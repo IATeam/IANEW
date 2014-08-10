@@ -16,7 +16,7 @@
 		<property name="driverClassName" value="${db.driverClassName}"></property> 
 		<property name="username" value="${db.username}"></property> <property name="password" 
 		value="${db.password}"></property> </bean> -->
-	<!-- 
+	
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
 		destroy-method="close">
 		<property name="driverClass" value="${db.driverClassName}" />
@@ -28,10 +28,12 @@
 		<property name="initialPoolSize" value="1"></property>
 		<property name="maxIdleTime" value="20"></property>
 	</bean>
- 	-->
+ 	
+ 	<!-- 
  	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">            
     	<property name="jndiName" value="jdbc/IANewDataSource"/>            
 	</bean>
+	-->
  	<!-- <jee:jndi-lookup id="dataSource" jndi-name="jdbc/IANewDataSource"/> -->
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"
