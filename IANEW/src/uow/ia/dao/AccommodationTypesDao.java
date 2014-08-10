@@ -3,10 +3,6 @@
  */
 package uow.ia.dao;
 
-import java.util.List;
-
-import uow.ia.bean.AccommodationTypes;
-
 /**
  * @author bruce
  *

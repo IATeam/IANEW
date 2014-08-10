@@ -5,8 +5,7 @@ package uow.ia.dao.impl;
 
 import org.springframework.stereotype.Repository;
 
-import uow.ia.bean.AccommodationTypes;
-import uow.ia.dao.AccommodationTypesDao;
+import uow.ia.bean.TitleTypes;
 import uow.ia.dao.TitleTypesDao;
 
 /**

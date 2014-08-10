@@ -3,8 +3,6 @@
  */
 package uow.ia.dao;
 
-import uow.ia.bean.GenderTypes;
-
 /**
  * @author bruce
  *
