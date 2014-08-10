@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 9, 2014 1:06:21 PM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="uow.ia.bean.Addresses" table="Addresses" catalog="ianew">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="contactId" type="java.lang.Integer">
+            <column name="contact_id" />
+        </property>
+        <property name="address" type="string">
+            <column name="address" />
+        </property>
+        <property name="surburb" type="string">
+            <column name="surburb" />
+        </property>
+        <property name="postcode" type="string">
+            <column name="postcode" />
+        </property>
+        <property name="state" type="string">
+            <column name="state" />
+        </property>
+        <property name="country" type="string">
+            <column name="country" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<constant name="struts.devMode" value="true" /> <!-- set false for prod -->
+    
+    <!-- configuration for root re-direct -->
+    <!-- need delete index.html -->
+    <!--  
+	    <package name="root-redirect" namespace="/" extends="struts-default">
+	    	<action name="">
+	    		<result type="redirect">Listing.action</result>
+	    	</action>
+	    </package>
+    -->
+    <constant name="struts.ui.theme" value="simple" />
+    <constant name="struts.ui.templateDir" value="template" />
+    <constant name="struts.ui.templateSuffix" value="ftl" />
+    
+    <!-- Enquiry Forms -->
+    <package name="enquiry" namespace="/enquiry" extends="struts-default">
+    	<action name="getEnquiry" class="uow.ia.action.EnquiryAction" method="getEnquiry">
+    		<result name="success">/forms/enquiry.jsp</result>
+    	</action>
+    	<action name="newEnquiry" class="uow.ia.action.EnquiryAction" method="newEnquiry">
+    		<result name="success">/forms/enquiry.jsp</result>
+    	</action>
+    </package>
+    
+    <!-- Case Forms -->
+    <package name="case" namespace="/case" extends="struts-default">
+    	
+    	<action name="*" class="uow.ia.action.CaseAction">
+    		<result name="success">/forms/{1}.jsp</result>
+    	</action>
+    </package>
+    
+    <package name="example" namespace="/" extends="struts-default">
+       <action name="*" class="uow.ia.action.Listing">
+           <result name="success">Listing.jsp</result>
+           <result name="redirect" type="redirect">${redirectUrl}</result>
+       </action>
+    </package>
+    
+    <include file="login.xml"/>
+    
+</struts>

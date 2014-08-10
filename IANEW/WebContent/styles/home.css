@@ -1,0 +1,241 @@
+@CHARSET "US-ASCII";
+
+body{
+	background-color: #404040;
+	color: white;
+    padding: 0;
+    //border: 0;
+    margin: 0;
+    overflow-Y: scroll;
+    height: 100%;
+}
+
+/* Header with Logo */
+header{
+	padding-left: 10%;
+	border: blue solid 1px;
+	z-index: -1;
+	height: 70px;
+	min-height: 50px;
+	width: 100%;
+}
+header img{
+	height: 100%;
+	width: auto;
+}
+
+
+/* Navigation */
+nav{
+	
+    
+    height: 30px; 
+    width: 100%;
+}
+
+ul {
+  text-align: left;
+  display: inline;
+  margin: 0;
+  padding: 15px 4px 17px 0;
+  list-style: none;
+  -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+}
+
+ul li {
+
+  font: bold 12px/18px sans-serif;
+  display: inline-block;
+  margin-right: -4px;
+  position: relative;
+  padding: 2px 20px;
+  margin-left: 0;
+  background: #fff;
+  cursor: pointer;
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  -ms-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  transition: all 0.2s;
+}
+ul li:hover {
+  background: #555;
+  color: #fff; 
+}
+
+ul li ul {
+  padding: 0;
+  position: absolute;
+  top: 20px;
+  left: 0;
+  width: 150px;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  display: none;
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transiton: opacity 0.2s;
+  -moz-transition: opacity 0.2s;
+  -ms-transition: opacity 0.2s;
+  -o-transition: opacity 0.2s;
+  -transition: opacity 0.2s; 
+}
+
+ul li ul li { 
+  background: #555; 
+  display: block; 
+  color: #fff;
+  text-shadow: 0 -1px 0 #000;
+}
+
+ul li ul li:hover { 
+	background: #666;
+}
+
+ul li:hover ul {
+  display: block;
+  opacity: 1;
+  visibility: visible;
+}
+
+ul a, ul ul a{
+	text-decoration: none;
+	color: black;
+}
+
+
+/* Search Section */
+#content{
+	position: absolute;
+	top: 100px;
+	border: solid green 1px;
+	width: 100%;
+}
+#secSearch div{
+    text-align: center;
+    width: 80%;
+    margin: 0 auto;
+    
+}
+
+.float{
+	position:fixed;
+	top: 0;
+}
+
+#divSearchBox {
+	border: orange 10px solid;
+    box-shadow: 0px 0px 5px gray;
+}
+
+#divRadio{
+	padding: 10px;
+}
+
+#divRadio input{
+	margin-left: 2%;
+}
+
+#divRadio label{
+    margin-right: 2%;
+}
+
+#searchbox{
+	border: none;
+    font-size: 16px;
+    background: none;
+    min-width: 500px;
+    width: 100%;
+    min-height: 30px;
+    text-align: center;
+    color: grey;
+}
+
+/* Suggestion Sections */
+#secSuggestions{
+    height: 50%;
+    width: 100%;
+    border: pink 1px solid;
+}
+
+/* Activities & Frequencies Section */
+
+#secLists{
+    width: 100%;
+    height: 20%;
+    text-align: center;
+    border: yellow 1px solid;
+}
+
+#secLists article{
+    display: inline-block;
+    width: 30%;
+    min-width: 200px;
+    margin-left: 7%;
+    margin-right: 7%;
+    text-align: left;
+    
+}
+
+#artActivities{
+   
+}
+
+#artFrequencies{
+}
+
+/* Footer */
+
+#statusBar{
+    
+	height: 30px;
+	width: 100%;
+	display: inline;
+	position: fixed;
+	bottom: 0;
+    left: 0;
+    background-color: white;
+    box-shadow: -5px -5px 5px grey;
+}
+
+#statusBar label{
+    display: inline-block;
+    position: relative;
+    font-size: 20px;
+    text-align: left;
+	left: 0px;
+    color: black;
+    padding: 4px 20px;
+}
+
+#statusBar label::before{
+    content: "Welcome ";
+    height: 20px;
+    
+}
+
+#statusBar button{
+	right: 0px;
+    float: right;
+    margin: 4px;
+}
+
+#formDiv{
+	margin: 0;
+}
+
+/* #formDiv{
+	width: 100%;
+	text-align: center;
+	box-shadow: 0px 0px 20px grey;
+} */
+
+#formDiv::AFTER {
+	content: "";
+	display: block;
+	height: 35px;
+	width: 100%;
+}

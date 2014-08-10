@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 9, 2014 1:06:21 PM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="uow.ia.bean.ContactsHistories" table="Contacts_Histories" catalog="ianew">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <timestamp name="timestamp" column="timestamp" />
+        <property name="action" type="string">
+            <column name="action" length="5" not-null="true" />
+        </property>
+        <property name="changeOrder" type="int">
+            <column name="change_order" not-null="true" />
+        </property>
+        <property name="contactId" type="int">
+            <column name="contact_id" not-null="true" />
+        </property>
+        <property name="titleId" type="java.lang.Integer">
+            <column name="title_id" />
+        </property>
+        <property name="firstname" type="string">
+            <column name="firstname" />
+        </property>
+        <property name="lastname" type="string">
+            <column name="lastname" />
+        </property>
+        <property name="othername" type="string">
+            <column name="othername" />
+        </property>
+        <property name="genderId" type="java.lang.Integer">
+            <column name="gender_id" />
+        </property>
+        <property name="contactTypeId" type="java.lang.Integer">
+            <column name="contact_type_id" />
+        </property>
+        <property name="homephone" type="string">
+            <column name="homephone" />
+        </property>
+        <property name="workphone" type="string">
+            <column name="workphone" />
+        </property>
+        <property name="mobilephone" type="string">
+            <column name="mobilephone" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" />
+        </property>
+        <property name="accommodationId" type="java.lang.Integer">
+            <column name="accommodation_id" />
+        </property>
+        <property name="accommodationComment" type="string">
+            <column name="accommodation_comment" />
+        </property>
+        <property name="employmentId" type="java.lang.Integer">
+            <column name="employment_id" />
+        </property>
+        <property name="employmentComment" type="string">
+            <column name="employment_comment" />
+        </property>
+        <property name="culturalBackgroundId" type="java.lang.Integer">
+            <column name="cultural_background_id" />
+        </property>
+        <property name="culturalBackgroundComment" type="string">
+            <column name="cultural_background_comment" />
+        </property>
+        <property name="dangerFlagId" type="java.lang.Integer">
+            <column name="danger_flag_id" />
+        </property>
+        <property name="identification" type="string">
+            <column name="identification" />
+        </property>
+        <property name="dob" type="date">
+            <column name="DOB" length="10" />
+        </property>
+        <property name="createdUserId" type="int">
+            <column name="created_user_id" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

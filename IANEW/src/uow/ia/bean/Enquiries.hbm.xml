@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 9, 2014 1:06:21 PM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="uow.ia.bean.Enquiries" table="Enquiries" catalog="ianew">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="contactId" type="java.lang.Integer">
+            <column name="contact_id" />
+        </property>
+        <property name="enquiryTypeId" type="java.lang.Integer">
+            <column name="enquiry_type_id" />
+        </property>
+        <property name="statusId" type="java.lang.Integer">
+            <column name="status_id" />
+        </property>
+        <property name="description" type="string">
+            <column name="description" />
+        </property>
+        <property name="createdUserId" type="java.lang.Integer">
+            <column name="created_user_id" />
+        </property>
+        <property name="createdDateTime" type="date">
+            <column name="created_date_time" length="10" />
+        </property>
+        <property name="inquisitor" type="string">
+            <column name="inquisitor" />
+        </property>
+        <property name="referralBy" type="string">
+            <column name="referralBy" />
+        </property>
+        <property name="referralTo" type="string">
+            <column name="referralTo" />
+        </property>
+        <property name="updatedDateTime" type="date">
+            <column name="updated_date_time" length="10" />
+        </property>
+        <property name="updatedUserId" type="java.lang.Integer">
+            <column name="updated_user_id" />
+        </property>
+        <property name="parentEnquiryId" type="java.lang.Integer">
+            <column name="parent_enquiry_id" />
+        </property>
+        <property name="outOfCoverageFlag" type="string">
+            <column name="out_of_coverage_flag" length="45" />
+        </property>
+    </class>
+</hibernate-mapping>

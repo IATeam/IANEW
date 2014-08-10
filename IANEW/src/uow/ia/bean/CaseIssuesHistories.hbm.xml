@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 9, 2014 1:06:21 PM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="uow.ia.bean.CaseIssuesHistories" table="Case_Issues_Histories" catalog="ianew">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <timestamp name="timestamp" column="TIMESTAMP" />
+        <property name="issueId" type="int">
+            <column name="issue_id" not-null="true" />
+        </property>
+        <property name="action" type="string">
+            <column name="action" length="10" not-null="true" />
+        </property>
+        <property name="caseId" type="java.lang.Integer">
+            <column name="case_id" />
+        </property>
+        <property name="oldIssueTypeId" type="java.lang.Integer">
+            <column name="old_issue_type_id" />
+        </property>
+        <property name="newIssueTypeId" type="java.lang.Integer">
+            <column name="new_issue_type_id" />
+        </property>
+        <property name="oldComments" type="string">
+            <column name="old_comments" />
+        </property>
+        <property name="newComments" type="string">
+            <column name="new_comments" />
+        </property>
+        <property name="oldStatusId" type="java.lang.Integer">
+            <column name="old_status_id" />
+        </property>
+        <property name="newStatusId" type="java.lang.Integer">
+            <column name="new_status_id" />
+        </property>
+        <property name="oldCompletedDate" type="date">
+            <column name="old_completed_date" length="10" />
+        </property>
+        <property name="newCompletedDate" type="date">
+            <column name="new_completed_date" length="10" />
+        </property>
+        <property name="createdUserId" type="java.lang.Integer">
+            <column name="created_user_id" />
+        </property>
+    </class>
+</hibernate-mapping>

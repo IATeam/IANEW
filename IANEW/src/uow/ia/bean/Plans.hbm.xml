@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 9, 2014 1:06:21 PM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="uow.ia.bean.Plans" table="Plans" catalog="ianew">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="caseId" type="java.lang.Integer">
+            <column name="case_id" />
+        </property>
+        <property name="statusId" type="java.lang.Integer">
+            <column name="status_id" />
+        </property>
+        <property name="createdDateTime" type="timestamp">
+            <column name="created_date_time" length="19" />
+        </property>
+        <property name="closedDateTime" type="timestamp">
+            <column name="closed_date_time" length="19" />
+        </property>
+        <property name="lastReviewedDate" type="date">
+            <column name="last_reviewed_date" length="10" />
+        </property>
+        <property name="reviewFrequencyId" type="java.lang.Integer">
+            <column name="review_frequency_id" />
+        </property>
+        <property name="providedPlanDate" type="date">
+            <column name="provided_plan_date" length="10" />
+        </property>
+        <property name="consentSignedDate" type="date">
+            <column name="consent_signed_date" length="10" />
+        </property>
+        <property name="supportPersonId" type="java.lang.Integer">
+            <column name="support_person_id" />
+        </property>
+        <property name="authorisedById" type="java.lang.Integer">
+            <column name="authorised_by_id" />
+        </property>
+        <property name="authorisedByDate" type="date">
+            <column name="authorised_by_date" length="10" />
+        </property>
+        <property name="notes" type="string">
+            <column name="notes" />
+        </property>
+        <property name="updatedDateTime" type="timestamp">
+            <column name="updated_date_time" length="19" />
+        </property>
+        <property name="updatedUserId" type="java.lang.Integer">
+            <column name="updated_user_id" />
+        </property>
+        <property name="createdUserId" type="java.lang.Integer">
+            <column name="created_user_id" />
+        </property>
+    </class>
+</hibernate-mapping>

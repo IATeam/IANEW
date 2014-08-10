@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 9, 2014 1:06:21 PM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="uow.ia.bean.PlanGoalsHistories" table="Plan_Goals_Histories" catalog="ianew">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <timestamp name="timestamp" column="timestamp" />
+        <property name="action" type="string">
+            <column name="action" length="10" not-null="true" />
+        </property>
+        <property name="planGoalId" type="int">
+            <column name="plan_goal_id" not-null="true" />
+        </property>
+        <property name="planId" type="java.lang.Integer">
+            <column name="plan_id" />
+        </property>
+        <property name="oldGoalTypeId" type="java.lang.Integer">
+            <column name="old_goal_type_id" />
+        </property>
+        <property name="newGoalTypeId" type="java.lang.Integer">
+            <column name="new_goal_type_id" />
+        </property>
+        <property name="oldCompletionDateTime" type="timestamp">
+            <column name="old_completion_date_time" length="19" />
+        </property>
+        <property name="newCompletionDateTime" type="timestamp">
+            <column name="new_completion_date_time" length="19" />
+        </property>
+        <property name="oldGoalDescription" type="string">
+            <column name="old_goal_description" />
+        </property>
+        <property name="newGoalDescription" type="string">
+            <column name="new_goal_description" />
+        </property>
+        <property name="oldGoalAction" type="string">
+            <column name="old_goal_action" />
+        </property>
+        <property name="newGoalAction" type="string">
+            <column name="new_goal_action" />
+        </property>
+        <property name="createdUserId" type="java.lang.Integer">
+            <column name="created_user_id" />
+        </property>
+    </class>
+</hibernate-mapping>

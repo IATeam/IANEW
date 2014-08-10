@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 9, 2014 1:06:21 PM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="uow.ia.bean.IndividualCases" table="Individual_Cases" catalog="ianew">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="clientId" type="java.lang.Integer">
+            <column name="client_id" />
+        </property>
+        <property name="advocateId" type="java.lang.Integer">
+            <column name="advocate_id" />
+        </property>
+        <property name="caseStatusId" type="java.lang.Integer">
+            <column name="case_status_id" />
+        </property>
+        <property name="description" type="string">
+            <column name="description" />
+        </property>
+        <property name="priorityId" type="java.lang.Integer">
+            <column name="priority_id" />
+        </property>
+        <property name="serviceProviderId" type="java.lang.Integer">
+            <column name="service_provider_id" />
+        </property>
+        <property name="createdDateTime" type="timestamp">
+            <column name="created_date_time" length="19" />
+        </property>
+        <property name="createdUserId" type="java.lang.Integer">
+            <column name="created_user_id" />
+        </property>
+        <property name="updatedDateTime" type="timestamp">
+            <column name="updated_date_time" length="19" />
+        </property>
+        <property name="updatedUserId" type="java.lang.Integer">
+            <column name="updated_user_id" />
+        </property>
+        <property name="referredTo" type="string">
+            <column name="referred_to" />
+        </property>
+        <property name="oldCaseId" type="java.lang.Integer">
+            <column name="old_case_id" />
+        </property>
+    </class>
+</hibernate-mapping>

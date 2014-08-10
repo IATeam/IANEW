@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 9, 2014 1:06:21 PM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="uow.ia.bean.ClientDisabilities" table="Client_Disabilities" catalog="ianew">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="contactId" type="java.lang.Integer">
+            <column name="contact_id" />
+        </property>
+        <property name="disabilityId" type="java.lang.Integer">
+            <column name="disability_id" />
+        </property>
+        <property name="comments" type="string">
+            <column name="comments" />
+        </property>
+        <property name="primaryFlag" type="string">
+            <column name="primary_flag" length="45" />
+        </property>
+    </class>
+</hibernate-mapping>

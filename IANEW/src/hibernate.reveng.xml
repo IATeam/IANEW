@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+  <table-filter match-catalog="ianew" match-name="Accommodation_Types"/>
+  <table-filter match-catalog="ianew" match-name="Addresses"/>
+  <table-filter match-catalog="ianew" match-name="Addresses_Histories"/>
+  <table-filter match-catalog="ianew" match-name="Calendars"/>
+  <table-filter match-catalog="ianew" match-name="Case_Issues"/>
+  <table-filter match-catalog="ianew" match-name="Case_Issues_Histories"/>
+  <table-filter match-catalog="ianew" match-name="Client_Disabilities"/>
+  <table-filter match-catalog="ianew" match-name="Client_Disabilities_Histories"/>
+  <table-filter match-catalog="ianew" match-name="Communication_Types"/>
+  <table-filter match-catalog="ianew" match-name="Contact_Types"/>
+  <table-filter match-catalog="ianew" match-name="Contacts"/>
+  <table-filter match-catalog="ianew" match-name="Contacts_Histories"/>
+  <table-filter match-catalog="ianew" match-name="Criteria_Control_Values"/>
+  <table-filter match-catalog="ianew" match-name="Criteria_Controls"/>
+  <table-filter match-catalog="ianew" match-name="Cultural_Background_Types"/>
+  <table-filter match-catalog="ianew" match-name="Danger_Types"/>
+  <table-filter match-catalog="ianew" match-name="Disability_Types"/>
+  <table-filter match-catalog="ianew" match-name="Document_Links"/>
+  <table-filter match-catalog="ianew" match-name="Employment_Types"/>
+  <table-filter match-catalog="ianew" match-name="Enquiries"/>
+  <table-filter match-catalog="ianew" match-name="Enquiries_Histories"/>
+  <table-filter match-catalog="ianew" match-name="Enquiry_Issues"/>
+  <table-filter match-catalog="ianew" match-name="Enquiry_Issues_Histories"/>
+  <table-filter match-catalog="ianew" match-name="Enquiry_Types"/>
+  <table-filter match-catalog="ianew" match-name="Events"/>
+  <table-filter match-catalog="ianew" match-name="Gender_Types"/>
+  <table-filter match-catalog="ianew" match-name="Goal_Types"/>
+  <table-filter match-catalog="ianew" match-name="IACase_Enquiry_Mappings"/>
+  <table-filter match-catalog="ianew" match-name="IA_Communications_Histories"/>
+  <table-filter match-catalog="ianew" match-name="Individual_Case_Communications"/>
+  <table-filter match-catalog="ianew" match-name="Individual_Cases"/>
+  <table-filter match-catalog="ianew" match-name="Individual_Cases_Histories"/>
+  <table-filter match-catalog="ianew" match-name="Issue_Types"/>
+  <table-filter match-catalog="ianew" match-name="Messages"/>
+  <table-filter match-catalog="ianew" match-name="Plan_Developers"/>
+  <table-filter match-catalog="ianew" match-name="Plan_Developers_Histories"/>
+  <table-filter match-catalog="ianew" match-name="Plan_Goals"/>
+  <table-filter match-catalog="ianew" match-name="Plan_Goals_Histories"/>
+  <table-filter match-catalog="ianew" match-name="Plans"/>
+  <table-filter match-catalog="ianew" match-name="Plans_Histories"/>
+  <table-filter match-catalog="ianew" match-name="Priority_Types"/>
+  <table-filter match-catalog="ianew" match-name="Reminders"/>
+  <table-filter match-catalog="ianew" match-name="Review_Frequencies"/>
+  <table-filter match-catalog="ianew" match-name="Risks"/>
+  <table-filter match-catalog="ianew" match-name="Risks_Histories"/>
+  <table-filter match-catalog="ianew" match-name="Roles"/>
+  <table-filter match-catalog="ianew" match-name="Status_Types"/>
+  <table-filter match-catalog="ianew" match-name="Title_Types"/>
+  <table-filter match-catalog="ianew" match-name="User_Roles"/>
+  <table-filter match-catalog="ianew" match-name="Users"/>
+</hibernate-reverse-engineering>

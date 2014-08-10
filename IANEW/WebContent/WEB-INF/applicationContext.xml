@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="    
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd  
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd  
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd  
+        http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.0.xsd  
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+
+	<context:property-placeholder location="classpath:db.properties" />
+	<!-- <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" 
+		destroy-method="close"> <property name="url" value="${db.url}"></property> 
+		<property name="driverClassName" value="${db.driverClassName}"></property> 
+		<property name="username" value="${db.username}"></property> <property name="password" 
+		value="${db.password}"></property> </bean> -->
+
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="driverClass" value="${db.driverClassName}" />
+		<property name="jdbcUrl" value="${db.url}" />
+		<property name="user" value="${db.username}" />
+		<property name="password" value="${db.password}" />
+		<property name="maxPoolSize" value="40"></property>
+		<property name="minPoolSize" value="1"></property>
+		<property name="initialPoolSize" value="1"></property>
+		<property name="maxIdleTime" value="20"></property>
+	</bean>
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"
+		scope="singleton">
+
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+
+		<property name="mappingResources">
+			<list>
+				<value>uow/ia/bean/AccommodationTypes.hbm.xml</value>
+				<value>uow/ia/bean/Addresses.hbm.xml</value>
+				<value>uow/ia/bean/AddressesHistories.hbm.xml</value>
+				<value>uow/ia/bean/Calendars.hbm.xml</value>
+				<value>uow/ia/bean/CaseIssues.hbm.xml</value>
+				<value>uow/ia/bean/CaseIssuesHistories.hbm.xml</value>
+				<value>uow/ia/bean/ClientDisabilities.hbm.xml</value>
+				<value>uow/ia/bean/ClientDisabilitiesHistories.hbm.xml</value>
+				<value>uow/ia/bean/CommunicationTypes.hbm.xml</value>
+				<value>uow/ia/bean/ContactTypes.hbm.xml</value>
+				<value>uow/ia/bean/Contacts.hbm.xml</value>
+				<value>uow/ia/bean/ContactsHistories.hbm.xml</value>
+				<value>uow/ia/bean/CriteriaControlValues.hbm.xml</value>
+				<value>uow/ia/bean/CriteriaControls.hbm.xml</value>
+				<value>uow/ia/bean/CulturalBackgroundTypes.hbm.xml</value>
+				<value>uow/ia/bean/DangerTypes.hbm.xml</value>
+				<value>uow/ia/bean/DisabilityTypes.hbm.xml</value>
+				<value>uow/ia/bean/DocumentLinks.hbm.xml</value>
+				<value>uow/ia/bean/EmploymentTypes.hbm.xml</value>
+				<value>uow/ia/bean/Enquiries.hbm.xml</value>
+				<value>uow/ia/bean/EnquiriesHistories.hbm.xml</value>
+				<value>uow/ia/bean/EnquiryIssues.hbm.xml</value>
+				<value>uow/ia/bean/EnquiryIssuesHistories.hbm.xml</value>
+				<value>uow/ia/bean/EnquiryTypes.hbm.xml</value>
+				<value>uow/ia/bean/Events.hbm.xml</value>
+				<value>uow/ia/bean/GenderTypes.hbm.xml</value>
+				<value>uow/ia/bean/GoalTypes.hbm.xml</value>
+				<value>uow/ia/bean/IaCommunicationsHistories.hbm.xml</value>
+				<value>uow/ia/bean/IacaseEnquiryMappings.hbm.xml</value>
+				<value>uow/ia/bean/IndividualCaseCommunications.hbm.xml</value>
+				<value>uow/ia/bean/IndividualCases.hbm.xml</value>
+				<value>uow/ia/bean/IndividualCasesHistories.hbm.xml</value>
+				<value>uow/ia/bean/IssueTypes.hbm.xml</value>
+				<value>uow/ia/bean/Messages.hbm.xml</value>
+				<value>uow/ia/bean/PlanDevelopers.hbm.xml</value>
+				<value>uow/ia/bean/PlanDevelopersHistories.hbm.xml</value>
+				<value>uow/ia/bean/PlanGoals.hbm.xml</value>
+				<value>uow/ia/bean/PlanGoalsHistories.hbm.xml</value>
+				<value>uow/ia/bean/Plans.hbm.xml</value>
+				<value>uow/ia/bean/PlansHistories.hbm.xml</value>
+				<value>uow/ia/bean/PriorityTypes.hbm.xml</value>
+				<value>uow/ia/bean/Reminders.hbm.xml</value>
+				<value>uow/ia/bean/ReviewFrequencies.hbm.xml</value>
+				<value>uow/ia/bean/Risks.hbm.xml</value>
+				<value>uow/ia/bean/RisksHistories.hbm.xml</value>
+				<value>uow/ia/bean/Roles.hbm.xml</value>
+				<value>uow/ia/bean/StatusTypes.hbm.xml</value>
+				<value>uow/ia/bean/TitleTypes.hbm.xml</value>
+				<value>uow/ia/bean/UserRoles.hbm.xml</value>
+				<value>uow/ia/bean/Users.hbm.xml</value>
+			</list>
+		</property>
+
+		<property name="hibernateProperties">
+			<value>
+				hibernate.dialect=org.hibernate.dialect.MySQLDialect
+				hibernate.show_sql=true
+				hibernate.hbm2ddl.auto=update
+				hibernate.current_session_context_class=org.springframework.orm.hibernate4.SpringSessionContext
+				hibernate.connection.autocommit=true
+			</value>
+		</property>
+		<!-- mapping for annotation style -->
+		<!-- <property name="packagesToScan"> <list> <value>data</value> </list> 
+			</property> -->
+		<!-- <property name="configLocation" value="classpath:hibernate.cfg.xml"/> -->
+	</bean>
+	 
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<context:component-scan base-package="uow.ia" />
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	<!-- 
+	<bean id="IAccommodationTypesDao" class="uow.ia.dao.impl.AccommodationTypesDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="IAccommodationTypesService" class="uow.ia.service.impl.AccommodationTypesServiceImpl" scope="prototype">
+		<property name="IAccommodationTypesDao" ref="IAccommodationTypesDao" />
+	</bean>
+	<bean id="EnquiryAction" class="uow.ia.action.EnquiryAction" scope="prototype">
+		<property name="IAccommodationTypesService" ref="IAccommodationTypesService" />
+	</bean>
+	-->
+	
+    
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="insert*" propagation="REQUIRED" />
+			<tx:method name="update*" propagation="REQUIRED" />
+			<tx:method name="edit*" propagation="REQUIRED" />
+			<tx:method name="save*" propagation="REQUIRED" />
+			<tx:method name="add*" propagation="REQUIRED" />
+			<tx:method name="new*" propagation="REQUIRED" />
+			<tx:method name="set*" propagation="REQUIRED" />
+			<tx:method name="remove*" propagation="REQUIRED" />
+			<tx:method name="delete*" propagation="REQUIRED" />
+			<tx:method name="change*" propagation="REQUIRED" />
+			<tx:method name="get*" propagation="REQUIRED" read-only="true" />
+			<tx:method name="find*" propagation="REQUIRED" read-only="true" />
+			<tx:method name="load*" propagation="REQUIRED" read-only="true" />
+			<tx:method name="*" propagation="REQUIRED" read-only="true" />
+		</tx:attributes>
+	</tx:advice>
+ 
+</beans>

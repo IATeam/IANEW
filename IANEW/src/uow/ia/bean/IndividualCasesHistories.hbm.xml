@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 9, 2014 1:06:21 PM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="uow.ia.bean.IndividualCasesHistories" table="Individual_Cases_Histories" catalog="ianew">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <timestamp name="timestamp" column="timestamp" />
+        <property name="action" type="string">
+            <column name="action" length="10" not-null="true" />
+        </property>
+        <property name="changeOrder" type="int">
+            <column name="change_order" not-null="true" />
+        </property>
+        <property name="caseId" type="int">
+            <column name="case_id" not-null="true" />
+        </property>
+        <property name="clientId" type="java.lang.Integer">
+            <column name="client_id" />
+        </property>
+        <property name="advocateId" type="java.lang.Integer">
+            <column name="advocate_id" />
+        </property>
+        <property name="caseStatusId" type="java.lang.Integer">
+            <column name="case_status_id" />
+        </property>
+        <property name="description" type="string">
+            <column name="description" />
+        </property>
+        <property name="priorityId" type="java.lang.Integer">
+            <column name="priority_id" />
+        </property>
+        <property name="serviceProviderId" type="java.lang.Integer">
+            <column name="service_provider_id" />
+        </property>
+        <property name="referredTo" type="string">
+            <column name="referred_to" />
+        </property>
+        <property name="oldCaseId" type="java.lang.Integer">
+            <column name="old_case_id" />
+        </property>
+        <property name="createdUserId" type="int">
+            <column name="created_user_id" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
