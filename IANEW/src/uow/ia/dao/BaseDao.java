@@ -19,7 +19,6 @@ public interface BaseDao<T> {
      * save object
      *  
      * @param o 
-     * @return 
      */
 	public Serializable save(T o);
 	
@@ -27,7 +26,6 @@ public interface BaseDao<T> {
      * delete object 
      *  
      * @param o 
-     * @return 
      */
 	public void delete(T o);
 	
