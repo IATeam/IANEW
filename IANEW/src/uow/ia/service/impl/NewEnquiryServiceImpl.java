@@ -5,13 +5,19 @@ package uow.ia.service.impl;
 
 import java.util.List;
 
+import javassist.bytecode.stackmap.TypeData.ClassName;
+
 import javax.annotation.Resource;
 
+import org.apache.log4j.Logger;
+import org.apache.log4j.lf5.Log4JLogRecord;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.sun.tools.xjc.reader.xmlschema.bindinfo.BIConversion.Static;
 
 import uow.ia.bean.*;
 import uow.ia.dao.*;
@@ -24,6 +30,8 @@ import uow.ia.service.NewEnquiryService;
 @Service(NewEnquiryService.SERVICENAME)
 public class NewEnquiryServiceImpl implements
 		NewEnquiryService {
+	
+	//static Logger logger = Logger.getLogger(ClassName.class);
 	
 	@Resource
     private TitleTypesDao<TitleTypes> titleTypesDao;
@@ -45,6 +53,7 @@ public class NewEnquiryServiceImpl implements
 	
 	@Override
 	public List<AccommodationTypes> findAccommodationTypes() {
+		//logger.info("NewEnquiryService.findAccommodationTypes called");
 		return accommodationTypesDao.find(" from AccommodationTypes");
 	}
 
