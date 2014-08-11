@@ -1,5 +1,7 @@
 package uow.ia.bean;
 
+import java.util.Set;
+
 // Generated Aug 9, 2014 1:06:20 PM by Hibernate Tools 4.0.0
 
 /**
@@ -12,6 +14,7 @@ public class DangerTypes implements java.io.Serializable {
 	private String dangerDescription;
 	private String symbol;
 	private Integer displayOrder;
+	private Set<Contacts> contactsSet;
 
 	public DangerTypes() {
 	}
@@ -62,6 +65,14 @@ public class DangerTypes implements java.io.Serializable {
 
 	public void setDisplayOrder(Integer displayOrder) {
 		this.displayOrder = displayOrder;
+	}
+
+	public Set<Contacts> getContactsSet() {
+		return contactsSet;
+	}
+
+	public void setContactsSet(Set<Contacts> contactsSet) {
+		this.contactsSet = contactsSet;
 	}
 
 }

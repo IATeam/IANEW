@@ -1,5 +1,10 @@
 package uow.ia.bean;
 
+import java.util.List;
+import java.util.Set;
+
+
+
 // Generated Aug 9, 2014 1:06:20 PM by Hibernate Tools 4.0.0
 
 /**
@@ -10,6 +15,7 @@ public class AccommodationTypes implements java.io.Serializable {
 	private Integer id;
 	private String accommodationName;
 	private String accommodationDescription;
+	private Set<Contacts> contactsSet;
 
 	public AccommodationTypes() {
 	}
@@ -44,4 +50,11 @@ public class AccommodationTypes implements java.io.Serializable {
 		this.accommodationDescription = accommodationDescription;
 	}
 
+	public Set<Contacts> getContactsSet() {
+		return contactsSet;
+	}
+
+	public void setContactsSet(Set<Contacts> contactsSet) {
+		this.contactsSet = contactsSet;
+	}
 }

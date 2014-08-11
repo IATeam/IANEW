@@ -8,9 +8,9 @@
             <column name="id" />
             <generator class="identity" />
         </id>
-        <property name="contactId" type="java.lang.Integer">
+        <!-- <property name="contactId" type="java.lang.Integer">
             <column name="contact_id" />
-        </property>
+        </property> -->
         <property name="address" type="string">
             <column name="address" />
         </property>
@@ -26,5 +26,10 @@
         <property name="country" type="string">
             <column name="country" />
         </property>
+        
+        <!-- Many to one relationship -->
+        <many-to-one name="contact" class="uow.ia.bean.Contacts">
+        	<column name="contact_id" not-null="true"/>
+        </many-to-one>
     </class>
 </hibernate-mapping>

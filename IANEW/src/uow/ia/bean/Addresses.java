@@ -8,19 +8,20 @@ package uow.ia.bean;
 public class Addresses implements java.io.Serializable {
 
 	private Integer id;
-	private Integer contactId;
+//	private Integer contactId;
 	private String address;
 	private String surburb;
 	private String postcode;
 	private String state;
 	private String country;
+	private Contacts contact;
 
 	public Addresses() {
 	}
 
-	public Addresses(Integer contactId, String address, String surburb,
+	public Addresses(String address, String surburb,
 			String postcode, String state, String country) {
-		this.contactId = contactId;
+//		this.contactId = contactId;
 		this.address = address;
 		this.surburb = surburb;
 		this.postcode = postcode;
@@ -36,13 +37,13 @@ public class Addresses implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public Integer getContactId() {
-		return this.contactId;
-	}
-
-	public void setContactId(Integer contactId) {
-		this.contactId = contactId;
-	}
+//	public Integer getContactId() {
+//		return this.contactId;
+//	}
+//
+//	public void setContactId(Integer contactId) {
+//		this.contactId = contactId;
+//	}
 
 	public String getAddress() {
 		return this.address;
@@ -82,6 +83,14 @@ public class Addresses implements java.io.Serializable {
 
 	public void setCountry(String country) {
 		this.country = country;
+	}
+	
+	public Contacts getContact() {
+		return contact;
+	}
+
+	public void setContact(Contacts contact) {
+		this.contact = contact;
 	}
 
 }

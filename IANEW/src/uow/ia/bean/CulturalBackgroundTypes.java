@@ -1,5 +1,7 @@
 package uow.ia.bean;
 
+import java.util.Set;
+
 // Generated Aug 9, 2014 1:06:20 PM by Hibernate Tools 4.0.0
 
 /**
@@ -10,6 +12,7 @@ public class CulturalBackgroundTypes implements java.io.Serializable {
 	private Integer id;
 	private String culturalBackgroundName;
 	private String culturalBackgroundDescription;
+	private Set<Contacts> contactsSet;
 
 	public CulturalBackgroundTypes() {
 	}
@@ -43,6 +46,14 @@ public class CulturalBackgroundTypes implements java.io.Serializable {
 	public void setCulturalBackgroundDescription(
 			String culturalBackgroundDescription) {
 		this.culturalBackgroundDescription = culturalBackgroundDescription;
+	}
+
+	public Set<Contacts> getContactsSet() {
+		return contactsSet;
+	}
+
+	public void setContactsSet(Set<Contacts> contactsSet) {
+		this.contactsSet = contactsSet;
 	}
 
 }

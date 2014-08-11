@@ -14,5 +14,12 @@
         <property name="genderCode" type="string">
             <column name="gender_code" length="45" />
         </property>
+        <!--  One to many relationship  -->
+		<set fetch="select" inverse="true" name="contactsSet" sort="unsorted" table="Contacts">
+			<key>
+		    	<column name="gender_id" not-null="true"/>
+		    </key>
+		    <one-to-many class="uow.ia.bean.Contacts"/>
+		</set>
     </class>
 </hibernate-mapping>

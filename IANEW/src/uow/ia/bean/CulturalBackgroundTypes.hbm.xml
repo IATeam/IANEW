@@ -14,5 +14,9 @@
         <property name="culturalBackgroundDescription" type="string">
             <column name="cultural_background_description" />
         </property>
+        <set fetch="select" inverse="true" name="contactsSet" sort="unsorted" table="Contacts">
+        	<key><column name="cultural_background_id" not-null="false"/></key>
+        	<one-to-many class="uow.ia.bean.Contacts"></one-to-many>
+        </set>
     </class>
 </hibernate-mapping>

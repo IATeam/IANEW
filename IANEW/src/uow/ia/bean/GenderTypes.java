@@ -1,5 +1,7 @@
 package uow.ia.bean;
 
+import java.util.Set;
+
 // Generated Aug 9, 2014 1:06:20 PM by Hibernate Tools 4.0.0
 
 /**
@@ -10,6 +12,7 @@ public class GenderTypes implements java.io.Serializable {
 	private Integer id;
 	private String genderName;
 	private String genderCode;
+	private Set<Contacts> contactsSet;
 
 	public GenderTypes() {
 	}
@@ -41,6 +44,14 @@ public class GenderTypes implements java.io.Serializable {
 
 	public void setGenderCode(String genderCode) {
 		this.genderCode = genderCode;
+	}
+
+	public Set<Contacts> getContactsSet() {
+		return contactsSet;
+	}
+
+	public void setContactsSet(Set<Contacts> contactsSet) {
+		this.contactsSet = contactsSet;
 	}
 
 }

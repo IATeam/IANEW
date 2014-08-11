@@ -14,5 +14,13 @@
         <property name="contactTypeDescription" type="string">
             <column name="contact_type_description" />
         </property>
+        
+        <!-- Many to one relationship -->
+        <set name="contactsSet" fetch="select" inverse="true" sort="unsorted" table="Contacts">
+        	<key>
+        		<column name="contact_type_id" not-null="true"/>
+        	</key>
+        	<one-to-many class="uow.ia.bean.Contacts"/>
+        </set>
     </class>
 </hibernate-mapping>
