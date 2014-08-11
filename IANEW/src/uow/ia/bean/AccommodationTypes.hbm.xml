@@ -22,7 +22,7 @@
    <key>
     <column name="accommodation_id" not-null="true"/>
    </key>
-   <one-to-many class="data.Contacts"/>
+   <one-to-many class="uow.ia.bean.Contacts"/>
   </set>
  </class>
 </hibernate-mapping>
