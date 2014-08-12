@@ -1,21 +1,34 @@
-<%@ page language="java" contentType="text/html; charset=US-ASCII"
+<!-- 
+	Created By Quang Nhan
+	Creaed On: 14/7/14
+	Last Updated On: 9/8/14
+	Description: A jsp page that displays the main home page
+  -->
+
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="US-ASCII"%>
 <%@ taglib prefix="sj" uri="/struts-jquery-tags" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <script src="<s:url value='/js/jquery/jquery-ui.min.js' encode='false' includeParams='none'/>"></script>
-<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <s:head/>
 <sj:head/>
-
 <link href="<s:url value='/styles/home.css' encode='false' includeParams='none'/>" rel="stylesheet" type="text/css" media="all"/>
+<link href="<s:url value='/styles/skeleton.css' encode='false' includeParams='none'/>" rel="stylesheet" type="text/css" media="all"/>
+<link href="<s:url value='/styles/sm-core-css.css' encode='false' includeParams='none'/>" rel="stylesheet" type="text/css" media="all"/>
+<link href="<s:url value='/styles/sm-simple-modified.css' encode='false' includeParams='none'/>" rel="stylesheet" type="text/css" media="all"/>
+
 <script src="<s:url value='/js/lists.js' encode='false' includeParams='none'/>"></script>
 <script src="<s:url value='/js/home.js' encode='false' includeParams='none'/>"></script>
 <script src="<s:url value='/js/radioActions.js' encode='false' includeParams='none'/>"></script>
+<script src="<s:url value='/js/jquery/jquery.smartmenus.js' encode='false' includeParams='none'/>"></script>
+<script src="<s:url value='/js/jquery/jquery.validate.js' encode='false' includeParams='none'/>"></script>
 <title>Illawarra Advocacy: Home</title>
+
 </head>
 <body>
 	<!-- List of urls to called for from the menu -->
@@ -35,10 +48,10 @@
 		<s:param name="formTitle">New Case</s:param>
 	</s:url>
 	
-	
+	<div class="container">
 	<!-- Navigation -->
 	<nav>
-		<ul>
+		<ul id="main-menu" class="sm sm-simple">
 			<li><a id="aHome"href="#">Illawarra Advocacy</a></li>
 			
 			<li><a id="aE"href="#">Enquiry</a>
@@ -86,7 +99,7 @@
 				</ul>
 			</li>
 			
-			<li class="one columns" >
+			<li>
 				<a href="#">Links</a>
 				<ul>
 					<li><sj:a id="aCNew" href="%{urlCNew}" targets="formDiv" onclick="menuclicked()">New Case</sj:a></li>
@@ -97,16 +110,17 @@
 		</ul>
 		
 	</nav>
-	
+
 	<header>
 		<img src="<s:url value='/resources/images/logo.png'/>"/>
 	</header>
+	
 	<div id="content">
 		<section id="secSearch">
 			<div id="divSearchBox"><s:textfield id="searchbox" onkeypress="return addActivity(this.value, event)"/><br/></div>
 			<div id="divRadio"><s:radio value="1" onclick="radioChecked(this.id)" name="radio" list="#{'1':'Database','2':'Document','3':'Report' }"/></div>
-			<button onclick="displayActivities()">display</button>
-			<button onclick="deleteLocalStorage()">clear</button>
+			<!-- <button onclick="displayActivities()">display</button>
+			<button onclick="deleteLocalStorage()">clear</button> -->
 		</section>
 		
 		<section id="secSuggestions">
@@ -129,13 +143,38 @@
 		</section>
 		
 		<s:div id="formDiv" />
+		<s:div id="helpPanel"/>
+		<s:div id="slidingPanel" style="background: yellow; position: fixed; top: 20%; box-shadow: 3px 3px 5px grey; height: 60%; overflow: scroll;">slide</s:div>
 	</div>
-	
+	</div>
 	<footer id="statusBar">
 		<label>User's Name</label>
 		<button>logout</button>
 	</footer>
-	
+	<script>
+		$(function(){
+			
+			$('#main-menu').smartmenus();
+			//$("#slidingPlanel").hide();
+			hideSlidingPanel();
+		});
+
+		function hideSlidingPanel(){
+			$("#slidingPanel").animate({
+				left: -$("#slidingPanel").width()
+		
+			}, 1000);
+		}
+
+		function showSlidingPanel(){
+			
+			$("#slidingPanel").animate({
+				
+				left: 0
+		
+			}, 1000);
+		}
+	</script>
 	<%-- <script>
 	 Experimental dragging div around.
 	$(function(){
