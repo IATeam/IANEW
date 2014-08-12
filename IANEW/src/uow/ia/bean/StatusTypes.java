@@ -1,5 +1,8 @@
 package uow.ia.bean;
 
+import java.util.HashSet;
+import java.util.Set;
+
 // Generated Aug 9, 2014 1:06:20 PM by Hibernate Tools 4.0.0
 
 /**
@@ -9,28 +12,67 @@ public class StatusTypes implements java.io.Serializable {
 
 	private Integer id;
 	private String statusName;
-
+	private Set<Enquiries> enquiriesSet = new HashSet<Enquiries>();
+	
+	/**
+	 * 
+	 */
 	public StatusTypes() {
+		// TODO Auto-generated constructor stub
 	}
 
-	public StatusTypes(String statusName) {
+	/**
+	 * @param id
+	 * @param statusName
+	 * @param enquiriesSet
+	 */
+	public StatusTypes(Integer id, String statusName,
+			Set<Enquiries> enquiriesSet) {
+		this.id = id;
 		this.statusName = statusName;
+		this.enquiriesSet = enquiriesSet;
 	}
 
+	/**
+	 * @return the id
+	 */
 	public Integer getId() {
 		return this.id;
 	}
 
+	/**
+	 * @param id the id to set
+	 */
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
+	/**
+	 * @return the statusName
+	 */
 	public String getStatusName() {
 		return this.statusName;
 	}
 
+	/**
+	 * @param statusName the statusName to set
+	 */
 	public void setStatusName(String statusName) {
 		this.statusName = statusName;
+	}
+
+	/**
+	 * @return the enquiriesSet
+	 */
+	public Set<Enquiries> getEnquiriesSet() {
+		return this.enquiriesSet;
+	}
+
+	/**
+	 * @param enquiriesSet the enquiriesSet to set
+	 */
+	public void setEnquiriesSet(Set<Enquiries> enquiriesSet) {
+		this.enquiriesSet = enquiriesSet;
 	}
 
 }

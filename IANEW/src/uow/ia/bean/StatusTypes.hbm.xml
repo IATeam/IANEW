@@ -11,5 +11,13 @@
         <property name="statusName" type="string">
             <column name="status_name" />
         </property>
+        
+        <!-- One-to-many relationship -->
+        <set fetch="select" inverse="true" name="enquiriesSet" sort="unsorted" table="Enquiries">
+        	<key>
+        		<column name="status_id" not-null="false"/>
+        	</key>
+        	<one-to-many class="uow.ia.bean.Enquiries"/>
+        </set>
     </class>
 </hibernate-mapping>

@@ -14,8 +14,13 @@
         <property name="riskManagement" type="string">
             <column name="risk_management" />
         </property>
-        <property name="caseId" type="java.lang.Integer">
+        <!-- <property name="caseId" type="java.lang.Integer">
             <column name="case_id" />
-        </property>
+        </property> -->
+        
+        <!-- Many to one relationship -->
+        <many-to-one class="uow.ia.bean.IndividualCases" name="individualCase">
+        	<column name="case_id" not-null="false"/>
+        </many-to-one>
     </class>
 </hibernate-mapping>

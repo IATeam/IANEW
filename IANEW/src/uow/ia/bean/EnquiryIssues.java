@@ -1,5 +1,8 @@
 package uow.ia.bean;
 
+import java.util.HashSet;
+import java.util.Set;
+
 // Generated Aug 9, 2014 1:06:20 PM by Hibernate Tools 4.0.0
 
 /**
@@ -8,47 +11,76 @@ package uow.ia.bean;
 public class EnquiryIssues implements java.io.Serializable {
 
 	private Integer id;
-	private Integer enquiryId;
-	private Integer issueId;
+//	private Integer enquiryId;
+//	private Integer issueId;
+	private Enquiries enquiry;
+	private IssueTypes issue;
 	private String comment;
-
+	/**
+	 * 
+	 */
 	public EnquiryIssues() {
+		// TODO Auto-generated constructor stub
 	}
-
-	public EnquiryIssues(Integer enquiryId, Integer issueId, String comment) {
-		this.enquiryId = enquiryId;
-		this.issueId = issueId;
+	/**
+	 * @param id
+	 * @param enquiry
+	 * @param issue
+	 * @param comment
+	 */
+	public EnquiryIssues(Integer id, Enquiries enquiry, IssueTypes issue,
+			String comment) {
+		this.id = id;
+		this.enquiry = enquiry;
+		this.issue = issue;
 		this.comment = comment;
 	}
-
+	/**
+	 * @return the id
+	 */
 	public Integer getId() {
-		return this.id;
+		return id;
 	}
-
+	/**
+	 * @param id the id to set
+	 */
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
-	public Integer getEnquiryId() {
-		return this.enquiryId;
+/**
+	 * @return the enquiry
+	 */
+	public Enquiries getEnquiry() {
+		return this.enquiry;
+	}
+	/**
+	 * @param enquiry the enquiry to set
+	 */
+	public void setEnquiry(Enquiries enquiry) {
+		this.enquiry = enquiry;
+	}
+	/**
+	 * @return the issue
+	 */
+	public IssueTypes getIssue() {
+		return this.issue;
+	}
+	/**
+	 * @param issue the issue to set
+	 */
+	public void setIssue(IssueTypes issue) {
+		this.issue = issue;
 	}
 
-	public void setEnquiryId(Integer enquiryId) {
-		this.enquiryId = enquiryId;
-	}
-
-	public Integer getIssueId() {
-		return this.issueId;
-	}
-
-	public void setIssueId(Integer issueId) {
-		this.issueId = issueId;
-	}
-
+	/**
+	 * @return the comment
+	 */
 	public String getComment() {
 		return this.comment;
 	}
-
+	/**
+	 * @param comment the comment to set
+	 */
 	public void setComment(String comment) {
 		this.comment = comment;
 	}

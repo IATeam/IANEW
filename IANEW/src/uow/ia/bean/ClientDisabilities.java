@@ -1,5 +1,7 @@
 package uow.ia.bean;
 
+import java.util.HashSet;
+
 // Generated Aug 9, 2014 1:06:20 PM by Hibernate Tools 4.0.0
 
 /**
@@ -8,18 +10,28 @@ package uow.ia.bean;
 public class ClientDisabilities implements java.io.Serializable {
 
 	private Integer id;
-	private Integer contactId;
-	private Integer disabilityId;
+//	private Integer contactId;
+//	private Integer disabilityId;
+	private Contacts contact;
+	private DisabilityTypes disabilityType;
 	private String comments;
 	private String primaryFlag;
 
 	public ClientDisabilities() {
 	}
 
-	public ClientDisabilities(Integer contactId, Integer disabilityId,
-			String comments, String primaryFlag) {
-		this.contactId = contactId;
-		this.disabilityId = disabilityId;
+	/**
+	 * @param id
+	 * @param contact
+	 * @param disabilityType
+	 * @param comments
+	 * @param primaryFlag
+	 */
+	public ClientDisabilities(Integer id, Contacts contact,
+			DisabilityTypes disabilityType, String comments, String primaryFlag) {
+		this.id = id;
+		this.contact = contact;
+		this.disabilityType = disabilityType;
 		this.comments = comments;
 		this.primaryFlag = primaryFlag;
 	}
@@ -32,20 +44,48 @@ public class ClientDisabilities implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public Integer getContactId() {
-		return this.contactId;
+//	public Integer getContactId() {
+//		return this.contactId;
+//	}
+//
+//	public void setContactId(Integer contactId) {
+//		this.contactId = contactId;
+//	}
+//
+//	public Integer getDisabilityId() {
+//		return this.disabilityId;
+//	}
+//
+//	public void setDisabilityId(Integer disabilityId) {
+//		this.disabilityId = disabilityId;
+//	}
+
+	/**
+	 * @return the contact
+	 */
+	public Contacts getContact() {
+		return contact;
 	}
 
-	public void setContactId(Integer contactId) {
-		this.contactId = contactId;
+	/**
+	 * @param contact the contact to set
+	 */
+	public void setContact(Contacts contact) {
+		this.contact = contact;
 	}
 
-	public Integer getDisabilityId() {
-		return this.disabilityId;
+	/**
+	 * @return the disabilityType
+	 */
+	public DisabilityTypes getDisabilityType() {
+		return disabilityType;
 	}
 
-	public void setDisabilityId(Integer disabilityId) {
-		this.disabilityId = disabilityId;
+	/**
+	 * @param disabilityType the disabilityType to set
+	 */
+	public void setDisabilityType(DisabilityTypes disabilityType) {
+		this.disabilityType = disabilityType;
 	}
 
 	public String getComments() {

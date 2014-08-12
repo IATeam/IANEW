@@ -10,10 +10,13 @@ import java.util.Date;
 public class CaseIssues implements java.io.Serializable {
 
 	private Integer id;
-	private Integer caseId;
-	private Integer issueTypeId;
+//	private Integer caseId;
+//	private Integer issueTypeId;
+	private IndividualCases individualCase;
+	private IssueTypes issue;
 	private String comments;
-	private Integer statusId;
+//	private Integer statusId;
+	private StatusTypes statusType;
 	private Date completedDate;
 	private Date createdDate;
 	private Integer createdUserId;
@@ -21,17 +24,32 @@ public class CaseIssues implements java.io.Serializable {
 	public CaseIssues() {
 	}
 
-	public CaseIssues(Integer caseId, Integer issueTypeId, String comments,
-			Integer statusId, Date completedDate, Date createdDate,
-			Integer createdUserId) {
-		this.caseId = caseId;
-		this.issueTypeId = issueTypeId;
+
+	/**
+	 * @param id
+	 * @param individualCase
+	 * @param issue
+	 * @param comments
+	 * @param statusType
+	 * @param completedDate
+	 * @param createdDate
+	 * @param createdUserId
+	 */
+	public CaseIssues(Integer id, IndividualCases individualCase,
+			IssueTypes issue, String comments, StatusTypes statusType,
+			Date completedDate, Date createdDate, Integer createdUserId) {
+		this.id = id;
+		this.individualCase = individualCase;
+		this.issue = issue;
 		this.comments = comments;
-		this.statusId = statusId;
+		this.statusType = statusType;
 		this.completedDate = completedDate;
 		this.createdDate = createdDate;
 		this.createdUserId = createdUserId;
 	}
+
+
+
 
 	public Integer getId() {
 		return this.id;
@@ -41,21 +59,53 @@ public class CaseIssues implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public Integer getCaseId() {
-		return this.caseId;
+//	public Integer getCaseId() {
+//		return this.caseId;
+//	}
+//
+//	public void setCaseId(Integer caseId) {
+//		this.caseId = caseId;
+//	}
+//
+//	public Integer getIssueTypeId() {
+//		return this.issueTypeId;
+//	}
+//
+//	public void setIssueTypeId(Integer issueTypeId) {
+//		this.issueTypeId = issueTypeId;
+//	}
+
+	/**
+	 * @return the individualCase
+	 */
+	public IndividualCases getIndividualCase() {
+		return individualCase;
 	}
 
-	public void setCaseId(Integer caseId) {
-		this.caseId = caseId;
+
+	/**
+	 * @param individualCase the individualCase to set
+	 */
+	public void setIndividualCase(IndividualCases individualCase) {
+		this.individualCase = individualCase;
 	}
 
-	public Integer getIssueTypeId() {
-		return this.issueTypeId;
+
+	/**
+	 * @return the issue
+	 */
+	public IssueTypes getIssue() {
+		return issue;
 	}
 
-	public void setIssueTypeId(Integer issueTypeId) {
-		this.issueTypeId = issueTypeId;
+
+	/**
+	 * @param issue the issue to set
+	 */
+	public void setIssue(IssueTypes issue) {
+		this.issue = issue;
 	}
+
 
 	public String getComments() {
 		return this.comments;
@@ -65,13 +115,29 @@ public class CaseIssues implements java.io.Serializable {
 		this.comments = comments;
 	}
 
-	public Integer getStatusId() {
-		return this.statusId;
+//	public Integer getStatusId() {
+//		return this.statusId;
+//	}
+//
+//	public void setStatusId(Integer statusId) {
+//		this.statusId = statusId;
+//	}
+
+	/**
+	 * @return the statusType
+	 */
+	public StatusTypes getStatusType() {
+		return statusType;
 	}
 
-	public void setStatusId(Integer statusId) {
-		this.statusId = statusId;
+
+	/**
+	 * @param statusType the statusType to set
+	 */
+	public void setStatusType(StatusTypes statusType) {
+		this.statusType = statusType;
 	}
+
 
 	public Date getCompletedDate() {
 		return this.completedDate;

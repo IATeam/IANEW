@@ -1,5 +1,8 @@
 package uow.ia.bean;
 
+import java.util.HashSet;
+import java.util.Set;
+
 // Generated Aug 9, 2014 1:06:20 PM by Hibernate Tools 4.0.0
 
 /**
@@ -10,41 +13,85 @@ public class EnquiryTypes implements java.io.Serializable {
 	private Integer id;
 	private String enquiryTypeName;
 	private String enquiryTypeDescription;
+	private Set<EnquiryTypes> enquiriesSet = new HashSet<EnquiryTypes>();
 
+	
+
+	/**
+	 * 
+	 */
 	public EnquiryTypes() {
+		// TODO Auto-generated constructor stub
 	}
 
-	public EnquiryTypes(String enquiryTypeName) {
-		this.enquiryTypeName = enquiryTypeName;
-	}
-
-	public EnquiryTypes(String enquiryTypeName, String enquiryTypeDescription) {
+	/**
+	 * @param id
+	 * @param enquiryTypeName
+	 * @param enquiryTypeDescription
+	 * @param enquiriesSet
+	 */
+	public EnquiryTypes(Integer id, String enquiryTypeName,
+			String enquiryTypeDescription, Set<EnquiryTypes> enquiriesSet) {
+		this.id = id;
 		this.enquiryTypeName = enquiryTypeName;
 		this.enquiryTypeDescription = enquiryTypeDescription;
+		this.enquiriesSet = enquiriesSet;
 	}
 
+	/**
+	 * @return the id
+	 */
 	public Integer getId() {
 		return this.id;
 	}
 
+	/**
+	 * @param id the id to set
+	 */
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
+	/**
+	 * @return the enquiryTypeName
+	 */
 	public String getEnquiryTypeName() {
 		return this.enquiryTypeName;
 	}
 
+	/**
+	 * @param enquiryTypeName the enquiryTypeName to set
+	 */
 	public void setEnquiryTypeName(String enquiryTypeName) {
 		this.enquiryTypeName = enquiryTypeName;
 	}
 
+	/**
+	 * @return the enquiryTypeDescription
+	 */
 	public String getEnquiryTypeDescription() {
 		return this.enquiryTypeDescription;
 	}
 
+	/**
+	 * @param enquiryTypeDescription the enquiryTypeDescription to set
+	 */
 	public void setEnquiryTypeDescription(String enquiryTypeDescription) {
 		this.enquiryTypeDescription = enquiryTypeDescription;
+	}
+
+	/**
+	 * @return the enquiriesSet
+	 */
+	public Set<EnquiryTypes> getEnquiriesSet() {
+		return this.enquiriesSet;
+	}
+
+	/**
+	 * @param enquiriesSet the enquiriesSet to set
+	 */
+	public void setEnquiriesSet(Set<EnquiryTypes> enquiriesSet) {
+		this.enquiriesSet = enquiriesSet;
 	}
 
 }

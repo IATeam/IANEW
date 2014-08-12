@@ -1,5 +1,8 @@
 package uow.ia.bean;
 
+import java.util.HashSet;
+import java.util.Set;
+
 // Generated Aug 9, 2014 1:06:20 PM by Hibernate Tools 4.0.0
 
 /**
@@ -10,41 +13,98 @@ public class IssueTypes implements java.io.Serializable {
 	private Integer id;
 	private String issueName;
 	private String issueDescription;
+	private Set<Enquiries> enquiriesSet = new HashSet<Enquiries>();
+	private Set<IndividualCases> individualCasesSet = new HashSet<IndividualCases>();
 
+	/**
+	 * @return the individualCasesSet
+	 */
+	public Set<IndividualCases> getIndividualCasesSet() {
+		return individualCasesSet;
+	}
+
+	/**
+	 * @param individualCasesSet the individualCasesSet to set
+	 */
+	public void setIndividualCasesSet(Set<IndividualCases> individualCasesSet) {
+		this.individualCasesSet = individualCasesSet;
+	}
+
+	/**
+	 * 
+	 */
 	public IssueTypes() {
+		// TODO Auto-generated constructor stub
 	}
 
-	public IssueTypes(String issueName) {
-		this.issueName = issueName;
-	}
-
-	public IssueTypes(String issueName, String issueDescription) {
+	/**
+	 * @param id
+	 * @param issueName
+	 * @param issueDescription
+	 * @param enquiriesSet
+	 */
+	public IssueTypes(Integer id, String issueName, String issueDescription,
+			Set<Enquiries> enquiriesSet) {
+		this.id = id;
 		this.issueName = issueName;
 		this.issueDescription = issueDescription;
+		this.enquiriesSet = enquiriesSet;
 	}
 
+	/**
+	 * @return the id
+	 */
 	public Integer getId() {
 		return this.id;
 	}
 
+	/**
+	 * @param id the id to set
+	 */
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
+	/**
+	 * @return the issueName
+	 */
 	public String getIssueName() {
 		return this.issueName;
 	}
 
+	/**
+	 * @param issueName the issueName to set
+	 */
 	public void setIssueName(String issueName) {
 		this.issueName = issueName;
 	}
 
+	/**
+	 * @return the issueDescription
+	 */
 	public String getIssueDescription() {
 		return this.issueDescription;
 	}
 
+	/**
+	 * @param issueDescription the issueDescription to set
+	 */
 	public void setIssueDescription(String issueDescription) {
 		this.issueDescription = issueDescription;
+	}
+
+	/**
+	 * @return the enquiriesSet
+	 */
+	public Set<Enquiries> getEnquiriesSet() {
+		return this.enquiriesSet;
+	}
+
+	/**
+	 * @param enquiriesSet the enquiriesSet to set
+	 */
+	public void setEnquiriesSet(Set<Enquiries> enquiriesSet) {
+		this.enquiriesSet = enquiriesSet;
 	}
 
 }

@@ -57,4 +57,9 @@ public class AccommodationTypes implements java.io.Serializable {
 	public void setContactsSet(Set<Contacts> contactsSet) {
 		this.contactsSet = contactsSet;
 	}
+	
+	public String toString() {
+		return accommodationName;
+		
+	}
 }

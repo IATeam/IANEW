@@ -25,6 +25,9 @@
     	<action name="newEnquiry" class="uow.ia.action.EnquiryAction" method="newEnquiry">
     		<result name="success">/forms/enquiry.jsp</result>
     	</action>
+    	<action name="enquiryList" class="uow.ia.action.EnquiryAction" method="enquiryList">
+    		<result name="success">/forms/enquiry.jsp</result>
+    	</action>
     </package>
     
     <!-- Case Forms -->

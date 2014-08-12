@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import uow.ia.bean.AccommodationTypes;
+import uow.ia.bean.Contacts;
 import uow.ia.bean.CulturalBackgroundTypes;
 import uow.ia.bean.GenderTypes;
 import uow.ia.bean.TitleTypes;
@@ -81,9 +82,18 @@ public class EnquiryAction extends BaseAction{
 	String employmentDescription;
 	String employmentComment;
 	
-	
+	List<Contacts> contacts;
 	public String enquiryList(){
+		//contacts=services.findContacts();
+		//for(Contacts c:contacts) {
+			//System.out.println(c.getAccommodation().toString());
+		//}
+		//System.out.println(contacts);
 		return SUCCESS;
+	}
+	
+	public List<Contacts> getContacts() {
+		return contacts;
 	}
 	
 	public String newEnquiry(){

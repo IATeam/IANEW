@@ -69,25 +69,25 @@
   
   <!-- Many to one relationship -->
   <many-to-one class="uow.ia.bean.AccommodationTypes" name="accommodation">
-  	<column name="accommodation_id" not-null="false"/>
+  	<column name="accommodation_id" not-null="true"/>
   </many-to-one>
   <many-to-one class="uow.ia.bean.ContactTypes" name="contactType">
-   <column name="contact_type_id" not-null="false"/>
+   <column name="contact_type_id" not-null="true"/>
   </many-to-one>
   <many-to-one class="uow.ia.bean.TitleTypes" name="titleType">
-   <column name="title_id" not-null="false"/>
+   <column name="title_id" not-null="true"/>
   </many-to-one>
   <many-to-one class="uow.ia.bean.GenderTypes" name="genderType">
-   <column name="gender_id" not-null="false"/>
+   <column name="gender_id" not-null="true"/>
   </many-to-one>
   <many-to-one class="uow.ia.bean.CulturalBackgroundTypes" name="culturalBackground">
-   <column name="cultural_background_id" not-null="false"/>
+   <column name="cultural_background_id" not-null="true"/>
   </many-to-one>
   <many-to-one class="uow.ia.bean.EmploymentTypes" name="employmentType">
-   <column name="employment_id" not-null="false"/>
+   <column name="employment_id" not-null="true"/>
   </many-to-one>
   <many-to-one class="uow.ia.bean.DangerTypes" name="dangerType">
-   <column name="danger_flag_id" not-null="false"/>
+   <column name="danger_flag_id" not-null="true"/>
   </many-to-one>
   
   <!--  One to many relationship  -->
@@ -97,6 +97,34 @@
    </key>
    <one-to-many class="uow.ia.bean.Addresses"/>
   </set>
+  
+  <set fetch="select" inverse="true" name="enquiriesSet" sort="unsorted" table="Enquiries" order-by="id">
+  	<key>
+  		<column name="contact_id" not-null="true"/>
+  	</key>
+  	<one-to-many class="uow.ia.bean.Enquiries"/>
+  </set>
+  
+  <set fetch="select" inverse="true" name="individualCasesSet" sort="unsorted" table="Individual_Cases" order-by="id">
+  	<key>
+  		<column name="client_id" not-null="true"/>
+  	</key>
+  	<one-to-many class="uow.ia.bean.IndividualCases"/>
+  </set>
+   <!-- <list name="individualCasesList" table="Individual_Cases" inverse="false">
+  	<key column="client_id"/>
+  	<key>
+  		<column name="client_id" not-null="true"/>
+  	</key>
+  	<list-index column="client_id" />
+  	<one-to-many class="uow.ia.bean.IndividualCases"/>
+  </list> -->
+ 
+	 <!-- Many-to-many relationship -->
+	 <set name="disabilitiesSet" table="Client_Disabilities" inverse="false" fetch="select" cascade="all">
+	 	<key column="contact_id"/>
+	 	<one-to-many class="uow.ia.bean.ClientDisabilities"/>
+	 </set>
  </class>
  
  <sql-query name="findById">select * from Contacts where id = :p_id</sql-query>

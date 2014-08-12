@@ -14,5 +14,11 @@
         <property name="disabilityDescription" type="string">
             <column name="disability_description" />
         </property>
+        
+        <!-- Many-to-many relationship -->
+        <set name="contactsSet" table="Client_Disabilities" inverse="true" fetch="select">
+        	<key column="disability_id"/>
+        	<one-to-many class="uow.ia.bean.ClientDisabilities"/>
+        </set>
     </class>
 </hibernate-mapping>

@@ -3,6 +3,7 @@ package uow.ia.service;
 import java.util.List;
 
 import uow.ia.bean.AccommodationTypes;
+import uow.ia.bean.Contacts;
 import uow.ia.bean.CulturalBackgroundTypes;
 import uow.ia.bean.DisabilityTypes;
 import uow.ia.bean.GenderTypes;
@@ -24,4 +25,6 @@ public interface NewEnquiryService {
 	public List<DisabilityTypes> findDisabilityTypes();
 	
 	public List<IssueTypes> findIssueTypes();
+	
+	public List<Contacts> findContacts();
 }
