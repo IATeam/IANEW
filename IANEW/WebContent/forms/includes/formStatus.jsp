@@ -16,8 +16,8 @@
 			</div>
 			<div class="nine columns">
 				<div class="row">
-					<div class="three columns"><s:select list="#{'1':'Flag (Attention)'}" id="issueType" name="" /></div>
-					<div class="three columns"><s:select list="#{'1':'Flag (Attention)'}" id="issueType" name="" /></div>
+					<div class="three columns"><s:select list="dangerSelectList.{dangerName}" value="dangerName" name="theDanger" headerKey="-1" headerValue="Flag Danger" /></div>
+					<div class="three columns"><s:select list="dangerSelectList.{dangerName}" value="dangerName" name="theDanger" headerKey="-1" headerValue="Enquiry Status" /></div>
 					<s:div cssClass="two columns">
 						<s:label for="enquiryID" value="Case#:" />
 						<s:text id="enquiryID" name="" />

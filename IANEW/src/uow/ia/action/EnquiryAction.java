@@ -7,7 +7,9 @@ import java.util.List;
 import uow.ia.bean.AccommodationTypes;
 import uow.ia.bean.Contacts;
 import uow.ia.bean.CulturalBackgroundTypes;
+import uow.ia.bean.DangerTypes;
 import uow.ia.bean.DisabilityTypes;
+import uow.ia.bean.Enquiries;
 import uow.ia.bean.GenderTypes;
 import uow.ia.bean.IssueTypes;
 import uow.ia.bean.TitleTypes;
@@ -21,11 +23,7 @@ import uow.ia.bean.TitleTypes;
 
 
 /**
- * @author Voom
- *
- */
-/**
- * @author Voom
+ * @author Quang
  *
  */
 public class EnquiryAction extends BaseAction{
@@ -45,10 +43,15 @@ public class EnquiryAction extends BaseAction{
 	
 	Integer enquiryID;
 	
+	List<DangerTypes> dangerSelectList;
+	String theDanger;
+	
 	//drop down menu
 	List<String> flagList; 			//Danger_Type table connected to Contacts table 
 	List<String> status; 			//Status_Type or criteria control value table 
 	
+	
+	List<Enquiries> enquiries;
 	
 	/*
 	 * Personal Details
@@ -105,12 +108,15 @@ public class EnquiryAction extends BaseAction{
 	List<IssueTypes> issueSelectList;
 	String theIssue;
 
+	
+	
 	public String enquiryList(){
 		//contacts=services.findContacts();
 		//for(Contacts c:contacts) {
 			//System.out.println(c.getAccommodation().toString());
 		//}
 		//System.out.println(contacts);
+		enquiries = services.findEnquiries();
 		return SUCCESS;
 	}
 	
@@ -122,7 +128,6 @@ public class EnquiryAction extends BaseAction{
 	public String getEnquiry(){
 		System.out.println("get (0iodfodf enquiry");
 		activateLists();
-		setAllFields();
 		return SUCCESS;
 	}
 	
@@ -166,6 +171,10 @@ public class EnquiryAction extends BaseAction{
 		accommodationSelectList = services.findAccommodationTypes();
 		disabilitySelectList = services.findDisabilityTypes();
 		issueSelectList = services.findIssueTypes();
+		dangerSelectList = services.findDangerTypes();
+		
+		
+		
 	}
 	
 	
@@ -227,4 +236,18 @@ public class EnquiryAction extends BaseAction{
 		return issueSelectList;
 	}
 
+	public List<Enquiries> getEnquiries() {
+		return enquiries;
+	}
+
+	public void setEnquiries(List<Enquiries> enquiries) {
+		this.enquiries = enquiries;
+	}
+
+	public List<DangerTypes> getDangerSelectList() {
+		return dangerSelectList;
+	}
+
+	
+	
 }
