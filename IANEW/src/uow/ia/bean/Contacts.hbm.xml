@@ -128,4 +128,7 @@
  </class>
  
  <sql-query name="findById">select * from Contacts where id = :p_id</sql-query>
+ <sql-query name="findByFirstname">select * from Contacts where lower(firstname) like lower(:firstname)</sql-query>
+ <sql-query name="findByLastname">select * from Contacts where lower(lastname) like lower(:lastname)</sql-query>
+ <sql-query name="findByFullname">select * from Contacts where lower(firstname) like lower(:firstname) and lower(lastname) like lower(lastname)</sql-query>
 </hibernate-mapping>

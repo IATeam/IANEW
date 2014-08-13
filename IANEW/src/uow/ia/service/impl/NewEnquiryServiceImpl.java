@@ -109,4 +109,8 @@ public class NewEnquiryServiceImpl implements
 		return enquiriesDao.find(" from Enquiries");
 	}
 
+	@Override
+	public Enquiries getEnquiry(long id) {
+		return enquiriesDao.get(Enquiries.class, id);
+	}
 }

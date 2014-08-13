@@ -4,6 +4,7 @@ package uow.ia.bean;
 
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 /**
@@ -341,6 +342,19 @@ public class Enquiries implements java.io.Serializable {
 	 */
 	public void setEnquiryIssuesSet(Set<EnquiryIssues> enquiryIssuesSet) {
 		this.enquiryIssuesSet = enquiryIssuesSet;
+	}
+	
+	/**
+	 * @auther ZhiYu Yang
+	 * @return String - Issues Types for this Enquiry as a String
+	 */
+	public String getIssuesTypes() {
+		String issuesTypesString="";
+		for(EnquiryIssues ei:enquiryIssuesSet) {
+			issuesTypesString += ei.getIssue().getIssueName()+" ";
+		}
+		issuesTypesString = issuesTypesString.trim();
+		return issuesTypesString;
 	}
 
 }

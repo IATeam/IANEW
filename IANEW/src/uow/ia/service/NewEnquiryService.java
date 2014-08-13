@@ -34,4 +34,6 @@ public interface NewEnquiryService {
 	public List<IssueTypes> findIssueTypes();
 	
 	public List<Enquiries> findEnquiries();
+	
+	public Enquiries getEnquiry(long id);
 }

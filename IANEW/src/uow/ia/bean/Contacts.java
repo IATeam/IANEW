@@ -404,6 +404,13 @@ public class Contacts implements java.io.Serializable {
 		this.individualCasesSet = individualCasesSet;
 	}
 
-	
+	/**
+	 * @auther ZhiYU Yang
+	 * @return String - Contact's full name
+	 * @
+	 */
+	public String getFullName() {
+		return this.getFirstname() + " " + this.getLastname();
+	}
 
 }

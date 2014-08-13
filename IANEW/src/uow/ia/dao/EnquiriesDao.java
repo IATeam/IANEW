@@ -9,5 +9,5 @@ package uow.ia.dao;
 
 public interface EnquiriesDao<Enquiries> extends BaseDao<Enquiries> {
 	public static final String DAONAME = "EnquiriesDao";
-
+	
 }
