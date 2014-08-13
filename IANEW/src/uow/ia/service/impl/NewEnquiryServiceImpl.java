@@ -110,7 +110,12 @@ public class NewEnquiryServiceImpl implements
 	}
 
 	@Override
-	public Enquiries getEnquiry(long id) {
+	public Enquiries getEnquiry(int id) {
 		return enquiriesDao.get(Enquiries.class, id);
+	}
+
+	@Override
+	public List<Enquiries> findEnquiriesByPage(int pageNo, int rows) {
+		return enquiriesDao.find(" from Enquiries", pageNo, rows);
 	}
 }

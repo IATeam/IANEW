@@ -106,6 +106,18 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 
 		// return (List<T>) getHibernateTemplate().find(hql, param);
 	}
+	
+	@Override
+	public List<T> find(String hql, Integer page, Integer rows) {
+		if (page == null || page < 1) {
+			page = 1;
+		}
+		if (rows == null || rows < 1) {
+			rows = 10;
+		}
+		Query q = this.getCurrentSession().createQuery(hql);
+		return q.setFirstResult((page - 1) * rows).setMaxResults(rows).list();
+	}
 
 	@Override
 	public List<T> find(String hql, Object[] param, Integer page, Integer rows) {
