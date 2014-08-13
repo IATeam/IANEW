@@ -3,11 +3,11 @@
 	<fieldset>
 	
 		<div class="row">
-			<s:select cssClass="four columns" list="title.{name}" value="personTitleProtege" name="theTitle" headerKey="-1" headerValue="Select Title" />
+			<div class="four columns"><s:select list="titleSelectList.{name}" value="personTitleProtege" name="theTitle" headerKey="-1" headerValue="Select Title" /></div>
 	
 			<div class='inputfield four columns'>
 				<s:label for="firstName" value="First Name:" />
-				<div><s:textfield id="firstName" name="firstName"></s:textfield></div>
+				<div><s:textfield id="firstName" Key="firstName" name="firstName"></s:textfield></div>
 			</div>
 			<div class="inputfield four columns">
 				<s:label for="otherName" value="Other Name:" />
@@ -16,12 +16,12 @@
 			
 			<div class="inputfield four columns omega">
 				<s:label for="lastName" value="Last Name:" />
-				<div><s:textfield id="lastName" name="lastName"></s:textfield></div>
+				<div><s:textfield id="lastName" name="lastName" Key="lastName"></s:textfield></div>
 			</div>
 		</div>
 		
 		<div class="row">
-			<s:select cssClass="four columns" list="gender.{genderName}" name="theGender" headerKey="-1" headerValue="Select Gender"></s:select>
+			<div class="four columns"><s:select list="genderSelectList.{genderName}" name="theGender" headerKey="-1" headerValue="Select Gender"/></div>
 			<!-- style="padding-right: 15px;" -->
 			<div class="inputfield eight columns" >
 				<s:label for="identification" value="Identification:" />
@@ -35,7 +35,7 @@
 		</div>
 		
 		<div class="row">
-			<s:select cssClass="four columns" list="culturalBackground.{culturalBackgroundName}" name="theCulturalBackground" headerKey="-1"  headerValue="Select Cultural Background" value="genderProtege"></s:select>
+			<div class="four columns"><s:select list="culturalBackgroundSelectList.{culturalBackgroundName}" name="theCulturalBackground" headerKey="-1"  headerValue="Select Cultural Background" value="genderProtege" /></div>
 			
 			<div class="textarea twelve columns omega">
 				<s:label for="culturalBackgroundComments" value="Comments:" />

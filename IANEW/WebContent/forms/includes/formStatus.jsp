@@ -1,4 +1,3 @@
-
 <div class="formStatus">
 	
 		<div class="row">
@@ -17,8 +16,8 @@
 			</div>
 			<div class="nine columns">
 				<div class="row">
-					<s:select cssClass="three columns" list="#{'1':'Flag (Attention)'}" id="issueType" name="" />
-					<s:select cssClass="three columns" list="#{'1':'Flag (Attention)'}" id="issueType" name="" />
+					<div class="three columns"><s:select list="#{'1':'Flag (Attention)'}" id="issueType" name="" /></div>
+					<div class="three columns"><s:select list="#{'1':'Flag (Attention)'}" id="issueType" name="" /></div>
 					<s:div cssClass="two columns">
 						<s:label for="enquiryID" value="Case#:" />
 						<s:text id="enquiryID" name="" />

@@ -1,7 +1,7 @@
-@CHARSET "US-ASCII";
+@CHARSET "UTF-8";
 
 .form{
-	background-color: white;
+	background: white;
 	text-align: left;
 	box-shadow: 5px 5px 5px black;
 	width: 98%;
@@ -55,7 +55,7 @@ fieldset{
 .imageContainer {
 	width: 100%;
 	miin-height: 100px;
-    //height:145px;
+    min-height:110px;
     background: #444444;
     margin-bottom: 0;
  }
@@ -68,11 +68,25 @@ fieldset{
 	max-height: 120px;
 	text-align: right;
 	margin-right: 10%;
-	line-height: 120px;
+	//line-height: 100px;
  	font-size:32px;
  	vertical-align: middle;
  	padding-right: 5%;
+	padding-top: 25px;
+	margin-bottom: 5px;
  }
+ .headerText div{
+	 margin-bottom: 3px;
+ }
+ 
+.inputfield{
+	box-sizing: border-box;
+ 	border: #4384ca solid 2px; 
+ 	border-top: none;
+ 	text-align: left;
+ 	padding:0 3px;
+
+}
  
 .inputfield{
 	box-sizing: border-box;
@@ -140,20 +154,13 @@ fieldset{
 	outline: none;
 	background: none;
 	width: 100%;
+	margin
 }
 
 label{
 	color: grey;
 	margin-right: 4px;
 	font-size: x-small
-}
-
-.divbuttons{
-	width: 100%;
-	//padding-right: 
-}
-
-.divbuttons input[type=button]{
 	
 }
 
@@ -161,7 +168,8 @@ label{
 .greybackground{
 	padding-top: 3px;
 	padding-bottom: 3px;
-	background: #a5a5a5;
+	background: #d6d6d6;
+	margin-bottom: 10px;
 }
 
 .greybackground ul li, .greybackground ul{
@@ -178,9 +186,47 @@ h3 {
 	color: blue;
 	font-size: 20px;
 	line-height: 30px;
+	color: grey;
 }
 
+.curveBorder{
+	margin: 5px 0;
+	box-sizing: border-box;	
+	border-radius: 20px;
+	border-left: 4px #4384ca solid;
+	border-right: 4px #4384ca solid;
+	box-shadow: 1px 1px 1px grey;
+	background-color: snow;
+	padding: 10px 0;
+}
 
-.primaryDisability{
-	background: red;
+.listSelected{
+	background-color	:#fddabe;
+	border-left			:solid 4px orange;
+	border-right		:solid 4px orange
+}
+
+.primary{
+	background: #7bb1d3;
+}
+
+.form input[type=button], .form input[type=submit]{
+	border-radius: 5px;
+	background: #4384ca;
+	font-size: 10px;
+	color: snow;
+}
+
+.form footer{
+	height: 40px;
+	background:#444444;
+	margin-top: 10px
+}
+
+.form .error{
+	color: #ed6b75;
+}
+		
+.row select{
+	width: 100%;
 }

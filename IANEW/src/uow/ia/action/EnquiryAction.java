@@ -7,10 +7,27 @@ import java.util.List;
 import uow.ia.bean.AccommodationTypes;
 import uow.ia.bean.Contacts;
 import uow.ia.bean.CulturalBackgroundTypes;
+import uow.ia.bean.DisabilityTypes;
 import uow.ia.bean.GenderTypes;
+import uow.ia.bean.IssueTypes;
 import uow.ia.bean.TitleTypes;
+/*
+ * Created By Quang Nhan,
+ * Editor: David Forbes, Quang Nhan
+ * Creaed On: 14/7/14
+ * Last Updated On: 9/8/14
+ * Description: Action class for enquiries
+ */
 
 
+/**
+ * @author Voom
+ *
+ */
+/**
+ * @author Voom
+ *
+ */
 public class EnquiryAction extends BaseAction{
 	
 	/* 
@@ -37,13 +54,13 @@ public class EnquiryAction extends BaseAction{
 	 * Personal Details
 	 */
 	//List<String> title; 
-	List<TitleTypes> title; 
+	List<TitleTypes> titleSelectList; 
 	String theTitle; 	//
 	//List<String> gender; 
-	List<GenderTypes> gender; 
+	List<GenderTypes> genderSelectList; 
 	String theGender;	//
 	//List<String> culturalBackground;
-	List<CulturalBackgroundTypes> culturalBackground;
+	List<CulturalBackgroundTypes> culturalBackgroundSelectList;
 	String theCulturalBackground; //
 	Date birthDate;
 	String firstName;
@@ -58,8 +75,8 @@ public class EnquiryAction extends BaseAction{
 	 * Address 
 	 */
 	//List<String> accomodation;
-	List<AccommodationTypes> accomodation;
-	String accomodationComments;
+	List<AccommodationTypes> accommodationSelectList;
+	String accommodationComments;
 	String address;
 	String city;
 	String state;
@@ -81,8 +98,13 @@ public class EnquiryAction extends BaseAction{
 	String workPhone;
 	String employmentDescription;
 	String employmentComment;
+
+	List<DisabilityTypes> disabilitySelectList;
+	String theDisability;
 	
-	List<Contacts> contacts;
+	List<IssueTypes> issueSelectList;
+	String theIssue;
+
 	public String enquiryList(){
 		//contacts=services.findContacts();
 		//for(Contacts c:contacts) {
@@ -90,10 +112,6 @@ public class EnquiryAction extends BaseAction{
 		//}
 		//System.out.println(contacts);
 		return SUCCESS;
-	}
-	
-	public List<Contacts> getContacts() {
-		return contacts;
 	}
 	
 	public String newEnquiry(){
@@ -113,7 +131,7 @@ public class EnquiryAction extends BaseAction{
 		//personal details
 		
 		
-		setFirstName("Quang");
+		/*setFirstName("Quang");
 		setOtherName("Matt");
 		setLastName("David");
 		setIdentification("YangKim");
@@ -138,337 +156,75 @@ public class EnquiryAction extends BaseAction{
 		setEmploymentComment("employment comment");
 		
 		//referrals
-		setReferredBy("Georgiei");
+		setReferredBy("Georgiei");*/
 	}
 	
 	private void activateLists(){
-		title=services.findTitleTypes();
-		gender=services.findGenderTypes();
-		culturalBackground=services.findCulturalBackgroundTypes();
-		accomodation = services.findAccommodationTypes();
-		//List<String> tit = new ArrayList<String>();
-		//tit.add("Mr");
-		//tit.add("Mrs");
-		//setTitle(tit);
-		
-		//List<String> gen = new ArrayList<String>();
-		//gen.add("Male");
-		//gen.add("Female");
-		//setGender(gen);
-		
-		//List<String> cult = new ArrayList<String>();
-		//cult.add("aussie");
-		//cult.add("oi");
-		//setCulturalBackground(cult);
-		/*
-		List<String> acco = new ArrayList<String>();
-		acco.add("Acc1");
-		acco.add("Acc2");
-		setTitle(acco);
-		*/
+		titleSelectList=services.findTitleTypes();
+		genderSelectList=services.findGenderTypes();
+		culturalBackgroundSelectList=services.findCulturalBackgroundTypes();
+		accommodationSelectList = services.findAccommodationTypes();
+		disabilitySelectList = services.findDisabilityTypes();
+		issueSelectList = services.findIssueTypes();
 	}
 	
-	/*
-	 * title
+	
+	/**
+	 * Getter for the form title
+	 * @return String
 	 */
 	public String getFormTitle() {
 		return formTitle;
 	}
-
+	/**
+	 * Setter for the form title
+	 * @param formTitle
+	 */
 	public void setFormTitle(String formTitle) {
 		System.out.println(formTitle);
 		this.formTitle = formTitle;
 	}
-
-	public Date getCreatedDate() {
-		return createdDate;
-	}
-
-	public void setCreatedDate(Date createdDate) {
-		this.createdDate = createdDate;
-	}
-
-	public Date getUpdatedDate() {
-		return updatedDate;
-	}
-
-	public void setUpdatedDate(Date updatedDate) {
-		this.updatedDate = updatedDate;
-	}
-
-	public String getCreatedBy() {
-		return createdBy;
-	}
-
-	public void setCreatedBy(String createdBy) {
-		this.createdBy = createdBy;
-	}
-
-	public String getUpdatedBy() {
-		return updatedBy;
-	}
-
-	public void setUpdatedBy(String updatedBy) {
-		this.updatedBy = updatedBy;
-	}
-
-	public Integer getEnquiryID() {
-		return enquiryID;
-	}
-
-	public void setEnquiryID(Integer enquiryID) {
-		this.enquiryID = enquiryID;
-	}
-
-	public List<String> getFlagList() {
-		return flagList;
-	}
-
-	public void setFlagList(List<String> flagList) {
-		this.flagList = flagList;
-	}
-
-	public List<String> getStatus() {
-		return status;
-	}
-
-	public void setStatus(List<String> status) {
-		this.status = status;
-	}
-
-	public List<TitleTypes> getTitle() {
-		return title;
-	}
-
-	public void setTitle(List<TitleTypes> title) {
-		this.title = title;
-	}
-
-	public List<GenderTypes> getGender() {
-		return gender;
-	}
-
-	public void setGender(List<GenderTypes> gender) {
-		this.gender = gender;
-	}
-
-	public List<CulturalBackgroundTypes> getCulturalBackground() {
-		return culturalBackground;
-	}
-
-	public void setCulturalBackground(List<CulturalBackgroundTypes> culturalBackground) {
-		this.culturalBackground = culturalBackground;
-	}
-
-	
-	
-	public String getTheTitle() {
-		return theTitle;
-	}
-
-	public void setTheTitle(String theTitle) {
-		this.theTitle = theTitle;
-	}
-
-	public String getTheGender() {
-		return theGender;
-	}
-
-	public void setTheGender(String theGender) {
-		this.theGender = theGender;
-	}
-
-	public String getTheCulturalBackground() {
-		return theCulturalBackground;
-	}
-
-	public void setTheCulturalBackground(String theCulturalBackground) {
-		this.theCulturalBackground = theCulturalBackground;
-	}
-
-	public Date getBirthDate() {
-		return birthDate;
-	}
-
-	public void setBirthDate(Date birthDate) {
-		this.birthDate = birthDate;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getOtherName() {
-		return otherName;
-	}
-
-	public void setOtherName(String otherName) {
-		this.otherName = otherName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-	
-	public String getIdentification() {
-		return identification;
-	}
-
-	public void setIdentification(String identification) {
-		this.identification = identification;
+	/**
+	 * Getter for title types
+	 * @return List
+	 */
+	public List<TitleTypes> getTitleSelectList() {
+		return titleSelectList;
+	}
+	/**
+	 * Getter for gender types
+	 * @return List
+	 */
+	public List<GenderTypes> getGenderSelectList() {
+		return genderSelectList;
+	}
+	/**
+	 * Getter for cultural background types
+	 * @return List
+	 */
+	public List<CulturalBackgroundTypes> getCulturalBackgroundSelectList() {
+		return culturalBackgroundSelectList;
+	}
+	/**
+	 * Getter for accommodation types
+	 * @return List
+	 */
+	public List<AccommodationTypes> getAccomodationSelectList() {
+		return accommodationSelectList;
+	}
+	/**
+	 * Getter for disability type
+	 * @return List
+	 */
+	public List<DisabilityTypes> getDisabilitySelectList() {
+		return disabilitySelectList;
+	}
+	/**
+	 * Getter for issue type
+	 * @return List
+	 */
+	public List<IssueTypes> getIssueSelectList() {
+		return issueSelectList;
 	}
 
-	public String getCulturalBackgroundComments() {
-		return culturalBackgroundComments;
-	}
-
-	public void setCulturalBackgroundComments(String culturalBackgroundComments) {
-		this.culturalBackgroundComments = culturalBackgroundComments;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getMobile() {
-		return mobile;
-	}
-
-	public void setMobile(String string) {
-		this.mobile = string;
-	}
-
-	public List<AccommodationTypes> getAccomodation() {
-		return accomodation;
-	}
-
-	public void setAccomodation(List<AccommodationTypes> accomodation) {
-		this.accomodation = accomodation;
-	}
-
-	public String getAccomodationComments() {
-		return accomodationComments;
-	}
-
-	public void setAccomodationComments(String accomodationComments) {
-		this.accomodationComments = accomodationComments;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-
-	public String getState() {
-		return state;
-	}
-
-	public void setState(String state) {
-		this.state = state;
-	}
-
-	public String getCountry() {
-		return country;
-	}
-
-	public void setCountry(String country) {
-		this.country = country;
-	}
-
-	public String getPostCode() {
-		return postCode;
-	}
-
-	public void setPostCode(String postCode) {
-		this.postCode = postCode;
-	}
-
-	public String getHomePhone() {
-		return homePhone;
-	}
-
-	public void setHomePhone(String homePhone) {
-		this.homePhone = homePhone;
-	}
-
-	public String getInquisitor() {
-		return inquisitor;
-	}
-
-	public void setInquisitor(String inquisitor) {
-		this.inquisitor = inquisitor;
-	}
-
-	public String getReferredBy() {
-		return referredBy;
-	}
-
-	public void setReferredBy(String referredBy) {
-		this.referredBy = referredBy;
-	}
-
-	public String getReferredTo() {
-		return referredTo;
-	}
-
-	public void setReferredTo(String referredTo) {
-		this.referredTo = referredTo;
-	}
-
-	public String getProfession() {
-		return profession;
-	}
-
-	public void setProfession(String profession) {
-		this.profession = profession;
-	}
-
-	public String getWorkPhone() {
-		return workPhone;
-	}
-
-	public void setWorkPhone(String workPhone) {
-		this.workPhone = workPhone;
-	}
-
-	public String getEmploymentDescription() {
-		return employmentDescription;
-	}
-
-	public void setEmploymentDescription(String employmentDescription) {
-		this.employmentDescription = employmentDescription;
-	}
-
-	public String getEmploymentComment() {
-		return employmentComment;
-	}
-
-	public void setEmploymentComment(String employmentComment) {
-		this.employmentComment = employmentComment;
-	}
-	
-	
 }

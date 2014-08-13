@@ -2,7 +2,7 @@
 <div class="fieldsetborder">
 	<fieldset>
 		<div class="row">
-			<s:select cssClass="four columns" list="accomodation.{accommodationName}" id="accommodationType" name="accommodationType" />
+			<div class="four columns"><s:select list="accomodationSelectList.{accommodationName}" id="accommodationType" name="accommodationType" headerKey="-1" headerValue="Select an Accomodation Type"/></div>
 			
 			<div class="textarea twelve columns">
 				<s:label for="accomodationComments" value="Comments:" />
@@ -44,6 +44,5 @@
 				<div><s:textfield id="homePhone" name="homePhone"></s:textfield></div>
 			</div>
 		</div>
-		
 	</fieldset>
 </div>
