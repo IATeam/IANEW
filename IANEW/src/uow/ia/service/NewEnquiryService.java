@@ -5,14 +5,21 @@ import java.util.List;
 import uow.ia.bean.AccommodationTypes;
 import uow.ia.bean.Contacts;
 import uow.ia.bean.CulturalBackgroundTypes;
+import uow.ia.bean.DangerTypes;
 import uow.ia.bean.DisabilityTypes;
+import uow.ia.bean.Enquiries;
 import uow.ia.bean.GenderTypes;
 import uow.ia.bean.IssueTypes;
+import uow.ia.bean.StatusTypes;
 import uow.ia.bean.TitleTypes;
 
 public interface NewEnquiryService {
 	
 	public static final String SERVICENAME = "NewEnquiryService";
+	
+	public List<DangerTypes> findDangerTypes();
+	
+	public List<StatusTypes> findStatusTypes();
 	
 	public List<TitleTypes> findTitleTypes();
 	
@@ -26,5 +33,5 @@ public interface NewEnquiryService {
 	
 	public List<IssueTypes> findIssueTypes();
 	
-	public List<Contacts> findContacts();
+	public List<Enquiries> findEnquiries();
 }

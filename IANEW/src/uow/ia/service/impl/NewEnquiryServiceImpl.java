@@ -54,6 +54,25 @@ public class NewEnquiryServiceImpl implements
 	@Resource
 	private ContactsDao<Contacts> contactsDao;
 	
+	@Resource
+	private EnquiriesDao<Enquiries> enquiriesDao;
+	
+	@Resource
+	private DangerTypesDao<DangerTypes> dangerTypesDao;
+	
+	@Resource
+	private StatusTypesDao<StatusTypes> statusTypesDao;
+	
+	@Override
+	public List<DangerTypes> findDangerTypes() {
+		return dangerTypesDao.find(" from DangerTypes");
+	}
+	
+	@Override
+	public List<StatusTypes> findStatusTypes() {
+		return statusTypesDao.find(" from StatusTypes");
+	}
+	
 	@Override
 	public List<AccommodationTypes> findAccommodationTypes() {
 		//logger.info("NewEnquiryService.findAccommodationTypes called");
@@ -86,8 +105,8 @@ public class NewEnquiryServiceImpl implements
 	}
 	
 	@Override
-	public List<Contacts> findContacts() {
-		return contactsDao.find(" from Contacts");
+	public List<Enquiries> findEnquiries() {
+		return enquiriesDao.find(" from Enquiries");
 	}
 
 }
