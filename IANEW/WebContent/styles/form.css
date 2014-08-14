@@ -230,3 +230,8 @@ h3 {
 .row select{
 	width: 100%;
 }
+
+.iteratorlist p{
+	display: inline;
+	color: blue;
+}

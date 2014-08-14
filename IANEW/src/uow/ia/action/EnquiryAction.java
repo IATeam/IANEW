@@ -3,8 +3,10 @@ package uow.ia.action;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import uow.ia.bean.AccommodationTypes;
+import uow.ia.bean.Addresses;
 import uow.ia.bean.Contacts;
 import uow.ia.bean.CulturalBackgroundTypes;
 import uow.ia.bean.DangerTypes;
@@ -33,6 +35,13 @@ public class EnquiryAction extends BaseAction{
 	 */
 	String formTitle;;
 	
+	
+	
+	Enquiries enquiry;
+	Contacts contact; //not calling from enquiry to allow 'CASE' to share the same include jsp
+	Set<Addresses> address;
+	
+	String description;
 	/*
 	 * status
 	 */
@@ -51,7 +60,7 @@ public class EnquiryAction extends BaseAction{
 	List<String> status; 			//Status_Type or criteria control value table 
 	
 	
-	List<Enquiries> enquiries;
+	List<Enquiries> enquiryList;
 	
 	/*
 	 * Personal Details
@@ -80,12 +89,12 @@ public class EnquiryAction extends BaseAction{
 	//List<String> accomodation;
 	List<AccommodationTypes> accommodationSelectList;
 	String accommodationComments;
-	String address;
+	/*String address;
 	String city;
 	String state;
 	String country;
 	String postCode;
-	String homePhone;
+	String homePhone;*/
 	
 	/*
 	 * Referral
@@ -108,7 +117,7 @@ public class EnquiryAction extends BaseAction{
 	List<IssueTypes> issueSelectList;
 	String theIssue;
 
-	
+	int hidden;
 	
 	public String enquiryList(){
 		//contacts=services.findContacts();
@@ -116,7 +125,7 @@ public class EnquiryAction extends BaseAction{
 			//System.out.println(c.getAccommodation().toString());
 		//}
 		//System.out.println(contacts);
-		enquiries = services.findEnquiries();
+		enquiryList = services.findEnquiries();
 		return SUCCESS;
 	}
 	
@@ -125,9 +134,16 @@ public class EnquiryAction extends BaseAction{
 		return SUCCESS;
 	}
 
-	public String getEnquiry(){
-		System.out.println("get (0iodfodf enquiry");
+	public String getExistingEnquiry(){
+		System.out.println("The hdiden field is : " + hidden);
+		enquiry = services.getEnquiry(hidden);
+		contact = enquiry.getContact();
+		//System.out.println("first name " + enquiry.getContact().getFirstname());
+		
+		
 		activateLists();
+		
+		
 		return SUCCESS;
 	}
 	
@@ -172,8 +188,6 @@ public class EnquiryAction extends BaseAction{
 		disabilitySelectList = services.findDisabilityTypes();
 		issueSelectList = services.findIssueTypes();
 		dangerSelectList = services.findDangerTypes();
-		
-		
 		
 	}
 	
@@ -236,18 +250,57 @@ public class EnquiryAction extends BaseAction{
 		return issueSelectList;
 	}
 
-	public List<Enquiries> getEnquiries() {
-		return enquiries;
+	public List<Enquiries> getEnquiryList() {
+		return enquiryList;
 	}
 
-	public void setEnquiries(List<Enquiries> enquiries) {
-		this.enquiries = enquiries;
+	public void setEnquiryList(List<Enquiries> enquiryList) {
+		this.enquiryList = enquiryList;
 	}
 
 	public List<DangerTypes> getDangerSelectList() {
 		return dangerSelectList;
 	}
 
+	public int getHidden() {
+		return hidden;
+	}
+
+	/**
+	 * @param hidden
+	 */
+	public void setHidden(int hidden) {
+		this.hidden = hidden;
+	}
+
+	/**
+	 * @param enquiry
+	 */
+	public void setEnquiry(Enquiries enquiry) {
+		this.enquiry = enquiry;
+	}
+
+	public Enquiries getEnquiry(){
+		return enquiry;
+	}
+
+	public Contacts getContact() {
+		return contact;
+	}
+
+	public void setContact(Contacts contact) {
+		this.contact = contact;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
+	
 	
 	
 }

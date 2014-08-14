@@ -38,7 +38,7 @@
 	<s:url var="urlENew" namespace="/enquiry" action="newEnquiry">
 		<s:param name="formTitle">New Enquiry</s:param>
 	</s:url>
-	<s:url var="urlEExisting" namespace="/enquiry" action="getEnquiry">
+	<s:url id="urlEExisting" namespace="/enquiry" action="getEnquiry" includeContext="false">
 		<s:param name="formTitle">Existing Enquiry</s:param>
 	</s:url>
 	<s:url id="urlCList" namespace="/case" value="caseList">

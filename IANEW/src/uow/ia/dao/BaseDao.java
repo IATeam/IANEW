@@ -73,6 +73,18 @@ public interface BaseDao<T> {
      * retrieve with object[] with pages
      *  
      * @param hql 
+     * @param page
+     *              search which page
+     * @param rows
+     *              rows per page
+     * @return List<Object>
+     */
+	public List<T> find(String hql, Integer page, Integer rows);
+	
+	/** 
+     * retrieve with object[] with pages
+     *  
+     * @param hql 
      * @param param
      * @param page
      *              search which page

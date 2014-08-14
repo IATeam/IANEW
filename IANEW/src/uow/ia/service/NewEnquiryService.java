@@ -35,5 +35,14 @@ public interface NewEnquiryService {
 	
 	public List<Enquiries> findEnquiries();
 	
-	public Enquiries getEnquiry(long id);
+	/** 
+     * retrieve with List<object> 
+     *  
+     * @param pageNo 
+     * @param rows
+     * @return List<Object>
+     */
+	public List<Enquiries> findEnquiriesByPage(int pageNo, int rows);
+	
+	public Enquiries getEnquiry(int id);
 }

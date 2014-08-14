@@ -19,7 +19,7 @@
     
     <!-- Enquiry Forms -->
     <package name="enquiry" namespace="/enquiry" extends="struts-default">
-    	<action name="getEnquiry" class="uow.ia.action.EnquiryAction" method="getEnquiry">
+    	<action name="getEnquiry" class="uow.ia.action.EnquiryAction" method="getExistingEnquiry">
     		<result name="success">/forms/enquiry.jsp</result>
     	</action>
     	<action name="newEnquiry" class="uow.ia.action.EnquiryAction" method="newEnquiry">
