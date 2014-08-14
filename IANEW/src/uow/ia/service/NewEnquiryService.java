@@ -44,5 +44,7 @@ public interface NewEnquiryService {
      */
 	public List<Enquiries> findEnquiriesByPage(int pageNo, int rows);
 	
+	public Long countEnquiries();
+	
 	public Enquiries getEnquiry(int id);
 }

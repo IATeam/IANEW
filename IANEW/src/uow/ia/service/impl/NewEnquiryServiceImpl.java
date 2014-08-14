@@ -118,4 +118,9 @@ public class NewEnquiryServiceImpl implements
 	public List<Enquiries> findEnquiriesByPage(int pageNo, int rows) {
 		return enquiriesDao.find(" from Enquiries", pageNo, rows);
 	}
+	
+	@Override
+	public Long countEnquiries() {
+		return enquiriesDao.count("select count(*) from Enquiries"); 
+	}
 }
