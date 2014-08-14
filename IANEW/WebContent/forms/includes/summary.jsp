@@ -9,14 +9,9 @@
 			<div class="textarea twelve columns">
 				<s:label for="description" value="Description:" />
 				<div>
-					<!-- get a description for enquiry summary  -->
-					<s:if test="formTitle='formTitle'">
-						<s:textarea id="description" cssClass="multiLineTextArea" name="enquiry.description" />
-					</s:if>
-					<!-- get the decription for case summary -->
-					<s:else>
-						<s:textarea id="description" cssClass="multiLineTextArea" name="case.description" />
-					</s:else>
+					
+						<s:textarea id="description" cssClass="multiLineTextArea" name="description" />
+					
 				</div>
 			</div>
 		</div>

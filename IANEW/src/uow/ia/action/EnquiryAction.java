@@ -1,20 +1,22 @@
 package uow.ia.action;
 
-import java.sql.Date;
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
 import uow.ia.bean.AccommodationTypes;
 import uow.ia.bean.Addresses;
+import uow.ia.bean.ClientDisabilities;
 import uow.ia.bean.Contacts;
 import uow.ia.bean.CulturalBackgroundTypes;
 import uow.ia.bean.DangerTypes;
 import uow.ia.bean.DisabilityTypes;
 import uow.ia.bean.Enquiries;
+import uow.ia.bean.EnquiryIssues;
 import uow.ia.bean.GenderTypes;
 import uow.ia.bean.IssueTypes;
 import uow.ia.bean.TitleTypes;
+import uow.ia.util.DateUtil;
 /*
  * Created By Quang Nhan,
  * Editor: David Forbes, Quang Nhan
@@ -40,7 +42,7 @@ public class EnquiryAction extends BaseAction{
 	Enquiries enquiry;
 	Contacts contact; //not calling from enquiry to allow 'CASE' to share the same include jsp
 	Set<Addresses> address;
-	
+	Set<ClientDisabilities> clientDisabilities;
 	String description;
 	/*
 	 * status
@@ -49,8 +51,7 @@ public class EnquiryAction extends BaseAction{
 	Date updatedDate;
 	String createdBy;
 	String updatedBy;
-	
-	Integer enquiryID;
+	Integer id;
 	
 	List<DangerTypes> dangerSelectList;
 	String theDanger;
@@ -74,28 +75,14 @@ public class EnquiryAction extends BaseAction{
 	//List<String> culturalBackground;
 	List<CulturalBackgroundTypes> culturalBackgroundSelectList;
 	String theCulturalBackground; //
-	Date birthDate;
-	String firstName;
-	String otherName;
-	String lastName;
-	String identification;
-	String culturalBackgroundComments; 	//for cultural background
-	String email; 						//need validation
-	String mobile;						//need validation
-	
+
 	/*
 	 * Address 
 	 */
 	//List<String> accomodation;
 	List<AccommodationTypes> accommodationSelectList;
 	String accommodationComments;
-	/*String address;
-	String city;
-	String state;
-	String country;
-	String postCode;
-	String homePhone;*/
-	
+
 	/*
 	 * Referral
 	 */
@@ -119,67 +106,101 @@ public class EnquiryAction extends BaseAction{
 
 	int hidden;
 	
-	public String enquiryList(){
-		//contacts=services.findContacts();
-		//for(Contacts c:contacts) {
-			//System.out.println(c.getAccommodation().toString());
-		//}
-		//System.out.println(contacts);
-		enquiryList = services.findEnquiries();
-		return SUCCESS;
-	}
+	/* For pagination */
+	int page;
+	int numberOfRecords;
+	long totalNumberOfRecords;
+	long totalNumberOfPages;
+
+
+
+	private Set<EnquiryIssues> issueSet;
+
+
+
+	private Set<Enquiries> linkedEnquiries;
 	
+	
+	
+	
+	
+
+	public Set<Enquiries> getLinkedEquiries() {
+		return linkedEnquiries;
+	}
+
+	public void setLinkedEnquiries(Set<Enquiries> linkedEnquiries) {
+		this.linkedEnquiries = linkedEnquiries;
+	}
+
+	/**
+	 * Action Method
+	 * @return
+	 */
 	public String newEnquiry(){
 		activateLists();
 		return SUCCESS;
 	}
 
+	/**
+	 * Action Method
+	 * @return
+	 */
 	public String getExistingEnquiry(){
-		System.out.println("The hdiden field is : " + hidden);
+		//System.out.println("The hdiden field is : " + hidden);
 		enquiry = services.getEnquiry(hidden);
 		contact = enquiry.getContact();
 		//System.out.println("first name " + enquiry.getContact().getFirstname());
 		
-		
+		setIssueSet(enquiry.getEnquiryIssuesSet());
+		//issueSet = enquiry.getEnquiryIssuesSet();
+		clientDisabilities = contact.getDisabilitiesSet();
+		setLinkedEnquiries(enquiry.getEnquiriesSet());
+		System.out.println(enquiry.getEnquiriesSet().toString());
+		//setCreatedBy(enquiry.getCreatedUserId().get);
+		setCreatedDate(enquiry.getCreatedDateTime());
+		setUpdatedDate(enquiry.getUpdatedDateTime());
+		setId(enquiry.getId());
+		setDescription(enquiry.getDescription());
+		setAddress(contact.getAddressesSet());
 		activateLists();
 		
 		
 		return SUCCESS;
 	}
 	
-	//testing setter for all fields
-	private void setAllFields(){
-		//personal details
+	
+	/**
+	 * Action method
+	 * @return
+	 */
+	public String enquiryList(){
+		setPage(1);
+		setNumberOfRecords(10);
 		
-		
-		/*setFirstName("Quang");
-		setOtherName("Matt");
-		setLastName("David");
-		setIdentification("YangKim");
-		setCulturalBackgroundComments("Long COmment...");
-		setEmail("134@uow.edu.au");
-		setMobile("0403020100");
-		
-		//address
-		
-		
-		setAccomodationComments("this is a great place to live");
-		setAddress("445 FFid Street");
-		setCity("Wollongong");
-		setState("NSW");
-		setPostCode("2111");
-		setHomePhone("09202002");
-		
-		//employment
-		setProfession("Lecturer");
-		setWorkPhone("97665432");
-		setEmploymentDescription("employment descriptino");
-		setEmploymentComment("employment comment");
-		
-		//referrals
-		setReferredBy("Georgiei");*/
+		enquiryList = services.findEnquiriesByPage(page,numberOfRecords);
+		totalNumberOfRecords = services.countEnquiries();
+		totalNumberOfPages = totalNumberOfRecords/numberOfRecords;
+		System.out.println(totalNumberOfPages);
+		return SUCCESS;
 	}
 	
+	
+	/**
+	 * Action Method
+	 * @return
+	 */
+	public String updateEnquiryList(){
+		System.out.println("updating page: " + getPage() + " number of Records: " + getNumberOfRecords());
+		
+		enquiryList = services.findEnquiriesByPage(getPage(),getNumberOfRecords());
+		totalNumberOfRecords = services.countEnquiries();
+		totalNumberOfPages = totalNumberOfRecords/numberOfRecords;
+		return SUCCESS;
+	}
+	
+	
+
 	private void activateLists(){
 		titleSelectList=services.findTitleTypes();
 		genderSelectList=services.findGenderTypes();
@@ -299,8 +320,140 @@ public class EnquiryAction extends BaseAction{
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
+	public Set<ClientDisabilities> getClientDisabilities() {
+		return clientDisabilities;
+	}
+
+	public void setClientDisabilities(Set<ClientDisabilities> clientDisabilities) {
+		this.clientDisabilities = clientDisabilities;
+	}
+
+	/*------------------------------------------------Pagination Variables
+	 * 
+	 */
+
+	public int getPage() {
+		return page;
+	}
+
+
+
+	public void setPage(int page) {
+		this.page = page;
+	}
+
+
+
+	public int getNumberOfRecords() {
+		return numberOfRecords;
+	}
+
+
+
+	public void setNumberOfRecords(int numberOfRecords) {
+		this.numberOfRecords = numberOfRecords;
+	}
+
 	
+
+	public long getTotalNumberOfRecords() {
+		return totalNumberOfRecords;
+	}
+
+
+
+	public void setTotalNumberOfRecords(int totalNumberOfRecords) {
+		this.totalNumberOfRecords = totalNumberOfRecords;
+	}
+
+
+
+	public long getTotalNumberOfPages() {
+		return totalNumberOfPages;
+	}
+
+
+
+	public void setTotalNumberOfPages(int totalNumberOfPages) {
+		this.totalNumberOfPages = totalNumberOfPages;
+	}
+
+
+
+	public Date getCreatedDate() {
+		return createdDate;
+	}
+
+
+
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
+	}
+
+
+
+	public Date getUpdatedDate() {
+		return updatedDate;
+	}
+
+
+
+	public void setUpdatedDate(Date updatedDate) {
+		this.updatedDate = updatedDate;
+	}
+
+
+
+	public String getCreatedBy() {
+		return createdBy;
+	}
+
+
+
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+
+
+
+	public String getUpdatedBy() {
+		return updatedBy;
+	}
+
+
+
+	public void setUpdatedBy(String updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+
+
+
+	public Integer getId() {
+		return id;
+	}
+
+
+
+	private void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Set<Addresses> getAddress() {
+		return address;
+	}
+
+	public void setAddress(Set<Addresses> address) {
+		this.address = address;
+	}
 	
+	public Set<EnquiryIssues> getIssueSet() {
+		return issueSet;
+	}
+
+	public void setIssueSet(Set<EnquiryIssues> issueSet) {
+		this.issueSet = issueSet;
+	}
 	
 	
 }

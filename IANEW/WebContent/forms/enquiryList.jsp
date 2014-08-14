@@ -23,10 +23,17 @@
 <sj:head/>
 </head>
 <body>
-	<s:url id="urlEExisting" namespace="/enquiry" action="getEnquiry" includeContext="false">
-		<s:param name="formTitle">Existing Enquiry</s:param>
+	<s:url var="urlEExisting" namespace="/enquiry" action="getEnquiry" includeContext="false"/>
+		
+	<s:url var="urlENew" namespace="/enquiry" action="newEnquiry">
 	</s:url>
-	<s:form form="enquiryForm" method="post" action="%{urlEExisting}">
+	<s:url id="urlUpdate" namespace="/enquiry" action="updateEnquiryList" includeContext="false"/>
+	
+
+	
+	
+	
+	<s:form id="enquiryForm" method="post" action="%{urlEExisting}">
 	
 		<div class="form container">  
 			<section class="imageContainer">
@@ -50,9 +57,8 @@
 			
 			<!-- iterator -->
 			<!-- status="..." use attribute to get status info of iteration (index, count, first, even last, odd info) -->
-			<s:iterator value="enquiryList">
-			
-				<div class="enquiryList">
+			<div class="enquiryList">
+				<s:iterator value="enquiryList">
 					<div class="curveBorder sixteen columns iteratorlist" onclick="enquirySelected(this)">
 						<div class="row">
 							<s:div cssClass="textarea two columns">
@@ -80,50 +86,84 @@
 							</div>
 						</div>
 					</div>
-				</div>
-			
-			</s:iterator>
-			<s:hidden id="enquiryID" name="hidden" />
+				</s:iterator>
+			</div>
 			
 			<div class="clear"></div>
+			
+			
+			<!--Hidden Fields to pass parameters between pages -->
+	<s:hidden id="enquiryID" name="hidden" />
+	<s:hidden id="formTitle" name="formTitle" value="Existing Enquiry" />
+	
+	<s:hidden id="totalNumberOfPages" name="totalNumberOfPages" />
+			
+			
+<!--------- the footer of the form containing the cancel, open enquiry and new enquiry as well as the pagination functions --------->
+
+
 			<footer style="background:#444444; margin-top: 10px; padding: 5px;">
 				<div class="row">
-					<section class="five columns">
+					<section class="four columns">
 						<input type="button" value="Close" class="three columns" onclick="deselectAll()"/>
-					</section>
-					
-					<section class="eleven columns alpha">
-						<div class="seven columns alpha"><p></p></div>
-						<sj:submit id="open" value="Open Enquiry" cssClass="two columns"/>
-						<input type="button" id="new" value="New Enquiry" class="two columns omega"/>
+					</section >
+					<section class="eight columns">
+						<div class="row">
+							<div class="one column alpha"><p></p></div>
+							
+							<sj:submit formIds="paginationForm" targets="formDiv" cssClass="one column" onclick="prevPage()" value="prev"/>
+							
+							<div class="three columns" style="text-align:center;">
+								page <s:textfield size="1" id="pageTextField" value="%{page}"/> of 
+								<div id="totalNumberOfPagesDiv" style="display: inline"> <s:text name="totalNumberOfPages"/> </div>
+							</div>
+							
+							<sj:submit formIds="paginationForm" targets="formDiv" cssClass="one column" onclick="nextPage()" value="next"/>
+							
+							
+							<div class="two column omega"><p></p></div>
+							
+						</div>
+					</section >
+					<section class="four columns alpha">
+						<sj:submit targets="formDiv" id="open" value="Open Enquiry" cssClass="two columns alpha"/>
+						<sj:a targets="formDiv" id="newEButton" href="%{urlENew}" ><input type="button" class="two columns omega" value="New Enquiry"/></sj:a>
 					</section>
 				</div>
 			</footer>
 			
 		</s:form>
 		
-		
-	</div>
-	
-	
-	<%-- <s:url id="urlEList" namespace="/enquiry" action="enquiryList">
-		<s:param name="formTitle">Enquiry List</s:param>
-	</s:url>
-	<s:url var="urlENew" namespace="/enquiry" action="newEnquiry">
-		<s:param name="formTitle">New Enquiry</s:param>
-	</s:url>
-	<s:url var="urlEExisting" namespace="/enquiry" action="getEnquiry">
-		<s:param name="formTitle">Existing Enquiry</s:param>
-	</s:url>
-	<s:url id="urlCList" namespace="/case" value="caseList">
-		<s:param name="formTitle">Case List</s:param>
-	</s:url>
-	<s:url id="urlCNew" namespace="/case" action="newCase">
-		<s:param name="formTitle">New Case</s:param>
-	</s:url> --%>
-	
+<!----- Hidden form to pass pagination to action class submitted by the prev and next buttons ------------------------------------------------------------------->
+		<div ">
+			<s:form id="paginationForm" method="post" action="%{urlUpdate}" namespace="enquiry">
+				<s:hidden id="page" name="page" />
+				<s:hidden id="numberOfRecords" name="numberOfRecords" />
+			</s:form> 
+		</div>
 	
 	<script>
+		function nextPage(){
+			var currentPageNumber = parseInt($("#pageTextField").val());
+			var totalNumberOfPages = parseInt( $("#totalNumberOfPagesDiv").text())
+			
+			if(currentPageNumber < totalNumberOfPages){ 
+				var nextPageNumber = currentPageNumber + 1;
+				$("#pageTextField").val(nextPageNumber);
+				$("#page").val(nextPageNumber);
+			}
+		}
+		
+		function prevPage(){
+			var currentPageNumber = parseInt($("#pageTextField").val());
+			
+			if(currentPageNumber > 1 ){
+				var prevPageNumber = currentPageNumber - 1;
+				$("#pageTextField").val(prevPageNumber);
+				$("#page").val(prevPageNumber);
+			}
+		}
+		
 		function enquirySelected(selectedDiv){
 			deselectAll();
 			$(selectedDiv).addClass("listSelected");

@@ -24,28 +24,22 @@
 		
 	
 
-	<!-- <s:if test="" >
-		<s:iterator value="">
-			<s:div cssClass="fieldsetborder">
-				<fieldset>
-					<div class="textarea two columns">
-						<s:label value="E#" />
-						<s:textarea cssClass="oneLineTextArea"></s:textarea>		 
-					</div>
-					
-					<div class="textarea four columns">
-						<s:label value="Date:" />
-						<s:textarea cssClass="oneLineTextArea"></s:textarea>		 
-					</div>
-					
-					<div class="textarea six columns">
-						<s:label value="Enquiry Description:" />
-						<s:textarea label="issuedescription" cssClass="oneLineTextArea"></s:textarea>		 
-					</div>
-				</fieldset>
-			</s:div>
+		<s:iterator value="linkedEnquiries">
+			<section class="secLinkedEnquiries sixteen columns curveBorder">
+				<s:div cssClass="textarea two columns">
+					<s:label for="enquiryID" value="Enquiry#:" />
+					<s:text id="enquiryID" name="id" />
+				</s:div>
+				<s:div cssClass="textarea two columns">
+					<s:label for="date" value="Date:" />
+					<s:date id="date" format="dd/MM/yyyy" name="updatedDateTime"/>
+				</s:div>
+				<div class="textarea eleven columns omega">
+					<s:label for="description" value="Description:" />
+					<div><s:textarea id="description" cssClass="multiLineTextArea" name="description" readonly="true"/></div>
+				</div>
+			</section>
 		</s:iterator>
-	</s:if> -->
 	
 	<article id="artLinkedEnquiries" class="row">
 	
