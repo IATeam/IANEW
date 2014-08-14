@@ -3,7 +3,7 @@
 	<fieldset>
 	
 		<div class="row">
-			<div class="four columns"><s:select list="titleSelectList.{name}" value="personTitleProtege" name="theTitle" headerKey="-1" headerValue="Select Title" /></div>
+			<div class="four columns"><s:select list="titleSelectList.{name}" value="theTitle" name="theTitle" headerKey="-1" headerValue="Select Title" /></div>
 	
 			<div class='inputfield four columns'>
 				<s:label for="firstName" value="First Name:" />
@@ -35,7 +35,7 @@
 		</div>
 		
 		<div class="row">
-			<div class="four columns"><s:select list="culturalBackgroundSelectList.{culturalBackgroundName}" name="theCulturalBackground" headerKey="-1"  headerValue="Select Cultural Background" value="genderProtege" /></div>
+			<div class="four columns"><s:select list="culturalBackgroundSelectList.{culturalBackgroundName}" name="theCulturalBackground" value="theCultrualBackground" headerKey="-1"  headerValue="Select Cultural Background" value="genderProtege" /></div>
 			
 			<div class="textarea twelve columns omega">
 				<s:label for="culturalBackgroundComments" value="Comments:" />

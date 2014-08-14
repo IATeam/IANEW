@@ -23,7 +23,7 @@
 		
 			<div class="divDisability row">
 				<section class="sixteen columns curveBorder primary">
-					<div class="four columns"><s:select list="disabilitySelectList.{disabilityName}" value="personTitleProtege" name="theDisability" headerKey="-1" headerValue="Select Disability" /></div>
+					<div class="four columns"><s:select list="disabilitySelectList.{disabilityName}" value="theDisability" name="theDisability" headerKey="-1" headerValue="Select Disability" /></div>
 					<div class="textarea eleven columns">
 						<s:label for="disabilityDescription" value="Disability Description:" /> 
 						<s:textarea id="disabilityDescription" cssClass="oneLineTextArea" name="comments"></s:textarea> 

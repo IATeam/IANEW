@@ -11,6 +11,7 @@ import uow.ia.bean.Contacts;
 import uow.ia.bean.CulturalBackgroundTypes;
 import uow.ia.bean.DangerTypes;
 import uow.ia.bean.DisabilityTypes;
+import uow.ia.bean.EmploymentTypes;
 import uow.ia.bean.Enquiries;
 import uow.ia.bean.EnquiryIssues;
 import uow.ia.bean.GenderTypes;
@@ -81,6 +82,7 @@ public class EnquiryAction extends BaseAction{
 	 */
 	//List<String> accomodation;
 	List<AccommodationTypes> accommodationSelectList;
+	String theAccommodation;
 	String accommodationComments;
 
 	/*
@@ -93,6 +95,7 @@ public class EnquiryAction extends BaseAction{
 	/*
 	 * Employment
 	 */
+	
 	String profession;
 	String workPhone;
 	String employmentDescription;
@@ -119,11 +122,20 @@ public class EnquiryAction extends BaseAction{
 
 
 	private Set<Enquiries> linkedEnquiries;
+
+
+
+	private EmploymentTypes employmentList;
+	private String theEmployment;
 	
 	
-	
-	
-	
+	public EmploymentTypes getEmploymentList() {
+		return employmentList;
+	}
+
+	public void setEmploymentList(EmploymentTypes employmentList) {
+		this.employmentList = employmentList;
+	}
 
 	public Set<Enquiries> getLinkedEquiries() {
 		return linkedEnquiries;
@@ -163,6 +175,18 @@ public class EnquiryAction extends BaseAction{
 		setId(enquiry.getId());
 		setDescription(enquiry.getDescription());
 		setAddress(contact.getAddressesSet());
+		
+		setTheGender(contact.getGenderType().getGenderName());
+		setTheDanger(contact.getDangerType().getDangerName());
+		setTheTitle(contact.getTitleType().getName());
+		setTheEmployment(contact.getEmploymentType().getEmploymentName());
+		setTheCulturalBackground(contact.getCulturalBackground().getCulturalBackgroundName());
+		setTheAccommodation(contact.getAccommodation().getAccommodationName());
+		
+		setInquisitor(enquiry.getInquisitor());
+		setReferredBy(enquiry.getReferralBy());
+		setReferredTo(enquiry.getReferralTo());
+		
 		activateLists();
 		
 		
@@ -209,7 +233,7 @@ public class EnquiryAction extends BaseAction{
 		disabilitySelectList = services.findDisabilityTypes();
 		issueSelectList = services.findIssueTypes();
 		dangerSelectList = services.findDangerTypes();
-		
+		setEmploymentList(contact.getEmploymentType());
 	}
 	
 	
@@ -454,6 +478,96 @@ public class EnquiryAction extends BaseAction{
 	public void setIssueSet(Set<EnquiryIssues> issueSet) {
 		this.issueSet = issueSet;
 	}
+
+	/** Referrals **/
+	public String getInquisitor() {
+		return inquisitor;
+	}
+
+	public void setInquisitor(String inquisitor) {
+		this.inquisitor = inquisitor;
+	}
+
+	public String getReferredBy() {
+		return referredBy;
+	}
+
+	public void setReferredBy(String referredBy) {
+		this.referredBy = referredBy;
+	}
+
+	public String getReferredTo() {
+		return referredTo;
+	}
+
+	public void setReferredTo(String referredTo) {
+		this.referredTo = referredTo;
+	}
+
+	public String getTheDanger() {
+		return theDanger;
+	}
+
+	public void setTheDanger(String theDanger) {
+		this.theDanger = theDanger;
+	}
+
+	public String getTheTitle() {
+		return theTitle;
+	}
+
+	public void setTheTitle(String theTitle) {
+		this.theTitle = theTitle;
+	}
+
+	public String getTheGender() {
+		return theGender;
+	}
+
+	public void setTheGender(String string) {
+		this.theGender = string;
+	}
+
+	public String getTheDisability() {
+		return theDisability;
+	}
+
+	public void setTheDisability(String theDisability) {
+		this.theDisability = theDisability;
+	}
+
+	public String getTheIssue() {
+		return theIssue;
+	}
+
+	public void setTheIssue(String theIssue) {
+		this.theIssue = theIssue;
+	}
+
+	public String getTheEmployment() {
+		return theEmployment;
+	}
+
+	public void setTheEmployment(String theEmployment) {
+		this.theEmployment = theEmployment;
+	}
+
+	public String getTheCulturalBackground() {
+		return theCulturalBackground;
+	}
+
+	public void setTheCulturalBackground(String theCulturalBackground) {
+		this.theCulturalBackground = theCulturalBackground;
+	}
+
+	public String getTheAccommodation() {
+		return theAccommodation;
+	}
+
+	public void setTheAccommodation(String theAccommodation) {
+		this.theAccommodation = theAccommodation;
+	}
+	
 	
 	
 }

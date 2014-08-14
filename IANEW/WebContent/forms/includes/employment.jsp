@@ -7,7 +7,7 @@
 				<s:label for="profession" value="Profession:" />
 				<div><s:textfield id="profession" name="profession"></s:textfield></div>
 			</div> -->
-		<div class="four columns"><s:select list="#{'1': 'waiting' }" value="personTitleProtege" name="theTitle" headerKey="-1" headerValue="Select Employment Type" /></div>
+		<div class="four columns"><s:select list="" value="" name="theEmployment" headerKey="-1" headerValue="Select Employment Type" /></div>
 			<div class="inputfield four columns">
 				<s:label for="workPhone" value="Work#:" />
 				<div><s:textfield id="workPhone" name="contact.workphone"></s:textfield></div>
