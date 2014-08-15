@@ -47,6 +47,9 @@
 	<s:url id="urlCNew" namespace="/case" action="newCase">
 		<s:param name="formTitle">New Case</s:param>
 	</s:url>
+	<s:url id="urlLinks" namespace="/links" action="links">
+		<s:param name="formTitle">Links</s:param>
+	</s:url>
 	
 	<div class="container">
 	<!-- Navigation -->
@@ -100,11 +103,7 @@
 			</li>
 			
 			<li>
-				<a href="#">Links</a>
-				<ul>
-					<li><sj:a id="aCNew" href="%{urlCNew}" targets="formDiv" onclick="menuclicked()">New Case</sj:a></li>
-					<li><sj:a id="aCList" href="%{urlCList}" targets="formDiv" onclick="menuclicked()">Case List</sj:a>
-				</ul>
+					<li><sj:a id="links" href="%{urlLinks}" targets="formDiv">Links</sj:a></li>
 			</li>
 			
 		</ul>

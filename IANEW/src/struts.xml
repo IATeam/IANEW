@@ -38,6 +38,13 @@
     	</action>
     </package>
     
+     <!-- Links Forms -->
+    <package name="links" namespace="/links" extends="struts-default">
+    	<action name="*" class="uow.ia.action.LinksAction">
+    		<result name="success">/forms/{1}.jsp</result>
+    	</action>
+    </package>
+     
     <package name="example" namespace="/" extends="struts-default">
        <action name="*" class="uow.ia.action.Listing">
            <result name="success">Listing.jsp</result>
@@ -45,6 +52,6 @@
        </action>
     </package>
     
-    <include file="login.xml"/>
+      <include file="login.xml"/>
     
 </struts>
