@@ -11,6 +11,7 @@
 	font-family: Helvetica;
 	font-weight: normal;
 	border: 0;
+	color: #808080;
 }
 
 .formStatus {
@@ -229,4 +230,9 @@ h3 {
 		
 .row select{
 	width: 100%;
+}
+
+.iteratorlist p{
+	display: inline;
+	color: blue;
 }
