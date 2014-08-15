@@ -23,12 +23,13 @@
 <sj:head/>
 </head>
 <body>
+<!-- 
 	<s:url var="urlEExisting" namespace="/enquiry" action="getEnquiry" includeContext="false"/>
 		
 	<s:url var="urlENew" namespace="/enquiry" action="newEnquiry">
 	</s:url>
 	<s:url id="urlUpdate" namespace="/enquiry" action="updateEnquiryList" includeContext="false"/>
-	
+	 -->
 
 	
 	
@@ -93,7 +94,7 @@
 			
 			
 			<!--Hidden Fields to pass parameters between pages -->
-	<s:hidden id="enquiryID" name="hidden" />
+	<s:hidden id="enquiryID" name="enquiryID" />
 	<s:hidden id="formTitle" name="formTitle" value="Existing Enquiry" />
 	
 	<s:hidden id="totalNumberOfPages" name="totalNumberOfPages" />

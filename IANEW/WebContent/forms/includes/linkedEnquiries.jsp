@@ -22,17 +22,15 @@
 
 	<s:url id="urlELinked" namespace="/enquiry" action="getLinkedEnquiry" />
 		
-	
-
-		<s:iterator value="linkedEnquiries">
+		<s:iterator value="linkedEnquiriesSet">
 			<section class="secLinkedEnquiries sixteen columns curveBorder">
 				<s:div cssClass="textarea two columns">
 					<s:label for="enquiryID" value="Enquiry#:" />
-					<s:text id="enquiryID" name="id" />
+					<s:text var="enquiryID" name="id" />
 				</s:div>
 				<s:div cssClass="textarea two columns">
 					<s:label for="date" value="Date:" />
-					<s:date id="date" format="dd/MM/yyyy" name="updatedDateTime"/>
+					<s:date var="date" format="dd/MM/yyyy" name="updatedDateTime"/>
 				</s:div>
 				<div class="textarea eleven columns omega">
 					<s:label for="description" value="Description:" />
@@ -41,9 +39,9 @@
 			</section>
 		</s:iterator>
 	
-	<article id="artLinkedEnquiries" class="row">
+	<%-- <article id="artLinkedEnquiries" class="row">
 	
-		<%-- <sj:a id="aELinked" href="%{urlELinked}" targets="slidingPanel"> --%>
+		<sj:a id="aELinked" href="%{urlELinked}" targets="slidingPanel">
 			<section class="secLinkedEnquiries sixteen columns curveBorder">
 				<s:div cssClass="textarea two columns">
 					<s:label for="enquiryID" value="Enquiry#:" />
@@ -58,8 +56,8 @@
 					<div><s:textarea id="description" cssClass="multiLineTextArea" name="" readonly="true"/></div>
 				</div>
 			</section>
-		<%-- </sj:a> --%>
-	</article>
+		</sj:a>
+	</article> --%>
 	
 	<div>
 		<div class="row">

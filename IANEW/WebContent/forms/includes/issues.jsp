@@ -3,7 +3,7 @@
 	<%-- <s:if test="" > --%>
 		<s:iterator value="issueSet">
 			<section class="secIssue sixteen columns curveBorder">
-				<div class="four columns"><s:select list="issueSelectList.{issueName}" value="issue" name="theIssue" headerKey="-1" headerValue="Select an Issue" /></div>
+				<div class="four columns"><s:select list="issueSelectList.{issueName}" value="getIssue().issueName" name="theIssue" headerKey="-1" headerValue="Select an Issue" /></div>
 				<div class="textarea eleven columns omega">
 					<s:label for="issuedescription" value="Issue Description:" />
 					<s:textarea id="" cssClass="oneLineTextArea" name="comment"/> 
