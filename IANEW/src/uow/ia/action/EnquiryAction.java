@@ -4,8 +4,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
-import com.sun.xml.rpc.processor.modeler.j2ee.xml.variableMappingType;
-
 import uow.ia.bean.AccommodationTypes;
 import uow.ia.bean.Addresses;
 import uow.ia.bean.ClientDisabilities;
@@ -19,21 +17,26 @@ import uow.ia.bean.EnquiryIssues;
 import uow.ia.bean.GenderTypes;
 import uow.ia.bean.IssueTypes;
 import uow.ia.bean.TitleTypes;
-import uow.ia.util.DateUtil;
 
-/*
- * Created By Quang Nhan,
- * Editor: David Forbes, Quang Nhan
- * Creaed On: 14/7/14
- * Last Updated On: 9/8/14
- * Description: Action class for enquiries
- */
-
-
-/**
- * @author Quang
+/** ---------------------------------------------------------------------------------------------
+ * @author: Quang Nhan
+ * Created Date: 27/07/2014
+ * ==============================================
+ * Updates:
+ * 12/08/2014 - 	Quang Nhan
+ * 					Migrate code into new project setup
+ * 14/08/2014 	- 	Quang Nhan
+ * 					Connect and retrieve data from service class to enquiry, enquirylist jsps and a
+ * 					dded pagination functionality
+ * 16/08/2014 -	Quang Nhan
+ * 					Refactor the code
+ * ==============================================
+ * 	Description: An action class to linking the service from spring to the enquiry jsp pages
  *
- */
+ *----------------------------------------------------------------------------------------------*/
+
+
+
 public class EnquiryAction extends BaseAction{
 	
 	/* 
@@ -68,46 +71,41 @@ public class EnquiryAction extends BaseAction{
 	private Set<Addresses> addressSet;
 	private Set<ClientDisabilities> clientDisabilitiesSet;
 
-	private Set<Enquiries> tmpSet;
-	public Set<Enquiries> getTmpSet() {
-		return tmpSet;
-	}
-
-	public void setTmpSet(Set<Enquiries> tmpSet) {
-		this.tmpSet = tmpSet;
-	}
-
 	/*
 	 * status variables
 	 */
-	private Date createdDate;
-	private Date updatedDate;
-	private String createdBy;
-	private String updatedBy;
+	private Date createdDate, updatedDate;
+	private String createdBy, updatedBy;
 	private Integer id;
 	
 	/*
 	 * Referral
 	 */
-	private String inquisitor;
-	private String referredBy;
-	private String referredTo;
+	private String inquisitor, referredBy, referredTo;
 	
 	/*
 	 * Employment
 	 */
 	
-	private String profession;
-	private String workPhone;
-	private String employmentDescription;
-	private String employmentComment;
-
+	private String profession, workPhone, employmentDescription, employmentComment;
+	
+	/*
+	 * Sumamry
+	 */
 	private String description;
 	
 	
 	//vairiable used to get enqury id;
-	int enquiryID;
+	int hiddenid;
 	
+	public int getHiddenid() {
+		return hiddenid;
+	}
+
+	public void setHiddenid(int hiddenid) {
+		this.hiddenid = hiddenid;
+	}
+
 	/* For pagination */
 	private List<Enquiries> enquiryList;
 	int page;
@@ -144,7 +142,7 @@ public class EnquiryAction extends BaseAction{
 	 * @return
 	 */
 	public String getExistingEnquiry(){
-		setEnquiry(services.getEnquiry(enquiryID));
+		setEnquiry(services.getEnquiry(getHiddenid()));
 		setContact(enquiry.getContact());
 		
 		setIssueSet(enquiry.getEnquiryIssuesSet());
@@ -180,10 +178,6 @@ public class EnquiryAction extends BaseAction{
 		return SUCCESS;
 	}
 	
-	
-	public Set<Enquiries> getLinkedEnquiriesSet() {
-		return linkedEnquiriesSet;
-	}
 
 	/**
 	 * Action method
@@ -256,6 +250,28 @@ public class EnquiryAction extends BaseAction{
 		System.out.println(formTitle);
 		this.formTitle = formTitle;
 	}
+	
+
+	public Enquiries getEnquiry(){
+		return enquiry;
+	}
+
+	/**
+	 * Setter for enquiry
+	 * @param enquiry
+	 */
+	public void setEnquiry(Enquiries enquiry){
+		this.enquiry = enquiry;
+	}
+	
+	public Contacts getContact() {
+		return contact;
+	}
+
+	public void setContact(Contacts contact) {
+		this.contact = contact;
+	}
+
 	/**
 	 * Getter for title types
 	 * @return List
@@ -263,6 +279,15 @@ public class EnquiryAction extends BaseAction{
 	public List<TitleTypes> getTitleSelectList() {
 		return titleSelectList;
 	}
+
+	public String getTheTitle() {
+		return theTitle;
+	}
+
+	public void setTheTitle(String theTitle) {
+		this.theTitle = theTitle;
+	}
+
 	/**
 	 * Getter for gender types
 	 * @return List
@@ -270,6 +295,15 @@ public class EnquiryAction extends BaseAction{
 	public List<GenderTypes> getGenderSelectList() {
 		return genderSelectList;
 	}
+
+	public String getTheGender() {
+		return theGender;
+	}
+
+	public void setTheGender(String string) {
+		this.theGender = string;
+	}
+
 	/**
 	 * Getter for cultural background types
 	 * @return List
@@ -277,6 +311,15 @@ public class EnquiryAction extends BaseAction{
 	public List<CulturalBackgroundTypes> getCulturalBackgroundSelectList() {
 		return culturalBackgroundSelectList;
 	}
+
+	public String getTheCulturalBackground() {
+		return theCulturalBackground;
+	}
+
+	public void setTheCulturalBackground(String theCulturalBackground) {
+		this.theCulturalBackground = theCulturalBackground;
+	}
+
 	/**
 	 * Getter for accommodation types
 	 * @return List
@@ -284,6 +327,15 @@ public class EnquiryAction extends BaseAction{
 	public List<AccommodationTypes> getAccomodationSelectList() {
 		return accommodationSelectList;
 	}
+
+	public String getTheAccommodation() {
+		return theAccommodation;
+	}
+
+	public void setTheAccommodation(String theAccommodation) {
+		this.theAccommodation = theAccommodation;
+	}
+
 	/**
 	 * Getter for disability type
 	 * @return List
@@ -291,12 +343,29 @@ public class EnquiryAction extends BaseAction{
 	public List<DisabilityTypes> getDisabilitySelectList() {
 		return disabilitySelectList;
 	}
+
+	public String getTheDisability() {
+		return theDisability;
+	}
+
+	public void setTheDisability(String theDisability) {
+		this.theDisability = theDisability;
+	}
+
 	/**
 	 * Getter for issue type
 	 * @return List
 	 */
 	public List<IssueTypes> getIssueSelectList() {
 		return issueSelectList;
+	}
+
+	public String getTheIssue() {
+		return theIssue;
+	}
+
+	public void setTheIssue(String theIssue) {
+		this.theIssue = theIssue;
 	}
 
 	/**
@@ -307,51 +376,77 @@ public class EnquiryAction extends BaseAction{
 		return employmentSelectList;
 	}
 
+	public String getTheEmployment() {
+		return theEmployment;
+	}
+
+	public void setTheEmployment(String theEmployment) {
+		this.theEmployment = theEmployment;
+	}
+
+	/**
+	 * @return List
+	 */
 	public List<DangerTypes> getDangerSelectList() {
 		return dangerSelectList;
 	}
 
-	/**
-	 * Getter for enquiryID
-	 * @return
-	 */
-	public int getEnquiryID() {
-		return enquiryID;
+	public String getTheDanger() {
+		return theDanger;
 	}
 
-	/**
-	 * Setter for enquiryID
-	 * @param hidden
-	 */
-	public void setEnquiryID(int enquiryID) {
-		this.enquiryID = enquiryID;
+	public void setTheDanger(String theDanger) {
+		this.theDanger = theDanger;
 	}
 
-	/**
-	 * @param enquiry
-	 */
-	public void setEnquiry(Enquiries enquiry) {
-		this.enquiry = enquiry;
+	public List<Enquiries> getEnquiryList() {
+		return enquiryList;
 	}
 
-	public Enquiries getEnquiry(){
-		return enquiry;
+	public void setEnquiryList(List<Enquiries> enquiryList) {
+		this.enquiryList = enquiryList;
 	}
 
-	public Contacts getContact() {
-		return contact;
+	public Set<Enquiries> getLinkedEnquiriesSet() {
+		return linkedEnquiriesSet;
 	}
-
-	public void setContact(Contacts contact) {
-		this.contact = contact;
-	}
-
+	
 	public String getDescription() {
 		return description;
 	}
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	
+
+	/*------------------------------------------------Pagination Variables
+	 * 
+	 */
+
+	public Set<EnquiryIssues> getIssueSet() {
+		return issueSet;
+	}
+
+	public void setIssueSet(Set<EnquiryIssues> issueSet) {
+		this.issueSet = issueSet;
+	}
+
+	public Set<Enquiries> getLinkedEquiriesSet() {
+		return linkedEnquiriesSet;
+	}
+
+	public void setLinkedEnquiriesSet(Set<Enquiries> linkedEnquiriesSet) {
+		this.linkedEnquiriesSet = linkedEnquiriesSet;
+	}
+
+	public Set<Addresses> getAddress() {
+		return addressSet;
+	}
+
+	public void setAddress(Set<Addresses> address) {
+		this.addressSet = address;
 	}
 
 	public Set<ClientDisabilities> getClientDisabilities() {
@@ -362,9 +457,122 @@ public class EnquiryAction extends BaseAction{
 		this.clientDisabilitiesSet = clientDisabilitiesSet;
 	}
 
-	/*------------------------------------------------Pagination Variables
-	 * 
+	/**
+	 * Getter for careated Date
+	 * @return Date
 	 */
+	public Date getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
+	}
+
+	public Date getUpdatedDate() {
+		return updatedDate;
+	}
+
+	public void setUpdatedDate(Date updatedDate) {
+		this.updatedDate = updatedDate;
+	}
+
+	/**
+	 * Getter for created by
+	 * @return
+	 */
+	public String getCreatedBy() {
+		return createdBy;
+	}
+
+	/**
+	 * Setter for the created by
+	 * @param createdBy
+	 */
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	/**
+	 * Getter for updated by
+	 * @return String
+	 */
+	public String getUpdatedBy() {
+		return updatedBy;
+	}
+
+	/**
+	 * Setter for updated by
+	 * @param updatedBy
+	 */
+	public void setUpdatedBy(String updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+
+	/**
+	 * Getter for enquiry id
+	 * @return
+	 */
+	public Integer getId() {
+		return id;
+	}
+
+	/**
+	 * Setter for enquiry id
+	 * @param id
+	 */
+	private void setId(Integer id) {
+		this.id = id;
+	}
+
+	/** Referrals **/
+	/**
+	 * Getter for inquisitor
+	 * @return
+	 */
+	public String getInquisitor() {
+		return inquisitor;
+	}
+
+	/**
+	 * Setter for inquisitor
+	 * @param inquisitor
+	 */
+	public void setInquisitor(String inquisitor) {
+		this.inquisitor = inquisitor;
+	}
+
+	/**
+	 * Getter for referred by
+	 * @return String
+	 */
+	public String getReferredBy() {
+		return referredBy;
+	}
+
+	/**
+	 * Setter for referred by
+	 * @param referredBy
+	 */
+	public void setReferredBy(String referredBy) {
+		this.referredBy = referredBy;
+	}
+
+	/**
+	 * Getter for referred to
+	 * @return
+	 */
+	public String getReferredTo() {
+		return referredTo;
+	}
+
+	/**
+	 * Setter for referred to
+	 * @param referredTo
+	 */
+	public void setReferredTo(String referredTo) {
+		this.referredTo = referredTo;
+	}
 
 	/**
 	 * Getter for page
@@ -435,7 +643,6 @@ public class EnquiryAction extends BaseAction{
 	}
 
 
-
 	/**
 	 * Setter for the total number of records
 	 * @param totalNumberOfPages
@@ -443,189 +650,4 @@ public class EnquiryAction extends BaseAction{
 	public void setTotalNumberOfPages(int totalNumberOfPages) {
 		this.totalNumberOfPages = totalNumberOfPages;
 	}
-
-
-
-	public Date getCreatedDate() {
-		return createdDate;
-	}
-
-
-
-	public void setCreatedDate(Date createdDate) {
-		this.createdDate = createdDate;
-	}
-
-
-
-	public Date getUpdatedDate() {
-		return updatedDate;
-	}
-
-
-
-	public void setUpdatedDate(Date updatedDate) {
-		this.updatedDate = updatedDate;
-	}
-
-
-
-	public String getCreatedBy() {
-		return createdBy;
-	}
-
-
-
-	public void setCreatedBy(String createdBy) {
-		this.createdBy = createdBy;
-	}
-
-
-
-	public String getUpdatedBy() {
-		return updatedBy;
-	}
-
-
-
-	public void setUpdatedBy(String updatedBy) {
-		this.updatedBy = updatedBy;
-	}
-
-
-
-	public Integer getId() {
-		return id;
-	}
-
-
-
-	private void setId(Integer id) {
-		this.id = id;
-	}
-
-	public Set<Addresses> getAddress() {
-		return addressSet;
-	}
-
-	public void setAddress(Set<Addresses> address) {
-		this.addressSet = address;
-	}
-	
-	public Set<EnquiryIssues> getIssueSet() {
-		return issueSet;
-	}
-
-	public void setIssueSet(Set<EnquiryIssues> issueSet) {
-		this.issueSet = issueSet;
-	}
-
-	/** Referrals **/
-	public String getInquisitor() {
-		return inquisitor;
-	}
-
-	public void setInquisitor(String inquisitor) {
-		this.inquisitor = inquisitor;
-	}
-
-	public String getReferredBy() {
-		return referredBy;
-	}
-
-	public void setReferredBy(String referredBy) {
-		this.referredBy = referredBy;
-	}
-
-	public String getReferredTo() {
-		return referredTo;
-	}
-
-	public void setReferredTo(String referredTo) {
-		this.referredTo = referredTo;
-	}
-
-	public String getTheDanger() {
-		return theDanger;
-	}
-
-	public void setTheDanger(String theDanger) {
-		this.theDanger = theDanger;
-	}
-
-	public String getTheTitle() {
-		return theTitle;
-	}
-
-	public void setTheTitle(String theTitle) {
-		this.theTitle = theTitle;
-	}
-
-	public String getTheGender() {
-		return theGender;
-	}
-
-	public void setTheGender(String string) {
-		this.theGender = string;
-	}
-
-	public String getTheDisability() {
-		return theDisability;
-	}
-
-	public void setTheDisability(String theDisability) {
-		this.theDisability = theDisability;
-	}
-
-	public String getTheIssue() {
-		return theIssue;
-	}
-
-	public void setTheIssue(String theIssue) {
-		this.theIssue = theIssue;
-	}
-
-	public String getTheEmployment() {
-		return theEmployment;
-	}
-
-	public void setTheEmployment(String theEmployment) {
-		this.theEmployment = theEmployment;
-	}
-
-	public String getTheCulturalBackground() {
-		return theCulturalBackground;
-	}
-
-	public void setTheCulturalBackground(String theCulturalBackground) {
-		this.theCulturalBackground = theCulturalBackground;
-	}
-
-	public String getTheAccommodation() {
-		return theAccommodation;
-	}
-
-	public void setTheAccommodation(String theAccommodation) {
-		this.theAccommodation = theAccommodation;
-	}
-
-	public List<Enquiries> getEnquiryList() {
-		return enquiryList;
-	}
-
-	public void setEnquiryList(List<Enquiries> enquiryList) {
-		this.enquiryList = enquiryList;
-	}
-	
-
-
-	public Set<Enquiries> getLinkedEquiriesSet() {
-		return linkedEnquiriesSet;
-	}
-
-	public void setLinkedEnquiriesSet(Set<Enquiries> linkedEnquiriesSet) {
-		this.linkedEnquiriesSet = linkedEnquiriesSet;
-	}
-
-	
 }

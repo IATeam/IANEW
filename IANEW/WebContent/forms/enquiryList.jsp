@@ -1,70 +1,82 @@
-<!-- 
-	Created By Quang Nhan
-	Creaed On: 9/8/14
-	Last Updated On: 9/8/14
-	Description: A jsp page that displays a list of enquiries.
-  -->
+<!----------------------------------------------------------------------------------------------
+	Created By: Quang Nhan
+	Created Date: 27/07/2014
+	==============================================
+	Updates:
+		12/08/2014 - 	Quang Nhan
+						Migrate code into new project setup
+						Added iteration by Quang Nhan
+		14/08/2014 	- 	Quang Nhan
+						Connect and retrieve data called by the action class and added pagination functionality
+		16/08/2014 -	Quang Nhan
+						Move javascript code to ianew.lists.js and ianew.pagefiltersort.js
+						Changed s:div to s:s:div and related class to cssClass
+						reorder syntax to be consistent throughout the jsps
+	==============================================	
+	Description: A jsp page that displays a list of enquiries. Refer to technical document about
+				using Skeleton design styling for mobile and windows application.
+	
+	Note: syntax order: <tag id/type(for input) name class value list(for select) ...>
+------------------------------------------------------------------------------------------------>
 
 
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="US-ASCII"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ taglib prefix="sj" uri="/struts-jquery-tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
+
 <html>
 <head>
-<title>Enquiry List</title>
-<link href="<s:url value='/styles/form.css' encode='false' includeParams='none'/>" rel="stylesheet" type="text/css"
-	      media="all"/>
-<link href="<s:url value='/styles/skeleton.css' encode='false' includeParams='none'/>" rel="stylesheet" type="text/css"
-	      media="all"/>
+<title>Illawarra Advocacy: Enquiry List</title>
+<script src="<s:url value='/js/ianew.lists.js' encode='false' includeParams='none'/>"></script>
+<script src="<s:url value='/js/ianew.pagefiltersort.js' encode='false' includeParams='none'/>"></script>
 <s:head/>
 <sj:head/>
 </head>
 <body>
-<!-- 
-	<s:url var="urlEExisting" namespace="/enquiry" action="getEnquiry" includeContext="false"/>
-		
-	<s:url var="urlENew" namespace="/enquiry" action="newEnquiry">
-	</s:url>
-	<s:url id="urlUpdate" namespace="/enquiry" action="updateEnquiryList" includeContext="false"/>
-	 -->
+ 
+<!-- ---------------------------------------------------------------------------------------------- -->
+<!-- iterator - used to iterate a list or set ----------------------------------------------------- -->
+<!-- ---------------------------------------------------------------------------------------------- -->	
+	<!-- 
+	there is a strange behavior with this s:url link.
+	-->
+	<s:url var="urlEExisting" namespace="/enquiry" action="getEnquiry" includeContext="false"/>		
+	<s:url var="urlENew" namespace="/enquiry" action="newEnquiry" />
+	<s:url var="urlUpdate" namespace="/enquiry" action="updateEnquiryList" includeContext="false"/>
 
-	
-	
-	
-	<s:form id="enquiryForm" method="post" action="%{urlEExisting}">
-	
-		<div class="form container">  
+
+	<s:form id="enquiryForm" cssClass="form container" method="post" action="%{urlEExisting}">
+
 			<section class="imageContainer">
-				<div class="row">
+				<s:div cssClass="row">
 					<img class="seven columns" src="<s:url value='/resources/images/logo.png'/>"/>
-					<div class="headerText nine columns">
-						<div class="row"><s:text name="formTitle" /></div>
-						<div class="row">
-							<div class="nine columns" style="text-align: center;">
-							
+					<s:div cssClass="headerText nine columns">
+						<s:div cssClass="row"><s:text name="formTitle" /></s:div>
+						<s:div cssClass="row">
+							<s:div cssClass="nine columns" style="text-align: center;">
+								
 								<s:label for="sortBy" value="Sort by:"/>
 								<s:select list="#{'eid':'eID', 'date': 'Date', 'name':'Name'}" id="sortBy"/>
 								<s:label for="filter" value="Filter:"/>
 								<s:select list="#{'all':'all', 'closed': 'closed', 'opened':'opened'}" id="filter"/>
-							
-							</div>
-						</div>
-					</div>
-				</div>
+							</s:div>
+						</s:div>
+					</s:div>
+				</s:div>
 			</section>
-			
-			<!-- iterator -->
+<!-- ---------------------------------------------------------------------------------------------- -->
+<!-- iterator - used to iterate a list or set ----------------------------------------------------- -->
+<!-- ---------------------------------------------------------------------------------------------- -->	
 			<!-- status="..." use attribute to get status info of iteration (index, count, first, even last, odd info) -->
-			<div class="enquiryList">
+			<s:div cssClass="list">
 				<s:iterator value="enquiryList">
-					<div class="curveBorder sixteen columns iteratorlist" onclick="enquirySelected(this)">
-						<div class="row">
+					<s:div cssClass="curveBorder sixteen columns iteratorlist" onclick="bandSelected(this)">
+						<s:div cssClass="row">
 							<s:div cssClass="textarea two columns">
-								<s:label for="enquiryID" value="Enquiry#:" />
-								<p class="enquiryID"><s:property value="id"/></p>
+								<s:label for="id" value="Enquiry#:" />
+								<p class="id"><s:property value="id"/></p>
 							</s:div>
 							<s:div cssClass="textarea five columns">
 								<s:label for="protege" value="Protege:" />
@@ -78,114 +90,69 @@
 								<s:label for="issues" value="Issues:" />
 								<p><s:property value="getIssuesTypes()" /></p>
 							</s:div>
-						</div>
+						</s:div>
 						
-						<div class="row toggled">
-							<div class="textarea fifteen columns omega">
+						<s:div cssClass="row toggled">
+							<s:div cssClass="textarea fifteen columns omega">
 								<s:label for="description" value="Description:" />
-								<div><s:textarea cssClass="multiLineTextArea" name="description" readonly="true"/></div>
-							</div>
-						</div>
-					</div>
+								<s:div><s:textarea cssClass="multiLineTextArea" name="description" readonly="true"/></s:div>
+							</s:div>
+						</s:div>
+					</s:div>
 				</s:iterator>
-			</div>
+			</s:div>
 			
-			<div class="clear"></div>
+			<s:div cssClass="clear"/>
 			
 			
 			<!--Hidden Fields to pass parameters between pages -->
-	<s:hidden id="enquiryID" name="enquiryID" />
-	<s:hidden id="formTitle" name="formTitle" value="Existing Enquiry" />
-	
-	<s:hidden id="totalNumberOfPages" name="totalNumberOfPages" />
+			<s:hidden id="hiddenid" name="hiddenid" />
+			<s:hidden id="formTitle" name="formTitle" value="Existing Enquiry" />
+			<s:hidden id="totalNumberOfPages" name="totalNumberOfPages" />
 			
+<!-- ----------------------------------------------------------------------------------------------------------------------- -->
+<!-- the footer of the form containing the cancel, open enquiry and new enquiry as well as the pagination functions -------- -->
+<!-- ----------------------------------------------------------------------------------------------------------------------- -->
 			
-<!--------- the footer of the form containing the cancel, open enquiry and new enquiry as well as the pagination functions --------->
-
-
-			<footer style="background:#444444; margin-top: 10px; padding: 5px;">
-				<div class="row">
+			<s:div style="background:#444444; margin-top: 10px; padding: 5px;">
+				<s:div cssClass="row">
 					<section class="four columns">
-						<input type="button" value="Close" class="three columns" onclick="deselectAll()"/>
+						<input type="button" class="three columns" value="Close"  onclick="deselectAll()"/>
 					</section >
 					<section class="eight columns">
-						<div class="row">
-							<div class="one column alpha"><p></p></div>
+						<s:div cssClass="row">
+							<s:div cssClass="one column alpha"><p></p></s:div>
 							
 							<sj:submit formIds="paginationForm" targets="formDiv" cssClass="one column" onclick="prevPage()" value="prev"/>
 							
-							<div class="three columns" style="text-align:center;">
+							<s:div cssClass="three columns" style="text-align:center;">
 								page <s:textfield size="1" id="pageTextField" value="%{page}"/> of 
-								<div id="totalNumberOfPagesDiv" style="display: inline"> <s:text name="totalNumberOfPages"/> </div>
-							</div>
+								<s:div id="totalNumberOfPagesDiv" style="display: inline"> <s:text name="totalNumberOfPages"/> </s:div>
+							</s:div>
 							
 							<sj:submit formIds="paginationForm" targets="formDiv" cssClass="one column" onclick="nextPage()" value="next"/>
 							
+							<s:div cssClass="two column omega"><p></p></s:div>
 							
-							<div class="two column omega"><p></p></div>
-							
-						</div>
-					</section >
-					<section class="four columns alpha">
-						<sj:submit targets="formDiv" id="open" value="Open Enquiry" cssClass="two columns alpha"/>
-						<sj:a targets="formDiv" id="newEButton" href="%{urlENew}" ><input type="button" class="two columns omega" value="New Enquiry"/></sj:a>
+						</s:div>
 					</section>
-				</div>
-			</footer>
-			
+					<section class="four columns alpha">
+						<sj:submit id="open" targets="formDiv" cssClass="two columns alpha" value="Open Enquiry"/>
+						<sj:a id="newEButton" targets="formDiv"  href="%{urlENew}" ><input type="button" class="two columns omega" value="New Enquiry"/></sj:a>
+					</section>
+				</s:div>
+			</s:div>
 		</s:form>
+
+<!-- ---------------------------------------------------------------------------------------------- -->
+<!-- Hidden form to pass pagination to action class submitted by the prev and next buttons -------- -->
+<!-- ---------------------------------------------------------------------------------------------- -->
 		
-<!----- Hidden form to pass pagination to action class submitted by the prev and next buttons ------------------------------------------------------------------->
-		<div ">
-			<s:form id="paginationForm" method="post" action="%{urlUpdate}" namespace="enquiry">
+			<s:form id="paginationForm" method="post" action="%{urlUpdate}" >
 				<s:hidden id="page" name="page" />
 				<s:hidden id="numberOfRecords" name="numberOfRecords" />
 			</s:form> 
-		</div>
+		
 	
-	<script>
-		function nextPage(){
-			var currentPageNumber = parseInt($("#pageTextField").val());
-			var totalNumberOfPages = parseInt( $("#totalNumberOfPagesDiv").text())
-			
-			if(currentPageNumber < totalNumberOfPages){ 
-				var nextPageNumber = currentPageNumber + 1;
-				$("#pageTextField").val(nextPageNumber);
-				$("#page").val(nextPageNumber);
-			}
-		}
-		
-		function prevPage(){
-			var currentPageNumber = parseInt($("#pageTextField").val());
-			
-			if(currentPageNumber > 1 ){
-				var prevPageNumber = currentPageNumber - 1;
-				$("#pageTextField").val(prevPageNumber);
-				$("#page").val(prevPageNumber);
-			}
-		}
-		
-		function enquirySelected(selectedDiv){
-			deselectAll();
-			$(selectedDiv).addClass("listSelected");
-
-			$(selectedDiv).children("div").last().slideToggle();
-			$("#enquiryID").val($(selectedDiv).find('.enquiryID').text())
-			//alert($(selectedDiv).find('.enquiryID').text())
-		}
-		function deselectAll(){
-			$('.enquiryList').children().removeClass("listSelected");
-			if($('.toggled').is(':visible')){
-				$('.toggled').hide('slide');
-			}
-		}
-		$('#new').click(function(){
-			alert($('#enquiryID').val())
-		});
-		
-		$(function(){
-			$(".toggled").hide();
-		});
-	</script>	
 </body>
 </html>

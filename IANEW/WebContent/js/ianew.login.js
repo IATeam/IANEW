@@ -1,14 +1,27 @@
 /*----------------------------------------------------------------------------------------------
 	Created By: Quang Nhan
-	Created Date: 20/07/2014
+	Created Date: 05/08/2014
 	==============================================
 	Updates: 
-		15/08/2014 - added functionality after the user press enter after inputing a password.
+		15/08/2014 - 	Quang Nhan
+					 	added functionality after the user press enter after inputing a password.
+		16/08/2014 -	Quang Nhan
+						Moved js code to here
+						Make username input focused upon entry to page and clear username and password
+						when refresh page upon entering wrong username or password.
 	==============================================	
 	Description: This js is for the login screen used to create the functionality
 	for pressing enter after typing username and password to login and submit the form
 	as well as switching (hiding and showing) username and password input field
 ------------------------------------------------------------------------------------------------*/
+/**
+ * When the page is loaded, the password is hidden
+ */
+$(document).ready(function(){
+	$('#password').hide();
+	resetPressed();
+	$('#username').focus();
+});
 
 /**
  * event after user input a username and pressed enter

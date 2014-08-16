@@ -1,16 +1,23 @@
-<!-- 
-	Created By Quang
-	Created On
-	Last Updated On
-	Description:
-	
-	Notes: the enquiry table has a field called parent enquiry
-	when the user selects and add an enquiry, the query should
-	check if that linked enquiry has a parent enquiry. If it does
-	the system should search for all enquiries with the same 
-	parent enquiry. It should add all enquiries with that same
-	parent enquiry into the list as well (if it already is not).
- -->
+<!----------------------------------------------------------------------------------------------
+	Created By: Quang Nhan
+	Created Date: 04/08/2014
+	==============================================
+	Updates:
+		10/08/2014 - 	Added iteration by Quang Nhan
+		14/08/2014 	- 	Connect and retrieve data called by the action class and added 
+						pagination functionality by Quang Nhan
+		16/08/2014 -	Tested s:url workings see comment below. 
+						Moved javascript code to list.js file by Quang Nhan
+	==============================================	
+	Description: A jsp page that displays a list of enquiries
+				Notes: the enquiry table has a field called parent enquiry
+				when the user selects and add an enquiry, the query should
+				check if that linked enquiry has a parent enquiry. If it does
+				the system should search for all enquiries with the same 
+				parent enquiry. It should add all enquiries with that same
+				parent enquiry into the list as well (if it already is not).
+------------------------------------------------------------------------------------------------>
+
 
 <%@ taglib prefix="sj" uri="/struts-jquery-tags" %>
 <head>

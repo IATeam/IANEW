@@ -1,9 +1,19 @@
-<!-- 
-	Created By Quang Nhan
-	Creaed On: 14/7/14
-	Last Updated On: 9/8/14
+<!----------------------------------------------------------------------------------------------
+	Created By: Quang Nhan
+	Created Date: 14/07/2014
+	==============================================
+	Updates:
+		01/08/2014 - 	Modified the URL - add parameters to pass formType parameters 
+						by Quang Nhan
+		10/08/2014 	- 	Remodified navigation menu to allow adaptation to mobile devices. 
+						by Quang Nhan
+		16/08/2014 -	Quang Nhan
+						Moved all css and js links to the home file for preloading
+				   -	Standardised the names of css and js files
+	==============================================	
 	Description: A jsp page that displays the main home page
-  -->
+------------------------------------------------------------------------------------------------>
+
 
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -17,20 +27,26 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <s:head/>
 <sj:head/>
-<link href="<s:url value='/styles/home.css' encode='false' includeParams='none'/>" rel="stylesheet" type="text/css" media="all"/>
-<link href="<s:url value='/styles/skeleton.css' encode='false' includeParams='none'/>" rel="stylesheet" type="text/css" media="all"/>
-<link href="<s:url value='/styles/sm-core-css.css' encode='false' includeParams='none'/>" rel="stylesheet" type="text/css" media="all"/>
-<link href="<s:url value='/styles/sm-simple-modified.css' encode='false' includeParams='none'/>" rel="stylesheet" type="text/css" media="all"/>
-
-<script src="<s:url value='/js/lists.js' encode='false' includeParams='none'/>"></script>
-<script src="<s:url value='/js/home.js' encode='false' includeParams='none'/>"></script>
-<script src="<s:url value='/js/radioActions.js' encode='false' includeParams='none'/>"></script>
-<script src="<s:url value='/js/jquery/jquery.smartmenus.js' encode='false' includeParams='none'/>"></script>
-<script src="<s:url value='/js/jquery/jquery.validate.js' encode='false' includeParams='none'/>"></script>
-<title>Illawarra Advocacy: Home</title>
+	<link href="<s:url value='/styles/ianew.form.css' encode='false' includeParams='none'/>" rel="stylesheet" type="text/css" media="all"/>
+	<link href="<s:url value='/styles/ianew.home.css' encode='false' includeParams='none'/>" rel="stylesheet" type="text/css" media="all"/>
+	<link href="<s:url value='/styles/import/skeleton.css' encode='false' includeParams='none'/>" rel="stylesheet" type="text/css" media="all"/>
+	<link href="<s:url value='/styles/import/sm-core-css.css' encode='false' includeParams='none'/>" rel="stylesheet" type="text/css" media="all"/>
+	<link href="<s:url value='/styles/import/sm-simple-modified.css' encode='false' includeParams='none'/>" rel="stylesheet" type="text/css" media="all"/>
+	
+	
+	<script src="<s:url value='/js/ianew.home.js' encode='false' includeParams='none'/>"></script>
+	<script src="<s:url value='/js/ianew.radioActions.js' encode='false' includeParams='none'/>"></script>
+	<script src="<s:url value='/js/jquery/jquery.smartmenus.js' encode='false' includeParams='none'/>"></script>
+	<script src="<s:url value='/js/jquery/jquery.validate.js' encode='false' includeParams='none'/>"></script>
+	
+	<title>Illawarra Advocacy: Home</title>
 
 </head>
 <body>
+
+<!-- ---------------------------------------------------------------------------------------------- -->
+<!-- URL Links for the Menu ----------------------------------------------------------------------- -->
+<!-- ---------------------------------------------------------------------------------------------- -->	
 	<!-- List of urls to called for from the menu -->
 	<s:url id="urlEList" namespace="/enquiry" action="enquiryList">
 		<s:param name="formTitle">Enquiry List</s:param>
@@ -52,12 +68,15 @@
 	</s:url>
 	
 	<div class="container">
-	<!-- Navigation -->
+	
+<!-- ---------------------------------------------------------------------------------------------- -->
+<!-- Navigation ----------------------------------------------------------------------------------- -->
+<!-- ---------------------------------------------------------------------------------------------- -->
 	<nav>
 		<ul id="main-menu" class="sm sm-simple">
-			<li><a id="aHome"href="#">Illawarra Advocacy</a></li>
+			<li><s:a id="aHome"href="#">Illawarra Advocacy</s:a></li>
 			
-			<li><a id="aE"href="#">Enquiry</a>
+			<li><s:a id="aE"href="#">Enquiry</s:a>
 				<ul>
 					<li><sj:a id="aENew" href="%{urlENew}" targets="formDiv" onclick="menuclicked()">New Enquiry</sj:a></li>
 					<li><sj:a id="aEExisting" href="%{urlEExisting}" targets="formDiv" onclick="menuclicked()">Existing Enquiry Test</sj:a></li>
@@ -65,7 +84,7 @@
 				</ul>
 			</li>
 			
-			<li><a href="#">Case</a>
+			<li><s:a href="#">Case</s:a>
 				<ul>
 					<li><sj:a id="aCNew" href="%{urlCNew}" targets="formDiv" onclick="menuclicked()">New Case</sj:a></li>
 					<li><sj:a id="aCList" href="%{urlCList}" targets="formDiv" onclick="menuclicked()">Case List</sj:a>
@@ -73,21 +92,13 @@
 			</li>
 			
 			<li >
-				<a href="#">Report</a>
+				<s:a href="#">Report</s:a>
 				<ul>
 					<li><sj:a id="aCNew" href="%{urlCNew}" targets="formDiv" onclick="menuclicked()">New Case</sj:a></li>
 					<li><sj:a id="aCList" href="%{urlCList}" targets="formDiv" onclick="menuclicked()">Case List</sj:a>
 				</ul>
 			</li>
-			<li><a href="#">Time Management</a>
-				<ul>
-					<li><sj:a id="aCNew" href="%{urlCNew}" targets="formDiv" onclick="menuclicked()">New Case</sj:a></li>
-					<li><sj:a id="aCList" href="%{urlCList}" targets="formDiv" onclick="menuclicked()">Case List</sj:a>
-				</ul>
-			</li>
-			
-			<li>
-				<a href="#">Synchronize</a>
+			<li><s:a href="#">Time Management</s:a>
 				<ul>
 					<li><sj:a id="aCNew" href="%{urlCNew}" targets="formDiv" onclick="menuclicked()">New Case</sj:a></li>
 					<li><sj:a id="aCList" href="%{urlCList}" targets="formDiv" onclick="menuclicked()">Case List</sj:a>
@@ -95,7 +106,7 @@
 			</li>
 			
 			<li>
-				<a href="#">Settings</a>
+				<s:a href="#">Synchronize</s:a>
 				<ul>
 					<li><sj:a id="aCNew" href="%{urlCNew}" targets="formDiv" onclick="menuclicked()">New Case</sj:a></li>
 					<li><sj:a id="aCList" href="%{urlCList}" targets="formDiv" onclick="menuclicked()">Case List</sj:a>
@@ -103,17 +114,26 @@
 			</li>
 			
 			<li>
-					<li><sj:a id="links" href="%{urlLinks}" targets="formDiv">Links</sj:a></li>
+				<s:a href="#">Settings</s:a>
+				<ul>
+					<li><sj:a id="aCNew" href="%{urlCNew}" targets="formDiv" onclick="menuclicked()">New Case</sj:a></li>
+					<li><sj:a id="aCList" href="%{urlCList}" targets="formDiv" onclick="menuclicked()">Case List</sj:a>
+				</ul>
 			</li>
-			
+			<li><sj:a id="links" href="%{urlLinks}" targets="formDiv">Links</sj:a></li>
 		</ul>
-		
 	</nav>
 
+<!-- ----------------------------------------------------------------------------------------------- -->
+<!-- Header Containing the Image ------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------------------------------- -->	
 	<header>
 		<img src="<s:url value='/resources/images/logo.png'/>"/>
 	</header>
 	
+<!-- ----------------------------------------------------------------------------------------------- -->
+<!-- Body of the content --------------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------------------------------- -->		
 	<div id="content">
 		<section id="secSearch">
 			<div id="divSearchBox"><s:textfield id="searchbox" onkeypress="return addActivity(this.value, event)"/><br/></div>
@@ -146,10 +166,20 @@
 		<s:div id="slidingPanel" style="background: yellow; position: fixed; top: 20%; box-shadow: 3px 3px 5px grey; height: 60%; overflow: scroll;">slide</s:div>
 	</div>
 	</div>
+	
+	
+	
+<!-- ----------------------------------------------------------------------------------------------- -->
+<!-- Home Page Footer ------------------------------------------------------------------------------ -->
+<!-- ----------------------------------------------------------------------------------------------- -->	
 	<footer id="statusBar">
 		<label>User's Name</label>
 		<button>logout</button>
 	</footer>
+	
+	
+	
+	
 	<script>
 		$(function(){
 			

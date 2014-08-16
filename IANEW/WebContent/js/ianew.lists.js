@@ -76,10 +76,32 @@ function updateStorage(item){
 		});
 	}
 	
-	//looping through a list
-//	var listItems = $("#artActivityList ol li");
-//	listItems.each(function(idx, li){
-//		
-//	});
-	
 }
+
+
+//initially hide all description from the list
+$(".toggled").hide();
+
+$('#new').click(function(){
+	alert($('#enquiryID').val())
+});
+
+function bandSelected(selectedDiv){
+	deselectAll();
+	$(selectedDiv).addClass("listSelected");
+
+	//shows and hide the enquiry/case descriptions
+	$(selectedDiv).children("div").last().slideToggle();
+	
+	//sets the value for the hidden enquiry id holder field
+	$("#hiddenid").val($(selectedDiv).find('.id').text());
+	alert($(selectedDiv).find('.id').text());
+	alert($("#hiddenid").val());
+}
+function deselectAll(){
+	$('.list').children().removeClass("listSelected");
+	if($('.toggled').is(':visible')){
+		$('.toggled').hide('slide');
+	}
+}
+		
