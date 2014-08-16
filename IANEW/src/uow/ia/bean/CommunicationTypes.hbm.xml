@@ -11,5 +11,13 @@
         <property name="communicationTypeName" type="string">
             <column name="communication_type_name" />
         </property>
+        
+        <!-- one to many relationship -->
+        <set fetch="select" inverse="true" name="individualCaseCommunicationsSet" sort="unsorted" table="Individual_Case_Communications" order-by="id">
+        	<key>
+        		<column name="communication_type_id" not-null="true"/>
+        	</key>
+        	<one-to-many class="uow.ia.bean.IndividualCaseCommunications"/>
+        </set>
     </class>
 </hibernate-mapping>

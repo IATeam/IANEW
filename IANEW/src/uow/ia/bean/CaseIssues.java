@@ -10,12 +10,9 @@ import java.util.Date;
 public class CaseIssues implements java.io.Serializable {
 
 	private Integer id;
-//	private Integer caseId;
-//	private Integer issueTypeId;
 	private IndividualCases individualCase;
 	private IssueTypes issue;
 	private String comments;
-//	private Integer statusId;
 	private StatusTypes statusType;
 	private Date completedDate;
 	private Date createdDate;
@@ -59,27 +56,11 @@ public class CaseIssues implements java.io.Serializable {
 		this.id = id;
 	}
 
-//	public Integer getCaseId() {
-//		return this.caseId;
-//	}
-//
-//	public void setCaseId(Integer caseId) {
-//		this.caseId = caseId;
-//	}
-//
-//	public Integer getIssueTypeId() {
-//		return this.issueTypeId;
-//	}
-//
-//	public void setIssueTypeId(Integer issueTypeId) {
-//		this.issueTypeId = issueTypeId;
-//	}
-
 	/**
 	 * @return the individualCase
 	 */
 	public IndividualCases getIndividualCase() {
-		return individualCase;
+		return this.individualCase;
 	}
 
 
@@ -95,7 +76,7 @@ public class CaseIssues implements java.io.Serializable {
 	 * @return the issue
 	 */
 	public IssueTypes getIssue() {
-		return issue;
+		return this.issue;
 	}
 
 
@@ -115,19 +96,11 @@ public class CaseIssues implements java.io.Serializable {
 		this.comments = comments;
 	}
 
-//	public Integer getStatusId() {
-//		return this.statusId;
-//	}
-//
-//	public void setStatusId(Integer statusId) {
-//		this.statusId = statusId;
-//	}
-
 	/**
 	 * @return the statusType
 	 */
 	public StatusTypes getStatusType() {
-		return statusType;
+		return this.statusType;
 	}
 
 

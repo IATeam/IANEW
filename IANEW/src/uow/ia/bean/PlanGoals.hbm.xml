@@ -8,12 +8,6 @@
             <column name="id" />
             <generator class="identity" />
         </id>
-        <property name="planId" type="java.lang.Integer">
-            <column name="plan_id" />
-        </property>
-        <property name="goalTypeId" type="java.lang.Integer">
-            <column name="goal_type_id" />
-        </property>
         <property name="completionDateTime" type="timestamp">
             <column name="completion_date_time" length="19" />
         </property>
@@ -35,5 +29,16 @@
         <property name="goalAction" type="string">
             <column name="goal_action" />
         </property>
+        
+        <!-- Many to one relationship -->
+        <many-to-one class="uow.ia.bean.IndividualCases" name="individualCase">
+        	<column name="case_id" not-null="false"/>
+        </many-to-one>
+        <many-to-one class="uow.ia.bean.GoalTypes" name="goalType">
+        	<column name="goal_type_id" not-null="false"/>
+        </many-to-one>
+        <many-to-one class="uow.ia.bean.StatusTypes" name="statusType">
+        	<column name="status_id" not-null="true"/>
+        </many-to-one>
     </class>
 </hibernate-mapping>

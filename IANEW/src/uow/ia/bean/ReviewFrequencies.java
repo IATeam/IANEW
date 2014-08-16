@@ -1,5 +1,8 @@
 package uow.ia.bean;
 
+import java.util.HashSet;
+import java.util.Set;
+
 // Generated Aug 9, 2014 1:06:20 PM by Hibernate Tools 4.0.0
 
 /**
@@ -9,28 +12,60 @@ public class ReviewFrequencies implements java.io.Serializable {
 
 	private Integer id;
 	private String frequencyName;
-
+	private Set<Plans> plansSet = new HashSet<Plans>();
+	/**
+	 * 
+	 */
 	public ReviewFrequencies() {
+		// TODO Auto-generated constructor stub
 	}
-
-	public ReviewFrequencies(String frequencyName) {
+	/**
+	 * @param id
+	 * @param frequencyName
+	 * @param plansSet
+	 */
+	public ReviewFrequencies(Integer id, String frequencyName,
+			Set<Plans> plansSet) {
+		this.id = id;
 		this.frequencyName = frequencyName;
+		this.plansSet = plansSet;
 	}
-
+	/**
+	 * @return the id
+	 */
 	public Integer getId() {
 		return this.id;
 	}
-
+	/**
+	 * @param id the id to set
+	 */
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
+	/**
+	 * @return the frequencyName
+	 */
 	public String getFrequencyName() {
 		return this.frequencyName;
 	}
-
+	/**
+	 * @param frequencyName the frequencyName to set
+	 */
 	public void setFrequencyName(String frequencyName) {
 		this.frequencyName = frequencyName;
 	}
+	/**
+	 * @return the plansSet
+	 */
+	public Set<Plans> getPlansSet() {
+		return this.plansSet;
+	}
+	/**
+	 * @param plansSet the plansSet to set
+	 */
+	public void setPlansSet(Set<Plans> plansSet) {
+		this.plansSet = plansSet;
+	}
+
 
 }

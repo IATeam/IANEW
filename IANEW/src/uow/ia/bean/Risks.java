@@ -75,7 +75,7 @@ public class Risks implements java.io.Serializable {
 	 * @return the individualCase
 	 */
 	public IndividualCases getIndividualCase() {
-		return individualCase;
+		return this.individualCase;
 	}
 	/**
 	 * @param individualCase the individualCase to set

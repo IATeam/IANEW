@@ -10,8 +10,8 @@ import java.util.Date;
 public class PlanGoals implements java.io.Serializable {
 
 	private Integer id;
-	private Integer planId;
-	private Integer goalTypeId;
+	private IndividualCases individualCase;
+	private GoalTypes goalType;
 	private Date completionDateTime;
 	private Date createdDateTime;
 	private Integer createdUserId;
@@ -19,16 +19,35 @@ public class PlanGoals implements java.io.Serializable {
 	private Date updatedDateTime;
 	private String goalDescription;
 	private String goalAction;
-
+	private StatusTypes statusType;
+	
+	/**
+	 * 
+	 */
 	public PlanGoals() {
+		// TODO Auto-generated constructor stub
 	}
 
-	public PlanGoals(Integer planId, Integer goalTypeId,
-			Date completionDateTime, Date createdDateTime,
+	/**
+	 * @param id
+	 * @param individualCase
+	 * @param goalType
+	 * @param completionDateTime
+	 * @param createdDateTime
+	 * @param createdUserId
+	 * @param updatedUserId
+	 * @param updatedDateTime
+	 * @param goalDescription
+	 * @param goalAction
+	 * @param statusType
+	 */
+	public PlanGoals(Integer id, IndividualCases individualCase,
+			GoalTypes goalType, Date completionDateTime, Date createdDateTime,
 			Integer createdUserId, Integer updatedUserId, Date updatedDateTime,
-			String goalDescription, String goalAction) {
-		this.planId = planId;
-		this.goalTypeId = goalTypeId;
+			String goalDescription, String goalAction, StatusTypes statusType) {
+		this.id = id;
+		this.individualCase = individualCase;
+		this.goalType = goalType;
 		this.completionDateTime = completionDateTime;
 		this.createdDateTime = createdDateTime;
 		this.createdUserId = createdUserId;
@@ -36,86 +55,162 @@ public class PlanGoals implements java.io.Serializable {
 		this.updatedDateTime = updatedDateTime;
 		this.goalDescription = goalDescription;
 		this.goalAction = goalAction;
+		this.statusType = statusType;
 	}
 
+	/**
+	 * @return the id
+	 */
 	public Integer getId() {
 		return this.id;
 	}
 
+	/**
+	 * @param id the id to set
+	 */
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public Integer getPlanId() {
-		return this.planId;
+	/**
+	 * @return the individualCase
+	 */
+	public IndividualCases getIndividualCase() {
+		return this.individualCase;
 	}
 
-	public void setPlanId(Integer planId) {
-		this.planId = planId;
+	/**
+	 * @param individualCase the individualCase to set
+	 */
+	public void setIndividualCase(IndividualCases individualCase) {
+		this.individualCase = individualCase;
 	}
 
-	public Integer getGoalTypeId() {
-		return this.goalTypeId;
+	/**
+	 * @return the goalType
+	 */
+	public GoalTypes getGoalType() {
+		return this.goalType;
 	}
 
-	public void setGoalTypeId(Integer goalTypeId) {
-		this.goalTypeId = goalTypeId;
+	/**
+	 * @param goalType the goalType to set
+	 */
+	public void setGoalType(GoalTypes goalType) {
+		this.goalType = goalType;
 	}
 
+	/**
+	 * @return the completionDateTime
+	 */
 	public Date getCompletionDateTime() {
 		return this.completionDateTime;
 	}
 
+	/**
+	 * @param completionDateTime the completionDateTime to set
+	 */
 	public void setCompletionDateTime(Date completionDateTime) {
 		this.completionDateTime = completionDateTime;
 	}
 
+	/**
+	 * @return the createdDateTime
+	 */
 	public Date getCreatedDateTime() {
 		return this.createdDateTime;
 	}
 
+	/**
+	 * @param createdDateTime the createdDateTime to set
+	 */
 	public void setCreatedDateTime(Date createdDateTime) {
 		this.createdDateTime = createdDateTime;
 	}
 
+	/**
+	 * @return the createdUserId
+	 */
 	public Integer getCreatedUserId() {
 		return this.createdUserId;
 	}
 
+	/**
+	 * @param createdUserId the createdUserId to set
+	 */
 	public void setCreatedUserId(Integer createdUserId) {
 		this.createdUserId = createdUserId;
 	}
 
+	/**
+	 * @return the updatedUserId
+	 */
 	public Integer getUpdatedUserId() {
 		return this.updatedUserId;
 	}
 
+	/**
+	 * @param updatedUserId the updatedUserId to set
+	 */
 	public void setUpdatedUserId(Integer updatedUserId) {
 		this.updatedUserId = updatedUserId;
 	}
 
+	/**
+	 * @return the updatedDateTime
+	 */
 	public Date getUpdatedDateTime() {
 		return this.updatedDateTime;
 	}
 
+	/**
+	 * @param updatedDateTime the updatedDateTime to set
+	 */
 	public void setUpdatedDateTime(Date updatedDateTime) {
 		this.updatedDateTime = updatedDateTime;
 	}
 
+	/**
+	 * @return the goalDescription
+	 */
 	public String getGoalDescription() {
 		return this.goalDescription;
 	}
 
+	/**
+	 * @param goalDescription the goalDescription to set
+	 */
 	public void setGoalDescription(String goalDescription) {
 		this.goalDescription = goalDescription;
 	}
 
+	/**
+	 * @return the goalAction
+	 */
 	public String getGoalAction() {
 		return this.goalAction;
 	}
 
+	/**
+	 * @param goalAction the goalAction to set
+	 */
 	public void setGoalAction(String goalAction) {
 		this.goalAction = goalAction;
 	}
+
+	/**
+	 * @return the statusType
+	 */
+	public StatusTypes getStatusType() {
+		return this.statusType;
+	}
+
+	/**
+	 * @param statusType the statusType to set
+	 */
+	public void setStatusType(StatusTypes statusType) {
+		this.statusType = statusType;
+	}
+
 
 }

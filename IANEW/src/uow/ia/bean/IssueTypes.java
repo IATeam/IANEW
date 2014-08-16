@@ -13,22 +13,9 @@ public class IssueTypes implements java.io.Serializable {
 	private Integer id;
 	private String issueName;
 	private String issueDescription;
-	private Set<Enquiries> enquiriesSet = new HashSet<Enquiries>();
-	private Set<IndividualCases> individualCasesSet = new HashSet<IndividualCases>();
+	private Set<EnquiryIssues> enquiryIssuesSet = new HashSet<EnquiryIssues>();
+	private Set<CaseIssues> caseIssuesSet = new HashSet<CaseIssues>();
 
-	/**
-	 * @return the individualCasesSet
-	 */
-	public Set<IndividualCases> getIndividualCasesSet() {
-		return individualCasesSet;
-	}
-
-	/**
-	 * @param individualCasesSet the individualCasesSet to set
-	 */
-	public void setIndividualCasesSet(Set<IndividualCases> individualCasesSet) {
-		this.individualCasesSet = individualCasesSet;
-	}
 
 	/**
 	 * 
@@ -37,19 +24,23 @@ public class IssueTypes implements java.io.Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
+
 	/**
 	 * @param id
 	 * @param issueName
 	 * @param issueDescription
-	 * @param enquiriesSet
+	 * @param enquiryIssuesSet
+	 * @param caseIssuesSet
 	 */
 	public IssueTypes(Integer id, String issueName, String issueDescription,
-			Set<Enquiries> enquiriesSet) {
+			Set<EnquiryIssues> enquiryIssuesSet, Set<CaseIssues> caseIssuesSet) {
 		this.id = id;
 		this.issueName = issueName;
 		this.issueDescription = issueDescription;
-		this.enquiriesSet = enquiriesSet;
+		this.enquiryIssuesSet = enquiryIssuesSet;
+		this.caseIssuesSet = caseIssuesSet;
 	}
+
 
 	/**
 	 * @return the id
@@ -93,18 +84,36 @@ public class IssueTypes implements java.io.Serializable {
 		this.issueDescription = issueDescription;
 	}
 
-	/**
-	 * @return the enquiriesSet
-	 */
-	public Set<Enquiries> getEnquiriesSet() {
-		return this.enquiriesSet;
-	}
 
 	/**
-	 * @param enquiriesSet the enquiriesSet to set
+	 * @return the enquiryIssuesSet
 	 */
-	public void setEnquiriesSet(Set<Enquiries> enquiriesSet) {
-		this.enquiriesSet = enquiriesSet;
+	public Set<EnquiryIssues> getEnquiryIssuesSet() {
+		return this.enquiryIssuesSet;
+	}
+
+
+	/**
+	 * @param enquiryIssuesSet the enquiryIssuesSet to set
+	 */
+	public void setEnquiryIssuesSet(Set<EnquiryIssues> enquiryIssuesSet) {
+		this.enquiryIssuesSet = enquiryIssuesSet;
+	}
+
+
+	/**
+	 * @return the caseIssuesSet
+	 */
+	public Set<CaseIssues> getCaseIssuesSet() {
+		return this.caseIssuesSet;
+	}
+
+
+	/**
+	 * @param caseIssuesSet the caseIssuesSet to set
+	 */
+	public void setCaseIssuesSet(Set<CaseIssues> caseIssuesSet) {
+		this.caseIssuesSet = caseIssuesSet;
 	}
 
 }

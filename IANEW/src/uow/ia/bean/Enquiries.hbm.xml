@@ -8,15 +8,6 @@
             <column name="id" />
             <generator class="identity" />
         </id>
-        <!-- <property name="contactId" type="java.lang.Integer">
-            <column name="contact_id" />
-        </property> -->
-        <!-- <property name="enquiryTypeId" type="java.lang.Integer">
-            <column name="enquiry_type_id" />
-        </property> -->
-        <!-- <property name="statusId" type="java.lang.Integer">
-            <column name="status_id" />
-        </property> -->
         <property name="description" type="string">
             <column name="description" />
         </property>
@@ -41,9 +32,6 @@
         <property name="updatedUserId" type="java.lang.Integer">
             <column name="updated_user_id" />
         </property>
-        <!-- <property name="parentEnquiryId" type="java.lang.Integer">
-            <column name="parent_enquiry_id" />
-        </property> -->
         <property name="outOfCoverageFlag" type="string">
             <column name="out_of_coverage_flag" length="45" />
         </property>
@@ -53,10 +41,10 @@
         	<column name="enquiry_type_id" not-null="true"/>
         </many-to-one>
         <many-to-one class="uow.ia.bean.Contacts" name="contact">
-        	<column name="contact_id" not-null="false"/>
+        	<column name="contact_id" not-null="true"/>
         </many-to-one>
         <many-to-one class="uow.ia.bean.StatusTypes" name="statusType">
-        	<column name="status_id" not-null="false"/>
+        	<column name="status_id" not-null="true"/>
         </many-to-one>
         
         <!-- Self-join many-to-one -->

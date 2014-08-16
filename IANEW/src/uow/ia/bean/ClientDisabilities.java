@@ -10,8 +10,6 @@ import java.util.HashSet;
 public class ClientDisabilities implements java.io.Serializable {
 
 	private Integer id;
-//	private Integer contactId;
-//	private Integer disabilityId;
 	private Contacts contact;
 	private DisabilityTypes disabilityType;
 	private String comments;
@@ -44,27 +42,11 @@ public class ClientDisabilities implements java.io.Serializable {
 		this.id = id;
 	}
 
-//	public Integer getContactId() {
-//		return this.contactId;
-//	}
-//
-//	public void setContactId(Integer contactId) {
-//		this.contactId = contactId;
-//	}
-//
-//	public Integer getDisabilityId() {
-//		return this.disabilityId;
-//	}
-//
-//	public void setDisabilityId(Integer disabilityId) {
-//		this.disabilityId = disabilityId;
-//	}
-
 	/**
 	 * @return the contact
 	 */
 	public Contacts getContact() {
-		return contact;
+		return this.contact;
 	}
 
 	/**
@@ -78,7 +60,7 @@ public class ClientDisabilities implements java.io.Serializable {
 	 * @return the disabilityType
 	 */
 	public DisabilityTypes getDisabilityType() {
-		return disabilityType;
+		return this.disabilityType;
 	}
 
 	/**

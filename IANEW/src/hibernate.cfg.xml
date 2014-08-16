@@ -27,7 +27,6 @@
         <mapping resource="uow/ia/bean/Risks.hbm.xml" />
         <mapping resource="uow/ia/bean/CommunicationTypes.hbm.xml" />
         <mapping resource="uow/ia/bean/EnquiryIssuesHistories.hbm.xml" />
-        <mapping resource="uow/ia/bean/IacaseEnquiryMappings.hbm.xml" />
         <mapping resource="uow/ia/bean/PlanGoals.hbm.xml" />
         <mapping resource="uow/ia/bean/EnquiriesHistories.hbm.xml" />
         <mapping resource="uow/ia/bean/CriteriaControls.hbm.xml" />
@@ -59,5 +58,6 @@
         <mapping resource="uow/ia/bean/CulturalBackgroundTypes.hbm.xml" />
         <mapping resource="uow/ia/bean/IaCommunicationsHistories.hbm.xml" />
         <mapping resource="uow/ia/bean/CaseIssuesHistories.hbm.xml" />
+        <mapping resource="uow/ia/bean/ContactEmployments.hbm.xml" />
     </session-factory>
 </hibernate-configuration>

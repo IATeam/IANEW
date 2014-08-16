@@ -18,7 +18,7 @@
         <!-- Many to one relationship -->
         <set name="contactsSet" fetch="select" inverse="true" sort="unsorted" table="Contacts">
         	<key>
-        		<column name="contact_type_id" not-null="true"/>
+        		<column name="contact_type_id" not-null="false"/>
         	</key>
         	<one-to-many class="uow.ia.bean.Contacts"/>
         </set>

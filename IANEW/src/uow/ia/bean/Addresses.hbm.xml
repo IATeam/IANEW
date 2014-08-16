@@ -8,9 +8,6 @@
             <column name="id" />
             <generator class="identity" />
         </id>
-        <!-- <property name="contactId" type="java.lang.Integer">
-            <column name="contact_id" />
-        </property> -->
         <property name="address" type="string">
             <column name="address" />
         </property>
@@ -25,6 +22,9 @@
         </property>
         <property name="country" type="string">
             <column name="country" />
+        </property>
+        <property name="homephone" type="string">
+        	<column name="homephone"/>
         </property>
         
         <!-- Many to one relationship -->

@@ -8,12 +8,6 @@
             <column name="id" />
             <generator class="identity" />
         </id>
-        <!-- <property name="contactId" type="java.lang.Integer">
-            <column name="contact_id" />
-        </property> -->
-        <!-- <property name="disabilityId" type="java.lang.Integer">
-            <column name="disability_id" />
-        </property> -->
         <property name="comments" type="string">
             <column name="comments" />
         </property>
@@ -22,10 +16,10 @@
         </property>
         
         <many-to-one class="uow.ia.bean.Contacts" name="contact">
-        	<column name="contact_id" not-null="false"/>
+        	<column name="contact_id" not-null="true"/>
         </many-to-one>
         <many-to-one class="uow.ia.bean.DisabilityTypes" name="disabilityType">
-        	<column name="disability_id" not-null="false"/>
+        	<column name="disability_id" not-null="true"/>
         </many-to-one>
     </class>
 </hibernate-mapping>

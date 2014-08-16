@@ -8,25 +8,38 @@ package uow.ia.bean;
 public class Addresses implements java.io.Serializable {
 
 	private Integer id;
-//	private Integer contactId;
 	private String address;
 	private String surburb;
 	private String postcode;
 	private String state;
 	private String country;
+	private String homephone;
 	private Contacts contact;
 
 	public Addresses() {
 	}
 
-	public Addresses(String address, String surburb,
-			String postcode, String state, String country) {
-//		this.contactId = contactId;
+	/**
+	 * @param id
+	 * @param address
+	 * @param surburb
+	 * @param postcode
+	 * @param state
+	 * @param country
+	 * @param homephone
+	 * @param contact
+	 */
+	public Addresses(Integer id, String address, String surburb,
+			String postcode, String state, String country, String homephone,
+			Contacts contact) {
+		this.id = id;
 		this.address = address;
 		this.surburb = surburb;
 		this.postcode = postcode;
 		this.state = state;
 		this.country = country;
+		this.homephone = homephone;
+		this.contact = contact;
 	}
 
 	public Integer getId() {
@@ -36,14 +49,6 @@ public class Addresses implements java.io.Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
-//	public Integer getContactId() {
-//		return this.contactId;
-//	}
-//
-//	public void setContactId(Integer contactId) {
-//		this.contactId = contactId;
-//	}
 
 	public String getAddress() {
 		return this.address;
@@ -85,8 +90,22 @@ public class Addresses implements java.io.Serializable {
 		this.country = country;
 	}
 	
+	/**
+	 * @return the homephone
+	 */
+	public String getHomephone() {
+		return this.homephone;
+	}
+
+	/**
+	 * @param homephone the homephone to set
+	 */
+	public void setHomephone(String homephone) {
+		this.homephone = homephone;
+	}
+
 	public Contacts getContact() {
-		return contact;
+		return this.contact;
 	}
 
 	public void setContact(Contacts contact) {

@@ -13,6 +13,7 @@ public class StatusTypes implements java.io.Serializable {
 	private Integer id;
 	private String statusName;
 	private Set<Enquiries> enquiriesSet = new HashSet<Enquiries>();
+	private Set<CaseIssues> caseIssuesSet = new HashSet<CaseIssues>();
 	
 	/**
 	 * 
@@ -73,6 +74,20 @@ public class StatusTypes implements java.io.Serializable {
 	 */
 	public void setEnquiriesSet(Set<Enquiries> enquiriesSet) {
 		this.enquiriesSet = enquiriesSet;
+	}
+
+	/**
+	 * @return the caseIssuesSet
+	 */
+	public Set<CaseIssues> getCaseIssuesSet() {
+		return this.caseIssuesSet;
+	}
+
+	/**
+	 * @param caseIssuesSet the caseIssuesSet to set
+	 */
+	public void setCaseIssuesSet(Set<CaseIssues> caseIssuesSet) {
+		this.caseIssuesSet = caseIssuesSet;
 	}
 
 }
