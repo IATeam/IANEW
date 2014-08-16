@@ -54,6 +54,7 @@
 				<value>uow/ia/bean/ClientDisabilities.hbm.xml</value>
 				<value>uow/ia/bean/ClientDisabilitiesHistories.hbm.xml</value>
 				<value>uow/ia/bean/CommunicationTypes.hbm.xml</value>
+				<value>uow/ia/bean/ContactEmployments.hbm.xml</value>
 				<value>uow/ia/bean/ContactTypes.hbm.xml</value>
 				<value>uow/ia/bean/Contacts.hbm.xml</value>
 				<value>uow/ia/bean/ContactsHistories.hbm.xml</value>
@@ -73,7 +74,6 @@
 				<value>uow/ia/bean/GenderTypes.hbm.xml</value>
 				<value>uow/ia/bean/GoalTypes.hbm.xml</value>
 				<value>uow/ia/bean/IaCommunicationsHistories.hbm.xml</value>
-				<value>uow/ia/bean/IacaseEnquiryMappings.hbm.xml</value>
 				<value>uow/ia/bean/IndividualCaseCommunications.hbm.xml</value>
 				<value>uow/ia/bean/IndividualCases.hbm.xml</value>
 				<value>uow/ia/bean/IndividualCasesHistories.hbm.xml</value>

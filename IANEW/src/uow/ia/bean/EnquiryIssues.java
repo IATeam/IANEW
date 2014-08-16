@@ -11,8 +11,6 @@ import java.util.Set;
 public class EnquiryIssues implements java.io.Serializable {
 
 	private Integer id;
-//	private Integer enquiryId;
-//	private Integer issueId;
 	private Enquiries enquiry;
 	private IssueTypes issue;
 	private String comment;
@@ -39,7 +37,7 @@ public class EnquiryIssues implements java.io.Serializable {
 	 * @return the id
 	 */
 	public Integer getId() {
-		return id;
+		return this.id;
 	}
 	/**
 	 * @param id the id to set

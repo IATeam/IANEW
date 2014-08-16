@@ -11,5 +11,13 @@
         <property name="frequencyName" type="string">
             <column name="frequency_name" />
         </property>
+        
+        <!-- one to many relationship -->
+        <set fetch="select" inverse="true" name="plansSet" table="Plans">
+        	<key>
+        		<column name="review_frequency_id" not-null="false"/>
+        	</key>
+        	<one-to-many class="uow.ia.bean.Plans" />
+        </set>
     </class>
 </hibernate-mapping>

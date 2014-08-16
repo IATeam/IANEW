@@ -167,7 +167,8 @@ public class EnquiryAction extends BaseAction{
 		setTheGender(contact.getGenderType().getGenderName());
 		setTheDanger(contact.getDangerType().getDangerName());
 		setTheTitle(contact.getTitleType().getName());
-		setTheEmployment(contact.getEmploymentType().getEmploymentName());
+		//setTheEmployment(contact.getEmploymentsTypeSet());
+		setTheEmployment("Kim change databse need chagne code for this part");
 		setTheCulturalBackground(contact.getCulturalBackground().getCulturalBackgroundName());
 		setTheAccommodation(contact.getAccommodation().getAccommodationName());
 		

@@ -19,5 +19,11 @@
         	</key>
         	<one-to-many class="uow.ia.bean.Enquiries"/>
         </set>
+        <set fetch="select" inverse="true" name="caseIssuesSet" sort="unsorted" table="Case_Issues">
+        	<key>
+        		<column name="status_id" not-null="false"/>
+        	</key>
+        	<one-to-many class="uow.ia.bean.CaseIssues"/>
+        </set>
     </class>
 </hibernate-mapping>

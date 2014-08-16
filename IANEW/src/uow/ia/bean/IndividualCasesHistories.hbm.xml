@@ -12,10 +12,10 @@
         <property name="action" type="string">
             <column name="action" length="10" not-null="true" />
         </property>
-        <property name="changeOrder" type="int">
+        <property name="changeOrder" type="java.lang.Integer">
             <column name="change_order" not-null="true" />
         </property>
-        <property name="caseId" type="int">
+        <property name="caseId" type="java.lang.Integer">
             <column name="case_id" not-null="true" />
         </property>
         <property name="clientId" type="java.lang.Integer">
@@ -42,8 +42,12 @@
         <property name="oldCaseId" type="java.lang.Integer">
             <column name="old_case_id" />
         </property>
-        <property name="createdUserId" type="int">
+        <property name="createdUserId" type="java.lang.Integer">
             <column name="created_user_id" not-null="true" />
         </property>
+        <property name="relatedEnquiryId" type="java.lang.Integer">
+            <column name="related_enquiry_id" not-null="true" />
+        </property>
+        
     </class>
 </hibernate-mapping>

@@ -13,25 +13,28 @@ public class DisabilityTypes implements java.io.Serializable {
 	private Integer id;
 	private String disabilityName;
 	private String disabilityDescription;
-	private Set<Contacts> contactsSet = new HashSet<Contacts>();
+	private Set<ClientDisabilities> clientDisabilitiesSet = new HashSet<ClientDisabilities>();
 	/**
 	 * 
 	 */
 	public DisabilityTypes() {
 	}
+	
 	/**
 	 * @param id
 	 * @param disabilityName
 	 * @param disabilityDescription
-	 * @param contactsSet
+	 * @param clientDisabilitiesSet
 	 */
 	public DisabilityTypes(Integer id, String disabilityName,
-			String disabilityDescription, Set<Contacts> contactsSet) {
+			String disabilityDescription,
+			Set<ClientDisabilities> clientDisabilitiesSet) {
 		this.id = id;
 		this.disabilityName = disabilityName;
 		this.disabilityDescription = disabilityDescription;
-		this.contactsSet = contactsSet;
+		this.clientDisabilitiesSet = clientDisabilitiesSet;
 	}
+
 	/**
 	 * @return the id
 	 */
@@ -68,19 +71,21 @@ public class DisabilityTypes implements java.io.Serializable {
 	public void setDisabilityDescription(String disabilityDescription) {
 		this.disabilityDescription = disabilityDescription;
 	}
+
 	/**
-	 * @return the contactsSet
+	 * @return the clientDisabilitiesSet
 	 */
-	public Set<Contacts> getContactsSet() {
-		return this.contactsSet;
-	}
-	/**
-	 * @param contactsSet the contactsSet to set
-	 */
-	public void setContactsSet(Set<Contacts> contactsSet) {
-		this.contactsSet = contactsSet;
+	public Set<ClientDisabilities> getClientDisabilitiesSet() {
+		return this.clientDisabilitiesSet;
 	}
 
+	/**
+	 * @param clientDisabilitiesSet the clientDisabilitiesSet to set
+	 */
+	public void setClientDisabilitiesSet(
+			Set<ClientDisabilities> clientDisabilitiesSet) {
+		this.clientDisabilitiesSet = clientDisabilitiesSet;
+	}
 	
 
 }

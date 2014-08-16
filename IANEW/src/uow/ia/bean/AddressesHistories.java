@@ -10,171 +10,199 @@ import java.util.Date;
 public class AddressesHistories implements java.io.Serializable {
 
 	private Integer id;
-	private int addressId;
 	private String action;
-	private String oldAddress;
-	private String newAddress;
-	private String oldSurburb;
-	private String newSurburb;
-	private String oldPostcode;
-	private String newPostcode;
-	private String oldState;
-	private String newState;
-	private String oldCountry;
-	private String newCountry;
-	private int createdUserId;
+	private Integer addressId;
+	private Integer contactId;
+	private String address;
+	private String surburb;
+	private String postcode;
+	private String state;
+	private String country;
+	private String homephone;
+	private Integer createdUserId;
 	private Date createdDateTime;
-
+	/**
+	 * 
+	 */
 	public AddressesHistories() {
+		// TODO Auto-generated constructor stub
 	}
-
-	public AddressesHistories(int addressId, String action, int createdUserId,
-			Date createdDateTime) {
-		this.addressId = addressId;
+	/**
+	 * @param id
+	 * @param action
+	 * @param addressId
+	 * @param contactId
+	 * @param address
+	 * @param surburb
+	 * @param postcode
+	 * @param state
+	 * @param country
+	 * @param homephone
+	 * @param createdUserId
+	 * @param createdDateTime
+	 */
+	public AddressesHistories(Integer id, String action, Integer addressId,
+			Integer contactId, String address, String surburb, String postcode,
+			String state, String country, String homephone,
+			Integer createdUserId, Date createdDateTime) {
+		this.id = id;
 		this.action = action;
+		this.addressId = addressId;
+		this.contactId = contactId;
+		this.address = address;
+		this.surburb = surburb;
+		this.postcode = postcode;
+		this.state = state;
+		this.country = country;
+		this.homephone = homephone;
 		this.createdUserId = createdUserId;
 		this.createdDateTime = createdDateTime;
 	}
-
-	public AddressesHistories(int addressId, String action, String oldAddress,
-			String newAddress, String oldSurburb, String newSurburb,
-			String oldPostcode, String newPostcode, String oldState,
-			String newState, String oldCountry, String newCountry,
-			int createdUserId, Date createdDateTime) {
-		this.addressId = addressId;
-		this.action = action;
-		this.oldAddress = oldAddress;
-		this.newAddress = newAddress;
-		this.oldSurburb = oldSurburb;
-		this.newSurburb = newSurburb;
-		this.oldPostcode = oldPostcode;
-		this.newPostcode = newPostcode;
-		this.oldState = oldState;
-		this.newState = newState;
-		this.oldCountry = oldCountry;
-		this.newCountry = newCountry;
-		this.createdUserId = createdUserId;
-		this.createdDateTime = createdDateTime;
-	}
-
+	/**
+	 * @return the id
+	 */
 	public Integer getId() {
-		return this.id;
+		return id;
 	}
-
+	/**
+	 * @param id the id to set
+	 */
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
-	public int getAddressId() {
-		return this.addressId;
-	}
-
-	public void setAddressId(int addressId) {
-		this.addressId = addressId;
-	}
-
+	/**
+	 * @return the action
+	 */
 	public String getAction() {
-		return this.action;
+		return action;
 	}
-
+	/**
+	 * @param action the action to set
+	 */
 	public void setAction(String action) {
 		this.action = action;
 	}
-
-	public String getOldAddress() {
-		return this.oldAddress;
+	/**
+	 * @return the addressId
+	 */
+	public Integer getAddressId() {
+		return addressId;
 	}
-
-	public void setOldAddress(String oldAddress) {
-		this.oldAddress = oldAddress;
+	/**
+	 * @param addressId the addressId to set
+	 */
+	public void setAddressId(Integer addressId) {
+		this.addressId = addressId;
 	}
-
-	public String getNewAddress() {
-		return this.newAddress;
+	/**
+	 * @return the contactId
+	 */
+	public Integer getContactId() {
+		return contactId;
 	}
-
-	public void setNewAddress(String newAddress) {
-		this.newAddress = newAddress;
+	/**
+	 * @param contactId the contactId to set
+	 */
+	public void setContactId(Integer contactId) {
+		this.contactId = contactId;
 	}
-
-	public String getOldSurburb() {
-		return this.oldSurburb;
+	/**
+	 * @return the address
+	 */
+	public String getAddress() {
+		return address;
 	}
-
-	public void setOldSurburb(String oldSurburb) {
-		this.oldSurburb = oldSurburb;
+	/**
+	 * @param address the address to set
+	 */
+	public void setAddress(String address) {
+		this.address = address;
 	}
-
-	public String getNewSurburb() {
-		return this.newSurburb;
+	/**
+	 * @return the surburb
+	 */
+	public String getSurburb() {
+		return surburb;
 	}
-
-	public void setNewSurburb(String newSurburb) {
-		this.newSurburb = newSurburb;
+	/**
+	 * @param surburb the surburb to set
+	 */
+	public void setSurburb(String surburb) {
+		this.surburb = surburb;
 	}
-
-	public String getOldPostcode() {
-		return this.oldPostcode;
+	/**
+	 * @return the postcode
+	 */
+	public String getPostcode() {
+		return postcode;
 	}
-
-	public void setOldPostcode(String oldPostcode) {
-		this.oldPostcode = oldPostcode;
+	/**
+	 * @param postcode the postcode to set
+	 */
+	public void setPostcode(String postcode) {
+		this.postcode = postcode;
 	}
-
-	public String getNewPostcode() {
-		return this.newPostcode;
+	/**
+	 * @return the state
+	 */
+	public String getState() {
+		return state;
 	}
-
-	public void setNewPostcode(String newPostcode) {
-		this.newPostcode = newPostcode;
+	/**
+	 * @param state the state to set
+	 */
+	public void setState(String state) {
+		this.state = state;
 	}
-
-	public String getOldState() {
-		return this.oldState;
+	/**
+	 * @return the country
+	 */
+	public String getCountry() {
+		return country;
 	}
-
-	public void setOldState(String oldState) {
-		this.oldState = oldState;
+	/**
+	 * @param country the country to set
+	 */
+	public void setCountry(String country) {
+		this.country = country;
 	}
-
-	public String getNewState() {
-		return this.newState;
+	/**
+	 * @return the homephone
+	 */
+	public String getHomephone() {
+		return homephone;
 	}
-
-	public void setNewState(String newState) {
-		this.newState = newState;
+	/**
+	 * @param homephone the homephone to set
+	 */
+	public void setHomephone(String homephone) {
+		this.homephone = homephone;
 	}
-
-	public String getOldCountry() {
-		return this.oldCountry;
+	/**
+	 * @return the createdUserId
+	 */
+	public Integer getCreatedUserId() {
+		return createdUserId;
 	}
-
-	public void setOldCountry(String oldCountry) {
-		this.oldCountry = oldCountry;
-	}
-
-	public String getNewCountry() {
-		return this.newCountry;
-	}
-
-	public void setNewCountry(String newCountry) {
-		this.newCountry = newCountry;
-	}
-
-	public int getCreatedUserId() {
-		return this.createdUserId;
-	}
-
-	public void setCreatedUserId(int createdUserId) {
+	/**
+	 * @param createdUserId the createdUserId to set
+	 */
+	public void setCreatedUserId(Integer createdUserId) {
 		this.createdUserId = createdUserId;
 	}
-
+	/**
+	 * @return the createdDateTime
+	 */
 	public Date getCreatedDateTime() {
-		return this.createdDateTime;
+		return createdDateTime;
 	}
-
+	/**
+	 * @param createdDateTime the createdDateTime to set
+	 */
 	public void setCreatedDateTime(Date createdDateTime) {
 		this.createdDateTime = createdDateTime;
 	}
+	
+	
 
 }

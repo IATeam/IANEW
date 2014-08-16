@@ -13,11 +13,8 @@ import java.util.Set;
 public class Enquiries implements java.io.Serializable {
 
 	private Integer id;
-//	private Integer contactId;
 	private Contacts contact;
-//	private Integer enquiryTypeId;
 	private EnquiryTypes enquiryType;
-//	private Integer statusId;
 	private StatusTypes statusType;
 	private String description;
 	private Integer createdUserId;
@@ -27,13 +24,11 @@ public class Enquiries implements java.io.Serializable {
 	private String referralTo;
 	private Date updatedDateTime;
 	private Integer updatedUserId;
-//	private Integer parentEnquiryId;
 	private String outOfCoverageFlag;
 	private Set<Enquiries> enquiriesSet;
 	private Enquiries parentEnquiry; 
 	private Set<EnquiryIssues> enquiryIssuesSet = new HashSet<EnquiryIssues>();
 
-	
 
 	/**
 	 * 
@@ -41,6 +36,7 @@ public class Enquiries implements java.io.Serializable {
 	public Enquiries() {
 		// TODO Auto-generated constructor stub
 	}
+
 
 	/**
 	 * @param id
@@ -84,6 +80,7 @@ public class Enquiries implements java.io.Serializable {
 		this.enquiryIssuesSet = enquiryIssuesSet;
 	}
 
+
 	/**
 	 * @return the id
 	 */
@@ -112,22 +109,6 @@ public class Enquiries implements java.io.Serializable {
 		this.contact = contact;
 	}
 
-//	public Integer getContactId() {
-//		return this.contactId;
-//	}
-//
-//	public void setContactId(Integer contactId) {
-//		this.contactId = contactId;
-//	}
-
-//	public Integer getEnquiryTypeId() {
-//		return this.enquiryTypeId;
-//	}
-//
-//	public void setEnquiryTypeId(Integer enquiryTypeId) {
-//		this.enquiryTypeId = enquiryTypeId;
-//	}
-
 	/**
 	 * @return the enquiryType
 	 */
@@ -141,14 +122,6 @@ public class Enquiries implements java.io.Serializable {
 	public void setEnquiryType(EnquiryTypes enquiryType) {
 		this.enquiryType = enquiryType;
 	}
-
-//	public Integer getStatusId() {
-//		return this.statusId;
-//	}
-//
-//	public void setStatusId(Integer statusId) {
-//		this.statusId = statusId;
-//	}
 
 	/**
 	 * @return the statusType
@@ -165,14 +138,6 @@ public class Enquiries implements java.io.Serializable {
 	}
 
 	
-
-//	public Integer getParentEnquiryId() {
-//		return this.parentEnquiryId;
-//	}
-//
-//	public void setParentEnquiryId(Integer parentEnquiryId) {
-//		this.parentEnquiryId = parentEnquiryId;
-//	}
 
 	/**
 	 * @return the description

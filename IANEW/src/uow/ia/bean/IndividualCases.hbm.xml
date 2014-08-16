@@ -8,21 +8,12 @@
             <column name="id" />
             <generator class="identity" />
         </id>
-        <!-- <property name="clientId" type="java.lang.Integer">
-            <column name="client_id" />
-        </property> -->
-        <property name="advocateId" type="java.lang.Integer">
-            <column name="advocate_id" />
-        </property>
         <property name="caseStatusId" type="java.lang.Integer">
             <column name="case_status_id" />
         </property>
         <property name="description" type="string">
             <column name="description" />
         </property>
-        <!-- <property name="priorityId" type="java.lang.Integer">
-            <column name="priority_id" />
-        </property> -->
         <property name="serviceProviderId" type="java.lang.Integer">
             <column name="service_provider_id" />
         </property>
@@ -41,9 +32,6 @@
         <property name="referredTo" type="string">
             <column name="referred_to" />
         </property>
-        <!-- <property name="oldCaseId" type="java.lang.Integer">
-            <column name="old_case_id" />
-        </property> -->
         
         <!-- Many-to-one relationship -->
         <many-to-one class="uow.ia.bean.Contacts" name="contact">
@@ -52,6 +40,10 @@
         <many-to-one class="uow.ia.bean.PriorityTypes" name="priorityType">
         	<column name="priority_Id" not-null="true"/>
         </many-to-one>
+        <many-to-one class="uow.ia.bean.Enquiries" name="relatedEnquiry" unique="true" column="related_enquiry_id" not-null="true"/>
+        <many-to-one class="uow.ia.bean.Contacts" name="advocate">
+        	<column name="advocate_id" not-null="false"/>
+        </many-to-one>
         
         <!-- One-to-many relationship -->
         <set fetch="select" inverse="true" name="risksSet" table="Risks">
@@ -59,6 +51,12 @@
         		<column name="case_id" not-null="false"/>
         	</key>
         	<one-to-many class="uow.ia.bean.Risks"/>
+        </set>
+        <set fetch="select" inverse="true" name="communicationsSet" table="Individual_Case_Communications">
+        	<key>
+        		<column name="case_id" not-null="false"/>
+        	</key>
+        	<one-to-many class="uow.ia.bean.IndividualCaseCommunications"/>
         </set>
         
         <!-- Self-join many-to-one -->

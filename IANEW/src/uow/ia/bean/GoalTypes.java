@@ -1,5 +1,8 @@
 package uow.ia.bean;
 
+import java.util.HashSet;
+import java.util.Set;
+
 // Generated Aug 9, 2014 1:06:20 PM by Hibernate Tools 4.0.0
 
 /**
@@ -9,28 +12,60 @@ public class GoalTypes implements java.io.Serializable {
 
 	private Integer id;
 	private String goalTypeName;
-
+	private Set<PlanGoals> planGoalsSet = new HashSet<PlanGoals>();
+	/**
+	 * 
+	 */
 	public GoalTypes() {
+		// TODO Auto-generated constructor stub
 	}
-
-	public GoalTypes(String goalTypeName) {
+	/**
+	 * @param id
+	 * @param goalTypeName
+	 * @param planGoalsSet
+	 */
+	public GoalTypes(Integer id, String goalTypeName,
+			Set<PlanGoals> planGoalsSet) {
+		this.id = id;
 		this.goalTypeName = goalTypeName;
+		this.planGoalsSet = planGoalsSet;
 	}
-
+	/**
+	 * @return the id
+	 */
 	public Integer getId() {
 		return this.id;
 	}
-
+	/**
+	 * @param id the id to set
+	 */
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
+	/**
+	 * @return the goalTypeName
+	 */
 	public String getGoalTypeName() {
 		return this.goalTypeName;
 	}
-
+	/**
+	 * @param goalTypeName the goalTypeName to set
+	 */
 	public void setGoalTypeName(String goalTypeName) {
 		this.goalTypeName = goalTypeName;
 	}
+	/**
+	 * @return the planGoalsSet
+	 */
+	public Set<PlanGoals> getPlanGoalsSet() {
+		return this.planGoalsSet;
+	}
+	/**
+	 * @param planGoalsSet the planGoalsSet to set
+	 */
+	public void setPlanGoalsSet(Set<PlanGoals> planGoalsSet) {
+		this.planGoalsSet = planGoalsSet;
+	}
+
 
 }

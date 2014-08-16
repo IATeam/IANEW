@@ -8,11 +8,25 @@
             <column name="id" />
             <generator class="identity" />
         </id>
-        <property name="planId" type="java.lang.Integer">
-            <column name="plan_id" />
-        </property>
-        <property name="contactId" type="java.lang.Integer">
-            <column name="contact_id" />
-        </property>
+        <property generated="never"  name="createdUserId" type="java.lang.Integer">
+   			<column name="created_user_id"/>
+		</property>
+		<property generated="never"  name="createdDateTime" type="date">
+		    <column length="10" name="created_date_time"/>
+		</property>
+		<property generated="never"  name="updatedUserId" type="java.lang.Integer">
+		    <column name="updated_user_id"/>
+		</property>
+		<property generated="never"  name="updatedDateTime" type="date">
+		    <column length="10" name="updated_date_time"/>
+		</property>
+		
+		<!-- many to one relationship -->
+		<many-to-one class="uow.ia.bean.Contacts" name="contact">
+			<column name="contact_id" not-null="false"/>
+		</many-to-one>
+		<many-to-one class="uow.ia.bean.IndividualCases" name="individualCase">
+			<column name="case_id" not-null="false"/>
+		</many-to-one>
     </class>
 </hibernate-mapping>

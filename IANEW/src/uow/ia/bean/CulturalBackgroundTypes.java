@@ -49,7 +49,7 @@ public class CulturalBackgroundTypes implements java.io.Serializable {
 	}
 
 	public Set<Contacts> getContactsSet() {
-		return contactsSet;
+		return this.contactsSet;
 	}
 
 	public void setContactsSet(Set<Contacts> contactsSet) {

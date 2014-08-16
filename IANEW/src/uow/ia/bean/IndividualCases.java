@@ -12,12 +12,10 @@ import java.util.Set;
 public class IndividualCases implements java.io.Serializable {
 
 	private Integer id;
-//	private Integer clientId;
 	private Contacts contact;
-	private Integer advocateId;
+	private Contacts advocate;
 	private Integer caseStatusId;
 	private String description;
-//	private Integer priorityId;
 	private PriorityTypes priorityType;
 	private Integer serviceProviderId;
 	private Date createdDateTime;
@@ -25,11 +23,20 @@ public class IndividualCases implements java.io.Serializable {
 	private Date updatedDateTime;
 	private Integer updatedUserId;
 	private String referredTo;
-//	private Integer oldCaseId;
 	private Set<Risks> risksSet = new HashSet<Risks>();
 	private IndividualCases oldCase;
+	private Enquiries relatedEnquiry;
 	private Set<IndividualCases> individualCasesSet = new HashSet<IndividualCases>();
+
 	private Set<CaseIssues> caseIssuesSet = new HashSet<CaseIssues>();
+	private Set<IndividualCaseCommunications> communicationsSet = new HashSet<IndividualCaseCommunications>();
+	
+	/**
+	 * 
+	 */
+	public IndividualCases() {
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @param id
@@ -45,19 +52,24 @@ public class IndividualCases implements java.io.Serializable {
 	 * @param updatedUserId
 	 * @param referredTo
 	 * @param risksSet
-	 * @param individualCase
+	 * @param oldCase
+	 * @param relatedEnquiryId
 	 * @param individualCasesSet
+	 * @param caseIssuesSet
+	 * @param communicationsSet
 	 */
-	public IndividualCases(Integer id, Contacts contact, Integer advocateId,
+	public IndividualCases(Integer id, Contacts contact, Contacts advocate,
 			Integer caseStatusId, String description,
 			PriorityTypes priorityType, Integer serviceProviderId,
 			Date createdDateTime, Integer createdUserId, Date updatedDateTime,
 			Integer updatedUserId, String referredTo, Set<Risks> risksSet,
-			IndividualCases oldCase,
-			Set<IndividualCases> individualCasesSet) {
+			IndividualCases oldCase, Enquiries relatedEnquiry,
+			Set<IndividualCases> individualCasesSet,
+			Set<CaseIssues> caseIssuesSet,
+			Set<IndividualCaseCommunications> communicationsSet) {
 		this.id = id;
 		this.contact = contact;
-		this.advocateId = advocateId;
+		this.advocate = advocate;
 		this.caseStatusId = caseStatusId;
 		this.description = description;
 		this.priorityType = priorityType;
@@ -69,27 +81,25 @@ public class IndividualCases implements java.io.Serializable {
 		this.referredTo = referredTo;
 		this.risksSet = risksSet;
 		this.oldCase = oldCase;
+		this.relatedEnquiry = relatedEnquiry;
 		this.individualCasesSet = individualCasesSet;
+		this.caseIssuesSet = caseIssuesSet;
+		this.communicationsSet = communicationsSet;
 	}
 
-	public IndividualCases() {
-	}
-
+	/**
+	 * @return the id
+	 */
 	public Integer getId() {
 		return this.id;
 	}
 
+	/**
+	 * @param id the id to set
+	 */
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
-//	public Integer getClientId() {
-//		return this.clientId;
-//	}
-//
-//	public void setClientId(Integer clientId) {
-//		this.clientId = clientId;
-//	}
 
 	/**
 	 * @return the contact
@@ -105,47 +115,53 @@ public class IndividualCases implements java.io.Serializable {
 		this.contact = contact;
 	}
 
-	public Integer getAdvocateId() {
-		return this.advocateId;
+	/**
+	 * @return the advocateId
+	 */
+	public Contacts getAdvocate() {
+		return this.advocate;
 	}
 
-	public void setAdvocateId(Integer advocateId) {
-		this.advocateId = advocateId;
+	/**
+	 * @param advocateId the advocateId to set
+	 */
+	public void setAdvocate(Contacts advocate) {
+		this.advocate = advocate;
 	}
 
+	/**
+	 * @return the caseStatusId
+	 */
 	public Integer getCaseStatusId() {
 		return this.caseStatusId;
 	}
 
+	/**
+	 * @param caseStatusId the caseStatusId to set
+	 */
 	public void setCaseStatusId(Integer caseStatusId) {
 		this.caseStatusId = caseStatusId;
 	}
 
+	/**
+	 * @return the description
+	 */
 	public String getDescription() {
 		return this.description;
 	}
 
+	/**
+	 * @param description the description to set
+	 */
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-//	public Integer getPriorityId() {
-//		return this.priorityId;
-//	}
-//
-//	public void setPriorityId(Integer priorityId) {
-//		this.priorityId = priorityId;
-//	}
-
-	public Integer getServiceProviderId() {
-		return this.serviceProviderId;
 	}
 
 	/**
 	 * @return the priorityType
 	 */
 	public PriorityTypes getPriorityType() {
-		return priorityType;
+		return this.priorityType;
 	}
 
 	/**
@@ -155,57 +171,89 @@ public class IndividualCases implements java.io.Serializable {
 		this.priorityType = priorityType;
 	}
 
+	/**
+	 * @return the serviceProviderId
+	 */
+	public Integer getServiceProviderId() {
+		return this.serviceProviderId;
+	}
+
+	/**
+	 * @param serviceProviderId the serviceProviderId to set
+	 */
 	public void setServiceProviderId(Integer serviceProviderId) {
 		this.serviceProviderId = serviceProviderId;
 	}
 
+	/**
+	 * @return the createdDateTime
+	 */
 	public Date getCreatedDateTime() {
 		return this.createdDateTime;
 	}
 
+	/**
+	 * @param createdDateTime the createdDateTime to set
+	 */
 	public void setCreatedDateTime(Date createdDateTime) {
 		this.createdDateTime = createdDateTime;
 	}
 
+	/**
+	 * @return the createdUserId
+	 */
 	public Integer getCreatedUserId() {
 		return this.createdUserId;
 	}
 
+	/**
+	 * @param createdUserId the createdUserId to set
+	 */
 	public void setCreatedUserId(Integer createdUserId) {
 		this.createdUserId = createdUserId;
 	}
 
+	/**
+	 * @return the updatedDateTime
+	 */
 	public Date getUpdatedDateTime() {
 		return this.updatedDateTime;
 	}
 
+	/**
+	 * @param updatedDateTime the updatedDateTime to set
+	 */
 	public void setUpdatedDateTime(Date updatedDateTime) {
 		this.updatedDateTime = updatedDateTime;
 	}
 
+	/**
+	 * @return the updatedUserId
+	 */
 	public Integer getUpdatedUserId() {
 		return this.updatedUserId;
 	}
 
+	/**
+	 * @param updatedUserId the updatedUserId to set
+	 */
 	public void setUpdatedUserId(Integer updatedUserId) {
 		this.updatedUserId = updatedUserId;
 	}
 
+	/**
+	 * @return the referredTo
+	 */
 	public String getReferredTo() {
 		return this.referredTo;
 	}
 
+	/**
+	 * @param referredTo the referredTo to set
+	 */
 	public void setReferredTo(String referredTo) {
 		this.referredTo = referredTo;
 	}
-
-//	public Integer getOldCaseId() {
-//		return this.oldCaseId;
-//	}
-//
-//	public void setOldCaseId(Integer oldCaseId) {
-//		this.oldCaseId = oldCaseId;
-//	}
 
 	/**
 	 * @return the risksSet
@@ -222,17 +270,31 @@ public class IndividualCases implements java.io.Serializable {
 	}
 
 	/**
-	 * @return the individualCase
+	 * @return the oldCase
 	 */
 	public IndividualCases getOldCase() {
 		return this.oldCase;
 	}
 
 	/**
-	 * @param individualCase the individualCase to set
+	 * @param oldCase the oldCase to set
 	 */
 	public void setOldCase(IndividualCases oldCase) {
 		this.oldCase = oldCase;
+	}
+
+	/**
+	 * @return the relatedEnquiryId
+	 */
+	public Enquiries getRelatedEnquiry() {
+		return this.relatedEnquiry;
+	}
+
+	/**
+	 * @param relatedEnquiryId the relatedEnquiryId to set
+	 */
+	public void setRelatedEnquiry(Enquiries relatedEnquiry) {
+		this.relatedEnquiry = relatedEnquiry;
 	}
 
 	/**
@@ -263,4 +325,20 @@ public class IndividualCases implements java.io.Serializable {
 		this.caseIssuesSet = caseIssuesSet;
 	}
 
+	/**
+	 * @return the communicationsSet
+	 */
+	public Set<IndividualCaseCommunications> getCommunicationsSet() {
+		return this.communicationsSet;
+	}
+
+	/**
+	 * @param communicationsSet the communicationsSet to set
+	 */
+	public void setCommunicationsSet(
+			Set<IndividualCaseCommunications> communicationsSet) {
+		this.communicationsSet = communicationsSet;
+	}
+
+	
 }

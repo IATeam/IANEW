@@ -6,14 +6,10 @@
     <class name="uow.ia.bean.Plans" table="Plans" catalog="ianew">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
-            <generator class="identity" />
+            <generator class="foreign">
+				<param name="property">id</param>
+			</generator>
         </id>
-        <property name="caseId" type="java.lang.Integer">
-            <column name="case_id" />
-        </property>
-        <property name="statusId" type="java.lang.Integer">
-            <column name="status_id" />
-        </property>
         <property name="createdDateTime" type="timestamp">
             <column name="created_date_time" length="19" />
         </property>
@@ -23,20 +19,11 @@
         <property name="lastReviewedDate" type="date">
             <column name="last_reviewed_date" length="10" />
         </property>
-        <property name="reviewFrequencyId" type="java.lang.Integer">
-            <column name="review_frequency_id" />
-        </property>
         <property name="providedPlanDate" type="date">
             <column name="provided_plan_date" length="10" />
         </property>
         <property name="consentSignedDate" type="date">
             <column name="consent_signed_date" length="10" />
-        </property>
-        <property name="supportPersonId" type="java.lang.Integer">
-            <column name="support_person_id" />
-        </property>
-        <property name="authorisedById" type="java.lang.Integer">
-            <column name="authorised_by_id" />
         </property>
         <property name="authorisedByDate" type="date">
             <column name="authorised_by_date" length="10" />
@@ -53,5 +40,22 @@
         <property name="createdUserId" type="java.lang.Integer">
             <column name="created_user_id" />
         </property>
+        
+        <!-- one to one relationship -->
+        <one-to-one name="individualCase" class="uow.ia.bean.IndividualCases" constrained="true"></one-to-one>
+        
+        <!-- Many to one relationship -->
+        <many-to-one name="statusType" class="uow.ia.bean.StatusTypes">
+        	<column name="status_id" not-null="false"/>
+        </many-to-one>
+        <many-to-one name="reviewFrequency" class="uow.ia.bean.ReviewFrequencies">
+        	<column name="review_frequency_id" not-null="true"/>
+        </many-to-one>
+        <many-to-one name="supportPerson" class="uow.ia.bean.Contacts">
+        	<column name="support_person_id" not-null="true"/>
+        </many-to-one>
+        <many-to-one name="authorisedBy" class="uow.ia.bean.Contacts">
+        	<column name="authorised_by_id" not-null="true"/>
+        </many-to-one>
     </class>
 </hibernate-mapping>

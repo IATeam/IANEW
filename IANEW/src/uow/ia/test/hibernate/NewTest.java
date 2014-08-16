@@ -53,14 +53,14 @@ public class NewTest {
 	  System.out.println("othername: " + contact.getOthername());
 	  System.out.println("genderId: " + contact.getGenderType().getGenderName());
 	  System.out.println("contactTypename: " + contact.getContactType().getContactTypeName());
-	  System.out.println("homephone: " + contact.getHomephone());
-	  System.out.println("workphone: " + contact.getWorkphone());
+	  //System.out.println("homephone: " + contact.getHomephone());
+	  //System.out.println("workphone: " + contact.getWorkphone());
 	  System.out.println("mobilephone: " + contact.getMobilephone());
 	  System.out.println("email: " + contact.getEmail());
 	  System.out.println("accommodation: " + contact.getAccommodation().getAccommodationName());
 	  System.out.println("accommodationComment: " + contact.getAccommodationComment());
-	  System.out.println("employmentId: " + contact.getEmploymentType().getEmploymentName());
-	  System.out.println("employmentComment: " + contact.getEmploymentComment());
+	  //System.out.println("employmentId: " + contact.getEmploymentType().getEmploymentName());
+	  //System.out.println("employmentComment: " + contact.getEmploymentComment());
 	  System.out.println("culturalBackgroundId: " + contact.getCulturalBackground().getCulturalBackgroundName());
 	  System.out.println("culturalBackgroundComment: " + contact.getCulturalBackgroundComment());
 	  System.out.println("dangerFlagId: " + contact.getDangerType().getDangerName());
@@ -131,7 +131,7 @@ public class NewTest {
 	  
 	  List<DisabilityTypes> disabilityList = session.createSQLQuery("SELECT * FROM Disability_Types").addEntity(DisabilityTypes.class).list();
 	  System.out.println("DisabilityId: " + disabilityList.get(0).getId());
-	  System.out.println("Disability Count: " + disabilityList.get(0).getContactsSet().size());
+	  //System.out.println("Disability Count: " + disabilityList.get(0).getContactsSet().size());
 	 
 	  List<Enquiries> enquiryList = session.createSQLQuery("SELECT * FROM Enquiries").addEntity(Enquiries.class).list();
 	  Enquiries enquiry = enquiryList.get(1);
@@ -155,8 +155,8 @@ public class NewTest {
 	
 	  List<IssueTypes> issueTypeList = session.createSQLQuery("SELECT * FROM Issue_Types").addEntity(IssueTypes.class).list();
 	  System.out.println("Issue Type ID: " + issueTypeList.get(0).getId());
-	  System.out.println("Enuiry Count: " + issueTypeList.get(0).getEnquiriesSet().size());
-	  System.out.println("Case Count: " + issueTypeList.get(0).getIndividualCasesSet().size());
+	  //System.out.println("Enuiry Count: " + issueTypeList.get(0).getEnquiriesSet().size());
+	  //System.out.println("Case Count: " + issueTypeList.get(0).getIndividualCasesSet().size());
 	  
 	  
 	  List<StatusTypes> statusList = session.createSQLQuery("SELECT * FROM Status_Types").addEntity(StatusTypes.class).list();

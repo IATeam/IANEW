@@ -18,9 +18,9 @@
   <!-- Defines one to many relationship with Contacts table
              No duplicate records can be obtained in a set
   -->
-  <set fetch="select" inverse="true" lazy="true" name="contactsSet" table="Contacts">
+  <set fetch="select" inverse="true" name="contactsSet" table="Contacts">
    <key>
-    <column name="accommodation_id" not-null="true"/>
+    <column name="accommodation_id" not-null="false"/>
    </key>
    <one-to-many class="uow.ia.bean.Contacts"/>
   </set>

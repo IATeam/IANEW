@@ -10,9 +10,9 @@ import java.util.Date;
 public class IndividualCaseCommunications implements java.io.Serializable {
 
 	private Integer id;
-	private Integer caseId;
+	private IndividualCases individualCase;
 	private Date communicationDate;
-	private Integer communicationTypeId;
+	private CommunicationTypes communicationType;
 	private String description;
 	private Integer createdUserId;
 	private Date createdDateTime;
@@ -22,19 +22,34 @@ public class IndividualCaseCommunications implements java.io.Serializable {
 	public IndividualCaseCommunications() {
 	}
 
-	public IndividualCaseCommunications(Integer caseId, Date communicationDate,
-			Integer communicationTypeId, String description,
+
+	/**
+	 * @param id
+	 * @param individualCase
+	 * @param communicationDate
+	 * @param communicationType
+	 * @param description
+	 * @param createdUserId
+	 * @param createdDateTime
+	 * @param timeSpent
+	 * @param importantFlag
+	 */
+	public IndividualCaseCommunications(Integer id,
+			IndividualCases individualCase, Date communicationDate,
+			CommunicationTypes communicationType, String description,
 			Integer createdUserId, Date createdDateTime, Float timeSpent,
 			String importantFlag) {
-		this.caseId = caseId;
+		this.id = id;
+		this.individualCase = individualCase;
 		this.communicationDate = communicationDate;
-		this.communicationTypeId = communicationTypeId;
+		this.communicationType = communicationType;
 		this.description = description;
 		this.createdUserId = createdUserId;
 		this.createdDateTime = createdDateTime;
 		this.timeSpent = timeSpent;
 		this.importantFlag = importantFlag;
 	}
+
 
 	public Integer getId() {
 		return this.id;
@@ -44,13 +59,21 @@ public class IndividualCaseCommunications implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public Integer getCaseId() {
-		return this.caseId;
+	/**
+	 * @return the individualCase
+	 */
+	public IndividualCases getIndividualCase() {
+		return this.individualCase;
 	}
 
-	public void setCaseId(Integer caseId) {
-		this.caseId = caseId;
+
+	/**
+	 * @param individualCase the individualCase to set
+	 */
+	public void setIndividualCase(IndividualCases individualCase) {
+		this.individualCase = individualCase;
 	}
+
 
 	public Date getCommunicationDate() {
 		return this.communicationDate;
@@ -60,13 +83,22 @@ public class IndividualCaseCommunications implements java.io.Serializable {
 		this.communicationDate = communicationDate;
 	}
 
-	public Integer getCommunicationTypeId() {
-		return this.communicationTypeId;
+
+	/**
+	 * @return the communicationType
+	 */
+	public CommunicationTypes getCommunicationType() {
+		return this.communicationType;
 	}
 
-	public void setCommunicationTypeId(Integer communicationTypeId) {
-		this.communicationTypeId = communicationTypeId;
+
+	/**
+	 * @param communicationType the communicationType to set
+	 */
+	public void setCommunicationType(CommunicationTypes communicationType) {
+		this.communicationType = communicationType;
 	}
+
 
 	public String getDescription() {
 		return this.description;
