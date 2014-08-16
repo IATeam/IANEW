@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" "http://struts.apache.org/dtds/struts-2.0.dtd">
 
+<!-- 
+	Created By: David Forbes
+	Created Date: 
+	==============================================
+	Updates:
+		
+	==============================================	
+	Description: configuration xml file for login
+
+-->
 
 <struts>
  	<package name="login" namespace="/" extends="struts-default">
     	<action name="login" class="uow.ia.action.LoginAction">
     		<result name="success">/home/home.jsp</result>
-    		<result name="login">/login.jsp</result>
+    		<result name="login">/forms/login.jsp</result>
     	</action>
    	</package>
 </struts>

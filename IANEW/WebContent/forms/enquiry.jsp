@@ -1,3 +1,32 @@
+<!----------------------------------------------------------------------------------------------
+	Created By: Quang Nhan
+	Created Date: 25/08/2014
+	==============================================
+	Updates:
+		02/08/2014 -	Quang Nhan
+						Separated the components into its own jsps to be included in this file
+						Created and referenced a form css style sheet
+		05/08/2014 -	Quang Nhan
+						Reseharched and added Skeleton styling and addjusted custom css. Skeleton is 
+						for mobile compatibility
+		12/08/2014 - 	Quang Nhan
+						Migrate code into new project setup
+		14/08/2014 - 	Quang Nhan
+						Connect and retrieve data called by the EnquiryAction class
+		16/08/2014 -	Quang Nhan
+						Changed s:div to s:s:div and related class to cssClass
+						reorder syntax to be consistent throughout the jsps
+				   -	Added Javascript functionality to have read only to existing enquiry
+				   -	Separate the form header into its own jsp file and included here
+
+	==============================================	
+	Description: A jsp page that displays enquiry list for both new and existing
+	
+	Note: syntax order: <tag id name class value list(for select) ...>
+------------------------------------------------------------------------------------------------>
+
+
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="US-ASCII"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
@@ -17,16 +46,18 @@
 
 </head>
 <body>
-	<s:form method="post" cssClass="cmxform form container" namespace='/enquiry' id="enquiryForm" novalidate="novalidate">  
-		<section class="imageContainer">
-			<div class="row">
-				<img class="seven columns" src="<s:url value='/resources/images/logo.png'/>"/>
-				<div class="headerText nine columns">
-					<s:text name="formTitle" />
-				</div>
-			</div>
-		</section>
+	<s:form id="enquiryForm" cssClass="cmxform form container" namespace='/enquiry' method="post" novalidate="novalidate">  
+<!-- ---------------------------------------------------------------------------------------------- -->
+<!-- Header of the form --------------------------------------------------------------------------- -->
+<!-- ---------------------------------------------------------------------------------------------- -->	
+		<%@include file="includes/formHeader.jsp" %>
 		
+		
+		
+<!-- ---------------------------------------------------------------------------------------------- -->
+<!-- Content of the form -------------------------------------------------------------------------- -->
+<!-- ---------------------------------------------------------------------------------------------- -->		
+	
 		<%@include file="includes/formStatus.jsp" %>
 		<%@include file="includes/summary.jsp" %>
 		<%@include file="includes/personalDetails.jsp" %>
@@ -37,20 +68,26 @@
 		<%@include file="includes/issues.jsp" %>
 		<%@include file="includes/linkedEnquiries.jsp" %>
 		
-		
-		<div class="clear"></div>
+<!-- ---------------------------------------------------------------------------------------------- -->
+<!-- iterator - footer for enquiry form ----------------------------------------------------------- -->
+<!-- ---------------------------------------------------------------------------------------------- -->
+		<!-- 
+		Note: each form will have its own footer settings so it is better to NOT to separate and
+		create its own include file and referenced it here.
+		 -->			
+		<s:div cssClass="clear"></s:div>
 		<footer>
-			<div class="row">
+			<s:div cssClass="row">
 				<section class="six columns">
-					<input type="button" value="Cancel" class="three columns alpha" />
-					<input type="button" value="New Enquiry" class="three columns omega"/>
+					<input type="button" class="three columns alpha" value="Cancel"/>
+					<input type="button" class="three columns omega" value="New Enquiry" />
 				</section>
 				<section class="six columns"><p></p></section>
 				<section class="four columns omega">
 					<input type="button" value="Create Case" class="two columns alpha"/>
 					<s:submit type="submit" cssClass="two columns omega" value="Save" />
 				</section>
-			</div>
+			</s:div>
 		</footer>
 	</s:form>	
 	<script>
