@@ -80,7 +80,7 @@
    <one-to-many class="uow.ia.bean.Addresses"/>
   </set>
   
-  <set fetch="select" inverse="true" name="enquiriesSet" sort="unsorted" table="Enquiries" order-by="id">
+  <set fetch="select" inverse="true" name="enquiriesSet" table="Enquiries" order-by="id" cascade="save-update, delete, delete, delete-orphan">
   	<key>
   		<column name="contact_id" not-null="true"/>
   	</key>

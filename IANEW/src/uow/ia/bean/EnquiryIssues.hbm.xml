@@ -8,12 +8,6 @@
             <column name="id" />
             <generator class="identity" />
         </id>
-        <!-- <property name="enquiryId" type="java.lang.Integer">
-            <column name="enquiry_id" />
-        </property> -->
-        <!-- <property name="issueId" type="java.lang.Integer">
-            <column name="issue_id" />
-        </property> -->
         <property name="comment" type="string">
             <column name="comment" />
         </property>
