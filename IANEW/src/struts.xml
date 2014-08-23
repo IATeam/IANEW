@@ -36,8 +36,17 @@
     <!-- Case Forms -->
     <package name="case" namespace="/case" extends="struts-default">
     	
-    	<action name="*" class="uow.ia.action.CaseAction">
-    		<result name="success">/forms/{1}.jsp</result>
+    	<action name="getCase" class="uow.ia.action.CaseAction" method="getExistingCase">
+    		<result name="success">/forms/case.jsp</result>
+    	</action>
+    	<action name="newCase" class="uow.ia.action.CaseAction" method="newCase">
+    		<result name="success">/forms/case.jsp</result>
+    	</action>
+    	<action name="caseList" class="uow.ia.action.CaseAction" method="caseList">
+    		<result name="success">/forms/caseList.jsp</result>
+    	</action>
+    	<action name="updateCaseList" class="uow.ia.action.CaseAction" method="updateCaseList">
+    		<result name="success">/forms/caseList.jsp</result>
     	</action>
     </package>
     
@@ -48,12 +57,12 @@
     	</action>
     </package>
      
-    <package name="example" namespace="/" extends="struts-default">
+    <!--  <package name="example" namespace="/" extends="struts-default">
        <action name="*" class="uow.ia.action.Listing">
            <result name="success">Listing.jsp</result>
            <result name="redirect" type="redirect">${redirectUrl}</result>
        </action>
-    </package>
+    </package>-->
     
       <include file="login.xml"/>
     
