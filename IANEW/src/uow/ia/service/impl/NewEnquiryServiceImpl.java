@@ -123,5 +123,49 @@ public class NewEnquiryServiceImpl implements
 	public Enquiries getEnquiry(int id) {
 		return enquiriesDao.get(Enquiries.class, id);
 	}
+	
+	@Override
+	public boolean saveEnquiry(Enquiries enquiry) {
+		try {
+			enquiriesDao.save(enquiry);
+			return true;
+		} catch (Exception e) {
+			System.out.println(e);
+			return false;
+		}
+	}
+
+	@Override
+	public boolean deleteEnquiry(Enquiries enquiry) {
+		try {
+			enquiriesDao.delete(enquiry);
+			return true;
+		} catch (Exception e) {
+			System.out.println(e);
+			return false;
+		}
+	}
+
+	@Override
+	public boolean updateEnquiry(Enquiries enquiry) {
+		try {
+			enquiriesDao.update(enquiry);
+			return true;
+		} catch (Exception e) {
+			System.out.println(e);
+			return false;
+		}
+	}
+
+	@Override
+	public boolean saveOrUpdateEnquiry(Enquiries enquiry) {
+		try {
+			enquiriesDao.saveOrUpdate(enquiry);
+			return true;
+		} catch (Exception e) {
+			System.out.println(e);
+			return false;
+		}
+	}
 
 }
