@@ -34,7 +34,7 @@ public class Contacts implements java.io.Serializable {
 	private StatusTypes status;
 	private Set<Addresses> addressesSet;
 	private Set<ClientDisabilities> disabilitiesSet;
-	private Set<Enquiries> enquiriesSet;
+	private Set<Enquiries> enquiriesSet = new HashSet<Enquiries>();
 	private Set<IndividualCases> individualCasesSet;
 	private Set<ContactEmployments> employmentsSet;
 	private Set<PlanDevelopers> planDevelopersSet;
