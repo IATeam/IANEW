@@ -18,7 +18,7 @@
 	<fieldset>
 		<div class="row">
 		<!-- to do -->
-			<div class="four columns"><s:select list="accomodationSelectList.{accommodationName}" id="accommodationType" value="theAccommodation" name="theAccommodation" headerKey="-1" headerValue="Select an Accomodation Type"/></div>
+			<div class="four columns"><s:select list="accomodationSelectList.{accommodationName}" id="accommodationType" name="theAccommodation" headerKey="-1" headerValue="Select an Accomodation Type"/></div>
 			
 			<div class="textarea twelve columns">
 				<s:label for="accomodationComments" value="Comments:" />

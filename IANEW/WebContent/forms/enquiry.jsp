@@ -35,12 +35,11 @@
 <html>
 <head>
 <title>Enquiry Form</title>
-<link href="<s:url value='/styles/form.css' encode='false' includeParams='none'/>" rel="stylesheet" type="text/css"
+<link href="<s:url value='/styles/ianew.form.css' encode='false' includeParams='none'/>" rel="stylesheet" type="text/css"
 	      media="all"/>
-<link href="<s:url value='/styles/skeleton.css' encode='false' includeParams='none'/>" rel="stylesheet" type="text/css"
+<link href="<s:url value='/styles/import/skeleton.css' encode='false' includeParams='none'/>" rel="stylesheet" type="text/css"
 	      media="all"/>
 <script src="<s:url value='/js/validation/enquiryValidation.js' encode='false' includeParams='none'/>"></script>
-
 
 <s:head/>
 
@@ -85,12 +84,21 @@
 				<section class="six columns"><p></p></section>
 				<section class="four columns omega">
 					<input type="button" value="Create Case" class="two columns alpha"/>
-					<s:submit type="submit" cssClass="two columns omega" value="Save" />
+					<s:submit type="submit" cssClass="two columns omega" value="Save"/>
 				</section>
 			</s:div>
 		</footer>
 	</s:form>	
 	<script>
+	$(function(){
+		alert("loaded")
+	});
+	if($("#formTitle").text() === "Existing Enquiry"){
+		alert("existing")
+		$("#enquiryForm").find("input").attr("readonly", "true");
+		$("#enquiryForm").find('textarea').attr("readonly", "true");
+		
+	}
 	
 	</script>
 </body>

@@ -1,5 +1,17 @@
 @CHARSET "UTF-8";
 
+/*----------------------------------------------------------------------------------------------
+	Created By: Quang Nhan
+	Created Date: 29/07/2014
+	==============================================
+	Updates:
+		21/08/2014 -	Quang Nhan
+						Changed primary background
+	==============================================	
+	Description: Stylesheet used for the forms
+------------------------------------------------------------------------------------------------*/
+
+
 .form{
 	background: white;
 	text-align: left;
@@ -208,7 +220,7 @@ h3 {
 }
 
 .primary{
-	background: #7bb1d3;
+	background: #f9f8ec;
 }
 
 .form input[type=button], .form input[type=submit]{

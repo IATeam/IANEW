@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<!-- 
+	Created By: Quang Nhan
+	Created Date: 22/08/2014
+	==============================================
+	Updates:
+		
+	==============================================	
+	Description: configuration xml file for Admin tasks
+
+-->
+
+<struts>
+ 	<package name="admin" namespace="/admin" extends="struts-default">
+    	<action name="getDisabilityTypeForm" class="uow.ia.action.AdminAction" method="getDisabilityTypeForm">
+    		<result name="success">/admin/newDisabilityType.jsp</result>
+    	</action>
+   	</package>
+</struts>

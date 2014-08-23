@@ -137,7 +137,7 @@
 						</s:div>
 					</section>
 					<section class="four columns alpha">
-						<sj:submit id="open" targets="formDiv" cssClass="two columns alpha" value="Open Enquiry"/>
+						<sj:submit id="open" targets="formDiv" cssClass="two columns alpha" value="Open Enquiry" onclick="openExistingEnquiry()"/>
 						<sj:a id="newEButton" targets="formDiv"  href="%{urlENew}" ><input type="button" class="two columns omega" value="New Enquiry"/></sj:a>
 					</section>
 				</s:div>

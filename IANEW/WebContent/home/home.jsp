@@ -38,7 +38,7 @@
 	<script src="<s:url value='/js/ianew.radioActions.js' encode='false' includeParams='none'/>"></script>
 	<script src="<s:url value='/js/jquery/jquery.smartmenus.js' encode='false' includeParams='none'/>"></script>
 	<script src="<s:url value='/js/jquery/jquery.validate.js' encode='false' includeParams='none'/>"></script>
-	
+
 	<title>Illawarra Advocacy: Home</title>
 
 </head>
@@ -163,11 +163,12 @@
 		
 		<s:div id="formDiv" />
 		<s:div id="helpPanel"/>
-		<s:div id="slidingPanel" style="background: yellow; position: fixed; top: 20%; box-shadow: 3px 3px 5px grey; height: 60%; overflow: scroll;">slide</s:div>
-	</div>
+		
 	</div>
 	
+	</div>
 	
+	<s:div id="slidingPanel" style="background: yellow; position: fixed; top: 20%; box-shadow: 3px 3px 5px grey; max-width: 20%">slide</s:div>
 	
 <!-- ----------------------------------------------------------------------------------------------- -->
 <!-- Home Page Footer ------------------------------------------------------------------------------ -->
@@ -182,26 +183,27 @@
 	
 	<script>
 		$(function(){
-			
+			$("#slidingPanel").hide();
 			$('#main-menu').smartmenus();
 			//$("#slidingPlanel").hide();
-			hideSlidingPanel();
+			//hideSlidingPanel();
 		});
 
 		function hideSlidingPanel(){
-			$("#slidingPanel").animate({
+			$("#slidingPanel").hide('slow');
+			/* $("#slidingPanel").animate({
 				left: -$("#slidingPanel").width()
 		
-			}, 1000);
+			}, 1000); */
 		}
 
 		function showSlidingPanel(){
-			
-			$("#slidingPanel").animate({
+			$("#slidingPanel").show('slow');
+			/* $("#slidingPanel").animate({
 				
 				left: 0
 		
-			}, 1000);
+			}, 1000); */
 		}
 	</script>
 	<%-- <script>

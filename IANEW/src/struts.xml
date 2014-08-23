@@ -56,5 +56,5 @@
     </package>
     
       <include file="login.xml"/>
-    
+     <include file="admin.xml" />
 </struts>

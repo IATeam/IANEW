@@ -14,7 +14,7 @@
 	<s:div cssClass="row">
 		<img class="seven columns" src="<s:url value='/resources/images/logo.png'/>"/>
 		<s:div cssClass="headerText nine columns">
-			<s:text name="formTitle" />
+			<s:div id="formTitle"><s:text name="formTitle" /></s:div>
 		</s:div>
 	</s:div>
 </section>
