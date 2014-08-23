@@ -4,6 +4,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 
+import uow.ia.service.AdminService;
 import uow.ia.service.NewCaseService;
 import uow.ia.service.NewEnquiryService;
 
@@ -18,6 +19,8 @@ public class BaseAction extends ActionSupport{
 	@Resource
 	protected NewCaseService caseServices;
 
+	@Resource
+	protected AdminService adminService;
 
 	public NewCaseService getCaseServices() {
 		return caseServices;

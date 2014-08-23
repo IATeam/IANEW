@@ -29,6 +29,11 @@ public interface NewCaseService {
 	
 	public List<AccommodationTypes> findAccommodationTypes();
 	
+	/** 
+     * retrieve with List<object> of Disability Types from Disability_Types table
+     *  
+     * @return List<Object>
+     */
 	public List<DisabilityTypes> findDisabilityTypes();
 	
 	public List<IssueTypes> findIssueTypes();
