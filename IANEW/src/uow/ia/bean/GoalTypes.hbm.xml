@@ -11,5 +11,13 @@
         <property name="goalTypeName" type="string">
             <column name="goal_type_name" />
         </property>
+        
+        <!-- one to many relationship -->
+        <set fetch="select" inverse="true" lazy="true" name="planGoalsSet" table="Plan_Goals">
+        	<key>
+        		<column name="goal_type_id" not-null="false"/>
+        	</key>
+        	<one-to-many class="uow.ia.bean.PlanGoals"/>
+        </set>
     </class>
 </hibernate-mapping>

@@ -11,5 +11,13 @@
         <property name="priorityName" type="string">
             <column name="priority_name" not-null="true" />
         </property>
+        
+        <!-- one to many relationship -->
+        <set fetch="select" inverse="true" name="individualCasesSet" table="Individual_Cases">
+        	<key>
+        		<column name="priority_id" not-null="false"/>
+        	</key>
+        	<one-to-many class="uow.ia.bean.IndividualCases"/>
+        </set>
     </class>
 </hibernate-mapping>

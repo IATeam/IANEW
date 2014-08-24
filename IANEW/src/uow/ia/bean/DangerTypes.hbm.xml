@@ -24,7 +24,7 @@
         <!--  One to many relationship  -->
   		<set fetch="select" inverse="true" name="contactsSet" sort="unsorted" table="Contacts">
 		<key>
-			<column name="danger_flag_id" not-null="true"/>
+			<column name="danger_flag_id" not-null="false"/>
 		</key>
 		<one-to-many class="uow.ia.bean.Contacts"/>
 		</set>

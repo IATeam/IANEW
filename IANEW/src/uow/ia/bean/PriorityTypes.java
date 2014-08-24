@@ -1,5 +1,8 @@
 package uow.ia.bean;
 
+import java.util.HashSet;
+import java.util.Set;
+
 // Generated Aug 9, 2014 1:06:20 PM by Hibernate Tools 4.0.0
 
 /**
@@ -9,28 +12,60 @@ public class PriorityTypes implements java.io.Serializable {
 
 	private Integer id;
 	private String priorityName;
-
+	private Set<IndividualCases> individualCasesSet = new HashSet<IndividualCases>();
+	/**
+	 * 
+	 */
 	public PriorityTypes() {
+		// TODO Auto-generated constructor stub
 	}
-
-	public PriorityTypes(String priorityName) {
+	/**
+	 * @param id
+	 * @param priorityName
+	 * @param individualCasesSet
+	 */
+	public PriorityTypes(Integer id, String priorityName,
+			Set<IndividualCases> individualCasesSet) {
+		this.id = id;
 		this.priorityName = priorityName;
+		this.individualCasesSet = individualCasesSet;
 	}
-
+	/**
+	 * @return the id
+	 */
 	public Integer getId() {
 		return this.id;
 	}
-
+	/**
+	 * @param id the id to set
+	 */
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
+	/**
+	 * @return the priorityName
+	 */
 	public String getPriorityName() {
 		return this.priorityName;
 	}
-
+	/**
+	 * @param priorityName the priorityName to set
+	 */
 	public void setPriorityName(String priorityName) {
 		this.priorityName = priorityName;
 	}
+	/**
+	 * @return the individualCasesSet
+	 */
+	public Set<IndividualCases> getIndividualCasesSet() {
+		return this.individualCasesSet;
+	}
+	/**
+	 * @param individualCasesSet the individualCasesSet to set
+	 */
+	public void setIndividualCasesSet(Set<IndividualCases> individualCasesSet) {
+		this.individualCasesSet = individualCasesSet;
+	}
+
 
 }

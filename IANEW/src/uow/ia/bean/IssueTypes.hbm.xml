@@ -16,11 +16,11 @@
         </property>
         
         <!-- Many-to-many relationship -->
-        <set name="enquiriesSet" table="Enquiry_Issues" inverse="true" fetch="select">
+        <set name="enquiryIssuesSet" table="Enquiry_Issues" inverse="true" fetch="select">
         	<key column="issue_id"/>
         	<one-to-many class="uow.ia.bean.EnquiryIssues"/>
         </set>
-        <set name="individualCasesSet" table="Case_Issues" inverse="true" fetch="select">
+        <set name="caseIssuesSet" table="Case_Issues" inverse="true" fetch="select">
         	<key column="issue_type_id"/>
         	<one-to-many class="uow.ia.bean.CaseIssues"/>
         </set>

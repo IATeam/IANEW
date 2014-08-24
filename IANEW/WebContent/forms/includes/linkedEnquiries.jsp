@@ -4,6 +4,7 @@
 	==============================================
 	Updates:
 		10/08/2014 - 	Added iteration by Quang Nhan
+<<<<<<< HEAD
 		12/08/2014 - 	Quang Nhan
 						Migrate code into new project setup
 		14/08/2014 	- 	Quang Nhan
@@ -13,6 +14,14 @@
 		17/08/2014 -	Changed Date format display to dd MMM yyyy
 	==============================================	
 	Description: Ajsp page that displays linked enquiries.
+=======
+		14/08/2014 	- 	Connect and retrieve data called by the action class and added 
+						pagination functionality by Quang Nhan
+		16/08/2014 -	Tested s:url workings see comment below. 
+						Moved javascript code to list.js file by Quang Nhan
+	==============================================	
+	Description: A jsp page that displays a list of enquiries
+>>>>>>> refs/remotes/origin/master
 				Notes: the enquiry table has a field called parent enquiry
 				when the user selects and add an enquiry, the query should
 				check if that linked enquiry has a parent enquiry. If it does

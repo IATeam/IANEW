@@ -14,5 +14,13 @@
         <property name="employmentDescription" type="string">
             <column name="employment_description" />
         </property>
+        
+        <!-- One to many relationship -->
+        <set fetch="select" inverse="true" name="contactEmploymentsSet" sort="unsorted" table="Contact_Employments">
+        	<key>
+        		<column name="employment_type_id" not-null="true"/>
+        	</key>
+        	<one-to-many class="uow.ia.bean.ContactEmployments"/>
+        </set>
     </class>
 </hibernate-mapping>

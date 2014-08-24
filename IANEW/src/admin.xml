@@ -17,5 +17,8 @@
     	<action name="getDisabilityTypeForm" class="uow.ia.action.AdminAction" method="getDisabilityTypeForm">
     		<result name="success">/admin/newDisabilityType.jsp</result>
     	</action>
+    	<action name="saveNewDisabilityType" class="uow.ia.action.AdminAction" method="saveNewDisabilityType">
+    		<result name="success">/admin/newDisabilityType.jsp</result>
+    	</action>
    	</package>
 </struts>

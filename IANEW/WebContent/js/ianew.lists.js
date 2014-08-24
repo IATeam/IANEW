@@ -83,6 +83,7 @@ function updateStorage(item){
 $(".toggled").hide();
 
 $('#new').click(function(){
+
 	//alert($('#enquiryID').val())
 });
 
@@ -97,7 +98,9 @@ function bandSelected(selectedDiv){
 	$("#hiddenid").val($(selectedDiv).find('.id').text());
 	//alert($(selectedDiv).find('.id').text());
 	//alert($("#hiddenid").val());
+
 }
+
 function deselectAll(){
 	$('.list').children().removeClass("listSelected");
 	if($('.toggled').is(':visible')){

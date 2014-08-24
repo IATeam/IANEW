@@ -12,8 +12,8 @@ public class IndividualCasesHistories implements java.io.Serializable {
 	private Integer id;
 	private Date timestamp;
 	private String action;
-	private int changeOrder;
-	private int caseId;
+	private Integer changeOrder;
+	private Integer caseId;
 	private Integer clientId;
 	private Integer advocateId;
 	private Integer caseStatusId;
@@ -22,12 +22,13 @@ public class IndividualCasesHistories implements java.io.Serializable {
 	private Integer serviceProviderId;
 	private String referredTo;
 	private Integer oldCaseId;
-	private int createdUserId;
+	private Integer createdUserId;
+	private Integer relatedEnquiryId;
 
 	public IndividualCasesHistories() {
 	}
 
-	public IndividualCasesHistories(String action, int changeOrder, int caseId,
+	public IndividualCasesHistories(String action, Integer changeOrder, Integer caseId,
 			int createdUserId) {
 		this.action = action;
 		this.changeOrder = changeOrder;
@@ -35,10 +36,10 @@ public class IndividualCasesHistories implements java.io.Serializable {
 		this.createdUserId = createdUserId;
 	}
 
-	public IndividualCasesHistories(String action, int changeOrder, int caseId,
+	public IndividualCasesHistories(String action, Integer changeOrder, Integer caseId,
 			Integer clientId, Integer advocateId, Integer caseStatusId,
 			String description, Integer priorityId, Integer serviceProviderId,
-			String referredTo, Integer oldCaseId, int createdUserId) {
+			String referredTo, Integer oldCaseId, Integer createdUserId) {
 		this.action = action;
 		this.changeOrder = changeOrder;
 		this.caseId = caseId;
@@ -77,19 +78,19 @@ public class IndividualCasesHistories implements java.io.Serializable {
 		this.action = action;
 	}
 
-	public int getChangeOrder() {
+	public Integer getChangeOrder() {
 		return this.changeOrder;
 	}
 
-	public void setChangeOrder(int changeOrder) {
+	public void setChangeOrder(Integer changeOrder) {
 		this.changeOrder = changeOrder;
 	}
 
-	public int getCaseId() {
+	public Integer getCaseId() {
 		return this.caseId;
 	}
 
-	public void setCaseId(int caseId) {
+	public void setCaseId(Integer caseId) {
 		this.caseId = caseId;
 	}
 
@@ -157,12 +158,20 @@ public class IndividualCasesHistories implements java.io.Serializable {
 		this.oldCaseId = oldCaseId;
 	}
 
-	public int getCreatedUserId() {
+	public Integer getCreatedUserId() {
 		return this.createdUserId;
 	}
 
-	public void setCreatedUserId(int createdUserId) {
+	public void setCreatedUserId(Integer createdUserId) {
 		this.createdUserId = createdUserId;
+	}
+
+	public Integer getRelatedEnquiryId() {
+		return this.relatedEnquiryId;
+	}
+
+	public void setRelatedEnquiryId(Integer relatedEnquiryId) {
+		this.relatedEnquiryId = relatedEnquiryId;
 	}
 
 }

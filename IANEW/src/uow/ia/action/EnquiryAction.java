@@ -183,7 +183,8 @@ public class EnquiryAction extends BaseAction{
 		setTheGender(contact.getGenderType().getGenderName());
 		setTheDanger(contact.getDangerType().getDangerName());
 		setTheTitle(contact.getTitleType().getName());
-		setTheEmployment(contact.getEmploymentType().getEmploymentName());
+		//setTheEmployment(contact.getEmploymentsTypeSet());
+		setTheEmployment("Kim change databse need chagne code for this part");
 		setTheCulturalBackground(contact.getCulturalBackground().getCulturalBackgroundName());
 		setTheAccommodation(contact.getAccommodation().getAccommodationName());
 		//setTheEnquiryStatus();
@@ -434,7 +435,6 @@ public class EnquiryAction extends BaseAction{
 	public List<String> getEnquiryStatusSelectList() {
 		return enquiryStatusSelectList;
 	}
-
 	/**
 	 * setter for enquiry status select list
 	 * @param enquiryStatusSelectList
@@ -457,6 +457,7 @@ public class EnquiryAction extends BaseAction{
 	public void setTheEnquiryStatus(String theEnquiryStatus) {
 		this.theEnquiryStatus = theEnquiryStatus;
 	}
+	
 	
 	public Set<Enquiries> getLinkedEnquiriesSet() {
 		return linkedEnquiriesSet;

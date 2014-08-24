@@ -9,7 +9,7 @@
 </head>
 <body>
 	<h3>New Disability Type</h3>
-	<s:form >
+	<s:form action="saveNewDisabilityType" method="saveNewDisabiltyType">
 		<div>
 			<s:label for="disabilityName" value="Name: "/>
 			<s:textfield id="disabilityName" name="disabilityName" />
@@ -17,7 +17,8 @@
 			<s:textarea id="disabilityDescription" name ="disabilityDescription" />
 		</div>
 		<input type="button" value="Cancel" id="btnCancel"/>
-		<s:submit />
+		<input type="button" value="edit" id="btnEdit"/>
+		<s:submit value="Save"/>
 	</s:form>
 	<script>
 	$("#btnCancel").click(function(){

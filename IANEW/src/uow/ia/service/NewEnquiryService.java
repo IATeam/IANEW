@@ -47,4 +47,12 @@ public interface NewEnquiryService {
 	public Long countEnquiries();
 
 	public Enquiries getEnquiry(int id);
+	
+	public boolean saveEnquiry(Enquiries e);
+	
+	public boolean deleteEnquiry(Enquiries e);
+	
+	public boolean updateEnquiry(Enquiries e);
+	
+	public boolean saveOrUpdateEnquiry(Enquiries e);
 }

@@ -13,7 +13,7 @@ public class EnquiryTypes implements java.io.Serializable {
 	private Integer id;
 	private String enquiryTypeName;
 	private String enquiryTypeDescription;
-	private Set<EnquiryTypes> enquiriesSet = new HashSet<EnquiryTypes>();
+	private Set<Enquiries> enquiriesSet = new HashSet<Enquiries>();
 
 	
 
@@ -24,6 +24,7 @@ public class EnquiryTypes implements java.io.Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
+
 	/**
 	 * @param id
 	 * @param enquiryTypeName
@@ -31,12 +32,13 @@ public class EnquiryTypes implements java.io.Serializable {
 	 * @param enquiriesSet
 	 */
 	public EnquiryTypes(Integer id, String enquiryTypeName,
-			String enquiryTypeDescription, Set<EnquiryTypes> enquiriesSet) {
+			String enquiryTypeDescription, Set<Enquiries> enquiriesSet) {
 		this.id = id;
 		this.enquiryTypeName = enquiryTypeName;
 		this.enquiryTypeDescription = enquiryTypeDescription;
 		this.enquiriesSet = enquiriesSet;
 	}
+
 
 	/**
 	 * @return the id
@@ -80,17 +82,19 @@ public class EnquiryTypes implements java.io.Serializable {
 		this.enquiryTypeDescription = enquiryTypeDescription;
 	}
 
+
 	/**
 	 * @return the enquiriesSet
 	 */
-	public Set<EnquiryTypes> getEnquiriesSet() {
+	public Set<Enquiries> getEnquiriesSet() {
 		return this.enquiriesSet;
 	}
+
 
 	/**
 	 * @param enquiriesSet the enquiriesSet to set
 	 */
-	public void setEnquiriesSet(Set<EnquiryTypes> enquiriesSet) {
+	public void setEnquiriesSet(Set<Enquiries> enquiriesSet) {
 		this.enquiriesSet = enquiriesSet;
 	}
 

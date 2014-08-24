@@ -16,8 +16,8 @@
         </property>
         
         <!-- Many-to-many relationship -->
-        <set name="contactsSet" table="Client_Disabilities" inverse="true" fetch="select">
-        	<key column="disability_id"/>
+        <set name="clientDisabilitiesSet" table="Client_Disabilities" inverse="true" fetch="select">
+        	<key column="disability_id" not-null="true"/>
         	<one-to-many class="uow.ia.bean.ClientDisabilities"/>
         </set>
     </class>

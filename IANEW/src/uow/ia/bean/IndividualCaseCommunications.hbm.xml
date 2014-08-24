@@ -8,14 +8,8 @@
             <column name="id" />
             <generator class="identity" />
         </id>
-        <property name="caseId" type="java.lang.Integer">
-            <column name="case_id" />
-        </property>
         <property name="communicationDate" type="date">
             <column name="communication_date" length="10" />
-        </property>
-        <property name="communicationTypeId" type="java.lang.Integer">
-            <column name="communication_type_id" />
         </property>
         <property name="description" type="string">
             <column name="description" />
@@ -32,5 +26,13 @@
         <property name="importantFlag" type="string">
             <column name="important_flag" />
         </property>
+        
+        <!-- Many to one relationship -->
+        <many-to-one class="uow.ia.bean.IndividualCases" name="individualCase">
+        	<column name="case_id" not-null="false"/>
+        </many-to-one>
+        <many-to-one class="uow.ia.bean.CommunicationTypes" name="communicationType">
+        	<column name="communication_type_id" not-null="false"/>
+        </many-to-one>
     </class>
 </hibernate-mapping>

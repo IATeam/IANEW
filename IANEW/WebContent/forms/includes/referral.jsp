@@ -7,7 +7,11 @@
 		14/08/2014 	- 	Connect and retrieve data called by the action class and added 
 						pagination functionality by Quang Nhan
 		16/08/2014 -	Quang Nhan
+<<<<<<< HEAD
 						Changed s:s:div to s:s:s:div and related class to cssClass
+=======
+						Changed s:div to s:s:div and related class to cssClass
+>>>>>>> refs/remotes/origin/master
 						reorder syntax to be consistent throughout the jsps
 	==============================================	
 	Description: A component of the contact that is to be displayed on both enquiry and case forms that 

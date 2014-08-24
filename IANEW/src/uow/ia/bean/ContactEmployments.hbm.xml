@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 15, 2014 11:43:19 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="uow.ia.bean.ContactEmployments" table="Contact_Employments">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <property name="workphone" type="java.lang.String">
+            <column name="workphone" />
+        </property>
+        <property name="comments" type="java.lang.String">
+            <column name="comments" />
+        </property>
+        <property name="createdUserId" type="java.lang.Integer">
+            <column name="created_user_id" />
+        </property>
+        <property name="createdDateTime" type="java.util.Date">
+            <column name="created_date_time" />
+        </property>
+        <property name="updatedUserId" type="java.lang.Integer">
+            <column name="updated_user_id" />
+        </property>
+        <property name="updatedDateTime" type="java.util.Date">
+            <column name="updated_date_time" />
+        </property>
+        
+        <!--  many to one relationship -->
+        <many-to-one name="contact" class="uow.ia.bean.Contacts">
+        	<column name="contact_id" not-null="true"/>
+        </many-to-one>
+        <many-to-one name="employmentType" class="uow.ia.bean.EmploymentTypes">
+        	<column name="employment_type_id" not-null="true"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

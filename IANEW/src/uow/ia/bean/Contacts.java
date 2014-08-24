@@ -12,45 +12,42 @@ import java.util.Set;
 public class Contacts implements java.io.Serializable {
 
 	private Integer id;
-//	private Integer titleId;
 	private TitleTypes titleType;
 	private String firstname;
 	private String lastname;
 	private String othername;
-//	private Integer genderId;
 	private GenderTypes genderType;
-//	private Integer contactTypeId;
 	private ContactTypes contactType;
-	private String homephone;
-	private String workphone;
 	private String mobilephone;
 	private String email;
-//	private Integer accommodationId;
 	private AccommodationTypes accommodation;
 	private String accommodationComment;
-//	private Integer employmentId;
-	private EmploymentTypes employmentType;
-	private String employmentComment;
-//	private Integer culturalBackgroundId;
 	private CulturalBackgroundTypes culturalBackground;
 	private String culturalBackgroundComment;
-//	private Integer dangerFlagId;
 	private DangerTypes dangerType;
 	private String identification;
 	private Date dob;
+	private Integer createdUserId;
+	private Date createdDateTime;
+	private Integer updatedUserId;
+	private Date updatedDateTime;
+	private StatusTypes status;
 	private Set<Addresses> addressesSet;
 	private Set<ClientDisabilities> disabilitiesSet;
-	private Set<Enquiries> enquiriesSet;
-//	private List<IndividualCases> individualCasesList;
+	private Set<Enquiries> enquiriesSet = new HashSet<Enquiries>();
 	private Set<IndividualCases> individualCasesSet;
-
+	private Set<ContactEmployments> employmentsSet;
+	private Set<PlanDevelopers> planDevelopersSet;
+	private Set<IndividualCases> advocateCasesSet;
+	
+	
 	/**
 	 * 
 	 */
 	public Contacts() {
 	}
-	
-	
+
+
 	/**
 	 * @param id
 	 * @param titleType
@@ -59,33 +56,43 @@ public class Contacts implements java.io.Serializable {
 	 * @param othername
 	 * @param genderType
 	 * @param contactType
-	 * @param homephone
-	 * @param workphone
 	 * @param mobilephone
 	 * @param email
 	 * @param accommodation
 	 * @param accommodationComment
-	 * @param employmentType
-	 * @param employmentComment
 	 * @param culturalBackground
 	 * @param culturalBackgroundComment
 	 * @param dangerType
 	 * @param identification
 	 * @param dob
+	 * @param createdUserId
+	 * @param createdDateTime
+	 * @param updatedUserId
+	 * @param updatedDateTime
+	 * @param status
 	 * @param addressesSet
 	 * @param disabilitiesSet
 	 * @param enquiriesSet
+	 * @param individualCasesSet
+	 * @param employmentsSet
+	 * @param planDevelopersSet
+	 * @param advocateCasesSet
 	 */
 	public Contacts(Integer id, TitleTypes titleType, String firstname,
 			String lastname, String othername, GenderTypes genderType,
-			ContactTypes contactType, String homephone, String workphone,
-			String mobilephone, String email, AccommodationTypes accommodation,
-			String accommodationComment, EmploymentTypes employmentType,
-			String employmentComment,
+			ContactTypes contactType, String mobilephone, String email,
+			AccommodationTypes accommodation, String accommodationComment,
 			CulturalBackgroundTypes culturalBackground,
 			String culturalBackgroundComment, DangerTypes dangerType,
-			String identification, Date dob, Set<Addresses> addressesSet,
-			Set<ClientDisabilities> disabilitiesSet, Set<Enquiries> enquiriesSet) {
+			String identification, Date dob, Integer createdUserId,
+			Date createdDateTime, Integer updatedUserId, Date updatedDateTime,
+			StatusTypes status, Set<Addresses> addressesSet,
+			Set<ClientDisabilities> disabilitiesSet,
+			Set<Enquiries> enquiriesSet,
+			Set<IndividualCases> individualCasesSet,
+			Set<ContactEmployments> employmentsSet,
+			Set<PlanDevelopers> planDevelopersSet,
+			Set<IndividualCases> advocateCasesSet) {
 		this.id = id;
 		this.titleType = titleType;
 		this.firstname = firstname;
@@ -93,22 +100,27 @@ public class Contacts implements java.io.Serializable {
 		this.othername = othername;
 		this.genderType = genderType;
 		this.contactType = contactType;
-		this.homephone = homephone;
-		this.workphone = workphone;
 		this.mobilephone = mobilephone;
 		this.email = email;
 		this.accommodation = accommodation;
 		this.accommodationComment = accommodationComment;
-		this.employmentType = employmentType;
-		this.employmentComment = employmentComment;
 		this.culturalBackground = culturalBackground;
 		this.culturalBackgroundComment = culturalBackgroundComment;
 		this.dangerType = dangerType;
 		this.identification = identification;
 		this.dob = dob;
+		this.createdUserId = createdUserId;
+		this.createdDateTime = createdDateTime;
+		this.updatedUserId = updatedUserId;
+		this.updatedDateTime = updatedDateTime;
+		this.status = status;
 		this.addressesSet = addressesSet;
 		this.disabilitiesSet = disabilitiesSet;
 		this.enquiriesSet = enquiriesSet;
+		this.individualCasesSet = individualCasesSet;
+		this.employmentsSet = employmentsSet;
+		this.planDevelopersSet = planDevelopersSet;
+		this.advocateCasesSet = advocateCasesSet;
 	}
 
 
@@ -128,7 +140,7 @@ public class Contacts implements java.io.Serializable {
 	 * @return the titleType
 	 */
 	public TitleTypes getTitleType() {
-		return titleType;
+		return this.titleType;
 	}
 	/**
 	 * @param titleType the titleType to set
@@ -176,7 +188,7 @@ public class Contacts implements java.io.Serializable {
 	 * @return the genderType
 	 */
 	public GenderTypes getGenderType() {
-		return genderType;
+		return this.genderType;
 	}
 	/**
 	 * @param genderType the genderType to set
@@ -188,7 +200,7 @@ public class Contacts implements java.io.Serializable {
 	 * @return the contactType
 	 */
 	public ContactTypes getContactType() {
-		return contactType;
+		return this.contactType;
 	}
 	/**
 	 * @param contactType the contactType to set
@@ -196,30 +208,7 @@ public class Contacts implements java.io.Serializable {
 	public void setContactType(ContactTypes contactType) {
 		this.contactType = contactType;
 	}
-	/**
-	 * @return the homephone
-	 */
-	public String getHomephone() {
-		return this.homephone;
-	}
-	/**
-	 * @param homephone the homephone to set
-	 */
-	public void setHomephone(String homephone) {
-		this.homephone = homephone;
-	}
-	/**
-	 * @return the workphone
-	 */
-	public String getWorkphone() {
-		return this.workphone;
-	}
-	/**
-	 * @param workphone the workphone to set
-	 */
-	public void setWorkphone(String workphone) {
-		this.workphone = workphone;
-	}
+	
 	/**
 	 * @return the mobilephone
 	 */
@@ -248,7 +237,7 @@ public class Contacts implements java.io.Serializable {
 	 * @return the accommodation
 	 */
 	public AccommodationTypes getAccommodation() {
-		return accommodation;
+		return this.accommodation;
 	}
 	/**
 	 * @param accommodation the accommodation to set
@@ -268,35 +257,12 @@ public class Contacts implements java.io.Serializable {
 	public void setAccommodationComment(String accommodationComment) {
 		this.accommodationComment = accommodationComment;
 	}
-	/**
-	 * @return the employmentType
-	 */
-	public EmploymentTypes getEmploymentType() {
-		return employmentType;
-	}
-	/**
-	 * @param employmentType the employmentType to set
-	 */
-	public void setEmploymentType(EmploymentTypes employmentType) {
-		this.employmentType = employmentType;
-	}
-	/**
-	 * @return the employmentComment
-	 */
-	public String getEmploymentComment() {
-		return employmentComment;
-	}
-	/**
-	 * @param employmentComment the employmentComment to set
-	 */
-	public void setEmploymentComment(String employmentComment) {
-		this.employmentComment = employmentComment;
-	}
+	
 	/**
 	 * @return the culturalBackground
 	 */
 	public CulturalBackgroundTypes getCulturalBackground() {
-		return culturalBackground;
+		return this.culturalBackground;
 	}
 	/**
 	 * @param culturalBackground the culturalBackground to set
@@ -320,7 +286,7 @@ public class Contacts implements java.io.Serializable {
 	 * @return the dangerType
 	 */
 	public DangerTypes getDangerType() {
-		return dangerType;
+		return this.dangerType;
 	}
 	/**
 	 * @param dangerType the dangerType to set
@@ -332,7 +298,7 @@ public class Contacts implements java.io.Serializable {
 	 * @return the identification
 	 */
 	public String getIdentification() {
-		return identification;
+		return this.identification;
 	}
 	/**
 	 * @param identification the identification to set
@@ -353,10 +319,110 @@ public class Contacts implements java.io.Serializable {
 		this.dob = dob;
 	}
 	/**
+	 * @return the createdUserId
+	 */
+	public Integer getCreatedUserId() {
+		return this.createdUserId;
+	}
+
+
+
+
+	/**
+	 * @param createdUserId the createdUserId to set
+	 */
+	public void setCreatedUserId(Integer createdUserId) {
+		this.createdUserId = createdUserId;
+	}
+
+
+
+
+	/**
+	 * @return the createdDateTime
+	 */
+	public Date getCreatedDateTime() {
+		return this.createdDateTime;
+	}
+
+
+
+
+	/**
+	 * @param createdDateTime the createdDateTime to set
+	 */
+	public void setCreatedDateTime(Date createdDateTime) {
+		this.createdDateTime = createdDateTime;
+	}
+
+
+
+
+	/**
+	 * @return the updatedUserId
+	 */
+	public Integer getUpdatedUserId() {
+		return this.updatedUserId;
+	}
+
+
+
+
+	/**
+	 * @param updatedUserId the updatedUserId to set
+	 */
+	public void setUpdatedUserId(Integer updatedUserId) {
+		this.updatedUserId = updatedUserId;
+	}
+
+
+
+
+	/**
+	 * @return the updatedDateTime
+	 */
+	public Date getUpdatedDateTime() {
+		return this.updatedDateTime;
+	}
+
+
+
+
+	/**
+	 * @param updatedDateTime the updatedDateTime to set
+	 */
+	public void setUpdatedDateTime(Date updatedDateTime) {
+		this.updatedDateTime = updatedDateTime;
+	}
+
+
+
+
+	/**
+	 * @return the status
+	 */
+	public StatusTypes getStatus() {
+		return this.status;
+	}
+
+
+
+
+	/**
+	 * @param status the status to set
+	 */
+	public void setStatus(StatusTypes status) {
+		this.status = status;
+	}
+
+
+
+
+	/**
 	 * @return the addressesSet
 	 */
 	public Set<Addresses> getAddressesSet() {
-		return addressesSet;
+		return this.addressesSet;
 	}
 	/**
 	 * @param addressesSet the addressesSet to set
@@ -368,7 +434,7 @@ public class Contacts implements java.io.Serializable {
 	 * @return the disabilitiesSet
 	 */
 	public Set<ClientDisabilities> getDisabilitiesSet() {
-		return disabilitiesSet;
+		return this.disabilitiesSet;
 	}
 	/**
 	 * @param disabilitiesSet the disabilitiesSet to set
@@ -380,7 +446,7 @@ public class Contacts implements java.io.Serializable {
 	 * @return the enquiriesSet
 	 */
 	public Set<Enquiries> getEnquiriesSet() {
-		return enquiriesSet;
+		return this.enquiriesSet;
 	}
 	/**
 	 * @param enquiriesSet the enquiriesSet to set
@@ -393,7 +459,7 @@ public class Contacts implements java.io.Serializable {
 	 * @return the individualCasesList
 	 */
 	public Set<IndividualCases> getIndividualCasesSet() {
-		return individualCasesSet;
+		return this.individualCasesSet;
 	}
 
 
@@ -405,10 +471,126 @@ public class Contacts implements java.io.Serializable {
 	}
 
 	/**
-	 * @auther ZhiYU Yang
-	 * @return String - Contact's full name
-	 * @
+	 * @return the employmentsSet
 	 */
+	public Set<ContactEmployments> getEmploymentsSet() {
+		return this.employmentsSet;
+	}
+
+
+	/**
+	 * @param employmentsSet the employmentsSet to set
+	 */
+	public void setEmploymentsSet(Set<ContactEmployments> employmentsSet) {
+		this.employmentsSet = employmentsSet;
+	}
+
+
+	/**
+	 * @param id
+	 * @param titleType
+	 * @param firstname
+	 * @param lastname
+	 * @param othername
+	 * @param genderType
+	 * @param contactType
+	 * @param mobilephone
+	 * @param email
+	 * @param accommodation
+	 * @param accommodationComment
+	 * @param culturalBackground
+	 * @param culturalBackgroundComment
+	 * @param dangerType
+	 * @param identification
+	 * @param dob
+	 * @param createdUserId
+	 * @param createdDateTime
+	 * @param updatedUserId
+	 * @param updatedDateTime
+	 * @param status
+	 * @param addressesSet
+	 * @param disabilitiesSet
+	 * @param enquiriesSet
+	 * @param individualCasesSet
+	 * @param employmentsSet
+	 * @param planDevelopersSet
+	 */
+	public Contacts(Integer id, TitleTypes titleType, String firstname,
+			String lastname, String othername, GenderTypes genderType,
+			ContactTypes contactType, String mobilephone, String email,
+			AccommodationTypes accommodation, String accommodationComment,
+			CulturalBackgroundTypes culturalBackground,
+			String culturalBackgroundComment, DangerTypes dangerType,
+			String identification, Date dob, Integer createdUserId,
+			Date createdDateTime, Integer updatedUserId, Date updatedDateTime,
+			StatusTypes status, Set<Addresses> addressesSet,
+			Set<ClientDisabilities> disabilitiesSet,
+			Set<Enquiries> enquiriesSet,
+			Set<IndividualCases> individualCasesSet,
+			Set<ContactEmployments> employmentsSet,
+			Set<PlanDevelopers> planDevelopersSet) {
+		this.id = id;
+		this.titleType = titleType;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.othername = othername;
+		this.genderType = genderType;
+		this.contactType = contactType;
+		this.mobilephone = mobilephone;
+		this.email = email;
+		this.accommodation = accommodation;
+		this.accommodationComment = accommodationComment;
+		this.culturalBackground = culturalBackground;
+		this.culturalBackgroundComment = culturalBackgroundComment;
+		this.dangerType = dangerType;
+		this.identification = identification;
+		this.dob = dob;
+		this.createdUserId = createdUserId;
+		this.createdDateTime = createdDateTime;
+		this.updatedUserId = updatedUserId;
+		this.updatedDateTime = updatedDateTime;
+		this.status = status;
+		this.addressesSet = addressesSet;
+		this.disabilitiesSet = disabilitiesSet;
+		this.enquiriesSet = enquiriesSet;
+		this.individualCasesSet = individualCasesSet;
+		this.employmentsSet = employmentsSet;
+		this.planDevelopersSet = planDevelopersSet;
+	}
+
+
+	/**
+	 * @return the planDevelopersSet
+	 */
+	public Set<PlanDevelopers> getPlanDevelopersSet() {
+		return this.planDevelopersSet;
+	}
+
+
+	/**
+	 * @param planDevelopersSet the planDevelopersSet to set
+	 */
+	public void setPlanDevelopersSet(Set<PlanDevelopers> planDevelopersSet) {
+		this.planDevelopersSet = planDevelopersSet;
+	}
+
+
+	/**
+	 * @return the advocateCasesSet
+	 */
+	public Set<IndividualCases> getAdvocateCasesSet() {
+		return this.advocateCasesSet;
+	}
+
+
+	/**
+	 * @param advocateCasesSet the advocateCasesSet to set
+	 */
+	public void setAdvocateCasesSet(Set<IndividualCases> advocateCasesSet) {
+		this.advocateCasesSet = advocateCasesSet;
+	}
+
+
 	public String getFullName() {
 		return this.getFirstname() + " " + this.getLastname();
 	}

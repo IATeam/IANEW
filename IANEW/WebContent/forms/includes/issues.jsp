@@ -6,9 +6,14 @@
 		10/08/2014 - 	Added iteration by Quang Nhan
 		14/08/2014 	- 	Connect and retrieve data called by the action class and added 
 						pagination functionality by Quang Nhan
+<<<<<<< HEAD
 		21/08/2014 -	Quang Nhan
 						Added "Add Issue" button and functionality
 						
+=======
+		16/08/2014 -	Tested s:url workings see comment below. 
+						Moved javascript code to list.js file by Quang Nhan
+>>>>>>> refs/remotes/origin/master
 	==============================================	
 	Description: A jsp page that displays a list of enquiries
 ------------------------------------------------------------------------------------------------>

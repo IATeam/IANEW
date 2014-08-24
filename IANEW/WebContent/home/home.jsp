@@ -57,7 +57,7 @@
 	<s:url id="urlEExisting" namespace="/enquiry" action="getEnquiry" includeContext="false">
 		<s:param name="formTitle">Existing Enquiry</s:param>
 	</s:url>
-	<s:url id="urlCList" namespace="/case" value="caseList">
+	<s:url id="urlCList" namespace="/case" action="caseList">
 		<s:param name="formTitle">Case List</s:param>
 	</s:url>
 	<s:url id="urlCNew" namespace="/case" action="newCase">
