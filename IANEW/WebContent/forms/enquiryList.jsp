@@ -12,6 +12,8 @@
 						Move javascript code to ianew.lists.js and ianew.pagefiltersort.js
 						Changed s:div to s:s:div and related class to cssClass
 						reorder syntax to be consistent throughout the jsps
+		26/08/2014 -	Quang Nhna
+						Added the feature for users to retrieve new enquiry set for pagination. (added changePage())
 	==============================================	
 	Description: A jsp page that displays a list of enquiries. Refer to technical document about
 				using Skeleton design styling for mobile and windows application.
@@ -120,43 +122,20 @@
 						<input type="button" class="three columns" value="Close"  onclick="deselectAll()"/>
 					</section >
 					<section class="eight columns">
-						<s:div cssClass="row">
-							<s:div cssClass="one column alpha"><p></p></s:div>
-							
-							<sj:submit formIds="paginationForm" targets="formDiv" cssClass="one column" onclick="prevPage()" value="prev"/>
-							
-							<s:div cssClass="three columns" style="text-align:center;">
-								page <s:textfield size="1" id="pageTextField" value="%{page}"/> of 
-								<s:div id="totalNumberOfPagesDiv" style="display: inline"> <s:text name="totalNumberOfPages"/> </s:div>
-							</s:div>
-							
-							<sj:submit formIds="paginationForm" targets="formDiv" cssClass="one column" onclick="nextPage()" value="next"/>
-							
-							<s:div cssClass="two column omega"><p></p></s:div>
-							
-						</s:div>
+						<%@include file="/forms/includes/paginationToolSet.jsp" %>
+						
 					</section>
 					<section class="four columns alpha">
-<<<<<<< HEAD
-						<sj:submit id="open" targets="formDiv" cssClass="two columns alpha" value="Open Enquiry"/>
-=======
 						<sj:submit id="open" targets="formDiv" cssClass="two columns alpha" value="Open Enquiry" onclick="openExistingEnquiry()"/>
->>>>>>> refs/remotes/origin/Quang
-						<sj:a id="newEButton" targets="formDiv"  href="%{urlENew}" ><input type="button" class="two columns omega" value="New Enquiry"/></sj:a>
+						<sj:a id="btnNewE" targets="formDiv"  href="%{urlENew}" ><input type="button" class="two columns omega" value="New Enquiry"/></sj:a>
 					</section>
 				</s:div>
 			</s:div>
 		</s:form>
-
+		<h1>Number of Records: </h1><s:text name="numberOfRecords"/>
 <!-- ---------------------------------------------------------------------------------------------- -->
 <!-- Hidden form to pass pagination to action class submitted by the prev and next buttons -------- -->
 <!-- ---------------------------------------------------------------------------------------------- -->
-		
-			<s:form id="paginationForm" method="post" action="%{urlUpdate}" >
-				<s:hidden id="page" name="page" />
-				<s:hidden id="numberOfRecords" name="numberOfRecords" />
-			</s:form> 
-		
-	
+		<%@include file="/forms/includes/paginationForm.jsp" %>
 </body>
 </html>

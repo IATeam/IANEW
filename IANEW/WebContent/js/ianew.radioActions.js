@@ -42,5 +42,5 @@ function showHeader(){
 
 function menuclicked(){
 	radioChecked("radio2")
-	$('input[name="radio"').val([2]);
+	$('input[name="radio"]').val([2]);
 }

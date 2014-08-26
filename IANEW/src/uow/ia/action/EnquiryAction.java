@@ -23,6 +23,7 @@ import uow.ia.bean.Enquiries;
 import uow.ia.bean.EnquiryIssues;
 import uow.ia.bean.GenderTypes;
 import uow.ia.bean.IssueTypes;
+import uow.ia.bean.StatusTypes;
 import uow.ia.bean.TitleTypes;
 
 /** ---------------------------------------------------------------------------------------------
@@ -72,7 +73,7 @@ public class EnquiryAction extends BaseAction{
 	private List<EmploymentTypes> employmentSelectList;					private String theEmployment;
 	private List<DangerTypes> dangerSelectList;							private String theDanger;
 	//Status_Type or criteria control value table 
-	private List<String> enquiryStatusSelectList;						private String theEnquiryStatus;
+	private List<StatusTypes> enquiryStatusSelectList;					private String theEnquiryStatus;
 	
 
 
@@ -109,7 +110,7 @@ public class EnquiryAction extends BaseAction{
 	private String description;
 	
 	
-	//vairiable used to get enqury id;
+	//vairiable used to get enquiry id from enquiry list;
 	int hiddenid;
 	
 	public int getHiddenid() {
@@ -143,8 +144,8 @@ public class EnquiryAction extends BaseAction{
 	
 	
 	/**
-	 * Action Method
-	 * @return
+	 * Action Method to create a new enquiry
+	 * @return String
 	 */
 	public String newEnquiry(){
 		activateLists();
@@ -159,15 +160,17 @@ public class EnquiryAction extends BaseAction{
 	}
 
 	/**
-	 * Action Method
-	 * @return
+	 * Action Method to get an Existing Enquiry Form by id
+	 * @return String
 	 */
 	public String getExistingEnquiry(){
+		//System.out.println(getHiddenid());
 		setEnquiry(services.getEnquiry(getHiddenid()));
 		setContact(enquiry.getContact());
+	
 		
 		setIssueSet(enquiry.getEnquiryIssuesSet());
-		setClientDisabilities(contact.getDisabilitiesSet());
+		setClientDisabilitiesSet(contact.getDisabilitiesSet());
 		setLinkedEnquiriesSet(enquiry.getEnquiriesSet());
 		
 		//to be deleted
@@ -175,8 +178,9 @@ public class EnquiryAction extends BaseAction{
 		for (Enquiries e : linkedEnquiriesSet) {
 			System.out.println("enquiry linked: " + e.getId() + " " + e.getDescription() );
 		}
-		
-		//setCreatedBy(enquiry.getCreatedUserId().get);
+		//LATER
+		//setCreatedBy();
+		//setUpdatedBy(contact.);
 		setCreatedDate(enquiry.getCreatedDateTime());
 		setUpdatedDate(enquiry.getUpdatedDateTime());
 		setId(enquiry.getId());
@@ -190,7 +194,7 @@ public class EnquiryAction extends BaseAction{
 		setTheEmployment("Kim change databse need chagne code for this part");
 		setTheCulturalBackground(contact.getCulturalBackground().getCulturalBackgroundName());
 		setTheAccommodation(contact.getAccommodation().getAccommodationName());
-		//setTheEnquiryStatus();
+		setTheEnquiryStatus(enquiry.getStatusType().getStatusName());
 		
 		
 		setInquisitor(enquiry.getInquisitor());
@@ -202,10 +206,17 @@ public class EnquiryAction extends BaseAction{
 		return SUCCESS;
 	}
 	
+	/**
+	 * Action method to Save/Update an enquiry form
+	 * @return String
+	 */
+	public String saveEnquiry(){
+		return SUCCESS;
+	}
 
 	/**
-	 * Action method
-	 * @return
+	 * Action method to return a list of enquiries
+	 * @return String
 	 */
 	public String enquiryList(){
 		setPage(1);
@@ -218,17 +229,18 @@ public class EnquiryAction extends BaseAction{
 		return SUCCESS;
 	}
 	
-	
 	/**
-	 * Action Method for updating the enquiry list after requesting a different page
-	 * @return
+	 * Action Method to update the enquiry list after requesting a different page
+	 * @return String
 	 */
 	public String updateEnquiryList(){
-		enquiryList = services.findEnquiriesByPage(getPage(),getNumberOfRecords());
+		setEnquiryList(services.findEnquiriesByPage(getPage(),getNumberOfRecords()));
 		totalNumberOfRecords = services.countEnquiries();
 		totalNumberOfPages = totalNumberOfRecords/numberOfRecords;
 		return SUCCESS;
 	}
+	
+	
 	
 	/* 
 	 * 
@@ -244,7 +256,7 @@ public class EnquiryAction extends BaseAction{
 	 * ----------------------------------------------------------------------------------------------------------*/
 
 	/**
-	 * populate the Select List vairables
+	 * populate the Select List variables
 	 */
 	private void activateLists(){
 		titleSelectList=services.findTitleTypes();
@@ -256,6 +268,7 @@ public class EnquiryAction extends BaseAction{
 		dangerSelectList = services.findDangerTypes();
 		//employmentSelectList = services.findEmploymentTypes();
 		//setEmploymentList(contact.getEmploymentType());
+		enquiryStatusSelectList = services.findStatusTypes();
 	}
 	
 	
@@ -435,14 +448,14 @@ public class EnquiryAction extends BaseAction{
 	 * Getter for enquiry status select list
 	 * @return
 	 */
-	public List<String> getEnquiryStatusSelectList() {
+	public List<StatusTypes> getEnquiryStatusSelectList() {
 		return enquiryStatusSelectList;
 	}
 	/**
 	 * setter for enquiry status select list
 	 * @param enquiryStatusSelectList
 	 */
-	public void setEnquiryStatusSelectList(List<String> enquiryStatusSelectList) {
+	public void setEnquiryStatusSelectList(List<StatusTypes> enquiryStatusSelectList) {
 		this.enquiryStatusSelectList = enquiryStatusSelectList;
 	}
 
@@ -503,11 +516,11 @@ public class EnquiryAction extends BaseAction{
 		this.addressSet = address;
 	}
 
-	public Set<ClientDisabilities> getClientDisabilities() {
+	public Set<ClientDisabilities> getClientDisabilitiesSet() {
 		return clientDisabilitiesSet;
 	}
 
-	public void setClientDisabilities(Set<ClientDisabilities> clientDisabilitiesSet) {
+	public void setClientDisabilitiesSet(Set<ClientDisabilities> clientDisabilitiesSet) {
 		this.clientDisabilitiesSet = clientDisabilitiesSet;
 	}
 
