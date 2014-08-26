@@ -41,4 +41,17 @@ public class DateUtil {
 		return dateDate;
 	}
 	
+	public static Date yyyymmddhhmmssTodayDate() throws ParseException {
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		dateDate = new Date();
+		dateDate = formatter.parse(formatter.format(dateDate));
+		return dateDate;
+	}
+	
+	public static String yyyymmddhhmmssTodayString() throws ParseException {
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		dateString = formatter.format(dateDate);
+		return dateString;
+	}
+	
 }

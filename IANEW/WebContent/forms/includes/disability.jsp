@@ -4,10 +4,27 @@
 	==============================================
 	Updates:
 		10/08/2014 - 	Added iteration by Quang Nhan
+<<<<<<< HEAD
 		14/08/2014 	- 	Connect and retrieve data called by the action class and added 
 						pagination functionality by Quang Nhan
 		16/08/2014 -	Tested s:url workings see comment below. 
 						Moved javascript code to list.js file by Quang Nhan
+=======
+<<<<<<< HEAD
+		12/08/2014 - 	Quang Nhan
+						Migrate code into new project setup
+		14/08/2014 	- 	Connect and retrieve data called by the action class and added 
+						pagination functionality by Quang Nhan
+		21/08/2014 -	Added 'Add Disability' and functionality
+						Add radio button for selecting primary disability option and jquery functions
+						to change the background color
+=======
+		14/08/2014 	- 	Connect and retrieve data called by the action class and added 
+						pagination functionality by Quang Nhan
+		16/08/2014 -	Tested s:url workings see comment below. 
+						Moved javascript code to list.js file by Quang Nhan
+>>>>>>> refs/remotes/origin/master
+>>>>>>> refs/remotes/origin/Quang
 	==============================================	
 	Description: A jsp page that displays a list of enquiries
 ------------------------------------------------------------------------------------------------>
@@ -16,69 +33,75 @@
 
 <h3 class="sixteen columns" style="float:none;">Disability</h3>
 <s:div cssClass="greybackground">
-	
-	<!-- <s:if test="" >
-		<s:iterator value="">
-			<s:div cssClass="fieldsetborder">
-				<fieldset>
-					
-				</fieldset>
-			</s:div>
-		</s:iterator>
-	</s:if> -->
-	
-	
-	
-	<article id="artDisability">
-	
+	<article id="itDisability">
 		<s:iterator value="clientDisabilities">
-		
-			<div class="divDisability row">
-				<section class="sixteen columns curveBorder primary">
-					<div class="four columns"><s:select list="disabilitySelectList.{disabilityName}" value="theDisability" name="theDisability" headerKey="-1" headerValue="Select Disability" /></div>
-					<div class="textarea eleven columns">
-						<s:label for="disabilityDescription" value="Disability Description:" /> 
-						<s:textarea id="disabilityDescription" cssClass="oneLineTextArea" name="comments"></s:textarea> 
-					</div>
-				</section>
-			</div>
-			<p><s:property value='primaryFlag' /></p>
-		
+			<section class="sixteen columns curveBorder row">
+				<s:div cssClass="four columns alpha">
+					<s:div cssClass="row four columns">
+						<s:select list="disabilitySelectList.{disabilityName}" name="theDisability" headerKey="-1" headerValue="Select Disability" />
+					</s:div>
+					<s:div cssClass="row four columns" style="text-align: center">
+						<input type="radio" name="primary" />
+						<s:label value="Primary Disability" />
+					</s:div>
+				</s:div>
+				<s:div cssClass="textarea eleven columns">
+					<s:label for="disabilityDescription" value="Disability Description:" /> 
+					<s:textarea cssClass="disabilityDescription" cssClass="oneLineTextArea"></s:textarea> 
+				</s:div>
+			</section>
 		</s:iterator>
-	
-		<div class="divDisability row">
-			<section class="sixteen columns curveBorder primary">
-				<div class="four columns"><s:select list="disabilitySelectList.{disabilityName}" value="personTitleProtege" name="theDisability" headerKey="-1" headerValue="Select Disability" /></div>
-				<div class="textarea eleven columns">
-					<s:label for="disabilityDescription" value="Disability Description:" /> 
-					<s:textarea id="disabilityDescription" cssClass="oneLineTextArea"></s:textarea> 
-				</div>
-			</section>
-		</div>
-		
-		<div class="divDisability row">
-			<section class="sixteen columns curveBorder">
-				<div class="four columns"><s:select list="disabilitySelectList.{disabilityName}" value="personTitleProtege" name="theDisability" headerKey="-1" headerValue="Select Disability" /></div>
-				<div class="textarea eleven columns">
-					<s:label for="disabilityDescription" value="Disability Description:" /> 
-					<s:textarea id="disabilityDescription" cssClass="oneLineTextArea"></s:textarea> 
-				</div>
-			</section>
-		</div>
 	</article>
 	
-	
+	<!-- Hidden disability to be added to iterator if needs to be added -->
+	<article id="artDisability" style='visiblity: hidden; display: none;'>
+		<section class="sixteen columns curveBorder row">
+			<s:div cssClass="four columns alpha">
+				<s:div cssClass="row four columns">
+					<s:select list="disabilitySelectList.{disabilityName}" name="theDisability" headerKey="-1" headerValue="Select Disability" />
+				</s:div>
+				<s:div cssClass="row four columns" style="text-align: center">
+					<input type="radio" name="primary" onchange="primaryUpdate()"/>
+					<s:label value="Primary Disability" />
+				</s:div>
+			</s:div>
+			<s:div cssClass="textarea eleven columns">
+				<s:label for="disabilityDescription" value="Disability Description:" /> 
+				<s:textarea cssClass="disabilityDescription" cssClass="oneLineTextArea"></s:textarea> 
+			</s:div>
+		</section>
+	</article>
 	
 	<div class="row">
-		<div class="fourteen columns alpha"><p></p></div>
-		<input type="button" id="btnNewDisability" value="New Disability" class="two columns" />
+		<input type="button" id="btnNewDisability" value ="New Disability" class="two columns" />
+		<div class="twelve columns alpha"><p></p></div>
+		<input type="button" id="btnAddDisability" value="Add Disability" class="two columns" />
 	</div>
 	
 	<script>
+	function primaryUpdate(){ 
+		if($('[name="primary"]').is(':checked')){
+			$('[name="primary"]:checked').parents("section").addClass("primary");
+			$('[name="primary"]:unchecked').parents("section").removeClass("primary");
+		}
+	};
+	
 	$(function(){
-		$("#btnNewDisability").click(function(){ 
-			$(".divDisability").last().clone().appendTo("#artDisability");
+		$("#btnAddDisability").click(function(){ 
+			$("#artDisability section").clone().appendTo("#itDisability");
 		});
+		
+		$("#btnNewDisability").click(function(){
+			$("#slidingPanel").load("/IANEW/admin/getDisabilityTypeForm", function(){
+				showSlidingPanel();
+			})
+			
+			
+			;
+			
+			//showSlidingPanel();
+		});
+		
 	});
 	</script>
 	

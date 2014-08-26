@@ -4,12 +4,33 @@
 	==============================================
 	Updates:
 		10/08/2014 - 	Added iteration by Quang Nhan
+<<<<<<< HEAD
 		14/08/2014 	- 	Connect and retrieve data called by the action class and added 
 						pagination functionality by Quang Nhan
 		16/08/2014 -	Tested s:url workings see comment below. 
 						Moved javascript code to list.js file by Quang Nhan
 	==============================================	
 	Description: A jsp page that displays a list of enquiries
+=======
+<<<<<<< HEAD
+		12/08/2014 - 	Quang Nhan
+						Migrate code into new project setup
+		14/08/2014 	- 	Quang Nhan
+						Connect and retrieve data called by the action class and added 
+		16/08/2014 -	Quang Nhan
+						Moved javascript code to list.js file by 
+		17/08/2014 -	Changed Date format display to dd MMM yyyy
+	==============================================	
+	Description: Ajsp page that displays linked enquiries.
+=======
+		14/08/2014 	- 	Connect and retrieve data called by the action class and added 
+						pagination functionality by Quang Nhan
+		16/08/2014 -	Tested s:url workings see comment below. 
+						Moved javascript code to list.js file by Quang Nhan
+	==============================================	
+	Description: A jsp page that displays a list of enquiries
+>>>>>>> refs/remotes/origin/master
+>>>>>>> refs/remotes/origin/Quang
 				Notes: the enquiry table has a field called parent enquiry
 				when the user selects and add an enquiry, the query should
 				check if that linked enquiry has a parent enquiry. If it does
@@ -31,13 +52,14 @@
 		
 		<s:iterator value="linkedEnquiriesSet">
 			<section class="secLinkedEnquiries sixteen columns curveBorder">
-				<s:div cssClass="textarea two columns">
-					<s:label for="enquiryID" value="Enquiry#:" />
-					<s:text var="enquiryID" name="id" />
+				<s:div cssClass="textarea one columns">
+					<s:label value="E#:" />
+					<s:property  value="id"/>
 				</s:div>
-				<s:div cssClass="textarea two columns">
+				<s:div cssClass="textarea three columns">
 					<s:label for="date" value="Date:" />
-					<s:date var="date" format="dd/MM/yyyy" name="updatedDateTime"/>
+					<!-- <s:property value="updatedDateTime"/> -->
+					<s:date name="updatedDateTime" format="dd MMM yyyy"/>
 				</s:div>
 				<div class="textarea eleven columns omega">
 					<s:label for="description" value="Description:" />

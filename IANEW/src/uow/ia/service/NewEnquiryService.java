@@ -8,6 +8,7 @@ import uow.ia.bean.CulturalBackgroundTypes;
 import uow.ia.bean.DangerTypes;
 import uow.ia.bean.DisabilityTypes;
 import uow.ia.bean.Enquiries;
+import uow.ia.bean.EnquiryTypes;
 import uow.ia.bean.GenderTypes;
 import uow.ia.bean.IssueTypes;
 import uow.ia.bean.StatusTypes;
@@ -33,6 +34,8 @@ public interface NewEnquiryService {
 	
 	public List<IssueTypes> findIssueTypes();
 	
+	public List<EnquiryTypes> findEnquiryTypes();
+	
 	public List<Enquiries> findEnquiries();
 	
 	/** 
@@ -47,6 +50,10 @@ public interface NewEnquiryService {
 	public Long countEnquiries();
 
 	public Enquiries getEnquiry(int id);
+	
+	public List<Enquiries> getLinkedEnquiry(int id);
+	
+	public boolean CreateNewEnquiry(Enquiries e, Contacts c);
 	
 	public boolean saveEnquiry(Enquiries e);
 	

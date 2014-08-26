@@ -3,6 +3,7 @@
  */
 package uow.ia.service.impl;
 
+import java.util.Iterator;
 import java.util.List;
 
 import javassist.bytecode.stackmap.TypeData.ClassName;
@@ -50,6 +51,9 @@ public class NewEnquiryServiceImpl implements
 	
 	@Resource
 	private IssueTypesDao<IssueTypes> issueTypesDao;
+	
+	@Resource
+	private EnquiryTypesDao<EnquiryTypes> enquiryTypesDao;
 	
 	@Resource
 	private ContactsDao<Contacts> contactsDao;
@@ -105,6 +109,11 @@ public class NewEnquiryServiceImpl implements
 	}
 	
 	@Override
+	public List<EnquiryTypes> findEnquiryTypes() {
+		return enquiryTypesDao.find(" from EnquiryTypes");
+	}
+	
+	@Override
 	public List<Enquiries> findEnquiries() {
 		return enquiriesDao.find(" from Enquiries");
 	}
@@ -122,6 +131,31 @@ public class NewEnquiryServiceImpl implements
 	@Override
 	public Enquiries getEnquiry(int id) {
 		return enquiriesDao.get(Enquiries.class, id);
+	}
+	
+	@Override
+	public List<Enquiries> getLinkedEnquiry(int id) {
+		Enquiries enquiries = enquiriesDao.get(Enquiries.class, id);
+		List<Enquiries> tmpEnquiries = null;
+		tmpEnquiries.add(enquiries.getParentEnquiry());
+		Iterator<Enquiries> iterator = enquiries.getEnquiriesSet().iterator();
+		while(iterator.hasNext()) {
+			tmpEnquiries.add(iterator.next());
+		}
+		return tmpEnquiries;
+	}
+	
+	@Override
+	public boolean CreateNewEnquiry(Enquiries e, Contacts c) {
+		e.setContact(c);
+  		c.getEnquiriesSet().add(e);
+  		try {
+  			contactsDao.save(c);
+  			return true;
+		} catch (Exception e2) {
+			System.out.println(e);
+			return false;
+		}
 	}
 	
 	@Override

@@ -83,7 +83,7 @@ function updateStorage(item){
 $(".toggled").hide();
 
 $('#new').click(function(){
-	alert($('#enquiryID').val())
+	//alert($('#enquiryID').val())
 });
 
 function bandSelected(selectedDiv){
@@ -95,13 +95,14 @@ function bandSelected(selectedDiv){
 	
 	//sets the value for the hidden enquiry id holder field
 	$("#hiddenid").val($(selectedDiv).find('.id').text());
-	alert($(selectedDiv).find('.id').text());
-	alert($("#hiddenid").val());
+	//alert($(selectedDiv).find('.id').text());
+	//alert($("#hiddenid").val());
+
 }
+
 function deselectAll(){
 	$('.list').children().removeClass("listSelected");
 	if($('.toggled').is(':visible')){
 		$('.toggled').hide('slide');
 	}
 }
-		

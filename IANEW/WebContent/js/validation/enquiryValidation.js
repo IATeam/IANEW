@@ -20,7 +20,7 @@
 
 
 
-$(document).ready(function(){ 
+/*$(document).ready(function(){ 
 	$('#enquiryForm').validate({
 		rules: {
 			firstName: "required",
@@ -46,4 +46,4 @@ $(document).ready(function(){
 		return (value != '-1');
 	}, "Please select a gender");
 	
-});
+});*/

@@ -56,7 +56,6 @@
     		<result name="success">/forms/{1}.jsp</result>
     	</action>
     </package>
-
     <!--  <package name="example" namespace="/" extends="struts-default">
        <action name="*" class="uow.ia.action.Listing">
            <result name="success">Listing.jsp</result>
@@ -65,5 +64,5 @@
     </package>-->
     
       <include file="login.xml"/>
-    
+     <include file="admin.xml" />
 </struts>

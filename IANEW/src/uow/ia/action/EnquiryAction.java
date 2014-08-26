@@ -2,7 +2,14 @@ package uow.ia.action;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+
+import org.apache.struts2.dispatcher.Dispatcher;
+import org.apache.struts2.dispatcher.mapper.ActionMapping;
+import org.apache.struts2.dispatcher.mapper.DefaultActionMapper;
+
+import com.opensymphony.xwork2.ActionContext;
 
 import uow.ia.bean.AccommodationTypes;
 import uow.ia.bean.Addresses;
@@ -30,6 +37,11 @@ import uow.ia.bean.TitleTypes;
  * 					dded pagination functionality
  * 16/08/2014 -	Quang Nhan
  * 					Refactor the code
+<<<<<<< HEAD
+=======
+ * 21/08/2014 -		Quang Nhan
+ * 					populate today's date for created and updated fields for  new enquiry
+>>>>>>> refs/remotes/origin/Quang
  * ==============================================
  * 	Description: An action class to linking the service from spring to the enquiry jsp pages
  *
@@ -60,8 +72,10 @@ public class EnquiryAction extends BaseAction{
 	private List<EmploymentTypes> employmentSelectList;					private String theEmployment;
 	private List<DangerTypes> dangerSelectList;							private String theDanger;
 	//Status_Type or criteria control value table 
-	private List<String> statusSelectList;								private String theStatus;
+	private List<String> enquiryStatusSelectList;						private String theEnquiryStatus;
 	
+
+
 
 	/*
 	 * Sets variables for 1 to many relationship tables
@@ -134,6 +148,13 @@ public class EnquiryAction extends BaseAction{
 	 */
 	public String newEnquiry(){
 		activateLists();
+		setCreatedDate(new Date());
+		setUpdatedDate(new Date());
+		
+		ActionContext context = ActionContext.getContext();
+		ActionMapping am = new ActionMapping();
+		Map map = context.getContextMap();
+		System.out.println("getting action name: " + map.toString());
 		return SUCCESS;
 	}
 
@@ -169,6 +190,8 @@ public class EnquiryAction extends BaseAction{
 		setTheEmployment("Kim change databse need chagne code for this part");
 		setTheCulturalBackground(contact.getCulturalBackground().getCulturalBackgroundName());
 		setTheAccommodation(contact.getAccommodation().getAccommodationName());
+		//setTheEnquiryStatus();
+		
 		
 		setInquisitor(enquiry.getInquisitor());
 		setReferredBy(enquiry.getReferralBy());
@@ -408,6 +431,36 @@ public class EnquiryAction extends BaseAction{
 		this.enquiryList = enquiryList;
 	}
 
+	/**
+	 * Getter for enquiry status select list
+	 * @return
+	 */
+	public List<String> getEnquiryStatusSelectList() {
+		return enquiryStatusSelectList;
+	}
+	/**
+	 * setter for enquiry status select list
+	 * @param enquiryStatusSelectList
+	 */
+	public void setEnquiryStatusSelectList(List<String> enquiryStatusSelectList) {
+		this.enquiryStatusSelectList = enquiryStatusSelectList;
+	}
+
+	
+	/**
+	 * @return
+	 */
+	public String getTheEnquiryStatus() {
+		return theEnquiryStatus;
+	}
+
+	/**
+	 * @param theEnquiryStatus
+	 */
+	public void setTheEnquiryStatus(String theEnquiryStatus) {
+		this.theEnquiryStatus = theEnquiryStatus;
+	}
+	
 	public Set<Enquiries> getLinkedEnquiriesSet() {
 		return linkedEnquiriesSet;
 	}
