@@ -73,9 +73,9 @@
   </many-to-one>
   
   <!--  One to many relationship  -->
-  <set fetch="select" inverse="true" name="addressesSet" sort="unsorted" table="Addresses">
+  <set fetch="select" inverse="true" name="addressesSet" sort="unsorted" table="Addresses" cascade="save-update, delete, delete-orphan">
    <key>
-    <column name="contact_id" not-null="true"/>
+    <column name="contact_id" not-null="false"/>
    </key>
    <one-to-many class="uow.ia.bean.Addresses"/>
   </set>
@@ -115,8 +115,8 @@
   </set>
  
 	 <!-- Many-to-many relationship -->
-	 <set name="disabilitiesSet" table="Client_Disabilities" inverse="false" fetch="select" cascade="all">
-	 	<key column="contact_id"/>
+	 <set name="disabilitiesSet" table="Client_Disabilities" inverse="true" fetch="select" cascade="save-update, delete, delete-orphan">
+	 	<key column="contact_id" not-null="false"/>
 	 	<one-to-many class="uow.ia.bean.ClientDisabilities"/>
 	 </set>
  </class>

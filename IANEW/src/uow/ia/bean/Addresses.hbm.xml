@@ -29,7 +29,7 @@
         
         <!-- Many to one relationship -->
         <many-to-one name="contact" class="uow.ia.bean.Contacts">
-        	<column name="contact_id" not-null="true"/>
+        	<column name="contact_id" not-null="false"/>
         </many-to-one>
     </class>
 </hibernate-mapping>

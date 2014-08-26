@@ -34,13 +34,13 @@ public class Contacts implements java.io.Serializable {
 	private Integer updatedUserId;
 	private Date updatedDateTime;
 	private StatusTypes status;
-	private Set<Addresses> addressesSet;
-	private Set<ClientDisabilities> disabilitiesSet;
+	private Set<Addresses> addressesSet = new HashSet<Addresses>();
+	private Set<ClientDisabilities> disabilitiesSet = new HashSet<ClientDisabilities>();
 	private Set<Enquiries> enquiriesSet = new HashSet<Enquiries>();
-	private Set<IndividualCases> individualCasesSet;
+	private Set<IndividualCases> individualCasesSet = new HashSet<IndividualCases>();
 	private Set<ContactEmployments> employmentsSet = new HashSet<ContactEmployments>();
-	private Set<PlanDevelopers> planDevelopersSet;
-	private Set<IndividualCases> advocateCasesSet;
+	private Set<PlanDevelopers> planDevelopersSet = new HashSet<PlanDevelopers>();
+	private Set<IndividualCases> advocateCasesSet = new HashSet<IndividualCases>();
 	
 	
 	/**
