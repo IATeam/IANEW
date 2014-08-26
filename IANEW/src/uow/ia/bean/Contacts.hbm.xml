@@ -94,7 +94,7 @@
   	<one-to-many class="uow.ia.bean.IndividualCases"/>
   </set>
   
-  <set fetch="select" inverse="true" name="employmentsSet" table="Contact_Employments" order-by="id" cascade="save-update">
+  <set fetch="select" inverse="true" name="employmentsSet" table="Contact_Employments" order-by="id" cascade="save-update, delete, delete-orphan">
   	<key>
   		<column name="contact_id" not-null="false"/>
   	</key>
