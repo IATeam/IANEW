@@ -18,7 +18,9 @@
 						reorder syntax to be consistent throughout the jsps
 				   -	Added Javascript functionality to have read only to existing enquiry
 				   -	Separate the form header into its own jsp file and included here
-
+		25/08/2014 -	Quang Nhan
+						Pulled the form footer out of the enquiryForm tags and placed it at the bottom
+						Implement readonly javascript for existing enquiry.
 	==============================================	
 	Description: A jsp page that displays enquiry list for both new and existing
 	
@@ -45,7 +47,8 @@
 
 </head>
 <body>
-	<s:form id="enquiryForm" cssClass="cmxform form container" namespace='/enquiry' method="post" novalidate="novalidate">  
+	<s:div cssClass="form container">
+	<s:form id="enquiryForm" cssClass="cmxform" namespace='/enquiry' method="post" novalidate="novalidate">  
 <!-- ---------------------------------------------------------------------------------------------- -->
 <!-- Header of the form --------------------------------------------------------------------------- -->
 <!-- ---------------------------------------------------------------------------------------------- -->	
@@ -66,8 +69,8 @@
 		<%@include file="includes/disability.jsp" %>
 		<%@include file="includes/issues.jsp" %>
 		<%@include file="includes/linkedEnquiries.jsp" %>
-		
-<!-- ---------------------------------------------------------------------------------------------- -->
+	</s:form>	
+	<!-- ---------------------------------------------------------------------------------------------- -->
 <!-- iterator - footer for enquiry form ----------------------------------------------------------- -->
 <!-- ---------------------------------------------------------------------------------------------- -->
 		<!-- 
@@ -78,26 +81,29 @@
 		<footer>
 			<s:div cssClass="row">
 				<section class="six columns">
-					<input type="button" class="three columns alpha" value="Cancel"/>
-					<input type="button" class="three columns omega" value="New Enquiry" />
+					<input id="btnCancel" type="button" class="three columns alpha" value="Cancel"/>
+					<input id="btnNewEnquiry" type="button" class="three columns omega" value="New Enquiry" />
 				</section>
 				<section class="six columns"><p></p></section>
 				<section class="four columns omega">
-					<input type="button" value="Create Case" class="two columns alpha"/>
-					<s:submit type="submit" cssClass="two columns omega" value="Save"/>
+					<input id="createCase" type="button" value="Create Case" class="two columns alpha"/>
+					<sj:submit formIds="enquiryForm" type="submit" cssClass="two columns omega" value="Save"/>
 				</section>
 			</s:div>
 		</footer>
-	</s:form>	
+	
+	</s:div>
 	<script>
-	$(function(){
-		alert("loaded")
-	});
+
+	//if the enquiry is an existing enquiry 
 	if($("#formTitle").text() === "Existing Enquiry"){
-		alert("existing")
+		alert("existing need to check if status is closed")
 		$("#enquiryForm").find("input").attr("readonly", "true");
 		$("#enquiryForm").find('textarea').attr("readonly", "true");
-		
+		$("#enquiryForm").find('select').attr("disabled", "disable");
+		$("#enquiryForm").find('input[type="button"]').attr("disabled", "disable");
+		$("#btnView").attr("disabled", null);
+		$("#btnAddEnquiry").attr("disabled", null);
 	}
 	
 	</script>

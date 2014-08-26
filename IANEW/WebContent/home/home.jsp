@@ -168,7 +168,8 @@
 	
 	</div>
 	
-	<s:div id="slidingPanel" style="background: yellow; position: fixed; top: 20%; box-shadow: 3px 3px 5px grey; max-width: 20%">slide</s:div>
+	<s:div id="leftPopUp" style="background: yellow; position: fixed; top: 20%; box-shadow: 3px 3px 5px grey;">left</s:div>
+	<s:div id="rightPopUp" style="background: yellow; position: fixed; top: 20%; box-shadow: 3px 3px 5px grey; right: 0">right</s:div>
 	
 <!-- ----------------------------------------------------------------------------------------------- -->
 <!-- Home Page Footer ------------------------------------------------------------------------------ -->
@@ -178,12 +179,10 @@
 		<button>logout</button>
 	</footer>
 	
-	
-	
-	
 	<script>
 		$(function(){
-			$("#slidingPanel").hide();
+			$("#leftPopUp").hide();
+			$("#rightPopUp").hide();
 			$('#main-menu').smartmenus();
 			//$("#slidingPlanel").hide();
 			//hideSlidingPanel();

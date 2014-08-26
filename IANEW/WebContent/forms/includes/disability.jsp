@@ -27,20 +27,21 @@
 <h3 class="sixteen columns" style="float:none;">Disability</h3>
 <s:div cssClass="greybackground">
 	<article id="itDisability">
-		<s:iterator value="clientDisabilities">
+		<s:iterator value="clientDisabilitiesSet">
 			<section class="sixteen columns curveBorder row">
 				<s:div cssClass="four columns alpha">
-					<s:div cssClass="row four columns">
-						<s:select list="disabilitySelectList.{disabilityName}" name="theDisability" headerKey="-1" headerValue="Select Disability" />
+					<s:div cssClass="disabilityTypeSelect row four columns">
+						<s:select list="disabilitySelectList.{disabilityName}" name="getDisabilityType().getDisabilityName()" headerKey="-1" headerValue="Select Disability" />
 					</s:div>
 					<s:div cssClass="row four columns" style="text-align: center">
+						
 						<input type="radio" name="primary" />
-						<s:label value="Primary Disability" />
+						<s:label value="Primary Disability" />						
 					</s:div>
 				</s:div>
 				<s:div cssClass="textarea eleven columns">
 					<s:label for="disabilityDescription" value="Disability Description:" /> 
-					<s:textarea cssClass="disabilityDescription" cssClass="oneLineTextArea"></s:textarea> 
+					<s:textarea cssClass="disabilityDescription" cssClass="oneLineTextArea" name="comments"></s:textarea> 
 				</s:div>
 			</section>
 		</s:iterator>
@@ -85,14 +86,9 @@
 		});
 		
 		$("#btnNewDisability").click(function(){
-			$("#slidingPanel").load("/IANEW/admin/getDisabilityTypeForm", function(){
-				showSlidingPanel();
-			})
-			
-			
-			;
-			
-			//showSlidingPanel();
+			$("#leftPopUp").load("/IANEW/admin/getDisabilityTypeForm", function(){
+				$("#leftPopUp").show("slow");
+			});
 		});
 		
 	});
