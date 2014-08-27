@@ -146,11 +146,11 @@ public class NewEnquiryServiceImpl implements
 	}
 	
 	@Override
-	public boolean CreateNewEnquiry(Enquiries e, Contacts c) {
+	public boolean saveOrUpdateEnquiry(Enquiries e, Contacts c) {
 		e.setContact(c);
   		c.getEnquiriesSet().add(e);
   		try {
-  			contactsDao.save(c);
+  			contactsDao.saveOrUpdate(c);
   			return true;
 		} catch (Exception e2) {
 			System.out.println(e);

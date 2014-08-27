@@ -16,10 +16,10 @@
         </property>
         
         <many-to-one class="uow.ia.bean.Contacts" name="contact">
-        	<column name="contact_id" not-null="true"/>
+        	<column name="contact_id" not-null="false"/>
         </many-to-one>
         <many-to-one class="uow.ia.bean.DisabilityTypes" name="disabilityType">
-        	<column name="disability_id" not-null="true"/>
+        	<column name="disability_id" not-null="false"/>
         </many-to-one>
     </class>
 </hibernate-mapping>

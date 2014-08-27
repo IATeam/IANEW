@@ -1,6 +1,11 @@
 package uow.ia.bean;
 
-import java.util.Date;
+import java.sql.Date;
+
+/**
+ * @author Kim To
+ * @version 1.0.3, 26/08/2014
+ */
 
 public class ContactEmployments implements java.io.Serializable{
 	private Integer id;

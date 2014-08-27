@@ -1,5 +1,6 @@
 package uow.ia.test.hibernate;
 
+import java.sql.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -59,13 +60,37 @@ public class ContactInsertTest {
 	  		Contacts newContact = new Contacts();
 	  		TitleTypes title = (TitleTypes)session.get(TitleTypes.class, 1);
 	  		AccommodationTypes accommodation = (AccommodationTypes)session.get(AccommodationTypes.class, 3);
+	  		ContactTypes contactType = (ContactTypes)session.get(ContactTypes.class, 2);
+	  		CulturalBackgroundTypes culturalBackground = (CulturalBackgroundTypes)session.get(CulturalBackgroundTypes.class,3);
+	  		GenderTypes genderType = (GenderTypes)session.get(GenderTypes.class, 2);
+	  		TitleTypes titleType = (TitleTypes)session.get(TitleTypes.class, 2);
 	  		
 	  		newContact.setAccommodation(accommodation);
 	  		newContact.setAccommodationComment("Kim first saving contact aommodation");
 	  		newContact.setFirstname("Ngoc");
 	  		newContact.setLastname("To");
 	  		newContact.setTitleType(title);
+	  		newContact.setContactType(contactType);
+	  		newContact.setCulturalBackground(culturalBackground);
+	  		newContact.setCulturalBackgroundComment("kim is vietnamese");
+	  		newContact.setDangerType((DangerTypes)session.get(DangerTypes.class, 1));
+	  		newContact.setDob(Date.valueOf("1992-08-26"));
+	  		newContact.setEmail("kim.to6462@gmail.com");
+	  		newContact.setGenderType(genderType);
+	  		newContact.setIdentification("NF1234");
+	  		newContact.setMobilephone("0401520752");
+	  		newContact.setTitleType(titleType);
 	  		
+	  		// set client disability
+	  		ClientDisabilities cDisability = new ClientDisabilities();
+	  		cDisability.setComments("primary disability");
+	  		cDisability.setContact(newContact);
+	  		cDisability.setDisabilityType((DisabilityTypes)session.get(DisabilityTypes.class, 2));
+	  		cDisability.setPrimaryFlag("Y");
+	  		
+	  		newContact.getDisabilitiesSet().add(cDisability);
+	  		
+	  		// set client employment
 	  		EmploymentTypes etype = (EmploymentTypes)session.get(EmploymentTypes.class, 2);
 	  		
 	  		ContactEmployments employment = new ContactEmployments();
@@ -75,6 +100,18 @@ public class ContactInsertTest {
 	  		employment.setWorkphone("4036578");
 	  		
 	  		newContact.getEmploymentsSet().add(employment);
+	  		
+	  		// set contact address
+	  		Addresses address = new Addresses();
+	  		address.setAddress("Unit 2/19 Sperry Street");
+	  		address.setContact(newContact);
+	  		address.setCountry("Australia");
+	  		address.setHomephone("021323234");
+	  		address.setPostcode("2500");
+	  		address.setState("NSW");
+	  		address.setSurburb("Wollongong");
+	  		
+	  		newContact.getAddressesSet().add(address);
 	  		
 	  		session.saveOrUpdate(newContact);
 	  		tx.commit();
