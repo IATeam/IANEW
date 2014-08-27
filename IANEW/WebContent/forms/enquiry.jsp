@@ -48,7 +48,7 @@
 </head>
 <body>
 	<s:div cssClass="form container">
-	<s:form id="enquiryForm" cssClass="cmxform" namespace='/enquiry' method="post" novalidate="novalidate">  
+	<s:form id="enquiryForm" action="saveUpdateEnquiry" cssClass="cmxform" namespace='/enquiry' method="post" novalidate="novalidate">  
 <!-- ---------------------------------------------------------------------------------------------- -->
 <!-- Header of the form --------------------------------------------------------------------------- -->
 <!-- ---------------------------------------------------------------------------------------------- -->	

@@ -10,6 +10,7 @@
 	
 	Note: syntax order: <tag id name class value list(for select) ...>
 ------------------------------------------------------------------------------------------------>
+<s:url var="urlUpdate" namespace="/enquiry" action="updateEnquiryList" includeContext="false"/>
 
 <s:form id="paginationForm" method="post" action="%{urlUpdate}" >
 	<s:hidden id="page" name="page" />

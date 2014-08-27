@@ -31,6 +31,9 @@
     	<action name="updateEnquiryList" class="uow.ia.action.EnquiryAction" method="updateEnquiryList">
     		<result name="success">/forms/enquiryList.jsp</result>
     	</action>
+    	<action name="saveUpdateEnquiry" class="uow.ia.action.EnquiryAction" method="saveUpdateEnquiry">
+    		<result name="success">/forms/enquiryList.jsp</result>
+    	</action>
     </package>
     
     <!-- Case Forms -->

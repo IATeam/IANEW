@@ -36,13 +36,10 @@ import uow.ia.bean.TitleTypes;
  * 14/08/2014 	- 	Quang Nhan
  * 					Connect and retrieve data from service class to enquiry, enquirylist jsps and a
  * 					dded pagination functionality
- * 16/08/2014 -	Quang Nhan
+ * 16/08/2014 -		Quang Nhan
  * 					Refactor the code
-<<<<<<< HEAD
-=======
  * 21/08/2014 -		Quang Nhan
  * 					populate today's date for created and updated fields for  new enquiry
->>>>>>> refs/remotes/origin/Quang
  * ==============================================
  * 	Description: An action class to linking the service from spring to the enquiry jsp pages
  *
@@ -73,7 +70,7 @@ public class EnquiryAction extends BaseAction{
 	private List<EmploymentTypes> employmentSelectList;					private String theEmployment;
 	private List<DangerTypes> dangerSelectList;							private String theDanger;
 	//Status_Type or criteria control value table 
-	private List<StatusTypes> enquiryStatusSelectList;					private String theEnquiryStatus;
+	private List<StatusTypes> statusSelectList;							private String theStatus;
 	
 
 
@@ -167,17 +164,11 @@ public class EnquiryAction extends BaseAction{
 		//System.out.println(getHiddenid());
 		setEnquiry(services.getEnquiry(getHiddenid()));
 		setContact(enquiry.getContact());
-	
 		
 		setIssueSet(enquiry.getEnquiryIssuesSet());
 		setClientDisabilitiesSet(contact.getDisabilitiesSet());
 		setLinkedEnquiriesSet(enquiry.getEnquiriesSet());
-		
-		//to be deleted
-		System.out.println(enquiry.getEnquiriesSet().toString());
-		for (Enquiries e : linkedEnquiriesSet) {
-			System.out.println("enquiry linked: " + e.getId() + " " + e.getDescription() );
-		}
+	
 		//LATER
 		//setCreatedBy();
 		//setUpdatedBy(contact.);
@@ -186,15 +177,18 @@ public class EnquiryAction extends BaseAction{
 		setId(enquiry.getId());
 		setDescription(enquiry.getDescription());
 		setAddress(contact.getAddressesSet());
+		if(null != contact.getGenderType())
+			setTheGender(contact.getGenderType().getGenderName());
 		
-		setTheGender(contact.getGenderType().getGenderName());
-		setTheDanger(contact.getDangerType().getDangerName());
+		if(null != contact.getDangerType())
+			setTheDanger(contact.getDangerType().getDangerName());
+		
 		setTheTitle(contact.getTitleType().getName());
 		//setTheEmployment(contact.getEmploymentsTypeSet());
 		setTheEmployment("Kim change databse need chagne code for this part");
 		setTheCulturalBackground(contact.getCulturalBackground().getCulturalBackgroundName());
 		setTheAccommodation(contact.getAccommodation().getAccommodationName());
-		setTheEnquiryStatus(enquiry.getStatusType().getStatusName());
+		setTheStatus(enquiry.getStatusType().getStatusName());
 		
 		
 		setInquisitor(enquiry.getInquisitor());
@@ -210,7 +204,24 @@ public class EnquiryAction extends BaseAction{
 	 * Action method to Save/Update an enquiry form
 	 * @return String
 	 */
-	public String saveEnquiry(){
+	public String saveUpdateEnquiry(){ 
+		System.out.println("in save update");
+		Enquiries newEnquiry = new Enquiries();
+		Contacts newContact = new Contacts();
+		
+//		newEnquiry.setCreatedDateTime(getCreatedDate());
+//		newEnquiry.setCreatedUserId(1);
+//		newEnquiry.setUpdatedDateTime(getCreatedDate());
+//		newEnquiry.setUpdatedUserId(1);
+		
+		newEnquiry.setDescription(getDescription());
+		newEnquiry.setInquisitor(getInquisitor());
+		
+		newContact.setFirstname(contact.getFirstname());
+		newContact.setLastname(contact.getLastname());
+		
+		services.saveOrUpdateNewEnquiry(newEnquiry, newContact);
+		
 		return SUCCESS;
 	}
 
@@ -224,8 +235,9 @@ public class EnquiryAction extends BaseAction{
 		
 		setEnquiryList(services.findEnquiriesByPage(page,numberOfRecords));
 		totalNumberOfRecords = services.countEnquiries();
-		totalNumberOfPages = totalNumberOfRecords/numberOfRecords;
-		System.out.println(totalNumberOfPages);
+		int mod = (int) totalNumberOfRecords % numberOfRecords;
+		if(mod != 0) mod = 1;
+		totalNumberOfPages = totalNumberOfRecords/numberOfRecords + mod;
 		return SUCCESS;
 	}
 	
@@ -234,13 +246,15 @@ public class EnquiryAction extends BaseAction{
 	 * @return String
 	 */
 	public String updateEnquiryList(){
+		System.out.println(getPage());
+		
 		setEnquiryList(services.findEnquiriesByPage(getPage(),getNumberOfRecords()));
 		totalNumberOfRecords = services.countEnquiries();
-		totalNumberOfPages = totalNumberOfRecords/numberOfRecords;
+		int mod = (int) totalNumberOfRecords % numberOfRecords;
+		if(mod != 0) mod = 1;
+		totalNumberOfPages = totalNumberOfRecords/numberOfRecords + mod;
 		return SUCCESS;
 	}
-	
-	
 	
 	/* 
 	 * 
@@ -268,7 +282,7 @@ public class EnquiryAction extends BaseAction{
 		dangerSelectList = services.findDangerTypes();
 		//employmentSelectList = services.findEmploymentTypes();
 		//setEmploymentList(contact.getEmploymentType());
-		enquiryStatusSelectList = services.findStatusTypes();
+		statusSelectList = services.findStatusTypes();
 	}
 	
 	
@@ -448,30 +462,30 @@ public class EnquiryAction extends BaseAction{
 	 * Getter for enquiry status select list
 	 * @return
 	 */
-	public List<StatusTypes> getEnquiryStatusSelectList() {
-		return enquiryStatusSelectList;
+	public List<StatusTypes> getStatusSelectList() {
+		return statusSelectList;
 	}
 	/**
 	 * setter for enquiry status select list
 	 * @param enquiryStatusSelectList
 	 */
-	public void setEnquiryStatusSelectList(List<StatusTypes> enquiryStatusSelectList) {
-		this.enquiryStatusSelectList = enquiryStatusSelectList;
+	public void setStatusSelectList(List<StatusTypes> statusSelectList) {
+		this.statusSelectList = statusSelectList;
 	}
 
 	
 	/**
 	 * @return
 	 */
-	public String getTheEnquiryStatus() {
-		return theEnquiryStatus;
+	public String getTheStatus() {
+		return theStatus;
 	}
 
 	/**
 	 * @param theEnquiryStatus
 	 */
-	public void setTheEnquiryStatus(String theEnquiryStatus) {
-		this.theEnquiryStatus = theEnquiryStatus;
+	public void setTheStatus(String theStatus) {
+		this.theStatus = theStatus;
 	}
 	
 	public Set<Enquiries> getLinkedEnquiriesSet() {

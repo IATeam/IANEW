@@ -5,12 +5,12 @@
 	Updates:
 		10/08/2014 - 	
 		14/08/2014 	- 	Connect and retrieve data called by the action class 
-						 
-						
 		18/08/2014 -	Quang Nhan
 						Changed date format display to dd MMM yyyy
 		25/08/2014 -	Quang Nhan
-						Connect enquiry status to action class.
+						Connect status to action class.
+		27/08/2014 -	Removed all enquiry to form wording to standardize to 
+						allow case to be used as well.
 	==============================================	
 	Description: A component of the contact that is to be displayed on both enquiry and case forms that 
 				displays the form status detail.
@@ -39,7 +39,7 @@
 				<div class="row">
 			
 					<div class="three columns"><s:select list="dangerSelectList.{dangerName}" name="theDanger" headerKey="-1" headerValue="Flag Danger" /></div>
-					<div class="three columns"><s:select id="enquiryStatus" list="enquiryStatusSelectList.{statusName}" name="theEnquiryStatus" headerKey="-1" headerValue="Enquiry Status" /></div>
+					<div class="three columns"><s:select id="theStatus" list="statusSelectList.{statusName}" name="theStatus" headerKey="-1" headerValue="Form Status" /></div>
 					<s:div cssClass="two columns">
 						<s:label for="id" value="Enquiry#:" />
 						<s:property value="id" />

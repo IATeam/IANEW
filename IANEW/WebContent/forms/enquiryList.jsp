@@ -46,10 +46,9 @@
 	-->
 	<s:url var="urlEExisting" namespace="/enquiry" action="getEnquiry" includeContext="false"/>		
 	<s:url var="urlENew" namespace="/enquiry" action="newEnquiry" />
-	<s:url var="urlUpdate" namespace="/enquiry" action="updateEnquiryList" includeContext="false"/>
 
 
-	<s:form id="enquiryForm" cssClass="form container" method="post" action="%{urlEExisting}">
+	<s:form id="listForm" cssClass="form container" method="post" action="%{urlEExisting}">
 
 			<section class="imageContainer">
 				<s:div cssClass="row">
@@ -123,7 +122,6 @@
 					</section >
 					<section class="eight columns">
 						<%@include file="/forms/includes/paginationToolSet.jsp" %>
-						
 					</section>
 					<section class="four columns alpha">
 						<sj:submit id="open" targets="formDiv" cssClass="two columns alpha" value="Open Enquiry" onclick="openExistingEnquiry()"/>
