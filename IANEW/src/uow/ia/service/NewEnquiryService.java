@@ -53,7 +53,7 @@ public interface NewEnquiryService {
 	
 	public List<Enquiries> getLinkedEnquiry(int id);
 	
-	public boolean CreateNewEnquiry(Enquiries e, Contacts c);
+	public boolean saveOrUpdateEnquiry(Enquiries e, Contacts c);
 	
 	public boolean saveEnquiry(Enquiries e);
 	
