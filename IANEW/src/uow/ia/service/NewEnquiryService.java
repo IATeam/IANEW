@@ -36,6 +36,8 @@ public interface NewEnquiryService {
 	
 	public List<EnquiryTypes> findEnquiryTypes();
 	
+	public List<Contacts> findContactsByFullName(String firstName, String lastName);
+	
 	public List<Enquiries> findEnquiries();
 	
 	/** 
