@@ -1,9 +1,8 @@
 package uow.ia.test.hibernate;
 
-import org.hibernate.Transaction;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.context.internal.ManagedSessionContext;
@@ -14,10 +13,12 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.log4testng.Logger;
 
-import uow.ia.bean.Contacts;
+import uow.ia.bean.Enquiries;
+import uow.ia.bean.EnquiryIssues;
+import uow.ia.bean.IssueTypes;
 
-public class ContactDeleteTest {
-	private Logger logger = Logger.getLogger(ContactDeleteTest.class);
+public class EnquiryDeleteTest {
+	private Logger logger = Logger.getLogger(EnquiryDeleteTest.class);
 	@Autowired
 	public static SessionFactory sessionFactory;
 	private Session session;
@@ -25,16 +26,25 @@ public class ContactDeleteTest {
 	
 	@Test
 	public void f() {
-		Contacts deleteContact = (Contacts)session.get(Contacts.class, 102);
+		System.out.println("Start deleting enquiry");
+		Enquiries deleteEnquiry = (Enquiries)session.get(Enquiries.class, 107);
+		
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			session.delete(deleteContact);
+			session.delete(deleteEnquiry);
 			tx.commit();
 		} catch (Exception e) {
 			System.out.println(e);
+		} finally {
+			System.out.println("finish delete enquiry");
+			deleteEnquiry = (Enquiries)session.get(Enquiries.class, 107);
+			if (deleteEnquiry == null) {
+				System.out.println("successfully deleted enquiry");
+			} else {
+				System.out.println("delete unsucessfully");
+			}
 		}
-		
 	}
 	
 	@BeforeMethod
