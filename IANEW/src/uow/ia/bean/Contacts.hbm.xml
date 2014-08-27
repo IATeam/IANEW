@@ -82,14 +82,14 @@
   
   <set fetch="select" inverse="true" name="enquiriesSet" table="Enquiries" order-by="id" cascade="save-update, delete, delete-orphan">
   	<key>
-  		<column name="contact_id" not-null="true"/>
+  		<column name="contact_id" not-null="false"/>
   	</key>
   	<one-to-many class="uow.ia.bean.Enquiries"/>
   </set>
   
-  <set fetch="select" inverse="true" name="individualCasesSet" sort="unsorted" table="Individual_Cases" order-by="id">
+  <set fetch="select" inverse="true" name="individualCasesSet" table="Individual_Cases" order-by="id"  cascade="save-update, delete, delete-orphan">
   	<key>
-  		<column name="client_id" not-null="true"/>
+  		<column name="client_id" not-null="false"/>
   	</key>
   	<one-to-many class="uow.ia.bean.IndividualCases"/>
   </set>
@@ -101,13 +101,14 @@
   	<one-to-many class="uow.ia.bean.ContactEmployments"/>
   </set>
   
-  <set fetch="select" inverse="true" name="planDevelopersSet" table="Plan_Developers" order-by="id">
+  <set fetch="select" inverse="true" name="planDevelopersSet" table="Plan_Developers" order-by="id"  cascade="save-update, delete, delete-orphan">
   	<key>
-  		<column name="contact_id" not-null="true"/>
+  		<column name="contact_id" not-null="false"/>
   	</key>
   	<one-to-many class="uow.ia.bean.PlanDevelopers"/>
   </set>
-  <set fetch="select" inverse="true" name="advocateCasesSet" table="Individual_Cases" order-by="id">
+  
+  <set fetch="select" inverse="true" name="advocateCasesSet" table="Individual_Cases" order-by="id"  cascade="save-update, delete, delete-orphan">
   	<key>
   		<column name="advocate_id" not-null="false"/>
   	</key>

@@ -35,8 +35,7 @@ public class Plans implements java.io.Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	
-	
+
 	/**
 	 * @param id
 	 * @param statusType
@@ -54,7 +53,6 @@ public class Plans implements java.io.Serializable {
 	 * @param updatedUserId
 	 * @param createdUserId
 	 * @param individualCase
-	 * @param planGoalsSet
 	 */
 	public Plans(Integer id, StatusTypes statusType, Date createdDateTime,
 			Date closedDateTime, Date lastReviewedDate,
@@ -63,6 +61,7 @@ public class Plans implements java.io.Serializable {
 			Contacts authorisedBy, Date authorisedByDate, String notes,
 			Date updatedDateTime, Integer updatedUserId, Integer createdUserId,
 			IndividualCases individualCase) {
+		super();
 		this.id = id;
 		this.statusType = statusType;
 		this.createdDateTime = createdDateTime;
@@ -80,7 +79,6 @@ public class Plans implements java.io.Serializable {
 		this.createdUserId = createdUserId;
 		this.individualCase = individualCase;
 	}
-
 
 
 	/**
@@ -263,12 +261,16 @@ public class Plans implements java.io.Serializable {
 	public void setCreatedUserId(Integer createdUserId) {
 		this.createdUserId = createdUserId;
 	}
+
+
 	/**
 	 * @return the individualCase
 	 */
 	public IndividualCases getIndividualCase() {
-		return this.individualCase;
+		return individualCase;
 	}
+
+
 	/**
 	 * @param individualCase the individualCase to set
 	 */

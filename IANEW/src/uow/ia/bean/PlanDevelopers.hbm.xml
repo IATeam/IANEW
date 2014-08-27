@@ -23,10 +23,10 @@
 		
 		<!-- many to one relationship -->
 		<many-to-one class="uow.ia.bean.Contacts" name="contact">
-			<column name="contact_id" not-null="false"/>
+			<column name="contact_id" not-null="true"/>
 		</many-to-one>
 		<many-to-one class="uow.ia.bean.IndividualCases" name="individualCase">
-			<column name="case_id" not-null="false"/>
+			<column name="case_id" not-null="true"/>
 		</many-to-one>
     </class>
 </hibernate-mapping>

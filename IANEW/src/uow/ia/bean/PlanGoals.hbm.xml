@@ -32,10 +32,10 @@
         
         <!-- Many to one relationship -->
         <many-to-one class="uow.ia.bean.IndividualCases" name="individualCase">
-        	<column name="case_id" not-null="false"/>
+        	<column name="case_id" not-null="true"/>
         </many-to-one>
         <many-to-one class="uow.ia.bean.GoalTypes" name="goalType">
-        	<column name="goal_type_id" not-null="false"/>
+        	<column name="goal_type_id" not-null="true"/>
         </many-to-one>
         <many-to-one class="uow.ia.bean.StatusTypes" name="statusType">
         	<column name="status_id" not-null="true"/>
