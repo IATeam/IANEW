@@ -42,7 +42,7 @@
 					<div class="three columns"><s:select id="theStatus" list="statusSelectList.{statusName}" name="theStatus" headerKey="-1" headerValue="Form Status" /></div>
 					<s:div cssClass="two columns">
 						<s:label for="id" value="Enquiry#:" />
-						<s:property value="id" />
+						<s:property value="model.id" />
 					</s:div>
 				</div>
 			</div>

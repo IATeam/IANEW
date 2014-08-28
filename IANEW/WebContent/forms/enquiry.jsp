@@ -98,8 +98,8 @@
 	//if the enquiry is an existing enquiry 
 	if($("#formTitle").text() === "Existing Enquiry"){
 		alert("existing need to check if status is closed")
-		$("#enquiryForm").find("input").attr("readonly", "true");
-		$("#enquiryForm").find('textarea').attr("readonly", "true");
+		//$("#enquiryForm").find("input").attr("readonly", "true");
+		//$("#enquiryForm").find('textarea').attr("readonly", "true");
 		$("#enquiryForm").find('select').attr("disabled", "disable");
 		$("#enquiryForm").find('input[type="button"]').attr("disabled", "disable");
 		$("#btnView").attr("disabled", null);

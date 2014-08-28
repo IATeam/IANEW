@@ -6,10 +6,9 @@
 		10/08/2014 - 	Added iteration by Quang Nhan
 		14/08/2014 	- 	Connect and retrieve data called by the action class and added 
 						pagination functionality by Quang Nhan
-		16/08/2014 -	Tested s:url workings see comment below. 
-						Moved javascript code to list.js file by Quang Nhan
+		28/08/2014 -	Address of 
 	==============================================	
-	Description: A jsp page that displays a list of enquiries
+	Description: A jsp page that displays a address of contact
 ------------------------------------------------------------------------------------------------>
 
 <h3 class="sixteen columns" style="float:none;">Address</h3>
@@ -26,41 +25,46 @@
 			</div>
 		</div>
 		<s:iterator value="address">
-		<div class="row">
-			<div class="inputfield eight columns">
-				<s:label for="address" value="Address:" />
-				<div><s:textfield id="address" name="address"></s:textfield></div>
+			<div class="row">
+				<div class="inputfield eight columns">
+					<s:label for="address" value="Address:" />
+					<div><s:textfield id="address" name="address"></s:textfield></div>
+				</div>
+				
+				<div class="inputfield four columns">
+					<s:label for="city" value="Suburb" />
+					<div><s:textfield id="city" name="surburb"></s:textfield></div>
+				</div>
+				
+				
+				<div class="inputfield four columns">
+					<s:label for="state" value="State:" />
+					<div><s:textfield id="state" name="state"></s:textfield></div>
+				</div>
 			</div>
 			
-			<div class="inputfield four columns">
-				<s:label for="city" value="Suburb" />
-				<div><s:textfield id="city" name="surburb"></s:textfield></div>
+			<div class="row">
+				<div class="inputfield four columns">
+					<s:label for="country" value="Country:" />
+					<div><s:textfield id="country" name="country"></s:textfield></div>
+				</div>
+				
+				<div class="inputfield four columns">
+					<s:label for="postCode" value="Post Code:" />
+					<div><s:textfield id="postCode" name="postcode"></s:textfield></div>
+				</div>
+				
+				<div class="inputfield four columns">
+					<s:label for="homePhone" value="Home#:"/>
+					<div><s:textfield id="homePhone" name="contact.homephone"></s:textfield></div>
+				</div>
 			</div>
-			
-			
-			<div class="inputfield four columns">
-				<s:label for="state" value="State:" />
-				<div><s:textfield id="state" name="state"></s:textfield></div>
-			</div>
-		</div>
+		</s:iterator>
 		
 		<div class="row">
-			<div class="inputfield four columns">
-				<s:label for="country" value="Country:" />
-				<div><s:textfield id="country" name="country"></s:textfield></div>
-			</div>
-			
-			<div class="inputfield four columns">
-				<s:label for="postCode" value="Post Code:" />
-				<div><s:textfield id="postCode" name="postcode"></s:textfield></div>
-			</div>
-			
-			<div class="inputfield four columns">
-				<s:label for="homePhone" value="Home#:"/>
-				<div><s:textfield id="homePhone" name="contact.homephone"></s:textfield></div>
-			</div>
+			<div class="fourteen columns alpha"><p></p></div>
+			<input type="button" id="btnAddAddress" value="Add Address" class="two columns" />
 		</div>
-		</s:iterator>
 	</fieldset>
 	
 </div>

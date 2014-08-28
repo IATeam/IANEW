@@ -114,6 +114,11 @@ public class NewEnquiryServiceImpl implements
 	}
 	
 	@Override
+	public List<Contacts> findContactsByFullName(String firstName, String lastName) {
+		return contactsDao.find(" from Contacts c where c.firstname = ? and c.lastname = ? ", new Object[] { firstName, lastName }); 
+	}
+	
+	@Override
 	public List<Enquiries> findEnquiries() {
 		return enquiriesDao.find(" from Enquiries");
 	}

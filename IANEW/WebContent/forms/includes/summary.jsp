@@ -19,7 +19,7 @@
 	<fieldset>
 		<s:div cssClass="row">
 			<s:div cssClass="four columns">
-				<s:select  name="" cssClass="four columns" list="#{'1':'type' }" headerKey="-1" headerValue="Type" />
+				<s:select  name="theEnquiryType" cssClass="four columns" list="enquiryTypeSelectList.{enquiryTypeName}" headerKey="-1" headerValue="Type" />
 			</s:div>
 			<s:div cssClass="textarea twelve columns">
 				<s:label for="description" value="Description:" />

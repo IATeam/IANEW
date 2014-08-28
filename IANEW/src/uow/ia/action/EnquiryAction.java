@@ -1,5 +1,7 @@
 package uow.ia.action;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.ParameterizedType;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +12,7 @@ import org.apache.struts2.dispatcher.mapper.ActionMapping;
 import org.apache.struts2.dispatcher.mapper.DefaultActionMapper;
 
 import com.opensymphony.xwork2.ActionContext;
+import com.opensymphony.xwork2.ModelDriven;
 
 import uow.ia.bean.AccommodationTypes;
 import uow.ia.bean.Addresses;
@@ -21,6 +24,7 @@ import uow.ia.bean.DisabilityTypes;
 import uow.ia.bean.EmploymentTypes;
 import uow.ia.bean.Enquiries;
 import uow.ia.bean.EnquiryIssues;
+import uow.ia.bean.EnquiryTypes;
 import uow.ia.bean.GenderTypes;
 import uow.ia.bean.IssueTypes;
 import uow.ia.bean.StatusTypes;
@@ -40,6 +44,8 @@ import uow.ia.bean.TitleTypes;
  * 					Refactor the code
  * 21/08/2014 -		Quang Nhan
  * 					populate today's date for created and updated fields for  new enquiry
+ * 28/08/2014 -		Quang Nhan
+ * 					Save enquiry implemented.Get contact by firstname and last name in new enquiry
  * ==============================================
  * 	Description: An action class to linking the service from spring to the enquiry jsp pages
  *
@@ -53,7 +59,7 @@ public class EnquiryAction extends BaseAction{
 	 * form title (can either be new enquiry/exisiting enquiry/enquiry list)
 	 */
 	private String formTitle;;
-	private Enquiries enquiry;
+	private Enquiries model;
 	private Contacts contact; //not calling from enquiry to allow 'CASE' to share the same include jsp
 	
 	/*
@@ -65,7 +71,7 @@ public class EnquiryAction extends BaseAction{
 	private List<CulturalBackgroundTypes> culturalBackgroundSelectList;	private String theCulturalBackground;
 	private List<AccommodationTypes> accommodationSelectList;			private String theAccommodation;
 	private List<DisabilityTypes> disabilitySelectList;					private String theDisability;
-	private List<Enquiries> enquiryTypeSelectList;						private String theEnquiryType;
+	private List<EnquiryTypes> enquiryTypeSelectList;					private String theEnquiryType;
 	private List<IssueTypes> issueSelectList;							private String theIssue;
 	private List<EmploymentTypes> employmentSelectList;					private String theEmployment;
 	private List<DangerTypes> dangerSelectList;							private String theDanger;
@@ -88,12 +94,9 @@ public class EnquiryAction extends BaseAction{
 	 */
 	private Date createdDate, updatedDate;
 	private String createdBy, updatedBy;
-	private Integer id;
+	//private Integer id;
 	
-	/*
-	 * Referral
-	 */
-	private String inquisitor, referredBy, referredTo;
+	
 	
 	/*
 	 * Employment
@@ -148,11 +151,14 @@ public class EnquiryAction extends BaseAction{
 		activateLists();
 		setCreatedDate(new Date());
 		setUpdatedDate(new Date());
+		model = new Enquiries();
+		contact = new Contacts();
+//		ActionContext context = ActionContext.getContext();
+//		ActionMapping am = new ActionMapping();
+//		Map map = context.getContextMap();
+//		System.out.println("getting action name: " + map.toString());
 		
-		ActionContext context = ActionContext.getContext();
-		ActionMapping am = new ActionMapping();
-		Map map = context.getContextMap();
-		System.out.println("getting action name: " + map.toString());
+		
 		return SUCCESS;
 	}
 
@@ -161,21 +167,22 @@ public class EnquiryAction extends BaseAction{
 	 * @return String
 	 */
 	public String getExistingEnquiry(){
+		activateLists();
 		//System.out.println(getHiddenid());
-		setEnquiry(services.getEnquiry(getHiddenid()));
-		setContact(enquiry.getContact());
+		setModel(services.getEnquiry(getHiddenid()));
+		setContact(model.getContact());
 		
-		setIssueSet(enquiry.getEnquiryIssuesSet());
+		setIssueSet(model.getEnquiryIssuesSet());
 		setClientDisabilitiesSet(contact.getDisabilitiesSet());
-		setLinkedEnquiriesSet(enquiry.getEnquiriesSet());
+		setLinkedEnquiriesSet(model.getEnquiriesSet());
 	
 		//LATER
 		//setCreatedBy();
 		//setUpdatedBy(contact.);
-		setCreatedDate(enquiry.getCreatedDateTime());
-		setUpdatedDate(enquiry.getUpdatedDateTime());
-		setId(enquiry.getId());
-		setDescription(enquiry.getDescription());
+		setCreatedDate(model.getCreatedDateTime());
+		setUpdatedDate(model.getUpdatedDateTime());
+		//setId(model.getId());
+		setDescription(model.getDescription());
 		setAddress(contact.getAddressesSet());
 		if(null != contact.getGenderType())
 			setTheGender(contact.getGenderType().getGenderName());
@@ -186,17 +193,22 @@ public class EnquiryAction extends BaseAction{
 		setTheTitle(contact.getTitleType().getName());
 		//setTheEmployment(contact.getEmploymentsTypeSet());
 		setTheEmployment("Kim change databse need chagne code for this part");
-		setTheCulturalBackground(contact.getCulturalBackground().getCulturalBackgroundName());
+		//setTheCulturalBackground(contact.getCulturalBackground().getCulturalBackgroundName());
 		setTheAccommodation(contact.getAccommodation().getAccommodationName());
-		setTheStatus(enquiry.getStatusType().getStatusName());
+		setTheStatus(model.getStatusType().getStatusName());
 		
 		
-		setInquisitor(enquiry.getInquisitor());
-		setReferredBy(enquiry.getReferralBy());
-		setReferredTo(enquiry.getReferralTo());
+//		setInquisitor(model.getInquisitor());
+//		setReferredBy(model.getReferralBy());
+//		setReferredTo(model.getReferralTo());
 		
-		activateLists();
 		
+		
+		return SUCCESS;
+	}
+	
+	public String checkContactExists(){
+		//services.findContactsByFullName(, lastName);
 		return SUCCESS;
 	}
 	
@@ -205,22 +217,29 @@ public class EnquiryAction extends BaseAction{
 	 * @return String
 	 */
 	public String saveUpdateEnquiry(){ 
-		System.out.println("in save update");
-		Enquiries newEnquiry = new Enquiries();
-		Contacts newContact = new Contacts();
+//		System.out.println("in save update");
+//		Enquiries newEnquiry = new Enquiries();
+//		Contacts newContact = new Contacts();
 		
 //		newEnquiry.setCreatedDateTime(getCreatedDate());
 //		newEnquiry.setCreatedUserId(1);
 //		newEnquiry.setUpdatedDateTime(getCreatedDate());
 //		newEnquiry.setUpdatedUserId(1);
 		
-		newEnquiry.setDescription(getDescription());
-		newEnquiry.setInquisitor(getInquisitor());
+//		newEnquiry.setDescription(getDescription());
+//		newEnquiry.setInquisitor(getInquisitor());
+//		
+//		newContact.setFirstname(contact.getFirstname());
+//		newContact.setLastname(contact.getLastname());
+//		
+//		services.saveOrUpdateEnquiry(newEnquiry, newContact);
+		//if(titleSelectList.equals(null))
 		
-		newContact.setFirstname(contact.getFirstname());
-		newContact.setLastname(contact.getLastname());
+//		Contacts newContact = new Contacts();
+//		populateContact(newContact);
 		
-		services.saveOrUpdateNewEnquiry(newEnquiry, newContact);
+		System.out.println("model" + model.getReferralBy());
+		//services.saveOrUpdateEnquiry(enquiry, contact);
 		
 		return SUCCESS;
 	}
@@ -273,7 +292,7 @@ public class EnquiryAction extends BaseAction{
 	 * populate the Select List variables
 	 */
 	private void activateLists(){
-		titleSelectList=services.findTitleTypes();
+		setTitleSelectList(services.findTitleTypes());
 		genderSelectList=services.findGenderTypes();
 		culturalBackgroundSelectList=services.findCulturalBackgroundTypes();
 		accommodationSelectList = services.findAccommodationTypes();
@@ -283,8 +302,42 @@ public class EnquiryAction extends BaseAction{
 		//employmentSelectList = services.findEmploymentTypes();
 		//setEmploymentList(contact.getEmploymentType());
 		statusSelectList = services.findStatusTypes();
+		enquiryTypeSelectList = services.findEnquiryTypes();
 	}
 	
+	/**
+	 * private method used by saveAndUpdateEnquiry to populate a Contacts object
+	 * @param Contacts c
+	 */
+	private void populateContact(Contacts c){
+		//getters for types
+		//services.getAccommodationId(getTheAccommodation());
+		//services.getGenderId(getTheGender());
+		//services.getDisabilityId(getTheDisability());
+		//services.getEnquiryId(getThe)
+		
+		String title = getTheTitle();;
+		int index;
+		//System.out.println(getTitleSelectList().toString());
+		//titleSelectList.
+		//System.out.println("theDanger: position" + index);
+		//c.setDangerType(getDangerSelectList().get(position));
+	}
+	
+	public void setTitleSelectList(List<TitleTypes> titleSelectList) {
+		this.titleSelectList = titleSelectList;
+	}
+
+	//private int getIndex(String name, List<?> obj) throws NoSuchFieldException, SecurityException{
+//		int index;
+//		for(Object o: obj){
+//			//if(name.equals(((Field) o).getName()))
+//			if(o.getClass().equals(TitleTypes.class))
+//				if(name.equals(((TitleTypes) o).getName())
+//						index= ((TitleTypes) o).getId();
+//		}
+//		return index;
+	//}
 	
 	/**
 	 * Getter for the form title
@@ -303,16 +356,16 @@ public class EnquiryAction extends BaseAction{
 	}
 	
 
-	public Enquiries getEnquiry(){
-		return enquiry;
+	public Enquiries getModel(){
+		return model;
 	}
 
 	/**
 	 * Setter for enquiry
 	 * @param enquiry
 	 */
-	public void setEnquiry(Enquiries enquiry){
-		this.enquiry = enquiry;
+	public void setModel(Enquiries enquiry){
+		this.model = enquiry;
 	}
 	
 	public Contacts getContact() {
@@ -500,11 +553,21 @@ public class EnquiryAction extends BaseAction{
 		this.description = description;
 	}
 
-	
+	public List<EnquiryTypes> getEnquiryTypeSelectList() {
+		return enquiryTypeSelectList;
+	}
 
-	/*------------------------------------------------Pagination Variables
-	 * 
-	 */
+	public void setEnquiryTypeSelectList(List<EnquiryTypes> enquiryTypeSelectList) {
+		this.enquiryTypeSelectList = enquiryTypeSelectList;
+	}
+
+	public String getTheEnquiryType() {
+		return theEnquiryType;
+	}
+
+	public void setTheEnquiryType(String theEnquiryType) {
+		this.theEnquiryType = theEnquiryType;
+	}
 
 	public Set<EnquiryIssues> getIssueSet() {
 		return issueSet;
@@ -611,50 +674,57 @@ public class EnquiryAction extends BaseAction{
 	 * Getter for inquisitor
 	 * @return
 	 */
-	public String getInquisitor() {
-		return inquisitor;
-	}
+//	public String getInquisitor() {
+//		return inquisitor;
+//	}
+//
+//	/**
+//	 * Setter for inquisitor
+//	 * @param inquisitor
+//	 */
+//	public void setInquisitor(String inquisitor) {
+//		this.inquisitor = inquisitor;
+//	}
+//
+//	/**
+//	 * Getter for referred by
+//	 * @return String
+//	 */
+//	public String getReferredBy() {
+//		return referredBy;
+//	}
+//
+//	/**
+//	 * Setter for referred by
+//	 * @param referredBy
+//	 */
+//	public void setReferredBy(String referredBy) {
+//		this.referredBy = referredBy;
+//	}
+//
+//	/**
+//	 * Getter for referred to
+//	 * @return
+//	 */
+//	public String getReferredTo() {
+//		return referredTo;
+//	}
+//
+//	/**
+//	 * Setter for referred to
+//	 * @param referredTo
+//	 */
+//	public void setReferredTo(String referredTo) {
+//		this.referredTo = referredTo;
+//	}
 
-	/**
-	 * Setter for inquisitor
-	 * @param inquisitor
+	
+
+	
+	/*------------------------------------------------Pagination Variables
+	 * 
 	 */
-	public void setInquisitor(String inquisitor) {
-		this.inquisitor = inquisitor;
-	}
-
-	/**
-	 * Getter for referred by
-	 * @return String
-	 */
-	public String getReferredBy() {
-		return referredBy;
-	}
-
-	/**
-	 * Setter for referred by
-	 * @param referredBy
-	 */
-	public void setReferredBy(String referredBy) {
-		this.referredBy = referredBy;
-	}
-
-	/**
-	 * Getter for referred to
-	 * @return
-	 */
-	public String getReferredTo() {
-		return referredTo;
-	}
-
-	/**
-	 * Setter for referred to
-	 * @param referredTo
-	 */
-	public void setReferredTo(String referredTo) {
-		this.referredTo = referredTo;
-	}
-
+	
 	/**
 	 * Getter for page
 	 * @return
@@ -731,4 +801,5 @@ public class EnquiryAction extends BaseAction{
 	public void setTotalNumberOfPages(int totalNumberOfPages) {
 		this.totalNumberOfPages = totalNumberOfPages;
 	}
+
 }
