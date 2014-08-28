@@ -15,7 +15,13 @@
 				displays the personal detail.
 ------------------------------------------------------------------------------------------------>
 
-<h3 class="sixteen columns"  style="float:none;">Personal Details</h3>
+<s:if test="%{#formType=='case'}">
+	<h3 class="sixteen columns"  style="float:none;">Protege Details</h3>
+</s:if>
+<s:elseif test="%{#formType=='enquiry'}">
+	<h3 class="sixteen columns"  style="float:none;">Personal Details</h3>
+</s:elseif>
+
 <div class="fieldsetborder">
 	<fieldset>
 	

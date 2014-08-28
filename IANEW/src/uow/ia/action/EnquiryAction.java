@@ -73,7 +73,7 @@ public class EnquiryAction extends BaseAction{
 	private List<EmploymentTypes> employmentSelectList;					private String theEmployment;
 	private List<DangerTypes> dangerSelectList;							private String theDanger;
 	//Status_Type or criteria control value table 
-	private List<StatusTypes> enquiryStatusSelectList;					private String theEnquiryStatus;
+	private List<StatusTypes> statusSelectList;					private String theEnquiryStatus;
 	
 
 
@@ -268,7 +268,7 @@ public class EnquiryAction extends BaseAction{
 		dangerSelectList = services.findDangerTypes();
 		employmentSelectList = services.findEmploymentTypes();
 		//setEmploymentList(contact.getEmploymentType());
-		enquiryStatusSelectList = services.findStatusTypes();
+		statusSelectList = services.findStatusTypes();
 	}
 	
 	
@@ -448,18 +448,17 @@ public class EnquiryAction extends BaseAction{
 	 * Getter for enquiry status select list
 	 * @return
 	 */
-	public List<StatusTypes> getEnquiryStatusSelectList() {
-		return enquiryStatusSelectList;
+	public List<StatusTypes> getStatusSelectList() {
+		return statusSelectList;
 	}
 	/**
 	 * setter for enquiry status select list
 	 * @param enquiryStatusSelectList
 	 */
-	public void setEnquiryStatusSelectList(List<StatusTypes> enquiryStatusSelectList) {
-		this.enquiryStatusSelectList = enquiryStatusSelectList;
+	public void setStatusSelectList(List<StatusTypes> statusSelectList) {
+		this.statusSelectList = statusSelectList;
 	}
 
-	
 	/**
 	 * @return
 	 */

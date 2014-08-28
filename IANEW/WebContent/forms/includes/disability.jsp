@@ -74,9 +74,8 @@
 	</article>
 	
 	<div class="row">
-		<input type="button" id="btnNewDisability" value ="New Disability" class="two columns" />
-		<div class="twelve columns alpha"><p></p></div>
-		<input type="button" id="btnAddDisability" value="Add Disability" class="two columns" />
+		<div class="thirteen columns alpha"><p></p></div>
+		<input type="button" id="btnAddDisability" value="Add Disability" class="three columns" />
 	</div>
 	
 	<script>

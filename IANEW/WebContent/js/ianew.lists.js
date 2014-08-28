@@ -86,13 +86,27 @@ $('#new').click(function(){
 	//alert($('#enquiryID').val())
 });
 
+function showAdvocates(){
+	var buttonText = $("#btnAdvocateDetails").val();
+	if (buttonText == "Show Advocate Details")
+	{
+		$("#btnAdvocateDetails").val('Hide Advocate Details');
+
+	}
+	else
+	{
+		$("#btnAdvocateDetails").val('Show Advocate Details');
+	}
+
+	$('.toggled').slideToggle();
+}
+
 function bandSelected(selectedDiv){
 	deselectAll();
 	$(selectedDiv).addClass("listSelected");
 	
 	//shows and hide the enquiry/case descriptions
-	//alert(selectedDiv);
-	
+
 	$(selectedDiv).children("div").last().slideToggle();
 	
 	//sets the value for the hidden enquiry id holder field

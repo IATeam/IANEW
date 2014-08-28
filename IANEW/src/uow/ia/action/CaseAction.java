@@ -16,6 +16,7 @@ import uow.ia.bean.IndividualCases;
 import uow.ia.bean.CaseIssues;
 import uow.ia.bean.GenderTypes;
 import uow.ia.bean.IssueTypes;
+import uow.ia.bean.StatusTypes;
 import uow.ia.bean.TitleTypes;
 
 /** ---------------------------------------------------------------------------------------------
@@ -60,7 +61,7 @@ public class CaseAction extends BaseAction{
 	private List<EmploymentTypes> employmentSelectList;					private String theEmployment;
 	private List<DangerTypes> dangerSelectList;							private String theDanger;
 	//Status_Type or criteria control value table 
-	private List<String> statusSelectList;								private String theStatus;
+	private List<StatusTypes> statusSelectList;								private String theStatus;
 	
 
 	/*
@@ -227,9 +228,25 @@ public class CaseAction extends BaseAction{
 		disabilitySelectList = caseServices.findDisabilityTypes();
 		issueSelectList = caseServices.findIssueTypes();
 		dangerSelectList = caseServices.findDangerTypes();
+		statusSelectList = services.findStatusTypes();
 		//employmentSelectList = caseServices.findEmploymentTypes();
 		//setEmploymentList(contact.getEmploymentType());
 	}
+	
+	
+	public void setStatusSelectList(List<StatusTypes> statusSelectList) {
+		this.statusSelectList = statusSelectList;
+		}
+		public List<StatusTypes> getStatusSelectList() {
+		return statusSelectList;
+		}
+		public void setTheStatus(String theStatus) {
+		this.theStatus = theStatus;
+		}
+		public String getTheStatus() {
+		return theStatus;
+		}
+	
 	
 	
 	/**

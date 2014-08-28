@@ -36,15 +36,24 @@
 				<!-- <s:text id="lastUpdatedBy" name="" /> -->
 			</div>
 			<div class="nine columns">
-				<div class="row">
 			
 					<div class="three columns"><s:select list="dangerSelectList.{dangerName}" name="theDanger" headerKey="-1" headerValue="Flag Danger" /></div>
-					<div class="three columns"><s:select id="enquiryStatus" list="enquiryStatusSelectList.{statusName}" name="theEnquiryStatus" headerKey="-1" headerValue="Enquiry Status" /></div>
-					<s:div cssClass="two columns">
-						<s:label for="id" value="Enquiry#:" />
-						<s:property value="id" />
-					</s:div>
+					<s:if test="%{#formType=='case'}">
+						<div class="three columns"><s:select id="status" list="statusSelectList.{statusName}" name="theCaseStatus" headerKey="-1" headerValue="Case Status" /></div>
+						<s:div cssClass="two columns">
+							<s:label for="id" value="Case#:" />
+							<s:property value="id" />
+						</s:div>
+												<div class="three columns"><s:select list="dangerSelectList.{dangerName}" name="theDanger" headerKey="-1" headerValue="Priority Level" /></div>
+						
+					</s:if>					
+					<s:elseif test="%{#formType=='enquiry'}">
+						<div class="three columns"><s:select id="status" list="statusSelectList.{statusName}" name="theEnquiryStatus" headerKey="-1" headerValue="Enquiry Status" /></div>
+						<s:div cssClass="two columns">
+							<s:label for="id" value="Enquiry#:" />
+							<s:property value="id" />
+						</s:div>
+					</s:elseif>				
 				</div>
-			</div>
 		</div>
 </div>

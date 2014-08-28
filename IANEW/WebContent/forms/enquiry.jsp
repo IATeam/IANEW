@@ -47,6 +47,7 @@
 
 </head>
 <body>
+	<s:set var="formType">enquiry</s:set>
 	<s:div cssClass="form container">
 	<s:form id="enquiryForm" cssClass="cmxform" namespace='/enquiry' method="post" novalidate="novalidate">  
 <!-- ---------------------------------------------------------------------------------------------- -->

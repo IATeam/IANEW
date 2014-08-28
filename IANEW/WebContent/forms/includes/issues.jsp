@@ -27,31 +27,77 @@
 <s:div cssClass="greybackground">
 	<%-- <s:if test="" > --%>
 	<article id="itIssue">
-		<s:iterator value="issueSet">
+		<s:iterator value="issueSet">		
 			<section class="secIssue sixteen columns curveBorder">
-				<div class="four columns"><s:select list="issueSelectList.{issueName}" name="getIssue().issueName" headerKey="-1" headerValue="Select an Issue" /></div>
+			<div class="row">
+			<div class="four columns"><s:select list="issueSelectList.{issueName}" name="" headerKey="-1" headerValue="Select an Issue" /></div>
+			<s:if test="%{#formType=='case'}">
+				<div class="three columns">
+				<s:label for="createdDate" value="Created Date:" />
+				    <s:date name="createdDate" format="dd/MM/yyyy"/>
+			    </div>
+			    <div class="three columns">
+				<s:label for="createdBy" value="Created By:" />
+				    <s:date name="createdBy" format="dd/MM/yyyy"/>
+			    </div>
+			    <div class="three columns">
+					<s:label for="completedDate" value="Completed Date:"  />
+				    <s:date name="completedDate" format="dd/MM/yyyy"/>
+			    </div>
+				    <div class="three columns"><s:select list="issueSelectList.{issueName}" value="issue" name="" headerKey="-1" headerValue="Status" /></div>
+				</div>
+				<div class="row">
+					<div class="textarea fifteen columns omega">
+					<s:label for="comments" value="Comments:" />
+					<s:textarea id="" cssClass="oneLineTextArea" name=""/> 
+					</div>
+				</div>
+			</s:if>
+			<s:elseif test="%{#formType=='enquiry'}">
 				<div class="textarea eleven columns omega">
 					<s:label for="issuedescription" value="Issue Description:" />
-					<s:textarea id="" cssClass="oneLineTextArea" name="comment"/> 
-				</div>
-			</section>
+					<s:textarea id="" cssClass="oneLineTextArea" name="" /> 
+			</s:elseif>
+		</section>
 		</s:iterator>
 	</article>
 	
-	
 	<article id="artIssue" class="row" style="visibility: hidden; display: none;">
 		<section class="secIssue sixteen columns curveBorder">
-			<div class="four columns"><s:select list="issueSelectList.{issueName}" name="getIssue().issueName" headerKey="-1" headerValue="Select an Issue" /></div>
-			<div class="textarea eleven columns omega">
-				<s:label for="issuedescription" value="Issue Description:" />
-				<s:textarea id="" cssClass="oneLineTextArea" name="" /> 
-			</div>
+			<div class="row">
+			<div class="three columns"><s:select list="issueSelectList.{issueName}" name="" headerKey="-1" headerValue="Select an Issue" /></div>
+			<s:if test="%{#formType=='case'}">
+				<div class="three columns">
+				<s:label for="createdDate" value="Created Date:" />
+				    <s:date name="createdDate" format="dd/MM/yyyy"/>
+			    </div>
+			    <div class="three columns">
+				<s:label for="createdBy" value="Created By:" />
+				    <s:date name="createdBy" format="dd/MM/yyyy"/>
+			    </div>
+			    <div class="three columns">
+					<s:label for="completedDate" value="Completed Date:"  />
+				    <s:date name="completedDate" format="dd/MM/yyyy"/>
+			    </div>
+				    <div class="three columns"><s:select list="issueSelectList.{issueName}" value="issue" name="" headerKey="-1" headerValue="Status" /></div>
+				</div>
+				<div class="row">
+					<div class="textarea fifteen columns omega">
+					<s:label for="comments" value="Comments:" />
+					<s:textarea id="" cssClass="oneLineTextArea" name=""/> 
+					</div>
+				</div>
+			</s:if>
+			<s:elseif test="%{#formType=='enquiry'}">
+				<div class="textarea eleven columns omega">
+					<s:label for="issuedescription" value="Issue Description:" />
+					<s:textarea id="" cssClass="oneLineTextArea" name="" /> 
+			</s:elseif>
 		</section>
 	</article>
 	<div class="row">
-		<input type="button" id="btnNewIssue" value="New Issue" class="two columns" />
-		<div class="twelve columns alpha"><p></p></div>
-		<input type="button" id="btnAddIssue" value="Add Issue" class="two columns" />
+		<div class="thirteen columns alpha"><p></p></div>
+		<input type="button" id="btnAddIssue" value="Add Issue" class="three columns" />
 	</div>
 	
 	<script>
