@@ -9,7 +9,7 @@ import java.util.Set;
 /**
  * Bean class for Individual Case
  * @author Kim To
- * @version 1.0.4, 27/08/2014
+ * @version 1.0.5, 28/08/2014
  */
 public class IndividualCases implements java.io.Serializable {
 
@@ -30,6 +30,7 @@ public class IndividualCases implements java.io.Serializable {
 	private Enquiries relatedEnquiry;
 	private Plans plan;
 	private Set<PlanGoals> planGoalsSet = new HashSet<PlanGoals>();
+	private Set<PlanDevelopers> planDevelopersSet = new HashSet<PlanDevelopers>();
 	
 	private Set<IndividualCases> individualCasesSet = new HashSet<IndividualCases>();
 	
@@ -42,6 +43,7 @@ public class IndividualCases implements java.io.Serializable {
 	public IndividualCases() {
 		// TODO Auto-generated constructor stub
 	}
+
 
 
 	/**
@@ -62,6 +64,7 @@ public class IndividualCases implements java.io.Serializable {
 	 * @param relatedEnquiry
 	 * @param plan
 	 * @param planGoalsSet
+	 * @param planDevelopersSet
 	 * @param individualCasesSet
 	 * @param caseIssuesSet
 	 * @param communicationsSet
@@ -72,7 +75,7 @@ public class IndividualCases implements java.io.Serializable {
 			Date createdDateTime, Integer createdUserId, Date updatedDateTime,
 			Integer updatedUserId, String referredTo, Set<Risks> risksSet,
 			IndividualCases oldCase, Enquiries relatedEnquiry, Plans plan,
-			Set<PlanGoals> planGoalsSet,
+			Set<PlanGoals> planGoalsSet, Set<PlanDevelopers> planDevelopersSet,
 			Set<IndividualCases> individualCasesSet,
 			Set<CaseIssues> caseIssuesSet,
 			Set<IndividualCaseCommunications> communicationsSet) {
@@ -94,10 +97,12 @@ public class IndividualCases implements java.io.Serializable {
 		this.relatedEnquiry = relatedEnquiry;
 		this.plan = plan;
 		this.planGoalsSet = planGoalsSet;
+		this.planDevelopersSet = planDevelopersSet;
 		this.individualCasesSet = individualCasesSet;
 		this.caseIssuesSet = caseIssuesSet;
 		this.communicationsSet = communicationsSet;
 	}
+
 
 
 	/**
@@ -348,6 +353,24 @@ public class IndividualCases implements java.io.Serializable {
 	public void setPlanGoalsSet(Set<PlanGoals> planGoalsSet) {
 		this.planGoalsSet = planGoalsSet;
 	}
+
+
+	/**
+	 * @return the planDevelopersSet
+	 */
+	public Set<PlanDevelopers> getPlanDevelopersSet() {
+		return planDevelopersSet;
+	}
+
+
+
+	/**
+	 * @param planDevelopersSet the planDevelopersSet to set
+	 */
+	public void setPlanDevelopersSet(Set<PlanDevelopers> planDevelopersSet) {
+		this.planDevelopersSet = planDevelopersSet;
+	}
+
 
 
 	/**

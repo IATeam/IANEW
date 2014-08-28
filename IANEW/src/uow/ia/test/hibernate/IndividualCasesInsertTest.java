@@ -23,6 +23,7 @@ import uow.ia.bean.EnquiryIssues;
 import uow.ia.bean.IndividualCaseCommunications;
 import uow.ia.bean.IndividualCases;
 import uow.ia.bean.IssueTypes;
+import uow.ia.bean.PlanDevelopers;
 import uow.ia.bean.PlanGoals;
 import uow.ia.bean.Plans;
 import uow.ia.bean.Risks;
@@ -33,6 +34,11 @@ import uow.ia.bean.PriorityTypes;
 
 /*
  * Test to insert a new individual case for an existing contact
+ * 1. save case object, or
+ * 2. save contact associated with this case.
+ * 
+ * @author Kim To
+ * @version 1.0.1, 28/08/2014
  */
 public class IndividualCasesInsertTest {
 	private Logger logger = Logger.getLogger(IndividualCasesInsertTest.class);
@@ -101,13 +107,19 @@ public class IndividualCasesInsertTest {
 	
 		iCase.getPlanGoalsSet().add(goal);
 		
+		PlanDevelopers developer = new PlanDevelopers();
+		developer.setContact((Contacts)session.get(Contacts.class, 1));
+		developer.setIndividualCase(iCase);
+		
+		iCase.getPlanDevelopersSet().add(developer);
+		
 		contact.getIndividualCasesSet().add(iCase);
 		
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			//session.saveOrUpdate(iCase);
-			session.saveOrUpdate(contact);
+			session.saveOrUpdate(iCase);
+			//session.saveOrUpdate(contact);
 			tx.commit();
 		} catch (Exception e) {
 			tx.rollback();
@@ -120,7 +132,6 @@ public class IndividualCasesInsertTest {
 			System.out.println("risk id: " + risk.getId());
 			System.out.println("goal id: " + goal.getId());
 		}
-		
 	}
 	
 	@AfterMethod

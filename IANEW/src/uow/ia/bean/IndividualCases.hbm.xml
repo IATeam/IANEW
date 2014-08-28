@@ -67,6 +67,13 @@
         	<one-to-many class="uow.ia.bean.PlanGoals"/>
         </set>
         
+        <set fetch="select" inverse="true" name="planDevelopersSet" table="Plan_Developers" order-by="id"  cascade="save-update, delete, delete-orphan">
+		  	<key>
+		  		<column name="case_id" not-null="false"/>
+		  	</key>
+			<one-to-many class="uow.ia.bean.PlanDevelopers"/>
+		</set>
+        
         <!-- One to one relationship -->
         <one-to-one name="plan" class="uow.ia.bean.Plans" cascade="save-update, delete"></one-to-one>
         
