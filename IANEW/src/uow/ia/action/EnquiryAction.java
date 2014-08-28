@@ -266,7 +266,7 @@ public class EnquiryAction extends BaseAction{
 		disabilitySelectList = services.findDisabilityTypes();
 		issueSelectList = services.findIssueTypes();
 		dangerSelectList = services.findDangerTypes();
-		//employmentSelectList = services.findEmploymentTypes();
+		employmentSelectList = services.findEmploymentTypes();
 		//setEmploymentList(contact.getEmploymentType());
 		enquiryStatusSelectList = services.findStatusTypes();
 	}
