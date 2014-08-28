@@ -9,7 +9,7 @@ import java.util.Set;
 /**
  * Bean class for Individual Case
  * @author Kim To
- * @version 1.0.5, 28/08/2014
+ * @version 1.0.6, 28/08/2014
  */
 public class IndividualCases implements java.io.Serializable {
 
@@ -323,7 +323,7 @@ public class IndividualCases implements java.io.Serializable {
 	 * @return the plan
 	 */
 	public Plans getPlan() {
-		return plan;
+		return this.plan;
 	}
 
 
@@ -343,7 +343,7 @@ public class IndividualCases implements java.io.Serializable {
 	 * @return the planGoalsSet
 	 */
 	public Set<PlanGoals> getPlanGoalsSet() {
-		return planGoalsSet;
+		return this.planGoalsSet;
 	}
 
 
@@ -359,7 +359,7 @@ public class IndividualCases implements java.io.Serializable {
 	 * @return the planDevelopersSet
 	 */
 	public Set<PlanDevelopers> getPlanDevelopersSet() {
-		return planDevelopersSet;
+		return this.planDevelopersSet;
 	}
 
 
