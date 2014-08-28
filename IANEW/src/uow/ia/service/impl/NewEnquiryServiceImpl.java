@@ -172,11 +172,11 @@ public class NewEnquiryServiceImpl implements NewEnquiryService {
 
 	@Override
 	public int getDangerTypeId(String name) {
-		DangerTypes d = dangerTypesDao.get(
+		DangerTypes o = dangerTypesDao.get(
 				" from DangerTypes t where t.dangerName =?",
 				new Object[] { name });
-		if (d != null) {
-			return d.getId();
+		if (o != null) {
+			return o.getId();
 		} else {
 			return -1;
 		}
@@ -189,11 +189,11 @@ public class NewEnquiryServiceImpl implements NewEnquiryService {
 
 	@Override
 	public int getStatusTypeId(String name) {
-		StatusTypes s = statusTypesDao.get(
+		StatusTypes o = statusTypesDao.get(
 				" from StatusTypes t where t.statusName =?",
 				new Object[] { name });
-		if (s != null) {
-			return s.getId();
+		if (o != null) {
+			return o.getId();
 		} else {
 			return -1;
 		}
@@ -206,11 +206,11 @@ public class NewEnquiryServiceImpl implements NewEnquiryService {
 
 	@Override
 	public int getTitleTypeId(String name) {
-		TitleTypes t = titleTypesDao.get(
+		TitleTypes o = titleTypesDao.get(
 				" from TitleTypes t where t.name =?",
 				new Object[] { name });
-		if (t != null) {
-			return t.getId();
+		if (o != null) {
+			return o.getId();
 		} else {
 			return -1;
 		}
@@ -223,11 +223,11 @@ public class NewEnquiryServiceImpl implements NewEnquiryService {
 	
 	@Override
 	public int getGenderTypeId(String name) {
-		GenderTypes g = genderTypesDao.get(
+		GenderTypes o = genderTypesDao.get(
 				" from GenderTypes t where t.genderName =?",
 				new Object[] { name });
-		if (g != null) {
-			return g.getId();
+		if (o != null) {
+			return o.getId();
 		} else {
 			return -1;
 		}
@@ -240,11 +240,11 @@ public class NewEnquiryServiceImpl implements NewEnquiryService {
 
 	@Override
 	public int getCulturalBackgroundTypeId(String name) {
-		CulturalBackgroundTypes c = culturalBackgroundTypesDao
+		CulturalBackgroundTypes o = culturalBackgroundTypesDao
 				.get(" from CulturalBackgroundTypes t where t.culturalBackgroundName =?",
 						new Object[] { name });
-		if (c != null) {
-			return c.getId();
+		if (o != null) {
+			return o.getId();
 		} else {
 			return -1;
 		}
@@ -257,11 +257,11 @@ public class NewEnquiryServiceImpl implements NewEnquiryService {
 
 	@Override
 	public int getAccommodationTypeId(String name) {
-		AccommodationTypes a = accommodationTypesDao.get(
+		AccommodationTypes o = accommodationTypesDao.get(
 				" from AccommodationTypes t where t.accommodationName =?",
 				new Object[] { name });
-		if (a != null) {
-			return a.getId();
+		if (o != null) {
+			return o.getId();
 		} else {
 			return -1;
 		}
@@ -274,11 +274,11 @@ public class NewEnquiryServiceImpl implements NewEnquiryService {
 
 	@Override
 	public int getDisabilityTypeId(String name) {
-		DisabilityTypes d = disabilityTypesDao.get(
+		DisabilityTypes o = disabilityTypesDao.get(
 				" from DisabilityTypes t where t.disabilityName =?",
 				new Object[] { name });
-		if (d != null) {
-			return d.getId();
+		if (o != null) {
+			return o.getId();
 		} else {
 			return -1;
 		}
@@ -291,11 +291,11 @@ public class NewEnquiryServiceImpl implements NewEnquiryService {
 
 	@Override
 	public int getIssueTypeId(String name) {
-		IssueTypes i = issueTypesDao.get(
+		IssueTypes o = issueTypesDao.get(
 				" from IssueTypes t where t.issueName =?",
 				new Object[] { name });
-		if (i != null) {
-			return i.getId();
+		if (o != null) {
+			return o.getId();
 		} else {
 			return -1;
 		}
@@ -308,11 +308,11 @@ public class NewEnquiryServiceImpl implements NewEnquiryService {
 
 	@Override
 	public int getEnquiryTypeId(String name) {
-		EnquiryTypes i = enquiryTypesDao.get(
+		EnquiryTypes o = enquiryTypesDao.get(
 				" from EnquiryTypes t where t.enquiryTypeName =?",
 				new Object[] { name });
-		if (i != null) {
-			return i.getId();
+		if (o != null) {
+			return o.getId();
 		} else {
 			return -1;
 		}
@@ -325,16 +325,186 @@ public class NewEnquiryServiceImpl implements NewEnquiryService {
 	
 	@Override
 	public int getEmploymentTypeId(String name) {
-		EmploymentTypes i = employmentTypesDao.get(
+		EmploymentTypes o = employmentTypesDao.get(
 				" from EmploymentTypes t where t.employmentName =?",
 				new Object[] { name });
-		if (i != null) {
-			return i.getId();
+		if (o != null) {
+			return o.getId();
 		} else {
 			return -1;
 		}
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see uow.ia.service.NewEnquiryService#getDangerType(java.lang.String)
+	 */
+	
+	@Override
+	public DangerTypes getDangerTypeByName(String name) {
+		DangerTypes o = dangerTypesDao.get(
+				" from DangerTypes t where t.dangerName =?",
+				new Object[] { name });
+		if (o != null) {
+			return o;
+		} else {
+			return null;
+		}
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see uow.ia.service.NewEnquiryService#getStatusType(java.lang.String)
+	 */
+	
+	@Override
+	public StatusTypes getStatusTypeByName(String name) {
+		StatusTypes o = statusTypesDao.get(
+				" from StatusTypes t where t.statusName =?",
+				new Object[] { name });
+		if (o != null) {
+			return o;
+		} else {
+			return null;
+		}
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see uow.ia.service.NewEnquiryService#getTitleType(java.lang.String)
+	 */
+
+	@Override
+	public TitleTypes getTitleTypeByName(String name) {
+		TitleTypes o = titleTypesDao.get(
+				" from TitleTypes t where t.name =?",
+				new Object[] { name });
+		if (o != null) {
+			return o;
+		} else {
+			return null;
+		}
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see uow.ia.service.NewEnquiryService#getGenderType(java.lang.String)
+	 */
+
+	@Override
+	public GenderTypes getGenderTypeByName(String name) {
+		GenderTypes o = genderTypesDao.get(
+				" from GenderTypes t where t.genderName =?",
+				new Object[] { name });
+		if (o != null) {
+			return o;
+		} else {
+			return null;
+		}
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see uow.ia.service.NewEnquiryService#getCulturalBackgroundType(java.lang.String)
+	 */
+
+	@Override
+	public CulturalBackgroundTypes getCulturalBackgroundTypeByName(String name) {
+		CulturalBackgroundTypes o = culturalBackgroundTypesDao
+				.get(" from CulturalBackgroundTypes t where t.culturalBackgroundName =?",
+						new Object[] { name });
+		if (o != null) {
+			return o;
+		} else {
+			return null;
+		}
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see uow.ia.service.NewEnquiryService#getAccommodationType(java.lang.String)
+	 */
+
+	@Override
+	public AccommodationTypes getAccommodationTypeByName(String name) {
+		AccommodationTypes o = accommodationTypesDao.get(
+				" from AccommodationTypes t where t.accommodationName =?",
+				new Object[] { name });
+		if (o != null) {
+			return o;
+		} else {
+			return null;
+		}
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see uow.ia.service.NewEnquiryService#getDisabilityType(java.lang.String)
+	 */
+
+	@Override
+	public DisabilityTypes getDisabilityTypeByName(String name) {
+		DisabilityTypes o = disabilityTypesDao.get(
+				" from DisabilityTypes t where t.disabilityName =?",
+				new Object[] { name });
+		if (o != null) {
+			return o;
+		} else {
+			return null;
+		}
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see uow.ia.service.NewEnquiryService#getIssueType(java.lang.String)
+	 */
+	
+	@Override
+	public IssueTypes getIssueTypeByName(String name) {
+		IssueTypes o = issueTypesDao.get(
+				" from IssueTypes t where t.issueName =?",
+				new Object[] { name });
+		if (o != null) {
+			return o;
+		} else {
+			return null;
+		}
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see uow.ia.service.NewEnquiryService#getEnquiryType(java.lang.String)
+	 */
+
+	@Override
+	public EnquiryTypes getEnquiryTypeByName(String name) {
+		EnquiryTypes o = enquiryTypesDao.get(
+				" from EnquiryTypes t where t.enquiryTypeName =?",
+				new Object[] { name });
+		if (o != null) {
+			return o;
+		} else {
+			return null;
+		}
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see uow.ia.service.NewEnquiryService#getEmploymentType(java.lang.String)
+	 */
+
+	@Override
+	public EmploymentTypes getEmploymentTypeByName(String name) {
+		EmploymentTypes o = employmentTypesDao.get(
+				" from EmploymentTypes t where t.employmentName =?",
+				new Object[] { name });
+		if (o != null) {
+			return o;
+		} else {
+			return null;
+		}
+	}
+		
 	/*
 	 * (non-Javadoc)
 	 * @see uow.ia.service.NewEnquiryService#findContactsByFullName(java.lang.String, java.lang.String)
