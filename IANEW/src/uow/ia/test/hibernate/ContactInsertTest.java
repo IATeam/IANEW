@@ -123,44 +123,6 @@ public class ContactInsertTest {
   		}
   		throw e;
   	}
-  	
-	  
-	  
-	List<Contacts> contactList = session.createSQLQuery("SELECT * FROM Contacts").addEntity(Contacts.class).list();
-	  Contacts contact = contactList.get(1);
-	  System.out.println("Contact ID: " + contact.getId());
-	  System.out.println("Title ID: " + contact.getTitleType().getName());
-	  System.out.println("firstname: " + contact.getFirstname());
-	  System.out.println("lastname: " + contact.getLastname());
-	  System.out.println("othername: " + contact.getOthername());
-	  System.out.println("genderId: " + contact.getGenderType().getGenderName());
-	  System.out.println("contactTypename: " + contact.getContactType().getContactTypeName());
-	  System.out.println("mobilephone: " + contact.getMobilephone());
-	  System.out.println("email: " + contact.getEmail());
-	  System.out.println("accommodation: " + contact.getAccommodation().getAccommodationName());
-	  System.out.println("accommodationComment: " + contact.getAccommodationComment());
-	  System.out.println("culturalBackgroundId: " + contact.getCulturalBackground().getCulturalBackgroundName());
-	  System.out.println("culturalBackgroundComment: " + contact.getCulturalBackgroundComment());
-	  System.out.println("dangerFlagId: " + contact.getDangerType().getDangerName());
-	  System.out.println("identification: " + contact.getIdentification());
-	  System.out.println("dob: " + contact.getDob());
-	  Set<Addresses> addressesSet = contact.getAddressesSet();
-	  for (Addresses a : addressesSet) {
-		  System.out.println("Address: " + a.getId() + " " + a.getAddress() + " " + a.getSurburb() + " " + a.getPostcode() + " " + a.getState());
-	  }
-	  Set<ClientDisabilities> disabilitySet = contact.getDisabilitiesSet();
-	  for (ClientDisabilities dt : disabilitySet) {
-		  System.out.println("CLient Disability: " + dt.getId() + " " + dt.getDisabilityType().getDisabilityName() + " " + dt.getComments());
-	  }
-	  Set<Enquiries> enquiriesSet  = contact.getEnquiriesSet();
-	  for (Enquiries a : enquiriesSet) {
-		  System.out.println("Enquiry: " + a.getId());
-	  }
-	  Set<IndividualCases> iaList = contact.getIndividualCasesSet();
-
-	  for (IndividualCases ia : iaList) {
-		  System.out.println("IACase: " + ia.getId());
-	  }
 	  
   }
   @BeforeMethod
