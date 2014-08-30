@@ -29,7 +29,7 @@ public class ContactTypesTest {
 	@Test
 	public void f() {
 		List<ContactTypes> contactTypeList = session.createSQLQuery("SELECT * FROM Contact_Types").addEntity(ContactTypes.class).list();
-		Set<Contacts> contactsSet2  = contactTypeList.get(0).getContactsSet();
+		List<Contacts> contactsSet2  = contactTypeList.get(0).getContactsList();
 		System.out.println("Contacts");
 		System.out.println("contactTypeId: " + contactTypeList.get(0).getId());
 		System.out.println("Count: " + contactsSet2.size());

@@ -42,7 +42,7 @@ public class EnquiryIssueInsertTest {
 		eIssue.setEnquiry(enquiry);
 		eIssue.setIssue((IssueTypes)session.get(IssueTypes.class, 7));
 		
-		enquiry.getEnquiryIssuesSet().add(eIssue);
+		enquiry.getEnquiryIssuesList().add(eIssue);
 		
 		Transaction tx = null;
 		try {

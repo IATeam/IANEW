@@ -37,23 +37,23 @@ public class IndividualCasesTest {
 		System.out.println("Contact Id: " + ia.getContact().getId());
 		System.out.println("Advocate Id: " + ia.getAdvocate().getId());
 		System.out.println("Priority: " + ia.getPriorityType().getPriorityName());
-		Set<Risks> riskSet = ia.getRisksSet();
+		List<Risks> riskSet = ia.getRisksList();
 		for (Risks a : riskSet) {
 			System.out.println("Risks: " + a.getId() + " " + a.getRiskDescription() + " " + a.getRiskManagement());
 		}
 		
-		System.out.println("old case Id: " + ia.getOldCase().getId());
-		Set<CaseIssues> caseIssues = ia.getCaseIssuesSet();
+//		System.out.println("old case Id: " + ia.getOldCase().getId());
+		List<CaseIssues> caseIssues = ia.getCaseIssuesList();
 		for (CaseIssues dt : caseIssues) {
 			System.out.println("Issue: " + dt.getId() + " " + dt.getIssue().getIssueName() + " " + dt.getStatusType().getStatusName() + " " + dt.getComments());
 		}
-		Set<IndividualCaseCommunications> communicationSet = ia.getCommunicationsSet();
+		List<IndividualCaseCommunications> communicationSet = ia.getCommunicationsList();
 		for (IndividualCaseCommunications icc : communicationSet) {
 			System.out.println("Communication: " + icc.getDescription() + ", time:" + icc.getTimeSpent());
 			System.out.println("communication type: " + icc.getCommunicationType().getCommunicationTypeName());
 		}
 		
-		System.out.println("enquiry id" + ia.getRelatedEnquiry().getId());
+//		System.out.println("enquiry id" + ia.getRelatedEnquiry().getId());
 	}
 	
 	@AfterMethod

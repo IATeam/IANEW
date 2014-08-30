@@ -30,7 +30,7 @@ public class EmploymentTypeTest {
 	@Test
 	public void f() {
 		List<EmploymentTypes> employmentList = session.createSQLQuery("SELECT * FROM Employment_Types").addEntity(EmploymentTypes.class).list();
-		Set<ContactEmployments> contactEmploymentSet  = employmentList.get(1).getContactEmploymentsSet();
+		List<ContactEmployments> contactEmploymentSet  = employmentList.get(1).getContactEmploymentsList();
 		System.out.println("employment id:" + employmentList.get(1).getId());
 		System.out.println("contact employment count: " + contactEmploymentSet.size());
 		for (ContactEmployments c : contactEmploymentSet) {

@@ -88,7 +88,7 @@ public class ContactInsertTest {
 	  		cDisability.setDisabilityType((DisabilityTypes)session.get(DisabilityTypes.class, 2));
 	  		cDisability.setPrimaryFlag("Y");
 	  		
-	  		newContact.getDisabilitiesSet().add(cDisability);
+	  		newContact.getDisabilitiesList().add(cDisability);
 	  		
 	  		// set client employment
 	  		EmploymentTypes etype = (EmploymentTypes)session.get(EmploymentTypes.class, 2);
@@ -99,7 +99,7 @@ public class ContactInsertTest {
 	  		employment.setEmploymentType(etype);
 	  		employment.setWorkphone("4036578");
 	  		
-	  		newContact.getEmploymentsSet().add(employment);
+	  		newContact.getEmploymentsList().add(employment);
 	  		
 	  		// set contact address
 	  		Addresses address = new Addresses();
@@ -111,7 +111,7 @@ public class ContactInsertTest {
 	  		address.setState("NSW");
 	  		address.setSuburb("Wollongong");
 	  		
-	  		newContact.getAddressesSet().add(address);
+	  		newContact.getAddressesList().add(address);
 	  		
 	  		session.saveOrUpdate(newContact);
 	  		tx.commit();

@@ -3,12 +3,12 @@ package uow.ia.bean;
 // Generated Aug 9, 2014 1:06:20 PM by Hibernate Tools 4.0.0
 
 import java.sql.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Kim To
- * @version 1.0.3, 26/08/2014
+ * @version 1.0.4, 30/08/2014
  */
 public class Enquiries implements java.io.Serializable {
 
@@ -25,9 +25,9 @@ public class Enquiries implements java.io.Serializable {
 	private Date updatedDateTime;
 	private Integer updatedUserId;
 	private String outOfCoverageFlag;
-	private Set<Enquiries> enquiriesSet = new HashSet<Enquiries>();
+	private List<Enquiries> enquiriesList = new ArrayList<Enquiries>();
 	private Enquiries parentEnquiry; 
-	private Set<EnquiryIssues> enquiryIssuesSet = new HashSet<EnquiryIssues>();
+	private List<EnquiryIssues> enquiryIssuesList = new ArrayList<EnquiryIssues>();
 
 
 	/**
@@ -36,6 +36,7 @@ public class Enquiries implements java.io.Serializable {
 	public Enquiries() {
 		// TODO Auto-generated constructor stub
 	}
+
 
 
 	/**
@@ -52,16 +53,17 @@ public class Enquiries implements java.io.Serializable {
 	 * @param updatedDateTime
 	 * @param updatedUserId
 	 * @param outOfCoverageFlag
-	 * @param enquiriesSet
+	 * @param enquiriesList
 	 * @param parentEnquiry
-	 * @param enquiryIssuesSet
+	 * @param enquiryIssuesList
 	 */
 	public Enquiries(Integer id, Contacts contact, EnquiryTypes enquiryType,
 			StatusTypes statusType, String description, Integer createdUserId,
 			Date createdDateTime, String inquisitor, String referralBy,
 			String referralTo, Date updatedDateTime, Integer updatedUserId,
-			String outOfCoverageFlag, Set<Enquiries> enquiriesSet,
-			Enquiries parentEnquiry, Set<EnquiryIssues> enquiryIssuesSet) {
+			String outOfCoverageFlag, List<Enquiries> enquiriesList,
+			Enquiries parentEnquiry, List<EnquiryIssues> enquiryIssuesList) {
+		super();
 		this.id = id;
 		this.contact = contact;
 		this.enquiryType = enquiryType;
@@ -75,10 +77,11 @@ public class Enquiries implements java.io.Serializable {
 		this.updatedDateTime = updatedDateTime;
 		this.updatedUserId = updatedUserId;
 		this.outOfCoverageFlag = outOfCoverageFlag;
-		this.enquiriesSet = enquiriesSet;
+		this.enquiriesList = enquiriesList;
 		this.parentEnquiry = parentEnquiry;
-		this.enquiryIssuesSet = enquiryIssuesSet;
+		this.enquiryIssuesList = enquiryIssuesList;
 	}
+
 
 
 	/**
@@ -267,19 +270,6 @@ public class Enquiries implements java.io.Serializable {
 		this.outOfCoverageFlag = outOfCoverageFlag;
 	}
 
-	/**
-	 * @return the enquiriesSet
-	 */
-	public Set<Enquiries> getEnquiriesSet() {
-		return this.enquiriesSet;
-	}
-
-	/**
-	 * @param enquiriesSet the enquiriesSet to set
-	 */
-	public void setEnquiriesSet(Set<Enquiries> enquiriesSet) {
-		this.enquiriesSet = enquiriesSet;
-	}
 
 	/**
 	 * @return the parentEnquiry
@@ -294,24 +284,26 @@ public class Enquiries implements java.io.Serializable {
 	public void setParentEnquiry(Enquiries parentEnquiry) {
 		this.parentEnquiry = parentEnquiry;
 	}
-
-	/**
-	 * @return the enquiryIssuesSet
-	 */
-	public Set<EnquiryIssues> getEnquiryIssuesSet() {
-		return this.enquiryIssuesSet;
+	
+	public List<Enquiries> getEnquiriesList(){
+		return this.enquiriesList;
 	}
-
-	/**
-	 * @param enquiryIssuesSet the enquiryIssuesSet to set
-	 */
-	public void setEnquiryIssuesSet(Set<EnquiryIssues> enquiryIssuesSet) {
-		this.enquiryIssuesSet = enquiryIssuesSet;
+	
+	public void setEnquiriesList(List<Enquiries> enquiriesList){
+		this.enquiriesList = enquiriesList;
+	}
+	
+	public List<EnquiryIssues> getEnquiryIssuesList(){
+		return this.enquiryIssuesList;
+	}
+	
+	public void setEnquiryIssuesList(List<EnquiryIssues> enquiryIssuesList){
+		this.enquiryIssuesList = enquiryIssuesList;
 	}
 
 	public String getIssuesTypes() {
 		String issuesTypesString="";
-		for(EnquiryIssues ei:enquiryIssuesSet) {
+		for(EnquiryIssues ei: this.enquiryIssuesList) {
 			issuesTypesString += ei.getIssue().getIssueName()+" ";
 		}
 		issuesTypesString = issuesTypesString.trim();

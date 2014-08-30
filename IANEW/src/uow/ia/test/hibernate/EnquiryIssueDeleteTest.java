@@ -41,7 +41,7 @@ public class EnquiryIssueDeleteTest {
 		Enquiries enquiry = (Enquiries)session.get(Enquiries.class, 105);
 		EnquiryIssues eIssue = (EnquiryIssues)session.get(EnquiryIssues.class, 103);
 		 
-		Set<EnquiryIssues> eIssueSet = enquiry.getEnquiryIssuesSet();
+		List<EnquiryIssues> eIssueSet = enquiry.getEnquiryIssuesList();
 		eIssueSet.remove(eIssue);
 		
 		Transaction tx = null;
@@ -54,7 +54,7 @@ public class EnquiryIssueDeleteTest {
 			System.out.println("Error: " + e);
 		} finally {
 			System.out.println("Enquiry Issue for enquiry 105");
-			for (EnquiryIssues i : enquiry.getEnquiryIssuesSet()) {
+			for (EnquiryIssues i : enquiry.getEnquiryIssuesList()) {
 				System.out.println(i.getId());
 			}
 		}

@@ -56,7 +56,7 @@ public class EnquiryInsertTest {
 		enquiryIssue.setEnquiry(newEnquiry);
 		enquiryIssue.setIssue((IssueTypes)session.get(IssueTypes.class, 2));
 				
-		newEnquiry.getEnquiryIssuesSet().add(enquiryIssue);
+		newEnquiry.getEnquiryIssuesList().add(enquiryIssue);
 		
 		newEnquiry.setInquisitor("Kim To");
 		newEnquiry.setOutOfCoverageFlag("N");
@@ -64,7 +64,7 @@ public class EnquiryInsertTest {
 		newEnquiry.setStatusType((StatusTypes)session.get(StatusTypes.class, 2));
 		
 		
-		contact.getEnquiriesSet().add(newEnquiry);
+		contact.getEnquiriesList().add(newEnquiry);
 		
 		Transaction tx = null;
 		try {
@@ -91,7 +91,7 @@ public class EnquiryInsertTest {
 		enquiryIssue2.setEnquiry(newEnquiry2);
 		enquiryIssue2.setIssue((IssueTypes)session.get(IssueTypes.class, 5));
 				
-		newEnquiry2.getEnquiryIssuesSet().add(enquiryIssue2);
+		newEnquiry2.getEnquiryIssuesList().add(enquiryIssue2);
 		
 		newEnquiry2.setInquisitor("Ngoc To");
 		newEnquiry2.setOutOfCoverageFlag("Y");
