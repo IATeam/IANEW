@@ -65,12 +65,13 @@
 		<%@include file="includes/advocateDetails.jsp" %>
 		<%@include file="includes/personalDetails.jsp" %>
 		<%@include file="includes/address.jsp" %>
-		<%@include file="includes/referral.jsp" %>
  		<%@include file="includes/employment.jsp" %>		
 		<%@include file="includes/disability.jsp" %>
 		<%@include file="includes/issues.jsp" %>
 		<%@include file="includes/communications.jsp" %>
 		<%@include file="includes/goals.jsp" %>
+		<%@include file="includes/referral.jsp" %>
+		<%@include file="includes/linkedEnquiries.jsp" %>
 		<%@include file="includes/linkedCases.jsp" %>
 		
 <!-- ---------------------------------------------------------------------------------------------- -->

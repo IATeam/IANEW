@@ -230,11 +230,15 @@ h3 {
 	color: snow;
 }
 
-#btnImportant{
-	border-radius: 5px;
-	background: #4384ca;
-	font-size: 10px;
-	color: orange;
+
+
+#btnImportant {
+  width: 50px;
+	height: 50px;
+	background: #d6d6d6;
+	-moz-border-radius: 50px;
+	-webkit-border-radius: 50px;
+	border-radius: 50px;
 }
 
 
@@ -255,5 +259,9 @@ h3 {
 .iteratorlist p{
 	display: inline;
 	color: blue;
+}
+
+*:focus {
+    outline: 0;
 }
 

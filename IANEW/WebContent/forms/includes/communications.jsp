@@ -81,11 +81,11 @@
 			    <div class="two columns"><s:select list="issueSelectList.{issueName}" value="issue" name="" headerKey="-1" headerValue="Time Spent" /></div>
 			</div>
 			<div class="row">
-				<div class="textarea thirteen columns omega">
+				<div class="textarea fourteen columns omega">
 				<s:label for="comments" value="Comments:" />
 				<s:textarea id="" cssClass="oneLineTextArea" name=""/> 
 				</div>
-				<input type="button" id="btnImportant" value="!!IMPORTANT!!" class="two columns" onclick="importantDiv(this)"/>
+				<input type="button" id="btnImportant" value="" class="one columns" onclick="importantDiv(this)"/>
 			</div>
 		</section>
 	</article>

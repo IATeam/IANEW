@@ -65,10 +65,10 @@
 		<%@include file="includes/summary.jsp" %>
 		<%@include file="includes/personalDetails.jsp" %>
 		<%@include file="includes/address.jsp" %>
-		<%@include file="includes/referral.jsp" %>
 		<%@include file="includes/employment.jsp" %>
 		<%@include file="includes/disability.jsp" %>
 		<%@include file="includes/issues.jsp" %>
+		<%@include file="includes/referral.jsp" %>
 		<%@include file="includes/linkedEnquiries.jsp" %>
 	</s:form>	
 	<!-- ---------------------------------------------------------------------------------------------- -->

@@ -40,7 +40,7 @@
 		</div>
 		
 		<div class="row toggled">
-			<div class="four columns"><s:select list="genderSelectList.{genderName}" name="theGender" headerKey="-1" headerValue="Select Gender" readonly="true"/></div>
+			<div class="four columns"><s:select list="genderSelectList.{genderName}" name="theGender" headerKey="-1" headerValue="Select Gender" disabled="disabled"/></div>
 			<!-- style="padding-right: 15px;" -->
 			<div class="inputfield eight columns" >
 				<s:label for="identification" value="Identification:" />
@@ -54,7 +54,7 @@
 		</div>
 		
 		<div class="row toggled">
-			<div class="four columns"><s:select list="culturalBackgroundSelectList.{culturalBackgroundName}" name="theCulturalBackground" value="theCultrualBackground" headerKey="-1"  headerValue="Select Cultural Background" value="genderProtege"  readonly="true"/></div>
+			<div class="four columns"><s:select list="culturalBackgroundSelectList.{culturalBackgroundName}" name="theCulturalBackground" value="theCultrualBackground" headerKey="-1"  headerValue="Select Cultural Background" value="genderProtege"  disabled="disabled"/></div>
 			
 			<div class="textarea twelve columns omega">
 				<s:label for="culturalBackgroundComments" value="Comments:" />
