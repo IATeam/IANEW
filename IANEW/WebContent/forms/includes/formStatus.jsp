@@ -21,30 +21,29 @@
 		<div class="row">
 			<div class="six columns">
 				<s:label for="createdDate" value="Created Date:" />
-			    <s:date name="createdDate" format="dd MMM yyyy"/>
-			   <!--  <input type="date" name="createdDate" value="createdDate"/> -->
+			    <s:date name="iamodel.createdDateTime" format="dd MMM yyyy"/>
 			   
 				<s:label for="lastUpdatedOn" value="Last Updated On:" />
-				<s:date name="updatedDate" format="dd MMM yyyy"/>
+				<s:date name="iamodel.updatedDateTime" format="dd MMM yyyy"/>
 				<br>
 				<s:label for="createdBy" value="Created By:" />
-				<s:property value=""/>
-				<!-- <s:text id="createdBy" name="" /> -->
 				
-				<s:label for="lastUpdatedBy" value="Last Updated By:" />
-				<s:property value=""/>
+				<s:label for="iamodel.lastUpdatedBy" value="Last Updated By:" />
+				
 				<!-- <s:text id="lastUpdatedBy" name="" /> -->
 			</div>
 			<div class="nine columns">
 				<div class="row">
 			
-					<div class="three columns"><s:select list="dangerSelectList.{dangerName}" name="theDanger" headerKey="-1" headerValue="Flag Danger" /></div>
+					<div class="three columns"><s:select list="dangerSelectList.{dangerName}" name="iamodel.contact.dangerType.dangerName" headerKey="-1" headerValue="Flag Danger" /></div>
 					<div class="three columns"><s:select id="theStatus" list="statusSelectList.{statusName}" name="theStatus" headerKey="-1" headerValue="Form Status" /></div>
 					<s:div cssClass="two columns">
 						<s:label for="id" value="Enquiry#:" />
-						<s:property value="model.id" />
+						<s:property value="iamodel.id" />
 					</s:div>
 				</div>
 			</div>
 		</div>
+		<s:hidden name="iamodel.createdDateTime"/>
+		<s:hidden name="iamodel.updatedDateTime"/>
 </div>

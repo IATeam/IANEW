@@ -47,7 +47,7 @@
 <!-- URL Links for the Menu ----------------------------------------------------------------------- -->
 <!-- ---------------------------------------------------------------------------------------------- -->	
 	<!-- List of urls to called for from the menu -->
-	<s:url id="urlEList" namespace="/enquiry" action="enquiryList">
+	<s:url id="urlEList" namespace="/enquiryList" action="getEnquiryList">
 		<s:param name="formTitle">Enquiry List</s:param>
 	</s:url>
 	<s:url var="urlENew" namespace="/enquiry" action="newEnquiry">

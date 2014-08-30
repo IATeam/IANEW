@@ -7,6 +7,8 @@
 	Updates:
 		21/08/2014 -	Quang Nhan
 						Changed primary background
+		28/08/2014 -	Quang Nhan 
+						Added hidden class
 	==============================================	
 	Description: Stylesheet used for the forms
 ------------------------------------------------------------------------------------------------*/
@@ -247,4 +249,9 @@ h3 {
 .iteratorlist p{
 	display: inline;
 	color: blue;
+}
+
+.hidden{
+	display: none;
+	visibility: hidden;
 }

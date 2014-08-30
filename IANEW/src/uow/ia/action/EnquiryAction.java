@@ -1,22 +1,17 @@
 package uow.ia.action;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.ParameterizedType;
+
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
-import org.apache.struts2.dispatcher.Dispatcher;
-import org.apache.struts2.dispatcher.mapper.ActionMapping;
-import org.apache.struts2.dispatcher.mapper.DefaultActionMapper;
 
-import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ModelDriven;
 
 import uow.ia.bean.AccommodationTypes;
 import uow.ia.bean.Addresses;
 import uow.ia.bean.ClientDisabilities;
+import uow.ia.bean.ContactEmployments;
 import uow.ia.bean.Contacts;
 import uow.ia.bean.CulturalBackgroundTypes;
 import uow.ia.bean.DangerTypes;
@@ -29,6 +24,7 @@ import uow.ia.bean.GenderTypes;
 import uow.ia.bean.IssueTypes;
 import uow.ia.bean.StatusTypes;
 import uow.ia.bean.TitleTypes;
+import uow.ia.util.DateUtil;
 
 /** ---------------------------------------------------------------------------------------------
  * @author: Quang Nhan
@@ -46,6 +42,8 @@ import uow.ia.bean.TitleTypes;
  * 					populate today's date for created and updated fields for  new enquiry
  * 28/08/2014 -		Quang Nhan
  * 					Save enquiry implemented.Get contact by firstname and last name in new enquiry
+ * 29/08/2014 -		Quang Nhan
+ * 					Moved enquiry list to its own action class EnquiryListAction
  * ==============================================
  * 	Description: An action class to linking the service from spring to the enquiry jsp pages
  *
@@ -53,14 +51,14 @@ import uow.ia.bean.TitleTypes;
 
 
 
-public class EnquiryAction extends BaseAction{
+public class EnquiryAction extends BaseAction implements ModelDriven<Enquiries>{
 	
 	/* 
 	 * form title (can either be new enquiry/exisiting enquiry/enquiry list)
 	 */
 	private String formTitle;;
-	private Enquiries model;
-	private Contacts contact; //not calling from enquiry to allow 'CASE' to share the same include jsp
+	private Enquiries iamodel;
+	private Contacts ccontact; //not calling from enquiry to allow 'CASE' to share the same include jsp
 	
 	/*
 	 * Lists for the drop down select options for the jsps
@@ -74,12 +72,10 @@ public class EnquiryAction extends BaseAction{
 	private List<EnquiryTypes> enquiryTypeSelectList;					private String theEnquiryType;
 	private List<IssueTypes> issueSelectList;							private String theIssue;
 	private List<EmploymentTypes> employmentSelectList;					private String theEmployment;
-	private List<DangerTypes> dangerSelectList;							private String theDanger;
+	private List<DangerTypes> dangerSelectList;							//private String theDanger;
 	//Status_Type or criteria control value table 
 	private List<StatusTypes> statusSelectList;							private String theStatus;
 	
-
-
 
 	/*
 	 * Sets variables for 1 to many relationship tables
@@ -88,11 +84,20 @@ public class EnquiryAction extends BaseAction{
 	private Set<Enquiries> linkedEnquiriesSet;
 	private Set<Addresses> addressSet;
 	private Set<ClientDisabilities> clientDisabilitiesSet;
+	private Set<ContactEmployments> contactEmploymentsSet;
+
+	public Set<ContactEmployments> getContactEmploymentsSet() {
+		return contactEmploymentsSet;
+	}
+
+	public void setContactEmploymentsSet(
+			Set<ContactEmployments> contactEmploymentsSet) {
+		this.contactEmploymentsSet = contactEmploymentsSet;
+	}
 
 	/*
 	 * status variables
 	 */
-	private Date createdDate, updatedDate;
 	private String createdBy, updatedBy;
 	//private Integer id;
 	
@@ -110,10 +115,14 @@ public class EnquiryAction extends BaseAction{
 	private String description;
 	
 	
+	
+	
+	
+	
 	//vairiable used to get enquiry id from enquiry list;
 	int hiddenid;
 	
-	public int getHiddenid() {
+	public int getHiddenid() { 
 		return hiddenid;
 	}
 
@@ -121,14 +130,20 @@ public class EnquiryAction extends BaseAction{
 		this.hiddenid = hiddenid;
 	}
 
-	/* For pagination */
-	private List<Enquiries> enquiryList;
-	int page;
-	int numberOfRecords;
-	long totalNumberOfRecords;
-	long totalNumberOfPages;
+//	/* For pagination */
+//	private List<Enquiries> enquiryList;
+//	int page;
+//	int numberOfRecords;
+//	long totalNumberOfRecords;
+//	long totalNumberOfPages;
 
+	//used to populate address 
+	Addresses address;
+	
 
+	EnquiryIssues issue;
+	
+	
 	/* 
 	 * 
 	 * 
@@ -141,18 +156,47 @@ public class EnquiryAction extends BaseAction{
 	 * Action Methods
 	 * ----------------------------------------------------------------------------------------------------------
 	 * ----------------------------------------------------------------------------------------------------------*/
+	public Addresses getAddress() {
+		return address;
+	}
 	
-	
+	public void setAddress(Addresses address) {
+		this.address = address;
+	}
+
 	/**
 	 * Action Method to create a new enquiry
 	 * @return String
 	 */
 	public String newEnquiry(){
 		activateLists();
-		setCreatedDate(new Date());
-		setUpdatedDate(new Date());
-		model = new Enquiries();
-		contact = new Contacts();
+		
+		iamodel = new Enquiries();
+		ccontact = new Contacts();
+		
+		//form status setters
+		Date today = new Date();
+		java.sql.Date sqlDate = new java.sql.Date(today.getTime());
+		iamodel.setCreatedDateTime(sqlDate);
+		iamodel.setUpdatedDateTime(sqlDate);
+		/*
+		 * TODO: change the user to the session user.
+		 */
+		iamodel.setCreatedUserId(1);
+		iamodel.setUpdatedUserId(1);
+		
+		//setAddress(new Addresses());
+		address = new Addresses();
+		
+		
+		//Set<Addresses> addressSet = new HashSet<Addresses>();
+		//this is going to be inserted into the addressSet 
+		//address = new Addresses();
+		
+		//iamodel.getEnquiryIssuesSet();
+		//issue = new EnquiryIssues();
+		
+		
 //		ActionContext context = ActionContext.getContext();
 //		ActionMapping am = new ActionMapping();
 //		Map map = context.getContextMap();
@@ -169,39 +213,60 @@ public class EnquiryAction extends BaseAction{
 	public String getExistingEnquiry(){
 		activateLists();
 		//System.out.println(getHiddenid());
-		setModel(services.getEnquiry(getHiddenid()));
-		setContact(model.getContact());
-		
-		setIssueSet(model.getEnquiryIssuesSet());
-		setClientDisabilitiesSet(contact.getDisabilitiesSet());
-		setLinkedEnquiriesSet(model.getEnquiriesSet());
+
+		setIamodel(services.getEnquiry(getHiddenid()));
+		setCcontact(getIamodel().getContact());
+		System.out.println(getCcontact().getAddressesSet().size());
+		//setCcontact(getIamodel().getContact());
+//		setIssueSet(iamodel.getEnquiryIssuesSet());
+//		setClientDisabilitiesSet(contact.getDisabilitiesSet());
+//		setLinkedEnquiriesSet(iamodel.getEnquiriesSet());
 	
 		//LATER
 		//setCreatedBy();
 		//setUpdatedBy(contact.);
-		setCreatedDate(model.getCreatedDateTime());
-		setUpdatedDate(model.getUpdatedDateTime());
-		//setId(model.getId());
-		setDescription(model.getDescription());
-		setAddress(contact.getAddressesSet());
-		if(null != contact.getGenderType())
-			setTheGender(contact.getGenderType().getGenderName());
 		
-		if(null != contact.getDangerType())
-			setTheDanger(contact.getDangerType().getDangerName());
+		//setAddressSet(contact.getAddressesSet());
 		
-		setTheTitle(contact.getTitleType().getName());
+//		if(null != contact.getGenderType())
+//			setTheGender(contact.getGenderType().getGenderName());
+		
+		//if(null != contact.getDangerType())
+			//setTheDanger(contact.getDangerType().getDangerName());
+		
 		//setTheEmployment(contact.getEmploymentsTypeSet());
-		setTheEmployment("Kim change databse need chagne code for this part");
+//		setTheEmployment("Kim change databse need chagne code for this part");
 		//setTheCulturalBackground(contact.getCulturalBackground().getCulturalBackgroundName());
-		setTheAccommodation(contact.getAccommodation().getAccommodationName());
-		setTheStatus(model.getStatusType().getStatusName());
+//		setTheAccommodation(contact.getAccommodation().getAccommodationName());
+//		setTheStatus(iamodel.getStatusType().getStatusName());
 		
 		
 //		setInquisitor(model.getInquisitor());
 //		setReferredBy(model.getReferralBy());
 //		setReferredTo(model.getReferralTo());
 		
+		
+		
+		return SUCCESS;
+	}
+	
+	public String updateAddressSet(){ System.out.println("inside address");
+//		address.setCountry("ABC");
+//		address.setPostcode("2324");
+//		address.setHomephone("22323 2323");
+	
+		System.out.println("address: " + getAddress().getAddress());
+		System.out.println("suburb: " + getAddress().getSurburb());
+		System.out.println("state: " + getAddress().getState());
+		System.out.println("country: " + getAddress().getCountry());
+		System.out.println("postcode: " + getAddress().getPostcode());
+		System.out.println("homephone: " + getAddress().getHomephone());
+		//getModel().getContact().getAddressesSet().add(address);
+		//setAddress(new Addresses()); 
+		iamodel.getContact().getAddressesSet().add(getAddress());
+		
+		
+		setAddress(new Addresses());
 		
 		
 		return SUCCESS;
@@ -238,8 +303,16 @@ public class EnquiryAction extends BaseAction{
 //		Contacts newContact = new Contacts();
 //		populateContact(newContact);
 		
-		System.out.println("model" + model.getReferralBy());
-		//services.saveOrUpdateEnquiry(enquiry, contact);
+		//iamodel.setEnquiryType(getEnquiryTypeSelectList().get(services.getEnquiryTypeId(getTheEnquiryType())));
+		//EnquiryTypes enquiryTypes = enquiryTypeSelectList.get(services.getEnquiryTypeId(getTheEnquiryType()));
+		//iamodel.setEnquiryType(services.getDangerType(getTheEnquiryType()));
+		//Contacts aSet = getCcontact();
+		System.out.println("firstname " + getCcontact().getFirstname());
+		System.out.println("addressSet size " + getCcontact().getAddressesSet().size());
+//		for(Addresses a: aSet){
+//			System.out.println("Suburb " + a.getSurburb());
+//		}
+		//services.saveOrUpdateEnquiry(getModel(), getModel().getCcontact());
 		
 		return SUCCESS;
 	}
@@ -248,32 +321,32 @@ public class EnquiryAction extends BaseAction{
 	 * Action method to return a list of enquiries
 	 * @return String
 	 */
-	public String enquiryList(){
-		setPage(1);
-		setNumberOfRecords(10);
-		
-		setEnquiryList(services.findEnquiriesByPage(page,numberOfRecords));
-		totalNumberOfRecords = services.countEnquiries();
-		int mod = (int) totalNumberOfRecords % numberOfRecords;
-		if(mod != 0) mod = 1;
-		totalNumberOfPages = totalNumberOfRecords/numberOfRecords + mod;
-		return SUCCESS;
-	}
+//	public String enquiryList(){
+//		setPage(1);
+//		setNumberOfRecords(10);
+//		
+//		setEnquiryList(services.findEnquiriesByPage(page,numberOfRecords));
+//		totalNumberOfRecords = services.countEnquiries();
+//		int mod = (int) totalNumberOfRecords % numberOfRecords;
+//		if(mod != 0) mod = 1;
+//		totalNumberOfPages = totalNumberOfRecords/numberOfRecords + mod;
+//		return SUCCESS;
+//	}
 	
 	/**
 	 * Action Method to update the enquiry list after requesting a different page
 	 * @return String
 	 */
-	public String updateEnquiryList(){
-		System.out.println(getPage());
-		
-		setEnquiryList(services.findEnquiriesByPage(getPage(),getNumberOfRecords()));
-		totalNumberOfRecords = services.countEnquiries();
-		int mod = (int) totalNumberOfRecords % numberOfRecords;
-		if(mod != 0) mod = 1;
-		totalNumberOfPages = totalNumberOfRecords/numberOfRecords + mod;
-		return SUCCESS;
-	}
+//	public String updateEnquiryList(){
+//		System.out.println(getPage());
+//		
+//		setEnquiryList(services.findEnquiriesByPage(getPage(),getNumberOfRecords()));
+//		totalNumberOfRecords = services.countEnquiries();
+//		int mod = (int) totalNumberOfRecords % numberOfRecords;
+//		if(mod != 0) mod = 1;
+//		totalNumberOfPages = totalNumberOfRecords/numberOfRecords + mod;
+//		return SUCCESS;
+//	}
 	
 	/* 
 	 * 
@@ -299,10 +372,11 @@ public class EnquiryAction extends BaseAction{
 		disabilitySelectList = services.findDisabilityTypes();
 		issueSelectList = services.findIssueTypes();
 		dangerSelectList = services.findDangerTypes();
-		//employmentSelectList = services.findEmploymentTypes();
+		employmentSelectList = services.findEmploymentTypes();
 		//setEmploymentList(contact.getEmploymentType());
 		statusSelectList = services.findStatusTypes();
 		enquiryTypeSelectList = services.findEnquiryTypes();
+		
 	}
 	
 	/**
@@ -316,7 +390,7 @@ public class EnquiryAction extends BaseAction{
 		//services.getDisabilityId(getTheDisability());
 		//services.getEnquiryId(getThe)
 		
-		String title = getTheTitle();;
+		String title = getTheTitle();
 		int index;
 		//System.out.println(getTitleSelectList().toString());
 		//titleSelectList.
@@ -356,24 +430,24 @@ public class EnquiryAction extends BaseAction{
 	}
 	
 
-	public Enquiries getModel(){
-		return model;
+	public Enquiries getIamodel(){
+		return iamodel;
 	}
 
 	/**
 	 * Setter for enquiry
 	 * @param enquiry
 	 */
-	public void setModel(Enquiries enquiry){
-		this.model = enquiry;
+	public void setIamodel(Enquiries enquiry){
+		this.iamodel = enquiry;
 	}
 	
-	public Contacts getContact() {
-		return contact;
+	public Contacts getCcontact() {
+		return ccontact;
 	}
 
-	public void setContact(Contacts contact) {
-		this.contact = contact;
+	public void setCcontact(Contacts contact) {
+		this.ccontact = contact;
 	}
 
 	/**
@@ -495,21 +569,13 @@ public class EnquiryAction extends BaseAction{
 		return dangerSelectList;
 	}
 
-	public String getTheDanger() {
-		return theDanger;
-	}
-
-	public void setTheDanger(String theDanger) {
-		this.theDanger = theDanger;
-	}
-
-	public List<Enquiries> getEnquiryList() {
-		return enquiryList;
-	}
-
-	public void setEnquiryList(List<Enquiries> enquiryList) {
-		this.enquiryList = enquiryList;
-	}
+//	public String getTheDanger() {
+//		return theDanger;
+//	}
+//
+//	public void setTheDanger(String theDanger) {
+//		this.theDanger = theDanger;
+//	}
 
 	/**
 	 * Getter for enquiry status select list
@@ -585,11 +651,11 @@ public class EnquiryAction extends BaseAction{
 		this.linkedEnquiriesSet = linkedEnquiriesSet;
 	}
 
-	public Set<Addresses> getAddress() {
+	public Set<Addresses> getAddressSet() {
 		return addressSet;
 	}
 
-	public void setAddress(Set<Addresses> address) {
+	public void setAddressSet(Set<Addresses> address) {
 		this.addressSet = address;
 	}
 
@@ -601,28 +667,9 @@ public class EnquiryAction extends BaseAction{
 		this.clientDisabilitiesSet = clientDisabilitiesSet;
 	}
 
-	/**
-	 * Getter for careated Date
-	 * @return Date
-	 */
-	public Date getCreatedDate() {
-		return createdDate;
-	}
-
-	public void setCreatedDate(Date createdDate) {
-		this.createdDate = createdDate;
-	}
-
-	public Date getUpdatedDate() {
-		return updatedDate;
-	}
-
-	public void setUpdatedDate(Date updatedDate) {
-		this.updatedDate = updatedDate;
-	}
 
 	/**
-	 * Getter for created by
+	 * Getter for created by full name
 	 * @return
 	 */
 	public String getCreatedBy() {
@@ -630,7 +677,7 @@ public class EnquiryAction extends BaseAction{
 	}
 
 	/**
-	 * Setter for the created by
+	 * Setter for the created by full name
 	 * @param createdBy
 	 */
 	public void setCreatedBy(String createdBy) {
@@ -653,21 +700,23 @@ public class EnquiryAction extends BaseAction{
 		this.updatedBy = updatedBy;
 	}
 
-	/**
-	 * Getter for enquiry id
-	 * @return
-	 */
-	public Integer getId() {
-		return id;
-	}
+	
 
-	/**
-	 * Setter for enquiry id
-	 * @param id
-	 */
-	private void setId(Integer id) {
-		this.id = id;
-	}
+//	/**
+//	 * Getter for enquiry id
+//	 * @return
+//	 */
+//	public Integer getId() {
+//		return id;
+//	}
+//
+//	/**
+//	 * Setter for enquiry id
+//	 * @param id
+//	 */
+//	private void setId(Integer id) {
+//		this.id = id;
+//	}
 
 	/** Referrals **/
 	/**
@@ -718,88 +767,11 @@ public class EnquiryAction extends BaseAction{
 //		this.referredTo = referredTo;
 //	}
 
-	
-
-	
-	/*------------------------------------------------Pagination Variables
-	 * 
-	 */
-	
-	/**
-	 * Getter for page
-	 * @return
-	 */
-	public int getPage() {
-		return page;
+	@Override
+	public Enquiries getModel() {
+		// TODO Auto-generated method stub
+		return iamodel;
 	}
 
-
-
-	/**
-	 * Setter for Page
-	 * @param page
-	 */
-	public void setPage(int page) {
-		this.page = page;
-	}
-
-
-
-	/**
-	 * Getter for the number of records for display
-	 * @return
-	 */
-	public int getNumberOfRecords() {
-		return numberOfRecords;
-	}
-
-
-
-	/**
-	 * Setter for the number of records for display
-	 * @param numberOfRecords
-	 */
-	public void setNumberOfRecords(int numberOfRecords) {
-		this.numberOfRecords = numberOfRecords;
-	}
-
-	
-
-	/**
-	 * Getter for the total number of records
-	 * @return
-	 */
-	public long getTotalNumberOfRecords() {
-		return totalNumberOfRecords;
-	}
-
-
-
-	/**
-	 * Setter for the total number of records
-	 * @param totalNumberOfRecords
-	 */
-	public void setTotalNumberOfRecords(int totalNumberOfRecords) {
-		this.totalNumberOfRecords = totalNumberOfRecords;
-	}
-
-
-
-	/**
-	 * Getter for the total number of pages
-	 * @return
-	 */
-	public long getTotalNumberOfPages() {
-		return totalNumberOfPages;
-	}
-
-
-	/**
-	 * Setter for the total number of records
-	 * @param totalNumberOfPages
-	 */
-	public void setTotalNumberOfPages(int totalNumberOfPages) {
-		this.totalNumberOfPages = totalNumberOfPages;
-	}
 
 }

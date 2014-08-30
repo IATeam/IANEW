@@ -7,6 +7,7 @@ import uow.ia.bean.Contacts;
 import uow.ia.bean.CulturalBackgroundTypes;
 import uow.ia.bean.DangerTypes;
 import uow.ia.bean.DisabilityTypes;
+import uow.ia.bean.EmploymentTypes;
 import uow.ia.bean.Enquiries;
 import uow.ia.bean.EnquiryTypes;
 import uow.ia.bean.GenderTypes;
@@ -36,6 +37,34 @@ public interface NewEnquiryService{
 	
 	public List<EnquiryTypes> findEnquiryTypes();
 	
+	public List<EmploymentTypes> findEmploymentTypes();
+	
+	/*
+	 * 
+	 */
+	public int getDangerTypeId(String name);
+	
+	public int getStatusTypeId(String name);
+	
+	public int getTitleTypeId(String name);
+	
+	public int getGenderTypeId(String name);
+	
+	public int getCulturalBackgroundTypeId(String name);
+	
+	public int getAccommodationTypeId(String name);
+	
+	public int getDisabilityTypeId(String name);
+	
+	public int getIssueTypeId(String name);
+	
+	public int getEnquiryTypeId(String name);
+	
+	public int getEmploymentTypeId(String name);
+	
+	/*
+	 * 
+	 */
 	public List<Contacts> findContactsByFullName(String firstName, String lastName);
 	
 	public List<Enquiries> findEnquiries();
@@ -64,4 +93,5 @@ public interface NewEnquiryService{
 	public boolean updateEnquiry(Enquiries e);
 	
 	public boolean saveOrUpdateEnquiry(Enquiries e);
+	
 }

@@ -423,7 +423,7 @@ public class Contacts implements java.io.Serializable {
 	/**
 	 * @return the addressesSet
 	 */
-	public Set<Addresses> getAddressesSet() {
+	public Set<Addresses> getAddressesSet() { System.out.println("in addresset");
 		return this.addressesSet;
 	}
 	/**

@@ -90,15 +90,9 @@ function bandSelected(selectedDiv){
 	deselectAll();
 	$(selectedDiv).addClass("listSelected");
 	
-	//shows and hide the enquiry/case descriptions
-	//alert(selectedDiv);
-	
 	$(selectedDiv).children("div").last().slideToggle();
 	
-	//sets the value for the hidden enquiry id holder field
 	$("#hiddenid").val($(selectedDiv).find('.id').text());
-	//alert($(selectedDiv).find('.id').text());
-	alert($("#hiddenid").val());
 }
 
 function deselectAll(){

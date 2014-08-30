@@ -48,6 +48,10 @@
 </head>
 <body>
 	<s:div cssClass="form container">
+	<s:form id="addressForm" action="updateAddressSet" namespace="/enquiry" method="post" novalidate="novalidate">
+		<s:hidden name="address" />
+		<s:hidden name="model"/>
+	</s:form>
 	<s:form id="enquiryForm" action="saveUpdateEnquiry" cssClass="cmxform" namespace='/enquiry' method="post" novalidate="novalidate">  
 <!-- ---------------------------------------------------------------------------------------------- -->
 <!-- Header of the form --------------------------------------------------------------------------- -->
@@ -70,7 +74,7 @@
 		<%@include file="includes/issues.jsp" %>
 		<%@include file="includes/linkedEnquiries.jsp" %>
 	</s:form>	
-	<!-- ---------------------------------------------------------------------------------------------- -->
+<!-- ---------------------------------------------------------------------------------------------- -->
 <!-- iterator - footer for enquiry form ----------------------------------------------------------- -->
 <!-- ---------------------------------------------------------------------------------------------- -->
 		<!-- 
@@ -100,10 +104,11 @@
 		alert("existing need to check if status is closed")
 		//$("#enquiryForm").find("input").attr("readonly", "true");
 		//$("#enquiryForm").find('textarea').attr("readonly", "true");
-		$("#enquiryForm").find('select').attr("disabled", "disable");
-		$("#enquiryForm").find('input[type="button"]').attr("disabled", "disable");
-		$("#btnView").attr("disabled", null);
-		$("#btnAddEnquiry").attr("disabled", null);
+		
+		//$("#enquiryForm").find('select').attr("disabled", "disable");
+		//$("#enquiryForm").find('input[type="button"]').attr("disabled", "disable");
+		//$("#btnView").attr("disabled", null);
+		//$("#btnAddEnquiry").attr("disabled", null);
 	}
 	
 	</script>

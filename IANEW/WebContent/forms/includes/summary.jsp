@@ -19,11 +19,11 @@
 	<fieldset>
 		<s:div cssClass="row">
 			<s:div cssClass="four columns">
-				<s:select  name="theEnquiryType" cssClass="four columns" list="enquiryTypeSelectList.{enquiryTypeName}" headerKey="-1" headerValue="Type" />
+				<s:select  name="iamodel.enquiryType.enquiryTypeName" cssClass="four columns" list="enquiryTypeSelectList.{enquiryTypeName}" headerKey="-1" headerValue="Type" />
 			</s:div>
 			<s:div cssClass="textarea twelve columns">
 				<s:label for="description" value="Description:" />
-				<s:div><s:textarea id="description" name="description"  cssClass="multiLineTextArea" /></s:div>
+				<s:div><s:textarea id="description" name="model.description"  cssClass="multiLineTextArea" /></s:div>
 			</s:div>
 		</s:div>
 	</fieldset>

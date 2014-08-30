@@ -14,6 +14,8 @@
 						reorder syntax to be consistent throughout the jsps
 		26/08/2014 -	Quang Nhna
 						Added the feature for users to retrieve new enquiry set for pagination. (added changePage())
+		28/08/2014 - 	Quang Nhan
+						Moved iterator to its own jsps so case list can use it
 	==============================================	
 	Description: A jsp page that displays a list of enquiries. Refer to technical document about
 				using Skeleton design styling for mobile and windows application.
@@ -44,12 +46,21 @@
 	<!-- 
 	there is a strange behavior with this s:url link.
 	-->
-	<s:url var="urlEExisting" namespace="/enquiry" action="getEnquiry" includeContext="false"/>		
+	<s:url var="urlExisting" namespace="/enquiry" action="getEnquiry" includeContext="false"/>		
 	<s:url var="urlENew" namespace="/enquiry" action="newEnquiry" />
 
+	<!-- Change namespace and action for appropriate urls for pagination purposes-->
+	<s:url var="urlUpdate" namespace="/enquiryList" action="updateEnquiryList" includeContext="false"/>
 
-	<s:form id="listForm" cssClass="form container" method="post" action="%{urlEExisting}">
-
+	
+		
+	<s:form id="listForm" cssClass="form container" method="post" action="%{urlExisting}">
+			
+			<!--Hidden Fields to pass parameters between pages -->
+			<s:hidden id="hiddenid" name="hiddenid" />
+			<s:hidden id="formTitle" name="formTitle" value="Existing Enquiry" />
+			<s:hidden id="totalNumberOfPages" name="totalNumberOfPages" />
+			
 			<section class="imageContainer">
 				<s:div cssClass="row">
 					<img class="seven columns" src="<s:url value='/resources/images/logo.png'/>"/>
@@ -71,46 +82,9 @@
 <!-- iterator - used to iterate a list or set ----------------------------------------------------- -->
 <!-- ---------------------------------------------------------------------------------------------- -->	
 			<!-- status="..." use attribute to get status info of iteration (index, count, first, even last, odd info) -->
-			<s:div cssClass="list">
-				<s:iterator value="enquiryList">
-					<s:div cssClass="curveBorder sixteen columns iteratorlist" onclick="bandSelected(this)">
-						<s:div cssClass="row">
-							<s:div cssClass="textarea two columns">
-								<s:label for="id" value="Enquiry#:" />
-								<p class="id"><s:property value="id"/></p>
-							</s:div>
-							<s:div cssClass="textarea five columns">
-								<s:label for="protege" value="Protege:" />
-								<p><s:property value="contact.getFullName()" /></p>
-							</s:div>
-							<s:div cssClass="textarea two columns">
-								<s:label value="Date:" />
-								<p><s:property value="updatedDateTime" /></p>
-							</s:div>
-							<s:div cssClass="textarea six columns omega">
-								<s:label for="issues" value="Issues:" />
-								<p><s:property value="getIssuesTypes()" /></p>
-							</s:div>
-						</s:div>
-						
-						<s:div cssClass="row toggled">
-							<s:div cssClass="textarea fifteen columns omega">
-								<s:label for="description" value="Description:" />
-								<s:div><s:textarea cssClass="multiLineTextArea" name="description" readonly="true"/></s:div>
-							</s:div>
-						</s:div>
-					</s:div>
-				</s:iterator>
-			</s:div>
 			
+			<%@include file="/forms/includes/lists.jsp" %>
 			<s:div cssClass="clear"/>
-			
-			
-			<!--Hidden Fields to pass parameters between pages -->
-			<s:hidden id="hiddenid" name="hiddenid" />
-			<s:hidden id="formTitle" name="formTitle" value="Existing Enquiry" />
-			<s:hidden id="totalNumberOfPages" name="totalNumberOfPages" />
-			
 <!-- ----------------------------------------------------------------------------------------------------------------------- -->
 <!-- the footer of the form containing the cancel, open enquiry and new enquiry as well as the pagination functions -------- -->
 <!-- ----------------------------------------------------------------------------------------------------------------------- -->
@@ -124,7 +98,7 @@
 						<%@include file="/forms/includes/paginationToolSet.jsp" %>
 					</section>
 					<section class="four columns alpha">
-						<sj:submit id="open" targets="formDiv" cssClass="two columns alpha" value="Open Enquiry" onclick="openExistingEnquiry()"/>
+						<sj:submit id="open" targets="formDiv" cssClass="two columns alpha" value="Open Enquiry"/>
 						<sj:a id="btnNewE" targets="formDiv"  href="%{urlENew}" ><input type="button" class="two columns omega" value="New Enquiry"/></sj:a>
 					</section>
 				</s:div>

@@ -4,13 +4,7 @@
 	==============================================
 	Updates:
 		10/08/2014 - 	Added iteration by Quang Nhan
-<<<<<<< HEAD
-		14/08/2014 	- 	Connect and retrieve data called by the action class and added 
-						pagination functionality by Quang Nhan
-		16/08/2014 -	Tested s:url workings see comment below. 
-						Moved javascript code to list.js file by Quang Nhan
-=======
-<<<<<<< HEAD
+
 		12/08/2014 - 	Quang Nhan
 						Migrate code into new project setup
 		14/08/2014 	- 	Connect and retrieve data called by the action class and added 
@@ -18,13 +12,6 @@
 		21/08/2014 -	Added 'Add Disability' and functionality
 						Add radio button for selecting primary disability option and jquery functions
 						to change the background color
-=======
-		14/08/2014 	- 	Connect and retrieve data called by the action class and added 
-						pagination functionality by Quang Nhan
-		16/08/2014 -	Tested s:url workings see comment below. 
-						Moved javascript code to list.js file by Quang Nhan
->>>>>>> refs/remotes/origin/master
->>>>>>> refs/remotes/origin/Quang
 	==============================================	
 	Description: A jsp page that displays a list of enquiries
 ------------------------------------------------------------------------------------------------>
