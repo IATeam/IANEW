@@ -4,7 +4,9 @@ package uow.ia.bean;
 
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -35,7 +37,7 @@ public class Contacts implements java.io.Serializable {
 	private Date updatedDateTime;
 	private StatusTypes status;
 	private String timestamp;
-	private Set<Addresses> addressesSet = new HashSet<Addresses>();
+	private List<Addresses> addressesSet = new ArrayList<Addresses>();
 	private Set<ClientDisabilities> disabilitiesSet = new HashSet<ClientDisabilities>();
 	private Set<Enquiries> enquiriesSet = new HashSet<Enquiries>();
 	private Set<IndividualCases> individualCasesSet = new HashSet<IndividualCases>();
@@ -89,7 +91,7 @@ public class Contacts implements java.io.Serializable {
 			String culturalBackgroundComment, DangerTypes dangerType,
 			String identification, Date dob, Integer createdUserId,
 			Date createdDateTime, Integer updatedUserId, Date updatedDateTime,
-			StatusTypes status, Set<Addresses> addressesSet,
+			StatusTypes status, List<Addresses> addressesSet,
 			Set<ClientDisabilities> disabilitiesSet,
 			Set<Enquiries> enquiriesSet,
 			Set<IndividualCases> individualCasesSet,
@@ -442,13 +444,13 @@ public class Contacts implements java.io.Serializable {
 	/**
 	 * @return the addressesSet
 	 */
-	public Set<Addresses> getAddressesSet() {
+	public List<Addresses> getAddressesSet() {
 		return this.addressesSet;
 	}
 	/**
 	 * @param addressesSet the addressesSet to set
 	 */
-	public void setAddressesSet(Set<Addresses> addressesSet) {
+	public void setAddressesSet(List<Addresses> addressesSet) {
 		this.addressesSet = addressesSet;
 	}
 	/**
