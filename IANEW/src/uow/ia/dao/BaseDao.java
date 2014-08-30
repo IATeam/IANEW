@@ -51,6 +51,8 @@ public interface BaseDao<T> {
      */
 	public List<T> find(String hql);
 	
+	public List<T> find(String hql,String param, Object o);
+	
 	/** 
      * retrieve with object[] 
      *  
