@@ -29,41 +29,40 @@
 				<div><s:textarea id="accomodationComments" cssClass="oneLineTextArea" name="model.contact.accommodationComment" /></div> 
 			</div>
 		</div>
-		<s:set var="contactaddress" value="ccontact.addressesSet" />
-		<!-- <s:iterator value="%{contactaddress}" status="stat"> -->
-			<h1><s:property value="#stat.index" /></h1>
+		<s:iterator value="ccontact.addressesList" status="stat">
+			<h1><s:property value="{#stat.index}" /></h1>
 			<section class="sixteen columns curveBorder">
 				<div class="row">
 					<div class="inputfield eight columns">
-						<s:label for="address" value="Address:" />
-						<div><s:textfield name="%{contactaddress.state}"></s:textfield></div>
+						<s:label for="address" value="Street" />
+						<div><s:textfield name="ccontact.addressesList[{#stat.index}].street"></s:textfield></div>
 					</div>
-					<!-- <div class="inputfield four columns">
+					<div class="inputfield four columns">
 						<s:label for="city" value="Suburb" />
-						<div><s:textfield id="city" name="suburb"></s:textfield></div>
+						<div><s:textfield name="ccontact.addressesList{[%stat.index]}.suburb" /></div>
 					</div>
 					<div class="inputfield three columns">
 						<s:label for="state" value="State:" />
-						<div><s:textfield name="state"></s:textfield></div>
-					</div> -->
+						<div><s:textfield name="ccontact.addressesList{[%stat.index]}.state" /></div>
+					</div>
 				</div>
 				
-				<!-- <div class="row">
+				<div class="row">
 					<div class="inputfield four columns">
 						<s:label for="country" value="Country:" />
-						<div><s:textfield id="country" name="country"></s:textfield></div>
+						<div><s:textfield name="ccontact.addressesList{[%stat.index]}.country"></s:textfield></div>
 					</div>
 					<div class="inputfield four columns">
 						<s:label for="postCode" value="Post Code:" />
-						<div><s:textfield id="postCode" name="postcode"></s:textfield></div>
+						<div><s:textfield name="ccontact.addressesList{[%stat.index]}.postcode"></s:textfield></div>
 					</div>
 					<div class="inputfield four columns">
 						<s:label for="homePhone" value="Home#:"/>
-						<div><s:textfield id="homePhone" name="homephone"></s:textfield></div>
-					</div> -->
+						<div><s:textfield name="ccontact.addressesList{[%stat.index]}.homephone"></s:textfield></div>
+					</div>
 				</div> 
 			</section>
-		<!-- </s:iterator> -->
+		</s:iterator>
 		
 		<s:textfield id="homePhone" name="addressSet.size" />
 			

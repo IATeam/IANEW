@@ -442,7 +442,7 @@ public class Contacts implements java.io.Serializable {
 	/**
 	 * @return the addressesSet
 	 */
-	public Set<Addresses> getAddressesSet() { System.out.println("in addresset");
+	public Set<Addresses> getAddressesSet() {
 		return this.addressesSet;
 	}
 	/**
