@@ -103,13 +103,13 @@ public class ContactInsertTest {
 	  		
 	  		// set contact address
 	  		Addresses address = new Addresses();
-	  		address.setAddress("Unit 2/19 Sperry Street");
+	  		address.setStreet("Unit 2/19 Sperry Street");
 	  		address.setContact(newContact);
 	  		address.setCountry("Australia");
 	  		address.setHomephone("021323234");
 	  		address.setPostcode("2500");
 	  		address.setState("NSW");
-	  		address.setSurburb("Wollongong");
+	  		address.setSuburb("Wollongong");
 	  		
 	  		newContact.getAddressesSet().add(address);
 	  		

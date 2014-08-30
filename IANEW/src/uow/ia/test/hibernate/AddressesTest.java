@@ -31,8 +31,8 @@ public class AddressesTest {
 		List<Addresses> addressList = session.createSQLQuery("SELECT * FROM Addresses").addEntity(Addresses.class).list();
 		  Addresses address = addressList.get(0);
 		  System.out.println("Address ID: " + address.getId());
-		  System.out.println("Address: " + address.getAddress());
-		  System.out.println("Surburb: " + address.getSurburb());
+		  System.out.println("Street: " + address.getStreet());
+		  System.out.println("Suburb: " + address.getSuburb());
 		  System.out.println("State: " + address.getState());
 		  System.out.println("Postcode: " + address.getPostcode());
 		  System.out.println("Country:" + address.getCountry());

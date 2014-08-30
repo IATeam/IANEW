@@ -15,17 +15,23 @@
         <property name="description" type="string">
             <column name="description" />
         </property>
+        <property name="timeSpent" type="java.lang.Float">
+            <column name="time_spent" precision="12" scale="0" />
+        </property>
+        <property name="importantFlag" type="string">
+            <column name="important_flag" />
+        </property>
         <property name="createdUserId" type="java.lang.Integer">
             <column name="created_user_id" />
         </property>
         <property name="createdDateTime" type="timestamp">
             <column name="created_date_time" length="19" />
         </property>
-        <property name="timeSpent" type="java.lang.Float">
-            <column name="time_spent" precision="12" scale="0" />
+        <property name="updatedUserId" type="java.lang.Integer">
+            <column name="updated_user_id" />
         </property>
-        <property name="importantFlag" type="string">
-            <column name="important_flag" />
+        <property name="updatedDateTime" type="timestamp">
+            <column name="updated_date_time" length="19" />
         </property>
         
         <!-- Many to one relationship -->

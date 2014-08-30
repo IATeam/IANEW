@@ -9,7 +9,7 @@ import java.util.Set;
 
 /**
  * @author Kim To
- * @version 1.0.3, 26/08/2014
+ * @version 1.0.4, 29/08/2014
  */
 public class Contacts implements java.io.Serializable {
 
@@ -34,6 +34,7 @@ public class Contacts implements java.io.Serializable {
 	private Integer updatedUserId;
 	private Date updatedDateTime;
 	private StatusTypes status;
+	private String timestamp;
 	private Set<Addresses> addressesSet = new HashSet<Addresses>();
 	private Set<ClientDisabilities> disabilitiesSet = new HashSet<ClientDisabilities>();
 	private Set<Enquiries> enquiriesSet = new HashSet<Enquiries>();
@@ -418,6 +419,24 @@ public class Contacts implements java.io.Serializable {
 	}
 
 
+
+
+
+
+	/**
+	 * @return the timestamp
+	 */
+	public String getTimestamp() {
+		return timestamp;
+	}
+
+
+	/**
+	 * @param timestamp the timestamp to set
+	 */
+	public void setTimestamp(String timestamp) {
+		this.timestamp = timestamp;
+	}
 
 
 	/**

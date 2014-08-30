@@ -15,6 +15,18 @@
         <property name="riskManagement" type="string">
             <column name="risk_management" />
         </property>
+        <property name="createdUserId" type="java.lang.Integer">
+            <column name="created_user_id" />
+        </property>
+        <property name="createdDateTime" type="timestamp">
+            <column name="created_date_time" length="19" />
+        </property>
+        <property name="updatedUserId" type="java.lang.Integer">
+            <column name="updated_user_id" />
+        </property>
+        <property name="updatedDateTime" type="timestamp">
+            <column name="updated_date_time" length="19" />
+        </property>
         
         <!-- Many to one relationship -->
         <many-to-one class="uow.ia.bean.IndividualCases" name="individualCase">

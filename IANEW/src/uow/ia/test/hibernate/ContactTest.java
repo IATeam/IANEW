@@ -106,7 +106,7 @@ public class ContactTest {
 	  System.out.println("dob: " + contact.getDob());
 	  Set<Addresses> addressesSet = contact.getAddressesSet();
 	  for (Addresses a : addressesSet) {
-		  System.out.println("Address: " + a.getId() + " " + a.getAddress() + " " + a.getSurburb() + " " + a.getPostcode() + " " + a.getState());
+		  System.out.println("Address: " + a.getId() + " " + a.getStreet() + " " + a.getSuburb() + " " + a.getPostcode() + " " + a.getState());
 	  }
 	  Set<ClientDisabilities> disabilitySet = contact.getDisabilitiesSet();
 	  for (ClientDisabilities dt : disabilitySet) {
