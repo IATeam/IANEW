@@ -10,17 +10,22 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.context.internal.ManagedSessionContext;
 import org.hibernate.service.ServiceRegistry;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.testng.annotations.Test;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 import org.testng.log4testng.Logger;
 
-import uow.ia.bean.Addresses;
-import uow.ia.bean.Enquiries;
-import uow.ia.bean.EnquiryIssues;
+import uow.ia.bean.CriteriaControlValues;
+import uow.ia.bean.CriteriaControls;
 
-public class AddressesTest {
-	private Logger logger = Logger.getLogger(AddressesTest.class);
+/*
+ * Test fetching criteria control records
+ * 
+ * @author Kim TO
+ * @version 1.0.0, 28/08/2014
+ */
+public class CriteriaControlTest {
+	private Logger logger = Logger.getLogger(CriteriaControlTest.class);
 	@Autowired
 	private SessionFactory sessionFactory;
 	private Session session;
@@ -28,14 +33,13 @@ public class AddressesTest {
 
 	@Test
 	public void f() {
-		List<Addresses> addressList = session.createSQLQuery("SELECT * FROM Addresses").addEntity(Addresses.class).list();
-		  Addresses address = addressList.get(0);
-		  System.out.println("Address ID: " + address.getId());
-		  System.out.println("Street: " + address.getStreet());
-		  System.out.println("Suburb: " + address.getSuburb());
-		  System.out.println("State: " + address.getState());
-		  System.out.println("Postcode: " + address.getPostcode());
-		  System.out.println("Country:" + address.getCountry());
+		CriteriaControls control = (CriteriaControls)session.get(CriteriaControls.class, 1);
+		System.out.println("control id: " + control.getId());
+		
+		Set<CriteriaControlValues> values = control.getCriteriaControlValuesSet();
+		for (CriteriaControlValues v : values) {
+			System.out.println("value id: " + v.getValue());
+		}
 	}
 	
 	@AfterMethod
@@ -54,5 +58,4 @@ public class AddressesTest {
 		session = sessionFactory.openSession();
 		ManagedSessionContext.bind(session);
 	}
-
 }

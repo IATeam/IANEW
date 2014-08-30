@@ -2,8 +2,9 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated Aug 9, 2014 1:06:21 PM by Hibernate Tools 4.0.0 -->
+<!-- Modified by Kim To, v.1.0.2, 29/08/2014 -->
 <hibernate-mapping>
-    <class name="uow.ia.bean.PlanGoals" table="Plan_Goals" catalog="ianew">
+    <class name="uow.ia.bean.PlanGoals" table="Plan_Goals"  dynamic-insert="true">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
             <generator class="identity" />
@@ -32,10 +33,10 @@
         
         <!-- Many to one relationship -->
         <many-to-one class="uow.ia.bean.IndividualCases" name="individualCase">
-        	<column name="case_id" not-null="false"/>
+        	<column name="case_id" not-null="true"/>
         </many-to-one>
         <many-to-one class="uow.ia.bean.GoalTypes" name="goalType">
-        	<column name="goal_type_id" not-null="false"/>
+        	<column name="goal_type_id" not-null="true"/>
         </many-to-one>
         <many-to-one class="uow.ia.bean.StatusTypes" name="statusType">
         	<column name="status_id" not-null="true"/>

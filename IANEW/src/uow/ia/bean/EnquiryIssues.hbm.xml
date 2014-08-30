@@ -2,14 +2,27 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated Aug 9, 2014 1:06:21 PM by Hibernate Tools 4.0.0 -->
+<!-- Modified by Kim To, v1.0.6, 29/08/204 -->
 <hibernate-mapping>
-    <class name="uow.ia.bean.EnquiryIssues" table="Enquiry_Issues" catalog="ianew">
+    <class name="uow.ia.bean.EnquiryIssues" table="Enquiry_Issues" dynamic-insert="true">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
             <generator class="identity" />
         </id>
         <property name="comment" type="string">
             <column name="comment" />
+        </property>
+        <property name="createdDateTime" type="date">
+            <column name="created_date_time" length="10" />
+        </property>
+        <property name="createdUserId" type="java.lang.Integer">
+            <column name="created_user_id" />
+        </property>
+        <property name="updatedDateTime" type="date">
+            <column name="updated_date_time" length="10" />
+        </property>
+        <property name="updatedUserId" type="java.lang.Integer">
+            <column name="updated_user_id" />
         </property>
         
         <many-to-one class="uow.ia.bean.Enquiries" name="enquiry">
