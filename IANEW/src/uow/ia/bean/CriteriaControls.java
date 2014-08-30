@@ -9,11 +9,12 @@ import java.util.Set;
  * Bean class of criteria_controls
  * 
  * @author Kim To
- * @version 1.0.1, 28/08/2014
+ * @version 1.0.2, 30/08/2014
  */
 public class CriteriaControls implements java.io.Serializable {
 
 	private Integer id;
+	private String controlName;
 	private String tableName;
 	private String columnName;
 	private String description;
@@ -27,20 +28,34 @@ public class CriteriaControls implements java.io.Serializable {
 	}
 	/**
 	 * @param id
+	 * @param controlName
 	 * @param tableName
 	 * @param columnName
 	 * @param description
 	 * @param criteriaControlValuesSet
 	 */
-	public CriteriaControls(Integer id, String tableName, String columnName,
-			String description,
+	public CriteriaControls(Integer id, String controlName, String tableName,
+			String columnName, String description,
 			Set<CriteriaControlValues> criteriaControlValuesSet) {
 		super();
 		this.id = id;
+		this.controlName = controlName;
 		this.tableName = tableName;
 		this.columnName = columnName;
 		this.description = description;
 		this.criteriaControlValuesSet = criteriaControlValuesSet;
+	}
+	/**
+	 * @return the controlName
+	 */
+	public String getControlName() {
+		return this.controlName;
+	}
+	/**
+	 * @param controlName the controlName to set
+	 */
+	public void setControlName(String controlName) {
+		this.controlName = controlName;
 	}
 	/**
 	 * @return the id
