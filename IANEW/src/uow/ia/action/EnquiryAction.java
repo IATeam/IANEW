@@ -255,8 +255,8 @@ public class EnquiryAction extends BaseAction implements ModelDriven<Enquiries>{
 //		address.setPostcode("2324");
 //		address.setHomephone("22323 2323");
 	
-		System.out.println("address: " + getAddress().getAddress());
-		System.out.println("suburb: " + getAddress().getSurburb());
+		System.out.println("address: " + getAddress().getStreet());
+		System.out.println("suburb: " + getAddress().getSuburb());
 		System.out.println("state: " + getAddress().getState());
 		System.out.println("country: " + getAddress().getCountry());
 		System.out.println("postcode: " + getAddress().getPostcode());

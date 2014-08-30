@@ -29,25 +29,26 @@
 				<div><s:textarea id="accomodationComments" cssClass="oneLineTextArea" name="model.contact.accommodationComment" /></div> 
 			</div>
 		</div>
-		<s:iterator value="ccontact.addressesSet" status="stat">
+		<s:set var="contactaddress" value="ccontact.addressesSet" />
+		<!-- <s:iterator value="%{contactaddress}" status="stat"> -->
 			<h1><s:property value="#stat.index" /></h1>
 			<section class="sixteen columns curveBorder">
 				<div class="row">
 					<div class="inputfield eight columns">
 						<s:label for="address" value="Address:" />
-						<div><s:textfield value="%{address}" name="ccontact.addressesSet[%{#stat.index}].address"></s:textfield></div>
+						<div><s:textfield name="%{contactaddress.state}"></s:textfield></div>
 					</div>
-					<div class="inputfield four columns">
+					<!-- <div class="inputfield four columns">
 						<s:label for="city" value="Suburb" />
-						<div><s:textfield id="city" name="surburb"></s:textfield></div>
+						<div><s:textfield id="city" name="suburb"></s:textfield></div>
 					</div>
 					<div class="inputfield three columns">
 						<s:label for="state" value="State:" />
 						<div><s:textfield name="state"></s:textfield></div>
-					</div>
+					</div> -->
 				</div>
 				
-				<div class="row">
+				<!-- <div class="row">
 					<div class="inputfield four columns">
 						<s:label for="country" value="Country:" />
 						<div><s:textfield id="country" name="country"></s:textfield></div>
@@ -59,11 +60,10 @@
 					<div class="inputfield four columns">
 						<s:label for="homePhone" value="Home#:"/>
 						<div><s:textfield id="homePhone" name="homephone"></s:textfield></div>
-					</div>
-				</div>
+					</div> -->
+				</div> 
 			</section>
-		</s:iterator>
-		
+		<!-- </s:iterator> -->
 		
 		<s:textfield id="homePhone" name="addressSet.size" />
 			

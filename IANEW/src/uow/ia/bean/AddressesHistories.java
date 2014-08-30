@@ -13,8 +13,8 @@ public class AddressesHistories implements java.io.Serializable {
 	private String action;
 	private Integer addressId;
 	private Integer contactId;
-	private String address;
-	private String surburb;
+	private String street;
+	private String suburb;
 	private String postcode;
 	private String state;
 	private String country;
@@ -32,8 +32,8 @@ public class AddressesHistories implements java.io.Serializable {
 	 * @param action
 	 * @param addressId
 	 * @param contactId
-	 * @param address
-	 * @param surburb
+	 * @param street
+	 * @param suburb
 	 * @param postcode
 	 * @param state
 	 * @param country
@@ -42,15 +42,16 @@ public class AddressesHistories implements java.io.Serializable {
 	 * @param createdDateTime
 	 */
 	public AddressesHistories(Integer id, String action, Integer addressId,
-			Integer contactId, String address, String surburb, String postcode,
+			Integer contactId, String street, String suburb, String postcode,
 			String state, String country, String homephone,
 			Integer createdUserId, Date createdDateTime) {
+		super();
 		this.id = id;
 		this.action = action;
 		this.addressId = addressId;
 		this.contactId = contactId;
-		this.address = address;
-		this.surburb = surburb;
+		this.street = street;
+		this.suburb = suburb;
 		this.postcode = postcode;
 		this.state = state;
 		this.country = country;
@@ -107,28 +108,28 @@ public class AddressesHistories implements java.io.Serializable {
 		this.contactId = contactId;
 	}
 	/**
-	 * @return the address
+	 * @return the street
 	 */
-	public String getAddress() {
-		return address;
+	public String getStreet() {
+		return this.street;
 	}
 	/**
-	 * @param address the address to set
+	 * @param street the street to set
 	 */
-	public void setAddress(String address) {
-		this.address = address;
+	public void setStreet(String street) {
+		this.street = street;
 	}
 	/**
-	 * @return the surburb
+	 * @return the suburb
 	 */
-	public String getSurburb() {
-		return surburb;
+	public String getSuburb() {
+		return this.suburb;
 	}
 	/**
-	 * @param surburb the surburb to set
+	 * @param suburb the suburb to set
 	 */
-	public void setSurburb(String surburb) {
-		this.surburb = surburb;
+	public void setSuburb(String suburb) {
+		this.suburb = suburb;
 	}
 	/**
 	 * @return the postcode

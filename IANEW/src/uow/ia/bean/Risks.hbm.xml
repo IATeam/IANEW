@@ -2,8 +2,9 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated Aug 9, 2014 1:06:21 PM by Hibernate Tools 4.0.0 -->
+<!-- Modified by Kim To, v.1.0.2, 29/08/2014 -->
 <hibernate-mapping>
-    <class name="uow.ia.bean.Risks" table="Risks" catalog="ianew">
+    <class name="uow.ia.bean.Risks" table="Risks" dynamic-insert="true">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
             <generator class="identity" />
@@ -14,13 +15,22 @@
         <property name="riskManagement" type="string">
             <column name="risk_management" />
         </property>
-        <!-- <property name="caseId" type="java.lang.Integer">
-            <column name="case_id" />
-        </property> -->
+        <property name="createdUserId" type="java.lang.Integer">
+            <column name="created_user_id" />
+        </property>
+        <property name="createdDateTime" type="timestamp">
+            <column name="created_date_time" length="19" />
+        </property>
+        <property name="updatedUserId" type="java.lang.Integer">
+            <column name="updated_user_id" />
+        </property>
+        <property name="updatedDateTime" type="timestamp">
+            <column name="updated_date_time" length="19" />
+        </property>
         
         <!-- Many to one relationship -->
         <many-to-one class="uow.ia.bean.IndividualCases" name="individualCase">
-        	<column name="case_id" not-null="false"/>
+        	<column name="case_id" not-null="true"/>
         </many-to-one>
     </class>
 </hibernate-mapping>

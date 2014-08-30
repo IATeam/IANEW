@@ -61,6 +61,29 @@ public interface NewEnquiryService{
 	public int getEnquiryTypeId(String name);
 	
 	public int getEmploymentTypeId(String name);
+
+	/*
+	 *
+	 */
+	public DangerTypes getDangerTypeByName(String name);
+	
+	public StatusTypes getStatusTypeByName(String name);
+	
+	public TitleTypes getTitleTypeByName(String name);
+	
+	public GenderTypes getGenderTypeByName(String name);
+	
+	public CulturalBackgroundTypes getCulturalBackgroundTypeByName(String name);
+	
+	public AccommodationTypes getAccommodationTypeByName(String name);
+	
+	public DisabilityTypes getDisabilityTypeByName(String name);
+	
+	public IssueTypes getIssueTypeByName(String name);
+	
+	public EnquiryTypes getEnquiryTypeByName(String name);
+	
+	public EmploymentTypes getEmploymentTypeByName(String name);
 	
 	/*
 	 * 

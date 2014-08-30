@@ -9,7 +9,7 @@ import java.util.Set;
 
 /**
  * @author Kim To
- * @version 1.0.3, 26/08/2014
+ * @version 1.0.4, 29/08/2014
  */
 public class Contacts implements java.io.Serializable {
 
@@ -34,6 +34,7 @@ public class Contacts implements java.io.Serializable {
 	private Integer updatedUserId;
 	private Date updatedDateTime;
 	private StatusTypes status;
+	private String timestamp;
 	private Set<Addresses> addressesSet = new HashSet<Addresses>();
 	private Set<ClientDisabilities> disabilitiesSet = new HashSet<ClientDisabilities>();
 	private Set<Enquiries> enquiriesSet = new HashSet<Enquiries>();
@@ -420,6 +421,24 @@ public class Contacts implements java.io.Serializable {
 
 
 
+
+
+	/**
+	 * @return the timestamp
+	 */
+	public String getTimestamp() {
+		return timestamp;
+	}
+
+
+	/**
+	 * @param timestamp the timestamp to set
+	 */
+	public void setTimestamp(String timestamp) {
+		this.timestamp = timestamp;
+	}
+
+
 	/**
 	 * @return the addressesSet
 	 */
@@ -486,80 +505,6 @@ public class Contacts implements java.io.Serializable {
 	public void setEmploymentsSet(Set<ContactEmployments> employmentsSet) {
 		this.employmentsSet = employmentsSet;
 	}
-
-
-	/**
-	 * @param id
-	 * @param titleType
-	 * @param firstname
-	 * @param lastname
-	 * @param othername
-	 * @param genderType
-	 * @param contactType
-	 * @param mobilephone
-	 * @param email
-	 * @param accommodation
-	 * @param accommodationComment
-	 * @param culturalBackground
-	 * @param culturalBackgroundComment
-	 * @param dangerType
-	 * @param identification
-	 * @param dob
-	 * @param createdUserId
-	 * @param createdDateTime
-	 * @param updatedUserId
-	 * @param updatedDateTime
-	 * @param status
-	 * @param addressesSet
-	 * @param disabilitiesSet
-	 * @param enquiriesSet
-	 * @param individualCasesSet
-	 * @param employmentsSet
-	 * @param planDevelopersSet
-	 */
-	public Contacts(Integer id, TitleTypes titleType, String firstname,
-			String lastname, String othername, GenderTypes genderType,
-			ContactTypes contactType, String mobilephone, String email,
-			AccommodationTypes accommodation, String accommodationComment,
-			CulturalBackgroundTypes culturalBackground,
-			String culturalBackgroundComment, DangerTypes dangerType,
-			String identification, Date dob, Integer createdUserId,
-			Date createdDateTime, Integer updatedUserId, Date updatedDateTime,
-			StatusTypes status, Set<Addresses> addressesSet,
-			Set<ClientDisabilities> disabilitiesSet,
-			Set<Enquiries> enquiriesSet,
-			Set<IndividualCases> individualCasesSet,
-			Set<ContactEmployments> employmentsSet,
-			Set<PlanDevelopers> planDevelopersSet) {
-		this.id = id;
-		this.titleType = titleType;
-		this.firstname = firstname;
-		this.lastname = lastname;
-		this.othername = othername;
-		this.genderType = genderType;
-		this.contactType = contactType;
-		this.mobilephone = mobilephone;
-		this.email = email;
-		this.accommodation = accommodation;
-		this.accommodationComment = accommodationComment;
-		this.culturalBackground = culturalBackground;
-		this.culturalBackgroundComment = culturalBackgroundComment;
-		this.dangerType = dangerType;
-		this.identification = identification;
-		this.dob = dob;
-		this.createdUserId = createdUserId;
-		this.createdDateTime = createdDateTime;
-		this.updatedUserId = updatedUserId;
-		this.updatedDateTime = updatedDateTime;
-		this.status = status;
-		this.addressesSet = addressesSet;
-		this.disabilitiesSet = disabilitiesSet;
-		this.enquiriesSet = enquiriesSet;
-		this.individualCasesSet = individualCasesSet;
-		this.employmentsSet = employmentsSet;
-		this.planDevelopersSet = planDevelopersSet;
-	}
-
 
 	/**
 	 * @return the planDevelopersSet

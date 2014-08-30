@@ -34,24 +34,26 @@ public class ContactUpdateTest {
 	
 	@Test
 	public void f() {
-		Contacts updateContact = (Contacts)session.get(Contacts.class, 10);
+		Contacts updateContact = (Contacts)session.get(Contacts.class, 11);
+		
 		updateContact.setAccommodation((AccommodationTypes)session.get(AccommodationTypes.class, 2));
 		updateContact.setDob(Date.valueOf("1992-07-23"));
+		updateContact.setAccommodationComment("kim test first update");
 		
-		Set<ClientDisabilities> disabilitySet = updateContact.getDisabilitiesSet();
-		for (ClientDisabilities d : disabilitySet) {
-			if (d.getDisabilityType().getId() == 6) {
-				d.setDisabilityType((DisabilityTypes)session.get(DisabilityTypes.class, 2));
-			}
-		}
+//		Set<ClientDisabilities> disabilitySet = updateContact.getDisabilitiesSet();
+//		for (ClientDisabilities d : disabilitySet) {
+//			if (d.getDisabilityType().getId() == 6) {
+//				d.setDisabilityType((DisabilityTypes)session.get(DisabilityTypes.class, 2));
+//			}
+//		}
 		
-		ClientDisabilities newDisability = new ClientDisabilities();
-		newDisability.setComments("Kim test");
-		newDisability.setContact(updateContact);
-		newDisability.setDisabilityType((DisabilityTypes)session.get(DisabilityTypes.class, 5));
-		
-		disabilitySet.add(newDisability);
-		updateContact.setDisabilitiesSet(disabilitySet);
+//		ClientDisabilities newDisability = new ClientDisabilities();
+//		newDisability.setComments("Kim test");
+//		newDisability.setContact(updateContact);
+//		newDisability.setDisabilityType((DisabilityTypes)session.get(DisabilityTypes.class, 5));
+//		
+//		disabilitySet.add(newDisability);
+//		updateContact.setDisabilitiesSet(disabilitySet);
 		
 		Transaction tx = null;
 		try {
@@ -59,6 +61,7 @@ public class ContactUpdateTest {
 			session.saveOrUpdate(updateContact);
 			tx.commit();
 		} catch (Exception e) {
+			tx.rollback();
 			System.out.println(e);
 		} 
 	}

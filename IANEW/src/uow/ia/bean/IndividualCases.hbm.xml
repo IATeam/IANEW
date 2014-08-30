@@ -2,15 +2,13 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated Aug 9, 2014 1:06:21 PM by Hibernate Tools 4.0.0 -->
+<!-- Modified By Kim To, v.1.0.5, 29/08/2014 -->
 <hibernate-mapping>
-    <class name="uow.ia.bean.IndividualCases" table="Individual_Cases" catalog="ianew">
+    <class name="uow.ia.bean.IndividualCases" table="Individual_Cases"  dynamic-insert="true">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
             <generator class="identity" />
         </id>
-        <property name="caseStatusId" type="java.lang.Integer">
-            <column name="case_status_id" />
-        </property>
         <property name="description" type="string">
             <column name="description" />
         </property>
@@ -38,37 +36,59 @@
         	<column name="client_id" not-null="false" />
         </many-to-one>
         <many-to-one class="uow.ia.bean.PriorityTypes" name="priorityType">
-        	<column name="priority_Id" not-null="true"/>
+        	<column name="priority_Id" not-null="false"/>
         </many-to-one>
-        <many-to-one class="uow.ia.bean.Enquiries" name="relatedEnquiry" unique="true" column="related_enquiry_id" not-null="true"/>
+        <many-to-one class="uow.ia.bean.Enquiries" name="relatedEnquiry" unique="true" column="related_enquiry_id" not-null="false"/>
         <many-to-one class="uow.ia.bean.Contacts" name="advocate">
         	<column name="advocate_id" not-null="false"/>
         </many-to-one>
+        <many-to-one class="uow.ia.bean.StatusTypes" name="statusType">
+        	<column name="case_status_id" not-null="false"/>
+        </many-to-one>
         
         <!-- One-to-many relationship -->
-        <set fetch="select" inverse="true" name="risksSet" table="Risks">
+        <set fetch="select" inverse="true" name="risksSet" table="Risks"  cascade="save-update, delete, delete-orphan">
         	<key>
         		<column name="case_id" not-null="false"/>
         	</key>
         	<one-to-many class="uow.ia.bean.Risks"/>
         </set>
-        <set fetch="select" inverse="true" name="communicationsSet" table="Individual_Case_Communications">
+        
+        <set fetch="select" inverse="true" name="communicationsSet" table="Individual_Case_Communications"  cascade="save-update, delete, delete-orphan">
         	<key>
         		<column name="case_id" not-null="false"/>
         	</key>
         	<one-to-many class="uow.ia.bean.IndividualCaseCommunications"/>
         </set>
         
+        <set fetch="select" inverse="true" name="planGoalsSet" table="Plan_Goals"  cascade="save-update, delete, delete-orphan">
+        	<key>
+        		<column name="case_id" not-null="false"/>
+        	</key>
+        	<one-to-many class="uow.ia.bean.PlanGoals"/>
+        </set>
+        
+        <set fetch="select" inverse="true" name="planDevelopersSet" table="Plan_Developers" order-by="id"  cascade="save-update, delete, delete-orphan">
+		  	<key>
+		  		<column name="case_id" not-null="false"/>
+		  	</key>
+			<one-to-many class="uow.ia.bean.PlanDevelopers"/>
+		</set>
+        
+        <!-- One to one relationship -->
+        <one-to-one name="plan" class="uow.ia.bean.Plans" cascade="save-update, delete"></one-to-one>
+        
+        
         <!-- Self-join many-to-one -->
-        <many-to-one class="uow.ia.bean.IndividualCases" name="oldCase" column="old_case_id" not-null="true"/>
-        <set name="individualCasesSet" table="Individual_Cases" cascade="all-delete-orphan" inverse="false">
-        	<key column="old_case_id"/>
+        <many-to-one class="uow.ia.bean.IndividualCases" name="oldCase" column="old_case_id" not-null="false"/>
+        <set name="individualCasesSet" table="Individual_Cases" cascade="all-delete-orphan" inverse="true">
+        	<key column="old_case_id" not-null="false"/>
         	<one-to-many class="uow.ia.bean.IndividualCases"/>
         </set>
         
         <!-- Many to many relationship -->
-        <set name="caseIssuesSet" table="Case_Issues" inverse="false" fetch="select">
-        	<key column="case_id"/>
+        <set name="caseIssuesSet" table="Case_Issues" inverse="true" fetch="select"  cascade="save-update, delete, delete-orphan">
+        	<key column="case_id" not-null="false"/>
         	<one-to-many class="uow.ia.bean.CaseIssues"/>
         </set>
     </class>

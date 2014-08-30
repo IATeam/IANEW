@@ -15,43 +15,46 @@ public class IndividualCaseCommunications implements java.io.Serializable {
 	private Date communicationDate;
 	private CommunicationTypes communicationType;
 	private String description;
-	private Integer createdUserId;
-	private Date createdDateTime;
 	private Float timeSpent;
 	private String importantFlag;
+	private Integer createdUserId;
+	private Date createdDateTime;
+	private Integer updatedUserId;
+	private Date updatedDateTime;
 
 	public IndividualCaseCommunications() {
 	}
-
-
 	/**
 	 * @param id
 	 * @param individualCase
 	 * @param communicationDate
 	 * @param communicationType
 	 * @param description
-	 * @param createdUserId
-	 * @param createdDateTime
 	 * @param timeSpent
 	 * @param importantFlag
+	 * @param createdUserId
+	 * @param createdDateTime
+	 * @param updatedUserId
+	 * @param updatedDateTime
 	 */
 	public IndividualCaseCommunications(Integer id,
 			IndividualCases individualCase, Date communicationDate,
 			CommunicationTypes communicationType, String description,
-			Integer createdUserId, Date createdDateTime, Float timeSpent,
-			String importantFlag) {
+			Float timeSpent, String importantFlag, Integer createdUserId,
+			Date createdDateTime, Integer updatedUserId, Date updatedDateTime) {
+		super();
 		this.id = id;
 		this.individualCase = individualCase;
 		this.communicationDate = communicationDate;
 		this.communicationType = communicationType;
 		this.description = description;
-		this.createdUserId = createdUserId;
-		this.createdDateTime = createdDateTime;
 		this.timeSpent = timeSpent;
 		this.importantFlag = importantFlag;
+		this.createdUserId = createdUserId;
+		this.createdDateTime = createdDateTime;
+		this.updatedUserId = updatedUserId;
+		this.updatedDateTime = updatedDateTime;
 	}
-
-
 	public Integer getId() {
 		return this.id;
 	}
@@ -139,6 +142,30 @@ public class IndividualCaseCommunications implements java.io.Serializable {
 
 	public void setImportantFlag(String importantFlag) {
 		this.importantFlag = importantFlag;
+	}
+	/**
+	 * @return the updatedUserId
+	 */
+	public Integer getUpdatedUserId() {
+		return this.updatedUserId;
+	}
+	/**
+	 * @param updatedUserId the updatedUserId to set
+	 */
+	public void setUpdatedUserId(Integer updatedUserId) {
+		this.updatedUserId = updatedUserId;
+	}
+	/**
+	 * @return the udpatedDateTime
+	 */
+	public Date getUpdatedDateTime() {
+		return this.updatedDateTime;
+	}
+	/**
+	 * @param udpatedDateTime the udpatedDateTime to set
+	 */
+	public void setUpdatedDateTime(Date updatedDateTime) {
+		this.updatedDateTime = updatedDateTime;
 	}
 
 }

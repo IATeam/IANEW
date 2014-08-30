@@ -2,8 +2,9 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated Aug 9, 2014 1:06:21 PM by Hibernate Tools 4.0.0 -->
+<!-- Modified by Kim To, v1.0.4, 29/08/2014 -->
 <hibernate-mapping>
- <class catalog="ianew" name="uow.ia.bean.Contacts" table="Contacts">
+ <class name="uow.ia.bean.Contacts" table="Contacts" dynamic-insert="true">
   <id name="id" type="java.lang.Integer">
    <column name="id"/>
    <generator class="identity"/>
@@ -48,6 +49,9 @@
   <property generated="never"  name="updatedDateTime" type="date">
    <column length="10" name="updated_date_time"/>
   </property>
+  <property generated="never" name="timestamp" type="string">
+   <column name="timestamp"/>
+  </property>
   
   <!-- Many to one relationship -->
   <many-to-one class="uow.ia.bean.AccommodationTypes" name="accommodation">
@@ -82,14 +86,14 @@
   
   <set fetch="select" inverse="true" name="enquiriesSet" table="Enquiries" order-by="id" cascade="save-update, delete, delete-orphan">
   	<key>
-  		<column name="contact_id" not-null="true"/>
+  		<column name="contact_id" not-null="false"/>
   	</key>
   	<one-to-many class="uow.ia.bean.Enquiries"/>
   </set>
   
-  <set fetch="select" inverse="true" name="individualCasesSet" sort="unsorted" table="Individual_Cases" order-by="id">
+  <set fetch="select" inverse="true" name="individualCasesSet" table="Individual_Cases" order-by="id"  cascade="save-update, delete, delete-orphan">
   	<key>
-  		<column name="client_id" not-null="true"/>
+  		<column name="client_id" not-null="false"/>
   	</key>
   	<one-to-many class="uow.ia.bean.IndividualCases"/>
   </set>
@@ -101,13 +105,14 @@
   	<one-to-many class="uow.ia.bean.ContactEmployments"/>
   </set>
   
-  <set fetch="select" inverse="true" name="planDevelopersSet" table="Plan_Developers" order-by="id">
+  <set fetch="select" inverse="true" name="planDevelopersSet" table="Plan_Developers" order-by="id"  cascade="save-update, delete, delete-orphan">
   	<key>
-  		<column name="contact_id" not-null="true"/>
+  		<column name="contact_id" not-null="false"/>
   	</key>
   	<one-to-many class="uow.ia.bean.PlanDevelopers"/>
   </set>
-  <set fetch="select" inverse="true" name="advocateCasesSet" table="Individual_Cases" order-by="id">
+  
+  <set fetch="select" inverse="true" name="advocateCasesSet" table="Individual_Cases" order-by="id"  cascade="save-update, delete, delete-orphan">
   	<key>
   		<column name="advocate_id" not-null="false"/>
   	</key>
