@@ -121,3 +121,9 @@ function deselectAll(){
 		$('.toggled').hide('slide');
 	}
 }
+
+function importantDiv(selectedDiv){
+	$(selectedDiv).parent("div").parent("section").css({'background-color':'#fddabe'});
+}
+
+

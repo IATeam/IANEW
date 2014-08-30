@@ -220,7 +220,7 @@ h3 {
 }
 
 .primary{
-	background: #f9f8ec;
+	background: #fddabe;
 }
 
 .form input[type=button], .form input[type=submit]{
@@ -229,6 +229,14 @@ h3 {
 	font-size: 10px;
 	color: snow;
 }
+
+#btnImportant{
+	border-radius: 5px;
+	background: #4384ca;
+	font-size: 10px;
+	color: orange;
+}
+
 
 .form footer{
 	height: 40px;
@@ -248,3 +256,4 @@ h3 {
 	display: inline;
 	color: blue;
 }
+

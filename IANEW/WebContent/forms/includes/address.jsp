@@ -25,7 +25,6 @@
 				<div><s:textarea id="accomodationComments" cssClass="oneLineTextArea" name="contact.accomodationComments"></s:textarea></div> 
 			</div>
 		</div>
-		<s:iterator value="address">
 		<div class="row">
 			<div class="inputfield eight columns">
 				<s:label for="address" value="Address:" />
@@ -60,7 +59,6 @@
 				<div><s:textfield id="homePhone" name="contact.homephone"></s:textfield></div>
 			</div>
 		</div>
-		</s:iterator>
 	</fieldset>
 	
 </div>
