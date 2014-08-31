@@ -56,9 +56,9 @@
 	
 	<div>
 		<div class="row">
-			<div class="twelve columns alpha"><p></p></div>
-			<input type="button" id="btnView" value="View" class="two columns"/>
-			<input type="button" id="btnAddEnquiry" value="Add Enquiry" class="two columns omega"/>
+			<div class="ten columns alpha"><p></p></div>
+			<input type="button" id="btnView" value="View" class="three columns"/>
+			<input type="button" id="btnAddEnquiry" value="Add Enquiry" class="three columns omega"/>
 		</div>
 	</div>
 

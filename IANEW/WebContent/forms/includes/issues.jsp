@@ -79,7 +79,7 @@
 					<s:label for="completedDate" value="Completed Date:"  />
 				    <s:date name="completedDate" format="dd/MM/yyyy"/>
 			    </div>
-				    <div class="three columns"><s:select list="issueSelectList.{issueName}" value="issue" name="" headerKey="-1" headerValue="Status" /></div>
+				    <div class="three columns"><s:select list="statusSelectList.{statusName}" value="theStatus" name="" headerKey="-1" headerValue="Status" /></div>
 				</div>
 				<div class="row">
 					<div class="textarea fifteen columns omega">

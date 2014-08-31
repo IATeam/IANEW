@@ -63,9 +63,12 @@
 	</article>
 	
 	<article id="artCommunication" class="row" style="visibility: hidden; display: none;">
+	
 		<section class="secIssue sixteen columns curveBorder">
+			<input type="image" src="/IANEW/resources/images/undoButtonImage.png" alt="undoButton" id="btnUndo" value="Undo" onclick="undoButton(this);return false;" class="undoButton"/>
+			
 			<div class="row">
-			<div class="three columns"><s:select list="issueSelectList.{issueName}" name="" headerKey="-1" headerValue="Communication Type" /></div>
+			<div class="three columns"><s:select list="communicationSelectList.{communicationTypeName}" name="theCommunication" headerKey="-1" headerValue="Communication Type" /></div>
 			<div class="three columns">
 			<s:label for="createdDate" value="Created Date:" />
 			    <s:date name="createdDate" format="dd/MM/yyyy"/>
@@ -78,7 +81,7 @@
 				<s:label for="communicationDate" value="Commun. Date:" />
 				<div><input type="date" id="communicationDate" name=""></div>
 			</div>
-			    <div class="two columns"><s:select list="issueSelectList.{issueName}" value="issue" name="" headerKey="-1" headerValue="Time Spent" /></div>
+			    <div class="two columns"><s:select list="{'<5 Minutes','5-10 Minutes','10-30 Minutes','30-60 Minutes', '1-2 Hours', '3-6 Hours', '7+ Hours'}"  name="" headerKey="-1" headerValue="Time Spent" /></div>
 			</div>
 			<div class="row">
 				<div class="textarea fourteen columns omega">

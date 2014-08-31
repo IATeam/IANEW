@@ -23,10 +23,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<script src="<s:url value='/js/jquery/jquery-ui.min.js' encode='false' includeParams='none'/>"></script>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <s:head/>
 <sj:head/>
+<script src="<s:url value='/js/jquery/jquery-ui.min.js' encode='false' includeParams='none'/>"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 	<link href="<s:url value='/styles/ianew.form.css' encode='false' includeParams='none'/>" rel="stylesheet" type="text/css" media="all"/>
 	<link href="<s:url value='/styles/ianew.home.css' encode='false' includeParams='none'/>" rel="stylesheet" type="text/css" media="all"/>
 	<link href="<s:url value='/styles/import/skeleton.css' encode='false' includeParams='none'/>" rel="stylesheet" type="text/css" media="all"/>

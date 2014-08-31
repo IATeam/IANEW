@@ -74,7 +74,7 @@ public class EnquiryAction extends BaseAction{
 	private List<EmploymentTypes> employmentSelectList;					private String theEmployment;
 	private List<DangerTypes> dangerSelectList;							private String theDanger;
 	//Status_Type or criteria control value table 
-	private List<StatusTypes> statusSelectList;					private String theEnquiryStatus;
+	private List<StatusTypes> statusSelectList;							private String theStatus;
 	
 
 
@@ -191,7 +191,7 @@ public class EnquiryAction extends BaseAction{
 		setTheEmployment("Kim change databse need chagne code for this part");
 		setTheCulturalBackground(contact.getCulturalBackground().getCulturalBackgroundName());
 		setTheAccommodation(contact.getAccommodation().getAccommodationName());
-		setTheEnquiryStatus(enquiry.getStatusType().getStatusName());
+		setTheStatus(enquiry.getStatusType().getStatusName());
 		
 		
 		setInquisitor(enquiry.getInquisitor());
@@ -459,15 +459,15 @@ public class EnquiryAction extends BaseAction{
 	/**
 	 * @return
 	 */
-	public String getTheEnquiryStatus() {
-		return theEnquiryStatus;
+	public String getTheStatus() {
+		return theStatus;
 	}
 
 	/**
 	 * @param theEnquiryStatus
 	 */
-	public void setTheEnquiryStatus(String theEnquiryStatus) {
-		this.theEnquiryStatus = theEnquiryStatus;
+	public void setTheStatus(String theStatus) {
+		this.theStatus = theStatus;
 	}
 	
 	public List<Enquiries> getLinkedEnquiriesSet() {

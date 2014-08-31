@@ -14,13 +14,14 @@
 
 <html>
 <head>
+<s:head/>
+<sj:head/>
 <title>Case List</title>
 <link href="<s:url value='/styles/form.css' encode='false' includeParams='none'/>" rel="stylesheet" type="text/css"
 	      media="all"/>
 <link href="<s:url value='/styles/skeleton.css' encode='false' includeParams='none'/>" rel="stylesheet" type="text/css"
 	      media="all"/>
-<s:head/>
-<sj:head/>
+
 </head>
 <body>
 <!-- 

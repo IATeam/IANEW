@@ -30,11 +30,12 @@
 
 <html>
 <head>
+<s:head/>
+<sj:head/>
 <title>Illawarra Advocacy: Enquiry List</title>
 <script src="<s:url value='/js/ianew.lists.js' encode='false' includeParams='none'/>"></script>
 <script src="<s:url value='/js/ianew.pagefiltersort.js' encode='false' includeParams='none'/>"></script>
-<s:head/>
-<sj:head/>
+
 </head>
 <body>
  

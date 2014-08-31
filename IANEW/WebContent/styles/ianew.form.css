@@ -270,3 +270,10 @@ h3 {
     outline: 0;
 }
 
+.undoButton {
+	 width: 15px;
+	 height: 15px;
+	 margin-left:97%;
+	 margin-top:0%;
+}
+

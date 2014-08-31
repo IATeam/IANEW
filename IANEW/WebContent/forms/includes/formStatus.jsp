@@ -66,7 +66,7 @@ function changePriorityColour(selectList) {
 	
 	<s:if test="%{#formType=='case'}">
 		<div class="two columns">
-			<s:select id="status" list="statusSelectList.{statusName}" name="theCaseStatus" headerKey="-1" headerValue="Case Status" />
+			<s:select id="status" list="statusSelectList.{statusName}" name="theStatus" headerKey="-1" headerValue="Case Status" />
 		</div>
 		
 		<s:div cssClass="two columns">
@@ -76,7 +76,7 @@ function changePriorityColour(selectList) {
 	</s:if>					
 	<s:elseif test="%{#formType=='enquiry'}">
 		<div class="two columns">
-			<s:select id="status" list="statusSelectList.{statusName}" name="theEnquiryStatus" headerKey="-1" headerValue="Enquiry Status" />
+			<s:select id="status" list="statusSelectList.{statusName}" name="theStatus" headerKey="-1" headerValue="Enquiry Status" />
 		</div>
 		
 		<s:div cssClass="two columns">

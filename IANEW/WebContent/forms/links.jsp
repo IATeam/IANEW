@@ -20,7 +20,6 @@
 <link href="<s:url value='/styles/links.css' encode='false' includeParams='none'/>" rel="stylesheet" type="text/css"
 	      media="all"/>
 	      
-<s:head/>
 
 </head>
 <body>

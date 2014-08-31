@@ -42,8 +42,6 @@
 <script src="<s:url value='/js/ianew.lists.js' encode='false' includeParams='none'/>"></script>
 
 
-<s:head/>
-
 </head>
 <body>
 	<s:set var="formType">case</s:set>

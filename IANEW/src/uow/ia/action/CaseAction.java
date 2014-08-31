@@ -7,6 +7,7 @@ import java.util.Set;
 import uow.ia.bean.AccommodationTypes;
 import uow.ia.bean.Addresses;
 import uow.ia.bean.ClientDisabilities;
+import uow.ia.bean.CommunicationTypes;
 import uow.ia.bean.Contacts;
 import uow.ia.bean.CulturalBackgroundTypes;
 import uow.ia.bean.DangerTypes;
@@ -64,6 +65,7 @@ public class CaseAction extends BaseAction{
 	private List<StatusTypes> statusSelectList;							private String theStatus;
 	private List<Contacts> advocateSelectList;							private String theAdvocate;
 	private List<PriorityTypes> prioritySelectList;						private String thePriority;	
+	private List<CommunicationTypes> communicationSelectList;			private String theCommunication;
 	/*
 	 * Sets variables for 1 to many relationship tables
 	 */
@@ -237,6 +239,7 @@ public class CaseAction extends BaseAction{
 		employmentSelectList = caseServices.findEmploymentTypes();
 		advocateSelectList = caseServices.findAdvocates();
 		prioritySelectList = caseServices.findPriorityTypes();
+		communicationSelectList = caseServices.findCommunicationTypes();
 	}
 	
 	
@@ -266,6 +269,19 @@ public class CaseAction extends BaseAction{
 		public String getThePriority() {
 		return thePriority;
 		}
+		
+		public void setCommunicationSelectList(List<CommunicationTypes> communicationSelectList) {
+			this.communicationSelectList = communicationSelectList;
+			}
+			public List<CommunicationTypes> getCommunicationSelectList() {
+			return communicationSelectList;
+			}
+			public void setTheCommunication(String theCommunication) {
+			this.theCommunication = theCommunication;
+			}
+			public String getTheCommunication() {
+			return theCommunication;
+			}
 	/**
 	 * Getter for the form title
 	 * @return String

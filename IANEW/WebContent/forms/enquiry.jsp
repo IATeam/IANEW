@@ -43,7 +43,6 @@
 	      media="all"/>
 <script src="<s:url value='/js/validation/enquiryValidation.js' encode='false' includeParams='none'/>"></script>
 
-<s:head/>
 
 </head>
 <body>
