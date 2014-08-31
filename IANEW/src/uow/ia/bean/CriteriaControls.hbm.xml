@@ -2,12 +2,16 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated Aug 9, 2014 1:06:21 PM by Hibernate Tools 4.0.0 -->
+<!-- Modified by Kim To, v.1.0.3, 30/08/2014 -->
 <hibernate-mapping>
     <class name="uow.ia.bean.CriteriaControls" table="Criteria_Controls" catalog="ianew">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
             <generator class="identity" />
         </id>
+        <property name="controlName" type="string">
+            <column name="control_name" />
+        </property>
         <property name="tableName" type="string">
             <column name="table_name" />
         </property>
@@ -17,5 +21,12 @@
         <property name="description" type="string">
             <column name="description" />
         </property>
+        
+        <set fetch="select" inverse="true" name="criteriaControlValuesSet" table="Criteria_Control_Values" order-by="id" cascade="save-update, delete, delete-orphan">
+  			<key>
+  				<column name="criteria_control_id" not-null="true"/>
+  			</key>
+  			<one-to-many class="uow.ia.bean.CriteriaControlValues"/>
+ 	 	</set>
     </class>
 </hibernate-mapping>

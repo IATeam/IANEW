@@ -21,7 +21,7 @@
 				<s:label for="profession" value="Profession:" />
 				<div><s:textfield id="profession" name="profession"></s:textfield></div>
 			</div> -->
-					<div class="four columns"><s:select list="#{'1', '2'}" name="" headerKey="-1" headerValue="Select Employment Type" /></div>
+					<div class="four columns"><s:select list="employmentSelectList.{employmentName}" name="theEmployment" headerKey="-1" headerValue="Select Employment Type" /></div>
 			
 			<div class="inputfield four columns">
 				<s:label for="workPhone" value="Work#:" />

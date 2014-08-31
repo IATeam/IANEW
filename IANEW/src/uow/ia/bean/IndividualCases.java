@@ -7,16 +7,17 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
+ * Bean class for Individual Case
  * @author Kim To
- * @version 1.0.3, 26/08/2014
+ * @version 1.0.6, 28/08/2014
  */
 public class IndividualCases implements java.io.Serializable {
 
 	private Integer id;
 	private Contacts contact;
 	private Contacts advocate;
-	private Integer caseStatusId;
 	private String description;
+	private StatusTypes statusType;
 	private PriorityTypes priorityType;
 	private Integer serviceProviderId;
 	private Date createdDateTime;
@@ -27,8 +28,12 @@ public class IndividualCases implements java.io.Serializable {
 	private Set<Risks> risksSet = new HashSet<Risks>();
 	private IndividualCases oldCase;
 	private Enquiries relatedEnquiry;
+	private Plans plan;
+	private Set<PlanGoals> planGoalsSet = new HashSet<PlanGoals>();
+	private Set<PlanDevelopers> planDevelopersSet = new HashSet<PlanDevelopers>();
+	
 	private Set<IndividualCases> individualCasesSet = new HashSet<IndividualCases>();
-
+	
 	private Set<CaseIssues> caseIssuesSet = new HashSet<CaseIssues>();
 	private Set<IndividualCaseCommunications> communicationsSet = new HashSet<IndividualCaseCommunications>();
 	
@@ -39,12 +44,14 @@ public class IndividualCases implements java.io.Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
+
+
 	/**
 	 * @param id
 	 * @param contact
-	 * @param advocateId
-	 * @param caseStatusId
+	 * @param advocate
 	 * @param description
+	 * @param statusType
 	 * @param priorityType
 	 * @param serviceProviderId
 	 * @param createdDateTime
@@ -54,25 +61,30 @@ public class IndividualCases implements java.io.Serializable {
 	 * @param referredTo
 	 * @param risksSet
 	 * @param oldCase
-	 * @param relatedEnquiryId
+	 * @param relatedEnquiry
+	 * @param plan
+	 * @param planGoalsSet
+	 * @param planDevelopersSet
 	 * @param individualCasesSet
 	 * @param caseIssuesSet
 	 * @param communicationsSet
 	 */
 	public IndividualCases(Integer id, Contacts contact, Contacts advocate,
-			Integer caseStatusId, String description,
+			String description, StatusTypes statusType,
 			PriorityTypes priorityType, Integer serviceProviderId,
 			Date createdDateTime, Integer createdUserId, Date updatedDateTime,
 			Integer updatedUserId, String referredTo, Set<Risks> risksSet,
-			IndividualCases oldCase, Enquiries relatedEnquiry,
+			IndividualCases oldCase, Enquiries relatedEnquiry, Plans plan,
+			Set<PlanGoals> planGoalsSet, Set<PlanDevelopers> planDevelopersSet,
 			Set<IndividualCases> individualCasesSet,
 			Set<CaseIssues> caseIssuesSet,
 			Set<IndividualCaseCommunications> communicationsSet) {
+		super();
 		this.id = id;
 		this.contact = contact;
 		this.advocate = advocate;
-		this.caseStatusId = caseStatusId;
 		this.description = description;
+		this.statusType = statusType;
 		this.priorityType = priorityType;
 		this.serviceProviderId = serviceProviderId;
 		this.createdDateTime = createdDateTime;
@@ -83,10 +95,15 @@ public class IndividualCases implements java.io.Serializable {
 		this.risksSet = risksSet;
 		this.oldCase = oldCase;
 		this.relatedEnquiry = relatedEnquiry;
+		this.plan = plan;
+		this.planGoalsSet = planGoalsSet;
+		this.planDevelopersSet = planDevelopersSet;
 		this.individualCasesSet = individualCasesSet;
 		this.caseIssuesSet = caseIssuesSet;
 		this.communicationsSet = communicationsSet;
 	}
+
+
 
 	/**
 	 * @return the id
@@ -131,18 +148,22 @@ public class IndividualCases implements java.io.Serializable {
 	}
 
 	/**
-	 * @return the caseStatusId
+	 * @return the statusType
 	 */
-	public Integer getCaseStatusId() {
-		return this.caseStatusId;
+	public StatusTypes getStatusType() {
+		return statusType;
 	}
 
+
+
 	/**
-	 * @param caseStatusId the caseStatusId to set
+	 * @param statusType the statusType to set
 	 */
-	public void setCaseStatusId(Integer caseStatusId) {
-		this.caseStatusId = caseStatusId;
+	public void setStatusType(StatusTypes statusType) {
+		this.statusType = statusType;
 	}
+
+
 
 	/**
 	 * @return the description
@@ -297,6 +318,60 @@ public class IndividualCases implements java.io.Serializable {
 	public void setRelatedEnquiry(Enquiries relatedEnquiry) {
 		this.relatedEnquiry = relatedEnquiry;
 	}
+
+	/**
+	 * @return the plan
+	 */
+	public Plans getPlan() {
+		return this.plan;
+	}
+
+
+
+
+	/**
+	 * @param plan the plan to set
+	 */
+	public void setPlan(Plans plan) {
+		this.plan = plan;
+	}
+
+
+
+
+	/**
+	 * @return the planGoalsSet
+	 */
+	public Set<PlanGoals> getPlanGoalsSet() {
+		return this.planGoalsSet;
+	}
+
+
+	/**
+	 * @param planGoalsSet the planGoalsSet to set
+	 */
+	public void setPlanGoalsSet(Set<PlanGoals> planGoalsSet) {
+		this.planGoalsSet = planGoalsSet;
+	}
+
+
+	/**
+	 * @return the planDevelopersSet
+	 */
+	public Set<PlanDevelopers> getPlanDevelopersSet() {
+		return this.planDevelopersSet;
+	}
+
+
+
+	/**
+	 * @param planDevelopersSet the planDevelopersSet to set
+	 */
+	public void setPlanDevelopersSet(Set<PlanDevelopers> planDevelopersSet) {
+		this.planDevelopersSet = planDevelopersSet;
+	}
+
+
 
 	/**
 	 * @return the individualCasesSet

@@ -77,6 +77,13 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 		return this.getCurrentSession().createQuery(hql).list();
 		// return (List<T>) getHibernateTemplate().find(hql);
 	}
+	
+	@Override
+	public List<T> find(String hql, String param, Object o) {
+		Query q = this.getCurrentSession().createQuery(hql);
+		q.setParameter(param, o);
+		return q.list();
+	}
 
 	@Override
 	public List<T> find(String hql, Object[] param) {

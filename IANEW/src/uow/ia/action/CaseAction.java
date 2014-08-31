@@ -62,7 +62,7 @@ public class CaseAction extends BaseAction{
 	private List<DangerTypes> dangerSelectList;							private String theDanger;
 	//Status_Type or criteria control value table 
 	private List<StatusTypes> statusSelectList;								private String theStatus;
-	
+	private List<Contacts> advocateSelectList;						private String theAdvocate;
 
 	/*
 	 * Sets variables for 1 to many relationship tables
@@ -135,6 +135,9 @@ public class CaseAction extends BaseAction{
 	 */
 	public String newCase(){
 		activateLists();
+
+		setCreatedDate(new Date());
+		setUpdatedDate(new Date());
 		return SUCCESS;
 	}
 
@@ -229,7 +232,8 @@ public class CaseAction extends BaseAction{
 		issueSelectList = caseServices.findIssueTypes();
 		dangerSelectList = caseServices.findDangerTypes();
 		statusSelectList = services.findStatusTypes();
-		//employmentSelectList = caseServices.findEmploymentTypes();
+		employmentSelectList = caseServices.findEmploymentTypes();
+		advocateSelectList = caseServices.findAdvocates();
 		//setEmploymentList(contact.getEmploymentType());
 	}
 	
@@ -434,7 +438,25 @@ public class CaseAction extends BaseAction{
 	}
 
 	
+	/**
+	 * Getter for advocate type
+	 * @return List
+	 */
+	public List<Contacts> setAdvocateSelectList(List<Contacts> advocateSelectList) {
+		return this.advocateSelectList = advocateSelectList;
+	}
+	
+	public List<Contacts> getAdvocateSelectList() {
+		return advocateSelectList;
+	}
 
+	public String getTheAdvocate() {
+		return theAdvocate;
+	}
+
+	public void setTheAdvocate(String theAdvocate) {
+		this.theAdvocate = theAdvocate;
+	}
 	/*------------------------------------------------Pagination Variables
 	 * 
 	 */

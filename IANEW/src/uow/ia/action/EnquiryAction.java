@@ -1,6 +1,7 @@
 package uow.ia.action;
 
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -152,10 +153,6 @@ public class EnquiryAction extends BaseAction{
 		setCreatedDate(new Date());
 		setUpdatedDate(new Date());
 		
-		ActionContext context = ActionContext.getContext();
-		ActionMapping am = new ActionMapping();
-		Map map = context.getContextMap();
-		System.out.println("getting action name: " + map.toString());
 		return SUCCESS;
 	}
 

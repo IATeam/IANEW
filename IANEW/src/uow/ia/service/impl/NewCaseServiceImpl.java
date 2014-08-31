@@ -53,7 +53,22 @@ NewCaseService {
 	private IssueTypesDao<IssueTypes> issueTypesDao;
 	
 	@Resource
+	private EnquiryTypesDao<EnquiryTypes> enquiryTypesDao;
+	
+	@Resource
+	private EmploymentTypesDao<EmploymentTypes> employmentTypesDao;
+	
+	@Resource
+	private CommunicationTypesDao<CommunicationTypes> communicationTypesDao;
+	
+	@Resource
+	private GoalTypesDao<GoalTypes> goalTypesDao;
+	
+	@Resource
 	private ContactsDao<Contacts> contactsDao;
+	
+	@Resource
+	private ContactTypesDao<ContactTypes> contactTypesDao;
 	
 	@Resource
 	private IndividualCasesDao<IndividualCases> individualCasesDao;
@@ -106,6 +121,26 @@ NewCaseService {
 	}
 	
 	@Override
+	public List<EnquiryTypes> findEnquiryTypes() {
+		return enquiryTypesDao.find(" from EnquiryTypes");
+	}
+
+	@Override
+	public List<EmploymentTypes> findEmploymentTypes() {
+		return employmentTypesDao.find(" from EmploymentTypes");
+	}
+
+	@Override
+	public List<CommunicationTypes> findCommunicationTypes() {
+		return communicationTypesDao.find(" from CommunicationTypes");
+	}
+
+	@Override
+	public List<GoalTypes> findGoalTypes() {
+		return goalTypesDao.find(" from GoalTypes");
+	}
+	
+	@Override
 	public List<IndividualCases> findCases() {
 		return individualCasesDao.find(" from IndividualCases");
 	}
@@ -123,6 +158,14 @@ NewCaseService {
 	@Override
 	public IndividualCases getCase(int id) {
 		return individualCasesDao.get(IndividualCases.class, id);
+	}
+
+	@Override
+	public List<Contacts> findAdvocates() {
+		ContactTypes c = contactTypesDao.get(
+				" from ContactTypes t where t.contactTypeName =?",
+				new Object[] { "Advocate" });
+		return contactsDao.find(" from Contacts t where t.contactType =:contactType order by t.lastname asc, t.firstname asc","contactType", c);
 	}
 
 

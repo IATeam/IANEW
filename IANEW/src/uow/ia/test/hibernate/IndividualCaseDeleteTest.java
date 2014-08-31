@@ -1,7 +1,6 @@
 package uow.ia.test.hibernate;
 
-import java.util.List;
-import java.util.Set;
+import java.sql.Date;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -16,18 +15,19 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.log4testng.Logger;
 
-import uow.ia.bean.Enquiries;
-import uow.ia.bean.EnquiryIssues;
+import uow.ia.bean.Contacts;
+import uow.ia.bean.IndividualCases;
 
 /*
- * Test deleting an enquiry issue from an existing enquiry
- * Need to save Enquiry object due to cascade save-update in order to have this change in effect.
+ * Test deleting individual case in two ways:
+ * 1. retrieve case by id and delete the object
+ * 2. retrieve case via contact and save contact object
  * 
  * @author Kim To
- * @version 1.0.0, 27/08/2014
+ * @version 1.0.0, 28/08/2014
  */
-public class EnquiryIssueDeleteTest {
-	private Logger logger = Logger.getLogger(EnquiryIssueDeleteTest.class);
+public class IndividualCaseDeleteTest {
+	private Logger logger = Logger.getLogger(IndividualCaseDeleteTest.class);
 	@Autowired
 	private SessionFactory sessionFactory;
 	private Session session;
@@ -35,36 +35,34 @@ public class EnquiryIssueDeleteTest {
 
 	@Test
 	public void f() {
-		System.out.println("Remove enquiry issue id 103 from enquiry id 105");
-		System.out.println("Save delete transaction by save enquiry object");
-		
-		Enquiries enquiry = (Enquiries)session.get(Enquiries.class, 105);
-		EnquiryIssues eIssue = (EnquiryIssues)session.get(EnquiryIssues.class, 103);
-		 
-		Set<EnquiryIssues> eIssueSet = enquiry.getEnquiryIssuesSet();
-		eIssueSet.remove(eIssue);
+		System.out.println("Start process to delete new individual case");
+		IndividualCases iCase = (IndividualCases)session.get(IndividualCases.class ,104);
 		
 		Transaction tx = null;
+		
 		try {
 			tx = session.beginTransaction();
-			session.saveOrUpdate(enquiry);
+			session.delete(iCase);
 			tx.commit();
 		} catch (Exception e) {
 			tx.rollback();
-			System.out.println("Error: " + e);
+			System.out.println(e);
 		} finally {
-			System.out.println("Enquiry Issue for enquiry 105");
-			for (EnquiryIssues i : enquiry.getEnquiryIssuesSet()) {
-				System.out.println(i.getId());
+			iCase = (IndividualCases)session.get(IndividualCases.class ,104);
+			if (iCase == null) {
+				System.out.println("successfully deleted");
+			} else {
+				System.out.println("unsucessfully deleted");
 			}
 		}
 		
-		System.out.println("Remove by delete the object directly");
-		EnquiryIssues deleteIssue = (EnquiryIssues)session.get(EnquiryIssues.class, 103);
+		System.out.println("delete case by save contact object");
+		Contacts contact = (Contacts)session.get(Contacts.class, 100);
+		contact.getIndividualCasesSet().remove((IndividualCases)session.get(IndividualCases.class, 105));
 		
 		try {
 			tx = session.beginTransaction();
-			session.delete(deleteIssue);
+			session.saveOrUpdate(contact);
 			tx.commit();
 		} catch (Exception e) {
 			tx.rollback();

@@ -14,11 +14,11 @@
         <property name="action" type="string">
             <column name="action" length="10" not-null="true" />
         </property>
-        <property name="address" type="string">
-            <column name="address" />
+        <property name="street" type="string">
+            <column name="stret" />
         </property>
-        <property name="surburb" type="string">
-            <column name="surburb" />
+        <property name="suburb" type="string">
+            <column name="suburb" />
         </property>
         <property name="postcode" type="string">
             <column name="postcode" />

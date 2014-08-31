@@ -19,7 +19,7 @@
 <div class="fieldsetborder">
 	<fieldset>
 		<div class="row">
-			<div class="eight columns"><s:select list="#{'1', '2'}" name=" " headerKey="-1" headerValue="Select Advocate" /></div>
+			<div class="eight columns"><s:select list="advocateSelectList.{lastname + ', ' + firstname}" name="theAdvocate" headerKey="-1" headerValue="Select Advocate" /></div>
 			<section class="five columns"><p></p></section>
 			<input type="button" id="btnAdvocateDetails" onclick="showAdvocates()" value="Show Advocate Details" class="three columns omega"/>
 		</div>		
@@ -40,7 +40,7 @@
 		</div>
 		
 		<div class="row toggled">
-			<div class="four columns"><s:select list="genderSelectList.{genderName}" name="theGender" headerKey="-1" headerValue="Select Gender" disabled="disabled"/></div>
+			<div class="four columns"><s:select list="genderSelectList.{genderName}" name="theGender" headerKey="-1" headerValue="Select Gender" disabled="true"/></div>
 			<!-- style="padding-right: 15px;" -->
 			<div class="inputfield eight columns" >
 				<s:label for="identification" value="Identification:" />
@@ -54,7 +54,7 @@
 		</div>
 		
 		<div class="row toggled">
-			<div class="four columns"><s:select list="culturalBackgroundSelectList.{culturalBackgroundName}" name="theCulturalBackground" value="theCultrualBackground" headerKey="-1"  headerValue="Select Cultural Background" value="genderProtege"  disabled="disabled"/></div>
+			<div class="four columns"><s:select list="culturalBackgroundSelectList.{culturalBackgroundName}" name="theCulturalBackground" value="theCultrualBackground" headerKey="-1"  headerValue="Select Cultural Background" value="genderProtege"  disabled="true"/></div>
 			
 			<div class="textarea twelve columns omega">
 				<s:label for="culturalBackgroundComments" value="Comments:" />
