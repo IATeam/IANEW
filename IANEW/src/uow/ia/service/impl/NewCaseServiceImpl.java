@@ -65,6 +65,9 @@ NewCaseService {
 	private GoalTypesDao<GoalTypes> goalTypesDao;
 	
 	@Resource
+	private PriorityTypesDao<PriorityTypes> priorityTypesDao;
+	
+	@Resource
 	private ContactsDao<Contacts> contactsDao;
 	
 	@Resource
@@ -138,6 +141,11 @@ NewCaseService {
 	@Override
 	public List<GoalTypes> findGoalTypes() {
 		return goalTypesDao.find(" from GoalTypes");
+	}
+	
+	@Override
+	public List<PriorityTypes> findPriorityTypes() {
+		return priorityTypesDao.find(" from PriorityTypes");
 	}
 	
 	@Override
