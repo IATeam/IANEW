@@ -67,7 +67,7 @@
 		</div>
 		
 		<div class="row">
-			<div class="inputfield four columns">
+			<div class="inputfield five columns">
 				<s:label for="email" value="Email:" />
 				<div><s:textfield id="email" name="contact.email"></s:textfield></div>
 			</div>

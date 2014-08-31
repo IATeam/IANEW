@@ -568,7 +568,7 @@ public class NewEnquiryServiceImpl implements NewEnquiryService {
 		Enquiries enquiries = enquiriesDao.get(Enquiries.class, id);
 		List<Enquiries> tmpEnquiries = null;
 		tmpEnquiries.add(enquiries.getParentEnquiry());
-		Iterator<Enquiries> iterator = enquiries.getEnquiriesSet().iterator();
+		Iterator<Enquiries> iterator = enquiries.getEnquiriesList().iterator();
 		while (iterator.hasNext()) {
 			tmpEnquiries.add(iterator.next());
 		}
@@ -583,7 +583,7 @@ public class NewEnquiryServiceImpl implements NewEnquiryService {
 	@Override
 	public boolean saveOrUpdateEnquiry(Enquiries e, Contacts c) {
 		e.setContact(c);
-		c.getEnquiriesSet().add(e);
+		c.getEnquiriesList().add(e);
 		try {
 			contactsDao.saveOrUpdate(c);
 			return true;

@@ -15,6 +15,39 @@
 	Description: A component of the contact that is to be displayed on both enquiry and case forms that 
 				displays the form status detail.
 ------------------------------------------------------------------------------------------------>
+<script>
+function changeDangerColour(selectList) {
+		var selectedDanger = $(selectList).val();
+		
+		if (selectedDanger == -1)
+		{
+			 $(selectList).css({'background':'grey'});
+		}
+		
+	    <s:iterator value="dangerSelectList">
+	    	if(selectedDanger == "<s:property value='dangerName'/>")
+	    	{
+	    		$(selectList).css({"background": "<s:property value='symbol'/>"});
+	    	}
+	    </s:iterator>
+}
+
+function changePriorityColour(selectList) {
+	var selectedPriority = $(selectList).val();
+	
+	if (selectedPriority == -1)
+	{
+		 $(selectList).css({'background':'grey'});
+	}
+	
+    <s:iterator value="prioritySelectList">
+    	if(selectedPriority == "<s:property value='priorityName'/>")
+    	{
+    		$(selectList).css({"background": "<s:property value='color'/>"});
+    	}
+    </s:iterator>
+}
+</script>
 
 <div class="formStatus">
 	
@@ -37,14 +70,14 @@
 			</div>
 			<div class="nine columns">
 			
-					<div class="three columns"><s:select list="dangerSelectList.{dangerName}" name="theDanger" headerKey="-1" headerValue="Flag Danger" cssClass="coloured" onChange="dangerChange(this)"/></div>
+					<div class="three columns"><s:select list="dangerSelectList.{dangerName}" name="theDanger" headerKey="-1" headerValue="Flag Danger" cssClass="coloured" onChange="changeDangerColour(this)"/></div>
 					<s:if test="%{#formType=='case'}">
 						<div class="three columns"><s:select id="status" list="statusSelectList.{statusName}" name="theCaseStatus" headerKey="-1" headerValue="Case Status" /></div>
 						<s:div cssClass="two columns">
 							<s:label for="id" value="Case#:" />
 							<s:property value="id" />
 						</s:div>
-						<div class="three columns"><s:select list="dangerSelectList.{dangerName}" name="theDanger" headerKey="-1" headerValue="Priority Level" cssClass="coloured"/></div>
+						<div class="three columns"><s:select list="prioritySelectList.{priorityName}" name="thePriority" headerKey="-1" headerValue="Priority Level" cssClass="coloured" onChange="changePriorityColour(this)"/></div>
 						
 					</s:if>					
 					<s:elseif test="%{#formType=='enquiry'}">

@@ -135,8 +135,3 @@ function importantDiv(selectedDiv){
 		$(selectedDiv).css({'background':'#d6d6d6'});
 	}
 }
-
-function changeColor(selectList) {
-	
-	
-}

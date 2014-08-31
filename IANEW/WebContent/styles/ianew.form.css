@@ -257,6 +257,7 @@ h3 {
 }
 
 .coloured { 
+    text-shadow: -0.75px 0 black, 0 0.75px black, 0.75px 0 black, 0 -0.75px black;
 	color: white;
 	background: grey;
 }

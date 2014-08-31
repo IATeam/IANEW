@@ -18,6 +18,7 @@ import uow.ia.bean.GenderTypes;
 import uow.ia.bean.IssueTypes;
 import uow.ia.bean.StatusTypes;
 import uow.ia.bean.TitleTypes;
+import uow.ia.bean.PriorityTypes;
 
 /** ---------------------------------------------------------------------------------------------
  * @author: Quang Nhan
@@ -60,10 +61,9 @@ public class CaseAction extends BaseAction{
 	private List<IssueTypes> issueSelectList;							private String theIssue;
 	private List<EmploymentTypes> employmentSelectList;					private String theEmployment;
 	private List<DangerTypes> dangerSelectList;							private String theDanger;
-	//Status_Type or criteria control value table 
-	private List<StatusTypes> statusSelectList;								private String theStatus;
-	private List<Contacts> advocateSelectList;						private String theAdvocate;
-
+	private List<StatusTypes> statusSelectList;							private String theStatus;
+	private List<Contacts> advocateSelectList;							private String theAdvocate;
+	private List<PriorityTypes> prioritySelectList;						private String thePriority;	
 	/*
 	 * Sets variables for 1 to many relationship tables
 	 */
@@ -234,7 +234,7 @@ public class CaseAction extends BaseAction{
 		statusSelectList = services.findStatusTypes();
 		employmentSelectList = caseServices.findEmploymentTypes();
 		advocateSelectList = caseServices.findAdvocates();
-		//setEmploymentList(contact.getEmploymentType());
+		prioritySelectList = caseServices.findPriorityTypes();
 	}
 	
 	
@@ -252,7 +252,18 @@ public class CaseAction extends BaseAction{
 		}
 	
 	
-	
+	public void setPrioritySelectList(List<PriorityTypes> prioritySelectList) {
+		this.prioritySelectList = prioritySelectList;
+		}
+		public List<PriorityTypes> getPrioritySelectList() {
+		return prioritySelectList;
+		}
+		public void setThePriority(String thePriority) {
+		this.thePriority = thePriority;
+		}
+		public String getThePriority() {
+		return thePriority;
+		}
 	/**
 	 * Getter for the form title
 	 * @return String
