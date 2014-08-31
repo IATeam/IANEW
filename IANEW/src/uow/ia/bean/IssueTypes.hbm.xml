@@ -2,6 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated Aug 9, 2014 1:06:21 PM by Hibernate Tools 4.0.0 -->
+<!-- Modified by Kim To, v.1.0.3, 30/08/2014 -->
 <hibernate-mapping>
     <class name="uow.ia.bean.IssueTypes" table="Issue_Types" catalog="ianew">
         <id name="id" type="java.lang.Integer">
@@ -16,13 +17,13 @@
         </property>
         
         <!-- Many-to-many relationship -->
-        <set name="enquiryIssuesSet" table="Enquiry_Issues" inverse="true" fetch="select">
+        <bag name="enquiryIssuesList" table="Enquiry_Issues" inverse="true" fetch="select">
         	<key column="issue_id"/>
         	<one-to-many class="uow.ia.bean.EnquiryIssues"/>
-        </set>
-        <set name="caseIssuesSet" table="Case_Issues" inverse="true" fetch="select">
+        </bag>
+        <bag name="caseIssuesList" table="Case_Issues" inverse="true" fetch="select">
         	<key column="issue_type_id"/>
         	<one-to-many class="uow.ia.bean.CaseIssues"/>
-        </set>
+        </bag>
     </class>
 </hibernate-mapping>

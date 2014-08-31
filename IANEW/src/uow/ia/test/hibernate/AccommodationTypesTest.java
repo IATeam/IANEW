@@ -29,7 +29,7 @@ public class AccommodationTypesTest {
 	@Test
 	public void f() {
 		List<AccommodationTypes> accommodationList = session.createSQLQuery("SELECT * FROM Accommodation_Types").addEntity(AccommodationTypes.class).list();
-		Set<Contacts> contactsSet  = accommodationList.get(1).getContactsSet();
+		List<Contacts> contactsSet  = accommodationList.get(1).getContactsList();
 		System.out.println("Contacts");
 		System.out.println("accommodationId: " + accommodationList.get(1).getId());
 		System.out.println("Count: " + contactsSet.size());

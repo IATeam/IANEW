@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated Aug 9, 2014 1:06:21 PM by Hibernate Tools 4.0.0 -->
-<!-- Modified by Kim To, v.1.0.3, 29/08/2014 -->
+<!-- Modified by Kim To, v.1.0.4, 29/08/2014 -->
 <hibernate-mapping>
     <class name="uow.ia.bean.IndividualCaseCommunications" table="Individual_Case_Communications"  dynamic-insert="true">
         <id name="id" type="java.lang.Integer">
@@ -24,13 +24,13 @@
         <property name="createdUserId" type="java.lang.Integer">
             <column name="created_user_id" />
         </property>
-        <property name="createdDateTime" type="timestamp">
+        <property name="createdDateTime" type="java.sql.Date">
             <column name="created_date_time" length="19" />
         </property>
         <property name="updatedUserId" type="java.lang.Integer">
             <column name="updated_user_id" />
         </property>
-        <property name="updatedDateTime" type="timestamp">
+        <property name="updatedDateTime" type="java.sql.Date">
             <column name="updated_date_time" length="19" />
         </property>
         

@@ -31,7 +31,7 @@ public class CommunicationTypesTest {
 		CommunicationTypes communicationType = communicationTypeList.get(0);
 		System.out.println("typeid: " + communicationType.getId());
 		System.out.println("name: " + communicationType.getCommunicationTypeName());
-		Set<IndividualCaseCommunications> iaCommunications = communicationType.getIndividualCaseCommunicationsSet();
+		List<IndividualCaseCommunications> iaCommunications = communicationType.getIndividualCaseCommunicationsList();
 		System.out.println("case count: " + iaCommunications.size());
 		for (IndividualCaseCommunications icc : iaCommunications) {
 			System.out.println(icc.getId() + " " + icc.getDescription() + " " + icc.getTimeSpent());

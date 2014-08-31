@@ -22,11 +22,11 @@
             <column name="description" />
         </property>
         
-        <set fetch="select" inverse="true" name="criteriaControlValuesSet" table="Criteria_Control_Values" order-by="id" cascade="save-update, delete, delete-orphan">
+        <bag fetch="select" inverse="true" name="criteriaControlValuesList" table="Criteria_Control_Values" order-by="id" cascade="save-update, delete, delete-orphan">
   			<key>
   				<column name="criteria_control_id" not-null="true"/>
   			</key>
   			<one-to-many class="uow.ia.bean.CriteriaControlValues"/>
- 	 	</set>
+ 	 	</bag>
     </class>
 </hibernate-mapping>

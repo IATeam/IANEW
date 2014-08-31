@@ -4,12 +4,14 @@ package uow.ia.bean;
 
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
  * @author Kim To
- * @version 1.0.4, 29/08/2014
+ * @version 1.0.5, 30/08/2014
  */
 public class Contacts implements java.io.Serializable {
 
@@ -35,13 +37,13 @@ public class Contacts implements java.io.Serializable {
 	private Date updatedDateTime;
 	private StatusTypes status;
 	private String timestamp;
-	private Set<Addresses> addressesSet = new HashSet<Addresses>();
-	private Set<ClientDisabilities> disabilitiesSet = new HashSet<ClientDisabilities>();
-	private Set<Enquiries> enquiriesSet = new HashSet<Enquiries>();
-	private Set<IndividualCases> individualCasesSet = new HashSet<IndividualCases>();
-	private Set<ContactEmployments> employmentsSet = new HashSet<ContactEmployments>();
-	private Set<PlanDevelopers> planDevelopersSet = new HashSet<PlanDevelopers>();
-	private Set<IndividualCases> advocateCasesSet = new HashSet<IndividualCases>();
+	private List<Addresses> addressesList = new ArrayList<Addresses>();
+	private List<ClientDisabilities> disabilitiesList = new ArrayList<ClientDisabilities>();
+	private List<Enquiries> enquiriesList = new ArrayList<Enquiries>();
+	private List<IndividualCases> individualCasesList = new ArrayList<IndividualCases>();
+	private List<ContactEmployments> employmentsList = new ArrayList<ContactEmployments>();
+	private List<PlanDevelopers> planDevelopersList = new ArrayList<PlanDevelopers>();
+	private List<IndividualCases> advocateCasesList = new ArrayList<IndividualCases>();
 	
 	
 	/**
@@ -49,7 +51,6 @@ public class Contacts implements java.io.Serializable {
 	 */
 	public Contacts() {
 	}
-
 
 	/**
 	 * @param id
@@ -73,13 +74,14 @@ public class Contacts implements java.io.Serializable {
 	 * @param updatedUserId
 	 * @param updatedDateTime
 	 * @param status
-	 * @param addressesSet
-	 * @param disabilitiesSet
-	 * @param enquiriesSet
-	 * @param individualCasesSet
-	 * @param employmentsSet
-	 * @param planDevelopersSet
-	 * @param advocateCasesSet
+	 * @param timestamp
+	 * @param addressesList
+	 * @param disabilitiesList
+	 * @param enquiriesList
+	 * @param individualCasesList
+	 * @param employmentsList
+	 * @param planDevelopersList
+	 * @param advocateCasesList
 	 */
 	public Contacts(Integer id, TitleTypes titleType, String firstname,
 			String lastname, String othername, GenderTypes genderType,
@@ -89,13 +91,15 @@ public class Contacts implements java.io.Serializable {
 			String culturalBackgroundComment, DangerTypes dangerType,
 			String identification, Date dob, Integer createdUserId,
 			Date createdDateTime, Integer updatedUserId, Date updatedDateTime,
-			StatusTypes status, Set<Addresses> addressesSet,
-			Set<ClientDisabilities> disabilitiesSet,
-			Set<Enquiries> enquiriesSet,
-			Set<IndividualCases> individualCasesSet,
-			Set<ContactEmployments> employmentsSet,
-			Set<PlanDevelopers> planDevelopersSet,
-			Set<IndividualCases> advocateCasesSet) {
+			StatusTypes status, String timestamp,
+			List<Addresses> addressesList,
+			List<ClientDisabilities> disabilitiesList,
+			List<Enquiries> enquiriesList,
+			List<IndividualCases> individualCasesList,
+			List<ContactEmployments> employmentsList,
+			List<PlanDevelopers> planDevelopersList,
+			List<IndividualCases> advocateCasesList) {
+		super();
 		this.id = id;
 		this.titleType = titleType;
 		this.firstname = firstname;
@@ -117,15 +121,15 @@ public class Contacts implements java.io.Serializable {
 		this.updatedUserId = updatedUserId;
 		this.updatedDateTime = updatedDateTime;
 		this.status = status;
-		this.addressesSet = addressesSet;
-		this.disabilitiesSet = disabilitiesSet;
-		this.enquiriesSet = enquiriesSet;
-		this.individualCasesSet = individualCasesSet;
-		this.employmentsSet = employmentsSet;
-		this.planDevelopersSet = planDevelopersSet;
-		this.advocateCasesSet = advocateCasesSet;
+		this.timestamp = timestamp;
+		this.addressesList = addressesList;
+		this.disabilitiesList = disabilitiesList;
+		this.enquiriesList = enquiriesList;
+		this.individualCasesList = individualCasesList;
+		this.employmentsList = employmentsList;
+		this.planDevelopersList = planDevelopersList;
+		this.advocateCasesList = advocateCasesList;
 	}
-
 
 	/**
 	 * @return the id
@@ -419,15 +423,11 @@ public class Contacts implements java.io.Serializable {
 	}
 
 
-
-
-
-
 	/**
 	 * @return the timestamp
 	 */
 	public String getTimestamp() {
-		return timestamp;
+		return this.timestamp;
 	}
 
 
@@ -440,103 +440,102 @@ public class Contacts implements java.io.Serializable {
 
 
 	/**
-	 * @return the addressesSet
+	 * @return the addressesList
 	 */
-	public Set<Addresses> getAddressesSet() {
-		return this.addressesSet;
+	public List<Addresses> getAddressesList() {
+		return this.addressesList;
 	}
+
 	/**
-	 * @param addressesSet the addressesSet to set
+	 * @param addressesList the addressesList to set
 	 */
-	public void setAddressesSet(Set<Addresses> addressesSet) {
-		this.addressesSet = addressesSet;
+	public void setAddressesList(List<Addresses> addressesList) {
+		this.addressesList = addressesList;
 	}
+
 	/**
-	 * @return the disabilitiesSet
+	 * @return the disabilitiesList
 	 */
-	public Set<ClientDisabilities> getDisabilitiesSet() {
-		return this.disabilitiesSet;
+	public List<ClientDisabilities> getDisabilitiesList() {
+		return this.disabilitiesList;
 	}
+
 	/**
-	 * @param disabilitiesSet the disabilitiesSet to set
+	 * @param disabilitiesList the disabilitiesList to set
 	 */
-	public void setDisabilitiesSet(Set<ClientDisabilities> disabilitiesSet) {
-		this.disabilitiesSet = disabilitiesSet;
+	public void setDisabilitiesList(List<ClientDisabilities> disabilitiesList) {
+		this.disabilitiesList = disabilitiesList;
 	}
+
 	/**
-	 * @return the enquiriesSet
+	 * @return the enquiriesList
 	 */
-	public Set<Enquiries> getEnquiriesSet() {
-		return this.enquiriesSet;
+	public List<Enquiries> getEnquiriesList() {
+		return this.enquiriesList;
 	}
+
 	/**
-	 * @param enquiriesSet the enquiriesSet to set
+	 * @param enquiriesList the enquiriesList to set
 	 */
-	public void setEnquiriesSet(Set<Enquiries> enquiriesSet) {
-		this.enquiriesSet = enquiriesSet;
+	public void setEnquiriesList(List<Enquiries> enquiriesList) {
+		this.enquiriesList = enquiriesList;
 	}
 
 	/**
 	 * @return the individualCasesList
 	 */
-	public Set<IndividualCases> getIndividualCasesSet() {
-		return this.individualCasesSet;
+	public List<IndividualCases> getIndividualCasesList() {
+		return this.individualCasesList;
 	}
-
 
 	/**
 	 * @param individualCasesList the individualCasesList to set
 	 */
-	public void setIndividualCasesSet(Set<IndividualCases> individualCasesSet) {
-		this.individualCasesSet = individualCasesSet;
+	public void setIndividualCasesList(List<IndividualCases> individualCasesList) {
+		this.individualCasesList = individualCasesList;
 	}
 
 	/**
-	 * @return the employmentsSet
+	 * @return the employmentsList
 	 */
-	public Set<ContactEmployments> getEmploymentsSet() {
-		return this.employmentsSet;
-	}
-
-
-	/**
-	 * @param employmentsSet the employmentsSet to set
-	 */
-	public void setEmploymentsSet(Set<ContactEmployments> employmentsSet) {
-		this.employmentsSet = employmentsSet;
+	public List<ContactEmployments> getEmploymentsList() {
+		return this.employmentsList;
 	}
 
 	/**
-	 * @return the planDevelopersSet
+	 * @param employmentsList the employmentsList to set
 	 */
-	public Set<PlanDevelopers> getPlanDevelopersSet() {
-		return this.planDevelopersSet;
+	public void setEmploymentsList(List<ContactEmployments> employmentsList) {
+		this.employmentsList = employmentsList;
 	}
-
 
 	/**
-	 * @param planDevelopersSet the planDevelopersSet to set
+	 * @return the planDevelopersList
 	 */
-	public void setPlanDevelopersSet(Set<PlanDevelopers> planDevelopersSet) {
-		this.planDevelopersSet = planDevelopersSet;
+	public List<PlanDevelopers> getPlanDevelopersList() {
+		return this.planDevelopersList;
 	}
-
 
 	/**
-	 * @return the advocateCasesSet
+	 * @param planDevelopersList the planDevelopersList to set
 	 */
-	public Set<IndividualCases> getAdvocateCasesSet() {
-		return this.advocateCasesSet;
+	public void setPlanDevelopersList(List<PlanDevelopers> planDevelopersList) {
+		this.planDevelopersList = planDevelopersList;
 	}
-
 
 	/**
-	 * @param advocateCasesSet the advocateCasesSet to set
+	 * @return the advocateCasesList
 	 */
-	public void setAdvocateCasesSet(Set<IndividualCases> advocateCasesSet) {
-		this.advocateCasesSet = advocateCasesSet;
+	public List<IndividualCases> getAdvocateCasesList() {
+		return this.advocateCasesList;
 	}
 
+	/**
+	 * @param advocateCasesList the advocateCasesList to set
+	 */
+	public void setAdvocateCasesList(List<IndividualCases> advocateCasesList) {
+		this.advocateCasesList = advocateCasesList;
+	}
 
 	public String getFullName() {
 		return this.getFirstname() + " " + this.getLastname();

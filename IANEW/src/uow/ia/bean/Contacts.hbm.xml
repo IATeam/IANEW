@@ -2,9 +2,9 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated Aug 9, 2014 1:06:21 PM by Hibernate Tools 4.0.0 -->
-<!-- Modified by Kim To, v1.0.4, 29/08/2014 -->
+<!-- Modified by Kim To, v1.0.5, 30/08/2014 -->
 <hibernate-mapping>
- <class name="uow.ia.bean.Contacts" table="Contacts" dynamic-insert="true">
+ <class catalog="ianew" name="uow.ia.bean.Contacts" table="Contacts" dynamic-insert="true">
   <id name="id" type="java.lang.Integer">
    <column name="id"/>
    <generator class="identity"/>
@@ -77,53 +77,53 @@
   </many-to-one>
   
   <!--  One to many relationship  -->
-  <set fetch="select" inverse="true" name="addressesSet" sort="unsorted" table="Addresses" cascade="save-update, delete, delete-orphan">
+  <bag fetch="select" inverse="true" name="addressesList" table="Addresses" cascade="save-update, delete, delete-orphan">
    <key>
     <column name="contact_id" not-null="false"/>
    </key>
    <one-to-many class="uow.ia.bean.Addresses"/>
-  </set>
+  </bag>
   
-  <set fetch="select" inverse="true" name="enquiriesSet" table="Enquiries" order-by="id" cascade="save-update, delete, delete-orphan">
+  <bag fetch="select" inverse="true" name="enquiriesList" table="Enquiries" order-by="id" cascade="save-update, delete, delete-orphan">
   	<key>
   		<column name="contact_id" not-null="false"/>
   	</key>
   	<one-to-many class="uow.ia.bean.Enquiries"/>
-  </set>
+  </bag>
   
-  <set fetch="select" inverse="true" name="individualCasesSet" table="Individual_Cases" order-by="id"  cascade="save-update, delete, delete-orphan">
+  <bag fetch="select" inverse="true" name="individualCasesList" table="Individual_Cases" order-by="id"  cascade="save-update, delete, delete-orphan">
   	<key>
   		<column name="client_id" not-null="false"/>
   	</key>
   	<one-to-many class="uow.ia.bean.IndividualCases"/>
-  </set>
+  </bag>
   
-  <set fetch="select" inverse="true" name="employmentsSet" table="Contact_Employments" order-by="id" cascade="save-update, delete, delete-orphan">
+  <bag fetch="select" inverse="true" name="employmentsList" table="Contact_Employments" order-by="id" cascade="save-update, delete, delete-orphan">
   	<key>
   		<column name="contact_id" not-null="false"/>
   	</key>
   	<one-to-many class="uow.ia.bean.ContactEmployments"/>
-  </set>
+  </bag>
   
-  <set fetch="select" inverse="true" name="planDevelopersSet" table="Plan_Developers" order-by="id"  cascade="save-update, delete, delete-orphan">
+  <bag fetch="select" inverse="true" name="planDevelopersList" table="Plan_Developers" order-by="id"  cascade="save-update, delete, delete-orphan">
   	<key>
   		<column name="contact_id" not-null="false"/>
   	</key>
   	<one-to-many class="uow.ia.bean.PlanDevelopers"/>
-  </set>
+  </bag>
   
-  <set fetch="select" inverse="true" name="advocateCasesSet" table="Individual_Cases" order-by="id"  cascade="save-update, delete, delete-orphan">
+  <bag fetch="select" inverse="true" name="advocateCasesList" table="Individual_Cases" order-by="id"  cascade="save-update, delete, delete-orphan">
   	<key>
   		<column name="advocate_id" not-null="false"/>
   	</key>
   	<one-to-many class="uow.ia.bean.IndividualCases"/>
-  </set>
+  </bag>
  
 	 <!-- Many-to-many relationship -->
-	 <set name="disabilitiesSet" table="Client_Disabilities" inverse="true" fetch="select" cascade="save-update, delete, delete-orphan">
+	 <bag name="disabilitiesList" table="Client_Disabilities" inverse="true" fetch="select" cascade="save-update, delete, delete-orphan">
 	 	<key column="contact_id" not-null="false"/>
 	 	<one-to-many class="uow.ia.bean.ClientDisabilities"/>
-	 </set>
+	 </bag>
  </class>
  
  <sql-query name="findById">select * from Contacts where id = :p_id</sql-query>

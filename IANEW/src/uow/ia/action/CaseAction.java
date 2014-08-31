@@ -66,10 +66,10 @@ public class CaseAction extends BaseAction{
 	/*
 	 * Sets variables for 1 to many relationship tables
 	 */
-	private Set<CaseIssues> issueSet;
-	private Set<IndividualCases> linkedCasesSet;
-	private Set<Addresses> addressSet;
-	private Set<ClientDisabilities> clientDisabilitiesSet;
+	private List<CaseIssues> issueSet;
+	private List<IndividualCases> linkedCasesSet;
+	private List<Addresses> addressSet;
+	private List<ClientDisabilities> clientDisabilitiesSet;
 
 	/*
 	 * status variables
@@ -145,12 +145,12 @@ public class CaseAction extends BaseAction{
 		setCase(caseServices.getCase(getHiddenid()));
 		setContact(iCase.getContact());
 		
-		setIssueSet(iCase.getCaseIssuesSet());
-		setClientDisabilities(contact.getDisabilitiesSet());
-		setLinkedCasesSet(iCase.getIndividualCasesSet());
+		setIssueSet(iCase.getCaseIssuesList());
+		setClientDisabilities(contact.getDisabilitiesList());
+		setLinkedCasesSet(iCase.getIndividualCasesList());
 		
 		//to be deleted
-		System.out.println(iCase.getIndividualCasesSet().toString());
+		System.out.println(iCase.getIndividualCasesList().toString());
 		for (IndividualCases c : linkedCasesSet) {
 			System.out.println("case linked: " + c.getId() + " " + c.getDescription() );
 		}
@@ -160,7 +160,7 @@ public class CaseAction extends BaseAction{
 		setUpdatedDate(iCase.getUpdatedDateTime());
 		setId(iCase.getId());
 		setDescription(iCase.getDescription());
-		setAddress(contact.getAddressesSet());
+		setAddress(contact.getAddressesList());
 		
 		setTheGender(contact.getGenderType().getGenderName());
 		setTheDanger(contact.getDangerType().getDangerName());
@@ -404,7 +404,7 @@ public class CaseAction extends BaseAction{
 		this.caseList = caseList;
 	}
 
-	public Set<IndividualCases> getLinkedCasesSet() {
+	public List<IndividualCases> getLinkedCasesSet() {
 		return linkedCasesSet;
 	}
 	
@@ -422,36 +422,36 @@ public class CaseAction extends BaseAction{
 	 * 
 	 */
 
-	public Set<CaseIssues> getIssueSet() {
+	public List<CaseIssues> getIssueSet() {
 		return issueSet;
 	}
 
-	public void setIssueSet(Set<CaseIssues> issueSet) {
-		this.issueSet = issueSet;
+	public void setIssueSet(List<CaseIssues> list) {
+		this.issueSet = list;
 	}
 
-	public Set<IndividualCases> getLinkedEquiriesSet() {
+	public List<IndividualCases> getLinkedEquiriesSet() {
 		return linkedCasesSet;
 	}
 
-	public void setLinkedCasesSet(Set<IndividualCases> linkedCasesSet) {
-		this.linkedCasesSet = linkedCasesSet;
+	public void setLinkedCasesSet(List<IndividualCases> list) {
+		this.linkedCasesSet = list;
 	}
 
-	public Set<Addresses> getAddress() {
+	public List<Addresses> getAddress() {
 		return addressSet;
 	}
 
-	public void setAddress(Set<Addresses> address) {
-		this.addressSet = address;
+	public void setAddress(List<Addresses> list) {
+		this.addressSet = list;
 	}
 
-	public Set<ClientDisabilities> getClientDisabilities() {
+	public List<ClientDisabilities> getClientDisabilities() {
 		return clientDisabilitiesSet;
 	}
 
-	public void setClientDisabilities(Set<ClientDisabilities> clientDisabilitiesSet) {
-		this.clientDisabilitiesSet = clientDisabilitiesSet;
+	public void setClientDisabilities(List<ClientDisabilities> list) {
+		this.clientDisabilitiesSet = list;
 	}
 
 	/**

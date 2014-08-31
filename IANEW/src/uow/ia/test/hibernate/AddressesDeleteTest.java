@@ -1,7 +1,6 @@
 package uow.ia.test.hibernate;
 
-import java.util.Set;
-
+import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -37,7 +36,7 @@ public class AddressesDeleteTest {
 		Contacts deleteContact = (Contacts)session.get(Contacts.class, 100);
 		Transaction tx = null;
 		try {
-			Set<Addresses> addressesSet = deleteContact.getAddressesSet();
+			List<Addresses> addressesSet = deleteContact.getAddressesList();
 			addressesSet.clear();
 			tx = session.beginTransaction();
 			session.saveOrUpdate(deleteContact);
