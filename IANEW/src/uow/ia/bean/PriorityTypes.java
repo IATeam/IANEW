@@ -9,12 +9,13 @@ import java.util.Set;
 
 /**
  * @author Kim To
- * @version 1.0.3, 30/08/2014
+ * @version 1.0.4, 31/08/2014
  */
 public class PriorityTypes implements java.io.Serializable {
 
 	private Integer id;
 	private String priorityName;
+	private String color;
 	private List<IndividualCases> individualCasesList = new ArrayList<IndividualCases>();
 	/**
 	 * 
@@ -25,13 +26,14 @@ public class PriorityTypes implements java.io.Serializable {
 	/**
 	 * @param id
 	 * @param priorityName
+	 * @param color
 	 * @param individualCasesList
 	 */
-	public PriorityTypes(Integer id, String priorityName,
+	public PriorityTypes(Integer id, String priorityName, String color,
 			List<IndividualCases> individualCasesList) {
-		super();
 		this.id = id;
 		this.priorityName = priorityName;
+		this.color = color;
 		this.individualCasesList = individualCasesList;
 	}
 	/**
@@ -57,6 +59,18 @@ public class PriorityTypes implements java.io.Serializable {
 	 */
 	public void setPriorityName(String priorityName) {
 		this.priorityName = priorityName;
+	}
+	/**
+	 * @return the color
+	 */
+	public String getColor() {
+		return color;
+	}
+	/**
+	 * @param color the color to set
+	 */
+	public void setColor(String color) {
+		this.color = color;
 	}
 	/**
 	 * @return the individualCasesList
