@@ -76,7 +76,7 @@ public class NewEnquiryServiceImpl implements NewEnquiryService {
 	
 	@Override
 	public List<DangerTypes> findDangerTypes() {
-		return dangerTypesDao.find(" from DangerTypes");
+		return dangerTypesDao.find(" from DangerType sorder by display_order");
 	}
 	
 	/*
@@ -86,7 +86,7 @@ public class NewEnquiryServiceImpl implements NewEnquiryService {
 
 	@Override
 	public List<StatusTypes> findStatusTypes() {
-		return statusTypesDao.find(" from StatusTypes");
+		return statusTypesDao.find(" from StatusTypes order by display_order");
 	}
 	
 	/*

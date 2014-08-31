@@ -84,12 +84,12 @@ NewCaseService {
 	
 	@Override
 	public List<DangerTypes> findDangerTypes() {
-		return dangerTypesDao.find(" from DangerTypes");
+		return dangerTypesDao.find(" from DangerTypes order by display_order");
 	}
 	
 	@Override
 	public List<StatusTypes> findStatusTypes() {
-		return statusTypesDao.find(" from StatusTypes");
+		return statusTypesDao.find(" from StatusTypes order by display_order");
 	}
 	
 	@Override
@@ -145,7 +145,7 @@ NewCaseService {
 	
 	@Override
 	public List<PriorityTypes> findPriorityTypes() {
-		return priorityTypesDao.find(" from PriorityTypes");
+		return priorityTypesDao.find(" from PriorityTypes order by display_order");
 	}
 	
 	@Override
