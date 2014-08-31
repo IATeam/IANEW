@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import uow.ia.util.DateUtil;
+
 
 /**
  * @author Kim To
@@ -539,6 +541,11 @@ public class Contacts implements java.io.Serializable {
 
 	public String getFullName() {
 		return this.getFirstname() + " " + this.getLastname();
+	}
+
+	public String getDateString()
+	{
+		return uow.ia.util.DateUtil.yyyymmddStr(dob);
 	}
 
 }

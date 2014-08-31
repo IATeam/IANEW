@@ -75,7 +75,7 @@
 			    <s:date name="createdBy" format="dd/MM/yyyy"/>
 		    </div>
 		    <div class="inputfield four columns omega">
-				<s:label for="communicationDate" value="Communication Date:" />
+				<s:label for="communicationDate" value="Commun. Date:" />
 				<div><input type="date" id="communicationDate" name=""></div>
 			</div>
 			    <div class="two columns"><s:select list="issueSelectList.{issueName}" value="issue" name="" headerKey="-1" headerValue="Time Spent" /></div>

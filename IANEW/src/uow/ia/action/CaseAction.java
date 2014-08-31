@@ -138,6 +138,8 @@ public class CaseAction extends BaseAction{
 
 		setCreatedDate(new Date());
 		setUpdatedDate(new Date());
+		setCreatedBy("Michael Hall");
+		setUpdatedBy("Michael Hall");
 		return SUCCESS;
 	}
 
@@ -697,4 +699,5 @@ public class CaseAction extends BaseAction{
 	public void setTotalNumberOfPages(int totalNumberOfPages) {
 		this.totalNumberOfPages = totalNumberOfPages;
 	}
+	
 }

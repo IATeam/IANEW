@@ -51,6 +51,7 @@ function changeAdvocate(selectList) {
 						 $("#genderAdvocate").val("<s:property value='#gender.genderName'/>");
 		    		}
     	    	</s:iterator>
+   			 $("#birthDateAdvocate").val("<s:property value='#advocate.getDateString()'/>");
    				$("#identificationAdvocate").val("<s:property value='#advocate.identification'/>");
    				<s:iterator var="culturalBackground" value="culturalBackgroundSelectList">
 	    		if("<s:property value='#advocate.culturalBackground.culturalBackgroundName'/>" == "<s:property value='#culturalBackground.culturalBackgroundName'/>")
