@@ -14,6 +14,7 @@ import uow.ia.bean.GenderTypes;
 import uow.ia.bean.GoalTypes;
 import uow.ia.bean.IndividualCases;
 import uow.ia.bean.IssueTypes;
+import uow.ia.bean.PriorityTypes;
 import uow.ia.bean.StatusTypes;
 import uow.ia.bean.TitleTypes;
 
@@ -32,6 +33,8 @@ public interface NewCaseService {
 	public List<CulturalBackgroundTypes> findCulturalBackgroundTypes();
 	
 	public List<AccommodationTypes> findAccommodationTypes();
+	
+	public List<PriorityTypes> findPriorityTypes();
 	
 	/** 
      * retrieve with List<object> of Disability Types from Disability_Types table

@@ -82,10 +82,10 @@ public class EnquiryAction extends BaseAction{
 	/*
 	 * Sets variables for 1 to many relationship tables
 	 */
-	private Set<EnquiryIssues> issueSet;
-	private Set<Enquiries> linkedEnquiriesSet;
-	private Set<Addresses> addressSet;
-	private Set<ClientDisabilities> clientDisabilitiesSet;
+	private List<EnquiryIssues> issueSet;
+	private List<Enquiries> linkedEnquiriesSet;
+	private List<Addresses> addressSet;
+	private List<ClientDisabilities> clientDisabilitiesSet;
 
 	/*
 	 * status variables
@@ -166,12 +166,12 @@ public class EnquiryAction extends BaseAction{
 		setContact(enquiry.getContact());
 	
 		
-		setIssueSet(enquiry.getEnquiryIssuesSet());
-		setClientDisabilitiesSet(contact.getDisabilitiesSet());
-		setLinkedEnquiriesSet(enquiry.getEnquiriesSet());
+		setIssueSet(enquiry.getEnquiryIssuesList());
+		setClientDisabilitiesSet(contact.getDisabilitiesList());
+		setLinkedEnquiriesSet(enquiry.getEnquiriesList());
 		
 		//to be deleted
-		System.out.println(enquiry.getEnquiriesSet().toString());
+		System.out.println(enquiry.getEnquiriesList().toString());
 		for (Enquiries e : linkedEnquiriesSet) {
 			System.out.println("enquiry linked: " + e.getId() + " " + e.getDescription() );
 		}
@@ -182,7 +182,7 @@ public class EnquiryAction extends BaseAction{
 		setUpdatedDate(enquiry.getUpdatedDateTime());
 		setId(enquiry.getId());
 		setDescription(enquiry.getDescription());
-		setAddress(contact.getAddressesSet());
+		setAddress(contact.getAddressesList());
 		
 		setTheGender(contact.getGenderType().getGenderName());
 		setTheDanger(contact.getDangerType().getDangerName());
@@ -470,7 +470,7 @@ public class EnquiryAction extends BaseAction{
 		this.theEnquiryStatus = theEnquiryStatus;
 	}
 	
-	public Set<Enquiries> getLinkedEnquiriesSet() {
+	public List<Enquiries> getLinkedEnquiriesSet() {
 		return linkedEnquiriesSet;
 	}
 	
@@ -488,36 +488,36 @@ public class EnquiryAction extends BaseAction{
 	 * 
 	 */
 
-	public Set<EnquiryIssues> getIssueSet() {
+	public List<EnquiryIssues> getIssueSet() {
 		return issueSet;
 	}
 
-	public void setIssueSet(Set<EnquiryIssues> issueSet) {
-		this.issueSet = issueSet;
+	public void setIssueSet(List<EnquiryIssues> list) {
+		this.issueSet = list;
 	}
 
-	public Set<Enquiries> getLinkedEquiriesSet() {
+	public List<Enquiries> getLinkedEquiriesSet() {
 		return linkedEnquiriesSet;
 	}
 
-	public void setLinkedEnquiriesSet(Set<Enquiries> linkedEnquiriesSet) {
-		this.linkedEnquiriesSet = linkedEnquiriesSet;
+	public void setLinkedEnquiriesSet(List<Enquiries> list) {
+		this.linkedEnquiriesSet = list;
 	}
 
-	public Set<Addresses> getAddress() {
+	public List<Addresses> getAddress() {
 		return addressSet;
 	}
 
-	public void setAddress(Set<Addresses> address) {
-		this.addressSet = address;
+	public void setAddress(List<Addresses> list) {
+		this.addressSet = list;
 	}
 
-	public Set<ClientDisabilities> getClientDisabilitiesSet() {
+	public List<ClientDisabilities> getClientDisabilitiesSet() {
 		return clientDisabilitiesSet;
 	}
 
-	public void setClientDisabilitiesSet(Set<ClientDisabilities> clientDisabilitiesSet) {
-		this.clientDisabilitiesSet = clientDisabilitiesSet;
+	public void setClientDisabilitiesSet(List<ClientDisabilities> list) {
+		this.clientDisabilitiesSet = list;
 	}
 
 	/**

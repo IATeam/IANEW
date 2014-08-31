@@ -30,7 +30,7 @@ public class DangerTypeTest {
 	public void f() {
 		List<DangerTypes> dangerList = session.createSQLQuery("Select * From Danger_Types").addEntity(DangerTypes.class).list();
 		System.out.println("DangerTypeId: " + dangerList.get(0).getId());
-		System.out.println("Count: " + dangerList.get(0).getContactsSet().size());
+		System.out.println("Count: " + dangerList.get(0).getContactsList().size());
 	}
 	
 	@AfterMethod

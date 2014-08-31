@@ -29,7 +29,7 @@ public class GenderTypesTest {
 	@Test
 	public void f() {
 		List<GenderTypes> genderList = session.createSQLQuery("Select * From Gender_Types").addEntity(GenderTypes.class).list();
-		Set<Contacts> contactsSet3  = genderList.get(0).getContactsSet();
+		List<Contacts> contactsSet3  = genderList.get(0).getContactsList();
 		System.out.println("Contacts");
 		System.out.println("GenderId: " + genderList.get(0).getId());
 		System.out.println("Count: " + contactsSet3.size());

@@ -37,14 +37,14 @@
 			</div>
 			<div class="nine columns">
 			
-					<div class="three columns"><s:select list="dangerSelectList.{dangerName}" name="theDanger" headerKey="-1" headerValue="Flag Danger" /></div>
+					<div class="three columns"><s:select list="dangerSelectList.{dangerName}" name="theDanger" headerKey="-1" headerValue="Flag Danger" cssClass="coloured" onChange="dangerChange(this)"/></div>
 					<s:if test="%{#formType=='case'}">
 						<div class="three columns"><s:select id="status" list="statusSelectList.{statusName}" name="theCaseStatus" headerKey="-1" headerValue="Case Status" /></div>
 						<s:div cssClass="two columns">
 							<s:label for="id" value="Case#:" />
 							<s:property value="id" />
 						</s:div>
-												<div class="three columns"><s:select list="dangerSelectList.{dangerName}" name="theDanger" headerKey="-1" headerValue="Priority Level" /></div>
+						<div class="three columns"><s:select list="dangerSelectList.{dangerName}" name="theDanger" headerKey="-1" headerValue="Priority Level" cssClass="coloured"/></div>
 						
 					</s:if>					
 					<s:elseif test="%{#formType=='enquiry'}">

@@ -1,6 +1,7 @@
 package uow.ia.test.hibernate;
 
 import java.sql.Date;
+import java.util.List;
 import java.util.Set;
 
 import org.hibernate.Session;
@@ -44,7 +45,7 @@ public class AddressesInsertTest {
 	public void f() {
 		
 		Contacts updateContact = (Contacts)session.get(Contacts.class, 100);
-		Set<Addresses> addressSet = updateContact.getAddressesSet();
+		List<Addresses> addressSet = updateContact.getAddressesList();
 		for (Addresses a : addressSet) {
 			a.setHomephone("40376432");
 		}
@@ -59,7 +60,7 @@ public class AddressesInsertTest {
 		
 		System.out.println("Save addresses directly");
 		Contacts updateContact2 = (Contacts)session.get(Contacts.class, 99);
-		Set<Addresses> addressSet2 = updateContact2.getAddressesSet();
+		List<Addresses> addressSet2 = updateContact2.getAddressesList();
 		for (Addresses a : addressSet2) {
 			a.setHomephone("123456");
 			

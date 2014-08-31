@@ -31,7 +31,7 @@ public class ReviewFrequencyTest {
 		List<ReviewFrequencies> list = session.createSQLQuery("SELECT * FROM Review_Frequencies").addEntity(ReviewFrequencies.class).list();
 		ReviewFrequencies r = list.get(0);
 		System.out.println("id: " + r.getId());
-		System.out.println("plan count: " + r.getPlansSet().size());
+		System.out.println("plan count: " + r.getPlansList().size());
 	}
 	
 	@AfterMethod

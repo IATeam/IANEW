@@ -1,6 +1,8 @@
 package uow.ia.bean;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 // Generated Aug 9, 2014 1:06:20 PM by Hibernate Tools 4.0.0
@@ -18,7 +20,7 @@ public class CriteriaControls implements java.io.Serializable {
 	private String tableName;
 	private String columnName;
 	private String description;
-	private Set<CriteriaControlValues> criteriaControlValuesSet = new HashSet<CriteriaControlValues>();
+	private List<CriteriaControlValues> criteriaControlValuesList = new ArrayList<CriteriaControlValues>();
 	/**
 	 * 
 	 */
@@ -32,18 +34,18 @@ public class CriteriaControls implements java.io.Serializable {
 	 * @param tableName
 	 * @param columnName
 	 * @param description
-	 * @param criteriaControlValuesSet
+	 * @param criteriaControlValuesList
 	 */
 	public CriteriaControls(Integer id, String controlName, String tableName,
 			String columnName, String description,
-			Set<CriteriaControlValues> criteriaControlValuesSet) {
+			List<CriteriaControlValues> criteriaControlValuesList) {
 		super();
 		this.id = id;
 		this.controlName = controlName;
 		this.tableName = tableName;
 		this.columnName = columnName;
 		this.description = description;
-		this.criteriaControlValuesSet = criteriaControlValuesSet;
+		this.criteriaControlValuesList = criteriaControlValuesList;
 	}
 	/**
 	 * @return the controlName
@@ -106,17 +108,17 @@ public class CriteriaControls implements java.io.Serializable {
 		this.description = description;
 	}
 	/**
-	 * @return the criteriaControlValuesSet
+	 * @return the criteriaControlValuesList
 	 */
-	public Set<CriteriaControlValues> getCriteriaControlValuesSet() {
-		return this.criteriaControlValuesSet;
+	public List<CriteriaControlValues> getCriteriaControlValuesList() {
+		return this.criteriaControlValuesList;
 	}
 	/**
-	 * @param criteriaControlValuesSet the criteriaControlValuesSet to set
+	 * @param criteriaControlValuesList the criteriaControlValuesList to set
 	 */
-	public void setCriteriaControlValuesSet(
-			Set<CriteriaControlValues> criteriaControlValuesSet) {
-		this.criteriaControlValuesSet = criteriaControlValuesSet;
+	public void setCriteriaControlValuesList(
+			List<CriteriaControlValues> criteriaControlValuesList) {
+		this.criteriaControlValuesList = criteriaControlValuesList;
 	}
 
 	

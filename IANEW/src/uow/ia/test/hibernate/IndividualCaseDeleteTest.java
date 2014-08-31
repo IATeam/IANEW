@@ -58,7 +58,7 @@ public class IndividualCaseDeleteTest {
 		
 		System.out.println("delete case by save contact object");
 		Contacts contact = (Contacts)session.get(Contacts.class, 100);
-		contact.getIndividualCasesSet().remove((IndividualCases)session.get(IndividualCases.class, 105));
+		contact.getIndividualCasesList().remove((IndividualCases)session.get(IndividualCases.class, 105));
 		
 		try {
 			tx = session.beginTransaction();

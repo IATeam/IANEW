@@ -9,10 +9,10 @@
             <column name="id" />
             <generator class="identity" />
         </id>
-        <property name="completionDateTime" type="timestamp">
+        <property name="completionDateTime" type="java.sql.Date">
             <column name="completion_date_time" length="19" />
         </property>
-        <property name="createdDateTime" type="timestamp">
+        <property name="createdDateTime" type="java.sql.Date">
             <column name="created_date_time" length="19" />
         </property>
         <property name="createdUserId" type="java.lang.Integer">
@@ -21,7 +21,7 @@
         <property name="updatedUserId" type="java.lang.Integer">
             <column name="updated_user_id" />
         </property>
-        <property name="updatedDateTime" type="timestamp">
+        <property name="updatedDateTime" type="java.sql.Date">
             <column name="updated_date_time" length="19" />
         </property>
         <property name="goalDescription" type="string">

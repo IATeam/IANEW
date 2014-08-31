@@ -35,11 +35,11 @@ public class EnquiriesTest {
 		 System.out.println("Enquiry Type: " + enquiry.getEnquiryType().getEnquiryTypeName());
 		 System.out.println("StatusTypeID " + enquiry.getStatusType().getId() + " " + enquiry.getStatusType().getStatusName());
 //		 System.out.println("ParentEnquiryId Id: " + enquiry.getParentEnquiry().getId());
-		 Set<Enquiries> enquirySet = enquiry.getEnquiriesSet();
+		 List<Enquiries> enquirySet = enquiry.getEnquiriesList();
 		 for(Enquiries e : enquirySet) {
 			 System.out.println("Enquiry set: " + e.getId() + " " + e.getDescription());
 		 }
-		 Set<EnquiryIssues> issueTypes = enquiry.getEnquiryIssuesSet();
+		 List<EnquiryIssues> issueTypes = enquiry.getEnquiryIssuesList();
 		 for (EnquiryIssues dt : issueTypes) {
 			 System.out.println("Issue: " + dt.getId() + " " + dt.getIssue().getIssueName()  + dt.getComment());
 		 }

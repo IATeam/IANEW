@@ -11,10 +11,10 @@
 				<param name="property">individualCase</param>
 			</generator>
         </id>
-        <property name="createdDateTime" type="timestamp">
+        <property name="createdDateTime" type="java.sql.Date">
             <column name="created_date_time" length="19" />
         </property>
-        <property name="closedDateTime" type="timestamp">
+        <property name="closedDateTime" type="java.sql.Date">
             <column name="closed_date_time" length="19" />
         </property>
         <property name="lastReviewedDate" type="date">
@@ -32,7 +32,7 @@
         <property name="notes" type="string">
             <column name="notes" />
         </property>
-        <property name="updatedDateTime" type="timestamp">
+        <property name="updatedDateTime" type="java.sql.Date">
             <column name="updated_date_time" length="19" />
         </property>
         <property name="updatedUserId" type="java.lang.Integer">

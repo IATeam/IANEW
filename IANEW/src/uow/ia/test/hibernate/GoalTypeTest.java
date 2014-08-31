@@ -31,7 +31,7 @@ public class GoalTypeTest {
 	public void f() {
 		List<GoalTypes> goalTypeList = session.createSQLQuery("SELECT * FROM Goal_Types").addEntity(GoalTypes.class).list();
 		System.out.println("id: " + goalTypeList.get(0).getId());
-		Set<PlanGoals> planGoalsSet  = goalTypeList.get(0).getPlanGoalsSet();
+		List<PlanGoals> planGoalsSet  = goalTypeList.get(0).getPlanGoalsList();
 		System.out.println("plan goal Count: " + planGoalsSet.size());
 		for (PlanGoals c : planGoalsSet) {
 			System.out.println(c.getId() + " " + c.getGoalAction() + " " + c.getGoalDescription());
