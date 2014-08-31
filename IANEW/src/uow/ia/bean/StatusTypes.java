@@ -9,12 +9,13 @@ import java.util.Set;
 
 /**
  * @author Kim To
- * @version 1.0.3, 30/08/2014
+ * @version 1.0.4, 31/08/2014
  */
 public class StatusTypes implements java.io.Serializable {
 
 	private Integer id;
 	private String statusName;
+	private Integer displayOrder;
 	private List<Enquiries> enquiriesList = new ArrayList<Enquiries>();
 	private List<CaseIssues> caseIssuesList = new ArrayList<CaseIssues>();
 	
@@ -27,16 +28,12 @@ public class StatusTypes implements java.io.Serializable {
 	/**
 	 * @param id
 	 * @param statusName
-	 * @param enquiriesList
-	 * @param caseIssuesList
+	 * @param displayOrder
 	 */
-	public StatusTypes(Integer id, String statusName,
-			List<Enquiries> enquiriesList, List<CaseIssues> caseIssuesList) {
-		super();
+	public StatusTypes(Integer id, String statusName, Integer displayOrder) {
 		this.id = id;
 		this.statusName = statusName;
-		this.enquiriesList = enquiriesList;
-		this.caseIssuesList = caseIssuesList;
+		this.displayOrder = displayOrder;
 	}
 	/**
 	 * @return the id
@@ -64,6 +61,18 @@ public class StatusTypes implements java.io.Serializable {
 	 */
 	public void setStatusName(String statusName) {
 		this.statusName = statusName;
+	}
+	/**
+	 * @return the displayOrder
+	 */
+	public Integer getDisplayOrder() {
+		return this.displayOrder;
+	}
+	/**
+	 * @param displayOrder the displayOrder to set
+	 */
+	public void setDisplayOrder(Integer displayOrder) {
+		this.displayOrder = displayOrder;
 	}
 	/**
 	 * @return the enquiriesList

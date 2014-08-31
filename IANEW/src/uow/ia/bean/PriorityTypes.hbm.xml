@@ -13,7 +13,10 @@
             <column name="priority_name" not-null="true" />
         </property>
         <property name="color" type="string">
-            <column name="color" not-null="true" />
+            <column name="color" not-null="false" />
+        </property>
+        <property name="displayOrder" type="java.lang.Integer">
+            <column name="display_order" not-null="false" />
         </property>
         
         <!-- one to many relationship -->
