@@ -2,6 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated Aug 9, 2014 1:06:21 PM by Hibernate Tools 4.0.0 -->
+<!-- Modified by Kim To, v.1.0.2, 30/08/2014 -->
 <hibernate-mapping>
     <class name="uow.ia.bean.PriorityTypes" table="Priority_Types" catalog="ianew">
         <id name="id" type="java.lang.Integer">
@@ -13,11 +14,11 @@
         </property>
         
         <!-- one to many relationship -->
-        <set fetch="select" inverse="true" name="individualCasesSet" table="Individual_Cases">
+        <bag fetch="select" inverse="true" name="individualCasesList" table="Individual_Cases">
         	<key>
         		<column name="priority_id" not-null="false"/>
         	</key>
         	<one-to-many class="uow.ia.bean.IndividualCases"/>
-        </set>
+        </bag>
     </class>
 </hibernate-mapping>

@@ -32,7 +32,7 @@ public class PriorityTypeTest {
 		List<PriorityTypes> list = session.createSQLQuery("SELECT * FROM Priority_Types").addEntity(PriorityTypes.class).list();
 		PriorityTypes type = list.get(0);
 		System.out.println("id: " + type.getId());
-		Set<IndividualCases> set = type.getIndividualCasesSet();
+		List<IndividualCases> set = type.getIndividualCasesList();
 		System.out.println(set.size());
 		for (IndividualCases i : set) {
 			System.out.println("case id: " + i.getId());

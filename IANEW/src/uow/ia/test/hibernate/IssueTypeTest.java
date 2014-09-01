@@ -31,13 +31,13 @@ public class IssueTypeTest {
 		List<IssueTypes> list = session.createSQLQuery("SELECT * FROM Issue_Types").addEntity(IssueTypes.class).list();
 		IssueTypes type = list.get(0);
 		System.out.println("id: " + type.getId() + " " + type.getIssueName());
-		Set<EnquiryIssues> enquirySet = type.getEnquiryIssuesSet();
+		List<EnquiryIssues> enquirySet = type.getEnquiryIssuesList();
 		System.out.println("enquiry count: " + enquirySet.size());
 		for (EnquiryIssues e : enquirySet) {
 			System.out.println("enquiry issue: " + e.getId() + " " + e.getComment());
 		}
 		
-		Set<CaseIssues> caseSet = type.getCaseIssuesSet();
+		List<CaseIssues> caseSet = type.getCaseIssuesList();
 		System.out.println("case count: " + caseSet.size());
 		for (CaseIssues e : caseSet) {
 			System.out.println("case issue: " + e.getId() + " " + e.getComments());

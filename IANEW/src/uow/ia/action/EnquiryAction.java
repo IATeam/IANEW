@@ -1,13 +1,15 @@
 package uow.ia.action;
 
 
+import java.text.ParseException;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import antlr.Lookahead;
 
 import com.opensymphony.xwork2.ModelDriven;
+import com.sun.xml.rpc.processor.modeler.j2ee.xml.javaIdentifierType;
 
 import uow.ia.bean.AccommodationTypes;
 import uow.ia.bean.Addresses;
@@ -65,17 +67,17 @@ public class EnquiryAction extends BaseAction implements ModelDriven<Enquiries>{
 	 * Lists for the drop down select options for the jsps
 	 * and its associated value variables
 	 */
-	private List<TitleTypes> titleSelectList; 							private String theTitle;
-	private List<GenderTypes> genderSelectList; 						private String theGender;
-	private List<CulturalBackgroundTypes> culturalBackgroundSelectList;	private String theCulturalBackground;
-	private List<AccommodationTypes> accommodationSelectList;			private String theAccommodation;
-	private List<DisabilityTypes> disabilitySelectList;					private String theDisability;
-	private List<EnquiryTypes> enquiryTypeSelectList;					private String theEnquiryType;
-	private List<IssueTypes> issueSelectList;							private String theIssue;
-	private List<EmploymentTypes> employmentSelectList;					private String theEmployment;
-	private List<DangerTypes> dangerSelectList;							//private String theDanger;
+	private List<TitleTypes> titleSelectList; 							
+	private List<GenderTypes> genderSelectList; 						
+	private List<CulturalBackgroundTypes> culturalBackgroundSelectList;
+	private List<AccommodationTypes> accommodationSelectList;			
+	private List<DisabilityTypes> disabilitySelectList;					
+	private List<EnquiryTypes> enquiryTypeSelectList;					
+	private List<IssueTypes> issueSelectList;							
+	private List<EmploymentTypes> employmentSelectList;					
+	private List<DangerTypes> dangerSelectList;							
 	//Status_Type or criteria control value table 
-	private List<StatusTypes> statusSelectList;							private String theStatus;
+	private List<StatusTypes> statusSelectList;							
 	
 
 	/*
@@ -94,21 +96,8 @@ public class EnquiryAction extends BaseAction implements ModelDriven<Enquiries>{
 	public void setContactEmploymentsSet(
 			Set<ContactEmployments> contactEmploymentsSet) {
 		this.contactEmploymentsSet = contactEmploymentsSet;
-	}
-
-	/*
-	 * status variables
-	 */
-	private String createdBy, updatedBy;
-	//private Integer id;
+	}	
 	
-	
-	
-	/*
-	 * Employment
-	 */
-	
-	private String profession, workPhone, employmentDescription, employmentComment;
 	
 	/*
 	 * Sumamry
@@ -130,21 +119,25 @@ public class EnquiryAction extends BaseAction implements ModelDriven<Enquiries>{
 	public void setHiddenid(int hiddenid) {
 		this.hiddenid = hiddenid;
 	}
-
-//	/* For pagination */
-//	private List<Enquiries> enquiryList;
-//	int page;
-//	int numberOfRecords;
-//	long totalNumberOfRecords;
-//	long totalNumberOfPages;
-
-	//used to populate address 
+ 
 	Addresses address;
+	ClientDisabilities clientDisability;
+	EnquiryIssues enquiryIssue;
 	
 
 	EnquiryIssues issue;
 	
+	Date today;
 	
+	
+	public Date getToday() {
+		return today;
+	}
+
+	public void setToday(Date today) {
+		this.today = today;
+	}
+
 	/* 
 	 * 
 	 * 
@@ -176,7 +169,7 @@ public class EnquiryAction extends BaseAction implements ModelDriven<Enquiries>{
 		ccontact = new Contacts();
 		
 		//form status setters
-		Date today = new Date();
+		today = new Date();
 		java.sql.Date sqlDate = new java.sql.Date(today.getTime());
 		iamodel.setCreatedDateTime(sqlDate);
 		iamodel.setUpdatedDateTime(sqlDate);
@@ -188,20 +181,8 @@ public class EnquiryAction extends BaseAction implements ModelDriven<Enquiries>{
 		
 		//setAddress(new Addresses());
 		address = new Addresses();
-		
-		
-		//Set<Addresses> addressSet = new HashSet<Addresses>();
-		//this is going to be inserted into the addressSet 
-		//address = new Addresses();
-		
-		//iamodel.getEnquiryIssuesSet();
-		//issue = new EnquiryIssues();
-		
-		
-//		ActionContext context = ActionContext.getContext();
-//		ActionMapping am = new ActionMapping();
-//		Map map = context.getContextMap();
-//		System.out.println("getting action name: " + map.toString());
+		setToday(sqlDate);
+		setDob("");
 		
 		
 		return SUCCESS;
@@ -217,46 +198,37 @@ public class EnquiryAction extends BaseAction implements ModelDriven<Enquiries>{
 
 		setIamodel(services.getEnquiry(getHiddenid()));
 		setCcontact(getIamodel().getContact());
-		System.out.println(getCcontact().getAddressesSet().size());
-		//setCcontact(getIamodel().getContact());
-//		setIssueSet(iamodel.getEnquiryIssuesSet());
-//		setClientDisabilitiesSet(contact.getDisabilitiesSet());
-//		setLinkedEnquiriesSet(iamodel.getEnquiriesSet());
-	
+		System.out.println(getCcontact().getAddressesList().size());
+		
+		Date date = new Date(ccontact.getDob().getTime());
+		//dob = DateUtil.yyyymmddStr(date);
+		
+		setDob(getCcontact().getDob().toString());
+		
+		
+		
+		System.out.println("hbm date = " + ccontact.getDob());
 		//LATER
 		//setCreatedBy();
 		//setUpdatedBy(contact.);
 		
-		//setAddressSet(contact.getAddressesSet());
-		
-//		if(null != contact.getGenderType())
-//			setTheGender(contact.getGenderType().getGenderName());
-		
-		//if(null != contact.getDangerType())
-			//setTheDanger(contact.getDangerType().getDangerName());
-		
-		//setTheEmployment(contact.getEmploymentsTypeSet());
-//		setTheEmployment("Kim change databse need chagne code for this part");
-		//setTheCulturalBackground(contact.getCulturalBackground().getCulturalBackgroundName());
-//		setTheAccommodation(contact.getAccommodation().getAccommodationName());
-//		setTheStatus(iamodel.getStatusType().getStatusName());
-		
-		
-//		setInquisitor(model.getInquisitor());
-//		setReferredBy(model.getReferralBy());
-//		setReferredTo(model.getReferralTo());
-		
-		
-		
 		return SUCCESS;
 	}
 	
-	public String updateAddressSet(){ System.out.println("inside address");
-//		address.setCountry("ABC");
-//		address.setPostcode("2324");
-//		address.setHomephone("22323 2323");
+	String dob;
 	
-		System.out.println("address: " + getAddress().getStreet());
+	
+	public String getDob() {
+		return dob;
+	}
+
+	public void setDob(String dob) {
+		this.dob = dob;
+	}
+
+	public String updateAddressList(){ System.out.println("inside address List");
+		
+		System.out.println("street: " + getAddress().getStreet());
 		System.out.println("suburb: " + getAddress().getSuburb());
 		System.out.println("state: " + getAddress().getState());
 		System.out.println("country: " + getAddress().getCountry());
@@ -264,7 +236,7 @@ public class EnquiryAction extends BaseAction implements ModelDriven<Enquiries>{
 		System.out.println("homephone: " + getAddress().getHomephone());
 		//getModel().getContact().getAddressesSet().add(address);
 		//setAddress(new Addresses()); 
-		iamodel.getContact().getAddressesSet().add(getAddress());
+		//iamodel.getContact().getAddressesList().add(getAddress());
 		
 		
 		setAddress(new Addresses());
@@ -281,39 +253,58 @@ public class EnquiryAction extends BaseAction implements ModelDriven<Enquiries>{
 	/**
 	 * Action method to Save/Update an enquiry form
 	 * @return String
+	 * @throws ParseException 
 	 */
-	public String saveUpdateEnquiry(){ 
-//		System.out.println("in save update");
-//		Enquiries newEnquiry = new Enquiries();
-//		Contacts newContact = new Contacts();
-		
-//		newEnquiry.setCreatedDateTime(getCreatedDate());
-//		newEnquiry.setCreatedUserId(1);
-//		newEnquiry.setUpdatedDateTime(getCreatedDate());
-//		newEnquiry.setUpdatedUserId(1);
-		
-//		newEnquiry.setDescription(getDescription());
-//		newEnquiry.setInquisitor(getInquisitor());
-//		
-//		newContact.setFirstname(contact.getFirstname());
-//		newContact.setLastname(contact.getLastname());
-//		
-//		services.saveOrUpdateEnquiry(newEnquiry, newContact);
-		//if(titleSelectList.equals(null))
-		
-//		Contacts newContact = new Contacts();
-//		populateContact(newContact);
-		
-		//iamodel.setEnquiryType(getEnquiryTypeSelectList().get(services.getEnquiryTypeId(getTheEnquiryType())));
-		//EnquiryTypes enquiryTypes = enquiryTypeSelectList.get(services.getEnquiryTypeId(getTheEnquiryType()));
-		//iamodel.setEnquiryType(services.getDangerType(getTheEnquiryType()));
-		//Contacts aSet = getCcontact();
+	public String saveUpdateEnquiry() throws ParseException{ 
+
+		/*
+		 * Address component
+		 */
+		List<Addresses> aSet = getCcontact().getAddressesList();
 		System.out.println("firstname " + getCcontact().getFirstname());
-		System.out.println("addressSet size " + getCcontact().getAddressesSet().size());
-//		for(Addresses a: aSet){
-//			System.out.println("Suburb " + a.getSurburb());
-//		}
-		//services.saveOrUpdateEnquiry(getModel(), getModel().getCcontact());
+		System.out.println("addressSet size " + getCcontact().getAddressesList().size());
+		
+		//today's date in sql format
+		java.sql.Date sqlDate = new java.sql.Date(new Date().getTime());
+		
+		for(Addresses a: aSet){
+			System.out.println("createdDateTime " + a.getCreatedDateTime());
+			System.out.println("Street " + a.getStreet());
+			System.out.println("Postcode: " + a.getPostcode());
+			if(a.getId() == null){
+				a.setCreatedDateTime(sqlDate);
+				a.setUpdatedDateTime(sqlDate);
+				//TODO: set created user and updated user to session user
+				a.setCreatedUserId(1);
+				a.setUpdatedUserId(1);
+			}
+		}
+		
+		/*
+		 * Disability Component
+		 */
+		
+		/*
+		 * Issue Component
+		 */
+		
+		/*
+		 * Linked Enquiries Component;
+		 */
+		
+		/*
+		 * 
+		 */
+		
+		
+		/*
+		 * Save compoenents into contact
+		 */
+		
+		/*
+		 * Save contact and enquiries
+		 */
+		//services.saveOrUpdateEnquiry(this.getIamodel(), this.getCcontact());
 		
 		return SUCCESS;
 	}
@@ -391,8 +382,7 @@ public class EnquiryAction extends BaseAction implements ModelDriven<Enquiries>{
 		//services.getDisabilityId(getTheDisability());
 		//services.getEnquiryId(getThe)
 		
-		String title = getTheTitle();
-		int index;
+		
 		//System.out.println(getTitleSelectList().toString());
 		//titleSelectList.
 		//System.out.println("theDanger: position" + index);
@@ -459,13 +449,7 @@ public class EnquiryAction extends BaseAction implements ModelDriven<Enquiries>{
 		return titleSelectList;
 	}
 
-	public String getTheTitle() {
-		return theTitle;
-	}
 
-	public void setTheTitle(String theTitle) {
-		this.theTitle = theTitle;
-	}
 
 	/**
 	 * Getter for gender types
@@ -475,13 +459,13 @@ public class EnquiryAction extends BaseAction implements ModelDriven<Enquiries>{
 		return genderSelectList;
 	}
 
-	public String getTheGender() {
-		return theGender;
-	}
-
-	public void setTheGender(String string) {
-		this.theGender = string;
-	}
+//	public String getTheGender() {
+//		return theGender;
+//	}
+//
+//	public void setTheGender(String string) {
+//		this.theGender = string;
+//	}
 
 	/**
 	 * Getter for cultural background types
@@ -491,13 +475,7 @@ public class EnquiryAction extends BaseAction implements ModelDriven<Enquiries>{
 		return culturalBackgroundSelectList;
 	}
 
-	public String getTheCulturalBackground() {
-		return theCulturalBackground;
-	}
 
-	public void setTheCulturalBackground(String theCulturalBackground) {
-		this.theCulturalBackground = theCulturalBackground;
-	}
 
 	/**
 	 * Getter for accommodation types
@@ -507,13 +485,7 @@ public class EnquiryAction extends BaseAction implements ModelDriven<Enquiries>{
 		return accommodationSelectList;
 	}
 
-	public String getTheAccommodation() {
-		return theAccommodation;
-	}
 
-	public void setTheAccommodation(String theAccommodation) {
-		this.theAccommodation = theAccommodation;
-	}
 
 	/**
 	 * Getter for disability type
@@ -523,13 +495,6 @@ public class EnquiryAction extends BaseAction implements ModelDriven<Enquiries>{
 		return disabilitySelectList;
 	}
 
-	public String getTheDisability() {
-		return theDisability;
-	}
-
-	public void setTheDisability(String theDisability) {
-		this.theDisability = theDisability;
-	}
 
 	/**
 	 * Getter for issue type
@@ -539,13 +504,6 @@ public class EnquiryAction extends BaseAction implements ModelDriven<Enquiries>{
 		return issueSelectList;
 	}
 
-	public String getTheIssue() {
-		return theIssue;
-	}
-
-	public void setTheIssue(String theIssue) {
-		this.theIssue = theIssue;
-	}
 
 	/**
 	 * Getter for employment types
@@ -555,28 +513,12 @@ public class EnquiryAction extends BaseAction implements ModelDriven<Enquiries>{
 		return employmentSelectList;
 	}
 
-	public String getTheEmployment() {
-		return theEmployment;
-	}
-
-	public void setTheEmployment(String theEmployment) {
-		this.theEmployment = theEmployment;
-	}
-
 	/**
 	 * @return List
 	 */
 	public List<DangerTypes> getDangerSelectList() {
 		return dangerSelectList;
 	}
-
-//	public String getTheDanger() {
-//		return theDanger;
-//	}
-//
-//	public void setTheDanger(String theDanger) {
-//		this.theDanger = theDanger;
-//	}
 
 	/**
 	 * Getter for enquiry status select list
@@ -585,28 +527,7 @@ public class EnquiryAction extends BaseAction implements ModelDriven<Enquiries>{
 	public List<StatusTypes> getStatusSelectList() {
 		return statusSelectList;
 	}
-	/**
-	 * setter for enquiry status select list
-	 * @param enquiryStatusSelectList
-	 */
-	public void setStatusSelectList(List<StatusTypes> statusSelectList) {
-		this.statusSelectList = statusSelectList;
-	}
 
-	
-	/**
-	 * @return
-	 */
-	public String getTheStatus() {
-		return theStatus;
-	}
-
-	/**
-	 * @param theEnquiryStatus
-	 */
-	public void setTheStatus(String theStatus) {
-		this.theStatus = theStatus;
-	}
 	
 	public Set<Enquiries> getLinkedEnquiriesSet() {
 		return linkedEnquiriesSet;
@@ -628,13 +549,7 @@ public class EnquiryAction extends BaseAction implements ModelDriven<Enquiries>{
 		this.enquiryTypeSelectList = enquiryTypeSelectList;
 	}
 
-	public String getTheEnquiryType() {
-		return theEnquiryType;
-	}
 
-	public void setTheEnquiryType(String theEnquiryType) {
-		this.theEnquiryType = theEnquiryType;
-	}
 
 	public Set<EnquiryIssues> getIssueSet() {
 		return issueSet;
@@ -669,110 +584,8 @@ public class EnquiryAction extends BaseAction implements ModelDriven<Enquiries>{
 	}
 
 
-	/**
-	 * Getter for created by full name
-	 * @return
-	 */
-	public String getCreatedBy() {
-		return createdBy;
-	}
-
-	/**
-	 * Setter for the created by full name
-	 * @param createdBy
-	 */
-	public void setCreatedBy(String createdBy) {
-		this.createdBy = createdBy;
-	}
-
-	/**
-	 * Getter for updated by
-	 * @return String
-	 */
-	public String getUpdatedBy() {
-		return updatedBy;
-	}
-
-	/**
-	 * Setter for updated by
-	 * @param updatedBy
-	 */
-	public void setUpdatedBy(String updatedBy) {
-		this.updatedBy = updatedBy;
-	}
-
-	
-
-//	/**
-//	 * Getter for enquiry id
-//	 * @return
-//	 */
-//	public Integer getId() {
-//		return id;
-//	}
-//
-//	/**
-//	 * Setter for enquiry id
-//	 * @param id
-//	 */
-//	private void setId(Integer id) {
-//		this.id = id;
-//	}
-
-	/** Referrals **/
-	/**
-	 * Getter for inquisitor
-	 * @return
-	 */
-//	public String getInquisitor() {
-//		return inquisitor;
-//	}
-//
-//	/**
-//	 * Setter for inquisitor
-//	 * @param inquisitor
-//	 */
-//	public void setInquisitor(String inquisitor) {
-//		this.inquisitor = inquisitor;
-//	}
-//
-//	/**
-//	 * Getter for referred by
-//	 * @return String
-//	 */
-//	public String getReferredBy() {
-//		return referredBy;
-//	}
-//
-//	/**
-//	 * Setter for referred by
-//	 * @param referredBy
-//	 */
-//	public void setReferredBy(String referredBy) {
-//		this.referredBy = referredBy;
-//	}
-//
-//	/**
-//	 * Getter for referred to
-//	 * @return
-//	 */
-//	public String getReferredTo() {
-//		return referredTo;
-//	}
-//
-//	/**
-//	 * Setter for referred to
-//	 * @param referredTo
-//	 */
-//	public void setReferredTo(String referredTo) {
-//		this.referredTo = referredTo;
-//	}
-
 	@Override
 	public Enquiries getModel() {
-		// TODO Auto-generated method stub
 		return iamodel;
 	}
-
-
 }

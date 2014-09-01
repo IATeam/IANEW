@@ -21,11 +21,17 @@
 <h3 class="sixteen columns" style="float:none;">Disability</h3>
 <s:div cssClass="greybackground">
 	<article id="itDisability">
-		<s:iterator value="clientDisabilitiesSet">
+		<s:iterator value="ccontact.disabilitiesList" status="stat">
 			<section class="sixteen columns curveBorder row">
+				<s:hidden name="ccontact.disabilitiesList[%{#stat.index}].id"/>
+				<s:hidden name="ccontact.disabilitiesList[%{#stat.index}].createdUserId"/>
+				<s:hidden name="ccontact.disabilitiesList[%{#stat.index}].createdDateTime"/>
+				<s:hidden name="ccontact.disabilitiesList[%{#stat.index}].updatedUserId"/>
+				<s:hidden name="ccontact.disabilitiesList[%{#stat.index}].updatedDateTime"/>
+				
 				<s:div cssClass="four columns alpha">
 					<s:div cssClass="disabilityTypeSelect row four columns">
-						<s:select list="disabilitySelectList.{disabilityName}" name="getDisabilityType().getDisabilityName()" headerKey="-1" headerValue="Select Disability" />
+						<s:select list="disabilitySelectList.{disabilityName}" name="ccontact.disabilitiesList[%{#stat.index}].disabilityType.disabilityName" headerKey="-1" headerValue="Select Disability" />
 					</s:div>
 					<s:div cssClass="row four columns" style="text-align: center">
 						
@@ -34,30 +40,39 @@
 					</s:div>
 				</s:div>
 				<s:div cssClass="textarea eleven columns">
-					<s:label for="disabilityDescription" value="Disability Description:" /> 
-					<s:textarea cssClass="disabilityDescription" cssClass="oneLineTextArea" name="comments"></s:textarea> 
+					<s:label for="disabilityDescription" value="Comment:" /> 
+					<s:textarea cssClass="disabilityDescription" cssClass="oneLineTextArea" name="ccontact.disabilitiesList[%{#stat.index}].comments"></s:textarea> 
 				</s:div>
 			</section>
 		</s:iterator>
 	</article>
 	
 	<!-- Hidden disability to be added to iterator if needs to be added -->
+	<s:textfield id="addressSize" name="ccontact.disabilitiesList.size" value="%{ccontact.disabilitiesList.size}"/>
+	
 	<article id="artDisability" style='visiblity: hidden; display: none;'>
 		<section class="sixteen columns curveBorder row">
-			<s:div cssClass="four columns alpha">
-				<s:div cssClass="row four columns">
-					<s:select list="disabilitySelectList.{disabilityName}" name="theDisability" headerKey="-1" headerValue="Select Disability" />
+				<s:hidden name="ccontact.disabilitiesList[%{#stat.index}].id"/>
+				<s:hidden name="ccontact.disabilitiesList[%{#stat.index}].createdUserId"/>
+				<s:hidden name="ccontact.disabilitiesList[%{#stat.index}].createdDateTime"/>
+				<s:hidden name="ccontact.disabilitiesList[%{#stat.index}].updatedUserId"/>
+				<s:hidden name="ccontact.disabilitiesList[%{#stat.index}].updatedDateTime"/>
+				
+				<s:div cssClass="four columns alpha">
+					<s:div cssClass="disabilityTypeSelect row four columns">
+						<s:select list="disabilitySelectList.{disabilityName}" name="ccontact.disabilitiesList[%{#stat.index}].disabilityType.disabilityName" headerKey="-1" headerValue="Select Disability" />
+					</s:div>
+					<s:div cssClass="row four columns" style="text-align: center">
+						
+						<input type="radio" name="primary" />
+						<s:label value="Primary Disability" />						
+					</s:div>
 				</s:div>
-				<s:div cssClass="row four columns" style="text-align: center">
-					<input type="radio" name="primary" onchange="primaryUpdate()"/>
-					<s:label value="Primary Disability" />
+				<s:div cssClass="textarea eleven columns">
+					<s:label for="disabilityDescription" value="Comment:" /> 
+					<s:textarea cssClass="disabilityDescription" cssClass="oneLineTextArea" name="ccontact.disabilitiesList[%{#stat.index}].comments"></s:textarea> 
 				</s:div>
-			</s:div>
-			<s:div cssClass="textarea eleven columns">
-				<s:label for="disabilityDescription" value="Disability Description:" /> 
-				<s:textarea cssClass="disabilityDescription" cssClass="oneLineTextArea"></s:textarea> 
-			</s:div>
-		</section>
+			</section>
 	</article>
 	
 	<div class="row">

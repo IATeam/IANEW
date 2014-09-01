@@ -32,7 +32,7 @@ public class DisabilityTypeTest {
 		List<DisabilityTypes> disabilityList = session.createSQLQuery("SELECT * FROM Disability_Types").addEntity(DisabilityTypes.class).list();
 		DisabilityTypes disabilityType = disabilityList.get(0);
 		System.out.println("DisabilityId: " + disabilityType.getId());
-		System.out.println("Client Disability Count: " + disabilityType.getClientDisabilitiesSet().size());
+		System.out.println("Client Disability Count: " + disabilityType.getClientDisabilitiesList().size());
 		  
 	}
 	

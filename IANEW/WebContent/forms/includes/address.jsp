@@ -11,130 +11,152 @@
 	Description: A jsp page that displays a address of contact
 ------------------------------------------------------------------------------------------------>
 <%@ taglib prefix="sj" uri="/struts-jquery-tags" %>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <h3 class="sixteen columns" style="float:none;">Address</h3>
-<div id="addressField" class="fieldsetborder">
-	<!-- url for the add button press - ajax call -->
-	<s:url id="urlUpdateAddress" action="updateAddressSet" namespace="/enquiry" >
-		<s:param name="address.state" value="%{address.state}"/>
+<div class="fieldsetborder">
+	<s:url var="urlUpdateAddress" action="updateAddressList" namespace="/enquiry">
+		<s:param name="address" />
 	</s:url>
 	<fieldset>
 		<div class="row">
 		<!-- to do -->
 			<div class="four columns">
-				<s:select list="accomodationSelectList.{accommodationName}" id="accommodationType" name="model.contact.accommodation.accommodationName" headerKey="-1" headerValue="Select an Accomodation Type"/>
+				<s:select list="accomodationSelectList.{accommodationName}" name="ccontact.accommodation.accommodationName" headerKey="-1" headerValue="Select an Accomodation Type"/>
 			</div>
 			
 			<div class="textarea twelve columns">
 				<s:label for="accomodationComments" value="Comments:" />
-				<div><s:textarea id="accomodationComments" cssClass="oneLineTextArea" name="model.contact.accommodationComment" /></div> 
+				<div><s:textarea id="accomodationComments" cssClass="oneLineTextArea" name="ccontact.accommodationComment" /></div> 
 			</div>
 		</div>
-		<s:iterator value="ccontact.addressesList" status="stat">
-			<h1><s:property value="{#stat.index}" /></h1>
-			<section class="sixteen columns curveBorder">
-				<div class="row">
-					<div class="inputfield eight columns">
-						<s:label for="address" value="Street" />
-						<div><s:textfield name="ccontact.addressesList[{#stat.index}].street"></s:textfield></div>
+		<aticle id="itAddress">
+			<s:iterator value="ccontact.addressesList" status="stat">
+				<h1><s:property value="{#stat.index}" /></h1>
+				<section class="sixteen columns curveBorder">
+					<s:hidden name="ccontact.addressesList[%{#stat.index}].id"/>
+					<s:hidden name="ccontact.addressesList[%{#stat.index}].createdUserId"/>
+					<s:hidden name="ccontact.addressesList[%{#stat.index}].createdDateTime"/>
+					<s:hidden name="ccontact.addressesList[%{#stat.index}].updatedUserId"/>
+					<s:hidden name="ccontact.addressesList[%{#stat.index}].updatedDateTime"/>
+					
+					<div class="row">
+						<div class="inputfield eight columns">
+							<s:label for="address" value="Street" />
+							<div><s:textfield name="ccontact.addressesList[%{#stat.index}].street"></s:textfield></div>
+						</div>
+						<div class="inputfield four columns">
+							<s:label for="city" value="Suburb" />
+							<div><s:textfield name="ccontact.addressesList[%{#stat.index}].suburb" /></div>
+						</div>
+						<div class="inputfield three columns">
+							<s:label for="state" value="State:" />
+							<div><s:textfield name="ccontact.addressesList[%{#stat.index}].state" /></div>
+						</div>
 					</div>
-					<div class="inputfield four columns">
-						<s:label for="city" value="Suburb" />
-						<div><s:textfield name="ccontact.addressesList{[%stat.index]}.suburb" /></div>
-					</div>
-					<div class="inputfield three columns">
-						<s:label for="state" value="State:" />
-						<div><s:textfield name="ccontact.addressesList{[%stat.index]}.state" /></div>
-					</div>
-				</div>
-				
-				<div class="row">
-					<div class="inputfield four columns">
-						<s:label for="country" value="Country:" />
-						<div><s:textfield name="ccontact.addressesList{[%stat.index]}.country"></s:textfield></div>
-					</div>
-					<div class="inputfield four columns">
-						<s:label for="postCode" value="Post Code:" />
-						<div><s:textfield name="ccontact.addressesList{[%stat.index]}.postcode"></s:textfield></div>
-					</div>
-					<div class="inputfield four columns">
-						<s:label for="homePhone" value="Home#:"/>
-						<div><s:textfield name="ccontact.addressesList{[%stat.index]}.homephone"></s:textfield></div>
-					</div>
-				</div> 
-			</section>
-		</s:iterator>
+					
+					<div class="row">
+						<div class="inputfield four columns">
+							<s:label for="country" value="Country:" />
+							<div><s:textfield name="ccontact.addressesList[%{#stat.index}].country"></s:textfield></div>
+						</div>
+						<div class="inputfield four columns">
+							<s:label for="postCode" value="Post Code:" />
+							<div><s:textfield name="ccontact.addressesList[%{#stat.index}].postcode"></s:textfield></div>
+						</div>
+						<div class="inputfield four columns">
+							<s:label for="homePhone" value="Home#:"/>
+							<div><s:textfield name="ccontact.addressesList[%{#stat.index}].homephone"></s:textfield></div>
+						</div>
+					</div> 
+				</section>
+			</s:iterator>
+		</aticle>
 		
-		<s:textfield id="homePhone" name="addressSet.size" />
+		<s:textfield id="addressSize" name="ccontact.addressesList.size" value="%{ccontact.addressesList.size}"/>
+		<s:hidden id="createdUserId" name="" />
+		<s:hidden id="updatedUserId" name=""/>
+		<s:hidden id="createdDateTime" name =""/>
+		<s:hidden id="createdUpdateTime" name=""/>
 			
 		<!-- if contact has existing address display the address else display input field for address -->	
-		<s:if test="%{addressSet.size > 0}"><article id="artAddress" class="hidden"></s:if>
+		<s:if test="%{ccontact.addressesList.size > 0}"><article id="artAddress" class="hidden"></s:if>
 		<s:else><article id="artAddress"></s:else>
 			<section class="sixteen columns curveBorder">
+				<s:hidden name="ccontact.addressesList[%{ccontact.addressesList.size}].id"/>
 				<div class="row">
 					<div class="inputfield eight columns">
 						<s:label for="street" value="Street: " />
-						<div><s:textfield id="street"></s:textfield></div>
+						<div><s:textfield name="ccontact.addressesList[%{ccontact.addressesList.size}].street" /></div>
 					</div>
 					<div class="inputfield four columns">
 						<s:label for="city" value="Suburb" />
-						<div><s:textfield id="suburb" name="address.surburb"></s:textfield></div>
+						<div><s:textfield name="ccontact.addressesList[%{ccontact.addressesList.size}].surburb" /></div>
 					</div>
 					<div class="inputfield three columns">
 						<s:label for="state" value="State:" />
-						<div><s:textfield id="state" name="address.state"></s:textfield></div>
+						<div><s:textfield name="ccontact.addressesList[%{ccontact.addressesList.size}].state" /></div>
 					</div>
 				</div>
 				
 				<div class="row">
 					<div class="inputfield four columns">
 						<s:label for="country" value="Country:" />
-						<div><s:textfield id="country" name="address.country"></s:textfield></div>
+						<div><s:textfield name="ccontact.addressesList[%{ccontact.addressesList.size}].country" /></div>
 					</div>
 					<div class="inputfield four columns">
 						<s:label for="postCode" value="Post Code:" />
-						<div><s:textfield id="postCode" name="address.postcode"></s:textfield></div>
+						<div><s:textfield name="ccontact.addressesList[%{ccontact.addressesList.size}].postcode" /></div>
 					</div>
 					<div class="inputfield four columns">
 						<s:label for="homePhone" value="Home#:"/>
-						<div><s:textfield id="homephone" name="address.homephone"></s:textfield></div>
+						<div><s:textfield name="ccontact.addressesList[%{ccontact.addressesList.size}].homephone" /></div>
 					</div>
 				</div>
 			</section>
 		</article>
 		
-		
 		<div class="row">
 			<div class="fourteen columns alpha"><p></p></div>
-			<input type="button" id="btnAddAddress" value="Add Address" class="two columns" onclick="addAddress()"/>
+			<input type="button" id="btnAddAddress" value="Add Address" class="two columns" onclick="return addAddress()" />
 		</div>
 	</fieldset>
-	
+	<s:hidden id="address" name="address.street" />
 	<script>
 	
-		function addAddress(){
+		function addAddress(){ 
+			
 			//if artAddress is not hidden then add to iterator
 			if(!$("#artAddress").hasClass("hidden")){
-				//$("#artDisability section").clone().appendTo("#itDisability");
-				//submit
-				//var address = $('#address');
-				//alert(address);
+				//clone address and put in iterator
+				$("#artAddress section").clone().appendTo("#itAddress");
 				
-				var suburb = $("#suburb").val();
-				var street= $("#street").val();
-				var state = $("#state").val();
-				var country = $("#country").val();
-				var postCode = $("#postCode").val();
-				var homephone = $("#homePhone").val();
-				$("#addressField").load("/IANEW/enquiry/updateAddressSet.action?address.address=" + street
-						+ "&address.surburb=" + suburb
-						+ "&address.state=" + state
-						+ "&address.country=" + country
-						+ "&address.postcode=" + postCode
-						+ "&address.homephone=" + homephone );
+				updateIndex($("#artAddress"),$("#addressSize"));
+				//set all hidden fields
+				
 			}
 			else{
 				$("#artAddress").removeClass("hidden");
 			}
+			
+		}
+
+		function updateIndex(articleEle, sizeEle ){
+			var ele = articleEle.find("[name]");
+			var sizeInt = parseInt(sizeEle.val());
+			var newIndex;
+			var prependStr = "ccontact.addressesList[" +  newIndex   +  "].";
+
+			sizeEle.val(sizeInt + 1);
+
+			newIndex = "[" + sizeEle.val() + "]";
+			
+			//replaces the old index with the new one and clear the content
+			$(ele).each(function(){
+				var oldIndex = $(this).attr('name').match(/\[.\]/);
+				var newName = $(this).attr('name').replace(oldIndex, newIndex);
+				$(this).attr('name', newName);
+				$(this).val(null);
+			});
 		}
 	</script>
 	

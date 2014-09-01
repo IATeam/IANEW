@@ -34,7 +34,7 @@ public class EnquiryTypeTest {
 		  EnquiryTypes type = enquiryTypeList.get(0);
 		  System.out.println("Enquiry Type: " + type.getId() + " " + type.getEnquiryTypeName());
 		  
-		  Set<Enquiries> set = type.getEnquiriesSet();
+		  List<Enquiries> set = type.getEnquiriesList();
 		  System.out.println("Enquiry Count: " + set.size());
 		  for (Enquiries e : set) {
 			  System.out.println(e.getId());

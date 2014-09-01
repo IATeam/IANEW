@@ -142,35 +142,35 @@ public class CaseAction extends BaseAction{
 	 * @return
 	 */
 	public String getExistingCase(){
-		setCase(caseServices.getCase(getHiddenid()));
-		setContact(iCase.getContact());
-		
-		setIssueSet(iCase.getCaseIssuesSet());
-		setClientDisabilities(contact.getDisabilitiesSet());
-		setLinkedCasesSet(iCase.getIndividualCasesSet());
-		
-		//to be deleted
-		System.out.println(iCase.getIndividualCasesSet().toString());
-		for (IndividualCases c : linkedCasesSet) {
-			System.out.println("case linked: " + c.getId() + " " + c.getDescription() );
-		}
-		
-		//setCreatedBy(case.getCreatedUserId().get);
-		setCreatedDate(iCase.getCreatedDateTime());
-		setUpdatedDate(iCase.getUpdatedDateTime());
-		setId(iCase.getId());
-		setDescription(iCase.getDescription());
-		setAddress(contact.getAddressesSet());
-		
-		setTheGender(contact.getGenderType().getGenderName());
-		setTheDanger(contact.getDangerType().getDangerName());
-		setTheTitle(contact.getTitleType().getName());
-		//setTheEmployment(contact.getEmploymentsTypeSet());
-		setTheEmployment("Kim change databse need chagne code for this part");
-		setTheCulturalBackground(contact.getCulturalBackground().getCulturalBackgroundName());
-		setTheAccommodation(contact.getAccommodation().getAccommodationName());
-		
-		activateLists();
+//		setCase(caseServices.getCase(getHiddenid()));
+//		setContact(iCase.getContact());
+//		
+//		setIssueSet(iCase.getCaseIssuesSet());
+//		setClientDisabilities(contact.getDisabilitiesSet());
+//		setLinkedCasesSet(iCase.getIndividualCasesSet());
+//		
+//		//to be deleted
+//		System.out.println(iCase.getIndividualCasesSet().toString());
+//		for (IndividualCases c : linkedCasesSet) {
+//			System.out.println("case linked: " + c.getId() + " " + c.getDescription() );
+//		}
+//		
+//		//setCreatedBy(case.getCreatedUserId().get);
+//		setCreatedDate(iCase.getCreatedDateTime());
+//		setUpdatedDate(iCase.getUpdatedDateTime());
+//		setId(iCase.getId());
+//		setDescription(iCase.getDescription());
+//		setAddress(contact.getAddressesSet());
+//		
+//		setTheGender(contact.getGenderType().getGenderName());
+//		setTheDanger(contact.getDangerType().getDangerName());
+//		setTheTitle(contact.getTitleType().getName());
+//		//setTheEmployment(contact.getEmploymentsTypeSet());
+//		setTheEmployment("Kim change databse need chagne code for this part");
+//		setTheCulturalBackground(contact.getCulturalBackground().getCulturalBackgroundName());
+//		setTheAccommodation(contact.getAccommodation().getAccommodationName());
+//		
+//		activateLists();
 		
 		return SUCCESS;
 	}

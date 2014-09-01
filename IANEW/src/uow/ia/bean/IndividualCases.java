@@ -3,13 +3,15 @@ package uow.ia.bean;
 // Generated Aug 9, 2014 1:06:20 PM by Hibernate Tools 4.0.0
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
  * Bean class for Individual Case
  * @author Kim To
- * @version 1.0.6, 28/08/2014
+ * @version 1.0.7, 30/08/2014
  */
 public class IndividualCases implements java.io.Serializable {
 
@@ -25,17 +27,17 @@ public class IndividualCases implements java.io.Serializable {
 	private Date updatedDateTime;
 	private Integer updatedUserId;
 	private String referredTo;
-	private Set<Risks> risksSet = new HashSet<Risks>();
+	private List<Risks> risksList = new ArrayList<Risks>();
 	private IndividualCases oldCase;
 	private Enquiries relatedEnquiry;
 	private Plans plan;
-	private Set<PlanGoals> planGoalsSet = new HashSet<PlanGoals>();
-	private Set<PlanDevelopers> planDevelopersSet = new HashSet<PlanDevelopers>();
+	private List<PlanGoals> planGoalsList = new ArrayList<PlanGoals>();
+	private List<PlanDevelopers> planDevelopersList = new ArrayList<PlanDevelopers>();
 	
-	private Set<IndividualCases> individualCasesSet = new HashSet<IndividualCases>();
+	private List<IndividualCases> individualCasesList = new ArrayList<IndividualCases>();
 	
-	private Set<CaseIssues> caseIssuesSet = new HashSet<CaseIssues>();
-	private Set<IndividualCaseCommunications> communicationsSet = new HashSet<IndividualCaseCommunications>();
+	private List<CaseIssues> caseIssuesList = new ArrayList<CaseIssues>();
+	private List<IndividualCaseCommunications> communicationsList = new ArrayList<IndividualCaseCommunications>();
 	
 	/**
 	 * 
@@ -43,6 +45,7 @@ public class IndividualCases implements java.io.Serializable {
 	public IndividualCases() {
 		// TODO Auto-generated constructor stub
 	}
+
 
 
 
@@ -59,26 +62,27 @@ public class IndividualCases implements java.io.Serializable {
 	 * @param updatedDateTime
 	 * @param updatedUserId
 	 * @param referredTo
-	 * @param risksSet
+	 * @param risksList
 	 * @param oldCase
 	 * @param relatedEnquiry
 	 * @param plan
-	 * @param planGoalsSet
-	 * @param planDevelopersSet
-	 * @param individualCasesSet
-	 * @param caseIssuesSet
-	 * @param communicationsSet
+	 * @param planGoalsList
+	 * @param planDevelopersList
+	 * @param individualCasesList
+	 * @param caseIssuesList
+	 * @param communicationsList
 	 */
 	public IndividualCases(Integer id, Contacts contact, Contacts advocate,
 			String description, StatusTypes statusType,
 			PriorityTypes priorityType, Integer serviceProviderId,
 			Date createdDateTime, Integer createdUserId, Date updatedDateTime,
-			Integer updatedUserId, String referredTo, Set<Risks> risksSet,
+			Integer updatedUserId, String referredTo, List<Risks> risksList,
 			IndividualCases oldCase, Enquiries relatedEnquiry, Plans plan,
-			Set<PlanGoals> planGoalsSet, Set<PlanDevelopers> planDevelopersSet,
-			Set<IndividualCases> individualCasesSet,
-			Set<CaseIssues> caseIssuesSet,
-			Set<IndividualCaseCommunications> communicationsSet) {
+			List<PlanGoals> planGoalsList,
+			List<PlanDevelopers> planDevelopersList,
+			List<IndividualCases> individualCasesList,
+			List<CaseIssues> caseIssuesList,
+			List<IndividualCaseCommunications> communicationsList) {
 		super();
 		this.id = id;
 		this.contact = contact;
@@ -92,16 +96,17 @@ public class IndividualCases implements java.io.Serializable {
 		this.updatedDateTime = updatedDateTime;
 		this.updatedUserId = updatedUserId;
 		this.referredTo = referredTo;
-		this.risksSet = risksSet;
+		this.risksList = risksList;
 		this.oldCase = oldCase;
 		this.relatedEnquiry = relatedEnquiry;
 		this.plan = plan;
-		this.planGoalsSet = planGoalsSet;
-		this.planDevelopersSet = planDevelopersSet;
-		this.individualCasesSet = individualCasesSet;
-		this.caseIssuesSet = caseIssuesSet;
-		this.communicationsSet = communicationsSet;
+		this.planGoalsList = planGoalsList;
+		this.planDevelopersList = planDevelopersList;
+		this.individualCasesList = individualCasesList;
+		this.caseIssuesList = caseIssuesList;
+		this.communicationsList = communicationsList;
 	}
+
 
 
 
@@ -278,20 +283,6 @@ public class IndividualCases implements java.io.Serializable {
 	}
 
 	/**
-	 * @return the risksSet
-	 */
-	public Set<Risks> getRisksSet() {
-		return this.risksSet;
-	}
-
-	/**
-	 * @param risksSet the risksSet to set
-	 */
-	public void setRisksSet(Set<Risks> risksSet) {
-		this.risksSet = risksSet;
-	}
-
-	/**
 	 * @return the oldCase
 	 */
 	public IndividualCases getOldCase() {
@@ -340,81 +331,121 @@ public class IndividualCases implements java.io.Serializable {
 
 
 	/**
-	 * @return the planGoalsSet
+	 * @return the risksList
 	 */
-	public Set<PlanGoals> getPlanGoalsSet() {
-		return this.planGoalsSet;
+	public List<Risks> getRisksList() {
+		return this.risksList;
 	}
 
-
-	/**
-	 * @param planGoalsSet the planGoalsSet to set
-	 */
-	public void setPlanGoalsSet(Set<PlanGoals> planGoalsSet) {
-		this.planGoalsSet = planGoalsSet;
-	}
-
-
-	/**
-	 * @return the planDevelopersSet
-	 */
-	public Set<PlanDevelopers> getPlanDevelopersSet() {
-		return this.planDevelopersSet;
-	}
 
 
 
 	/**
-	 * @param planDevelopersSet the planDevelopersSet to set
+	 * @param risksList the risksList to set
 	 */
-	public void setPlanDevelopersSet(Set<PlanDevelopers> planDevelopersSet) {
-		this.planDevelopersSet = planDevelopersSet;
+	public void setRisksList(List<Risks> risksList) {
+		this.risksList = risksList;
 	}
+
 
 
 
 	/**
-	 * @return the individualCasesSet
+	 * @return the planGoalsList
 	 */
-	public Set<IndividualCases> getIndividualCasesSet() {
-		return this.individualCasesSet;
+	public List<PlanGoals> getPlanGoalsList() {
+		return this.planGoalsList;
 	}
+
+
+
 
 	/**
-	 * @param individualCasesSet the individualCasesSet to set
+	 * @param planGoalsList the planGoalsList to set
 	 */
-	public void setIndividualCasesSet(Set<IndividualCases> individualCasesSet) {
-		this.individualCasesSet = individualCasesSet;
+	public void setPlanGoalsList(List<PlanGoals> planGoalsList) {
+		this.planGoalsList = planGoalsList;
 	}
+
+
+
 
 	/**
-	 * @return the caseIssuesSet
+	 * @return the planDevelopersList
 	 */
-	public Set<CaseIssues> getCaseIssuesSet() {
-		return this.caseIssuesSet;
+	public List<PlanDevelopers> getPlanDevelopersList() {
+		return this.planDevelopersList;
 	}
+
+
+
 
 	/**
-	 * @param caseIssuesSet the caseIssuesSet to set
+	 * @param planDevelopersList the planDevelopersList to set
 	 */
-	public void setCaseIssuesSet(Set<CaseIssues> caseIssuesSet) {
-		this.caseIssuesSet = caseIssuesSet;
+	public void setPlanDevelopersList(List<PlanDevelopers> planDevelopersList) {
+		this.planDevelopersList = planDevelopersList;
 	}
+
+
+
 
 	/**
-	 * @return the communicationsSet
+	 * @return the individualCasesList
 	 */
-	public Set<IndividualCaseCommunications> getCommunicationsSet() {
-		return this.communicationsSet;
+	public List<IndividualCases> getIndividualCasesList() {
+		return this.individualCasesList;
 	}
+
+
+
 
 	/**
-	 * @param communicationsSet the communicationsSet to set
+	 * @param individualCasesList the individualCasesList to set
 	 */
-	public void setCommunicationsSet(
-			Set<IndividualCaseCommunications> communicationsSet) {
-		this.communicationsSet = communicationsSet;
+	public void setIndividualCasesList(List<IndividualCases> individualCasesList) {
+		this.individualCasesList = individualCasesList;
 	}
 
-	
+
+
+
+	/**
+	 * @return the caseIssuesList
+	 */
+	public List<CaseIssues> getCaseIssuesList() {
+		return this.caseIssuesList;
+	}
+
+
+
+
+	/**
+	 * @param caseIssuesList the caseIssuesList to set
+	 */
+	public void setCaseIssuesList(List<CaseIssues> caseIssuesList) {
+		this.caseIssuesList = caseIssuesList;
+	}
+
+
+
+
+	/**
+	 * @return the communicationsList
+	 */
+	public List<IndividualCaseCommunications> getCommunicationsList() {
+		return this.communicationsList;
+	}
+
+
+
+
+	/**
+	 * @param communicationsList the communicationsList to set
+	 */
+	public void setCommunicationsList(
+			List<IndividualCaseCommunications> communicationsList) {
+		this.communicationsList = communicationsList;
+	}
+
 }

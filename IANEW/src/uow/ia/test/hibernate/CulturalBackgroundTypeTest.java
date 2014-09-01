@@ -29,7 +29,7 @@ public class CulturalBackgroundTypeTest {
 		  List<CulturalBackgroundTypes> culturalBackgroundList = session.createSQLQuery("Select * From Cultural_Background_Types").addEntity(CulturalBackgroundTypes.class).list();
 		  CulturalBackgroundTypes culturalBackground = culturalBackgroundList.get(0);
 		  System.out.println("CulturalBackgroundId: " + culturalBackground.getId());
-		  System.out.println("Count: " + culturalBackground.getContactsSet().size());
+		  System.out.println("Count: " + culturalBackground.getContactsList().size());
 	}
 	
 	@AfterMethod

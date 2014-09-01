@@ -47,11 +47,15 @@
 
 </head>
 <body>
-	<s:div cssClass="form container">
-	<s:form id="addressForm" action="updateAddressSet" namespace="/enquiry" method="post" novalidate="novalidate">
-		<s:hidden name="address" />
-		<s:hidden name="model"/>
+	
+	<s:form  id="addressForm" action="updateAddressList" namespace="/enquiry" method="post" cssClass="hidden">
+		<s:hidden name="address.street" value="address.street"/>
+		
 	</s:form>
+
+
+	<s:div cssClass="form container">
+	
 	<s:form id="enquiryForm" action="saveUpdateEnquiry" cssClass="cmxform" namespace='/enquiry' method="post" novalidate="novalidate">  
 <!-- ---------------------------------------------------------------------------------------------- -->
 <!-- Header of the form --------------------------------------------------------------------------- -->
@@ -91,12 +95,15 @@
 				<section class="six columns"><p></p></section>
 				<section class="four columns omega">
 					<input id="createCase" type="button" value="Create Case" class="two columns alpha"/>
-					<sj:submit formIds="enquiryForm" type="submit" cssClass="two columns omega" value="Save"/>
+					<sj:submit formIds="enquiryForm" cssClass="two columns omega" value="Save" onclick= "checkForm()"/>
 				</section>
 			</s:div>
 		</footer>
 	
 	</s:div>
+	
+	
+	
 	<script>
 
 	//if the enquiry is an existing enquiry 
@@ -110,7 +117,9 @@
 		//$("#btnView").attr("disabled", null);
 		//$("#btnAddEnquiry").attr("disabled", null);
 	}
-	
+	function checkForm(){
+		
+	}
 	</script>
 </body>
 </html>

@@ -68,7 +68,7 @@ public class IndividualCasesInsertTest {
 		caseIssue.setIssue((IssueTypes)session.get(IssueTypes.class, 5));
 		caseIssue.setStatusType((StatusTypes)session.get(StatusTypes.class, 3));
 		
-		iCase.getCaseIssuesSet().add(caseIssue);
+		iCase.getCaseIssuesList().add(caseIssue);
 		
 		// add new communication to case
 		IndividualCaseCommunications communication = new IndividualCaseCommunications();
@@ -79,7 +79,7 @@ public class IndividualCasesInsertTest {
 		communication.setIndividualCase(iCase);
 		communication.setTimeSpent((float) 3.1);
 		
-		iCase.getCommunicationsSet().add(communication);
+		iCase.getCommunicationsList().add(communication);
 		
 		// add plan to case
 		Plans plan = new Plans();
@@ -96,7 +96,7 @@ public class IndividualCasesInsertTest {
 		risk.setRiskDescription("kim test risk");
 		risk.setRiskManagement("kim test risk management");
 		
-		iCase.getRisksSet().add(risk);
+		iCase.getRisksList().add(risk);
 		
 		// ad plan goal to case
 		PlanGoals goal = new PlanGoals();
@@ -105,15 +105,15 @@ public class IndividualCasesInsertTest {
 		goal.setIndividualCase(iCase);
 		goal.setStatusType((StatusTypes)session.get(StatusTypes.class, 1));
 	
-		iCase.getPlanGoalsSet().add(goal);
+		iCase.getPlanGoalsList().add(goal);
 		
 		PlanDevelopers developer = new PlanDevelopers();
 		developer.setContact((Contacts)session.get(Contacts.class, 1));
 		developer.setIndividualCase(iCase);
 		
-		iCase.getPlanDevelopersSet().add(developer);
+		iCase.getPlanDevelopersList().add(developer);
 		
-		contact.getIndividualCasesSet().add(iCase);
+		contact.getIndividualCasesList().add(iCase);
 		
 		Transaction tx = null;
 		try {

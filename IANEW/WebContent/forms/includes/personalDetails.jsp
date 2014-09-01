@@ -36,7 +36,7 @@
 				<div><s:textfield id="lastName" name="ccontact.lastname" /></div>
 			</div>
 		</div>
-		
+		<!-- name="ccontact.genderType.genderName" -->
 		<div class="row">
 			<div class="four columns"><s:select list="genderSelectList.{genderName}" name="ccontact.genderType.genderName" headerKey="-1" headerValue="Select Gender"/></div>
 			<!-- style="padding-right: 15px;" -->
@@ -47,7 +47,7 @@
 			
 			<div class="inputfield four columns omega ">
 				<s:label for="birthDate" value="Birth Date:" />
-				<div><input type="date" id="birthDate" name="ccontact.dob"></div>
+				<div><input type="date" id="birthDate" name="dob" value="<s:property value='ccontact.dob.toString()'/>" /></div>
 			</div>
 		</div>
 		

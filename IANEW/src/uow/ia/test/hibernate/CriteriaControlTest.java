@@ -36,7 +36,7 @@ public class CriteriaControlTest {
 		CriteriaControls control = (CriteriaControls)session.get(CriteriaControls.class, 1);
 		System.out.println("control id: " + control.getId());
 		
-		Set<CriteriaControlValues> values = control.getCriteriaControlValuesSet();
+		List<CriteriaControlValues> values = control.getCriteriaControlValuesList();
 		for (CriteriaControlValues v : values) {
 			System.out.println("value id: " + v.getValue());
 		}

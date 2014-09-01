@@ -29,6 +29,19 @@ public class DateUtil {
 		return dateString;
 	}
 	
+	/**
+	 * @author Quang Nhan 31/08/2014
+	 * 
+	 * @param date
+	 * @return String yyyy-dd-MM
+	 * @throws ParseException
+	 */
+	public static String yyyyddmmStr(Date date) {
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-dd-MM");
+		dateString = formatter.format(date);
+		return dateString;
+	}
+	
 	public static Date yyyymmddDate(String date) throws ParseException {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		dateDate = formatter.parse(date);
@@ -53,5 +66,7 @@ public class DateUtil {
 		dateString = formatter.format(dateDate);
 		return dateString;
 	}
+	
+	
 	
 }

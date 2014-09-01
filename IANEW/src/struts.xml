@@ -30,7 +30,7 @@
     		<result name="success">/forms/enquiryList.jsp</result>
     		<result name="input">/forms/enquiry.jsp</result>
     	</action>
-    	<action name="updateAddressSet" class="uow.ia.action.EnquiryAction" method="updateAddressSet">
+    	<action name="updateAddressList" class="uow.ia.action.EnquiryAction" method="updateAddressList">
     		<result name="success">/forms/includes/address.jsp</result>
     		<result name="input">/forms/enquiry.jsp</result>
     	</action>
