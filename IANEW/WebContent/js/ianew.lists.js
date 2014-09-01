@@ -87,16 +87,17 @@ $('#new').click(function(){
 	//alert($('#enquiryID').val())
 });
 
-function showContact(contactButton){
+function showContact(contactButton, buttonValue){
 	var buttonText = $(contactButton).val();
-	if (buttonText == "Show Advocate Details")
+	var buttonValueCombined = "Show " + buttonValue;
+	if (buttonText == buttonValueCombined)
 	{
-		$(contactButton).val('Hide Advocate Details');
+		$(contactButton).val("Hide " + buttonValue);
 
 	}
 	else
 	{
-		$(contactButton).val('Show Advocate Details');
+		$(contactButton).val("Show " + buttonValue);
 	}
 
 	$(contactButton).parent("div").siblings("div").slideToggle();

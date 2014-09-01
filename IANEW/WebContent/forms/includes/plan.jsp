@@ -184,7 +184,7 @@ function changeContact(selectedPerson) {
 							<div class="row">
 								<div class="eight columns"><s:select list="advocateSelectList.{lastname + ', ' + firstname}" name="theAdvocate" id="advocateList" headerKey="-1" headerValue="Select Developer" onChange="changeContact(this)" /></div>
 								<section class="four columns"><p></p></section>
-								<input type="button" id="btnAdvocateDetails" onclick="showContact(this)" value="Show Advocate Details" class="three columns omega"/>
+								<input type="button" id="btnAdvocateDetails" onclick="showContact(this, 'Contact Details')"  value="Show Contact Details" class="three columns omega"/>
 							</div>		
 							<div class="row toggled">
 								<div class="three columns"><s:select list="titleSelectList.{name}" name="theTitle" id="titleContact" headerKey="-1" headerValue="Title" disabled="true"/></div>
