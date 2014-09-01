@@ -267,6 +267,12 @@ public class EnquiryAction extends BaseAction implements ModelDriven<Enquiries>{
 		//today's date in sql format
 		java.sql.Date sqlDate = new java.sql.Date(new Date().getTime());
 		
+		/*******************
+		 * KIM HEERE
+		 */
+		getCcontact().setDob(new java.sql.Date(DateUtil.yyyymmddDate(getDob()).getTime()));
+		System.out.println(getCcontact().getDob());
+		/***************************/
 		for(Addresses a: aSet){
 			System.out.println("createdDateTime " + a.getCreatedDateTime());
 			System.out.println("Street " + a.getStreet());
@@ -279,6 +285,8 @@ public class EnquiryAction extends BaseAction implements ModelDriven<Enquiries>{
 				a.setUpdatedUserId(1);
 			}
 		}
+		
+		
 		
 		/*
 		 * Disability Component
@@ -305,6 +313,17 @@ public class EnquiryAction extends BaseAction implements ModelDriven<Enquiries>{
 		 * Save contact and enquiries
 		 */
 		//services.saveOrUpdateEnquiry(this.getIamodel(), this.getCcontact());
+//		if(getCcontact().getDob() != null){
+//			getCcontact().setDob(new java.sql.Date(DateUtil.yyyymmddDate(getDob()).getTime()));
+//			//System.out.println(getCcontact().getDob());
+//		}
+		//getCcontact().setDob(new java.sql.Date(DateUtil.yyyymmddDate(getDob()).getTime()));
+//		if(getDob() != ""){
+//			getCcontact().setDob(new java.sql.Date(DateUtil.yyyymmddDate(getDob()).getTime()));
+//		}
+			//System.out.println("DOB: " + getDob());
+		
+		//services.saveOrUpdateEnquiry(getModel(), getModel().getCcontact());
 		
 		return SUCCESS;
 	}
