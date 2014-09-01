@@ -60,5 +60,12 @@
         	<key column="enquiry_id"/>
         	<one-to-many class="uow.ia.bean.EnquiryIssues"/>
         </bag>
+        
+        <!-- Filters -->
+        <filter name="enquiryStatusFilter" condition="status_id = :enquiryStatusFilterParam"/>
     </class>
+    
+    <filter-def name="enquiryStatusFilter">
+   		<filter-param name="enquiryStatusFilterParam" type="java.lang.Integer"/>
+ 	</filter-def>
 </hibernate-mapping>
