@@ -81,24 +81,25 @@ function updateStorage(item){
 
 //initially hide all description from the list
 $(".toggled").hide();
+$(".startShown").slideToggle();
 
 $('#new').click(function(){
 	//alert($('#enquiryID').val())
 });
 
-function showAdvocates(){
-	var buttonText = $("#btnAdvocateDetails").val();
+function showContact(contactButton){
+	var buttonText = $(contactButton).val();
 	if (buttonText == "Show Advocate Details")
 	{
-		$("#btnAdvocateDetails").val('Hide Advocate Details');
+		$(contactButton).val('Hide Advocate Details');
 
 	}
 	else
 	{
-		$("#btnAdvocateDetails").val('Show Advocate Details');
+		$(contactButton).val('Show Advocate Details');
 	}
 
-	$('.toggled').slideToggle();
+	$(contactButton).parent("div").siblings("div").slideToggle();
 }
 
 function bandSelected(selectedDiv){
@@ -139,4 +140,19 @@ function importantDiv(selectedDiv){
 function undoButton(selectedDiv){
 	$(selectedDiv).parent("section").hide();
 
+}
+
+function divHide(clickedButton){
+	var buttonImage = $(clickedButton).attr("src");
+	
+	if (buttonImage == "/IANEW/resources/images/minusButton.png")
+	{
+		$(clickedButton).attr("src", "/IANEW/resources/images/plusButton.png");
+		
+	}
+	else 
+	{	
+		$(clickedButton).attr("src", "/IANEW/resources/images/minusButton.png");
+	}
+	$(clickedButton).siblings("div").children("div").slideToggle();
 }

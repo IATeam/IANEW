@@ -14,6 +14,7 @@
 	Description: A component of the contact that is to be displayed on both enquiry and case forms that 
 				displays the personal detail.
 ------------------------------------------------------------------------------------------------>
+<section>
 
 <s:if test="%{#formType=='case'}">
 	<h3 class="sixteen columns"  style="float:none;">Protege Details</h3>
@@ -22,7 +23,11 @@
 	<h3 class="sixteen columns"  style="float:none;">Personal Details</h3>
 </s:elseif>
 
+<input type="image" src="/IANEW/resources/images/minusButton.png" alt="Hide/Show" id="btnShowHide" value="ShowHide" onclick="divHide(this);return false;" class="divHideButton"/>
+
 <div class="fieldsetborder">
+<div id="personalDetailsDiv" class="toggled startShown">
+
 	<fieldset>
 	
 		<div class="row">
@@ -78,4 +83,4 @@
 			</div>
 		</div>
 	</fieldset>
-</div>
+</div></div></section>

@@ -14,8 +14,12 @@
 	
 	Note: syntax order: <tag id name class value list(for select) ...>
 ------------------------------------------------------------------------------------------------>
+<section>
+<h3 class="sixteen columns" style="float:none;">Summary</h3>
+<input type="image" src="/IANEW/resources/images/minusButton.png" alt="Hide/Show" id="btnShowHide" value="ShowHide" onclick="divHide(this);return false;" class="divHideButton"/>
 
 <s:div cssClass="fieldsetborder">
+<div id="summaryDiv" class="toggled startShown">	
 	<fieldset>
 		<s:div cssClass="row">
 			<s:div cssClass="four columns">
@@ -26,5 +30,5 @@
 				<s:div><s:textarea id="description" name="description"  cssClass="multiLineTextArea" /></s:div>
 			</s:div>
 		</s:div>
-	</fieldset>
-</s:div>
+	</fieldset></div>
+</s:div></section>

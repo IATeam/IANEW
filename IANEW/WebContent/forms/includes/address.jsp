@@ -11,10 +11,11 @@
 	==============================================	
 	Description: A jsp page that displays a list of enquiries
 ------------------------------------------------------------------------------------------------>
-
+<section>
 <h3 class="sixteen columns" style="float:none;">Address</h3>
+<input type="image" src="/IANEW/resources/images/minusButton.png" alt="Hide/Show" id="btnShowHide" value="ShowHide" onclick="divHide(this);return false;" class="divHideButton"/>
 <div class="fieldsetborder">
-	
+<div id="addressDiv" class="toggled startShown">	
 	<fieldset>
 		<div class="row">
 		<!-- to do -->
@@ -60,5 +61,6 @@
 			</div>
 		</div>
 	</fieldset>
-	
+	</div>
 </div>
+</section>

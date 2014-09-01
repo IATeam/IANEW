@@ -23,14 +23,20 @@
 <head>
 
 </head>
-
+<section>
 <h3 class="sixteen columns" style="float:none;">Linked Cases</h3>
+<input type="image" src="/IANEW/resources/images/minusButton.png" alt="Hide/Show" id="btnShowHide" value="ShowHide" onclick="divHide(this);return false;" class="divHideButton"/>
+
 <s:div cssClass="greybackground">
+<div id="linkedCasesDiv" class="toggled startShown">	
+
 
 	<s:url id="urlCLinked" namespace="/case" action="getLinkedCase" />
 		
 		<s:iterator value="linkedCasesSet">
 			<section class="secLinkedCases sixteen columns curveBorder">
+						<input type="image" src="/IANEW/resources/images/undoButtonImage.png" alt="undoButton" id="btnUndo" value="Undo" onclick="undoButton(this);return false;" class="undoButton"/>
+			
 				<s:div cssClass="textarea two columns">
 					<s:label for="caseID" value="Case#:" />
 					<s:text var="caseID" name="id" />
@@ -97,5 +103,5 @@
 			showSlidingPanel();
 		});
 	});
-	</script>
-</s:div>
+	</script></div>
+</s:div></section>

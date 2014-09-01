@@ -31,8 +31,11 @@
 
 <!-- TODO LATER: add js function to click to select primary disability -->
 
+<section>
 <h3 class="sixteen columns" style="float:none;">Disability</h3>
+<input type="image" src="/IANEW/resources/images/minusButton.png" alt="Hide/Show" id="btnShowHide" value="ShowHide" onclick="divHide(this);return false;" class="divHideButton"/>
 <s:div cssClass="greybackground">
+<div id="disabilityDiv" class="toggled startShown">	
 	<article id="itDisability">
 		<s:iterator value="clientDisabilitiesSet">
 			<section class="sixteen columns curveBorder row">
@@ -57,6 +60,8 @@
 	<!-- Hidden disability to be added to iterator if needs to be added -->
 	<article id="artDisability" style='visiblity: hidden; display: none;'>
 		<section class="sixteen columns curveBorder row">
+					<input type="image" src="/IANEW/resources/images/undoButtonImage.png" alt="undoButton" id="btnUndo" value="Undo" onclick="undoButton(this);return false;" class="undoButton"/>
+		
 			<s:div cssClass="four columns alpha">
 				<s:div cssClass="row four columns">
 					<s:select list="disabilitySelectList.{disabilityName}" name="theDisability" headerKey="-1" headerValue="Select Disability" />
@@ -101,3 +106,4 @@
 	</script>
 	
 </s:div>
+</div></section>

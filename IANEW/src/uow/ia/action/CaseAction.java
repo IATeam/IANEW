@@ -13,6 +13,7 @@ import uow.ia.bean.CulturalBackgroundTypes;
 import uow.ia.bean.DangerTypes;
 import uow.ia.bean.DisabilityTypes;
 import uow.ia.bean.EmploymentTypes;
+import uow.ia.bean.GoalTypes;
 import uow.ia.bean.IndividualCases;
 import uow.ia.bean.CaseIssues;
 import uow.ia.bean.GenderTypes;
@@ -48,7 +49,7 @@ public class CaseAction extends BaseAction{
 	private String formTitle;;
 	private IndividualCases iCase;
 	private Contacts contact; //not calling from case to allow 'CASE' to share the same include jsp
-	
+
 	/*
 	 * Lists for the drop down select options for the jsps
 	 * and its associated value variables
@@ -66,6 +67,8 @@ public class CaseAction extends BaseAction{
 	private List<Contacts> advocateSelectList;							private String theAdvocate;
 	private List<PriorityTypes> prioritySelectList;						private String thePriority;	
 	private List<CommunicationTypes> communicationSelectList;			private String theCommunication;
+	private List<GoalTypes> goalSelectList;								private String theGoal;							
+	
 	/*
 	 * Sets variables for 1 to many relationship tables
 	 */
@@ -240,6 +243,7 @@ public class CaseAction extends BaseAction{
 		advocateSelectList = caseServices.findAdvocates();
 		prioritySelectList = caseServices.findPriorityTypes();
 		communicationSelectList = caseServices.findCommunicationTypes();
+		goalSelectList = caseServices.findGoalTypes();
 	}
 	
 	
@@ -282,6 +286,21 @@ public class CaseAction extends BaseAction{
 			public String getTheCommunication() {
 			return theCommunication;
 			}
+			
+			
+			public void setGoalSelectList(List<GoalTypes> goalSelectList) {
+				this.goalSelectList = goalSelectList;
+				}
+				public List<GoalTypes> getGoalSelectList() {
+				return goalSelectList;
+				}
+				public void setTheGoal(String theGoal) {
+				this.theGoal = theGoal;
+				}
+				public String getTheGoal() {
+				return theGoal;
+				}		
+			
 	/**
 	 * Getter for the form title
 	 * @return String

@@ -15,117 +15,122 @@
 				displays the personal detail.
 ------------------------------------------------------------------------------------------------>
 <script>
-function changeAdvocate(selectList) {
-		var selectedAdvocate = $(selectList).val();
-		if (selectedAdvocate == -1)
-		{
-			$("#titleAdvocate").val("-1");
-			 $("#firstNameAdvocate").val("");
-			 $("#otherNameAdvocate").val("");
-			 $("#lastNameAdvocate").val("");
-			 $("#genderAdvocate").val("-1");
-			 $("#birthDateAdvocate").val("");
-			 $("#identificationAdvocate").val("");
-			 $("#culturalBackgroundAdvocate").val("-1");
-			 $("#culturalBackgroundCommentsAdvocate").val("");
-			 $("#emailAdvocate").val("");
-			 $("#mobileAdvocate").val("");
-		}
-		
-	    <s:iterator var="advocate" value="advocateSelectList">
-	    	var fullname = "<s:property value='#advocate.lastname'/>" + ", " + "<s:property value='#advocate.firstname'/>"
-	    	if(selectedAdvocate == fullname)
-	    	{
-	    	    <s:iterator var="title" value="titleSelectList">
-		    		if("<s:property value='#advocate.titleType.name'/>" == "<s:property value='#title.name'/>")
-		    		{
-						 $("#titleAdvocate").val("<s:property value='#title.name'/>");
-		    		}
-	    	    </s:iterator>
-				$("#firstNameAdvocate").val("<s:property value='#advocate.firstname'/>");
-				$("#otherNameAdvocate").val("<s:property value='#advocate.othername'/>");
-				$("#lastNameAdvocate").val("<s:property value='#advocate.lastname'/>");
-				<s:iterator var="gender" value="genderSelectList">
-		    		if("<s:property value='#advocate.genderType.genderName'/>" == "<s:property value='#gender.genderName'/>")
-		    		{
-						 $("#genderAdvocate").val("<s:property value='#gender.genderName'/>");
-		    		}
-    	    	</s:iterator>
-   			 $("#birthDateAdvocate").val("<s:property value='#advocate.getDateString()'/>");
-   				$("#identificationAdvocate").val("<s:property value='#advocate.identification'/>");
-   				<s:iterator var="culturalBackground" value="culturalBackgroundSelectList">
-	    		if("<s:property value='#advocate.culturalBackground.culturalBackgroundName'/>" == "<s:property value='#culturalBackground.culturalBackgroundName'/>")
+function changeContact(selectedPerson) {
+	var selectedContact = $(selectedPerson).val();
+	var pathA = $(selectedPerson).parent("div").parent("div").parent("fieldset").children("div").children("div").children("div");
+	if (selectedContact == -1)
+	{
+		 $(pathA).children("#titleContact").val("-1");
+		 $(pathA).children("#firstNameContact").val("");
+		 $(pathA).children("#otherNameContact").val("");
+		 $(pathA).children("#lastNameContact").val("");
+		 $(pathA).children("#genderContact").val("-1");
+		 $(pathA).children("#birthDateContact").val("");
+		 $(pathA).children("#identificationContact").val("");
+		 $(pathA).children("#culturalBackgroundContact").val("-1");
+		 $(pathA).children("#culturalBackgroundCommentsContact").val("");
+		 $(pathA).children("#emailContact").val("");
+		 $(pathA).children("#mobileContact").val("");
+	}
+	
+    <s:iterator var="contact" value="advocateSelectList">
+    	var fullname = "<s:property value='#contact.lastname'/>" + ", " + "<s:property value='#contact.firstname'/>"
+    	if(selectedContact == fullname)
+    	{
+    	    <s:iterator var="title" value="titleSelectList">
+	    		if("<s:property value='#contact.titleType.name'/>" == "<s:property value='#title.name'/>")
 	    		{
-					 $("#culturalBackgroundAdvocate").val("<s:property value='#culturalBackground.culturalBackgroundName'/>");
+	    			$(pathA).children("#titleContact").val("<s:property value='#title.name'/>");
 	    		}
-	    		</s:iterator>
-				$("#culturalBackgroundCommentsAdvocate").val("<s:property value='#advocate.culturalBackgroundComment'/>");
-				$("#emailAdvocate").val("<s:property value='#advocate.email'/>");
-				$("#mobileAdvocate").val("<s:property value='#advocate.mobilephone'/>");
+    	    </s:iterator>
+    	    $(pathA).children("#firstNameContact").val("<s:property value='#contact.firstname'/>");
+    	    $(pathA).children("#otherNameContact").val("<s:property value='#contact.othername'/>");
+    	    $(pathA).children("#lastNameContact").val("<s:property value='#contact.lastname'/>");
+			<s:iterator var="gender" value="genderSelectList">
+	    		if("<s:property value='#contact.genderType.genderName'/>" == "<s:property value='#gender.genderName'/>")
+	    		{
+	    			$(pathA).children("#genderContact").val("<s:property value='#gender.genderName'/>");
+	    		}
+	    	</s:iterator>
+	    	$(pathA).children("#birthDateContact").val("<s:property value='#contact.getDateString()'/>");
+	    	$(pathA).children("#identificationContact").val("<s:property value='#contact.identification'/>");
+				<s:iterator var="culturalBackground" value="culturalBackgroundSelectList">
+    		if("<s:property value='#contact.culturalBackground.culturalBackgroundName'/>" == "<s:property value='#culturalBackground.culturalBackgroundName'/>")
+    		{
+    			$(pathA).children("#culturalBackgroundContact").val("<s:property value='#culturalBackground.culturalBackgroundName'/>");
+    		}
+    		</s:iterator>
+    		$(pathA).children("#culturalBackgroundCommentsContact").val("<s:property value='#contact.culturalBackgroundComment'/>");
+    		$(pathA).children("#emailContact").val("<s:property value='#contact.email'/>");
+    		$(pathA).children("#mobileContact").val("<s:property value='#contact.mobilephone'/>");
 
-	    	}
-	    </s:iterator>
+    	}
+    </s:iterator>
 }
 </script>
-
+<section>
 <h3 class="sixteen columns"  style="float:none;">Advocate</h3>
+<input type="image" src="/IANEW/resources/images/minusButton.png" alt="Hide/Show" id="btnShowHide" value="ShowHide" onclick="divHide(this);return false;" class="divHideButton"/>
 <div class="fieldsetborder">
+<div id="advocateDetailsDiv" class="toggled startShown">	
 	<fieldset>
 		<div class="row">
-			<div class="eight columns"><s:select list="advocateSelectList.{lastname + ', ' + firstname}" name="theAdvocate" id="advocateList" headerKey="-1" headerValue="Select Advocate" onChange="changeAdvocate(this)" /></div>
+			<div class="eight columns"><s:select list="advocateSelectList.{lastname + ', ' + firstname}" name="theAdvocate" id="advocateList" headerKey="-1" headerValue="Select Advocate" onChange="changeContact(this)" /></div>
 			<section class="five columns"><p></p></section>
-			<input type="button" id="btnAdvocateDetails" onclick="showAdvocates()" value="Show Advocate Details" class="three columns omega"/>
+			<input type="button" id="btnAdvocateDetails" onclick="showContact(this)" value="Show Advocate Details" class="three columns omega"/>
 		</div>		
 		<div class="row toggled">
-			<div class="four columns"><s:select list="titleSelectList.{name}" name="theTitle" id="titleAdvocate" headerKey="-1" headerValue="Title" disabled="true"/></div>
+			<div class="four columns"><s:select list="titleSelectList.{name}" name="theTitle" id="titleContact" headerKey="-1" headerValue="Title" disabled="true"/></div>
 			<div class='inputfield four columns'>
-				<s:label for="firstNameAdvocate" value="First Name:" />
-				<div><s:textfield id="firstNameAdvocate" Key="firstName" name="contact.firstname" readonly="true"></s:textfield></div>
+				<s:label for="firstNameContact" value="First Name:" />
+				<div><s:textfield id="firstNameContact" Key="firstName" name="contact.firstname" readonly="true"></s:textfield></div>
 			</div>
 			<div class="inputfield four columns">
-				<s:label for="otherNameAdvocate" value="Other Name:" />
-				<div><s:textfield id="otherNameAdvocate" name="contact.othername" readonly="true"></s:textfield></div>
+				<s:label for="otherNameContact" value="Other Name:" />
+				<div><s:textfield id="otherNameContact" name="contact.othername" readonly="true"></s:textfield></div>
 			</div>
 			
 			<div class="inputfield four columns omega">
-				<s:label for="lastNameAdvocate" value="Last Name:" />
-				<div><s:textfield id="lastNameAdvocate" name="contact.lastname" Key="lastname" readonly="true"></s:textfield></div>
+				<s:label for="lastNameContact" value="Last Name:" />
+				<div><s:textfield id="lastNameContact" name="contact.lastname" Key="lastname" readonly="true"></s:textfield></div>
 			</div>
 		</div>
 		
 		<div class="row toggled">
-			<div class="four columns"><s:select list="genderSelectList.{genderName}" name="theGender" id="genderAdvocate" headerKey="-1" headerValue="Gender" disabled="true"/></div>
+			<div class="four columns"><s:select list="genderSelectList.{genderName}" name="theGender" id="genderContact" headerKey="-1" headerValue="Gender" disabled="true"/></div>
 			<!-- style="padding-right: 15px;" -->
 			<div class="inputfield eight columns" >
-				<s:label for="identificationAdvocate" value="Identification:" />
-				<div><s:textfield id="identificationAdvocate" name="contact.identification" readonly="true"></s:textfield></div>
+				<s:label for="identificationContact" value="Identification:" />
+				<div><s:textfield id="identificationContact" name="contact.identification" readonly="true"></s:textfield></div>
 			</div>
 			
 			<div class="inputfield four columns omega ">
-				<s:label for="birthDateAdvocate" value="Birth Date:" />
-				<div><input type="date" id="birthDateAdvocate" name="contact.dob" readonly="true"></div>
+				<s:label for="birthDateContact" value="Birth Date:" />
+				<div><input type="date" id="birthDateContact" name="contact.dob" readonly="true"></div>
 			</div>
 		</div>
 		
 		<div class="row toggled">
-			<div class="four columns"><s:select list="culturalBackgroundSelectList.{culturalBackgroundName}" name="theCulturalBackground" id="culturalBackgroundAdvocate" value="theCultrualBackground" headerKey="-1"  headerValue="Cultural Background" value="genderProtege"  disabled="true"/></div>
+			<div class="four columns"><s:select list="culturalBackgroundSelectList.{culturalBackgroundName}" name="theCulturalBackground" id="culturalBackgroundContact" value="theCultrualBackground" headerKey="-1"  headerValue="Cultural Background" value="genderProtege"  disabled="true"/></div>
 			
 			<div class="textarea twelve columns omega">
-				<s:label for="culturalBackgroundCommentsAdvocate" value="Comments:" />
-				<div><s:textarea id="culturalBackgroundCommentsAdvocate" cssClass="oneLineTextArea" name="contact.culturalBackgroundComment" readonly="true"></s:textarea></div> 
+				<s:label for="culturalBackgroundCommentsContact" value="Comments:" />
+				<div><s:textarea id="culturalBackgroundCommentsContact" cssClass="oneLineTextArea" name="contact.culturalBackgroundComment" readonly="true"></s:textarea></div> 
 			</div>
 		</div>
 		
 		<div class="row toggled">
 			<div class="inputfield five columns">
-				<s:label for="emailAdvocate" value="Email:" />
-				<div><s:textfield id="emailAdvocate" name="contact.email" readonly="true"></s:textfield></div>
+				<s:label for="emailContact" value="Email:" />
+				<div><s:textfield id="emailContact" name="contact.email" readonly="true"></s:textfield></div>
 			</div>
 			
 			<div class="inputfield four columns omega">
-				<s:label for="mobileAdvocate" value="Mobile#:" />
-				<div><s:textfield id="mobileAdvocate" name="contact.mobilephone" readonly="true" ></s:textfield></div>
+				<s:label for="mobileContact" value="Mobile#:" />
+				<div><s:textfield id="mobileContact" name="contact.mobilephone" readonly="true" ></s:textfield></div>
 			</div>
 		</div>
 	</fieldset>
 </div>
+</div>
+</section>

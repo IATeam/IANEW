@@ -28,14 +28,19 @@
 <head>
 
 </head>
-
+<section>
 <h3 class="sixteen columns" style="float:none;">Linked Enquiries</h3>
+<input type="image" src="/IANEW/resources/images/minusButton.png" alt="Hide/Show" id="btnShowHide" value="ShowHide" onclick="divHide(this);return false;" class="divHideButton"/>
+
 <s:div cssClass="greybackground">
+<div id="linkedEnquiriesDiv" class="toggled startShown">	
 
 	<s:url id="urlELinked" namespace="/enquiry" action="getLinkedEnquiry" />
 		
 	<s:iterator value="linkedEnquiriesSet">
 		<section class="secLinkedEnquiries sixteen columns curveBorder"  onclick="bandSelected(this)">
+					<input type="image" src="/IANEW/resources/images/undoButtonImage.png" alt="undoButton" id="btnUndo" value="Undo" onclick="undoButton(this);return false;" class="undoButton"/>
+		
 			<s:div cssClass="textarea one columns">
 				<s:label value="E#:" />
 				<s:div cssClass="id"><s:property  value="id"/></s:div>
@@ -89,5 +94,5 @@
 			//alert(id);
 		});
 	});
-	</script>
-</s:div>
+	</script></div>
+</s:div></section>

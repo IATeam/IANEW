@@ -22,9 +22,11 @@
 	==============================================	
 	Description: A jsp page that displays a list of enquiries
 ------------------------------------------------------------------------------------------------>
-
-<h3 class="sixteen columns" style="float:none;">Communications</h3>
+<section>
+<h3 class="fifteen columns" style="float:none;">Communications</h3>
+<input type="image" src="/IANEW/resources/images/minusButton.png" alt="Hide/Show" id="btnShowHide" value="ShowHide" onclick="divHide(this);return false;" class="divHideButton"/>
 <s:div cssClass="greybackground">
+<div id="communicationsDiv" class="toggled startShown">
 	<%-- <s:if test="" > --%>
 	<article id="itCommunication">
 		<s:iterator value="communicationSet">		
@@ -104,4 +106,6 @@
 		});
 	});
 	</script>
+	</div>
 </s:div>
+</section>

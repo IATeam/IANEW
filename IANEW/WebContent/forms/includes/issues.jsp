@@ -22,10 +22,11 @@
 	==============================================	
 	Description: A jsp page that displays a list of enquiries
 ------------------------------------------------------------------------------------------------>
-
+<section>
 <h3 class="sixteen columns" style="float:none;">Issues</h3>
+<input type="image" src="/IANEW/resources/images/minusButton.png" alt="Hide/Show" id="btnShowHide" value="ShowHide" onclick="divHide(this);return false;" class="divHideButton"/>
 <s:div cssClass="greybackground">
-	<%-- <s:if test="" > --%>
+<div id="issuesDiv" class="toggled startShown">	
 	<article id="itIssue">
 		<s:iterator value="issueSet">		
 			<section class="secIssue sixteen columns curveBorder">
@@ -64,6 +65,8 @@
 	
 	<article id="artIssue" class="row" style="visibility: hidden; display: none;">
 		<section class="secIssue sixteen columns curveBorder">
+					<input type="image" src="/IANEW/resources/images/undoButtonImage.png" alt="undoButton" id="btnUndo" value="Undo" onclick="undoButton(this);return false;" class="undoButton"/>
+		
 			<div class="row">
 			<div class="three columns"><s:select list="issueSelectList.{issueName}" name="" headerKey="-1" headerValue="Select an Issue" /></div>
 			<s:if test="%{#formType=='case'}">
@@ -106,5 +109,5 @@
 			$("#artIssue section").clone().appendTo("#itIssue");
 		});
 	});
-	</script>
-</s:div>
+	</script></div>
+</s:div></section>

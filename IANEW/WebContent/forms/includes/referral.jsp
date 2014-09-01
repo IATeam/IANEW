@@ -21,9 +21,12 @@
 	Description: A component of the contact that is to be displayed on both enquiry and case forms that 
 				displays referral info.
 ------------------------------------------------------------------------------------------------>
-
+<section>
 <h3 class="sixteen columns" style="float:none;">Referral</h3>
+<input type="image" src="/IANEW/resources/images/minusButton.png" alt="Hide/Show" id="btnShowHide" value="ShowHide" onclick="divHide(this);return false;" class="divHideButton"/>
 <s:div cssClass="fieldsetborder">
+<div id="referralDiv" class="toggled startShown">
+
 	<fieldset>
 		<s:div cssClass="row">
 			<s:if test="%{#formType=='enquiry'}">
@@ -49,5 +52,5 @@
 				</s:div>
 			</s:elseif>	
 		</s:div>
-	</fieldset>
-</s:div>
+	</fieldset></div>
+</s:div></section>
