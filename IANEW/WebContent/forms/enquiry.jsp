@@ -42,6 +42,7 @@
 <link href="<s:url value='/styles/import/skeleton.css' encode='false' includeParams='none'/>" rel="stylesheet" type="text/css"
 	      media="all"/>
 <script src="<s:url value='/js/validation/enquiryValidation.js' encode='false' includeParams='none'/>"></script>
+<script src="<s:url value='/js/ianew.lists.js' encode='false' includeParams='none'/>"></script>
 
 
 </head>

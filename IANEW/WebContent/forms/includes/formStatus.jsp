@@ -30,6 +30,7 @@ function changeDangerColour(selectList) {
 	    		$(selectList).css({"background": "<s:property value='symbol'/>"});
 	    	}
 	    </s:iterator>
+
 }
 
 function changePriorityColour(selectList) {
@@ -66,35 +67,47 @@ function changePriorityColour(selectList) {
 	
 	<s:if test="%{#formType=='case'}">
 		<div class="two columns">
-			<s:select id="status" list="statusSelectList.{statusName}" name="theStatus" headerKey="-1" headerValue="Case Status" />
+			<s:textfield id="healthIssueComment" name="" cssClass="colouredRed"></s:textfield>		
 		</div>
 		
 		<s:div cssClass="two columns">
-			<s:label for="id" value="Case#:" />
+			<s:label for="id" value="Case#:" cssStyle="padding-left:20px;"/>
 			<s:property value="id" />
 		</s:div>
 	</s:if>					
 	<s:elseif test="%{#formType=='enquiry'}">
 		<div class="two columns">
-			<s:select id="status" list="statusSelectList.{statusName}" name="theStatus" headerKey="-1" headerValue="Enquiry Status" />
+			<s:textfield id="healthIssueComment" name="" cssClass="colouredRed"></s:textfield>		
 		</div>
 		
 		<s:div cssClass="two columns">
-			<s:label for="id" value="Enquiry#:" />
+			<s:label for="id" value="Enquiry#:" cssStyle="padding-left:20px;" />
 			<s:property value="id" />
 		</s:div>
 	</s:elseif>				
 	<div class="four columns">
 		<s:label for="createdBy" value="Created By:" />
 		<s:property value="createdBy"/>
-	</div>					
-	<div class="four columns">	
-		<s:label for="lastUpdatedBy" value="Last Updated By:" />
-		<s:property value="updatedBy"/>
-	</div>			
-	<s:if test="%{#formType=='case'}">
-		<div class="four columns">
+	</div>		
+	<s:if test="%{#formType=='case'}">			
+		<div class="four columns">	
+			<s:label for="lastUpdatedBy" value="Last Updated By:" />
+			<s:property value="updatedBy"/>
+		</div>			
+		<div class="three columns">
 			<s:select list="prioritySelectList.{priorityName}" name="thePriority" headerKey="-1" headerValue="Priority Level" cssClass="coloured" onChange="changePriorityColour(this)"/>
 		</div>
-	</s:if>				
+		<div class="two columns">
+			<s:select id="status" list="statusSelectList.{statusName}" name="theStatus" headerKey="-1" headerValue="Case Status" />
+		</div>
+	</s:if>		
+	<s:elseif test="%{#formType=='enquiry'}">
+		<div class="seven columns">	
+			<s:label for="lastUpdatedBy" value="Last Updated By:" />
+			<s:property value="updatedBy"/>
+		</div>			
+		<div class="two columns">
+			<s:select id="status" list="statusSelectList.{statusName}" name="theStatus" headerKey="-1" headerValue="Enquiry Status" />
+		</div>
+	</s:elseif>			
 </div>

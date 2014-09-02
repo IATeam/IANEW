@@ -30,7 +30,7 @@
 </head>
 <section>
 <h3 class="sixteen columns" style="float:none;">Linked Enquiries</h3>
-<input type="image" src="/IANEW/resources/images/minusButton.png" alt="Hide/Show" id="btnShowHide" value="ShowHide" onclick="divHide(this);return false;" class="divHideButton"/>
+<input type="image" src="/IANEW/resources/images/plusButton.png" alt="Hide/Show" id="btnShowHide" value="ShowHide" onclick="divHide(this);return false;" class="divHideButton"/>
 
 <s:div cssClass="greybackground">
 <div id="linkedEnquiriesDiv" class="toggled startShown">	

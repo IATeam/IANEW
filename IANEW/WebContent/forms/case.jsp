@@ -34,14 +34,12 @@
 
 <html>
 <head>
-<title>Case Form</title>
-<link href="<s:url value='/styles/ianew.form.css' encode='false' includeParams='none'/>" rel="stylesheet" type="text/css"
-	      media="all"/>
-<link href="<s:url value='/styles/import/skeleton.css' encode='false' includeParams='none'/>" rel="stylesheet" type="text/css"
-	      media="all"/>
-<script src="<s:url value='/js/ianew.lists.js' encode='false' includeParams='none'/>"></script>
-
-
+	<title>Case Form</title>
+	<link href="<s:url value='/styles/ianew.form.css' encode='false' includeParams='none'/>" rel="stylesheet" type="text/css"
+		      media="all"/>
+	<link href="<s:url value='/styles/import/skeleton.css' encode='false' includeParams='none'/>" rel="stylesheet" type="text/css"
+		      media="all"/>
+	<script src="<s:url value='/js/ianew.lists.js' encode='false' includeParams='none'/>"></script>
 </head>
 <body>
 	<s:set var="formType">case</s:set>
@@ -62,14 +60,14 @@
 		<%@include file="includes/formStatus.jsp" %>
 		<%@include file="includes/advocateDetails.jsp" %>
 		<%@include file="includes/personalDetails.jsp" %>
-		<%@include file="includes/address.jsp" %>
- 		<%@include file="includes/employment.jsp" %>		
+		<%@include file="includes/address.jsp" %>	
 		<%@include file="includes/disability.jsp" %>
+ 		<%@include file="includes/employment.jsp" %>	
+		<%@include file="includes/plan.jsp" %>
 		<%@include file="includes/issues.jsp" %>
 		<%@include file="includes/communications.jsp" %>
-		<%@include file="includes/plan.jsp" %>
-		<%@include file="includes/linkedEnquiries.jsp" %>
 		<%@include file="includes/linkedCases.jsp" %>
+		<%@include file="includes/linkedEnquiries.jsp" %>
 		<%@include file="includes/referral.jsp" %>
 		
 <!-- ---------------------------------------------------------------------------------------------- -->

@@ -81,7 +81,6 @@ function updateStorage(item){
 
 //initially hide all description from the list
 $(".toggled").hide();
-$(".startShown").slideToggle();
 
 $('#new').click(function(){
 	//alert($('#enquiryID').val())

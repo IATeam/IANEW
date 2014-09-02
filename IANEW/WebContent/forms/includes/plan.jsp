@@ -78,8 +78,8 @@ function changeContact(selectedPerson) {
 </script>
 <section>
 	<h3 class="sixteen columns"  style="float:none;">Plan</h3>
-	<input type="image" src="/IANEW/resources/images/minusButton.png" alt="Hide/Show" id="btnShowHide" value="ShowHide" onclick="divHide(this);return false;" class="divHideButton"/>
-	<div class="fieldsetborder">
+	<input type="image" src="/IANEW/resources/images/plusButton.png" alt="Hide/Show" id="btnShowHide" value="ShowHide" onclick="divHide(this);return false;" class="divHideButton"/>
+	<div class="greybackground">
 		<div id="plansDiv" class="toggled startShown">
 			<fieldset>
 				<div class="row">
@@ -142,7 +142,7 @@ function changeContact(selectedPerson) {
 				</div>
 			</fieldset>
 			<br>
-			<div class="greybackground">
+			<div class="fieldsetborder">
 				<h4 class="sixteen columns"  style="float:none;">Developed By</h4>
 				<article id="itDeveloper">
 					<s:iterator value="developerSet">		
@@ -260,7 +260,7 @@ function changeContact(selectedPerson) {
 				</script>
 			</div>	
 			<br>
-			<div class="greybackground">
+			<div class="fieldsetborder">
 				<h4 class="sixteen columns"  style="float:none;">Goals</h4>
 				<article id="itGoal">
 					<s:iterator value="goalSet">		
@@ -353,7 +353,7 @@ function changeContact(selectedPerson) {
 				</script>
 				</div>
 				<br>
-			<div class="greybackground">
+			<div class="fieldsetborder">
 				<h4 class="sixteen columns"  style="float:none;">Risks</h4>
 				<article id="itRisk">
 					<s:iterator value="riskSet">		

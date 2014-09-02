@@ -13,8 +13,8 @@
 ------------------------------------------------------------------------------------------------>
 <section>
 <h3 class="sixteen columns" style="float:none;">Address</h3>
-<input type="image" src="/IANEW/resources/images/minusButton.png" alt="Hide/Show" id="btnShowHide" value="ShowHide" onclick="divHide(this);return false;" class="divHideButton"/>
-<div class="fieldsetborder">
+<input type="image" src="/IANEW/resources/images/plusButton.png" alt="Hide/Show" id="btnShowHide" value="ShowHide" onclick="divHide(this);return false;" class="divHideButton"/>
+<div class="greybackground">
 <div id="addressDiv" class="toggled startShown">	
 	<fieldset>
 		<div class="row">

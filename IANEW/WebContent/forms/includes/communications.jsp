@@ -24,7 +24,7 @@
 ------------------------------------------------------------------------------------------------>
 <section>
 <h3 class="fifteen columns" style="float:none;">Communications</h3>
-<input type="image" src="/IANEW/resources/images/minusButton.png" alt="Hide/Show" id="btnShowHide" value="ShowHide" onclick="divHide(this);return false;" class="divHideButton"/>
+<input type="image" src="/IANEW/resources/images/plusButton.png" alt="Hide/Show" id="btnShowHide" value="ShowHide" onclick="divHide(this);return false;" class="divHideButton"/>
 <s:div cssClass="greybackground">
 <div id="communicationsDiv" class="toggled startShown">
 	<%-- <s:if test="" > --%>
