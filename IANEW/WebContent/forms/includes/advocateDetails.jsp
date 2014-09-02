@@ -18,16 +18,18 @@
 function changeContact(selectedPerson) {
 	var selectedContact = $(selectedPerson).val();
 	var pathA = $(selectedPerson).parent("div").parent("div").parent("fieldset").children("div").children("div").children("div");
+	var pathB = $(selectedPerson).parent("div").parent("div").parent("fieldset").children("div").children("div");
+
 	if (selectedContact == -1)
 	{
-		 $(pathA).children("#titleContact").val("-1");
+		 $(pathB).children("#titleContact").val("-1");
 		 $(pathA).children("#firstNameContact").val("");
 		 $(pathA).children("#otherNameContact").val("");
 		 $(pathA).children("#lastNameContact").val("");
-		 $(pathA).children("#genderContact").val("-1");
+		 $(pathB).children("#genderContact").val("-1");
 		 $(pathA).children("#birthDateContact").val("");
 		 $(pathA).children("#identificationContact").val("");
-		 $(pathA).children("#culturalBackgroundContact").val("-1");
+		 $(pathB).children("#culturalBackgroundContact").val("-1");
 		 $(pathA).children("#culturalBackgroundCommentsContact").val("");
 		 $(pathA).children("#emailContact").val("");
 		 $(pathA).children("#mobileContact").val("");
@@ -40,7 +42,7 @@ function changeContact(selectedPerson) {
     	    <s:iterator var="title" value="titleSelectList">
 	    		if("<s:property value='#contact.titleType.name'/>" == "<s:property value='#title.name'/>")
 	    		{
-	    			$(pathA).children("#titleContact").val("<s:property value='#title.name'/>");
+	    			$(pathB).children("#titleContact").val("<s:property value='#title.name'/>");
 	    		}
     	    </s:iterator>
     	    $(pathA).children("#firstNameContact").val("<s:property value='#contact.firstname'/>");
@@ -49,7 +51,7 @@ function changeContact(selectedPerson) {
 			<s:iterator var="gender" value="genderSelectList">
 	    		if("<s:property value='#contact.genderType.genderName'/>" == "<s:property value='#gender.genderName'/>")
 	    		{
-	    			$(pathA).children("#genderContact").val("<s:property value='#gender.genderName'/>");
+	    			$(pathB).children("#genderContact").val("<s:property value='#gender.genderName'/>");
 	    		}
 	    	</s:iterator>
 	    	$(pathA).children("#birthDateContact").val("<s:property value='#contact.getDateString()'/>");
@@ -57,7 +59,7 @@ function changeContact(selectedPerson) {
 				<s:iterator var="culturalBackground" value="culturalBackgroundSelectList">
     		if("<s:property value='#contact.culturalBackground.culturalBackgroundName'/>" == "<s:property value='#culturalBackground.culturalBackgroundName'/>")
     		{
-    			$(pathA).children("#culturalBackgroundContact").val("<s:property value='#culturalBackground.culturalBackgroundName'/>");
+    			$(pathB).children("#culturalBackgroundContact").val("<s:property value='#culturalBackground.culturalBackgroundName'/>");
     		}
     		</s:iterator>
     		$(pathA).children("#culturalBackgroundCommentsContact").val("<s:property value='#contact.culturalBackgroundComment'/>");
