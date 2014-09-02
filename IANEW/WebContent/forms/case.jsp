@@ -79,7 +79,7 @@
 		 -->			
 		<s:div cssClass="clear"></s:div>
 		<footer>
-			<s:div cssClass="row">
+			<s:div cssClass="row" cssStyle="padding-top:10px;">
 				<section class="six columns">
 					<input type="button" class="three columns alpha" value="Cancel"/>
 					<input type="button" class="three columns omega" value="New Case" />

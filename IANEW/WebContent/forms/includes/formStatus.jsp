@@ -50,7 +50,7 @@ function changePriorityColour(selectList) {
 }
 </script>
 
-<div class="formStatus">
+<div class="formStatus"  style="padding-top:10px;margin-top:1px;">
 	<div class="four columns">
 		<s:label for="createdDate" value="Created Date:" />
 	    <s:date name="createdDate" format="dd MMM yyyy"/>

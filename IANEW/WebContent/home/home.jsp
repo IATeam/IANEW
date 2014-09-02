@@ -74,7 +74,7 @@
 <!-- ---------------------------------------------------------------------------------------------- -->
 	<nav>
 		<ul id="main-menu" class="sm sm-simple">
-			<li><s:a id="aHome"href="#">Illawarra Advocacy</s:a></li>
+			<li><s:a id="aHome"href="/IANEW/home/home.jsp">Illawarra Advocacy</s:a></li>
 			
 			<li><s:a id="aE"href="#">Enquiry</s:a>
 				<ul>
