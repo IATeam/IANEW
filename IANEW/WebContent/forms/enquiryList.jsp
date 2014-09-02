@@ -133,7 +133,6 @@
 				</s:div>
 			</s:div>
 		</s:form>
-		<h1>Number of Records: </h1><s:text name="numberOfRecords"/>
 <!-- ---------------------------------------------------------------------------------------------- -->
 <!-- Hidden form to pass pagination to action class submitted by the prev and next buttons -------- -->
 <!-- ---------------------------------------------------------------------------------------------- -->
