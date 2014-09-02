@@ -83,55 +83,61 @@ function changeContact(selectedPerson) {
 		<div id="plansDiv" class="toggled startShown">
 			<fieldset>
 				<div class="row">
-					<div class="four columns"><s:select list="titleSelectList.{name}" name="theTitle" headerKey="-1" headerValue="Select Title" /></div>
-			
+					<div class="three columns">
+						<s:select list="#{'Weekly' : 'Weekly', 'Monthly' : 'Monthly', 'Bi-Monthly' : 'Bi-Monthly'}" name="theCommunication" headerKey="-1" headerValue="Review Frequency" />
+					</div>
+					<div class="three columns">
+					<s:label for="createdDate" value="Created Date:" />
+					    <s:date name="createdDate" format="dd/MM/yyyy"/>
+				    </div>
+				    <div class="three columns">
+					<s:label for="createdBy" value="Created By:" />
+					    <s:date name="createdBy" format="dd/MM/yyyy"/>
+				    </div>
+				    <div class="three columns omega">
+						<s:label for="completionDate" value="Completion Date:" />
+					    <s:date name="completionDate" format="dd/MM/yyyy"/>
+					</div>
+					    <div class="four columns"><s:select list="statusSelectList.{statusName}" name="theStatus" headerKey="-1" headerValue="Status" /></div>
+				</div>
+				<div class="row">
+					<div class="inputfield five columns omega">
+						<s:label for="lastReviewDate" value="Last Review Date:" />
+						<div><input type="date" id="lastReviewDate" name=""></div>
+					</div>
+					<div class="inputfield five columns omega">
+						<s:label for="planProvidedDate" value="Plan Provided Date:" />
+						<div><input type="date" id="planProvidedDate" name=""></div>
+					</div>
+					<div class="inputfield six columns omega">
+						<s:label for="consentSignedDate" value="Consent Signed Date:" />
+						<div><input type="date" id="consentSignedDate" name=""></div>
+					</div>
+				</div>
+				<div class="row">
 					<div class='inputfield four columns'>
-						<s:label for="firstName" value="First Name:" />
-						<div><s:textfield id="firstName" Key="firstName" name="contact.firstname"></s:textfield></div>
-					</div>
-					<div class="inputfield four columns">
-						<s:label for="otherName" value="Other Name:" />
-						<div><s:textfield id="otherName" name="contact.othername"></s:textfield></div>
-					</div>
-					
-					<div class="inputfield four columns omega">
-						<s:label for="lastName" value="Last Name:" />
-						<div><s:textfield id="lastName" name="contact.lastname" Key="lastname"></s:textfield></div>
-					</div>
+									<s:label for="firstNameContact" value="Support First Name:" />
+									<div><s:textfield id="firstNameContact" Key="firstName" name="contact.firstname" ></s:textfield></div>
+								</div>
+								<div class="inputfield four columns">
+									<s:label for="otherNameContact" value="Support Other Name:" />
+									<div><s:textfield id="otherNameContact" name="contact.othername"></s:textfield></div>
+								</div>
+								
+								<div class="inputfield four columns omega">
+									<s:label for="lastNameContact" value="Support Last Name:" />
+									<div><s:textfield id="lastNameContact" name="contact.lastname" Key="lastname" ></s:textfield></div>
 				</div>
 				
-				<div class="row">
-					<div class="four columns"><s:select list="genderSelectList.{genderName}" name="theGender" headerKey="-1" headerValue="Select Gender"/></div>
-					<!-- style="padding-right: 15px;" -->
-					<div class="inputfield eight columns" >
-						<s:label for="identification" value="Identification:" />
-						<div><s:textfield id="identification" name="contact.identification"></s:textfield></div>
-					</div>
-					
-					<div class="inputfield four columns omega ">
-						<s:label for="birthDate" value="Birth Date:" />
-						<div><input type="date" id="birthDate" name="contact.dob"></div>
-					</div>
+				<div class="inputfield four columns omega">
+									<s:label for="mobileContact" value="Support Mobile#:" />
+									<div><s:textfield id="mobileContact" name="contact.mobilephone" ></s:textfield></div>
+								</div>
 				</div>
-				
 				<div class="row">
-					<div class="four columns"><s:select list="culturalBackgroundSelectList.{culturalBackgroundName}" name="theCulturalBackground" value="theCultrualBackground" headerKey="-1"  headerValue="Select Cultural Background" value="genderProtege" /></div>
-					
-					<div class="textarea twelve columns omega">
-						<s:label for="culturalBackgroundComments" value="Comments:" />
-						<div><s:textarea id="culturalBackgroundComments" cssClass="oneLineTextArea" name="contact.culturalBackgroundComment"></s:textarea></div> 
-					</div>
-				</div>
-				
-				<div class="row">
-					<div class="inputfield five columns">
-						<s:label for="email" value="Email:" />
-						<div><s:textfield id="email" name="contact.email"></s:textfield></div>
-					</div>
-					
-					<div class="inputfield four columns omega">
-						<s:label for="mobile" value="Mobile#:" />
-						<div><s:textfield id="mobile" name="contact.mobilephone" ></s:textfield></div>
+					<div class="textarea sixteen columns omega">
+						<s:label for="notes" value="Notes:" />
+						<s:textarea id="notes" cssClass="oneLineTextArea" name=""/> 
 					</div>
 				</div>
 			</fieldset>
@@ -153,7 +159,7 @@ function changeContact(selectedPerson) {
 									<s:label for="createdBy" value="Created By:" />
 								    <s:date name="createdBy" format="dd/MM/yyyy"/>
 							    </div>
-							   	<div class="three columns">
+							   	<div class="four columns">
 									<s:label for="completedDate" value="Completed Date:" />
 								    <s:date name="completedDate" format="dd/MM/yyyy"/>
 							    </div>
@@ -184,7 +190,7 @@ function changeContact(selectedPerson) {
 							<div class="row">
 								<div class="eight columns"><s:select list="advocateSelectList.{lastname + ', ' + firstname}" name="theAdvocate" id="advocateList" headerKey="-1" headerValue="Select Developer" onChange="changeContact(this)" /></div>
 								<section class="four columns"><p></p></section>
-								<input type="button" id="btnAdvocateDetails" onclick="showContact(this, 'Contact Details')"  value="Show Contact Details" class="three columns omega"/>
+								<input type="button" id="btnAdvocateDetails" onclick="showContact(this, 'Developer Details')"  value="Show Developer Details" class="three columns omega"/>
 							</div>		
 							<div class="row toggled">
 								<div class="three columns"><s:select list="titleSelectList.{name}" name="theTitle" id="titleContact" headerKey="-1" headerValue="Title" disabled="true"/></div>
@@ -342,6 +348,59 @@ function changeContact(selectedPerson) {
 				$(function(){
 					$("#btnAddGoal").click(function(){ 
 						$("#artGoal section").clone().appendTo("#itGoal");
+					});
+				});
+				</script>
+				</div>
+				<br>
+			<div class="greybackground">
+				<h4 class="sixteen columns"  style="float:none;">Risks</h4>
+				<article id="itRisk">
+					<s:iterator value="riskSet">		
+						<section class="secIssue sixteen columns curveBorder">
+						<input type="image" src="/IANEW/resources/images/undoButtonImage.png" alt="undoButton" id="btnUndo" value="Undo" onclick="undoButton(this);return false;" class="undoButton"/>
+							<div class="row">
+								<div class="textarea fifteen columns omega">
+									<s:label for="riskDescription" value="Risk Description" />
+									<s:textarea id="" cssClass="oneLineTextArea" name=""/> 
+								</div>
+							</div>			
+							<div class="row">
+								<div class="textarea fifteen columns omega">
+									<s:label for="riskManagement" value="Risk Management" />
+									<s:textarea id="" cssClass="oneLineTextArea" name=""/> 
+								</div>
+							</div>
+						</section>
+					</s:iterator>
+				</article>
+				
+				<article id="artRisk" class="row" style="visibility: hidden; display: none;">
+					<section class="secIssue sixteen columns curveBorder">
+						<input type="image" src="/IANEW/resources/images/undoButtonImage.png" alt="undoButton" id="btnUndo" value="Undo" onclick="undoButton(this);return false;" class="undoButton"/>
+						<div class="row">
+								<div class="textarea fifteen columns omega">
+									<s:label for="riskDescription" value="Risk Description" />
+									<s:textarea id="" cssClass="oneLineTextArea" name=""/> 
+								</div>
+							</div>			
+							<div class="row">
+								<div class="textarea fifteen columns omega">
+									<s:label for="riskManagement" value="Risk Management" />
+									<s:textarea id="" cssClass="oneLineTextArea" name=""/> 
+								</div>
+							</div>
+					</section>
+				</article>
+				<div class="row">
+					<div class="thirteen columns alpha"><p></p></div>
+					<input type="button" id="btnAddRisk" value="Add Risk" class="three columns" />
+				</div>
+	
+				<script>
+				$(function(){
+					$("#btnAddRisk").click(function(){ 
+						$("#artRisk section").clone().appendTo("#itRisk");
 					});
 				});
 				</script>
