@@ -66,6 +66,15 @@
 	<s:url id="urlLinks" namespace="/links" action="links">
 		<s:param name="formTitle">Links</s:param>
 	</s:url>
+	<s:url id="urlSettings" namespace="/settings" action="settings">
+		<s:param name="formTitle">Settings</s:param>
+	</s:url>
+	<s:url id="urlReport" namespace="/report" action="report">
+		<s:param name="formTitle">Report</s:param>
+	</s:url>
+	<s:url id="urlTimeManagement" namespace="/timeManagement" action="timeManagement">
+		<s:param name="formTitle">Time Management</s:param>
+	</s:url>
 	
 	<div class="container">
 	
@@ -76,7 +85,7 @@
 		<ul id="main-menu" class="sm sm-simple">
 			<li><s:a id="aHome"href="/IANEW/home/home.jsp">Illawarra Advocacy</s:a></li>
 			
-			<li><s:a id="aE"href="#">Enquiry</s:a>
+			<li><sj:a id="menuENew" href="%{urlENew}" targets="formDiv" onclick="menuclicked()">Enquiry</sj:a>
 				<ul>
 					<li><sj:a id="aENew" href="%{urlENew}" targets="formDiv" onclick="menuclicked()">New Enquiry</sj:a></li>
 					<li><sj:a id="aEExisting" href="%{urlEExisting}" targets="formDiv" onclick="menuclicked()">Existing Enquiry Test</sj:a></li>
@@ -84,7 +93,7 @@
 				</ul>
 			</li>
 			
-			<li><s:a href="#">Case</s:a>
+			<li><sj:a id="menuCNew" href="%{urlCNew}" targets="formDiv" onclick="menuclicked()">Case</sj:a>
 				<ul>
 					<li><sj:a id="aCNew" href="%{urlCNew}" targets="formDiv" onclick="menuclicked()">New Case</sj:a></li>
 					<li><sj:a id="aCList" href="%{urlCList}" targets="formDiv" onclick="menuclicked()">Case List</sj:a>
@@ -92,23 +101,18 @@
 			</li>
 			
 			<li >
-				<s:a href="#">Report</s:a>
+			<li><sj:a id="report" href="%{urlReport}" targets="formDiv"  onclick="menuclicked()">Report</sj:a></li>
 		
 			</li>
-			<li><s:a href="#">Time Management</s:a>
+			<li><sj:a id="timeManagement" href="%{urlTimeManagement}" targets="formDiv"  onclick="menuclicked()">Time Management</sj:a></li>
 			
 			</li>
 			
 			<li>
-				<s:a href="#">Synchronize</s:a>
+			<li><sj:a id="settings" href="%{urlSettings}" targets="formDiv"  onclick="menuclicked()">Settings</sj:a></li>
 				
 			</li>
-			
-			<li>
-				<s:a href="#">Settings</s:a>
-				
-			</li>
-			<li><sj:a id="links" href="%{urlLinks}" targets="formDiv">Links</sj:a></li>
+			<li><sj:a id="links" href="%{urlLinks}" targets="formDiv"  onclick="menuclicked()">Links</sj:a></li>
 		</ul>
 	</nav>
 

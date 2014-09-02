@@ -28,7 +28,7 @@
 			<div class="row">
 				<img class="seven columns" src="<s:url value='/resources/images/logo.png'/>"/>
 				<div class="headerText nine columns">
-					<s:text name="Advocacy Links" />
+					<s:text name="Links" />
 				</div>
 			</div>
 	</section>
