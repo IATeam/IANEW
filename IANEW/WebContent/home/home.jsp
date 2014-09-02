@@ -93,32 +93,20 @@
 			
 			<li >
 				<s:a href="#">Report</s:a>
-				<ul>
-					<li><sj:a id="aCNew" href="%{urlCNew}" targets="formDiv" onclick="menuclicked()">New Case</sj:a></li>
-					<li><sj:a id="aCList" href="%{urlCList}" targets="formDiv" onclick="menuclicked()">Case List</sj:a>
-				</ul>
+		
 			</li>
 			<li><s:a href="#">Time Management</s:a>
-				<ul>
-					<li><sj:a id="aCNew" href="%{urlCNew}" targets="formDiv" onclick="menuclicked()">New Case</sj:a></li>
-					<li><sj:a id="aCList" href="%{urlCList}" targets="formDiv" onclick="menuclicked()">Case List</sj:a>
-				</ul>
+			
 			</li>
 			
 			<li>
 				<s:a href="#">Synchronize</s:a>
-				<ul>
-					<li><sj:a id="aCNew" href="%{urlCNew}" targets="formDiv" onclick="menuclicked()">New Case</sj:a></li>
-					<li><sj:a id="aCList" href="%{urlCList}" targets="formDiv" onclick="menuclicked()">Case List</sj:a>
-				</ul>
+				
 			</li>
 			
 			<li>
 				<s:a href="#">Settings</s:a>
-				<ul>
-					<li><sj:a id="aCNew" href="%{urlCNew}" targets="formDiv" onclick="menuclicked()">New Case</sj:a></li>
-					<li><sj:a id="aCList" href="%{urlCList}" targets="formDiv" onclick="menuclicked()">Case List</sj:a>
-				</ul>
+				
 			</li>
 			<li><sj:a id="links" href="%{urlLinks}" targets="formDiv">Links</sj:a></li>
 		</ul>
@@ -175,8 +163,8 @@
 <!-- Home Page Footer ------------------------------------------------------------------------------ -->
 <!-- ----------------------------------------------------------------------------------------------- -->	
 	<footer id="statusBar">
-		<label>User's Name</label>
-		<button>logout</button>
+		<label>Michael Hall</label>
+		<button>Logout</button>
 	</footer>
 	
 	<script>

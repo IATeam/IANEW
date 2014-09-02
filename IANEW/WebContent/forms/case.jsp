@@ -87,7 +87,7 @@
 				<section class="six columns"><p></p></section>
 				<section class="four columns omega">
 					<input type="button" value="Create Case" class="two columns alpha"/>
-					<s:submit type="submit" cssClass="two columns omega" value="Save" />
+					<s:submit type="submit" cssClass="two columns omega" value="Save" onClick="return false;" />
 				</section>
 			</s:div>
 		</footer>
