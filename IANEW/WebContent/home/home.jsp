@@ -25,6 +25,7 @@
 <head>
 <s:head/>
 <sj:head/>
+<link rel="icon" type="image/x-icon" href="/IANEW/resources/images/favicon.ico">
 <script src="<s:url value='/js/jquery/jquery-ui.min.js' encode='false' includeParams='none'/>"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
