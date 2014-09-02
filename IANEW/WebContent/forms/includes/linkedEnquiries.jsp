@@ -87,10 +87,10 @@
 			showSlidingPanel();
 		}); */
 
-		$('#btnView').click(function(){
+		/* $('#btnView').click(function(){
 			var id = $("#hiddenid").val();
 			$('#rightPopUp').load("enquiry/getEnquiry.action?hiddenid=" + id +"&formTitle=Existing Enquiry" );
-			$('#rightPopUp').show("slow");
+			$('#rightPopUp').show("slow"); */
 			//alert(id);
 		});
 	});
