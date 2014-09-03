@@ -11,11 +11,11 @@
 ------------------------------------------------------------------------------------------------>
 <script>
 function expandAll() {
-	$(".toggled").show();
+	$(".startShown").show();
 	$(".divHideButton").attr("src","/IANEW/resources/images/minusButton.png");
 }
 function collapseAll() {
-	$(".toggled").hide();
+	$(".startShown").hide();
 	$(".divHideButton").attr("src","/IANEW/resources/images/plusButton.png");
 }
 </script>
