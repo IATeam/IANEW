@@ -94,7 +94,7 @@
 			$('#rightPopUp').load("enquiry/getEnquiry.action?hiddenid=" + id +"&formTitle=Existing Enquiry" );
 			$('#rightPopUp').show("slow"); */
 			//alert(id);
-		});
+	});
 
 	</script></div>
 </s:div></section>

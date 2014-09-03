@@ -17,10 +17,10 @@
 <s:head/>
 <sj:head/>
 <title>Case List</title>
-<link href="<s:url value='/styles/form.css' encode='false' includeParams='none'/>" rel="stylesheet" type="text/css"
-	      media="all"/>
-<link href="<s:url value='/styles/skeleton.css' encode='false' includeParams='none'/>" rel="stylesheet" type="text/css"
-	      media="all"/>
+<link href="<s:url value='/styles/ianew.form.css' encode='false' includeParams='none'/>" rel="stylesheet" type="text/css"
+		      media="all"/>
+	<link href="<s:url value='/styles/import/skeleton.css' encode='false' includeParams='none'/>" rel="stylesheet" type="text/css"
+		      media="all"/>
 
 </head>
 <body>
@@ -89,8 +89,8 @@
 						</div>
 					</div>
 				</s:iterator>
-			</div></div>
-			
+			</div>
+			</div>
 			<div class="clear"></div>
 			
 			
@@ -137,7 +137,7 @@
 		</s:form>
 		
 <!----- Hidden form to pass pagination to action class submitted by the prev and next buttons ------------------------------------------------------------------->
-		<div >
+		<div>
 			<s:form id="paginationForm" method="post" action="%{urlUpdate}" namespace="case">
 				<s:hidden id="page" name="page" />
 				<s:hidden id="numberOfRecords" name="numberOfRecords" />
