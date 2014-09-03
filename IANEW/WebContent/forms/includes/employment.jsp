@@ -11,6 +11,10 @@
 	==============================================	
 	Description: A jsp page that displays a list of enquiries
 ------------------------------------------------------------------------------------------------>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="US-ASCII"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
+
 <section>
 
 <h3 class="sixteen columns" style="float:none;">Employment</h3>

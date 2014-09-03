@@ -32,7 +32,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="US-ASCII"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -98,7 +98,7 @@
 
 	//if the enquiry is an existing enquiry 
 	if($("#formTitle").text() === "Existing Enquiry"){
-		alert("existing need to check if status is closed")
+		alert("existing need to check if status is closed");
 		$("#enquiryForm").find("input").attr("readonly", "true");
 		$("#enquiryForm").find('textarea').attr("readonly", "true");
 		$("#enquiryForm").find('select').attr("disabled", "disable");

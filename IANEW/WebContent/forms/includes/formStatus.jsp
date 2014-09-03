@@ -15,6 +15,10 @@
 	Description: A component of the contact that is to be displayed on both enquiry and case forms that 
 				displays the form status detail.
 ------------------------------------------------------------------------------------------------>
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="US-ASCII"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <script>
 function changeDangerColour(selectList) {
 		var selectedDanger = $(selectList).val();

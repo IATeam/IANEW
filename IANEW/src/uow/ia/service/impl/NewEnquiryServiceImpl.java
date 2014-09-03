@@ -3,6 +3,7 @@
  */
 package uow.ia.service.impl;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -566,7 +567,7 @@ public class NewEnquiryServiceImpl implements NewEnquiryService {
 	@Override
 	public List<Enquiries> getLinkedEnquiry(int id) {
 		Enquiries enquiries = enquiriesDao.get(Enquiries.class, id);
-		List<Enquiries> tmpEnquiries = null;
+		List<Enquiries> tmpEnquiries = new ArrayList<Enquiries>();
 		tmpEnquiries.add(enquiries.getParentEnquiry());
 		Iterator<Enquiries> iterator = enquiries.getEnquiriesList().iterator();
 		while (iterator.hasNext()) {

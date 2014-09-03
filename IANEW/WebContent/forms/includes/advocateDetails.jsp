@@ -14,6 +14,10 @@
 	Description: A component of the contact that is to be displayed on both enquiry and case forms that 
 				displays the personal detail.
 ------------------------------------------------------------------------------------------------>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="US-ASCII"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
+
 <script>
 function changeContact(selectedPerson) {
 	var selectedContact = $(selectedPerson).val();
@@ -36,7 +40,7 @@ function changeContact(selectedPerson) {
 	}
 	
     <s:iterator var="contact" value="advocateSelectList">
-    	var fullname = "<s:property value='#contact.lastname'/>" + ", " + "<s:property value='#contact.firstname'/>"
+    	var fullname = "<s:property value='#contact.lastname'/>" + ", " + "<s:property value='#contact.firstname'/>";
     	if(selectedContact == fullname)
     	{
     	    <s:iterator var="title" value="titleSelectList">
@@ -108,7 +112,7 @@ function changeContact(selectedPerson) {
 			
 			<div class="inputfield four columns omega ">
 				<s:label for="birthDateContact" value="Birth Date:" />
-				<div><input type="date" id="birthDateContact" name="contact.dob" readonly="true"></div>
+				<div><input type="date" id="birthDateContact" name="contact.dob" readonly="readonly"></div>
 			</div>
 		</div>
 		

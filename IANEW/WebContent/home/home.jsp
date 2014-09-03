@@ -20,7 +20,7 @@
     pageEncoding="US-ASCII"%>
 <%@ taglib prefix="sj" uri="/struts-jquery-tags" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <s:head/>
@@ -103,15 +103,12 @@
 			<li >
 			<li><sj:a id="report" href="%{urlReport}" targets="formDiv"  onclick="menuclicked()">Report</sj:a></li>
 		
-			</li>
 			<li><sj:a id="timeManagement" href="%{urlTimeManagement}" targets="formDiv"  onclick="menuclicked()">Time Management</sj:a></li>
 			
-			</li>
 			
 			<li>
 			<li><sj:a id="settings" href="%{urlSettings}" targets="formDiv"  onclick="menuclicked()">Settings</sj:a></li>
 				
-			</li>
 			<li><sj:a id="links" href="%{urlLinks}" targets="formDiv"  onclick="menuclicked()">Links</sj:a></li>
 		</ul>
 	</nav>
@@ -136,7 +133,7 @@
 		
 		<section id="secSuggestions">
 			<!-- dynamically loads suggestions based on the key pressed from input box -->
-			<article id="artSuggestionList" />
+			<article id="artSuggestionList" ></article>
 		</section>
 			
 		<section id="secLists">

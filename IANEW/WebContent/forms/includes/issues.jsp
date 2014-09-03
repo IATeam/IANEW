@@ -22,6 +22,10 @@
 	==============================================	
 	Description: A jsp page that displays a list of enquiries
 ------------------------------------------------------------------------------------------------>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="US-ASCII"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
+
 <section>
 <h3 class="sixteen columns" style="float:none;">Issues</h3>
 <input type="image" src="/IANEW/resources/images/plusButton.png" alt="Hide/Show" id="btnShowHide" value="ShowHide" onclick="divHide(this);return false;" class="divHideButton"/>
@@ -46,6 +50,8 @@
 				    <s:date name="completedDate" format="dd/MM/yyyy"/>
 			    </div>
 				    <div class="three columns"><s:select list="issueSelectList.{issueName}" value="issue" name="" headerKey="-1" headerValue="Status" /></div>
+							</s:if>
+				
 				</div>
 				<div class="row">
 					<div class="textarea fifteen columns omega">
@@ -53,11 +59,11 @@
 					<s:textarea id="" cssClass="oneLineTextArea" name=""/> 
 					</div>
 				</div>
-			</s:if>
 			<s:elseif test="%{#formType=='enquiry'}">
 				<div class="textarea eleven columns omega">
 					<s:label for="issuedescription" value="Issue Description:" />
 					<s:textarea id="" cssClass="oneLineTextArea" name="" /> 
+				</div>
 			</s:elseif>
 		</section>
 		</s:iterator>
@@ -83,6 +89,8 @@
 				    <s:date name="completedDate" format="dd/MM/yyyy"/>
 			    </div>
 				    <div class="three columns"><s:select list="statusSelectList.{statusName}" value="theStatus" name="" headerKey="-1" headerValue="Status" /></div>
+							</s:if>
+				
 				</div>
 				<div class="row">
 					<div class="textarea fifteen columns omega">
@@ -90,11 +98,11 @@
 					<s:textarea id="" cssClass="oneLineTextArea" name=""/> 
 					</div>
 				</div>
-			</s:if>
 			<s:elseif test="%{#formType=='enquiry'}">
 				<div class="textarea eleven columns omega">
 					<s:label for="issuedescription" value="Issue Description:" />
 					<s:textarea id="" cssClass="oneLineTextArea" name="" /> 
+					</div>
 			</s:elseif>
 		</section>
 	</article>

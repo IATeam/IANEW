@@ -28,6 +28,9 @@
 	==============================================	
 	Description: A jsp page that displays a list of enquiries
 ------------------------------------------------------------------------------------------------>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="US-ASCII"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 
 <!-- TODO LATER: add js function to click to select primary disability -->
 
@@ -104,6 +107,6 @@
 		
 	});
 	</script>
-	
+</div>	
 </s:div>
-</div></section>
+</section>

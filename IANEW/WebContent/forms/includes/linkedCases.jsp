@@ -19,7 +19,9 @@
 ------------------------------------------------------------------------------------------------>
 
 
-<%@ taglib prefix="sj" uri="/struts-jquery-tags" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="US-ASCII"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <head>
 
 </head>

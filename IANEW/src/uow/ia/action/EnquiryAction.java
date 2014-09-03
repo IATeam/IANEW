@@ -69,7 +69,7 @@ public class EnquiryAction extends BaseAction{
 	private List<CulturalBackgroundTypes> culturalBackgroundSelectList;	private String theCulturalBackground;
 	private List<AccommodationTypes> accommodationSelectList;			private String theAccommodation;
 	private List<DisabilityTypes> disabilitySelectList;					private String theDisability;
-	private List<Enquiries> enquiryTypeSelectList;						private String theEnquiryType;
+	//private List<Enquiries> enquiryTypeSelectList;						private String theEnquiryType;
 	private List<IssueTypes> issueSelectList;							private String theIssue;
 	private List<EmploymentTypes> employmentSelectList;					private String theEmployment;
 	private List<DangerTypes> dangerSelectList;							private String theDanger;
@@ -103,7 +103,7 @@ public class EnquiryAction extends BaseAction{
 	 * Employment
 	 */
 	
-	private String profession, workPhone, employmentDescription, employmentComment;
+	//private String profession, workPhone, employmentDescription, employmentComment;
 	
 	/*
 	 * Sumamry

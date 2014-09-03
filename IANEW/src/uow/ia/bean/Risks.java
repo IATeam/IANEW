@@ -153,7 +153,7 @@ public class Risks implements java.io.Serializable {
 	 * @param udpatedDateTime the udpatedDateTime to set
 	 */
 	public void setUpdatedDateTime(Date udpatedDateTime) {
-		this.updatedDateTime = updatedDateTime;
+		this.updatedDateTime = udpatedDateTime;
 	}
 
 }

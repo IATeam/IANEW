@@ -22,6 +22,10 @@
 	==============================================	
 	Description: A jsp page that displays a list of enquiries
 ------------------------------------------------------------------------------------------------>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="US-ASCII"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
+
 <section>
 <h3 class="fifteen columns" style="float:none;">Communications</h3>
 <input type="image" src="/IANEW/resources/images/plusButton.png" alt="Hide/Show" id="btnShowHide" value="ShowHide" onclick="divHide(this);return false;" class="divHideButton"/>
@@ -33,7 +37,7 @@
 			<section class="secIssue sixteen columns curveBorder">
 			<div class="row">
 			<div class="four columns"><s:select list="issueSelectList.{issueName}" name="" headerKey="-1" headerValue="Select an Issue" /></div>
-			<s:if test="%{#formType=='case'}">
+<s:if test="%{#formType=='case'}">
 				<div class="three columns">
 				<s:label for="createdDate" value="Created Date:" />
 				    <s:date name="createdDate" format="dd/MM/yyyy"/>
@@ -47,18 +51,22 @@
 				    <s:date name="completedDate" format="dd/MM/yyyy"/>
 			    </div>
 				    <div class="three columns"><s:select list="issueSelectList.{issueName}" value="issue" name="" headerKey="-1" headerValue="Status" /></div>
+								</s:if>
+				
 				</div>
+				
 				<div class="row">
 					<div class="textarea fifteen columns omega">
 					<s:label for="comments" value="Comments:" />
 					<s:textarea id="" cssClass="oneLineTextArea" name=""/> 
 					</div>
 				</div>
-			</s:if>
+
 			<s:elseif test="%{#formType=='enquiry'}">
 				<div class="textarea eleven columns omega">
 					<s:label for="issuedescription" value="Issue Description:" />
 					<s:textarea id="" cssClass="oneLineTextArea" name="" /> 
+				</div>
 			</s:elseif>
 		</section>
 		</s:iterator>

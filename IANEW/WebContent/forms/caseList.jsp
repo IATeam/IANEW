@@ -10,7 +10,7 @@
     pageEncoding="US-ASCII"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ taglib prefix="sj" uri="/struts-jquery-tags"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -89,7 +89,7 @@
 						</div>
 					</div>
 				</s:iterator>
-			</div>
+			</div></div>
 			
 			<div class="clear"></div>
 			
@@ -137,7 +137,7 @@
 		</s:form>
 		
 <!----- Hidden form to pass pagination to action class submitted by the prev and next buttons ------------------------------------------------------------------->
-		<div ">
+		<div >
 			<s:form id="paginationForm" method="post" action="%{urlUpdate}" namespace="case">
 				<s:hidden id="page" name="page" />
 				<s:hidden id="numberOfRecords" name="numberOfRecords" />
@@ -147,7 +147,7 @@
 	<script>
 		function nextPage(){
 			var currentPageNumber = parseInt($("#pageTextField").val());
-			var totalNumberOfPages = parseInt( $("#totalNumberOfPagesDiv").text())
+			var totalNumberOfPages = parseInt( $("#totalNumberOfPagesDiv").text());
 			
 			if(currentPageNumber < totalNumberOfPages){ 
 				var nextPageNumber = currentPageNumber + 1;
@@ -171,7 +171,7 @@
 			$(selectedDiv).addClass("listSelected");
 
 			$(selectedDiv).children("div").last().slideToggle();
-			$("#caseID").val($(selectedDiv).find('.caseID').text())
+			$("#caseID").val($(selectedDiv).find('.caseID').text());
 			//alert($(selectedDiv).find('.caseID').text())
 		}
 		function deselectAll(){
@@ -181,7 +181,7 @@
 			}
 		}
 		$('#new').click(function(){
-			alert($('#caseID').val())
+			alert($('#caseID').val());
 		});
 		
 		$(function(){
