@@ -77,7 +77,7 @@ public class NewEnquiryServiceImpl implements NewEnquiryService {
 	
 	@Override
 	public List<DangerTypes> findDangerTypes() {
-		return dangerTypesDao.find(" from DangerTypes");
+		return dangerTypesDao.find(" from DangerTypes order by display_order");
 	}
 	
 	/*
@@ -87,7 +87,7 @@ public class NewEnquiryServiceImpl implements NewEnquiryService {
 
 	@Override
 	public List<StatusTypes> findStatusTypes() {
-		return statusTypesDao.find(" from StatusTypes");
+		return statusTypesDao.find(" from StatusTypes order by display_order");
 	}
 	
 	/*
@@ -570,14 +570,19 @@ public class NewEnquiryServiceImpl implements NewEnquiryService {
 		List<Enquiries> tmpEnquiries = new ArrayList<Enquiries>();
 		if(enquiries.getParentEnquiry()!=null) {
 			tmpEnquiries.add(enquiries.getParentEnquiry());
-			if(enquiries.getParentEnquiry().getEnquiriesList()!=null) {
-				//List<Enquiries> childrenEnquiries = enquiries.getEnquiriesList();
+			// if someone has a parent that means the parent always has at least one child
+			//if(enquiries.getParentEnquiry().getEnquiriesList()!=null) {
 				Iterator<Enquiries> iterator = enquiries.getParentEnquiry().getEnquiriesList().iterator();
 				while (iterator.hasNext()) {
 					tmpEnquiries.add(iterator.next());
 				}
+			//}
+		} else if(enquiries.getEnquiriesList()!=null) { //selected enquire is parent and has some children
+			Iterator<Enquiries> iterator = enquiries.getParentEnquiry().getEnquiriesList().iterator();
+			while (iterator.hasNext()) {
+				tmpEnquiries.add(iterator.next());
 			}
-		} else {
+		} else { // the selected enquire is the parent and no children
 			tmpEnquiries.add(enquiries);
 		}
 //		System.out.println(tmpEnquiries.size());
@@ -596,14 +601,10 @@ public class NewEnquiryServiceImpl implements NewEnquiryService {
 
 	@Override
 	public boolean saveOrUpdateEnquiry(Enquiries e, Contacts c) {
-		//e.setContact(c);
-		//c.getEnquiriesList().add(e);
-		//System.out.println(e.getEnquiryType().getId());
+		e.setContact(c);
+		c.getEnquiriesList().add(e);
 		try {
-			c.getEnquiriesList().add(e);
-			contactsDao.update(c);
-			e.setContact(c);
-			enquiriesDao.update(e);		
+			contactsDao.saveOrUpdate(c);
 			return true;
 		} catch (Exception e2) {
 			System.out.println(e2);

@@ -1,17 +1,30 @@
 package uow.ia.action;
 
-import com.opensymphony.xwork2.Action;
+import java.util.Date;
+import java.util.Map;
 
-public class LoginAction implements Action {
+import uow.ia.bean.Users;
+
+import com.opensymphony.xwork2.Action;
+import com.opensymphony.xwork2.ActionContext;
+
+public class LoginAction extends BaseAction {
 
 	private String username;
 	private String password;
 		
 	public String execute(){
-		if(getUsername().equals("username") && getPassword().equals("password")){
+		
+		//if(getUsername().equals("username") && getPassword().equals("password")){
+		Users user = adminService.login(username, password);
+		if(user!=null) {
+			Map<String, Object> session = ActionContext.getContext().getSession();
+			session.put("user",user);
+            session.put("context", new Date());
 			return SUCCESS;
+		} else {
+			return ERROR;
 		}
-		return LOGIN;
 	}
 
 	public String getUsername() {

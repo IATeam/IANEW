@@ -4,10 +4,12 @@ package uow.ia.action;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import antlr.Lookahead;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ModelDriven;
 import com.sun.org.apache.bcel.internal.generic.InstructionConstants.Clinit;
 import com.sun.xml.rpc.processor.modeler.j2ee.xml.javaIdentifierType;
@@ -28,6 +30,7 @@ import uow.ia.bean.GenderTypes;
 import uow.ia.bean.IssueTypes;
 import uow.ia.bean.StatusTypes;
 import uow.ia.bean.TitleTypes;
+import uow.ia.bean.Users;
 import uow.ia.util.DateUtil;
 
 /** ---------------------------------------------------------------------------------------------
@@ -138,6 +141,12 @@ public class EnquiryAction extends BaseAction{
 	 * @return String
 	 */
 	public String newEnquiry(){
+		/*
+		 * this is line for how to get session. the user part below can be deleted, only for test
+		 */
+		Map<String, Object> session = ActionContext.getContext().getSession();
+		//Users u = (Users) session.get("user");
+		//System.out.println(u.getUsername());
 		activateLists();
 		
 		iamodel = new Enquiries();
