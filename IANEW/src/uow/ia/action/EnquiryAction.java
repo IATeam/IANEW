@@ -26,6 +26,7 @@ import uow.ia.bean.GenderTypes;
 import uow.ia.bean.IssueTypes;
 import uow.ia.bean.StatusTypes;
 import uow.ia.bean.TitleTypes;
+import uow.ia.bean.Users;
 
 /** ---------------------------------------------------------------------------------------------
  * @author: Quang Nhan
@@ -149,6 +150,9 @@ public class EnquiryAction extends BaseAction{
 	 * @return String
 	 */
 	public String newEnquiry(){
+		Map<String, Object> session = ActionContext.getContext().getSession();
+		Users u = (Users) session.get("user");
+		System.out.println(u.getUsername());
 		activateLists();
 		setCreatedDate(new Date());
 		setUpdatedDate(new Date());
