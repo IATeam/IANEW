@@ -10,12 +10,15 @@
 		16/08/2014 -	Quang Nhan
 						Changed s:div to s:s:div and related class to cssClass
 						reorder syntax to be consistent throughout the jsps
+		07/08/2014 -	Quang Nhan
+						Added autocomplete feature
 	==============================================	
 	Description: A component of the contact that is to be displayed on both enquiry and case forms that 
 				displays the personal detail.
 ------------------------------------------------------------------------------------------------>
+<%@ taglib prefix="sj" uri="/struts-jquery-tags" %>
 
-<h3 class="sixteen columns"  style="float:none;">Personal Details</h3>
+<input type="button" id="contactSearch" /><h3 class="sixteen columns"  style="float:none;">Personal Details</h3>
 <div class="fieldsetborder">
 	<fieldset>
 		<s:hidden name="ccontact.id" />
@@ -24,7 +27,7 @@
 	
 			<div class='inputfield four columns'>
 				<s:label for="firstName" value="First Name:" />
-				<div><s:textfield id="firstName" name="ccontact.firstname" /></div>
+				<div><sj:autocompleter placeholder="enter first name" id="firstName" name="ccontact.firstname" list="%{firstNameAuto}" /></div>
 			</div>
 			<div class="inputfield four columns">
 				<s:label for="otherName" value="Other Name:" />
@@ -72,4 +75,7 @@
 			</div>
 		</div>
 	</fieldset>
+	<script>
+		
+	</script>
 </div>

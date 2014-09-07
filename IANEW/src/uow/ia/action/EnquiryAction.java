@@ -2,6 +2,7 @@ package uow.ia.action;
 
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -82,6 +83,16 @@ public class EnquiryAction extends BaseAction{
 	private List<StatusTypes> statusSelectList;							
 	
 
+	private List<String> firstNameAuto;
+	
+	public List<String> getFirstNameAuto() {
+		return firstNameAuto;
+	}
+
+	public void setFirstNameAuto(List<String> firstNameAuto) {
+		this.firstNameAuto = firstNameAuto;
+	}
+
 	private List<Enquiries> linkedEnquiriesList;
 	
 	//vairiable used to get enquiry id from enquiry list;
@@ -138,6 +149,7 @@ public class EnquiryAction extends BaseAction{
 	 * @return String
 	 */
 	public String newEnquiry(){
+		activateAutocomplete();
 		activateLists();
 		
 		iamodel = new Enquiries();
@@ -168,6 +180,7 @@ public class EnquiryAction extends BaseAction{
 	 * @return String
 	 */
 	public String getExistingEnquiry(){
+		activateAutocomplete();
 		activateLists();
 		//System.out.println(getHiddenid());
 
@@ -343,6 +356,15 @@ public class EnquiryAction extends BaseAction{
 	 * ----------------------------------------------------------------------------------------------------------
 	 * ----------------------------------------------------------------------------------------------------------*/
 
+	private void activateAutocomplete(){
+		firstNameAuto = new ArrayList<String>();
+		firstNameAuto.add("Tom");
+		firstNameAuto.add("Tori");
+		firstNameAuto.add("Terry");
+		firstNameAuto.add("Cary");
+		firstNameAuto.add("Cathy");
+	}
+	
 	/**
 	 * populate the Select List variables
 	 */
