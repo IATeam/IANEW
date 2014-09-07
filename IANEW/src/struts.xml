@@ -27,21 +27,35 @@
     	</action>
     	
     	<action name="saveUpdateEnquiry" class="uow.ia.action.EnquiryAction" method="saveUpdateEnquiry">
-    		<result name="success">/forms/enquiryList.jsp</result>
+    		<result name="success">/forms/enquiry.jsp</result>
+    		<result name="error">/forms/enquiry.jsp</result>
     		<result name="input">/forms/enquiry.jsp</result>
     	</action>
     	<action name="updateAddressList" class="uow.ia.action.EnquiryAction" method="updateAddressList">
     		<result name="success">/forms/includes/address.jsp</result>
     		<result name="input">/forms/enquiry.jsp</result>
     	</action>
+    	<action name="updateLinkedEnquiries" class="uow.ia.action.EnquiryAction" method="updateLinkedEnquiries">
+    		<result name="success">/forms/includes/linkedEnquiries.jsp</result>
+    	</action>
     </package>
     
     <!-- Enquiry List Forms-->
     <package name="enquiryList" namespace="/enquiryList" extends="struts-default">
+    	<action name="getEnquiryList" class="uow.ia.action.EnquiryListAction" method="getEnquiryList">
+    		<result name="success">/forms/enquiryList.jsp</result>
+    	</action>
     	<action name="updateEnquiryList" class="uow.ia.action.EnquiryListAction" method="updateEnquiryList">
     		<result name="success">/forms/enquiryList.jsp</result>
     	</action>
-    	<action name="getEnquiryList" class="uow.ia.action.EnquiryListAction" method="getEnquiryList">
+    	
+    	<action name="getLinkedEnquiriesList" class="uow.ia.action.EnquiryListAction" method="getLinkedEnquiriesList">
+    		<result name="success">/forms/includes/linkedEnquiriesList.jsp</result>
+    	</action>
+    	<action name="updateLinkedEnquiriesList" class="uow.ia.action.EnquiryListAction" method="updateLinkedEnquiriesList">
+    		<result name="success">/forms/includes/linkedEnquiriesList.jsp</result>
+    	</action>
+    	<action name="linkEnquiry" class="uow.ia.action.EnquiryListAction" method="updateEnquiryList">
     		<result name="success">/forms/enquiryList.jsp</result>
     	</action>
     </package>

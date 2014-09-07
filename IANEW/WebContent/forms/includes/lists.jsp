@@ -1,5 +1,5 @@
 <s:div cssClass="list">
-	<s:iterator value="iamodelList">
+	<s:iterator value="model">
 		<s:div cssClass="curveBorder sixteen columns iteratorlist" onclick="bandSelected(this)">
 			<s:div cssClass="row">
 				<s:div cssClass="textarea two columns">

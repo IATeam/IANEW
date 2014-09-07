@@ -3,6 +3,8 @@
  * Created Date: 29/08/2014
  * ==============================================
  * Updates:
+ * 02/08/2014 -		Quang Nhan
+ * 					Provide methods for linked enquiries
  * ==============================================
  * 	Description: An action class to linking the service from spring to the enquirylist jsp pages
  *
@@ -16,17 +18,42 @@ import uow.ia.bean.Enquiries;
 
 import com.opensymphony.xwork2.ModelDriven;
 
-public class EnquiryListAction extends BaseAction{
+public class EnquiryListAction extends BaseAction implements ModelDriven<List<Enquiries>>{
 
 
 	List<Enquiries> iamodelList;
-	
-	
+	private String formTitle;
+
 	/* For pagination */
 	int page;
 	int numberOfRecords;
 	long totalNumberOfRecords;
 	long totalNumberOfPages;
+	
+	public String getLinkedEnquiriesList(){
+		setPage(1);
+		setNumberOfRecords(10);
+		
+		setIamodelList(services.findEnquiriesByPage(page,numberOfRecords));
+		totalNumberOfRecords = services.countEnquiries();
+		int mod = (int) totalNumberOfRecords % numberOfRecords;
+		if(mod != 0) mod = 1;
+		totalNumberOfPages = totalNumberOfRecords/numberOfRecords + mod;
+		return SUCCESS;
+	}
+	
+	public String updateLinkedEnquiriesList(){
+		System.out.println(getPage());
+		
+		setIamodelList(services.findEnquiriesByPage(getPage(),getNumberOfRecords()));
+		totalNumberOfRecords = services.countEnquiries();
+		int mod = (int) totalNumberOfRecords % numberOfRecords;
+		if(mod != 0) mod = 1;
+		totalNumberOfPages = totalNumberOfRecords/numberOfRecords + mod;
+		return SUCCESS;
+	}
+	
+	
 	
 	public String getEnquiryList(){
 		setPage(1);
@@ -40,7 +67,6 @@ public class EnquiryListAction extends BaseAction{
 		return SUCCESS;
 	}
 	
-	
 	public String updateEnquiryList(){
 		System.out.println(getPage());
 		
@@ -50,6 +76,16 @@ public class EnquiryListAction extends BaseAction{
 		if(mod != 0) mod = 1;
 		totalNumberOfPages = totalNumberOfRecords/numberOfRecords + mod;
 		return SUCCESS;
+	}
+
+
+	
+	public String getFormTitle() {
+		return formTitle;
+	}
+
+	public void setFormTitle(String formTitle) {
+		this.formTitle = formTitle;
 	}
 	
 	public List<Enquiries> getIamodelList() {
@@ -139,6 +175,13 @@ public class EnquiryListAction extends BaseAction{
 	 */
 	public void setTotalNumberOfPages(int totalNumberOfPages) {
 		this.totalNumberOfPages = totalNumberOfPages;
+	}
+
+
+	@Override
+	public List<Enquiries> getModel() {
+		// TODO Auto-generated method stub
+		return iamodelList;
 	}
 	
 }

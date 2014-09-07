@@ -28,15 +28,25 @@
 				<s:hidden name="ccontact.disabilitiesList[%{#stat.index}].createdDateTime"/>
 				<s:hidden name="ccontact.disabilitiesList[%{#stat.index}].updatedUserId"/>
 				<s:hidden name="ccontact.disabilitiesList[%{#stat.index}].updatedDateTime"/>
-				
+				<s:hidden name="ccontact.disabilitiesList[%{#stat.index}].primaryFlag"/>
 				<s:div cssClass="four columns alpha">
 					<s:div cssClass="disabilityTypeSelect row four columns">
 						<s:select list="disabilitySelectList.{disabilityName}" name="ccontact.disabilitiesList[%{#stat.index}].disabilityType.disabilityName" headerKey="-1" headerValue="Select Disability" />
 					</s:div>
 					<s:div cssClass="row four columns" style="text-align: center">
+						<s:textfield type="text" name="ccontact.disabilitiesList[%{#stat.index}].primaryFlag" />
+						<!-- if primary flag is Y then mark check -->
+						<!-- <s:if test='%{ccontact.disabilitiesList[%{#stat.index}].primaryFlag == Y}'>
+							<h1>Primary</h1>
+							<input type="radio" name="primary" checked="checked"/>
+						</s:if>
+						<s:else>
+							<input type="radio" name="primary"/>
+						</s:else> -->
 						
-						<input type="radio" name="primary" />
-						<s:label value="Primary Disability" />						
+						<input type="radio" name="primary"/>
+						<s:label value="Primary Disability"/>	
+						
 					</s:div>
 				</s:div>
 				<s:div cssClass="textarea eleven columns">
@@ -48,15 +58,14 @@
 	</article>
 	
 	<!-- Hidden disability to be added to iterator if needs to be added -->
-	<s:textfield id="addressSize" name="ccontact.disabilitiesList.size" value="%{ccontact.disabilitiesList.size}"/>
+
 	
-	<article id="artDisability" style='visiblity: hidden; display: none;'>
+	<s:textfield id="disabilitySize" name="ccontact.disabilitiesList.size" value="%{ccontact.disabilitiesList.size}"/>
+	
+	<s:if test="%{ccontact.disabilitiesList.size > 0}"><article id="artDisability" class="hidden"></s:if>
+	<s:else><article id="artDisability""></s:else>
 		<section class="sixteen columns curveBorder row">
-				<s:hidden name="ccontact.disabilitiesList[%{ccontact.disabilitiesList.size].id"/>
-				<s:hidden name="ccontact.disabilitiesList[%{ccontact.disabilitiesList.size].createdUserId"/>
-				<s:hidden name="ccontact.disabilitiesList[%{ccontact.disabilitiesList.size}].createdDateTime"/>
-				<s:hidden name="ccontact.disabilitiesList[%{ccontact.disabilitiesList.size}].updatedUserId"/>
-				<s:hidden name="ccontact.disabilitiesList[%{ccontact.disabilitiesList.size}].updatedDateTime"/>
+				<s:hidden name="ccontact.disabilitiesList[%{ccontact.disabilitiesList.size}].id"/>
 				
 				<s:div cssClass="four columns alpha">
 					<s:div cssClass="disabilityTypeSelect row four columns">
@@ -70,7 +79,7 @@
 				</s:div>
 				<s:div cssClass="textarea eleven columns">
 					<s:label for="disabilityDescription" value="Comment:" /> 
-					<s:textarea cssClass="disabilityDescription" cssClass="oneLineTextArea" name="ccontact.disabilitiesList[%{ccontact.disabilitiesList.size}].comments"></s:textarea> 
+					<s:textarea cssClass="disabilityDescription" cssClass="oneLineTextArea" name="ccontact.disabilitiesList[%{ccontact.disabilitiesList.size}].comments" /> 
 				</s:div>
 			</section>
 	</article>
@@ -78,17 +87,11 @@
 	<div class="row">
 		<input type="button" id="btnNewDisability" value ="New Disability Type" class="two columns" />
 		<div class="twelve columns alpha"><p></p></div>
-		<input type="button" id="btnAddDisability" value="Add Disability" class="two columns" onclick="addDisability(this, )"/>
+		<input type="button" id="btnAddDisability" value="Add Disability" class="two columns" onclick="addNewRecord('artDisability', 'disabilitySize', 'itDisability' )"/>
 	</div>
 	
 	<script>
 
-	function addAnother(ele, size){
-		if(!$("#artDisability").hasClass("hidden")){
-			$("#artDisability section").clone
-		}
-	
-	}
 
 	
 	function primaryUpdate(){ 
@@ -99,16 +102,11 @@
 	};
 	
 	$(function(){
-		$("#btnAddDisability").click(function(){ 
-			$("#artDisability section").clone().appendTo("#itDisability");
-		});
-		
 		$("#btnNewDisability").click(function(){
 			$("#leftPopUp").load("/IANEW/admin/getDisabilityTypeForm", function(){
 				$("#leftPopUp").show("slow");
 			});
 		});
-		
 	});
 	</script>
 	

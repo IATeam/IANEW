@@ -18,7 +18,7 @@
 <h3 class="sixteen columns"  style="float:none;">Personal Details</h3>
 <div class="fieldsetborder">
 	<fieldset>
-	
+		<s:hidden name="ccontact.id" />
 		<div class="row">
 			<div class="four columns"><s:select list="titleSelectList.{name}" name="ccontact.titleType.name" headerKey="-1" headerValue="Select Title" /></div>
 	

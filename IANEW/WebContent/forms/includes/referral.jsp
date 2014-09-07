@@ -28,17 +28,17 @@
 		<s:div cssClass="row">
 			<s:div cssClass="inputfield six columns">
 				<s:label for="inquisitor" value="Inquisitor:" />
-				<s:div><s:textfield id="inquisitor" name="model.inquisitor"></s:textfield></s:div>
+				<s:div><s:textfield id="inquisitor" name="iamodel.inquisitor"></s:textfield></s:div>
 			</s:div>
 			
 			<s:div cssClass="inputfield five columns">
 				<s:label for="referredBy" value="Referred By:" />
-				<s:div><s:textfield id="referredBy" name="model.referralBy"></s:textfield></s:div>
+				<s:div><s:textfield id="referredBy" name="iamodel.referralBy"></s:textfield></s:div>
 			</s:div>
 			
 			<s:div cssClass="inputfield five columns">
 				<s:label for="referredTo" value="Referred To:" />
-				<s:div><s:textfield id="referredTo" name="model.referralTo"></s:textfield></s:div>
+				<s:div><s:textfield id="referredTo" name="iamodel.referralTo"></s:textfield></s:div>
 			</s:div>
 		</s:div>
 	</fieldset>

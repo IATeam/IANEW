@@ -3,6 +3,7 @@
  */
 package uow.ia.service.impl;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -566,12 +567,25 @@ public class NewEnquiryServiceImpl implements NewEnquiryService {
 	@Override
 	public List<Enquiries> getLinkedEnquiry(int id) {
 		Enquiries enquiries = enquiriesDao.get(Enquiries.class, id);
-		List<Enquiries> tmpEnquiries = null;
-		tmpEnquiries.add(enquiries.getParentEnquiry());
-		Iterator<Enquiries> iterator = enquiries.getEnquiriesList().iterator();
-		while (iterator.hasNext()) {
-			tmpEnquiries.add(iterator.next());
+		List<Enquiries> tmpEnquiries = new ArrayList<Enquiries>();
+		if(enquiries.getParentEnquiry()!=null) {
+			tmpEnquiries.add(enquiries.getParentEnquiry());
+			if(enquiries.getParentEnquiry().getEnquiriesList()!=null) {
+				//List<Enquiries> childrenEnquiries = enquiries.getEnquiriesList();
+				Iterator<Enquiries> iterator = enquiries.getParentEnquiry().getEnquiriesList().iterator();
+				while (iterator.hasNext()) {
+					tmpEnquiries.add(iterator.next());
+				}
+			}
+		} else {
+			tmpEnquiries.add(enquiries);
 		}
+//		System.out.println(tmpEnquiries.size());
+//		for (Enquiries enquiries2 : tmpEnquiries) {
+//			System.out.println("enquiries are:");
+//			System.out.println(enquiries2.getId());
+//		}
+		
 		return tmpEnquiries;
 	}
 	
@@ -582,13 +596,17 @@ public class NewEnquiryServiceImpl implements NewEnquiryService {
 
 	@Override
 	public boolean saveOrUpdateEnquiry(Enquiries e, Contacts c) {
-		e.setContact(c);
-		c.getEnquiriesList().add(e);
+		//e.setContact(c);
+		//c.getEnquiriesList().add(e);
+		//System.out.println(e.getEnquiryType().getId());
 		try {
-			contactsDao.saveOrUpdate(c);
+			c.getEnquiriesList().add(e);
+			contactsDao.update(c);
+			e.setContact(c);
+			enquiriesDao.update(e);		
 			return true;
 		} catch (Exception e2) {
-			System.out.println(e);
+			System.out.println(e2);
 			return false;
 		}
 	}

@@ -75,8 +75,6 @@
 		<s:textfield id="addressSize" name="ccontact.addressesList.size" value="%{ccontact.addressesList.size}"/>
 		<s:hidden id="createdUserId" name="" />
 		<s:hidden id="updatedUserId" name=""/>
-		<s:hidden id="createdDateTime" name =""/>
-		<s:hidden id="createdUpdateTime" name=""/>
 			
 		<!-- if contact has existing address display the address else display input field for address -->	
 		<s:if test="%{ccontact.addressesList.size > 0}"><article id="artAddress" class="hidden"></s:if>
@@ -117,47 +115,10 @@
 		
 		<div class="row">
 			<div class="fourteen columns alpha"><p></p></div>
-			<input type="button" id="btnAddAddress" value="Add Address" class="two columns" onclick="return addAddress()" />
+			<input type="button" id="btnAddAddress" value="Add Address" class="two columns" onclick="addNewRecord('artAddress', 'addressSize', 'itAddress')" />
 		</div>
+		
 	</fieldset>
 	<s:hidden id="address" name="address.street" />
-	<script>
-	
-		function addAddress(){ 
-			
-			//if artAddress is not hidden then add to iterator
-			if(!$("#artAddress").hasClass("hidden")){
-				//clone address and put in iterator
-				$("#artAddress section").clone().appendTo("#itAddress");
-				
-				updateIndex($("#artAddress"),$("#addressSize"));
-				//set all hidden fields
-				
-			}
-			else{
-				$("#artAddress").removeClass("hidden");
-			}
-			
-		}
-
-		function updateIndex(articleEle, sizeEle ){
-			var ele = articleEle.find("[name]");
-			var sizeInt = parseInt(sizeEle.val());
-			var newIndex;
-			var prependStr = "ccontact.addressesList[" +  newIndex   +  "].";
-
-			sizeEle.val(sizeInt + 1);
-
-			newIndex = "[" + sizeEle.val() + "]";
-			
-			//replaces the old index with the new one and clear the content
-			$(ele).each(function(){
-				var oldIndex = $(this).attr('name').match(/\[.\]/);
-				var newName = $(this).attr('name').replace(oldIndex, newIndex);
-				$(this).attr('name', newName);
-				$(this).val(null);
-			});
-		}
-	</script>
 	
 </div>

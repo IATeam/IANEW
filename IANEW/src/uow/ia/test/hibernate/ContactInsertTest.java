@@ -112,6 +112,7 @@ public class ContactInsertTest {
 	  		address.setSuburb("Wollongong");
 	  		
 	  		newContact.getAddressesList().add(address);
+	  		newContact.getAddressesList().add(new Addresses());
 	  		
 	  		session.saveOrUpdate(newContact);
 	  		tx.commit();

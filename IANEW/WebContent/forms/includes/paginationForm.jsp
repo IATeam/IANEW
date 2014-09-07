@@ -13,4 +13,5 @@
 <s:form id="paginationForm" method="post" action="%{urlUpdate}" >
 	<s:hidden id="page" name="page" />
 	<s:hidden id="numberOfRecords" name="numberOfRecords" />
+	<s:hidden name="formTitle"/>
 </s:form>

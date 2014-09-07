@@ -9,6 +9,7 @@ import java.util.Set;
 import antlr.Lookahead;
 
 import com.opensymphony.xwork2.ModelDriven;
+import com.sun.org.apache.bcel.internal.generic.InstructionConstants.Clinit;
 import com.sun.xml.rpc.processor.modeler.j2ee.xml.javaIdentifierType;
 
 import uow.ia.bean.AccommodationTypes;
@@ -47,6 +48,8 @@ import uow.ia.util.DateUtil;
  * 					Save enquiry implemented.Get contact by firstname and last name in new enquiry
  * 29/08/2014 -		Quang Nhan
  * 					Moved enquiry list to its own action class EnquiryListAction
+ * 02/08/2014 -		Quang Nhan
+ * 					Modified JSPs such that the name is directly associated with the bean class
  * ==============================================
  * 	Description: An action class to linking the service from spring to the enquiry jsp pages
  *
@@ -54,7 +57,7 @@ import uow.ia.util.DateUtil;
 
 
 
-public class EnquiryAction extends BaseAction implements ModelDriven<Enquiries>{
+public class EnquiryAction extends BaseAction{
 	
 	/* 
 	 * form title (can either be new enquiry/exisiting enquiry/enquiry list)
@@ -76,38 +79,10 @@ public class EnquiryAction extends BaseAction implements ModelDriven<Enquiries>{
 	private List<IssueTypes> issueSelectList;							
 	private List<EmploymentTypes> employmentSelectList;					
 	private List<DangerTypes> dangerSelectList;							
-	//Status_Type or criteria control value table 
 	private List<StatusTypes> statusSelectList;							
 	
 
-	/*
-	 * Sets variables for 1 to many relationship tables
-	 */
-	private Set<EnquiryIssues> issueSet;
-	private Set<Enquiries> linkedEnquiriesSet;
-	private Set<Addresses> addressSet;
-	private Set<ClientDisabilities> clientDisabilitiesSet;
-	private Set<ContactEmployments> contactEmploymentsSet;
-
-	public Set<ContactEmployments> getContactEmploymentsSet() {
-		return contactEmploymentsSet;
-	}
-
-	public void setContactEmploymentsSet(
-			Set<ContactEmployments> contactEmploymentsSet) {
-		this.contactEmploymentsSet = contactEmploymentsSet;
-	}	
-	
-	
-	/*
-	 * Sumamry
-	 */
-	private String description;
-	
-	
-	
-	
-	
+	private List<Enquiries> linkedEnquiriesList;
 	
 	//vairiable used to get enquiry id from enquiry list;
 	int hiddenid;
@@ -198,14 +173,17 @@ public class EnquiryAction extends BaseAction implements ModelDriven<Enquiries>{
 
 		setIamodel(services.getEnquiry(getHiddenid()));
 		setCcontact(getIamodel().getContact());
-		System.out.println(getCcontact().getAddressesList().size());
+		System.out.println(getIamodel().getEnquiryIssuesList().size());
 		
 		Date date = new Date(ccontact.getDob().getTime());
 		//dob = DateUtil.yyyymmddStr(date);
 		
 		setDob(getCcontact().getDob().toString());
 		
-		
+		linkedEnquiriesList = services.getLinkedEnquiry(getHiddenid());
+		for(Enquiries le: linkedEnquiriesList){
+			System.out.println("id " + le.getId());
+		}
 		
 		System.out.println("hbm date = " + ccontact.getDob());
 		//LATER
@@ -225,21 +203,11 @@ public class EnquiryAction extends BaseAction implements ModelDriven<Enquiries>{
 	public void setDob(String dob) {
 		this.dob = dob;
 	}
-
-	public String updateAddressList(){ System.out.println("inside address List");
-		
-		System.out.println("street: " + getAddress().getStreet());
-		System.out.println("suburb: " + getAddress().getSuburb());
-		System.out.println("state: " + getAddress().getState());
-		System.out.println("country: " + getAddress().getCountry());
-		System.out.println("postcode: " + getAddress().getPostcode());
-		System.out.println("homephone: " + getAddress().getHomephone());
-		//getModel().getContact().getAddressesSet().add(address);
-		//setAddress(new Addresses()); 
-		//iamodel.getContact().getAddressesList().add(getAddress());
-		
-		
-		setAddress(new Addresses());
+	
+	public String updateLinkedEnquiries(){
+		System.out.println("hidden id is " + getHiddenid());
+		linkedEnquiriesList = services.getLinkedEnquiry(getHiddenid());
+		System.out.println(getLinkedEnquiriesList().size());
 		
 		
 		return SUCCESS;
@@ -256,30 +224,38 @@ public class EnquiryAction extends BaseAction implements ModelDriven<Enquiries>{
 	 * @throws ParseException 
 	 */
 	public String saveUpdateEnquiry() throws ParseException{ 
-
-		/*
-		 * Address component
-		 */
-		List<Addresses> aSet = getCcontact().getAddressesList();
-		System.out.println("firstname " + getCcontact().getFirstname());
+		
+		List<Addresses> aList = getCcontact().getAddressesList();
+		List<EnquiryIssues> iList = getIamodel().getEnquiryIssuesList();
+		List<ClientDisabilities> dList = getCcontact().getDisabilitiesList();
+		List<ContactEmployments> eList = getCcontact().getEmploymentsList();
+		
 		System.out.println("addressSet size " + getCcontact().getAddressesList().size());
 		
 		//today's date in sql format
 		java.sql.Date sqlDate = new java.sql.Date(new Date().getTime());
 		
-		/*******************
-		 * KIM HEERE
+//		/*******************
+//		 * KIM HEERE
+//		 */
+//		getCcontact().setDob(new java.sql.Date(DateUtil.yyyymmddDate(getDob()).getTime()));
+//		System.out.println(getCcontact().getDob());
+//		/***************************/
+		
+        try {
+		java.util.Date utilDate = DateUtil.yyyymmddDate(getDob());
+		
+		if (utilDate != null) {
+			    getCcontact().setDob(new java.sql.Date(utilDate.getTime()));
+			}
+		} catch (Exception e) {
+			System.out.println("dob error" + e);
+		}
+        /*
+		 * Address component
 		 */
-		getCcontact().setDob(new java.sql.Date(DateUtil.yyyymmddDate(getDob()).getTime()));
-		System.out.println(getCcontact().getDob());
-		/***************************/
-		for(Addresses a: aSet){
-			System.out.println("createdDateTime " + a.getCreatedDateTime());
-			System.out.println("Street " + a.getStreet());
-			System.out.println("Postcode: " + a.getPostcode());
+		for(Addresses a: aList){
 			if(a.getId() == null){
-				a.setCreatedDateTime(sqlDate);
-				a.setUpdatedDateTime(sqlDate);
 				//TODO: set created user and updated user to session user
 				a.setCreatedUserId(1);
 				a.setUpdatedUserId(1);
@@ -287,77 +263,72 @@ public class EnquiryAction extends BaseAction implements ModelDriven<Enquiries>{
 		}
 		
 		
-		
 		/*
 		 * Disability Component
 		 */
+		//TODO: check primary flag and mark as Y
+		for(ClientDisabilities d: dList){
+			System.out.println();
+			if(d.getId() == null){
+				
+				//TODO: set created user and updated user to session user
+				d.setCreatedUserId(1);
+				d.setUpdatedUserId(1);
+			}
+		}
 		
 		/*
 		 * Issue Component
 		 */
+		for(EnquiryIssues i: iList){
+			System.out.println();
+			if(i.getId() == null){
+				
+				//TODO: set created user and updated user to session user
+				i.setCreatedUserId(1);
+				i.setUpdatedUserId(1);
+			}
+		}
+		
+		/*
+		 * Employment Component 
+		 */
+		for(ContactEmployments e: eList){
+			System.out.println();
+			if(e.getId() == null){
+				
+				//TODO: set created user and updated user to session user
+				e.setCreatedUserId(1);
+				e.setUpdatedUserId(1);
+			}
+		}
 		
 		/*
 		 * Linked Enquiries Component;
 		 */
 		
-		/*
-		 * 
-		 */
 		
+		System.out.println("kim contact id " + getCcontact().getId());
+		for (Addresses a : getCcontact().getAddressesList()){
+			System.out.println("kim address id " + a.getId() + a.getStreet());
+		}
 		
-		/*
-		 * Save compoenents into contact
-		 */
+		//printIamodel(iamodel);
+		printContact(ccontact);
 		
-		/*
-		 * Save contact and enquiries
-		 */
-		//services.saveOrUpdateEnquiry(this.getIamodel(), this.getCcontact());
-//		if(getCcontact().getDob() != null){
-//			getCcontact().setDob(new java.sql.Date(DateUtil.yyyymmddDate(getDob()).getTime()));
-//			//System.out.println(getCcontact().getDob());
-//		}
-		//getCcontact().setDob(new java.sql.Date(DateUtil.yyyymmddDate(getDob()).getTime()));
-//		if(getDob() != ""){
-//			getCcontact().setDob(new java.sql.Date(DateUtil.yyyymmddDate(getDob()).getTime()));
-//		}
-			//System.out.println("DOB: " + getDob());
-		
-		//services.saveOrUpdateEnquiry(getModel(), getModel().getCcontact());
-		
-		return SUCCESS;
+		if(services.saveOrUpdateEnquiry(getIamodel(), getCcontact())){
+			activateLists();
+			setCcontact(getCcontact());
+			setIamodel(getIamodel());
+			return SUCCESS;
+		}
+		activateLists();
+		setCcontact(getCcontact());
+		setIamodel(getIamodel());
+		System.out.println("save unsuccessful");
+		return ERROR;
 	}
 
-	/**
-	 * Action method to return a list of enquiries
-	 * @return String
-	 */
-//	public String enquiryList(){
-//		setPage(1);
-//		setNumberOfRecords(10);
-//		
-//		setEnquiryList(services.findEnquiriesByPage(page,numberOfRecords));
-//		totalNumberOfRecords = services.countEnquiries();
-//		int mod = (int) totalNumberOfRecords % numberOfRecords;
-//		if(mod != 0) mod = 1;
-//		totalNumberOfPages = totalNumberOfRecords/numberOfRecords + mod;
-//		return SUCCESS;
-//	}
-	
-	/**
-	 * Action Method to update the enquiry list after requesting a different page
-	 * @return String
-	 */
-//	public String updateEnquiryList(){
-//		System.out.println(getPage());
-//		
-//		setEnquiryList(services.findEnquiriesByPage(getPage(),getNumberOfRecords()));
-//		totalNumberOfRecords = services.countEnquiries();
-//		int mod = (int) totalNumberOfRecords % numberOfRecords;
-//		if(mod != 0) mod = 1;
-//		totalNumberOfPages = totalNumberOfRecords/numberOfRecords + mod;
-//		return SUCCESS;
-//	}
 	
 	/* 
 	 * 
@@ -390,38 +361,10 @@ public class EnquiryAction extends BaseAction implements ModelDriven<Enquiries>{
 		
 	}
 	
-	/**
-	 * private method used by saveAndUpdateEnquiry to populate a Contacts object
-	 * @param Contacts c
-	 */
-	private void populateContact(Contacts c){
-		//getters for types
-		//services.getAccommodationId(getTheAccommodation());
-		//services.getGenderId(getTheGender());
-		//services.getDisabilityId(getTheDisability());
-		//services.getEnquiryId(getThe)
-		
-		
-		//System.out.println(getTitleSelectList().toString());
-		//titleSelectList.
-		//System.out.println("theDanger: position" + index);
-		//c.setDangerType(getDangerSelectList().get(position));
-	}
 	
 	public void setTitleSelectList(List<TitleTypes> titleSelectList) {
 		this.titleSelectList = titleSelectList;
 	}
-
-	//private int getIndex(String name, List<?> obj) throws NoSuchFieldException, SecurityException{
-//		int index;
-//		for(Object o: obj){
-//			//if(name.equals(((Field) o).getName()))
-//			if(o.getClass().equals(TitleTypes.class))
-//				if(name.equals(((TitleTypes) o).getName())
-//						index= ((TitleTypes) o).getId();
-//		}
-//		return index;
-	//}
 	
 	/**
 	 * Getter for the form title
@@ -468,8 +411,6 @@ public class EnquiryAction extends BaseAction implements ModelDriven<Enquiries>{
 		return titleSelectList;
 	}
 
-
-
 	/**
 	 * Getter for gender types
 	 * @return List
@@ -477,14 +418,6 @@ public class EnquiryAction extends BaseAction implements ModelDriven<Enquiries>{
 	public List<GenderTypes> getGenderSelectList() {
 		return genderSelectList;
 	}
-
-//	public String getTheGender() {
-//		return theGender;
-//	}
-//
-//	public void setTheGender(String string) {
-//		this.theGender = string;
-//	}
 
 	/**
 	 * Getter for cultural background types
@@ -494,8 +427,6 @@ public class EnquiryAction extends BaseAction implements ModelDriven<Enquiries>{
 		return culturalBackgroundSelectList;
 	}
 
-
-
 	/**
 	 * Getter for accommodation types
 	 * @return List
@@ -503,8 +434,6 @@ public class EnquiryAction extends BaseAction implements ModelDriven<Enquiries>{
 	public List<AccommodationTypes> getAccomodationSelectList() {
 		return accommodationSelectList;
 	}
-
-
 
 	/**
 	 * Getter for disability type
@@ -547,19 +476,6 @@ public class EnquiryAction extends BaseAction implements ModelDriven<Enquiries>{
 		return statusSelectList;
 	}
 
-	
-	public Set<Enquiries> getLinkedEnquiriesSet() {
-		return linkedEnquiriesSet;
-	}
-	
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
 	public List<EnquiryTypes> getEnquiryTypeSelectList() {
 		return enquiryTypeSelectList;
 	}
@@ -568,43 +484,88 @@ public class EnquiryAction extends BaseAction implements ModelDriven<Enquiries>{
 		this.enquiryTypeSelectList = enquiryTypeSelectList;
 	}
 
-
-
-	public Set<EnquiryIssues> getIssueSet() {
-		return issueSet;
+	public List<Enquiries> getLinkedEnquiriesList() {
+		return linkedEnquiriesList;
 	}
 
-	public void setIssueSet(Set<EnquiryIssues> issueSet) {
-		this.issueSet = issueSet;
+	public void setLinkedEnquiriesList(List<Enquiries> linkedEnquiriesList) {
+		this.linkedEnquiriesList = linkedEnquiriesList;
 	}
-
-	public Set<Enquiries> getLinkedEquiriesSet() {
-		return linkedEnquiriesSet;
+	
+	private void printContact(Contacts c){
+		System.out.println(">>>Start Printing Contact Information: ");
+		//TODO: missing created and updated user date and id
+		//why status type for contact?
+		//"\ncontact type: " + c.getContactType().getContactTypeName() +
+		System.out.println(
+				"danger type: " + c.getDangerType().getDangerName() + 
+				"\ncontact id: " + c.getId() + 
+				"\ntitle: " + c.getTitleType().getName() +
+				"\nfirst name: " + c.getFirstname() + 
+				"\nother name: " + c.getOthername() +
+				"\nlast name: " + c.getLastname() + 
+				"\ngender type: " + c.getGenderType().getGenderName() +
+				"\ndob: " + c.getDob().toString() + 
+				 
+				"\nmobile: " + c.getMobilephone() + 
+				"\nemail: " + c.getEmail() + 
+				"\nidentification: " + c.getIdentification() +
+				"\ncultural background: " + c.getCulturalBackground().getCulturalBackgroundName() + 
+				"\ncultrual background comment: " + c.getCulturalBackgroundComment() +
+				"\naccommodation: " + c.getAccommodation().getAccommodationName() +
+				"\naccommodation comment: " + c.getAccommodationComment());
+		for (Addresses a : c.getAddressesList()) {
+			System.out.println(
+					"address id: " + a.getId() +
+					"\nstreet: " + a.getStreet() +
+					"\nsuburb: " + a.getSuburb() +
+					"\npostcode: " + a.getPostcode() +
+					"\nstate: " + a.getState() +
+					"\ncountry: " + a.getCountry() + 
+					"\nhomephone: " + a.getHomephone()
+					);
+		}
+		
+		for(ClientDisabilities cd: c.getDisabilitiesList()){
+			System.out.println(
+					"disability id: " + cd.getId() +
+					"\ndisability type: " + cd.getDisabilityType().getDisabilityName() +
+					"\ncomments: " + cd.getComments() +
+					"\nprimary flag: " + cd.getPrimaryFlag() );
+		};
+		for(ContactEmployments ce: c.getEmploymentsList()){
+			System.out.println(
+					"employment id: " + ce.getId() +
+					"\nemployment type: " + ce.getEmploymentType().getEmploymentName() +
+					"\ncomments: " + ce.getComments() + 
+					"\nwork phone: " + ce.getWorkphone() );
+		}
+		System.out.println(">>>End of Printing Contact Information");
 	}
-
-	public void setLinkedEnquiriesSet(Set<Enquiries> linkedEnquiriesSet) {
-		this.linkedEnquiriesSet = linkedEnquiriesSet;
-	}
-
-	public Set<Addresses> getAddressSet() {
-		return addressSet;
-	}
-
-	public void setAddressSet(Set<Addresses> address) {
-		this.addressSet = address;
-	}
-
-	public Set<ClientDisabilities> getClientDisabilitiesSet() {
-		return clientDisabilitiesSet;
-	}
-
-	public void setClientDisabilitiesSet(Set<ClientDisabilities> clientDisabilitiesSet) {
-		this.clientDisabilitiesSet = clientDisabilitiesSet;
-	}
-
-
-	@Override
-	public Enquiries getModel() {
-		return iamodel;
+	private void printIamodel(Enquiries e) throws NullPointerException{
+		System.out.println(
+			"Enquiry id: " + e.getId() + 
+			"\ncreated date: " + e.getCreatedDateTime() + 
+			"\ncreated User: " + e.getCreatedUserId() +
+			"\nupdated date: " + e.getUpdatedDateTime() +
+			"\nupdated User: " + e.getUpdatedUserId() +
+			"\nenquiry type: " + e.getEnquiryType().getEnquiryTypeName() +
+			"\nstatus type: " + e.getStatusType().getStatusName() + 
+			"\ndescription: " + e.getDescription() +
+			"\ninquisitor: " + e.getInquisitor() + 
+			"\nreferral by: " + e.getReferralBy() +
+			"\nreferred to: " + e.getReferralTo() +
+			"\nparent enquiry id: " + e.getParentEnquiry().getId() );
+		for (EnquiryIssues ei : e.getEnquiryIssuesList()) {
+			System.out.println(
+					"Enquiry Issue id: " + ei.getId() +
+					"\nissue type: " + ei.getIssue().getIssueName() +
+					"\ncomment: " + ei.getComment()
+					);
+		}
+		for(Enquiries e2: e.getEnquiriesList()){
+			System.out.println( "linked enquiry id: " + e2.getId());
+		}
+	
 	}
 }

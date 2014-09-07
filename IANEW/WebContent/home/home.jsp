@@ -169,7 +169,7 @@
 	</div>
 	
 	<s:div id="leftPopUp" style="background: yellow; position: fixed; top: 20%; box-shadow: 3px 3px 5px grey;">left</s:div>
-	<s:div id="rightPopUp" style="background: yellow; position: fixed; top: 20%; box-shadow: 3px 3px 5px grey; right: 0">right</s:div>
+	<s:div id="rightPopUp">right</s:div>
 	
 <!-- ----------------------------------------------------------------------------------------------- -->
 <!-- Home Page Footer ------------------------------------------------------------------------------ -->
@@ -188,48 +188,16 @@
 			//hideSlidingPanel();
 		});
 
-		function hideSlidingPanel(){
-			$("#slidingPanel").hide('slow');
-			/* $("#slidingPanel").animate({
-				left: -$("#slidingPanel").width()
-		
-			}, 1000); */
+		function hidePopUp(popUp){
+			$(popUp).hide('slow');
+			$("body").css("overflow-Y", "scroll")
 		}
 
-		function showSlidingPanel(){
-			$("#slidingPanel").show('slow');
-			/* $("#slidingPanel").animate({
-				
-				left: 0
-		
-			}, 1000); */
+		function showPopUp(popUp){
+			$(popUp).show('slow');
+			$("html, body").css({"overflow-Y": "hidden"});
+			
 		}
 	</script>
-	<%-- <script>
-	 Experimental dragging div around.
-	$(function(){
-		$("#aE").draggable();		
-	})
-	</script> --%>
-	
-	<%-- <script>
-	 Experimental Document find
-	function findString(str){
-		var strFound;
-		
-		if(window.find){
-			
-			strFound=self.find(str);
-			//alert(strFound + " found");
-			if(!strFound){
-				strFound = self.find(str,0,1);
-				//while(self.find(str,0,1)) continue;
-			}  
-		} 
-
-	}
-
-	</script> --%>
-	
 </body>
 </html>

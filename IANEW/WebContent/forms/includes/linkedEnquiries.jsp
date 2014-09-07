@@ -23,18 +23,18 @@
 				parent enquiry into the list as well (if it already is not).
 ------------------------------------------------------------------------------------------------>
 
-
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ taglib prefix="sj" uri="/struts-jquery-tags" %>
 <head>
 
 </head>
 
 <h3 class="sixteen columns" style="float:none;">Linked Enquiries</h3>
-<s:div cssClass="greybackground">
+<s:div id="linkedEnquiriesField" cssClass="greybackground">
 
 	<s:url id="urlELinked" namespace="/enquiry" action="getLinkedEnquiry" />
 		
-	<s:iterator value="linkedEnquiriesSet">
+	<s:iterator value="linkedEnquiriesList" status="stat">
 		<section class="secLinkedEnquiries sixteen columns curveBorder"  onclick="bandSelected(this)">
 			<s:div cssClass="textarea one columns">
 				<s:label value="E#:" />
@@ -84,9 +84,15 @@
 
 		$('#btnView').click(function(){
 			var id = $("#hiddenid").val();
-			$('#rightPopUp').load("enquiry/getEnquiry.action?hiddenid=" + id +"&formTitle=Existing Enquiry" );
 			$('#rightPopUp').show("slow");
+			$('#rightPopUp').load("enquiry/getEnquiry.action?hiddenid=" + id +"&formTitle=Existing Enquiry" );
+			
 			//alert(id);
+		});
+
+		$('#btnAddEnquiry').click(function(){
+			$("#linkedEnquiriesListDiv").show();
+			$('#linkedEnquiriesListDiv').load("enquiryList/getLinkedEnquiriesList.action");
 		});
 	});
 	</script>

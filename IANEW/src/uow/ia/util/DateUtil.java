@@ -37,7 +37,7 @@ public class DateUtil {
 	 * @throws ParseException
 	 */
 	public static Date yyyymmddDate(String date) throws ParseException {
-		if(date.equals("") || date == null){
+		if(date.equals("") || date == null || date.isEmpty()){
 			return null;
 		}
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
