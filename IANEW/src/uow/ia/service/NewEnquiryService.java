@@ -15,7 +15,7 @@ import uow.ia.bean.IssueTypes;
 import uow.ia.bean.StatusTypes;
 import uow.ia.bean.TitleTypes;
 
-public interface NewEnquiryService{
+public interface NewEnquiryService {
 	
 	public static final String SERVICENAME = "NewEnquiryService";
 	

@@ -1,18 +1,26 @@
-package uow.ia.action;
+	package uow.ia.action;
 
 
+import java.lang.reflect.Method;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+
+import org.apache.struts2.interceptor.SessionAware;
+import org.glassfish.api.deployment.ApplicationContext;
+import org.omg.CORBA.INITIALIZE;
 
 import antlr.Lookahead;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ModelDriven;
 import com.sun.org.apache.bcel.internal.generic.InstructionConstants.Clinit;
 import com.sun.xml.rpc.processor.modeler.j2ee.xml.javaIdentifierType;
 
+import sun.reflect.generics.scope.MethodScope;
 import uow.ia.bean.AccommodationTypes;
 import uow.ia.bean.Addresses;
 import uow.ia.bean.ClientDisabilities;
@@ -29,6 +37,8 @@ import uow.ia.bean.GenderTypes;
 import uow.ia.bean.IssueTypes;
 import uow.ia.bean.StatusTypes;
 import uow.ia.bean.TitleTypes;
+import uow.ia.bean.Users;
+import uow.ia.reflection.Reflection;
 import uow.ia.util.DateUtil;
 
 /** ---------------------------------------------------------------------------------------------
@@ -51,6 +61,8 @@ import uow.ia.util.DateUtil;
  * 					Moved enquiry list to its own action class EnquiryListAction
  * 02/08/2014 -		Quang Nhan
  * 					Modified JSPs such that the name is directly associated with the bean class
+ * 11/08/2014 -		Quang Nhan
+ * 					Implements SessionAware and used reflection to update updated enquiry.
  * ==============================================
  * 	Description: An action class to linking the service from spring to the enquiry jsp pages
  *
@@ -58,14 +70,16 @@ import uow.ia.util.DateUtil;
 
 
 
-public class EnquiryAction extends BaseAction{
+public class EnquiryAction extends BaseAction implements SessionAware{
 	
+	private final String ENQUIRY = "enquiry";
 	/* 
 	 * form title (can either be new enquiry/exisiting enquiry/enquiry list)
 	 */
 	private String formTitle;;
 	private Enquiries iamodel;
-	private Contacts ccontact; //not calling from enquiry to allow 'CASE' to share the same include jsp
+	//private Contacts ccontact;
+	//not calling from enquiry to allow 'CASE' to share the same include jsp
 	
 	/*
 	 * Lists for the drop down select options for the jsps
@@ -124,13 +138,7 @@ public class EnquiryAction extends BaseAction{
 		this.today = today;
 	}
 
-	/* 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
+	/*
 	 * ----------------------------------------------------------------------------------------------------------
 	 * ----------------------------------------------------------------------------------------------------------
 	 * Action Methods
@@ -149,11 +157,19 @@ public class EnquiryAction extends BaseAction{
 	 * @return String
 	 */
 	public String newEnquiry(){
+		System.out.println(">>>Beg New Enquiry");
 		activateAutocomplete();
-		activateLists();
 		
 		iamodel = new Enquiries();
-		ccontact = new Contacts();
+		
+	
+		if(userSession.containsKey(ENQUIRY))
+			userSession.remove(ENQUIRY); 
+		
+		userSession.put(ENQUIRY, new Enquiries());
+		
+		activateLists();
+		
 		
 		//form status setters
 		today = new Date();
@@ -161,7 +177,7 @@ public class EnquiryAction extends BaseAction{
 		iamodel.setCreatedDateTime(sqlDate);
 		iamodel.setUpdatedDateTime(sqlDate);
 		/*
-		 * TODO: change the user to the session user.
+		 * TODO: change the user to the userSession user.
 		 */
 		iamodel.setCreatedUserId(1);
 		iamodel.setUpdatedUserId(1);
@@ -170,11 +186,10 @@ public class EnquiryAction extends BaseAction{
 		address = new Addresses();
 		setToday(sqlDate);
 		setDob("");
-		
+		System.out.println("<<<end of new equiry");
 		
 		return SUCCESS;
 	}
-
 	/**
 	 * Action Method to get an Existing Enquiry Form by id
 	 * @return String
@@ -182,26 +197,14 @@ public class EnquiryAction extends BaseAction{
 	public String getExistingEnquiry(){
 		activateAutocomplete();
 		activateLists();
-		//System.out.println(getHiddenid());
-
-		setIamodel(services.getEnquiry(getHiddenid()));
-		setCcontact(getIamodel().getContact());
-		System.out.println(getIamodel().getEnquiryIssuesList().size());
 		
-		Date date = new Date(ccontact.getDob().getTime());
-		//dob = DateUtil.yyyymmddStr(date);
+		iamodel = services.getEnquiry(getHiddenid());
 		
-		setDob(getCcontact().getDob().toString());
+		if(userSession.containsKey(ENQUIRY))
+			userSession.remove(ENQUIRY); 
+		userSession.put(ENQUIRY, iamodel);
 		
 		linkedEnquiriesList = services.getLinkedEnquiry(getHiddenid());
-		for(Enquiries le: linkedEnquiriesList){
-			System.out.println("id " + le.getId());
-		}
-		
-		System.out.println("hbm date = " + ccontact.getDob());
-		//LATER
-		//setCreatedBy();
-		//setUpdatedBy(contact.);
 		
 		return SUCCESS;
 	}
@@ -209,13 +212,7 @@ public class EnquiryAction extends BaseAction{
 	String dob;
 	
 	
-	public String getDob() {
-		return dob;
-	}
-
-	public void setDob(String dob) {
-		this.dob = dob;
-	}
+	
 	
 	public String updateLinkedEnquiries(){
 		System.out.println("hidden id is " + getHiddenid());
@@ -238,108 +235,35 @@ public class EnquiryAction extends BaseAction{
 	 */
 	public String saveUpdateEnquiry() throws ParseException{ 
 		
-		List<Addresses> aList = getCcontact().getAddressesList();
-		List<EnquiryIssues> iList = getIamodel().getEnquiryIssuesList();
-		List<ClientDisabilities> dList = getCcontact().getDisabilitiesList();
-		List<ContactEmployments> eList = getCcontact().getEmploymentsList();
+		System.out.println(">>>Begin SaveUpdateEnquiry");
+		Enquiries oldEnquiry = new Enquiries();
+		oldEnquiry = (Enquiries) userSession.get(ENQUIRY);
 		
-		System.out.println("addressSet size " + getCcontact().getAddressesList().size());
-		
-		//today's date in sql format
-		java.sql.Date sqlDate = new java.sql.Date(new Date().getTime());
-		
-//		/*******************
-//		 * KIM HEERE
-//		 */
-//		getCcontact().setDob(new java.sql.Date(DateUtil.yyyymmddDate(getDob()).getTime()));
-//		System.out.println(getCcontact().getDob());
-//		/***************************/
-		
-        try {
-		java.util.Date utilDate = DateUtil.yyyymmddDate(getDob());
-		
-		if (utilDate != null) {
-			    getCcontact().setDob(new java.sql.Date(utilDate.getTime()));
-			}
-		} catch (Exception e) {
-			System.out.println("dob error" + e);
-		}
-        /*
-		 * Address component
-		 */
-		for(Addresses a: aList){
-			if(a.getId() == null){
-				//TODO: set created user and updated user to session user
-				a.setCreatedUserId(1);
-				a.setUpdatedUserId(1);
-			}
-		}
+		Reflection ref = new Reflection();
+		ref.updateObject(oldEnquiry, iamodel);
 		
 		
-		/*
-		 * Disability Component
-		 */
-		//TODO: check primary flag and mark as Y
-		for(ClientDisabilities d: dList){
-			System.out.println();
-			if(d.getId() == null){
-				
-				//TODO: set created user and updated user to session user
-				d.setCreatedUserId(1);
-				d.setUpdatedUserId(1);
-			}
-		}
+		System.out.println(iamodel.getContact().getLastname());
+		System.out.println(oldEnquiry.getContact().getLastname());
 		
-		/*
-		 * Issue Component
-		 */
-		for(EnquiryIssues i: iList){
-			System.out.println();
-			if(i.getId() == null){
-				
-				//TODO: set created user and updated user to session user
-				i.setCreatedUserId(1);
-				i.setUpdatedUserId(1);
-			}
-		}
+		System.out.println("newid" + iamodel.getContact().getId());
+		System.out.println("oldid" + oldEnquiry.getContact().getId());
 		
-		/*
-		 * Employment Component 
-		 */
-		for(ContactEmployments e: eList){
-			System.out.println();
-			if(e.getId() == null){
-				
-				//TODO: set created user and updated user to session user
-				e.setCreatedUserId(1);
-				e.setUpdatedUserId(1);
-			}
-		}
-		
-		/*
-		 * Linked Enquiries Component;
-		 */
-		
-		
-		System.out.println("kim contact id " + getCcontact().getId());
-		for (Addresses a : getCcontact().getAddressesList()){
-			System.out.println("kim address id " + a.getId() + a.getStreet());
-		}
-		
-		//printIamodel(iamodel);
-		printContact(ccontact);
-		
-		if(services.saveOrUpdateEnquiry(getIamodel(), getCcontact())){
-			activateLists();
-			setCcontact(getCcontact());
-			setIamodel(getIamodel());
-			return SUCCESS;
-		}
+//		if(services.saveOrUpdateEnquiry(getIamodel(), getCcontact())){
+//			activateLists();
+//			setCcontact(getCcontact());
+//			setIamodel(getIamodel());
+//			return SUCCESS;
+//		}
+//		activateLists();
+//		setCcontact(getCcontact());
+//		setIamodel(getIamodel());
+//		System.out.println("save unsuccessful");
+//		return ERROR;
 		activateLists();
-		setCcontact(getCcontact());
+		
 		setIamodel(getIamodel());
-		System.out.println("save unsuccessful");
-		return ERROR;
+		return SUCCESS;
 	}
 
 	
@@ -355,7 +279,14 @@ public class EnquiryAction extends BaseAction{
 	 * Other Methods & Setters and Getters
 	 * ----------------------------------------------------------------------------------------------------------
 	 * ----------------------------------------------------------------------------------------------------------*/
+	public String getDob() {
+		return dob;
+	}
 
+	public void setDob(String dob) {
+		this.dob = dob;
+	}
+	
 	private void activateAutocomplete(){
 		firstNameAuto = new ArrayList<String>();
 		firstNameAuto.add("Tom");
@@ -417,13 +348,15 @@ public class EnquiryAction extends BaseAction{
 		this.iamodel = enquiry;
 	}
 	
-	public Contacts getCcontact() {
-		return ccontact;
-	}
-
-	public void setCcontact(Contacts contact) {
-		this.ccontact = contact;
-	}
+//	public Contacts getCcontact() {
+//		ccontact = (Contacts) userSession.get(CONTACT); 
+//		return ccontact;
+//	}
+//
+//	public void setCcontact() {
+//		this.ccontact = (Contacts) userSession.get(CONTACT);
+//		
+//	}
 
 	/**
 	 * Getter for title types
@@ -589,5 +522,13 @@ public class EnquiryAction extends BaseAction{
 			System.out.println( "linked enquiry id: " + e2.getId());
 		}
 	
+	}
+	
+	Map <String, Object> userSession;
+
+	@Override
+	public void setSession(Map<String,Object> session) {
+		System.out.println("setSession called");
+		this.userSession = session;
 	}
 }

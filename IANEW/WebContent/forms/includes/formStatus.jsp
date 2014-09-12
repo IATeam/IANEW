@@ -21,7 +21,7 @@
 		<div class="row">
 			<div class="six columns">
 				<s:label for="createdDate" value="Created Date:" />
-			    <s:date name="iaiamodel.createdDateTime" format="dd MMM yyyy"/>
+			    <s:date name="iamodel.createdDateTime" format="dd MMM yyyy"/>
 			   
 				<s:label for="lastUpdatedOn" value="Last Updated On:" />
 				<s:date name="iamodel.updatedDateTime" format="dd MMM yyyy"/>
