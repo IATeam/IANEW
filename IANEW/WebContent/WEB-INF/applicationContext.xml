@@ -151,5 +151,11 @@
 			<tx:method name="*" propagation="REQUIRED" read-only="true" />
 		</tx:attributes>
 	</tx:advice>
+	
+	<aop:config>  
+        <aop:pointcut id="serviceOperation"  
+            expression="execution(* uow.ia.service..*.*(..))" />  
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="serviceOperation" />  
+    </aop:config>  
  
 </beans>
