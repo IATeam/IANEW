@@ -85,7 +85,7 @@
 				<div class="row">
 					<div class="inputfield eight columns">
 						<s:label for="street" value="Street: " />
-						<div><s:textfield name="iamodel.contact.addressesList[%{iamodel.contact.addressesiamodel.contact.disabilitiesList.sizeList.size}].street" /></div>
+						<div><s:textfield name="iamodel.contact.addressesList[%{iamodel.contact.addressesList.size}].street" /></div>
 					</div>
 					<div class="inputfield four columns">
 						<s:label for="city" value="Suburb" />

@@ -7,10 +7,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
+import org.hibernate.validator.internal.xml.Adapter1;
+
+import com.sun.xml.registry.uddi.bindings_v2_2.Contact;
 
 import uow.ia.bean.Addresses;
+import uow.ia.bean.ContactEmployments;
 import uow.ia.bean.ContactTypes;
 import uow.ia.bean.Contacts;
+import uow.ia.bean.EmploymentTypes;
 import uow.ia.bean.Enquiries;
 import uow.ia.bean.EnquiryIssues;
 import uow.ia.bean.EnquiryTypes;
@@ -19,8 +24,72 @@ import uow.ia.bean.IndividualCases;
 
 public class TestClass {
 	
-public static void main(String[] args) {
+	public static void main(String[] args) {
 		
+		newObject();
+		
+	}
+
+
+	private static void newObject(){
+		Enquiries e1 = new Enquiries();
+		Enquiries e2 = new Enquiries();
+		
+		Reflection ref = new Reflection();
+		e1 = (Enquiries) ref.initializeNewModel(e1);
+		//ref.initializeNewModel(e1);
+		
+		//e2.setDescription("value");
+		//e1.setDescription(new String());
+		
+		
+		e1.getContact().setFirstname("Dav");
+	
+		if(e1.getContact().getFirstname() == null){
+			System.out.println("e1 is null");
+		}else
+			System.out.println("first name is: " + e1.getContact().getFirstname());
+		
+		//e1.setId(1);
+		e2.setId(4);
+		//e1.setDescription("Hi Ho");
+		
+		Contacts contact = new Contacts();
+		e2.setContact(contact);
+		//e2.getContact().setFirstname(new String());
+		e2.getContact().setFirstname("Hi Hi");
+
+		//Address
+		
+		List<Addresses> A2 = new ArrayList<Addresses>();
+		
+		Addresses a1 = new Addresses();
+		Addresses a2 = new Addresses();
+		Addresses a3 = new Addresses();
+		Addresses a4 = new Addresses();
+		
+		a1.setCountry("abc");
+		a2.setCountry("ABC");
+		a3.setCountry("def");
+		a4.setCountry("DEF");
+		 
+		A2.add(a1); A2.add(a2); A2.add(a3); A2.add(a4);
+		
+		e2.getContact().setAddressesList(A2);
+		
+		//System.out.println(e1.getContact().getFirstname());
+		//System.out.println(e2.getContact().getFirstname());
+		
+		ref.updateObject(e1, e2);
+		
+		System.out.println("o1 enquiryIssues after update");
+		for(Addresses a: e1.getContact().getAddressesList()){
+			System.out.println(" country: " + a.getCountry() );
+		}
+		
+	}
+	
+	private static void existingObject(){
 		Contacts one = new Contacts();
 		Contacts two = new Contacts();
 		
@@ -63,6 +132,7 @@ public static void main(String[] args) {
 		o1.setContact(c1);
 		o2.setContact(c2);
 		
+		//Address
 		List<Addresses> A1 = new ArrayList<Addresses>();
 		List<Addresses> A2 = new ArrayList<Addresses>();
 		
@@ -79,8 +149,28 @@ public static void main(String[] args) {
 		A1.add(a1); A1.add(a2); 
 		A2.add(a2); A2.add(a3); A2.add(a4);
 		
+		
 		c1.setAddressesList(A1);
 		c2.setAddressesList(A2);
+		
+		
+		//employemnts list
+		List<ContactEmployments> eml1 = new ArrayList<ContactEmployments>();
+		List<ContactEmployments> eml2 = new ArrayList<ContactEmployments>();
+		
+		ContactEmployments em1 = new ContactEmployments();
+		ContactEmployments em2 = new ContactEmployments();
+		ContactEmployments em3 = new ContactEmployments();
+		
+		em1.setId(1);
+		em2.setId(4);
+		em3.setId(6);
+		
+		eml1.add(em1);
+		eml2.add(em2);
+		
+		c1.setEmploymentsList(eml1);
+		c2.setEmploymentsList(eml2);
 		
 		ContactTypes ct1 = new ContactTypes();
 		ContactTypes ct2 = new ContactTypes();
@@ -165,13 +255,12 @@ public static void main(String[] args) {
 		o2.setEnquiriesList(e2List);
 		
 		Reflection ref = new Reflection();
-		ref.updateObject(o1, o2);
+		ref.updateObject(c1, c2);
 //		System.out.println("name: Contact " +  o1.getContact().getFirstname());
 		System.out.println("o1 enquiryIssues after update");
 		for(EnquiryIssues e: o1.getEnquiryIssuesList()){
 			System.out.println(e.getId());
 			System.out.println(e.getComment());
 		}
-		
 	}
 }

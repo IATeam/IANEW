@@ -98,10 +98,13 @@ function removeNull(articleEle){
 	var ele = $(articleEle).find("[name]");
 	var isAllNull = true;
 	$(ele).each(function(){
-		if(!$(this).val(""))
+		if($(this).val().length > 0){
 			isAllNull = false;
+			alert($(this).val())
+		}
+			
 	});
-	if(isAllNull){alert("in removing null");
+	if(isAllNull === true){//alert("in removing null");
 		$(articleEle).remove();
 	}
 }

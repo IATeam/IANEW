@@ -1,26 +1,14 @@
 	package uow.ia.action;
 
 
-import java.lang.reflect.Method;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.apache.struts2.interceptor.SessionAware;
-import org.glassfish.api.deployment.ApplicationContext;
-import org.omg.CORBA.INITIALIZE;
 
-import antlr.Lookahead;
-
-import com.opensymphony.xwork2.ActionContext;
-import com.opensymphony.xwork2.ModelDriven;
-import com.sun.org.apache.bcel.internal.generic.InstructionConstants.Clinit;
-import com.sun.xml.rpc.processor.modeler.j2ee.xml.javaIdentifierType;
-
-import sun.reflect.generics.scope.MethodScope;
 import uow.ia.bean.AccommodationTypes;
 import uow.ia.bean.Addresses;
 import uow.ia.bean.ClientDisabilities;
@@ -34,12 +22,11 @@ import uow.ia.bean.Enquiries;
 import uow.ia.bean.EnquiryIssues;
 import uow.ia.bean.EnquiryTypes;
 import uow.ia.bean.GenderTypes;
+import uow.ia.bean.IndividualCases;
 import uow.ia.bean.IssueTypes;
 import uow.ia.bean.StatusTypes;
 import uow.ia.bean.TitleTypes;
-import uow.ia.bean.Users;
 import uow.ia.reflection.Reflection;
-import uow.ia.util.DateUtil;
 
 /** ---------------------------------------------------------------------------------------------
  * @author: Quang Nhan
@@ -62,7 +49,7 @@ import uow.ia.util.DateUtil;
  * 02/08/2014 -		Quang Nhan
  * 					Modified JSPs such that the name is directly associated with the bean class
  * 11/08/2014 -		Quang Nhan
- * 					Implements SessionAware and used reflection to update updated enquiry.
+ * 					Implements SessionAware and used reflection to updated enquiry.
  * ==============================================
  * 	Description: An action class to linking the service from spring to the enquiry jsp pages
  *
@@ -158,38 +145,27 @@ public class EnquiryAction extends BaseAction implements SessionAware{
 	 */
 	public String newEnquiry(){
 		System.out.println(">>>Beg New Enquiry");
-		activateAutocomplete();
+		//activateAutocomplete();
 		
+		activateLists();
 		iamodel = new Enquiries();
 		
-	
+		Reflection ref = new Reflection();
+		ref.initializeNewModel(iamodel);
+		
 		if(userSession.containsKey(ENQUIRY))
 			userSession.remove(ENQUIRY); 
 		
-		userSession.put(ENQUIRY, new Enquiries());
+		userSession.put(ENQUIRY, iamodel);
+	
 		
-		activateLists();
-		
-		
-		//form status setters
-		today = new Date();
-		java.sql.Date sqlDate = new java.sql.Date(today.getTime());
-		iamodel.setCreatedDateTime(sqlDate);
-		iamodel.setUpdatedDateTime(sqlDate);
-		/*
-		 * TODO: change the user to the userSession user.
-		 */
-		iamodel.setCreatedUserId(1);
-		iamodel.setUpdatedUserId(1);
-		
-		//setAddress(new Addresses());
-		address = new Addresses();
-		setToday(sqlDate);
-		setDob("");
+		//linkedEnquiriesList = services.getLinkedEnquiry(getHiddenid());
 		System.out.println("<<<end of new equiry");
 		
 		return SUCCESS;
+	
 	}
+
 	/**
 	 * Action Method to get an Existing Enquiry Form by id
 	 * @return String
@@ -199,6 +175,16 @@ public class EnquiryAction extends BaseAction implements SessionAware{
 		activateLists();
 		
 		iamodel = services.getEnquiry(getHiddenid());
+		
+		//TODO: pass this block of code into Reflection.
+		Contacts contacts = null;
+		try {
+			contacts = (Contacts) iamodel.getContact().clone();
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+		}
+		
+		iamodel.setContact(contacts);
 		
 		if(userSession.containsKey(ENQUIRY))
 			userSession.remove(ENQUIRY); 
@@ -236,44 +222,34 @@ public class EnquiryAction extends BaseAction implements SessionAware{
 	public String saveUpdateEnquiry() throws ParseException{ 
 		
 		System.out.println(">>>Begin SaveUpdateEnquiry");
-		Enquiries oldEnquiry = new Enquiries();
-		oldEnquiry = (Enquiries) userSession.get(ENQUIRY);
+		//System.out.println(iamodel.getContact().getAddressesList().get(2).getCountry());
 		
+		Enquiries enquiry = (Enquiries) userSession.get(ENQUIRY);
+
+		//System.out.println("contact class: " + enquiry.getContact().getClass());
+
 		Reflection ref = new Reflection();
-		ref.updateObject(oldEnquiry, iamodel);
+		ref.updateObject(enquiry, iamodel);
 		
+		System.out.println("contact class: " + enquiry.getContact().getClass());
 		
-		System.out.println(iamodel.getContact().getLastname());
-		System.out.println(oldEnquiry.getContact().getLastname());
+		System.out.println("first name iamodel: " + iamodel.getContact().getFirstname());
+		//System.out.println("first name enquiry: " + enquiry.getContact().getFirstname());
 		
-		System.out.println("newid" + iamodel.getContact().getId());
-		System.out.println("oldid" + oldEnquiry.getContact().getId());
-		
-//		if(services.saveOrUpdateEnquiry(getIamodel(), getCcontact())){
+//		if(services.saveOrUpdateEnquiry(enquiry, enquiry.getContact())){
 //			activateLists();
-//			setCcontact(getCcontact());
-//			setIamodel(getIamodel());
+//			setIamodel(enquiry);
 //			return SUCCESS;
 //		}
-//		activateLists();
-//		setCcontact(getCcontact());
-//		setIamodel(getIamodel());
-//		System.out.println("save unsuccessful");
-//		return ERROR;
 		activateLists();
-		
-		setIamodel(getIamodel());
+		setIamodel(enquiry);
+		System.out.println("save unsuccessful");
 		return SUCCESS;
+		
 	}
 
 	
 	/* 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
 	 * ----------------------------------------------------------------------------------------------------------
 	 * ----------------------------------------------------------------------------------------------------------
 	 * Other Methods & Setters and Getters
@@ -347,16 +323,6 @@ public class EnquiryAction extends BaseAction implements SessionAware{
 	public void setIamodel(Enquiries enquiry){
 		this.iamodel = enquiry;
 	}
-	
-//	public Contacts getCcontact() {
-//		ccontact = (Contacts) userSession.get(CONTACT); 
-//		return ccontact;
-//	}
-//
-//	public void setCcontact() {
-//		this.ccontact = (Contacts) userSession.get(CONTACT);
-//		
-//	}
 
 	/**
 	 * Getter for title types

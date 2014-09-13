@@ -13,7 +13,7 @@ import java.util.Set;
  * @author Kim To
  * @version 1.0.5, 30/08/2014
  */
-public class Contacts implements java.io.Serializable {
+public class Contacts implements java.io.Serializable, Cloneable{
 
 	private Integer id;
 	private TitleTypes titleType;
@@ -540,5 +540,8 @@ public class Contacts implements java.io.Serializable {
 	public String getFullName() {
 		return this.getFirstname() + " " + this.getLastname();
 	}
-
+	
+	public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
 }
