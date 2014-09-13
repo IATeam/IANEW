@@ -5,12 +5,18 @@
 <hibernate-configuration>
     <session-factory>
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="hibernate.connection.password"></property>
+        <property name="hibernate.connection.password">root</property>
         <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/ianew</property>
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="show_sql">true</property>
         <property name="format_sql">true</property>
+        
+        <!-- hibernate search configuration -->
+        <!-- @author Kim To -->
+		<property name="hibernate.search.default.indexBase"> 
+			/Users/KimTo/indexes 
+		</property> 
         
         <mapping resource="uow/ia/bean/CaseIssues.hbm.xml" />
         <mapping resource="uow/ia/bean/DangerTypes.hbm.xml" />
@@ -62,5 +68,25 @@
         <mapping resource="uow/ia/bean/IaCommunicationsHistories.hbm.xml" />
         <mapping resource="uow/ia/bean/CaseIssuesHistories.hbm.xml" />
         <mapping resource="uow/ia/bean/ContactEmployments.hbm.xml" />
+        
+        <!-- Enable listener -->
+        <event type="post-update"> 
+			<listener class="org.hibernate.search.event.FullTextIndexEventListener"/> 
+		</event> 
+		<event type="post-insert"> 
+			<listener class="org.hibernate.search.event.FullTextIndexEventListener"/> 
+		</event> 
+		<event type="post-delete"> 
+			<listener class="org.hibernate.search.event.FullTextIndexEventListener"/> 
+		</event> 
+		<event type="post-collection-recreate"> 
+			<listener class="org.hibernate.search.event.FullTextIndexEventListener"/> 
+		</event> 
+		<event type="post-collection-remove"> 
+			<listener class="org.hibernate.search.event.FullTextIndexEventListener"/> 
+		</event> 
+		<event type="post-collection-update"> 
+			<listener class="org.hibernate.search.event.FullTextIndexEventListener"/> 
+		</event> 
     </session-factory>
 </hibernate-configuration>

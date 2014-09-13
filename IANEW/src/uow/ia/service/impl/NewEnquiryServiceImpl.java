@@ -97,6 +97,7 @@ public class NewEnquiryServiceImpl implements NewEnquiryService {
 
 	@Override
 	public List<AccommodationTypes> findAccommodationTypes() {
+		System.out.println("in type");
 		// logger.info("NewEnquiryService.findAccommodationTypes called");
 		return accommodationTypesDao.find(" from AccommodationTypes");
 	}
@@ -658,4 +659,10 @@ public class NewEnquiryServiceImpl implements NewEnquiryService {
 		}
 	}
 
+	@Resource
+	private ContactsDao<Contacts> contact2;
+	@Override
+	public List<Contacts> findContacts() {
+		return contact2.find(" from Contacts");
+	}
 }

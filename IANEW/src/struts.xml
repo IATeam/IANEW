@@ -67,8 +67,12 @@
     	<action name="settings" class="uow.ia.action.SettingsAction" method="settings">
     		<result name="success">/forms/settings.jsp</result>
     	</action>
-    </package><package name="report" namespace="/report" extends="struts-default">
-    	<action name="report" class="uow.ia.action.ReportAction" method="report">
+    </package>
+    <package name="report" namespace="/report" extends="struts-default">
+    	<action name="report" class="uow.ia.report.action.ReportAction" method="report">
+    		<result name="success">/forms/report.jsp</result>
+    	</action>
+    	<action name="downloadExcel" class="uow.ia.report.action.ReportAction" method="downloadExcel">
     		<result name="success">/forms/report.jsp</result>
     	</action>
     </package><package name="timeManagement" namespace="/timeManagement" extends="struts-default">

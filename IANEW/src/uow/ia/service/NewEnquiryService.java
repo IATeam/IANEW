@@ -117,4 +117,6 @@ public interface NewEnquiryService {
 	
 	public boolean saveOrUpdateEnquiry(Enquiries e);
 	
+	public List<Contacts> findContacts();
+	
 }
