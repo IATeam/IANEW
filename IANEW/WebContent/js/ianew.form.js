@@ -100,7 +100,7 @@ function removeNull(articleEle){
 	$(ele).each(function(){
 		if($(this).val().length > 0){
 			isAllNull = false;
-			alert($(this).val())
+			//alert($(this).val())
 		}
 			
 	});

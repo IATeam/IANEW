@@ -115,6 +115,8 @@ public interface NewEnquiryService {
 	
 	public boolean updateEnquiry(Enquiries e);
 	
+	public Enquiries mergeEnquiry(Enquiries e);
+	
 	public boolean saveOrUpdateEnquiry(Enquiries e);
 	
 }

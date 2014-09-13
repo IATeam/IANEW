@@ -177,8 +177,8 @@ public class EnquiryAction extends BaseAction implements SessionAware{
 		activateLists();
 		
 		iamodel = services.getEnquiry(getHiddenid());
-		
 		//TODO: pass this block of code into Reflection.
+		
 		Contacts contacts = null;
 		try {
 			contacts = (Contacts) iamodel.getContact().clone();
@@ -187,7 +187,6 @@ public class EnquiryAction extends BaseAction implements SessionAware{
 		}
 		
 		iamodel.setContact(contacts);
-		
 		if(userSession.containsKey(ENQUIRY))
 			userSession.remove(ENQUIRY); 
 		userSession.put(ENQUIRY, iamodel);
@@ -224,25 +223,27 @@ public class EnquiryAction extends BaseAction implements SessionAware{
 	public String saveUpdateEnquiry() throws ParseException{ 
 		
 		System.out.println(">>>Begin SaveUpdateEnquiry");
-		//System.out.println(iamodel.getContact().getAddressesList().get(2).getCountry());
-		
+		//System.out.println(iamodel.getContact().getAddressesList().get(2).getCountry());	
 		Enquiries enquiry = (Enquiries) userSession.get(ENQUIRY);
-
+		enquiry = services.mergeEnquiry(enquiry);
+		System.out.println("called ");
 		//System.out.println("contact class: " + enquiry.getContact().getClass());
-
-		Reflection ref = new Reflection();
-		ref.updateObject(enquiry, iamodel);
+		//printIamodel(iamodel);
+		//Reflection ref = new Reflection();
+		//ref.updateObject(enquiry, iamodel);
 		
-		System.out.println("contact class: " + enquiry.getContact().getClass());
+		enquiry.getContact().setFirstname(iamodel.getContact().getFirstname());
 		
-		System.out.println("first name iamodel: " + iamodel.getContact().getFirstname());
+		//System.out.println("contact class: " + enquiry.getContact().getClass());
+		
+		//System.out.println("first name iamodel: " + iamodel.getContact().getFirstname());
 		//System.out.println("first name enquiry: " + enquiry.getContact().getFirstname());
 		
-//		if(services.saveOrUpdateEnquiry(enquiry, enquiry.getContact())){
-//			activateLists();
-//			setIamodel(enquiry);
-//			return SUCCESS;
-//		}
+		if(services.saveOrUpdateEnquiry(enquiry)){
+			activateLists();
+			setIamodel(enquiry);
+			return SUCCESS;
+		}
 		activateLists();
 		setIamodel(enquiry);
 		System.out.println("save unsuccessful");
@@ -477,8 +478,8 @@ public class EnquiryAction extends BaseAction implements SessionAware{
 			"\ndescription: " + e.getDescription() +
 			"\ninquisitor: " + e.getInquisitor() + 
 			"\nreferral by: " + e.getReferralBy() +
-			"\nreferred to: " + e.getReferralTo() +
-			"\nparent enquiry id: " + e.getParentEnquiry().getId() );
+			"\nreferred to: " + e.getReferralTo());// +
+			//"\nparent enquiry id: " + e.getParentEnquiry().getId() );
 		for (EnquiryIssues ei : e.getEnquiryIssuesList()) {
 			System.out.println(
 					"Enquiry Issue id: " + ei.getId() +
@@ -486,9 +487,9 @@ public class EnquiryAction extends BaseAction implements SessionAware{
 					"\ncomment: " + ei.getComment()
 					);
 		}
-		for(Enquiries e2: e.getEnquiriesList()){
-			System.out.println( "linked enquiry id: " + e2.getId());
-		}
+//		for(Enquiries e2: e.getEnquiriesList()){
+//			System.out.println( "linked enquiry id: " + e2.getId());
+//		}
 	
 	}
 	

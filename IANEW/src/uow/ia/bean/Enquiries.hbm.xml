@@ -50,13 +50,13 @@
         
         <!-- Self-join many-to-one -->
         <many-to-one class="uow.ia.bean.Enquiries" name="parentEnquiry" column="parent_enquiry_id" not-null="false"/>
-        <bag name="enquiriesList" table="Enquiries" cascade="all-delete-orphan" inverse="true">
+        <bag name="enquiriesList" table="Enquiries" cascade="all" inverse="true">
         	<key column="parent_enquiry_id"/>
         	<one-to-many class="uow.ia.bean.Enquiries"/>
         </bag>
         
         <!-- Many-to-many relationship -->
-        <bag name="enquiryIssuesList" table="Enquiry_Issues" inverse="true" fetch="select" cascade="save-update,delete,delete-orphan">
+        <bag name="enquiryIssuesList" table="Enquiry_Issues" inverse="true" fetch="select" cascade="all">
         	<key column="enquiry_id"/>
         	<one-to-many class="uow.ia.bean.EnquiryIssues"/>
         </bag>

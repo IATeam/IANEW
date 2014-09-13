@@ -567,26 +567,28 @@ public class NewEnquiryServiceImpl implements NewEnquiryService {
 	@Override
 	public List<Enquiries> getLinkedEnquiry(int id) {
 		Enquiries enquiries = enquiriesDao.get(Enquiries.class, id);
-		List<Enquiries> tmpEnquiries = new ArrayList<Enquiries>();
-		if(enquiries.getParentEnquiry()!=null) {
-			tmpEnquiries.add(enquiries.getParentEnquiry());
-			// if someone has a parent that means the parent always has at least one child
-			//if(enquiries.getParentEnquiry().getEnquiriesList()!=null) {
+		if(enquiries==null) {
+			List<Enquiries> tmpEnquiries = new ArrayList<Enquiries>();
+			if(enquiries.getParentEnquiry()!=null) {
+				tmpEnquiries.add(enquiries.getParentEnquiry());
+				// if someone has a parent that means the parent always has at least one child
+				//if(enquiries.getParentEnquiry().getEnquiriesList()!=null) {
+					Iterator<Enquiries> iterator = enquiries.getParentEnquiry().getEnquiriesList().iterator();
+					while (iterator.hasNext()) {
+						tmpEnquiries.add(iterator.next());
+					}
+				//}
+			} else if(enquiries.getEnquiriesList()!=null) { //selected enquire is parent and has some children
 				Iterator<Enquiries> iterator = enquiries.getParentEnquiry().getEnquiriesList().iterator();
 				while (iterator.hasNext()) {
 					tmpEnquiries.add(iterator.next());
 				}
-			//}
-		} else if(enquiries.getEnquiriesList()!=null) { //selected enquire is parent and has some children
-			Iterator<Enquiries> iterator = enquiries.getParentEnquiry().getEnquiriesList().iterator();
-			while (iterator.hasNext()) {
-				tmpEnquiries.add(iterator.next());
+			} else { // the selected enquire is the parent and no children
+				tmpEnquiries.add(enquiries);
 			}
-		} else { // the selected enquire is the parent and no children
-			tmpEnquiries.add(enquiries);
+			return tmpEnquiries;
 		}
-		return tmpEnquiries;
-		
+		return null;
 	}
 	
 	/*
@@ -595,6 +597,7 @@ public class NewEnquiryServiceImpl implements NewEnquiryService {
 	 */
 
 	@Override
+	@Transactional
 	public boolean saveOrUpdateEnquiry(Enquiries e, Contacts c) {
 		e.setContact(c);
 		c.getEnquiriesList().add(e);
@@ -616,6 +619,7 @@ public class NewEnquiryServiceImpl implements NewEnquiryService {
 	public boolean saveEnquiry(Enquiries enquiry) {
 		try {
 			enquiriesDao.save(enquiry);
+			System.out.println("saveEnquiry called");
 			return true;
 		} catch (Exception e) {
 			System.out.println(e);
@@ -652,6 +656,17 @@ public class NewEnquiryServiceImpl implements NewEnquiryService {
 		} catch (Exception e) {
 			System.out.println(e);
 			return false;
+		}
+	}
+	
+	@Override
+	public Enquiries mergeEnquiry(Enquiries enquiry) {
+		try {
+			enquiry = enquiriesDao.merge(enquiry);
+			return enquiry;
+		} catch (Exception e) {
+			System.out.println(e);
+			return null;
 		}
 	}
 	

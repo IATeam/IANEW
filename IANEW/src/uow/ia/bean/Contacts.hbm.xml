@@ -77,42 +77,42 @@
   </many-to-one>
   
   <!--  One to many relationship  -->
-  <bag fetch="select" inverse="true" name="addressesList" table="Addresses" cascade="save-update, delete, delete-orphan">
+  <bag fetch="select" inverse="true" name="addressesList" table="Addresses" cascade="all">
    <key>
     <column name="contact_id" not-null="false"/>
    </key>
    <one-to-many class="uow.ia.bean.Addresses"/>
   </bag>
   
-  <bag fetch="select" inverse="true" name="enquiriesList" table="Enquiries" order-by="id" cascade="save-update, delete, delete-orphan">
+  <bag fetch="select" inverse="true" name="enquiriesList" table="Enquiries" order-by="id" cascade="all">
   	<key>
   		<column name="contact_id" not-null="false"/>
   	</key>
   	<one-to-many class="uow.ia.bean.Enquiries"/>
   </bag>
   
-  <bag fetch="select" inverse="true" name="individualCasesList" table="Individual_Cases" order-by="id"  cascade="save-update, delete, delete-orphan">
+  <bag fetch="select" inverse="true" name="individualCasesList" table="Individual_Cases" order-by="id"  cascade="all">
   	<key>
   		<column name="client_id" not-null="false"/>
   	</key>
   	<one-to-many class="uow.ia.bean.IndividualCases"/>
   </bag>
   
-  <bag fetch="select" inverse="true" name="employmentsList" table="Contact_Employments" order-by="id" cascade="save-update, delete, delete-orphan">
+  <bag fetch="select" inverse="true" name="employmentsList" table="Contact_Employments" order-by="id" cascade="all">
   	<key>
   		<column name="contact_id" not-null="false"/>
   	</key>
   	<one-to-many class="uow.ia.bean.ContactEmployments"/>
   </bag>
   
-  <bag fetch="select" inverse="true" name="planDevelopersList" table="Plan_Developers" order-by="id"  cascade="save-update, delete, delete-orphan">
+  <bag fetch="select" inverse="true" name="planDevelopersList" table="Plan_Developers" order-by="id"  cascade="all">
   	<key>
   		<column name="contact_id" not-null="false"/>
   	</key>
   	<one-to-many class="uow.ia.bean.PlanDevelopers"/>
   </bag>
   
-  <bag fetch="select" inverse="true" name="advocateCasesList" table="Individual_Cases" order-by="id"  cascade="save-update, delete, delete-orphan">
+  <bag fetch="select" inverse="true" name="advocateCasesList" table="Individual_Cases" order-by="id"  cascade="all">
   	<key>
   		<column name="advocate_id" not-null="false"/>
   	</key>
@@ -120,7 +120,7 @@
   </bag>
  
 	 <!-- Many-to-many relationship -->
-	 <bag name="disabilitiesList" table="Client_Disabilities" inverse="true" fetch="select" cascade="save-update, delete, delete-orphan">
+	 <bag name="disabilitiesList" table="Client_Disabilities" inverse="true" fetch="select" cascade="all">
 	 	<key column="contact_id" not-null="false"/>
 	 	<one-to-many class="uow.ia.bean.ClientDisabilities"/>
 	 </bag>

@@ -65,6 +65,13 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 		this.getCurrentSession().update(o);
 		// getHibernateTemplate().update(o);
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public T merge(T o) {
+		return (T) this.getCurrentSession().merge(o);
+		// getHibernateTemplate().update(o);
+	}
 
 	@Override
 	public void saveOrUpdate(T o) {
