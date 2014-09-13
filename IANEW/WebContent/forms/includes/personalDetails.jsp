@@ -26,7 +26,7 @@
 	<fieldset>
 		<s:hidden name="iamodel.contact.id" />
 		<div class="row">
-			<div class="four columns"><s:select list="titleSelectList.{name}" name="iamodel.contact.titleType.name" headerKey="-1" headerValue="Select Title" /></div>
+			<div class="four columns"><s:select list="titleSelectList.{name}" name="iamodel.contact.titleType.id" headerKey="-1" headerValue="Select Title" /></div>
 	
 			<div class='inputfield four columns'>
 				<s:label for="firstName" value="First Name:" />

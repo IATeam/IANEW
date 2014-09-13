@@ -33,7 +33,7 @@
 	<!-- hidden field to be used as marker for next index up -->
 	<s:textfield id="issueSize" name="iamodel.enquiryIssuesList.size" value="%{iamodel.enquiryIssuesList.size}"/>
 	
-	<s:if test="%{iamodel.enquiryIssuesList.size > 0}"><article id="artIssue" class="hidden"></s:if>
+	<!-- <s:if test="%{iamodel.enquiryIssuesList.size > 0}"><article id="artIssue" class="hidden"></s:if>
 	<s:else><article id="artIssue""></s:else>
 		<section class="secIssue sixteen columns curveBorder row">
 			<s:hidden name="iamodel.enquiryIssuesList[%{.enquiryIssuesList.size}].id"/>
@@ -43,7 +43,7 @@
 				<s:textarea id="" cssClass="oneLineTextArea" name="iamodel.enquiryIssuesList[%{iamodel.enquiryIssuesList.size}].comment"/> 
 			</div>
 		</section>
-	</article>
+	</article> -->
 	<div class="row">
 		<input type="button" id="btnNewIssue" value="New Issue Type" class="two columns" />
 		<div class="twelve columns alpha"><p></p></div>

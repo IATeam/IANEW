@@ -9,6 +9,9 @@ import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
 
+import com.opensymphony.xwork2.ModelDriven;
+import com.opensymphony.xwork2.Preparable;
+
 import uow.ia.bean.AccommodationTypes;
 import uow.ia.bean.Addresses;
 import uow.ia.bean.ClientDisabilities;
@@ -26,7 +29,6 @@ import uow.ia.bean.IndividualCases;
 import uow.ia.bean.IssueTypes;
 import uow.ia.bean.StatusTypes;
 import uow.ia.bean.TitleTypes;
-
 import uow.ia.reflection.Reflection;
 
 /** ---------------------------------------------------------------------------------------------
@@ -58,17 +60,26 @@ import uow.ia.reflection.Reflection;
 
 
 
-public class EnquiryAction extends BaseAction implements SessionAware{
+public class EnquiryAction extends BaseAction implements 
+//SessionAware, 
+ModelDriven<Enquiries>, Preparable{
 	
 	private final String ENQUIRY = "enquiry";
 	/* 
 	 * form title (can either be new enquiry/exisiting enquiry/enquiry list)
 	 */
-	private String formTitle;;
+	private String formTitle;
 	private Enquiries iamodel;
 	//private Contacts ccontact;
 	//not calling from enquiry to allow 'CASE' to share the same include jsp
 	
+	/**
+	 * @param hiddenid the hiddenid to set
+	 */
+	public void setHiddenid(Integer hiddenid) {
+		this.hiddenid = hiddenid;
+	}
+
 	/*
 	 * Lists for the drop down select options for the jsps
 	 * and its associated value variables
@@ -176,20 +187,20 @@ public class EnquiryAction extends BaseAction implements SessionAware{
 		activateAutocomplete();
 		activateLists();
 		
-		iamodel = services.getEnquiry(getHiddenid());
+		//iamodel = services.getEnquiry(getHiddenid());
 		//TODO: pass this block of code into Reflection.
 		
 		Contacts contacts = null;
-		try {
-			contacts = (Contacts) iamodel.getContact().clone();
-		} catch (CloneNotSupportedException e) {
-			e.printStackTrace();
-		}
+		//try {
+		contacts = (Contacts) iamodel.getContact();//.clone();
+		//} catch (CloneNotSupportedException e) {
+		//	e.printStackTrace();
+		//}
 		
 		//iamodel.setContact(contacts);
-		if(userSession.containsKey(ENQUIRY))
-			userSession.remove(ENQUIRY); 
-		userSession.put(ENQUIRY, iamodel);
+//		if(userSession.containsKey(ENQUIRY))
+//			userSession.remove(ENQUIRY); 
+//		userSession.put(ENQUIRY, iamodel);
 		
 		linkedEnquiriesList = services.getLinkedEnquiry(getHiddenid());
 		
@@ -224,13 +235,19 @@ public class EnquiryAction extends BaseAction implements SessionAware{
 		
 		System.out.println(">>>Begin SaveUpdateEnquiry");
 		//System.out.println(iamodel.getContact().getAddressesList().get(2).getCountry());	
-		Enquiries enquiry = (Enquiries) userSession.get(ENQUIRY);
-		enquiry = services.mergeEnquiry(enquiry);
-		System.out.println("called ");
+		// {{Kim commented out
+		//Enquiries enquiry = (Enquiries) userSession.get(ENQUIRY);
+//		enquiry = services.mergeEnquiry(enquiry);
+//		System.out.println("called ");
+		// end}}
+		
 		//System.out.println("contact class: " + enquiry.getContact().getClass());
 		//printIamodel(iamodel);
-		Reflection ref = new Reflection();
-		ref.updateObject(enquiry, iamodel);
+		
+		// {{kim commented out
+//		Reflection ref = new Reflection();
+//		ref.updateObject(enquiry, iamodel);
+		//}}
 		
 		//enquiry.getContact().setFirstname(iamodel.getContact().getFirstname());
 		//Addresses e = new Addresses();
@@ -242,14 +259,19 @@ public class EnquiryAction extends BaseAction implements SessionAware{
 		//System.out.println("first name iamodel: " + iamodel.getContact().getFirstname());
 		//System.out.println("first name enquiry: " + enquiry.getContact().getFirstname());
 		
-		if(services.saveOrUpdateEnquiry(enquiry)){
+		//{{
+		if(services.saveOrUpdateEnquiry(iamodel)){
 			activateLists();
-			setIamodel(enquiry);
+			setIamodel(iamodel);
 			return SUCCESS;
 		}
-		activateLists();
-		setIamodel(enquiry);
-		System.out.println("save unsuccessful");
+//		activateLists();
+//		setIamodel(enquiry);
+		// end
+		
+		services.saveEnquiry(iamodel);
+		
+		System.out.println("save successfully");
 		return SUCCESS;
 		
 	}
@@ -498,9 +520,23 @@ public class EnquiryAction extends BaseAction implements SessionAware{
 	
 	Map <String, Object> userSession;
 
-	@Override
 	public void setSession(Map<String,Object> session) {
 		System.out.println("setSession called");
 		this.userSession = session;
+	}
+
+	@Override
+	public void prepare() throws Exception {
+		System.out.println("hiddenid = " + getHiddenid());
+		if ((Integer) getHiddenid() == null ) {
+			iamodel = new Enquiries();
+		} else {
+			iamodel = services.getEnquiry(getHiddenid());
+		}
+	}
+
+	@Override
+	public Enquiries getModel() {
+		return iamodel;
 	}
 }

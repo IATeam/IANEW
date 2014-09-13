@@ -567,7 +567,7 @@ public class NewEnquiryServiceImpl implements NewEnquiryService {
 	@Override
 	public List<Enquiries> getLinkedEnquiry(int id) {
 		Enquiries enquiries = enquiriesDao.get(Enquiries.class, id);
-		if(enquiries==null) {
+		if(enquiries!=null) {
 			List<Enquiries> tmpEnquiries = new ArrayList<Enquiries>();
 			if(enquiries.getParentEnquiry()!=null) {
 				tmpEnquiries.add(enquiries.getParentEnquiry());
@@ -579,7 +579,8 @@ public class NewEnquiryServiceImpl implements NewEnquiryService {
 					}
 				//}
 			} else if(enquiries.getEnquiriesList()!=null) { //selected enquire is parent and has some children
-				Iterator<Enquiries> iterator = enquiries.getParentEnquiry().getEnquiriesList().iterator();
+				tmpEnquiries.add(enquiries);	
+				Iterator<Enquiries> iterator = enquiries.getEnquiriesList().iterator();
 				while (iterator.hasNext()) {
 					tmpEnquiries.add(iterator.next());
 				}

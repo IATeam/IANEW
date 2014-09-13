@@ -5,6 +5,9 @@ package uow.ia.dao;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
+
+import org.hibernate.metadata.ClassMetadata;
 
 /**
  * Base Dao
@@ -195,4 +198,8 @@ public interface BaseDao<T> {
      * @return response number 
      */
 	public Integer executeHql(String hql, List<Object> param);
+	
+	public Map<String, ClassMetadata> getAllClassMetadata();
+	
+	public Class getClassByObject(Object ob);
 }

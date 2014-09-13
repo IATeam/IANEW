@@ -39,7 +39,7 @@
 	<!-- hidden field to be used as marker for next index up -->
 	<s:textfield id="employmentSize" name="iamodel.contact.employmentsList.size" value="%{iamodel.contact.employmentsList.size}"/>
 	
-	<s:if test="%{iamodel.contact.employmentsList.size > 0 }"><article id="artEmployment" class="hidden"></s:if>
+	<!-- <s:if test="%{iamodel.contact.employmentsList.size > 0 }"><article id="artEmployment" class="hidden"></s:if>
 	<s:else><article id="artEmployment"></s:else>
 	<section class="secIssue sixteen columns curveBorder">
 		<s:hidden name="iamodel.contact.employmentsList[%{iamodel.contact.employmentsList.size}].id"/>
@@ -58,7 +58,7 @@
 		</div>
 	</section>
 	
-	</article>
+	</article> -->
 	
 	<div class="row">
 		<input type="button" id="btnNewIssue" value="New Emp Type" class="two columns" />

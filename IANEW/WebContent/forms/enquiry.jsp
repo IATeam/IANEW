@@ -127,10 +127,10 @@
 		//$("#btnAddEnquiry").attr("disabled", null);
 	}
 	function checkForm(){
-		removeNull($("#artAddress"));
-		removeNull($("#artDisability"));
-		removeNull($("#artIssue"));
-		removeNull($("#artEmployment"));
+		removeNull($("artAddress"));
+		removeNull($("artDisability"));
+		removeNull($("artIssue"));
+		removeNull($("artEmployment"));
 		
 	}
 	</script>

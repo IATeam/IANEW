@@ -17,9 +17,14 @@
     <constant name="struts.ui.templateDir" value="template" />
     <constant name="struts.ui.templateSuffix" value="ftl" />
     
+    
+    
     <!-- Enquiry Forms -->
     <package name="enquiry" namespace="/enquiry" extends="struts-default">
     	<action name="getEnquiry" class="uow.ia.action.EnquiryAction" method="getExistingEnquiry">
+		    	<interceptor-ref name="params"/>
+		     <interceptor-ref name="prepare"/>
+		     <interceptor-ref name="basicStack"/>
     		<result name="success">/forms/enquiry.jsp</result>
     	</action>
     	<action name="newEnquiry" class="uow.ia.action.EnquiryAction" method="newEnquiry">
@@ -27,6 +32,9 @@
     	</action>
     	
     	<action name="saveUpdateEnquiry" class="uow.ia.action.EnquiryAction" method="saveUpdateEnquiry">
+    	<interceptor-ref name="params"/>
+		     <interceptor-ref name="prepare"/>
+		     <interceptor-ref name="basicStack"/>
     		<result name="success">/forms/enquiry.jsp</result>
     		<result name="error">/forms/enquiry.jsp</result>
     		<result name="input">/forms/enquiry.jsp</result>

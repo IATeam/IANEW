@@ -95,16 +95,18 @@ function updateIndex(articleEle, sizeEle ){
  * @param {} articleEle
  */
 function removeNull(articleEle){ 
-	var ele = $(articleEle).find("[name]");
+	
+	var ele = $("#" + articleEle).find(":hidden");
 	var isAllNull = true;
 	$(ele).each(function(){
-		if($(this).val().length > 0){
-			isAllNull = false;
+		if($(this).val().length == 0){
+			$(this).remove();
+			//isAllNull = false;
 			//alert($(this).val())
 		}
 			
 	});
-	if(isAllNull === true){//alert("in removing null");
-		$(articleEle).remove();
-	}
+	//if(isAllNull === true){//alert("in removing null");
+	//	$(articleEle).remove();
+	//}
 }

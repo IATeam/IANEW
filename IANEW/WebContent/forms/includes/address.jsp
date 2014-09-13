@@ -78,7 +78,7 @@
 		<s:hidden id="updatedUserId" name=""/>
 			
 		<!-- if contact has existing address display the address else display input field for address -->	
-		<s:if test="%{iamodel.contact.addressesList.size > 0}"><article id="artAddress" class="hidden"></s:if>
+		<%-- <s:if test="%{iamodel.contact.addressesList.size > 0}"><article id="artAddress" class="hidden"></s:if>
 		<s:else><article id="artAddress"></s:else>
 			<section class="sixteen columns curveBorder">
 				<s:hidden name="iamodel.contact.addressesList[%{iamodel.contact.addressesList.size}].id"/>
@@ -112,7 +112,7 @@
 					</div>
 				</div>
 			</section>
-		</article>
+		</article> --%>
 		
 		<div class="row">
 			<div class="fourteen columns alpha"><p></p></div>

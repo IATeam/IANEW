@@ -64,7 +64,7 @@
 	
 	<s:textfield id="disabilitySize" name="iamodel.contact.disabilitiesList.size" value="%{iamodel.contact.disabilitiesList.size}"/>
 	
-	<s:if test="%{iamodel.contact.disabilitiesList.size > 0}"><article id="artDisability" class="hidden"></s:if>
+	<!-- <s:if test="%{iamodel.contact.disabilitiesList.size > 0}"><article id="artDisability" class="hidden"></s:if>
 	<s:else><article id="artDisability""></s:else>
 		<section class="sixteen columns curveBorder row">
 				<s:hidden name="iamodel.contact.disabilitiesList[%{iamodel.contact.disabilitiesList.size}].id"/>
@@ -84,7 +84,7 @@
 					<s:textarea cssClass="disabilityDescription" cssClass="oneLineTextArea" name="iamodel.contact.disabilitiesList[%{iamodel.contact.disabilitiesList.size}].comments" /> 
 				</s:div>
 			</section>
-	</article>
+	</article> -->
 	
 	<div class="row">
 		<input type="button" id="btnNewDisability" value ="New Disability Type" class="two columns" />
