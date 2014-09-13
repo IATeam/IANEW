@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
+
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.queryParser.MultiFieldQueryParser;
 import org.apache.lucene.queryParser.ParseException;
@@ -21,20 +23,25 @@ import org.hibernate.search.FullTextSession;
 import org.hibernate.search.query.dsl.QueryBuilder;
 import org.hibernate.service.ServiceRegistry;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.log4testng.Logger;
 
 import uow.ia.bean.Contacts;
+import uow.ia.bean.Enquiries;
 import uow.ia.bean.TitleTypes;
-
+import uow.ia.dao.BaseDao;
+@Controller
 public class GenericSearchMethodTest {
 	private Logger logger = Logger.getLogger(AccommodationTypesTest.class);
-	@Autowired
 	private SessionFactory sessionFactory;
 	private Session session;
 	private static ServiceRegistry serviceRegistry;
+	
+	@Resource
+	private BaseDao dao;
 	
 	@Test
 	public void f() {
@@ -43,7 +50,12 @@ public class GenericSearchMethodTest {
 		List<String> productFields = new ArrayList<String>();
 		
 		try{
-			Map<String, ClassMetadata> map = sessionFactory.getAllClassMetadata();
+			
+			Map<String, ClassMetadata> map = dao.getClassMetaData();
+					//sessionFactory.getAllClassMetadata();
+			//Class class = Enquiries.class;
+			//Contacts contact = new Contacts();
+			//System.out.println("quang test " + sessionFactory.getClassMetadata(((Object)contact).getClass()));
 		
 			for (ClassMetadata c : map.values()) {
 				
@@ -55,6 +67,14 @@ public class GenericSearchMethodTest {
 					System.out.println("mapped class class" + c.getMappedClass().getClass().toString());
 					
 					Field[] field = c.getMappedClass().getDeclaredFields();
+					Method[] methods = c.getMappedClass().getDeclaredMethods();
+					
+					for(Method m : methods) {
+						if (m.getName().equals("getFirstName")) {
+							m.invoke("To");
+						}
+					}
+					
 					for (Field f : field) {
 						if (f.getType().isInstance(new String()) || 
 							f.getType().isInstance(new java.sql.Date(0)) || 
@@ -62,7 +82,9 @@ public class GenericSearchMethodTest {
 							f.getType().isInstance(new Integer(0)) )
 						{
 							System.out.println(f.getName());
+							
 							productFields.add(f.getName());
+							
 						}
 						
 					}

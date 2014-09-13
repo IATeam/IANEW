@@ -6,11 +6,13 @@ package uow.ia.dao.impl;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.metadata.ClassMetadata;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.HibernateCallback;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
@@ -271,6 +273,12 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 		return q.executeUpdate();
 
 		// return null;
+	}
+
+	@Override
+	public Map<String, ClassMetadata> getClassMetaData() {
+		// TODO Auto-generated method stub
+		return sessionFactory.getAllClassMetadata();
 	}
 
 }
