@@ -6,7 +6,8 @@
 		10/08/2014 - 	Added iteration by Quang Nhan
 		14/08/2014 	- 	Connect and retrieve data called by the action class and added 
 						pagination functionality by Quang Nhan
-		28/08/2014 -	Address of 
+		08/09/2014 -	Quang Nhan
+						changed all ccontact to iamodel.contact
 	==============================================	
 	Description: A jsp page that displays a address of contact
 ------------------------------------------------------------------------------------------------>
@@ -21,93 +22,93 @@
 		<div class="row">
 		<!-- to do -->
 			<div class="four columns">
-				<s:select list="accomodationSelectList.{accommodationName}" name="ccontact.accommodation.accommodationName" headerKey="-1" headerValue="Select an Accomodation Type"/>
+				<s:select list="accomodationSelectList.{accommodationName}" name="iamodel.contact.accommodation.accommodationName" headerKey="-1" headerValue="Select an Accomodation Type"/>
 			</div>
 			
 			<div class="textarea twelve columns">
 				<s:label for="accomodationComments" value="Comments:" />
-				<div><s:textarea id="accomodationComments" cssClass="oneLineTextArea" name="ccontact.accommodationComment" /></div> 
+				<div><s:textarea id="accomodationComments" cssClass="oneLineTextArea" name="iamodel.contact.accommodationComment" /></div> 
 			</div>
 		</div>
 		<aticle id="itAddress">
-			<s:iterator value="ccontact.addressesList" status="stat">
+			<s:iterator value="iamodel.contact.addressesList" status="stat">
 				<h1><s:property value="{#stat.index}" /></h1>
 				<section class="sixteen columns curveBorder">
-					<s:hidden name="ccontact.addressesList[%{#stat.index}].id"/>
-					<s:hidden name="ccontact.addressesList[%{#stat.index}].createdUserId"/>
-					<s:hidden name="ccontact.addressesList[%{#stat.index}].createdDateTime"/>
-					<s:hidden name="ccontact.addressesList[%{#stat.index}].updatedUserId"/>
-					<s:hidden name="ccontact.addressesList[%{#stat.index}].updatedDateTime"/>
+					<s:hidden name="iamodel.contact.addressesList[%{#stat.index}].id"/>
+					<s:hidden name="iamodel.contact.addressesList[%{#stat.index}].createdUserId"/>
+					<s:hidden name="iamodel.contact.addressesList[%{#stat.index}].createdDateTime"/>
+					<s:hidden name="iamodel.contact.addressesList[%{#stat.index}].updatedUserId"/>
+					<s:hidden name="iamodel.contact.addressesList[%{#stat.index}].updatedDateTime"/>
 					
 					<div class="row">
 						<div class="inputfield eight columns">
 							<s:label for="address" value="Street" />
-							<div><s:textfield name="ccontact.addressesList[%{#stat.index}].street"></s:textfield></div>
+							<div><s:textfield name="iamodel.contact.addressesList[%{#stat.index}].street"></s:textfield></div>
 						</div>
 						<div class="inputfield four columns">
 							<s:label for="city" value="Suburb" />
-							<div><s:textfield name="ccontact.addressesList[%{#stat.index}].suburb" /></div>
+							<div><s:textfield name="iamodel.contact.addressesList[%{#stat.index}].suburb" /></div>
 						</div>
 						<div class="inputfield three columns">
 							<s:label for="state" value="State:" />
-							<div><s:textfield name="ccontact.addressesList[%{#stat.index}].state" /></div>
+							<div><s:textfield name="iamodel.contact.addressesList[%{#stat.index}].state" /></div>
 						</div>
 					</div>
 					
 					<div class="row">
 						<div class="inputfield four columns">
 							<s:label for="country" value="Country:" />
-							<div><s:textfield name="ccontact.addressesList[%{#stat.index}].country"></s:textfield></div>
+							<div><s:textfield name="iamodel.contact.addressesList[%{#stat.index}].country"></s:textfield></div>
 						</div>
 						<div class="inputfield four columns">
 							<s:label for="postCode" value="Post Code:" />
-							<div><s:textfield name="ccontact.addressesList[%{#stat.index}].postcode"></s:textfield></div>
+							<div><s:textfield name="iamodel.contact.addressesList[%{#stat.index}].postcode"></s:textfield></div>
 						</div>
 						<div class="inputfield four columns">
 							<s:label for="homePhone" value="Home#:"/>
-							<div><s:textfield name="ccontact.addressesList[%{#stat.index}].homephone"></s:textfield></div>
+							<div><s:textfield name="iamodel.contact.addressesList[%{#stat.index}].homephone"></s:textfield></div>
 						</div>
 					</div> 
 				</section>
 			</s:iterator>
 		</aticle>
 		
-		<s:textfield id="addressSize" name="ccontact.addressesList.size" value="%{ccontact.addressesList.size}"/>
+		<s:textfield id="addressSize" name="iamodel.contact.addressesList.size" value="%{iamodel.contact.addressesList.size}"/>
 		<s:hidden id="createdUserId" name="" />
 		<s:hidden id="updatedUserId" name=""/>
 			
 		<!-- if contact has existing address display the address else display input field for address -->	
-		<s:if test="%{ccontact.addressesList.size > 0}"><article id="artAddress" class="hidden"></s:if>
+		<s:if test="%{iamodel.contact.addressesList.size > 0}"><article id="artAddress" class="hidden"></s:if>
 		<s:else><article id="artAddress"></s:else>
 			<section class="sixteen columns curveBorder">
-				<s:hidden name="ccontact.addressesList[%{ccontact.addressesList.size}].id"/>
+				<s:hidden name="iamodel.contact.addressesList[%{iamodel.contact.addressesList.size}].id"/>
 				<div class="row">
 					<div class="inputfield eight columns">
 						<s:label for="street" value="Street: " />
-						<div><s:textfield name="ccontact.addressesList[%{ccontact.addressesccontact.disabilitiesList.sizeList.size}].street" /></div>
+						<div><s:textfield name="iamodel.contact.addressesList[%{iamodel.contact.addressesList.size}].street" /></div>
 					</div>
 					<div class="inputfield four columns">
 						<s:label for="city" value="Suburb" />
-						<div><s:textfield name="ccontact.addressesList[%{ccontact.addressesList.size}].surburb" /></div>
+						<div><s:textfield name="iamodel.contact.addressesList[%{iamodel.contact.addressesList.size}].surburb" /></div>
 					</div>
 					<div class="inputfield three columns">
 						<s:label for="state" value="State:" />
-						<div><s:textfield name="ccontact.addressesList[%{ccontact.addressesList.size}].state" /></div>
+						<div><s:textfield name="iamodel.contact.addressesList[%{iamodel.contact.addressesList.size}].state" /></div>
 					</div>
 				</div>
 				
 				<div class="row">
 					<div class="inputfield four columns">
 						<s:label for="country" value="Country:" />
-						<div><s:textfield name="ccontact.addressesList[%{ccontact.addressesList.size}].country" /></div>
+						<div><s:textfield name="iamodel.contact.addressesList[%{iamodel.contact.addressesList.size}].country" /></div>
 					</div>
 					<div class="inputfield four columns">
 						<s:label for="postCode" value="Post Code:" />
-						<div><s:textfield name="ccontact.addressesList[%{ccontact.addressesList.size}].postcode" /></div>
+						<div><s:textfield name="iamodel.contact.addressesList[%{iamodel.contact.addressesList.size}].postcode" /></div>
 					</div>
 					<div class="inputfield four columns">
 						<s:label for="homePhone" value="Home#:"/>
-						<div><s:textfield name="ccontact.addressesList[%{ccontact.addressesList.size}].homephone" /></div>
+						<div><s:textfield name="iamodel.contact.addressesList[%{iamodel.contact.addressesList.size}].homephone" /></div>
 					</div>
 				</div>
 			</section>

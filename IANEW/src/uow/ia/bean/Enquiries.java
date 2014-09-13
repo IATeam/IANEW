@@ -10,7 +10,7 @@ import java.util.List;
  * @author Kim To
  * @version 1.0.4, 30/08/2014
  */
-public class Enquiries implements java.io.Serializable {
+public class Enquiries implements java.io.Serializable, Cloneable{
 
 	private Integer id;
 	private Contacts contact;
@@ -314,4 +314,7 @@ public class Enquiries implements java.io.Serializable {
 		return issuesTypesString;
 	}
 
+	public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
 }

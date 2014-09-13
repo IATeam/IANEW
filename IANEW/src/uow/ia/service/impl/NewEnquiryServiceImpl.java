@@ -585,13 +585,8 @@ public class NewEnquiryServiceImpl implements NewEnquiryService {
 		} else { // the selected enquire is the parent and no children
 			tmpEnquiries.add(enquiries);
 		}
-//		System.out.println(tmpEnquiries.size());
-//		for (Enquiries enquiries2 : tmpEnquiries) {
-//			System.out.println("enquiries are:");
-//			System.out.println(enquiries2.getId());
-//		}
-		
 		return tmpEnquiries;
+		
 	}
 	
 	/*
