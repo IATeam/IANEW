@@ -14,6 +14,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import uow.ia.bean.Enquiries;
+
 
 /** ---------------------------------------------------------------------------------------------
  * @author: Quang Nhan
@@ -49,11 +51,11 @@ public class Reflection{
 	private Object o1 = null;
 	private Object o2 = null;
 	
-	public Object initializeNewModel(Object o1){ System.out.println("Dealing with " + o1.getClass().getSimpleName());
+	public Object initializeNewModel(Object o1){ System.out.println("Dealing with " + Enquiries.class.getSimpleName());
 		this.o1 = o1;
 		try {
-			this.classNameList = getClassNameList(this.o1.getClass().getPackage().getName());
-			initializeAllFields(getCategorizedFieldList(this.o1.getClass()));
+			this.classNameList = getClassNameList(Enquiries.class.getPackage().getName());
+			initializeAllFields(getCategorizedFieldList(Enquiries.class));
 		} catch (IOException | URISyntaxException | NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 			
 			e.printStackTrace();
@@ -98,7 +100,7 @@ public class Reflection{
 		for(Field f: list){
 			System.out.println("uow.ia.Reflecton: Evoking initialization on nested class: " + f.getType().getSimpleName());
 			if(!f.getType().isAssignableFrom(Integer.class) && !f.getType().isAssignableFrom(java.sql.Date.class)){
-				Method setter = getSetterMethod(f, o1.getClass());
+				Method setter = getSetterMethod(f, Enquiries.class);
 				invokeSetterMethod(setter, o1, f.getType().newInstance());
 			}
 		}
@@ -121,7 +123,7 @@ public class Reflection{
 		for(Field f: list){
 			System.out.println("uow.ia.Reflecton: Evoking initialization on nested class: " + f.getType().getSimpleName());
 			
-			Method setter = getSetterMethod(f, o1.getClass());
+			Method setter = getSetterMethod(f, Enquiries.class);
 			invokeSetterMethod(setter, o1, f.getType().newInstance());
 		}
 	}
@@ -145,12 +147,12 @@ public class Reflection{
 		for(Field f: list){
 			System.out.println(f.getName());
 				
-			if(f.getType() != o1.getClass()){ 
+			if(f.getType() != Enquiries.class){ 
 				System.out.println("uow.ia.Reflecton: Evoking initialization on nested class: " + f.getType().getSimpleName());
-				Method setter = getSetterMethod(f, o1.getClass());
+				Method setter = getSetterMethod(f, Enquiries.class);
 				invokeSetterMethod(setter, o1, f.getType().newInstance());
 				
-				Method getter = getGetterMethod(f, o1.getClass());
+				Method getter = getGetterMethod(f, Enquiries.class);
 				
 				Reflection ref = new Reflection();
 				ref.initializeNewModel(invokeGetterMethod(getter, o1));
@@ -173,7 +175,7 @@ public class Reflection{
 		for(Field f: list){
 			System.out.println("uow.ia.Reflecton: initializing field: " + f.getName());
 			
-			Method[] getterSetter = getGetterSetterMethod(f, o1.getClass());
+			Method[] getterSetter = getGetterSetterMethod(f, Enquiries.class);
 			
 			//Object param =  Array.newInstance(f.getType(), 1);
 			
@@ -193,8 +195,8 @@ public class Reflection{
 		this.o1 = o1;
 		this.o2 = o2;
 		try {
-			this.classNameList = getClassNameList(this.o1.getClass().getPackage().getName());
-			updateMachine(getCategorizedFieldList(o1.getClass()));
+			this.classNameList = getClassNameList(Enquiries.class.getPackage().getName());
+			updateMachine(getCategorizedFieldList(Enquiries.class));
 		} catch (IOException | URISyntaxException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchFieldException | SecurityException e) {
 			e.printStackTrace();
 		}
@@ -236,8 +238,9 @@ public class Reflection{
 			Method[] getterSetters = this.getGetterSetterMethod(f, o2.getClass());
 			//if ob1 and obj2 equal ignore
 			//if ob1 not equal ob2, and obj2 not equal null, then update
-			System.out.println("Methods " + getterSetters[0].toString());
-			
+			System.out.println(fList.size());
+			//System.out.println("Methods " + getterSetters[0].toString());
+			System.out.println(fList.size());
 			Object o1Result = null; 
 			Object o2Result = null;
 			
@@ -323,22 +326,22 @@ public class Reflection{
 	private void level3Machinery(List<Field> fList) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchFieldException, SecurityException{
 		if(fList.size() == 0)
 			return;
-		System.out.println(o1.getClass().getSimpleName() + " list list size: " + fList.size() + " and " + fList.toString());
+		System.out.println(Enquiries.class.getSimpleName() + " list list size: " + fList.size() + " and " + fList.toString());
 		
 		for(Field f:fList){ 
 			
-			System.out.println("Parent object: " + o1.getClass().getSimpleName() + " ListField level3Machinery: " + f.getName());
+			System.out.println("Parent object: " + Enquiries.class.getSimpleName() + " ListField level3Machinery: " + f.getName());
 			
 			//List<k> this will give the class k
 			Class<?> ptClass = getParamClassOfList(f);
 			
-			Method[] getterSetters = this.getGetterSetterMethod(f, o1.getClass());
+			Method[] getterSetters = this.getGetterSetterMethod(f, Enquiries.class);
 			List<List<?>> filteredList = null;
 			
 			filteredList = getFilteredList(f);
 			if(filteredList != null){
 				System.out.println("PTCLASS: " + ptClass);
-				if(ptClass.equals(o1.getClass())){	
+				if(ptClass.equals(Enquiries.class)){	
 					invokeSetterMethod(getterSetters[1], o1, (invokeGetterMethod(getterSetters[0], o2)));
 					
 				}else{
@@ -392,7 +395,7 @@ public class Reflection{
 		
 		//fill o1DiscardedObjects with o1, o2UpdatedObjectList with o2 
 		//field Objects invoked by getter method
-		Method fGetter = getGetterMethod(f, o1.getClass());
+		Method fGetter = getGetterMethod(f, Enquiries.class);
 		o1DiscardObjectList = (List<?>)invokeGetterMethod(fGetter, o1);
 		o2UpdatedObjectList = (List<?>)invokeGetterMethod(fGetter, o2);
 		
@@ -460,7 +463,7 @@ public class Reflection{
 	 * @throws NoSuchFieldException 
 	 */
 	private void runSubClassAssignment(Field f) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchFieldException, SecurityException{
-		Method[] getterSetters = this.getGetterSetterMethod(f, o1.getClass());
+		Method[] getterSetters = this.getGetterSetterMethod(f, Enquiries.class);
 		
 		Field subIDField = f.getType().getDeclaredField("id");
 		Method subIDGetterMethod = getGetterMethod(subIDField, f.getType());
@@ -471,7 +474,11 @@ public class Reflection{
 		Object o2TypeID = null;
 		
 		//get the value of the bean field
-		try { o1Sub = invokeGetterMethod(getterSetters[0], o1); }
+		try { 
+			System.out.println(getterSetters[0].getName());
+			o1Sub = invokeGetterMethod(getterSetters[0], o1); 
+			
+		}
 		catch(NullPointerException npe){ /*null is okay*/ }
 		
 		try { o2Sub = invokeGetterMethod(getterSetters[0], o2); }
@@ -490,7 +497,7 @@ public class Reflection{
 		//o2 is assigned to the o1 if id of ob1 is not equal to ob2 or 
 		//if field type is the same as the class type eg Enquiry and its parentEnquiry or 
 		//field type containing substring "Type"
-		if(o1TypeID != o2TypeID || f.getType().getName().equals(o1.getClass().getName()) || f.getType().getSimpleName().contains("Type")){
+		if(o1TypeID != o2TypeID || f.getType().getName().equals(Enquiries.class.getName()) || f.getType().getSimpleName().contains("Type")){
 			invokeSetterMethod(getterSetters[1], o1, (invokeGetterMethod(getterSetters[0], o2)));
 			
 		}//if field is of type belonging to entity beans

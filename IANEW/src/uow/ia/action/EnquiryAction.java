@@ -186,7 +186,7 @@ public class EnquiryAction extends BaseAction implements SessionAware{
 			e.printStackTrace();
 		}
 		
-		iamodel.setContact(contacts);
+		//iamodel.setContact(contacts);
 		if(userSession.containsKey(ENQUIRY))
 			userSession.remove(ENQUIRY); 
 		userSession.put(ENQUIRY, iamodel);
@@ -229,10 +229,13 @@ public class EnquiryAction extends BaseAction implements SessionAware{
 		System.out.println("called ");
 		//System.out.println("contact class: " + enquiry.getContact().getClass());
 		//printIamodel(iamodel);
-		//Reflection ref = new Reflection();
-		//ref.updateObject(enquiry, iamodel);
+		Reflection ref = new Reflection();
+		ref.updateObject(enquiry, iamodel);
 		
-		enquiry.getContact().setFirstname(iamodel.getContact().getFirstname());
+		//enquiry.getContact().setFirstname(iamodel.getContact().getFirstname());
+		//Addresses e = new Addresses();
+		//e.setCountry("kkk");
+		//enquiry.getContact().getAddressesList().add(e);
 		
 		//System.out.println("contact class: " + enquiry.getContact().getClass());
 		
