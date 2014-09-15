@@ -19,7 +19,7 @@ public class LoginAction extends BaseAction {
 		Users user = adminService.login(username, password);
 		if(user!=null) {
 			Map<String, Object> session = ActionContext.getContext().getSession();
-			session.put("user",user);
+			session.put(USER, user);
             session.put("context", new Date());
 			return SUCCESS;
 		} else {

@@ -14,6 +14,7 @@
 						Added autocomplete feature
 		08/09/2014 -	Quang Nhan
 						changed all ccontact to iamodel.contact
+		15/09/2014 -	Quang Changed back all name in select list to the...
 	==============================================	
 	Description: A component of the contact that is to be displayed on both enquiry and case forms that 
 				displays the personal detail.
@@ -26,7 +27,7 @@
 	<fieldset>
 		<s:hidden name="iamodel.contact.id" />
 		<div class="row">
-			<div class="four columns"><s:select list="titleSelectList.{name}" name="iamodel.contact.titleType.id" headerKey="-1" headerValue="Select Title" /></div>
+			<div class="four columns"><s:select list="titleSelectList.{name}" name="theTitle" headerKey="-1" headerValue="Select Title" /></div>
 	
 			<div class='inputfield four columns'>
 				<s:label for="firstName" value="First Name:" />
@@ -46,7 +47,7 @@
 		</div>
 		<!-- name="iamodel.contact.genderType.genderName" -->
 		<div class="row">
-			<div class="four columns"><s:select list="genderSelectList.{genderName}" name="iamodel.contact.genderType.genderName" headerKey="-1" headerValue="Select Gender"/></div>
+			<div class="four columns"><s:select list="genderSelectList.{genderName}" name="theGender" headerKey="-1" headerValue="Select Gender"/></div>
 			<!-- style="padding-right: 15px;" -->
 			<div class="inputfield eight columns" >
 				<s:label for="identification" value="Identification:" />
@@ -60,7 +61,7 @@
 		</div>
 		
 		<div class="row">
-			<div class="four columns"><s:select list="culturalBackgroundSelectList.{culturalBackgroundName}" name="iamodel.contact.culturalBackground.culturalBackgroundName" headerKey="-1"  headerValue="Select Cultural Background" /></div>
+			<div class="four columns"><s:select list="culturalBackgroundSelectList.{culturalBackgroundName}" name="theCulturalBackground" headerKey="-1"  headerValue="Select Cultural Background" /></div>
 			
 			<div class="textarea twelve columns omega">
 				<s:label for="culturalBackgroundComments" value="Comments:" />

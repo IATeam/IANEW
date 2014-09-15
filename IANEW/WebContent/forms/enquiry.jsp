@@ -22,6 +22,7 @@
 						Pulled the form footer out of the enquiryForm tags and placed it at the bottom
 						Implement readonly javascript for existing enquiry.
 		01/08/2014 -	Include a new javascript ianew.form.js
+		14/08/2014 -	Quang Revised the function to remove null sections and definition when the form is submitted
 	==============================================	
 	Description: A jsp page that displays enquiry list for both new and existing
 	
@@ -55,7 +56,10 @@
 
 	<s:div cssClass="form container">
 	
-	<s:form id="enquiryForm" action="saveUpdateEnquiry" cssClass="cmxform" namespace='/enquiry' method="post" novalidate="novalidate">  
+	
+	
+	<s:form id="enquiryForm" action="saveUpdateEnquiry" cssClass="cmxform" namespace='/enquiry' method="post" novalidate="novalidate"> 
+		<s:hidden name="iamodel.contact.id" />
 <!-- ---------------------------------------------------------------------------------------------- -->
 <!-- Header of the form --------------------------------------------------------------------------- -->
 <!-- ---------------------------------------------------------------------------------------------- -->	
@@ -93,7 +97,7 @@
 				</section>
 				<section class="six columns"><p></p></section>
 				<section class="four columns omega">
-					<input id="createCase" type="button" value="Create Case" class="two columns alpha"/>
+					<input id="createCase" type="button" value="Create Case" class="two columns alpha" onclick="checkForm()"/>
 					<sj:submit formIds="enquiryForm" cssClass="two columns omega" value="Save" onclick="checkForm()"/>
 				</section>
 			</s:div>
@@ -126,11 +130,11 @@
 		//$("#btnView").attr("disabled", null);
 		//$("#btnAddEnquiry").attr("disabled", null);
 	}
-	function checkForm(){
-		removeNull($("artAddress"));
-		removeNull($("artDisability"));
-		removeNull($("artIssue"));
-		removeNull($("artEmployment"));
+	function checkForm(){ alert("checking form");
+		removeNullAndUpdateIndex($("#artAddress"), $("#itAddress"), $("#addressSize"));
+		removeNullAndUpdateIndex($("#artDisability"), $("#itDisability"), $("#disabilitySize"));
+		removeNullAndUpdateIndex($("#artIssue"), $("#itIssue"), $("#issueSize"));
+		removeNullAndUpdateIndex($("#artEmployment"), $("#itEmployment"), $("#employmentSize"));
 		
 	}
 	</script>

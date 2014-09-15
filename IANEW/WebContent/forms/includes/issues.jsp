@@ -18,35 +18,30 @@
 <h3 class="sixteen columns" style="float:none;">Issues</h3>
 <s:div cssClass="greybackground">
 	<article id="itIssue">
-		<s:iterator value="iamodel.enquiryIssuesList" status="stat">
-			<section class="secIssue sixteen columns curveBorder">
-				<s:hidden name="iamodel.enquiryIssuesList[%{#stat.index}].id"/>
-				<div class="four columns"><s:select list="issueSelectList.{issueName}" name="iamodel.enquiryIssuesList[%{#stat.index}].issue.issueName" headerKey="-1" headerValue="Select an Issue" /></div>
-				<div class="textarea eleven columns omega">
-					<s:label for="issuedescription" value="Issue Description:" />
-					<s:textarea id="" cssClass="oneLineTextArea" name="iamodel.enquiryIssuesList[%{#stat.index}].comment"/> 
-				</div>
-			</section>
-		</s:iterator>
+		<%@include file="iterIssues.jsp" %>
 	</article>
 	
 	<!-- hidden field to be used as marker for next index up -->
 	<s:textfield id="issueSize" name="iamodel.enquiryIssuesList.size" value="%{iamodel.enquiryIssuesList.size}"/>
 	
-	<!-- <s:if test="%{iamodel.enquiryIssuesList.size > 0}"><article id="artIssue" class="hidden"></s:if>
+	<s:if test="%{iamodel.enquiryIssuesList.size > 0}"><article id="artIssue" class="hidden"></s:if>
 	<s:else><article id="artIssue""></s:else>
 		<section class="secIssue sixteen columns curveBorder row">
 			<s:hidden name="iamodel.enquiryIssuesList[%{.enquiryIssuesList.size}].id"/>
-			<div class="four columns"><s:select list="issueSelectList.{issueName}" name="iamodel.enquiryIssuesList[%{.enquiryIssuesList.size}].issue.issueName" headerKey="-1" headerValue="Select an Issue" /></div>
+			
+			<div class="four columns">
+				<s:select list="issueSelectList.{issueName}" name="theIssueList[%{iamodel.enquiryIssuesList.size}]" headerKey="-1" headerValue="Select an Issue" />
+			</div>
+			
 			<div class="textarea eleven columns omega">
 				<s:label for="issuedescription" value="Issue Description:" />
 				<s:textarea id="" cssClass="oneLineTextArea" name="iamodel.enquiryIssuesList[%{iamodel.enquiryIssuesList.size}].comment"/> 
 			</div>
 		</section>
-	</article> -->
+	</article> 
 	<div class="row">
 		<input type="button" id="btnNewIssue" value="New Issue Type" class="two columns" />
-		<div class="twelve columns alpha"><p></p></div>
+		<div class="twelve columns alpha"><p></p></div>    
 		<input type="button" id="btnAddIssue" value="Add Issue" class="two columns" onclick="addNewRecord('artIssue', 'issueSize', 'itIssue' )"/>
 		
 	</div>

@@ -46,6 +46,15 @@
     	<action name="updateLinkedEnquiries" class="uow.ia.action.EnquiryAction" method="updateLinkedEnquiries">
     		<result name="success">/forms/includes/linkedEnquiries.jsp</result>
     	</action>
+    	<action name="deleteFromList" class="uow.ia.action.EnquiryAction" method="deleteFromList">
+    		<interceptor-ref name="params"/>
+		     <interceptor-ref name="prepare"/>
+		     <interceptor-ref name="basicStack"/>
+    		<result name="disabilityUpdate">/forms/includes/iterDisabilities.jsp</result>
+    		<result name="issueUpdate">/forms/includes/iterIssues.jsp</result>
+    		<result name="addressUpdate">/forms/includes/iterAddresses.jsp</result>
+    		<result name="employmentUpdate">/forms/includes/iterEmployments.jsp</result>
+    	</action>
     </package>
     
     <!-- Enquiry List Forms-->
@@ -66,6 +75,8 @@
     	<action name="linkEnquiry" class="uow.ia.action.EnquiryListAction" method="updateEnquiryList">
     		<result name="success">/forms/enquiryList.jsp</result>
     	</action>
+    	
+    	
     </package>
     
     <!-- Case Forms -->

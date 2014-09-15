@@ -53,8 +53,10 @@
 	</s:url>
 	<s:url var="urlENew" namespace="/enquiry" action="newEnquiry">
 		<s:param name="formTitle">New Enquiry</s:param>
+		<s:param name="hiddenid">null</s:param>
 	</s:url>
-	<s:url id="urlEExisting" namespace="/enquiry" action="getEnquiry" includeContext="false">
+	<s:url id="urlEExisting" namespace="/enquiry" action="getEnquiry">
+		<s:param name="hiddenid">1</s:param>
 		<s:param name="formTitle">Existing Enquiry</s:param>
 	</s:url>
 	<s:url id="urlCList" namespace="/case" action="caseList">

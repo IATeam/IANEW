@@ -19,7 +19,7 @@
 		<s:param name="address" />
 	</s:url>
 	<fieldset>
-		<div class="row">
+		<div class="row"> <s:text name="#session.user.username"></s:text>
 		<!-- to do -->
 			<div class="four columns">
 				<s:select list="accomodationSelectList.{accommodationName}" name="iamodel.contact.accommodation.accommodationName" headerKey="-1" headerValue="Select an Accomodation Type"/>
@@ -30,47 +30,9 @@
 				<div><s:textarea id="accomodationComments" cssClass="oneLineTextArea" name="iamodel.contact.accommodationComment" /></div> 
 			</div>
 		</div>
+		
 		<aticle id="itAddress">
-			<s:iterator value="iamodel.contact.addressesList" status="stat">
-				<h1><s:property value="{#stat.index}" /></h1>
-				<section class="sixteen columns curveBorder">
-					<s:hidden name="iamodel.contact.addressesList[%{#stat.index}].id"/>
-					<s:hidden name="iamodel.contact.addressesList[%{#stat.index}].createdUserId"/>
-					<s:hidden name="iamodel.contact.addressesList[%{#stat.index}].createdDateTime"/>
-					<s:hidden name="iamodel.contact.addressesList[%{#stat.index}].updatedUserId"/>
-					<s:hidden name="iamodel.contact.addressesList[%{#stat.index}].updatedDateTime"/>
-					
-					<div class="row">
-						<div class="inputfield eight columns">
-							<s:label for="address" value="Street" />
-							<div><s:textfield name="iamodel.contact.addressesList[%{#stat.index}].street"></s:textfield></div>
-						</div>
-						<div class="inputfield four columns">
-							<s:label for="city" value="Suburb" />
-							<div><s:textfield name="iamodel.contact.addressesList[%{#stat.index}].suburb" /></div>
-						</div>
-						<div class="inputfield three columns">
-							<s:label for="state" value="State:" />
-							<div><s:textfield name="iamodel.contact.addressesList[%{#stat.index}].state" /></div>
-						</div>
-					</div>
-					
-					<div class="row">
-						<div class="inputfield four columns">
-							<s:label for="country" value="Country:" />
-							<div><s:textfield name="iamodel.contact.addressesList[%{#stat.index}].country"></s:textfield></div>
-						</div>
-						<div class="inputfield four columns">
-							<s:label for="postCode" value="Post Code:" />
-							<div><s:textfield name="iamodel.contact.addressesList[%{#stat.index}].postcode"></s:textfield></div>
-						</div>
-						<div class="inputfield four columns">
-							<s:label for="homePhone" value="Home#:"/>
-							<div><s:textfield name="iamodel.contact.addressesList[%{#stat.index}].homephone"></s:textfield></div>
-						</div>
-					</div> 
-				</section>
-			</s:iterator>
+			<%@include file="iterAddresses.jsp" %>
 		</aticle>
 		
 		<s:textfield id="addressSize" name="iamodel.contact.addressesList.size" value="%{iamodel.contact.addressesList.size}"/>
@@ -78,10 +40,11 @@
 		<s:hidden id="updatedUserId" name=""/>
 			
 		<!-- if contact has existing address display the address else display input field for address -->	
-		<%-- <s:if test="%{iamodel.contact.addressesList.size > 0}"><article id="artAddress" class="hidden"></s:if>
+		<s:if test="%{iamodel.contact.addressesList.size > 0}"><article id="artAddress" class="hidden"></s:if>
 		<s:else><article id="artAddress"></s:else>
 			<section class="sixteen columns curveBorder">
-				<s:hidden name="iamodel.contact.addressesList[%{iamodel.contact.addressesList.size}].id"/>
+				<s:hidden name="iamodel.contact.addressesList[%{iamodel.contact.addressesList.size}].id" />
+				
 				<div class="row">
 					<div class="inputfield eight columns">
 						<s:label for="street" value="Street: " />
@@ -89,7 +52,7 @@
 					</div>
 					<div class="inputfield four columns">
 						<s:label for="city" value="Suburb" />
-						<div><s:textfield name="iamodel.contact.addressesList[%{iamodel.contact.addressesList.size}].surburb" /></div>
+						<div><s:textfield name="iamodel.contact.addressesList[%{iamodel.contact.addressesList.size}].suburb" /></div>
 					</div>
 					<div class="inputfield three columns">
 						<s:label for="state" value="State:" />
@@ -112,7 +75,7 @@
 					</div>
 				</div>
 			</section>
-		</article> --%>
+		</article>
 		
 		<div class="row">
 			<div class="fourteen columns alpha"><p></p></div>

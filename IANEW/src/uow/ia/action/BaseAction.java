@@ -13,6 +13,11 @@ import com.opensymphony.xwork2.ActionSupport;
 @Controller
 public class BaseAction extends ActionSupport{
 	
+	protected final String ENQUIRY = "enquiry";
+	protected final String CONTACT = "contact";
+	protected final String ADMIN = "adimin";
+	protected final String USER = "user";
+	
 	@Resource
 	protected NewEnquiryService services;
 	
