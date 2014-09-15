@@ -17,7 +17,7 @@
 <div class="fieldsetborder">
 	<s:url var="urlUpdateAddress" action="updateAddressList" namespace="/enquiry">
 		<s:param name="address" />
-	</s:url>
+	</s:url> 
 	<fieldset>
 		<div class="row"> <s:text name="#session.user.username"></s:text>
 		<!-- to do -->
