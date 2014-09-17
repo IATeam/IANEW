@@ -98,7 +98,7 @@
 				<section class="six columns"><p></p></section>
 				<section class="four columns omega">
 					<input id="createCase" type="button" value="Create Case" class="two columns alpha" onclick="checkForm()"/>
-					<sj:submit formIds="enquiryForm" cssClass="two columns omega" value="Save" onclick="checkForm()"/>
+					<sj:submit formIds="enquiryForm" targets="formDiv" cssClass="two columns omega" value="Save" onclick="checkForm()"/>
 				</section>
 			</s:div>
 		</footer>
