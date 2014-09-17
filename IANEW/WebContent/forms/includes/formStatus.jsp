@@ -35,8 +35,8 @@
 			<div class="nine columns">
 				<div class="row">
 			
-					<div class="three columns"><s:select list="dangerSelectList.{dangerName}" name="theDanger" headerKey="-1" headerValue="Flag Danger" /></div>
-					<div class="three columns"><s:select list="statusSelectList.{statusName}" name="theStatus" headerKey="-1" headerValue="Form Status" /></div>
+					<div class="three columns"><s:select list="dangerSelectList.{dangerName}" name="theDanger" value="iamodel.contact.dangerType.dangerName" headerKey="-1" headerValue="Flag Danger" /></div>
+					<div class="three columns"><s:select list="statusSelectList.{statusName}" name="theStatus" value="iamodel.statusType.statusName" headerKey="-1" headerValue="Form Status" /></div>
 					<s:div cssClass="two columns">
 						<s:label for="id" value="Enquiry#:" />
 						<s:property value="iamodel.id" />

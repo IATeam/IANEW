@@ -43,7 +43,7 @@
 				
 				<s:div cssClass="four columns alpha">
 					<s:div cssClass="disabilityTypeSelect row four columns">
-						<s:select list="disabilitySelectList.{disabilityName}" name="theDisabilityList[%{iamodel.contact.disabilitiesList.size}]" headerKey="-1" headerValue="Select Disability" />
+						<s:select list="disabilitySelectList.{disabilityName}" name="theDisabilityList[%{iamodel.contact.disabilitiesList.size}]" value="iamodel.contact.disabilitiesList.disabilityType.disabilityName" headerKey="-1" headerValue="Select Disability" />
 					</s:div>
 					<s:div cssClass="row four columns" style="text-align: center">
 						

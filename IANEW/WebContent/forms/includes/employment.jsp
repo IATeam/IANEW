@@ -28,7 +28,7 @@
 		<s:hidden name="iamodel.contact.employmentsList[%{iamodel.contact.employmentsList.size}].id"/>
 		<div class="row">
 			<div class="four columns">
-				<s:select list="employmentSelectList.{employmentName}" name="theEmploymentList[%{iamodel.contact.employmentsList.size}]" headerKey="-1" headerValue="Select Employment Type" />
+				<s:select list="employmentSelectList.{employmentName}" name="theEmploymentList[%{iamodel.contact.employmentsList.size}]" value="iamodel.contact.employmentsList.employmentType.employmentName" headerKey="-1" headerValue="Select Employment Type" />
 			</div>
 			<div class="inputfield four columns">
 				<s:label for="workPhone" value="Work#:" />

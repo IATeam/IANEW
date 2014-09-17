@@ -27,7 +27,7 @@
 	<fieldset>
 		<s:hidden name="iamodel.contact.id" />
 		<div class="row">
-			<div class="four columns"><s:select list="titleSelectList.{name}" name="theTitle" headerKey="-1" headerValue="Select Title" /></div>
+			<div class="four columns"><s:select list="titleSelectList.{name}" name="theTitle" value="iamodel.contact.titleType.name" headerKey="-1" headerValue="Select Title" /></div>
 	
 			<div class='inputfield four columns'>
 				<s:label for="firstName" value="First Name:" />
@@ -47,7 +47,7 @@
 		</div>
 		<!-- name="iamodel.contact.genderType.genderName" -->
 		<div class="row">
-			<div class="four columns"><s:select list="genderSelectList.{genderName}" name="theGender" headerKey="-1" headerValue="Select Gender"/></div>
+			<div class="four columns"><s:select list="genderSelectList.{genderName}" name="theGender" value="iamodel.contact.genderType.genderName" headerKey="-1" headerValue="Select Gender"/></div>
 			<!-- style="padding-right: 15px;" -->
 			<div class="inputfield eight columns" >
 				<s:label for="identification" value="Identification:" />
@@ -61,7 +61,7 @@
 		</div>
 		
 		<div class="row">
-			<div class="four columns"><s:select list="culturalBackgroundSelectList.{culturalBackgroundName}" name="theCulturalBackground" headerKey="-1"  headerValue="Select Cultural Background" /></div>
+			<div class="four columns"><s:select list="culturalBackgroundSelectList.{culturalBackgroundName}" name="theCulturalBackground" value="iamodel.contact.culturalBackground.culturalBackgroundName" headerKey="-1"  headerValue="Select Cultural Background" /></div>
 			
 			<div class="textarea twelve columns omega">
 				<s:label for="culturalBackgroundComments" value="Comments:" />
