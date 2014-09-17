@@ -16,8 +16,11 @@ function confirmAction(message, namespace, actionName) {
 			window.location.href = "http://localhost:8080/IANEW/home/home.jsp";
 	}
 	else if(namespace == "save"){
-		if (confirm(message) == true) 
-			checkForm();
+		if (confirm(message) == true) {
+			//ClientScriptManager cs = Page.ClientScript;
+            //cs.RegisterStartupScript(this.GetType(), "showalert", "alert('Data Saved Successfully.')", true);		
+			alert('Data Saved Successfully.');
+        }
 	}
 	else{
 		if (confirm(message) == true){ 
