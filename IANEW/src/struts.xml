@@ -109,6 +109,20 @@
        </action>
     </package>-->
     
+    <package name="settings" namespace="/settings" extends="struts-default">
+    	<action name="settings" class="uow.ia.action.SettingsAction" method="settings">
+    		<result name="success">/forms/settings.jsp</result>
+    	</action>
+    </package><package name="report" namespace="/report" extends="struts-default">
+    	<action name="report" class="uow.ia.action.ReportAction" method="report">
+    		<result name="success">/forms/report.jsp</result>
+    	</action>
+    </package><package name="timeManagement" namespace="/timeManagement" extends="struts-default">
+    	<action name="timeManagement" class="uow.ia.action.TimeManagementAction" method="timeManagement">
+    		<result name="success">/forms/timeManagement.jsp</result>
+    	</action>
+    </package>
+    
      <include file="login.xml"/>
      <include file="admin.xml" />
 </struts>

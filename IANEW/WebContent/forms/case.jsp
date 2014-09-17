@@ -30,22 +30,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="US-ASCII"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 
 <html>
 <head>
-<title>Case Form</title>
-<link href="<s:url value='/styles/form.css' encode='false' includeParams='none'/>" rel="stylesheet" type="text/css"
-	      media="all"/>
-<link href="<s:url value='/styles/skeleton.css' encode='false' includeParams='none'/>" rel="stylesheet" type="text/css"
-	      media="all"/>
-<script src="<s:url value='/js/validation/caseValidation.js' encode='false' includeParams='none'/>"></script>
-
-
-<s:head/>
-
+	<title>Case Form</title>
+	<link href="<s:url value='/styles/ianew.form.css' encode='false' includeParams='none'/>" rel="stylesheet" type="text/css"
+		      media="all"/>
+	<link href="<s:url value='/styles/import/skeleton.css' encode='false' includeParams='none'/>" rel="stylesheet" type="text/css"
+		      media="all"/>
+	<script src="<s:url value='/js/ianew.lists.js' encode='false' includeParams='none'/>"></script>
 </head>
 <body>
+	<s:set var="formType">case</s:set>
 	<s:form id="caseForm" cssClass="cmxform form container" namespace='/case' method="post" novalidate="novalidate">  
 <!-- ---------------------------------------------------------------------------------------------- -->
 <!-- Header of the form --------------------------------------------------------------------------- -->
@@ -60,14 +57,18 @@
 		<%-- 
 		<%@include file="includes/formStatus.jsp" %>
 		--%>
-		<%@include file="includes/summary.jsp" %>
+		<%@include file="includes/formStatus.jsp" %>
+		<%@include file="includes/advocateDetails.jsp" %>
 		<%@include file="includes/personalDetails.jsp" %>
-		<%@include file="includes/address.jsp" %>
-		<%@include file="includes/referral.jsp" %>
-		<%@include file="includes/employment.jsp" %>
+		<%@include file="includes/address.jsp" %>	
 		<%@include file="includes/disability.jsp" %>
+ 		<%@include file="includes/employment.jsp" %>	
+		<%@include file="includes/plan.jsp" %>
 		<%@include file="includes/issues.jsp" %>
+		<%@include file="includes/communications.jsp" %>
 		<%@include file="includes/linkedCases.jsp" %>
+		<%@include file="includes/linkedEnquiries.jsp" %>
+		<%@include file="includes/referral.jsp" %>
 		
 <!-- ---------------------------------------------------------------------------------------------- -->
 <!-- iterator - footer for case form ----------------------------------------------------------- -->
@@ -78,7 +79,7 @@
 		 -->			
 		<s:div cssClass="clear"></s:div>
 		<footer>
-			<s:div cssClass="row">
+			<s:div cssClass="row" cssStyle="padding-top:10px;">
 				<section class="six columns">
 					<input type="button" class="three columns alpha" value="Cancel"/>
 					<input type="button" class="three columns omega" value="New Case" />
@@ -86,7 +87,7 @@
 				<section class="six columns"><p></p></section>
 				<section class="four columns omega">
 					<input type="button" value="Create Case" class="two columns alpha"/>
-					<s:submit type="submit" cssClass="two columns omega" value="Save" />
+					<s:submit type="submit" cssClass="two columns omega" value="Save" onClick="return false;" />
 				</section>
 			</s:div>
 		</footer>

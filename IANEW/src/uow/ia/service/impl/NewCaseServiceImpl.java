@@ -65,6 +65,9 @@ NewCaseService {
 	private GoalTypesDao<GoalTypes> goalTypesDao;
 	
 	@Resource
+	private PriorityTypesDao<PriorityTypes> priorityTypesDao;
+	
+	@Resource
 	private ContactsDao<Contacts> contactsDao;
 	
 	@Resource
@@ -81,12 +84,12 @@ NewCaseService {
 	
 	@Override
 	public List<DangerTypes> findDangerTypes() {
-		return dangerTypesDao.find(" from DangerTypes");
+		return dangerTypesDao.find(" from DangerTypes order by display_order");
 	}
 	
 	@Override
 	public List<StatusTypes> findStatusTypes() {
-		return statusTypesDao.find(" from StatusTypes");
+		return statusTypesDao.find(" from StatusTypes order by display_order");
 	}
 	
 	@Override
@@ -141,6 +144,11 @@ NewCaseService {
 	}
 	
 	@Override
+	public List<PriorityTypes> findPriorityTypes() {
+		return priorityTypesDao.find(" from PriorityTypes order by display_order");
+	}
+	
+	@Override
 	public List<IndividualCases> findCases() {
 		return individualCasesDao.find(" from IndividualCases");
 	}
@@ -165,7 +173,7 @@ NewCaseService {
 		ContactTypes c = contactTypesDao.get(
 				" from ContactTypes t where t.contactTypeName =?",
 				new Object[] { "Advocate" });
-		return contactsDao.find(" from Contacts t where t.contactType =:contactType","contactType", c);
+		return contactsDao.find(" from Contacts t where t.contactType =:contactType order by t.lastname asc, t.firstname asc","contactType", c);
 	}
 
 

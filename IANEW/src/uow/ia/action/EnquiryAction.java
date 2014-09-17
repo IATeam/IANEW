@@ -163,8 +163,8 @@ ModelDriven<Enquiries>, Preparable{
 		System.out.println("Struts: start newEnquiry");
 		//activateAutocomplete();
 		
-		Reflection ref = new Reflection();
-		ref.initializeNewModel(iamodel);
+//		Reflection ref = new Reflection();
+//		ref.initializeNewModel(iamodel);
 		activateLists();
 		
 		//linkedEnquiriesList = services.getLinkedEnquiry(getHiddenid());
@@ -748,7 +748,7 @@ ModelDriven<Enquiries>, Preparable{
 		System.out.println("Struts: Prepare start");
 		System.out.println("hiddenid = " + getHiddenid());
 		if ((Integer) getHiddenid() == null || (Integer)getHiddenid() == 0) {
-			iamodel = new Enquiries();
+			//iamodel = new Enquiries();
 			
 		} else {
 			iamodel = services.getEnquiry(getHiddenid());
