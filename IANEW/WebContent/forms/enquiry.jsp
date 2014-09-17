@@ -38,76 +38,118 @@
 
 <html>
 <head>
+<s:head/>
 <title>Enquiry Form</title>
 <link href="<s:url value='/styles/ianew.form.css' encode='false' includeParams='none'/>" rel="stylesheet" type="text/css"
 	      media="all"/>
 <link href="<s:url value='/styles/import/skeleton.css' encode='false' includeParams='none'/>" rel="stylesheet" type="text/css"
 	      media="all"/>
+<script src="<s:url value='/js/jquery/jquery.validate.js' encode='false' includeParams='none'/>" ></script>
 <script src="<s:url value='/js/validation/enquiryValidation.js' encode='false' includeParams='none'/>" ></script>
 <script src="<s:url value='/js/ianew.form.js' encode='false' includeParams='none'/>" ></script>
-<s:head/>
+
 
 </head>
 <body>
 	
-	<s:form  id="addressForm" action="updateAddressList" namespace="/enquiry" method="post" cssClass="hidden">
-		<s:hidden name="address.street" value="address.street"/>
-	</s:form>
 
 	<s:div cssClass="form container">
-	
-	
-	
-	<s:form id="enquiryForm" action="saveUpdateEnquiry" cssClass="cmxform" namespace='/enquiry' method="post" novalidate="novalidate"> 
-		<s:hidden name="iamodel.contact.id" />
+		<s:form id="enquiryForm" action="saveUpdateEnquiry" cssClass="cmxform" namespace='/enquiry' method="post"> 
+			<s:hidden name="iamodel.contact.id" />
+			
 <!-- ---------------------------------------------------------------------------------------------- -->
 <!-- Header of the form --------------------------------------------------------------------------- -->
 <!-- ---------------------------------------------------------------------------------------------- -->	
-		<%@include file="includes/formHeader.jsp" %>
-		
+			<%@include file="includes/formHeader.jsp" %>
+			
 <!-- ---------------------------------------------------------------------------------------------- -->
 <!-- Content of the form -------------------------------------------------------------------------- -->
 <!-- ---------------------------------------------------------------------------------------------- -->		
-		<%@include file="includes/formStatus.jsp" %>
-		<%@include file="includes/summary.jsp" %>
-		<%@include file="includes/personalDetails.jsp" %>
-		<%@include file="includes/address.jsp" %>
-		<%@include file="includes/referral.jsp" %>
-		<%@include file="includes/employment.jsp" %>
-		<%@include file="includes/disability.jsp" %>
-		<%@include file="includes/issues.jsp" %>
-		<s:div id="linkedEnquiriesDiv">
-			<%@include file="includes/linkedEnquiries.jsp" %>
-		</s:div>
-		<s:div id="linkedEnquiriesListDiv" style="box-shadow: 5px 5px 0 grey;"/>
-	</s:form>	
+			<%@include file="includes/formStatus.jsp" %>
+			<%@include file="includes/summary.jsp" %>
+			<%@include file="includes/personalDetails.jsp" %>
+			<%@include file="includes/address.jsp" %>
+			<%@include file="includes/referral.jsp" %>
+			<%@include file="includes/employment.jsp" %>
+			<%@include file="includes/disability.jsp" %>
+			<%@include file="includes/issues.jsp" %>
+			<s:div id="linkedEnquiriesDiv">
+				<%@include file="includes/linkedEnquiries.jsp" %>
+			</s:div>
+			<s:div id="linkedEnquiriesListDiv" style="box-shadow: 5px 5px 0 grey;"/>
+			<input type="submit" value="Submit" name="submit">
+			<s:div cssClass="clear"></s:div>
+			
 <!-- ---------------------------------------------------------------------------------------------- -->
 <!-- iterator - footer for enquiry form ----------------------------------------------------------- -->
 <!-- ---------------------------------------------------------------------------------------------- -->
+			<footer>
+				<s:div cssClass="row">
+					<section class="six columns">
+						<input id="btnCancel" type="button" class="three columns alpha" value="Cancel"/>
+						<input id="btnNewEnquiry" type="button" class="three columns omega" value="New Enquiry" />
+					</section>
+					<section class="six columns"><p></p></section>
+					<section class="four columns omega">
+						<input id="createCase" type="button" value="Create Case" class="two columns alpha" onclick="checkForm()"/>
+<%-- 						<sj:submit formIds="enquiryForm" name="submit" cssClass="submit two columns omega" value="Submit" onclick="checkForm()"/>
+ --%>						<s:submit name="submit" cssClass="two columns omega" value="Submit"/>
+					</section>
+				</s:div>
+			</footer>
+		</s:form>	
 		<!-- 
 		Note: each form will have its own footer settings so it is better to NOT to separate and
 		create its own include file and referenced it here.
 		 -->			
-		<s:div cssClass="clear"></s:div>
-		<footer>
-			<s:div cssClass="row">
-				<section class="six columns">
-					<input id="btnCancel" type="button" class="three columns alpha" value="Cancel"/>
-					<input id="btnNewEnquiry" type="button" class="three columns omega" value="New Enquiry" />
-				</section>
-				<section class="six columns"><p></p></section>
-				<section class="four columns omega">
-					<input id="createCase" type="button" value="Create Case" class="two columns alpha" onclick="checkForm()"/>
-					<sj:submit formIds="enquiryForm" targets="formDiv" cssClass="two columns omega" value="Save" onclick="checkForm()"/>
-				</section>
-			</s:div>
-		</footer>
+	
 	</s:div>
 	
-	<input type="button" id="test" value="test"/>
+	<form id="abc" class="cmxform" method="get" novalidate="novalidate">
+	<label for="testfield">Test</label>
+	<textarea id="testfield" name="testfield"></textarea>
+	<input type="submit" value="Submit" name="submit">
+	</form>
 	
 	<script>
 
+	/* $.validator.setDefaults({
+		
+	}); */
+
+		
+		
+	
+/* 	$("#abc").validate();
+	
+	$('#enquiryForm').validate({ 
+		rules: {
+			"iamodel.contact.firstname": "required",
+			lastName: "required"
+//			theGender: { selectcheck: true },
+//			email: {
+//				email: true,
+//				required: true
+//			}
+		},
+		messages: {
+			"iamodel.contact.firstname": "Require protege's first name.",
+			lastName: "Require protege's last name."
+//			email: "Invalid email",
+//			email: {
+//				email: "Require a valid email",
+//				required: "Require an email address"
+//			}
+		}
+	});
+	jQuery.validator.addMethod('selectcheck', function(value){
+		return (value != '-1');
+	}, "Please select a gender");
+ */
+
+
+
+	
 	$("#test").click(function(){
 		
 		var ele = $("#enquiryForm").find("article")
@@ -130,12 +172,11 @@
 		//$("#btnView").attr("disabled", null);
 		//$("#btnAddEnquiry").attr("disabled", null);
 	}
-	function checkForm(){ alert("checking form");
+	function checkForm(){
 		removeNullAndUpdateIndex($("#artAddress"), $("#itAddress"), $("#addressSize"));
 		removeNullAndUpdateIndex($("#artDisability"), $("#itDisability"), $("#disabilitySize"));
 		removeNullAndUpdateIndex($("#artIssue"), $("#itIssue"), $("#issueSize"));
 		removeNullAndUpdateIndex($("#artEmployment"), $("#itEmployment"), $("#employmentSize"));
-		
 	}
 	</script>
 </body>

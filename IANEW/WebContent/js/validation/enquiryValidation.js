@@ -20,30 +20,57 @@
 
 
 
-/*$(document).ready(function(){ 
-	$('#enquiryForm').validate({
-		rules: {
-			firstName: "required",
-			lastName: "required",
-			theGender: { selectcheck: true },
-			email: {
-				email: true,
-				required: true
+	$('#enquiryForm').validate({ 
+			rules: {
+				//summary
+				theEnquiry								: 	{ 	selectcheck: 	true 	},
+				"iamodel.description"					: 		"required",
+				
+				
+				//personal inoformation
+				"iamodel.contact.firstname"				: 		"required",
+				"iamodel.contact.lastname"				: 		"required",
+				"iamodel.contact.identification"		:		"required",
+				theGender								: 	{ 	selectcheck: 	true 	},
+				theCulturalBackground					: 	{	selectcheck: 	true 	},
+				"iamodel.contact.mobilephone"			: 	{	number: 		true,
+																required: 		true	},
+				"iamodel.contact.email"					: 	{	email: 			true,
+																required: 		true	},
+														
+				//address
+				theAccommodation						:	{ 	selectcheck: 	true 	},
+				"iamodel.contact.accommodationComment"	: 		"required",
+				
+				"theDisabilityList[]"						:	{ 	selectcheck: 	true 	}
+				
+			},
+			
+			messages: {
+				//summary
+				"iamodel.description"					: 	"Required description",
+				
+				//personal information
+				"iamodel.contact.firstname"				: 	"Requires first name.",
+				"iamodel.contact.lastname"				: 	"Requires last name",
+				"iamodel.conact.identification"			: 	"Requires identification number",
+				"iamodel.contact.mobilephone"			: 	{	number: "Must be numbers",
+																required: "Requires a contact number"	},
+				"iamodel.contact.email"					: 	{	email: "Require a valid email",
+																required: "Require an email address"	},
+				"iamodel.contact.accommodationComment"	: 		"Requires comment"
+			
+			},
+			
+			
+			submitHandler: function(form) {
+				alert("submitted!");
+				checkForm();
+				form.submit();
 			}
-		},
-		messages: {
-			firstName: "Require protege's first name.",
-			lastName: "Require protege's last name.",
-			email: "Invalid email",
-			email: {
-				email: "Require a valid email",
-				required: "Require an email address"
-			}
-		}
-	});
-	
+		});
+	 	
 	jQuery.validator.addMethod('selectcheck', function(value){
-		return (value != '-1');
-	}, "Please select a gender");
+			return (value != '-1');
+		}, "Please select an option"); 
 	
-});*/

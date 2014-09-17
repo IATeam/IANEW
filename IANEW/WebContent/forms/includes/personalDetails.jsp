@@ -30,7 +30,7 @@
 			<div class="four columns"><s:select list="titleSelectList.{name}" name="theTitle" headerKey="-1" headerValue="Select Title" /></div>
 	
 			<div class='inputfield four columns'>
-				<s:label for="firstName" value="First Name:" />
+				<s:label for="firstname" value="First Name:" />
 				<div><s:textfield id="firstname" name="iamodel.contact.firstname" /></div>
 				<!-- <sj:autocompleter placeholder="enter first name" id="firstName" name="iamodel.contact.firstname" list="%{firstNameAuto}" /> -->
 			</div>

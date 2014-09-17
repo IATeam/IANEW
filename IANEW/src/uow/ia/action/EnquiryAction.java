@@ -172,12 +172,9 @@ ModelDriven<Enquiries>, Preparable{
 
 		System.out.println("Struts: start newEnquiry");
 		//activateAutocomplete();
-		
-//		Reflection ref = new Reflection();
-//		ref.initializeNewModel(iamodel);
+
 		activateLists();
 		
-		//linkedEnquiriesList = services.getLinkedEnquiry(getHiddenid());
 		System.out.println("Struts: end newEnquiry");
 		
 		return SUCCESS;
@@ -209,10 +206,19 @@ ModelDriven<Enquiries>, Preparable{
 		System.out.println("Struts: start updateLinkedEnquiries");
 		
 		linkedEnquiriesList = services.getLinkedEnquiry(getHiddenid());
-		System.out.println(getLinkedEnquiriesList().size());
-		iamodel.setParentEnquiry(services.getEnquiry(getHiddenid()));
+		System.out.println(getLinkedEnquiriesList().size() + " id: " + getHiddenid());
+		//System.out.println(iamodel.getParentEnquiry());
+		try{
+			if(iamodel.getParentEnquiry() != null)
+				iamodel.setParentEnquiry(services.getEnquiry(getHiddenid()));
+		}catch(NullPointerException e){
+			//iamodel.setParentEnquiry(new Enquiries());
+			//iamodel.setParentEnquiry(services.getEnquiry(getHiddenid()));
+			
+		}
 		
-		System.out.println("Struts: start updateLinkedEnquiries");
+		
+		System.out.println("Struts: end updateLinkedEnquiries");
 		return SUCCESS;
 	}
 	
@@ -229,6 +235,7 @@ ModelDriven<Enquiries>, Preparable{
 	public String saveUpdateEnquiry(){ //TODO
 		System.out.println("Struts: start SaveUpdateEnquiry");
 		
+		System.out.println("parent enquiry is" +  iamodel.getParentEnquiry());
 		Users user = (Users)userSession.get(USER);
 		
 		//System.out.println(iamodel.getId());
@@ -317,6 +324,7 @@ ModelDriven<Enquiries>, Preparable{
 		else if(services.saveOrUpdateEnquiry(iamodel)){
 			activateLists();
 			setIamodel(iamodel);
+			linkedEnquiriesList = services.getLinkedEnquiry(iamodel.getId());
 			System.out.println("save existing successfully");
 			System.out.println("Struts: end saveUpdateEnquiry");
 			return SUCCESS;
@@ -363,7 +371,7 @@ ModelDriven<Enquiries>, Preparable{
 		case "disabilitiesList": 
 			System.out.println("deleting list id: " + index + " from " + deleteFrom); 
 			iamodel.getContact().getDisabilitiesList().remove(index); returnString = "disabilityUpdate"; break;
-		case "issuesList": 
+		case "enquiryIssuesList": 
 			System.out.println("deleting list id: " + index + " from " + deleteFrom); 
 			iamodel.getEnquiryIssuesList().remove(index); returnString = "issueUpdate" ; break;
 		case "addressesList": 

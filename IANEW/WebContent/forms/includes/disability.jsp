@@ -33,17 +33,26 @@
 	</article>	
 		
 	<!-- Hidden disability to be added to iterator if needs to be added -->
-	<s:textfield id="disabilitySize" name="iamodel.contact.disabilitiesList.size" value="%{iamodel.contact.disabilitiesList.size}"/>
 	
-	<s:if test="%{iamodel.contact.disabilitiesList.size > 0}"><article id="artDisability" class="hidden"></s:if>
-	<s:else><article id="artDisability""></s:else>
+	
+	<s:if test="%{iamodel.contact.disabilitiesList.size > 0}">
+		<s:textfield id="disabilitySize" name="iamodel.contact.disabilitiesList.size" value="%{iamodel.contact.disabilitiesList.size}"/>
+		<article id="artDisability" class="hidden">
+		<s:set name="index" value="iamodel.contact.disabilitiesList.size" />
+		
+	</s:if>
+	<s:else>
+		<s:textfield id="disabilitySize" name="iamodel.contact.disabilitiesList.size" value="0"/>
+		<s:set name="index" value="0" />
+		<article id="artDisability">
+	</s:else>
 		<section class="sixteen columns curveBorder row">
-				<s:hidden name="iamodel.contact.disabilitiesList[%{iamodel.contact.disabilitiesList.size}].id"/>
-				<s:hidden name="iamodel.contact.disabilitiesList[%{iamodel.contact.disabilitiesList.size}].primaryFlag"/>
+				<s:hidden name="iamodel.contact.disabilitiesList[%{#index}].id"/>
+				<s:hidden name="iamodel.contact.disabilitiesList[%{#index}].primaryFlag"/>
 				
 				<s:div cssClass="four columns alpha">
 					<s:div cssClass="disabilityTypeSelect row four columns">
-						<s:select list="disabilitySelectList.{disabilityName}" name="theDisabilityList[%{iamodel.contact.disabilitiesList.size}]" headerKey="-1" headerValue="Select Disability" />
+						<s:select list="disabilitySelectList.{disabilityName}" name="theDisabilityList[%{#index}]" headerKey="-1" headerValue="Select Disability" />
 					</s:div>
 					<s:div cssClass="row four columns" style="text-align: center">
 						
@@ -53,7 +62,7 @@
 				</s:div>
 				<s:div cssClass="textarea eleven columns">
 					<s:label for="disabilityDescription" value="Comment:" /> 
-					<s:textarea cssClass="disabilityDescription" cssClass="oneLineTextArea" name="iamodel.contact.disabilitiesList[%{iamodel.contact.disabilitiesList.size}].comments" /> 
+					<s:textarea cssClass="disabilityDescription" cssClass="oneLineTextArea" name="iamodel.contact.disabilitiesList[%{#index}].comments" /> 
 				</s:div>
 			</section>
 	</article>

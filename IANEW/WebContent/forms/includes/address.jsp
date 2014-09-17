@@ -19,7 +19,7 @@
 		<s:param name="address" />
 	</s:url> 
 	<fieldset>
-		<div class="row"> <s:text name="#session.user.username"></s:text>
+		<div class="row">
 		<!-- to do -->
 			<div class="four columns">
 				<s:select list="accomodationSelectList.{accommodationName}" name="theAccommodation" headerKey="-1" headerValue="Select an Accomodation Type"/>

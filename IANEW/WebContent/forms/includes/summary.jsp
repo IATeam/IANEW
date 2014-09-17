@@ -23,7 +23,7 @@
 			</s:div>
 			<s:div cssClass="textarea twelve columns">
 				<s:label for="description" value="Description:" />
-				<s:div><s:textarea id="description" name="iamodel.description"  cssClass="multiLineTextArea" /></s:div>
+				<s:div><s:textarea id="description" name="iamodel.description" cssClass="multiLineTextArea" /></s:div>
 			</s:div>
 		</s:div>
 	</fieldset>
