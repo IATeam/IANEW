@@ -41,6 +41,13 @@ public interface BaseDao<T> {
 	public void update(T o);
 	
 	/** 
+     * update object 
+     *  
+     * @param o 
+     */
+	public T merge(T o);
+	
+	/** 
      * save or update object 
      *  
      * @param o 

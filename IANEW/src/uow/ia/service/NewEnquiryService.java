@@ -1,3 +1,4 @@
+
 package uow.ia.service;
 
 import java.util.List;
@@ -115,8 +116,8 @@ public interface NewEnquiryService {
 	
 	public boolean updateEnquiry(Enquiries e);
 	
-	public boolean saveOrUpdateEnquiry(Enquiries e);
+	public Enquiries mergeEnquiry(Enquiries e);
 	
-	public List<Contacts> findContacts();
+	public boolean saveOrUpdateEnquiry(Enquiries e);
 	
 }

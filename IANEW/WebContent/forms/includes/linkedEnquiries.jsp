@@ -23,26 +23,19 @@
 				parent enquiry into the list as well (if it already is not).
 ------------------------------------------------------------------------------------------------>
 
-
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="US-ASCII"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
+<%@ taglib prefix="sj" uri="/struts-jquery-tags" %>
 <head>
 
 </head>
-<section>
-<h3 class="sixteen columns" style="float:none;">Linked Enquiries</h3>
-<input type="image" src="/IANEW/resources/images/plusButton.png" alt="Hide/Show" id="btnShowHide" value="ShowHide" onclick="divHide(this);return false;" class="divHideButton"/>
 
-<s:div cssClass="greybackground">
-<div id="linkedEnquiriesDiv" class="toggled startShown">	
+<h3 class="sixteen columns" style="float:none;">Linked Enquiries</h3>
+<s:div id="linkedEnquiriesField" cssClass="greybackground">
 
 	<s:url id="urlELinked" namespace="/enquiry" action="getLinkedEnquiry" />
 		
-	<s:iterator value="linkedEnquiriesSet">
+	<s:iterator value="linkedEnquiriesList" status="stat">
 		<section class="secLinkedEnquiries sixteen columns curveBorder"  onclick="bandSelected(this)">
-					<input type="image" src="/IANEW/resources/images/undoButtonImage.png" alt="undoButton" id="btnUndo" value="Undo" onclick="undoButton(this);return false;" class="undoButton"/>
-		
 			<s:div cssClass="textarea one columns">
 				<s:label value="E#:" />
 				<s:div cssClass="id"><s:property  value="id"/></s:div>
@@ -63,9 +56,9 @@
 	
 	<div>
 		<div class="row">
-			<div class="ten columns alpha"><p></p></div>
-			<input type="button" id="btnView" value="View" class="three columns"/>
-			<input type="button" id="btnAddEnquiry" value="Add Enquiry" class="three columns omega"/>
+			<div class="twelve columns alpha"><p></p></div>
+			<input type="button" id="btnView" value="View" class="two columns"/>
+			<input type="button" id="btnAddEnquiry" value="Add Enquiry" class="two columns omega"/>
 		</div>
 	</div>
 
@@ -89,12 +82,18 @@
 			showSlidingPanel();
 		}); */
 
-		/* $('#btnView').click(function(){
+		$('#btnView').click(function(){
 			var id = $("#hiddenid").val();
+			$('#rightPopUp').show("slow");
 			$('#rightPopUp').load("enquiry/getEnquiry.action?hiddenid=" + id +"&formTitle=Existing Enquiry" );
-			$('#rightPopUp').show("slow"); */
+			
 			//alert(id);
-	});
+		});
 
-	</script></div>
-</s:div></section>
+		$('#btnAddEnquiry').click(function(){
+			$("#linkedEnquiriesListDiv").show();
+			$('#linkedEnquiriesListDiv').load("enquiryList/getLinkedEnquiriesList.action");
+		});
+	});
+	</script>
+</s:div>

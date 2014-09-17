@@ -48,10 +48,10 @@ public class ReportAction extends BaseAction{
 		this.list = list;
 	}
 
-	public String report(){
-		contact = services.findContacts();
-		return SUCCESS;
-	}
+//	public String report(){
+//		contact = services.findContacts();
+//		return SUCCESS;
+//	}
 	
 	public String downloadExcel() {
 		

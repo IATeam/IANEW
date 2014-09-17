@@ -10,18 +10,15 @@
     pageEncoding="US-ASCII"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ taglib prefix="sj" uri="/struts-jquery-tags"%>
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
 <head>
+<title>Case List</title>
+<script src="<s:url value='/js/ianew.lists.js' encode='false' includeParams='none'/>"></script>
+<script src="<s:url value='/js/ianew.pagefiltersort.js' encode='false' includeParams='none'/>"></script>
 <s:head/>
 <sj:head/>
-<title>Case List</title>
-<link href="<s:url value='/styles/ianew.form.css' encode='false' includeParams='none'/>" rel="stylesheet" type="text/css"
-		      media="all"/>
-	<link href="<s:url value='/styles/import/skeleton.css' encode='false' includeParams='none'/>" rel="stylesheet" type="text/css"
-		      media="all"/>
-
 </head>
 <body>
 <!-- 
@@ -31,11 +28,9 @@
 	</s:url>
 	<s:url id="urlUpdate" namespace="/case" action="updateCaseList" includeContext="false"/>
 	 -->
-
-	
-	
-	
-	<s:form id="caseForm" method="post" action="%{urlCExisting}">
+	<s:url var="urlCExisting" namespace="/case" action="getCase" includeContext="false"/>		
+	 
+	<s:form id="caseForm" cssClass="form container" method="post" action="%{urlCExisting}">
 	
 		<div class="form container">  
 			<section class="imageContainer">
@@ -58,6 +53,8 @@
 			</section>
 			
 			<!-- iterator -->
+			<%@include file="/forms/includes/lists.jsp" %>
+			<s:div cssClass="clear"/>
 			<!-- status="..." use attribute to get status info of iteration (index, count, first, even last, odd info) -->
 			<div class="caseList">
 				<s:iterator value="caseList">
@@ -90,7 +87,7 @@
 					</div>
 				</s:iterator>
 			</div>
-			</div>
+			
 			<div class="clear"></div>
 			
 			
@@ -137,7 +134,7 @@
 		</s:form>
 		
 <!----- Hidden form to pass pagination to action class submitted by the prev and next buttons ------------------------------------------------------------------->
-		<div>
+		<div ">
 			<s:form id="paginationForm" method="post" action="%{urlUpdate}" namespace="case">
 				<s:hidden id="page" name="page" />
 				<s:hidden id="numberOfRecords" name="numberOfRecords" />
@@ -147,7 +144,7 @@
 	<script>
 		function nextPage(){
 			var currentPageNumber = parseInt($("#pageTextField").val());
-			var totalNumberOfPages = parseInt( $("#totalNumberOfPagesDiv").text());
+			var totalNumberOfPages = parseInt( $("#totalNumberOfPagesDiv").text())
 			
 			if(currentPageNumber < totalNumberOfPages){ 
 				var nextPageNumber = currentPageNumber + 1;
@@ -171,7 +168,7 @@
 			$(selectedDiv).addClass("listSelected");
 
 			$(selectedDiv).children("div").last().slideToggle();
-			$("#caseID").val($(selectedDiv).find('.caseID').text());
+			$("#caseID").val($(selectedDiv).find('.caseID').text())
 			//alert($(selectedDiv).find('.caseID').text())
 		}
 		function deselectAll(){
@@ -181,7 +178,7 @@
 			}
 		}
 		$('#new').click(function(){
-			alert($('#caseID').val());
+			alert($('#caseID').val())
 		});
 		
 		$(function(){

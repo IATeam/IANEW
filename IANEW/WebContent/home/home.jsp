@@ -49,13 +49,16 @@
 <!-- URL Links for the Menu ----------------------------------------------------------------------- -->
 <!-- ---------------------------------------------------------------------------------------------- -->	
 	<!-- List of urls to called for from the menu -->
-	<s:url id="urlEList" namespace="/enquiry" action="enquiryList">
+	<s:url id="urlEList" namespace="/enquiryList" action="getEnquiryList">
 		<s:param name="formTitle">Enquiry List</s:param>
 	</s:url>
 	<s:url var="urlENew" namespace="/enquiry" action="newEnquiry">
 		<s:param name="formTitle">New Enquiry</s:param>
+		<s:param name="hiddenid">null</s:param>
 	</s:url>
-	<s:url id="urlEExisting" namespace="/enquiry" action="getEnquiry" includeContext="false">
+
+	<s:url id="urlEExisting" namespace="/enquiry" action="getEnquiry">
+		<s:param name="hiddenid">1</s:param>
 		<s:param name="formTitle">Existing Enquiry</s:param>
 	</s:url>
 	<s:url id="urlCList" namespace="/case" action="caseList">
@@ -101,14 +104,22 @@
 			</li>
 			
 			<li >
-			<li><sj:a id="report" href="%{urlReport}" targets="formDiv"  onclick="menuclicked()">Report</sj:a></li>
-		
+
+				<li><sj:a id="report" href="%{urlReport}" targets="formDiv"  onclick="menuclicked()">Report</sj:a></li>
+			</li>
 			<li><sj:a id="timeManagement" href="%{urlTimeManagement}" targets="formDiv"  onclick="menuclicked()">Time Management</sj:a></li>
 			
+
+			<li>
+				<s:a href="#">Synchronize</s:a>
+				
+			</li>
 			
 			<li>
-			<li><sj:a id="settings" href="%{urlSettings}" targets="formDiv"  onclick="menuclicked()">Settings</sj:a></li>
+
+				<li><sj:a id="settings" href="%{urlSettings}" targets="formDiv"  onclick="menuclicked()">Settings</sj:a></li>
 				
+			</li>
 			<li><sj:a id="links" href="%{urlLinks}" targets="formDiv"  onclick="menuclicked()">Links</sj:a></li>
 		</ul>
 	</nav>
@@ -173,8 +184,8 @@
 <!-- Home Page Footer ------------------------------------------------------------------------------ -->
 <!-- ----------------------------------------------------------------------------------------------- -->	
 	<footer id="statusBar">
-		<label>Michael Hall</label>
-		<button>Logout</button>
+		<label>User's Name</label>
+		<button>logout</button>
 	</footer>
 	
 	<script>
@@ -195,48 +206,17 @@
 			//hideSlidingPanel();
 		});
 
-		function hideSlidingPanel(){
-			$("#slidingPanel").hide('slow');
-			/* $("#slidingPanel").animate({
-				left: -$("#slidingPanel").width()
 		
-			}, 1000); */
+		function hidePopUp(popUp){
+			$(popUp).hide('slow');
+			$("body").css("overflow-Y", "scroll")
 		}
 
-		function showSlidingPanel(){
-			$("#slidingPanel").show('slow');
-			/* $("#slidingPanel").animate({
-				
-				left: 0
-		
-			}, 1000); */
+		function showPopUp(popUp){
+			$(popUp).show('slow');
+			$("html, body").css({"overflow-Y": "hidden"});
+			
 		}
 	</script>
-	<%-- <script>
-	 Experimental dragging div around.
-	$(function(){
-		$("#aE").draggable();		
-	})
-	</script> --%>
-	
-	<%-- <script>
-	 Experimental Document find
-	function findString(str){
-		var strFound;
-		
-		if(window.find){
-			
-			strFound=self.find(str);
-			//alert(strFound + " found");
-			if(!strFound){
-				strFound = self.find(str,0,1);
-				//while(self.find(str,0,1)) continue;
-			}  
-		} 
-
-	}
-
-	</script> --%>
-	
 </body>
 </html>

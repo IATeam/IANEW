@@ -67,6 +67,14 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 	public void update(T o) {
 		this.getCurrentSession().update(o);
 		// getHibernateTemplate().update(o);
+		// getHibernateTemplate().update(o);
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public T merge(T o) {
+		return (T) this.getCurrentSession().merge(o);
+		// getHibernateTemplate().update(o);
 	}
 
 	@Override
@@ -285,6 +293,5 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 	@Override
 	public FullTextSession getFullTextSession(){
 		return org.hibernate.search.Search.getFullTextSession(this.getCurrentSession());
-		//return this.getFullTextSession();
 	}
 }

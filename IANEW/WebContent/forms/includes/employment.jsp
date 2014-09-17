@@ -3,53 +3,54 @@
 	Created Date: 02/08/2014
 	==============================================
 	Updates:
-		10/08/2014 - 	Added iteration by Quang Nhan
 		14/08/2014 	- 	Connect and retrieve data called by the action class and added 
 						pagination functionality by Quang Nhan
-		16/08/2014 -	Tested s:url workings see comment below. 
-						Moved javascript code to list.js file by Quang Nhan
+		01/09/2014 -	Quang Nhan
+						Updated employment to support 1 to many and add Add Employment functionality
+		08/09/2014 -	Quang Nhan
+						changed all iamodel.contact to iamodel.contact
 	==============================================	
 	Description: A jsp page that displays a list of enquiries
 ------------------------------------------------------------------------------------------------>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="US-ASCII"%>
-<%@ taglib prefix="s" uri="/struts-tags" %>
-
-<section>
 
 <h3 class="sixteen columns" style="float:none;">Employment</h3>
-<input type="image" src="/IANEW/resources/images/plusButton.png" alt="Hide/Show" id="btnShowHide" value="ShowHide" onclick="divHide(this);return false;" class="divHideButton"/>
-
-<div class="greybackground">
-<div id="employmentDiv" class="toggled startShown">	
-
-	<fieldset>
+<s:div cssClass="greybackground">
+	<article id="itEmployment">
+		<%@include file="iterEmployments.jsp" %>
+	</article>
 	
+	<!-- hidden field to be used as marker for next index up -->
+	<s:textfield id="employmentSize" name="iamodel.contact.employmentsList.size" value="%{iamodel.contact.employmentsList.size}"/>
+	
+	<s:if test="%{iamodel.contact.employmentsList.size > 0 }"><article id="artEmployment" class="hidden"></s:if>
+	<s:else><article id="artEmployment"></s:else>
+	<section class="secIssue sixteen columns curveBorder">
+		<s:hidden name="iamodel.contact.employmentsList[%{iamodel.contact.employmentsList.size}].id"/>
 		<div class="row">
-			<!-- <div class="inputfield four columns">
-				<s:label for="profession" value="Profession:" />
-				<div><s:textfield id="profession" name="profession"></s:textfield></div>
-			</div> -->
-					<div class="four columns"><s:select list="employmentSelectList.{employmentName}" name="theEmployment" headerKey="-1" headerValue="Select Employment Type" /></div>
-			
+			<div class="four columns">
+				<s:select list="employmentSelectList.{employmentName}" name="theEmploymentList[%{iamodel.contact.employmentsList.size}]" headerKey="-1" headerValue="Select Employment Type" />
+			</div>
 			<div class="inputfield four columns">
 				<s:label for="workPhone" value="Work#:" />
-				<div><s:textfield id="workPhone" name="contact.workphone"></s:textfield></div>
+				<div><s:textfield name="iamodel.contact.employmentsList[%{iamodel.contact.employmentsList.size}].workphone" /></div>
 			</div>
 		</div>
 		<div class="row">
-			<div class="textarea sixteen columns">
-				<s:label for="employmentDescription" value="Description:" />
-				<div><s:textarea id="employmentDescription" cssClass="multiLineTextArea" name="employmentDescription" readonly="true"></s:textarea></div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="textarea sixteen columns">
+			<div class="textarea fifteen columns">
 				<s:label for="employmentComment" value="Comments:" /> 
-				<div><s:textarea id="employmentComment" cssClass="multiLineTextArea" name="contact.employmentComment"></s:textarea></div>
+				<div><s:textarea cssClass="multiLineTextArea" name="iamodel.contact.employmentsList[%{iamodel.contact.employmentsList.size}].comments" /></div>
 			</div>
 		</div>
+	</section>
+	
+	</article>
+	
+	<div class="row">
+		<input type="button" id="btnNewIssue" value="New Emp Type" class="two columns" />
+		<div class="twelve columns alpha"><p></p></div>
 		
-	</fieldset>
-</div>
-</div></section>
+		<!-- addNewRecord function is located in ianew.form.js -->
+		<input type="button" id="btnAddIssue" value="Add Issue" class="two columns" onclick="addNewRecord('artEmployment', 'employmentSize', 'itEmployment' )"/>
+	</div>
+	
+</s:div>
