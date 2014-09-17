@@ -20,5 +20,8 @@
     	<action name="saveNewDisabilityType" class="uow.ia.action.AdminAction" method="saveNewDisabilityType">
     		<result name="success">/home/home.jsp</result>
     	</action>
+    	<action name="startAdminPage" class="uow.ia.action.AdminAction" method="startAdminPage">
+    		<result name="success">/admin/admin.jsp</result>
+    	</action>
    	</package>
 </struts>

@@ -172,8 +172,11 @@ public class EnquiryAction extends BaseAction{
 		//System.out.println(getHiddenid());
 
 		setIamodel(services.getEnquiry(getHiddenid()));
-		setCcontact(getIamodel().getContact());
-		System.out.println(getIamodel().getEnquiryIssuesList().size());
+		System.out.println(getHiddenid());
+		if(iamodel != null)
+			setCcontact(getIamodel().getContact());
+		//else
+			//System.out.println(getIamodel().getEnquiryIssuesList().size());
 		
 		Date date = new Date(ccontact.getDob().getTime());
 		//dob = DateUtil.yyyymmddStr(date);

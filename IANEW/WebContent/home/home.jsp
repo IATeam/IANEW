@@ -66,6 +66,9 @@
 	<s:url id="urlLinks" namespace="/links" action="links">
 		<s:param name="formTitle">Links</s:param>
 	</s:url>
+	<s:url id="urlSettings" namespace="/admin" action="startAdminPage">
+		<s:param name="formTitle">Settings</s:param>
+	</s:url>
 	
 	<div class="container">
 	
@@ -113,13 +116,7 @@
 				</ul>
 			</li>
 			
-			<li>
-				<s:a href="#">Settings</s:a>
-				<ul>
-					<li><sj:a id="aCNew" href="%{urlCNew}" targets="formDiv" onclick="menuclicked()">New Case</sj:a></li>
-					<li><sj:a id="aCList" href="%{urlCList}" targets="formDiv" onclick="menuclicked()">Case List</sj:a>
-				</ul>
-			</li>
+			<li><sj:a id="settings" href="%{urlSettings}" targets="formDiv" onclick="menuclicked()">Settings</sj:a></li>
 			<li><sj:a id="links" href="%{urlLinks}" targets="formDiv">Links</sj:a></li>
 		</ul>
 	</nav>

@@ -83,6 +83,15 @@
     		<result name="success">/forms/{1}.jsp</result>
     	</action>
     </package>
+    
+    <!-- Settings Forms -->
+    <package name="settings" namespace="/admin" extends="struts-default">
+    	<action name="*" class="uow.ia.action.AdminAction">
+    		<result name="success">/forms/{1}.jsp</result>
+    	</action>
+    </package>
+    
+    
     <!--  <package name="example" namespace="/" extends="struts-default">
        <action name="*" class="uow.ia.action.Listing">
            <result name="success">Listing.jsp</result>
