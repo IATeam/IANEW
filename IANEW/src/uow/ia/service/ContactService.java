@@ -32,5 +32,7 @@ public interface ContactService {
 	public List<Contacts> findContacts();
 	
 	public List<Contacts> findContactsByPage(int pageNo, int rows);
+	
+	public Contacts getContacts(int id);
 
 }

@@ -103,4 +103,9 @@ public class ContactServiceImpl implements ContactService {
 		return contactsDao.find(" from Contacts", pageNo, rows);
 	}
 
+	@Override
+	public Contacts getContacts(int id) {
+		return contactsDao.get(Contacts.class, id);
+	}
+
 }
