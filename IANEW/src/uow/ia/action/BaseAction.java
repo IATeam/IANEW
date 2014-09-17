@@ -3,10 +3,13 @@ package uow.ia.action;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 
 import uow.ia.service.AdminService;
-import uow.ia.service.NewCaseService;
-import uow.ia.service.NewEnquiryService;
+import uow.ia.service.ContactService;
+import uow.ia.service.CaseService;
+import uow.ia.service.EnquiryService;
+import uow.ia.service.TypesService;
 
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -19,28 +22,34 @@ public class BaseAction extends ActionSupport{
 	protected final String USER = "user";
 	
 	@Resource
-	protected NewEnquiryService services;
+	protected TypesService typesService;
 	
 	@Resource
-	protected NewCaseService caseServices;
+	protected ContactService contactService;
+	
+	@Resource
+	protected EnquiryService enquiryService;
+	
+	@Resource
+	protected CaseService caseServices;
 
 	@Resource
 	protected AdminService adminService;
 
-	public NewCaseService getCaseServices() {
+	public CaseService getCaseServices() {
 		return caseServices;
 	}
 
-	public void setCaseServices(NewCaseService caseServices) {
+	public void setCaseServices(CaseService caseServices) {
 		this.caseServices = caseServices;
 	}
 
-	public NewEnquiryService getServices() {
-		return services;
+	public EnquiryService getServices() {
+		return enquiryService;
 	}
 
-	public void setServices(NewEnquiryService services) {
-		this.services = services;
+	public void setServices(EnquiryService services) {
+		this.enquiryService = services;
 	}
 	
 	protected String redirectUrl;

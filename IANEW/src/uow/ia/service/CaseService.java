@@ -18,9 +18,9 @@ import uow.ia.bean.PriorityTypes;
 import uow.ia.bean.StatusTypes;
 import uow.ia.bean.TitleTypes;
 
-public interface NewCaseService {
+public interface CaseService {
 	
-	public static final String SERVICENAME = "NewCaseService";
+	public static final String SERVICENAME = "CaseService";
 	
 	public List<DangerTypes> findDangerTypes();
 	

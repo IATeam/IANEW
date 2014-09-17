@@ -11,7 +11,7 @@ import java.util.List;
  * @author Quang
  * 
  * 25/08/2014 -	Quang Nhan
- * 				Updated Disability Type methods to integrate services
+ * 				Updated Disability Type methods to integrate enquiryService
  * 				
  */
 public class AdminAction extends BaseAction{

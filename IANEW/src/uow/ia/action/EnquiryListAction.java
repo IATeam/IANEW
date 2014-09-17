@@ -34,8 +34,8 @@ public class EnquiryListAction extends BaseAction implements ModelDriven<List<En
 		setPage(1);
 		setNumberOfRecords(10);
 		
-		setIamodelList(services.findEnquiriesByPage(page,numberOfRecords));
-		totalNumberOfRecords = services.countEnquiries();
+		setIamodelList(enquiryService.findEnquiriesByPage(page,numberOfRecords));
+		totalNumberOfRecords = enquiryService.countEnquiries();
 		int mod = (int) totalNumberOfRecords % numberOfRecords;
 		if(mod != 0) mod = 1;
 		totalNumberOfPages = totalNumberOfRecords/numberOfRecords + mod;
@@ -45,8 +45,8 @@ public class EnquiryListAction extends BaseAction implements ModelDriven<List<En
 	public String updateLinkedEnquiriesList(){
 		System.out.println(getPage());
 		
-		setIamodelList(services.findEnquiriesByPage(getPage(),getNumberOfRecords()));
-		totalNumberOfRecords = services.countEnquiries();
+		setIamodelList(enquiryService.findEnquiriesByPage(getPage(),getNumberOfRecords()));
+		totalNumberOfRecords = enquiryService.countEnquiries();
 		int mod = (int) totalNumberOfRecords % numberOfRecords;
 		if(mod != 0) mod = 1;
 		totalNumberOfPages = totalNumberOfRecords/numberOfRecords + mod;
@@ -59,8 +59,8 @@ public class EnquiryListAction extends BaseAction implements ModelDriven<List<En
 		setPage(1);
 		setNumberOfRecords(10);
 		
-		setIamodelList(services.findEnquiriesByPage(page,numberOfRecords));
-		totalNumberOfRecords = services.countEnquiries();
+		setIamodelList(enquiryService.findEnquiriesByPage(page,numberOfRecords));
+		totalNumberOfRecords = enquiryService.countEnquiries();
 		int mod = (int) totalNumberOfRecords % numberOfRecords;
 		if(mod != 0) mod = 1;
 		totalNumberOfPages = totalNumberOfRecords/numberOfRecords + mod;
@@ -70,8 +70,8 @@ public class EnquiryListAction extends BaseAction implements ModelDriven<List<En
 	public String updateEnquiryList(){
 		System.out.println(getPage());
 		
-		setIamodelList(services.findEnquiriesByPage(getPage(),getNumberOfRecords()));
-		totalNumberOfRecords = services.countEnquiries();
+		setIamodelList(enquiryService.findEnquiriesByPage(getPage(),getNumberOfRecords()));
+		totalNumberOfRecords = enquiryService.countEnquiries();
 		int mod = (int) totalNumberOfRecords % numberOfRecords;
 		if(mod != 0) mod = 1;
 		totalNumberOfPages = totalNumberOfRecords/numberOfRecords + mod;

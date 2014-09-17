@@ -22,15 +22,15 @@ import com.sun.tools.xjc.reader.xmlschema.bindinfo.BIConversion.Static;
 
 import uow.ia.bean.*;
 import uow.ia.dao.*;
-import uow.ia.service.NewCaseService;
+import uow.ia.service.CaseService;
 
 /**
  * @author bruce
  *
  */
-@Service(NewCaseService.SERVICENAME)
-public class NewCaseServiceImpl  implements
-NewCaseService {
+@Service(CaseService.SERVICENAME)
+public class CaseServiceImpl  implements
+CaseService {
 	
 	//static Logger logger = Logger.getLogger(ClassName.class);
 	
@@ -94,7 +94,7 @@ NewCaseService {
 	
 	@Override
 	public List<AccommodationTypes> findAccommodationTypes() {
-		//logger.info("NewEnquiryService.findAccommodationTypes called");
+		//logger.info("EnquiryService.findAccommodationTypes called");
 		return accommodationTypesDao.find(" from AccommodationTypes");
 	}
 

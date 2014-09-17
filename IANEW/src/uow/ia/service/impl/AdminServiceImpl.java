@@ -14,7 +14,7 @@ import uow.ia.bean.Users;
 import uow.ia.dao.DisabilityTypesDao;
 import uow.ia.dao.UsersDao;
 import uow.ia.service.AdminService;
-import uow.ia.service.NewEnquiryService;
+import uow.ia.service.EnquiryService;
 
 /**
  * @author ZhiYu Yang

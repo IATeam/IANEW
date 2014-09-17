@@ -9,9 +9,6 @@ import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
 
-import com.opensymphony.xwork2.ModelDriven;
-import com.opensymphony.xwork2.Preparable;
-
 import uow.ia.bean.AccommodationTypes;
 import uow.ia.bean.Addresses;
 import uow.ia.bean.ClientDisabilities;
@@ -25,12 +22,13 @@ import uow.ia.bean.Enquiries;
 import uow.ia.bean.EnquiryIssues;
 import uow.ia.bean.EnquiryTypes;
 import uow.ia.bean.GenderTypes;
-import uow.ia.bean.IndividualCases;
 import uow.ia.bean.IssueTypes;
 import uow.ia.bean.StatusTypes;
 import uow.ia.bean.TitleTypes;
 import uow.ia.bean.Users;
-import uow.ia.reflection.Reflection;
+
+import com.opensymphony.xwork2.ModelDriven;
+import com.opensymphony.xwork2.Preparable;
 
 /** ---------------------------------------------------------------------------------------------
  * @author: Quang Nhan
@@ -177,7 +175,7 @@ ModelDriven<Enquiries>, Preparable{
 //		ref.initializeNewModel(iamodel);
 		activateLists();
 		
-		//linkedEnquiriesList = services.getLinkedEnquiry(getHiddenid());
+		//linkedEnquiriesList = enquiryService.getLinkedEnquiry(getHiddenid());
 		System.out.println("Struts: end newEnquiry");
 		
 		return SUCCESS;
@@ -194,7 +192,7 @@ ModelDriven<Enquiries>, Preparable{
 		activateAutocomplete();
 		activateLists();
 		
-		linkedEnquiriesList = services.getLinkedEnquiry(getHiddenid());
+		linkedEnquiriesList = enquiryService.getLinkedEnquiry(getHiddenid());
 		
 		System.out.println("Struts: start getExistingEnquiry");
 		return SUCCESS;
@@ -208,16 +206,16 @@ ModelDriven<Enquiries>, Preparable{
 	public String updateLinkedEnquiries(){//TODO:
 		System.out.println("Struts: start updateLinkedEnquiries");
 		
-		linkedEnquiriesList = services.getLinkedEnquiry(getHiddenid());
+		linkedEnquiriesList = enquiryService.getLinkedEnquiry(getHiddenid());
 		System.out.println(getLinkedEnquiriesList().size());
-		iamodel.setParentEnquiry(services.getEnquiry(getHiddenid()));
+		iamodel.setParentEnquiry(enquiryService.getEnquiry(getHiddenid()));
 		
 		System.out.println("Struts: start updateLinkedEnquiries");
 		return SUCCESS;
 	}
 	
 	public String checkContactExists(){
-		//services.findContactsByFullName(, lastName);
+		//enquiryService.findContactsByFullName(, lastName);
 		return SUCCESS;
 	}
 	
@@ -252,7 +250,7 @@ ModelDriven<Enquiries>, Preparable{
 		for(int i = 0; i < theIssueList.size(); i++){
 			if (getTheIssueList().size() > 0) {
 				if(getTheIssueList().get(i) != "-1")
-					eil.get(i).setIssue(services.getIssueTypeByName(getTheIssueList().get(i)));
+					eil.get(i).setIssue(typesService.getIssueTypeByName(getTheIssueList().get(i)));
 		
 				if(eil.get(i).getId() == null){
 					eil.get(i).setEnquiry(getIamodel());
@@ -268,7 +266,7 @@ ModelDriven<Enquiries>, Preparable{
 		for(int i = 0; i < theDisabilityList.size(); i++){
 			if (getTheDisabilityList().size() > 0) {
 			if(getTheDisabilityList().get(i) != "-1")
-				cdl.get(i).setDisabilityType(services.getDisabilityTypeByName(getTheDisabilityList().get(i)));
+				cdl.get(i).setDisabilityType(typesService.getDisabilityTypeByName(getTheDisabilityList().get(i)));
 	
 			if(cdl.get(i).getId() == null){
 				cdl.get(i).setContact(iamodel.getContact());
@@ -285,7 +283,7 @@ ModelDriven<Enquiries>, Preparable{
 		for(int i = 0; i < theEmploymentList.size(); i++){
 			if (getTheEmploymentList().size() > 0) {
 				if(getTheEmploymentList().get(i) != "-1")
-					cel.get(i).setEmploymentType(services.getEmploymentTypeByName(getTheEmploymentList().get(i)));
+					cel.get(i).setEmploymentType(typesService.getEmploymentTypeByName(getTheEmploymentList().get(i)));
 		
 				if(cel.get(i).getId() == null){
 					cel.get(i).setContact(iamodel.getContact());
@@ -297,15 +295,15 @@ ModelDriven<Enquiries>, Preparable{
 		}
 		
 		//TODO: add a checker to see if value has changed first
-		iamodel.setStatusType(services.getStatusTypeByName(getTheStatus()));
-		iamodel.setEnquiryType(services.getEnquiryTypeByName(getTheEnquiry()));
-		iamodel.getContact().setTitleType(services.getTitleTypeByName(getTheTitle()));
-		iamodel.getContact().setGenderType(services.getGenderTypeByName(getTheGender()));
-		iamodel.getContact().setDangerType(services.getDangerTypeByName(getTheDanger()));;
-		//iamodel.getContact().setGenderType(services.getGenderTypeByName(getTheCulturalBackground()));
+		iamodel.setStatusType(typesService.getStatusTypeByName(getTheStatus()));
+		iamodel.setEnquiryType(typesService.getEnquiryTypeByName(getTheEnquiry()));
+		iamodel.getContact().setTitleType(typesService.getTitleTypeByName(getTheTitle()));
+		iamodel.getContact().setGenderType(typesService.getGenderTypeByName(getTheGender()));
+		iamodel.getContact().setDangerType(typesService.getDangerTypeByName(getTheDanger()));;
+		//iamodel.getContact().setGenderType(enquiryService.getGenderTypeByName(getTheCulturalBackground()));
 		System.out.println("just before updating");
 		if(iamodel.getId() == null){
-			if(services.saveOrUpdateEnquiry(iamodel, iamodel.getContact())){
+			if(enquiryService.saveOrUpdateEnquiry(iamodel, iamodel.getContact())){
 				activateLists();
 				setIamodel(iamodel);
 				System.out.println("save new enquiry successfully");
@@ -314,7 +312,7 @@ ModelDriven<Enquiries>, Preparable{
 			}
 		}
 		
-		else if(services.saveOrUpdateEnquiry(iamodel)){
+		else if(enquiryService.saveOrUpdateEnquiry(iamodel)){
 			activateLists();
 			setIamodel(iamodel);
 			System.out.println("save existing successfully");
@@ -375,7 +373,7 @@ ModelDriven<Enquiries>, Preparable{
 		default: System.out.println("Error deleting list");
 		}
 		
-		if(services.saveOrUpdateEnquiry(iamodel)){
+		if(enquiryService.saveOrUpdateEnquiry(iamodel)){
 			System.out.println("Struts: delete successful");
 			activateLists();
 			setIamodel(iamodel);
@@ -412,17 +410,17 @@ ModelDriven<Enquiries>, Preparable{
 	 * populate the Select List variables
 	 */
 	private void activateLists(){
-		setTitleSelectList(services.findTitleTypes());
-		genderSelectList=services.findGenderTypes();
-		culturalBackgroundSelectList=services.findCulturalBackgroundTypes();
-		accommodationSelectList = services.findAccommodationTypes();
-		disabilitySelectList = services.findDisabilityTypes();
-		issueSelectList = services.findIssueTypes();
-		dangerSelectList = services.findDangerTypes();
-		employmentSelectList = services.findEmploymentTypes();
+		setTitleSelectList(typesService.findTitleTypes());
+		genderSelectList=typesService.findGenderTypes();
+		culturalBackgroundSelectList=typesService.findCulturalBackgroundTypes();
+		accommodationSelectList = typesService.findAccommodationTypes();
+		disabilitySelectList = typesService.findDisabilityTypes();
+		issueSelectList = typesService.findIssueTypes();
+		dangerSelectList = typesService.findDangerTypes();
+		employmentSelectList = typesService.findEmploymentTypes();
 		//setEmploymentList(contact.getEmploymentType());
-		statusSelectList = services.findStatusTypes();
-		enquiryTypeSelectList = services.findEnquiryTypes();
+		statusSelectList = typesService.findStatusTypes();
+		enquiryTypeSelectList = typesService.findEnquiryTypes();
 		
 		if(iamodel != null){
 			theDisabilityList = new ArrayList<String>();
@@ -776,7 +774,7 @@ ModelDriven<Enquiries>, Preparable{
 			//iamodel = new Enquiries();
 			
 		} else {
-			iamodel = services.getEnquiry(getHiddenid());
+			iamodel = enquiryService.getEnquiry(getHiddenid());
 			activateLists();
 		}
 		System.out.println("Struts: Prepare end");

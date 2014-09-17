@@ -16,6 +16,7 @@ import uow.ia.bean.IndividualCases;
 import uow.ia.bean.CaseIssues;
 import uow.ia.bean.GenderTypes;
 import uow.ia.bean.IssueTypes;
+import uow.ia.bean.StatusTypes;
 import uow.ia.bean.TitleTypes;
 
 /** ---------------------------------------------------------------------------------------------
@@ -60,7 +61,7 @@ public class CaseAction extends BaseAction{
 	private List<EmploymentTypes> employmentSelectList;					private String theEmployment;
 	private List<DangerTypes> dangerSelectList;							private String theDanger;
 	//Status_Type or criteria control value table 
-	private List<String> statusSelectList;								private String theStatus;
+	private List<StatusTypes> statusSelectList;							private String theStatus;
 	
 
 	/*
@@ -220,15 +221,15 @@ public class CaseAction extends BaseAction{
 	 * populate the Select List vairables
 	 */
 	private void activateLists(){
-		titleSelectList=caseServices.findTitleTypes();
-		genderSelectList=caseServices.findGenderTypes();
-		culturalBackgroundSelectList=caseServices.findCulturalBackgroundTypes();
-		accommodationSelectList = caseServices.findAccommodationTypes();
-		disabilitySelectList = caseServices.findDisabilityTypes();
-		issueSelectList = caseServices.findIssueTypes();
-		dangerSelectList = caseServices.findDangerTypes();
-		//employmentSelectList = caseServices.findEmploymentTypes();
-		//setEmploymentList(contact.getEmploymentType());
+		titleSelectList=typesService.findTitleTypes();
+		genderSelectList=typesService.findGenderTypes();
+		culturalBackgroundSelectList=typesService.findCulturalBackgroundTypes();
+		accommodationSelectList = typesService.findAccommodationTypes();
+		disabilitySelectList = typesService.findDisabilityTypes();
+		issueSelectList = typesService.findIssueTypes();
+		dangerSelectList = typesService.findDangerTypes();
+		employmentSelectList = typesService.findEmploymentTypes();
+		statusSelectList = typesService.findStatusTypes();
 	}
 	
 	
