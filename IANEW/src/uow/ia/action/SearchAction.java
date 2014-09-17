@@ -4,9 +4,8 @@ import java.util.List;
 
 import uow.ia.util.SearchUtil;
 
-public class TimeManagementAction extends BaseAction{
-	
-private List list = null;
+public class SearchAction extends BaseAction {
+	private List list = null;
 	
 	/**
 	 * @return the list
@@ -22,14 +21,9 @@ private List list = null;
 		this.list = list;
 	}
 
-	public String displayResults() {
-		
+	public String search() {		
 		list = new SearchUtil().getResultObjectList("Mrs harley Kim", utilService);
 		
 		return SUCCESS;
-	}
-	
-	public String timeManagement(){
-		return displayResults();
 	}
 }

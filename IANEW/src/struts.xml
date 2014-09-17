@@ -81,6 +81,12 @@
     	</action>
     </package>
     
+    <package name="search" namespace="/search" extends="struts-default">
+    	<action name="displayResults" class="uow.ia.action.SearchAction" method="displayResults">
+    		<result name="success">/forms/searchResults.jsp</result>
+    	</action>
+    </package>
+    
      <include file="login.xml"/>
      <include file="admin.xml" />
 </struts>

@@ -10,6 +10,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import uow.ia.bean.DisabilityTypes;
+import uow.ia.bean.Users;
 import uow.ia.dao.DisabilityTypesDao;
 import uow.ia.service.AdminService;
 import uow.ia.service.NewEnquiryService;
@@ -62,6 +63,12 @@ public class AdminServiceImpl implements AdminService {
 			System.out.println(e);
 			return false;
 		}
+	}
+
+	@Override
+	public Users login(String username, String password) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

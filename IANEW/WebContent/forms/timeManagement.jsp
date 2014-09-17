@@ -33,7 +33,12 @@
 			</div>
 	</section>
 	<div class="fieldsetborder">
-		<div class="row"><p> &nbsp;Time Management is currently work in progress.</p></div>
+		<div class="row">
+			<p> &nbsp;Time Management is currently work in progress.</p>
+			<s:iterator value="list" var="Object">
+			<s:property />
+			</s:iterator>
+		</div>
 	</div>
 	<br>
 	</s:form>

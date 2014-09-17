@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import uow.ia.bean.DisabilityTypes;
+import uow.ia.bean.Users;
 
 /**
  * @author ZhiYu Yang
@@ -47,4 +48,6 @@ public interface AdminService {
      * @return List<Object>
      */
 	public boolean updateDisabilityType(DisabilityTypes d);
+	
+	public Users login(String username, String password);
 }

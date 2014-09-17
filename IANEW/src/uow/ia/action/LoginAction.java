@@ -1,17 +1,38 @@
 package uow.ia.action;
 
-import com.opensymphony.xwork2.Action;
+import java.lang.reflect.Field;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
-public class LoginAction implements Action {
+import uow.ia.bean.Contacts;
+import uow.ia.bean.Users;
+import uow.ia.util.SearchUtil;
+
+import com.google.common.base.Objects;
+import com.opensymphony.xwork2.Action;
+import com.opensymphony.xwork2.ActionContext;
+import com.opensymphony.xwork2.Preparable;
+
+public class LoginAction extends BaseAction
+//implements Preparable
+{
 
 	private String username;
 	private String password;
 		
 	public String execute(){
-		if(getUsername().equals("username") && getPassword().equals("password")){
+		
+		//if(getUsername().equals("username") && getPassword().equals("password")){
+		Users user = adminService.login(username, password);
+		if(user!=null) {
+			Map<String, Object> session = ActionContext.getContext().getSession();
+			session.put("user",user);
+            session.put("context", new Date());
 			return SUCCESS;
+		} else {
+			return ERROR;
 		}
-		return LOGIN;
 	}
 
 	public String getUsername() {
@@ -29,4 +50,65 @@ public class LoginAction implements Action {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	private List list = null;
+	private String searchString = null;
+	
+	
+	/**
+	 * @return the searchString
+	 */
+	public String getSearchString() {
+		return searchString;
+	}
+
+	/**
+	 * @param searchString the searchString to set
+	 */
+	public void setSearchString(String searchString) {
+		this.searchString = searchString;
+	}
+
+	/**
+	 * @return the list
+	 */
+	public List getList() {
+		return list;
+	}
+
+	/**
+	 * @param list the list to set
+	 */
+	public void setList(List list) {
+		this.list = list;
+	}
+
+	public String search() {
+		
+		if (!(searchString == null || searchString.equals(""))) {
+			System.out.println("search String " + searchString);
+			list = new SearchUtil().getResultObjectList(searchString, utilService);
+		
+			for (Object o : list) {
+				Field[] fields = o.getClass().getDeclaredFields();
+				if (o instanceof Contacts) {
+					System.out.println("Contacts object");
+				} else {
+					for (Field f : fields) {
+						if (f.getType().isInstance(new Contacts())){
+							System.out.println(o.getClass().getName());
+							break;
+						}
+					}
+				}
+			}
+		}
+		
+		return SUCCESS;
+	}
+
+//	@Override
+//	public void prepare() throws Exception {
+//		// TODO Auto-generated method stub
+//	}
 }

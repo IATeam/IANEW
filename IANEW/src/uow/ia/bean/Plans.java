@@ -6,29 +6,75 @@ import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.hibernate.search.annotations.DateBridge;
+import org.hibernate.search.annotations.DocumentId;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.IndexedEmbedded;
+import org.hibernate.search.annotations.Resolution;
+
 /**
  * Bean class of Plans
  * 
  * @author Kim To
  * @version 1.0.3, 28/08/2014
  */
+
+@Indexed
 public class Plans implements java.io.Serializable {
 
+	@DocumentId
 	private Integer id;
+	
+	@IndexedEmbedded
 	private StatusTypes statusType;
+	
+	@DateBridge(resolution = Resolution.DAY)
+	@Field
 	private Date createdDateTime;
+	
+	@DateBridge(resolution = Resolution.DAY)
+	@Field
 	private Date closedDateTime;
+	
+	@DateBridge(resolution = Resolution.DAY)
+	@Field
 	private Date lastReviewedDate;
+	
+	@IndexedEmbedded
 	private ReviewFrequencies reviewFrequency;
+	
+	@DateBridge(resolution = Resolution.DAY)
+	@Field
 	private Date providedPlanDate;
+	
+	@DateBridge(resolution = Resolution.DAY)
+	@Field
 	private Date consentSignedDate;
+	
+	@IndexedEmbedded
 	private Contacts supportPerson;
+	
+	@IndexedEmbedded
 	private Contacts authorisedBy;
+	
+	@DateBridge(resolution = Resolution.DAY)
+	@Field
 	private Date authorisedByDate;
+	
+	@Field
 	private String notes;
+	
+	@DateBridge(resolution = Resolution.DAY)
+	@Field
 	private Date updatedDateTime;
+	
+	@Field
 	private Integer updatedUserId;
+	
+	@Field
 	private Integer createdUserId;
+	
 	private IndividualCases individualCase;
 
 	/**

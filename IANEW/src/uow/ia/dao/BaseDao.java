@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.hibernate.metadata.ClassMetadata;
+import org.hibernate.search.FullTextSession;
 
 /**
  * Base Dao
@@ -192,5 +193,7 @@ public interface BaseDao<T> {
      */
 	public Integer executeHql(String hql, List<Object> param);
 	
-	public Map<String, ClassMetadata> getClassMetaData();
+	public Map<String, ClassMetadata> getAllClassMetadata();
+	
+	public FullTextSession getFullTextSession();
 }

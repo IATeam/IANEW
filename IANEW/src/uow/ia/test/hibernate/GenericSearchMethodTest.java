@@ -3,6 +3,7 @@ package uow.ia.test.hibernate;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -13,6 +14,7 @@ import org.apache.lucene.queryParser.MultiFieldQueryParser;
 import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.queryParser.QueryParser;
 import org.apache.lucene.util.Version;
+import org.apache.poi.hwpf.model.FFData;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -33,7 +35,7 @@ import uow.ia.bean.Contacts;
 import uow.ia.bean.Enquiries;
 import uow.ia.bean.TitleTypes;
 import uow.ia.dao.BaseDao;
-@Controller
+
 public class GenericSearchMethodTest {
 	private Logger logger = Logger.getLogger(AccommodationTypesTest.class);
 	private SessionFactory sessionFactory;
@@ -51,8 +53,7 @@ public class GenericSearchMethodTest {
 		
 		try{
 			
-			Map<String, ClassMetadata> map = dao.getClassMetaData();
-					//sessionFactory.getAllClassMetadata();
+			Map<String, ClassMetadata> map = sessionFactory.getAllClassMetadata();
 			//Class class = Enquiries.class;
 			//Contacts contact = new Contacts();
 			//System.out.println("quang test " + sessionFactory.getClassMetadata(((Object)contact).getClass()));
@@ -85,6 +86,8 @@ public class GenericSearchMethodTest {
 							
 							productFields.add(f.getName());
 							
+						} else if (f.getType() instanceof Object && !(Collection.class.isAssignableFrom(f.getType()))) {
+							System.out.println("Object " + f.getType());
 						}
 						
 					}
@@ -96,6 +99,8 @@ public class GenericSearchMethodTest {
 		    System.out.println(ex);
 
 		}
+		
+		//productFields.add("titleType.name");
 		
 		System.out.println(productFields.toString());
 		String[] searchFields = productFields.toArray(new String[0]);

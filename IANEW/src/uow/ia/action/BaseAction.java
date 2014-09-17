@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import uow.ia.service.AdminService;
 import uow.ia.service.NewCaseService;
 import uow.ia.service.NewEnquiryService;
+import uow.ia.service.UtilService;
 
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -21,6 +22,23 @@ public class BaseAction extends ActionSupport{
 
 	@Resource
 	protected AdminService adminService;
+	
+	@Resource
+	protected UtilService utilService;
+
+	/**
+	 * @return the utilService
+	 */
+	public UtilService getUtilService() {
+		return utilService;
+	}
+
+	/**
+	 * @param utilService the utilService to set
+	 */
+	public void setUtilService(UtilService utilService) {
+		this.utilService = utilService;
+	}
 
 	public NewCaseService getCaseServices() {
 		return caseServices;

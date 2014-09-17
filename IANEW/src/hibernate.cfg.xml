@@ -15,7 +15,7 @@
         <!-- hibernate search configuration -->
         <!-- @author Kim To -->
 		<property name="hibernate.search.default.indexBase"> 
-			/Users/KimTo/indexes 
+			/indexes 
 		</property> 
         
         <mapping resource="uow/ia/bean/CaseIssues.hbm.xml" />

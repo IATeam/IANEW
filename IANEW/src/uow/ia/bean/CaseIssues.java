@@ -4,21 +4,52 @@ package uow.ia.bean;
 
 import java.sql.Date;
 
+import org.hibernate.search.annotations.DateBridge;
+import org.hibernate.search.annotations.DocumentId;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.IndexedEmbedded;
+import org.hibernate.search.annotations.Resolution;
+
 /**
  * @author Kim To
  * @version 1.0.2, 29/08/2014
  */
-public class CaseIssues implements java.io.Serializable {
 
+@Indexed
+public class CaseIssues implements java.io.Serializable {
+	
+	@DocumentId
 	private Integer id;
+	
+	@IndexedEmbedded
 	private IndividualCases individualCase;
+	
+	@IndexedEmbedded
 	private IssueTypes issue;
+	
+	@Field
 	private String comments;
+	
+	@IndexedEmbedded
 	private StatusTypes statusType;
+	
+	@DateBridge(resolution = Resolution.DAY)
+	@Field
 	private Date completedDate;
+	
+	@DateBridge(resolution = Resolution.DAY)
+	@Field
 	private Date createdDateTime;
+	
+	//@Field
 	private Integer createdUserId;
+	
+	@DateBridge(resolution = Resolution.DAY)
+	@Field
 	private Date updatedDateTime;
+	
+	//@Field
 	private Integer updatedUserId;
 
 	public CaseIssues() {

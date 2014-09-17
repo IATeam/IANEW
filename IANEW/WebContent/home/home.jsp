@@ -124,16 +124,25 @@
 <!-- Body of the content --------------------------------------------------------------------------- -->
 <!-- ----------------------------------------------------------------------------------------------- -->		
 	<div id="content">
-		<section id="secSearch">
-			<div id="divSearchBox"><s:textfield id="searchbox" onkeypress="return addActivity(this.value, event)"/><br/></div>
-			<div id="divRadio"><s:radio value="1" onclick="radioChecked(this.id)" name="radio" list="#{'1':'Database','2':'Document','3':'Report' }"/></div>
-			<!-- <button onclick="displayActivities()">display</button>
-			<button onclick="deleteLocalStorage()">clear</button> -->
-		</section>
+		<s:form id="searchForm" namespace="/" action="search" method="post" novalidate="novalidate">
+			<section id="secSearch">
+				<div id="divSearchBox">
+					<s:textfield id="searchbox" Key="searchString" name="searchString"/><br/>
+					<%-- onkeypress="return addActivity(this.value, event)" --%>
+				</div>
+				<div id="divRadio"><s:radio value="1" onclick="radioChecked(this.id)" name="radio" list="#{'1':'Database','2':'Document','3':'Report' }"/></div>
+				<!-- <button onclick="displayActivities()">display</button>
+				<button onclick="deleteLocalStorage()">clear</button> -->
+			</section>
+		</s:form>
 		
 		<section id="secSuggestions">
 			<!-- dynamically loads suggestions based on the key pressed from input box -->
-			<article id="artSuggestionList" ></article>
+			<article id="artSuggestionList" >
+			<s:iterator value="list" var="Object">
+			<s:property /><br/>
+			</s:iterator>
+			</article>
 		</section>
 			
 		<section id="secLists">
@@ -169,6 +178,15 @@
 	</footer>
 	
 	<script>
+		$("#searchbox").keypress(function() {
+			if(event.which == 13) {
+				if ($("#searchbox").val() != null || $("#searchbox").val != "") {
+					event.preventDefault();
+					$("#searchForm").submit();
+				}
+			}
+		});
+		
 		$(function(){
 			$("#leftPopUp").hide();
 			$("#rightPopUp").hide();

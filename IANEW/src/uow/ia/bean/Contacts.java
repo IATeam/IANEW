@@ -41,7 +41,10 @@ public class Contacts implements java.io.Serializable {
 	@Field
 	private String othername;
 	
+	@IndexedEmbedded
 	private GenderTypes genderType;
+	
+	@IndexedEmbedded
 	private ContactTypes contactType;
 	
 	@Field
@@ -50,14 +53,19 @@ public class Contacts implements java.io.Serializable {
 	@Field
 	private String email;
 	
+	@IndexedEmbedded
 	private AccommodationTypes accommodation;
 	
 	@Field
 	private String accommodationComment;
+	
+	@IndexedEmbedded
 	private CulturalBackgroundTypes culturalBackground;
 	
 	@Field
 	private String culturalBackgroundComment;
+	
+	@IndexedEmbedded
 	private DangerTypes dangerType;
 	
 	@Field
@@ -67,20 +75,24 @@ public class Contacts implements java.io.Serializable {
 	@Field
 	private Date dob;
 	
-	@Field
+	//@Field
 	private Integer createdUserId;
 	
-	//@Field
+	@DateBridge(resolution = Resolution.DAY)
+	@Field
 	private Date createdDateTime;
 	
-	@Field
+	//@Field
 	private Integer updatedUserId;
 	
-	//@Field
+	@DateBridge(resolution = Resolution.DAY)
+	@Field
 	private Date updatedDateTime;
+	
+	@IndexedEmbedded
 	private StatusTypes status;
 	
-	@Field
+	//@Field
 	private String timestamp;
 	
 	private List<Addresses> addressesList = new ArrayList<Addresses>();
@@ -585,7 +597,7 @@ public class Contacts implements java.io.Serializable {
 	
 	@Override
 	public String toString() {
-		return this.firstname + this.lastname;
+		return this.firstname + " " + this.lastname;
 	}
 
 	public String getFullName() {
