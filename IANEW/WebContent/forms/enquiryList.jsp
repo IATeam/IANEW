@@ -95,7 +95,7 @@
 			<s:div style="background:#444444; margin-top: 10px; padding: 5px;">
 				<s:div cssClass="row">
 					<section class="four columns">
-						<input type="button" class="three columns" value="Close"  onclick="deselectAll()"/>
+						<input type="button" class="three columns" value="Close"  onclick="confirmAction('Are you sure you want to Close?', 'home', 'home')"/>
 					</section >
 					<section class="eight columns">
 						<%@include file="/forms/includes/paginationToolSet.jsp" %>

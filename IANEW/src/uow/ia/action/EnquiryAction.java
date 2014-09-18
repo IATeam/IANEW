@@ -197,6 +197,24 @@ ModelDriven<Enquiries>, Preparable{
 
 		setDob(iamodel.getContact().getDob().toString());
 		
+		if(iamodel.getContact().getEmploymentsList().size() > 0){
+			for(ContactEmployments ce: iamodel.getContact().getEmploymentsList()){
+				theEmploymentList.add(ce.getEmploymentType().getEmploymentName());
+			}
+		}
+		
+		if(iamodel.getContact().getDisabilitiesList().size() > 0){
+			for(ClientDisabilities cd: iamodel.getContact().getDisabilitiesList()){
+				theDisabilityList.add(cd.getDisabilityType().getDisabilityName());
+			}
+		}
+		
+		if(iamodel.getEnquiryIssuesList().size() > 0){
+			for(EnquiryIssues is: iamodel.getEnquiryIssuesList()){
+				theIssueList.add(is.getIssue().getIssueName());
+			}
+		}
+		
 		linkedEnquiriesList = services.getLinkedEnquiry(getHiddenid());
 		
 		System.out.println("Struts: start getExistingEnquiry");

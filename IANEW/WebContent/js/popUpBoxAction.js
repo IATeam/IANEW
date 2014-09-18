@@ -26,7 +26,7 @@ function confirmAction(message, namespace, actionName) {
 	}
 	else{
 		if (confirm(message) == true){ 
-				$("#formDiv").load("/IANEW/" + namespace + "/" + actionName + ".action");
+				/*$("#formDiv").load("/IANEW/" + namespace + "/" + actionName + ".action");*/
 				return true;
 		}else
 			return false;
