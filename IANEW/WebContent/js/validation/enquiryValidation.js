@@ -20,7 +20,7 @@
  * for adding dyanmic content validation
  */
 
-	
+function validated(){	
 
 	$('#enquiryForm').validate({ 
 			rules: {
@@ -66,7 +66,7 @@
 			
 			
 			submitHandler: function(form) {
-				alert("submitted!");
+				alert("Validation complete, submitting form!");
 				checkForm();
 				form.submit();
 			}
@@ -102,8 +102,8 @@
  			var re= new RegExp(regexp);
  			return this.optional(element) || re.test(value);
  	}, "Phone number is invalid" );	
- 	
- 	
+
+}
  	
  	
  	

@@ -21,8 +21,11 @@
 		25/08/2014 -	Quang Nhan
 						Pulled the form footer out of the enquiryForm tags and placed it at the bottom
 						Implement readonly javascript for existing enquiry.
-		01/08/2014 -	Include a new javascript ianew.form.js
-		14/08/2014 -	Quang Revised the function to remove null sections and definition when the form is submitted
+		01/09/2014 -	Include a new javascript ianew.form.js
+		13/09/2014 - 	David Forbes
+						Added OnClick method to buttons 
+		14/09/2014 -	Quang Revised the function to remove null sections and definition when the form is submitted
+		16/09/2014 -	Rework the submit to allow Jquery's validation
 	==============================================	
 	Description: A jsp page that displays enquiry list for both new and existing
 	
@@ -47,7 +50,8 @@
 <script src="<s:url value='/js/jquery/jquery.validate.js' encode='false' includeParams='none'/>" ></script>
 <script src="<s:url value='/js/validation/enquiryValidation.js' encode='false' includeParams='none'/>" ></script>
 <script src="<s:url value='/js/ianew.form.js' encode='false' includeParams='none'/>" ></script>
-
+<script src="<s:url value='/js/popUpBoxAction.js' encode='false' includeParams='none'/>" ></script>
+<s:head/>
 
 </head>
 <body>
@@ -86,14 +90,14 @@
 			<footer>
 				<s:div cssClass="row">
 					<section class="six columns">
-						<input id="btnCancel" type="button" class="three columns alpha" value="Cancel"/>
-						<input id="btnNewEnquiry" type="button" class="three columns omega" value="New Enquiry" />
+						<input id="btnCancel" type="button" class="three columns alpha" value="Cancel" onclick="confirmAction('Are you sure you want to Cancel?', 'home', 'home')"/>
+						<input id="btnNewEnquiry" type="button" class="three columns omega" value="New Enquiry" onclick="confirmAction('Are you sure you want to create a new enquiry?', 'enquiry', 'newEnquiry')"/>
 					</section>
 					<section class="six columns"><p></p></section>
 					<section class="four columns omega">
-						<input id="createCase" type="button" value="Create Case" class="two columns alpha" onclick="checkForm()"/>
+						<input id="createCase" type="button" value="Create Case" class="two columns alpha" onclick="confirmAction('Are you sure you want to create a case?', 'case', 'newCase')"/>
 <%-- 						<sj:submit formIds="enquiryForm" name="submit" cssClass="submit two columns omega" value="Submit" onclick="checkForm()"/>
- --%>						<s:submit name="submit" cssClass="two columns omega" value="Submit"/>
+ --%>						<s:submit name="submit" cssClass="two columns omega" value="Submit" onclick="confirmAction('Are you sure you want to save the enquiry?', 'enquiry', 'saveUpdateEnquiry')"/>
 					</section>
 				</s:div>
 			</footer>
@@ -102,7 +106,7 @@
 		Note: each form will have its own footer settings so it is better to NOT to separate and
 		create its own include file and referenced it here.
 		 -->			
-	
+
 	</s:div>
 	
 	

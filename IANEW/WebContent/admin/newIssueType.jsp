@@ -19,10 +19,22 @@
 			<s:textfield id="issueName" name="issueName" />
 			<s:label for="issueDescription" value="Description" />
 			<s:textarea id="issueDescription" name ="issueDescription" />
+			<table>
+				<tr>
+					<th>Issue Name</th>
+					<th>Issue Description</th>
+				</tr>
+				<s:iterator value="IssueTypeList" status="stat">
+				<tr>
+					<td><s:property value="issueName"></s:property></td>
+					<td><s:property value="issueDescription"></s:property></td>
+				</tr>
+				</s:iterator>
+			</table>
 		</div>
 		<input type="button" value="Cancel" id="btnCancel"/>
 		<input type="button" value="edit" id="btnEdit"/>
-		<sj:submit id="save" targets="disabilityTypeSelect" cssClass="two columns alpha" value="Save" onclick=""/>
+		<sj:submit id="save" targets="issueSelectList" cssClass="two columns alpha" value="Save" onclick=""/>
 	</s:form>
 	<script>
 	$("#btnCancel").click(function(){
