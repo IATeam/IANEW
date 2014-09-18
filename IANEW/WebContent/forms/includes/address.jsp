@@ -22,7 +22,7 @@
 		<div class="row"> <s:text name="#session.user.username"></s:text>
 		<!-- to do -->
 			<div class="four columns">
-				<s:select list="accomodationSelectList.{accommodationName}" name="theAccommodation" headerKey="-1" headerValue="Select an Accomodation Type"/>
+				<s:select list="accomodationSelectList.{accommodationName}" name="theAccommodation" value="iamodel.accommodation.accommodationName" headerKey="-1" headerValue="Select an Accomodation Type"/>
 			</div>
 			
 			<div class="textarea twelve columns">

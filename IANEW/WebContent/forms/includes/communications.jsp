@@ -28,48 +28,13 @@
 
 <section>
 <h3 class="fifteen columns" style="float:none;">Communications</h3>
-<input type="image" src="/IANEW/resources/images/plusButton.png" alt="Hide/Show" id="btnShowHide" value="ShowHide" onclick="divHide(this);return false;" class="divHideButton"/>
+<!-- <input type="image" src="/IANEW/resources/images/plusButton.png" alt="Hide/Show" id="btnShowHide" value="ShowHide" onclick="divHide(this);return false;" class="divHideButton"/>
+ -->
 <s:div cssClass="greybackground">
-<div id="communicationsDiv" class="toggled startShown">
+<div id="communicationsDiv">
 	<%-- <s:if test="" > --%>
 	<article id="itCommunication">
-		<s:iterator value="communicationSet">		
-			<section class="secIssue sixteen columns curveBorder">
-			<div class="row">
-			<div class="four columns"><s:select list="issueSelectList.{issueName}" name="" headerKey="-1" headerValue="Select an Issue" /></div>
-<s:if test="%{#formType=='case'}">
-				<div class="three columns">
-				<s:label for="createdDate" value="Created Date:" />
-				    <s:date name="createdDate" format="dd/MM/yyyy"/>
-			    </div>
-			    <div class="three columns">
-				<s:label for="createdBy" value="Created By:" />
-				    <s:date name="createdBy" format="dd/MM/yyyy"/>
-			    </div>
-			    <div class="three columns">
-					<s:label for="completedDate" value="Completed Date:"  />
-				    <s:date name="completedDate" format="dd/MM/yyyy"/>
-			    </div>
-				    <div class="three columns"><s:select list="issueSelectList.{issueName}" value="issue" name="" headerKey="-1" headerValue="Status" /></div>
-								</s:if>
-				
-				</div>
-				
-				<div class="row">
-					<div class="textarea fifteen columns omega">
-					<s:label for="comments" value="Comments:" />
-					<s:textarea id="" cssClass="oneLineTextArea" name=""/> 
-					</div>
-				</div>
-
-			<s:elseif test="%{#formType=='enquiry'}">
-				<div class="textarea eleven columns omega">
-					<s:label for="issuedescription" value="Issue Description:" />
-					<s:textarea id="" cssClass="oneLineTextArea" name="" /> 
-				</div>
-			</s:elseif>
-		</section>
-		</s:iterator>
+		<%@include file="iterCommunications.jsp" %>
 	</article>
 	
 	<article id="artCommunication" class="row" style="visibility: hidden; display: none;">
@@ -78,7 +43,7 @@
 			<input type="image" src="/IANEW/resources/images/undoButtonImage.png" alt="undoButton" id="btnUndo" value="Undo" onclick="undoButton(this);return false;" class="undoButton"/>
 			
 			<div class="row">
-			<div class="three columns"><s:select list="communicationSelectList.{communicationTypeName}" name="theCommunication" headerKey="-1" headerValue="Communication Type" /></div>
+			<div class="three columns"><s:select list="communicationSelectList.{communicationTypeName}" name="theCommunicationsList" headerKey="-1" headerValue="Select Communication Type" /></div>
 			<div class="three columns">
 			<s:label for="createdDate" value="Created Date:" />
 			    <s:date name="createdDate" format="dd/MM/yyyy"/>
@@ -89,9 +54,11 @@
 		    </div>
 		    <div class="inputfield four columns omega">
 				<s:label for="communicationDate" value="Commun. Date:" />
-				<div><input type="date" id="communicationDate" name=""></div>
+				<div><input type="date" id="communicationDate" name="" format="dd/MM/yyyy"></div>
 			</div>
-			    <div class="two columns"><s:select list="{'<5 Minutes','5-10 Minutes','10-30 Minutes','30-60 Minutes', '1-2 Hours', '3-6 Hours', '7+ Hours'}"  name="" headerKey="-1" headerValue="Time Spent" /></div>
+			<div  class="inputfield two columns omega">
+				<s:label for="timespent" value="Time Spent:" />
+				<div><input type="text" name=""></div>
 			</div>
 			<div class="row">
 				<div class="textarea fourteen columns omega">

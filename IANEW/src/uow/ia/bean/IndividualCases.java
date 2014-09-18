@@ -61,6 +61,7 @@ public class IndividualCases implements java.io.Serializable {
 	
 	@Field
 	private String referredTo;
+	
 	private List<Risks> risksList = new ArrayList<Risks>();
 	
 	private IndividualCases oldCase;

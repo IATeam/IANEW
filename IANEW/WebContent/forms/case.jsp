@@ -40,7 +40,7 @@
 	<link href="<s:url value='/styles/import/skeleton.css' encode='false' includeParams='none'/>" rel="stylesheet" type="text/css"
 		      media="all"/>
 	<script src="<s:url value='/js/ianew.lists.js' encode='false' includeParams='none'/>"></script>
-	<script src="<s:url value='/js/ianew.util.js' encode='false' includeParams='none'/>" ></script>
+	<script src="<s:url value='/js/ianew.form.js' encode='false' includeParams='none'/>" ></script>
 </head>
 <body>
 	<s:set var="formType">case</s:set>
@@ -65,7 +65,7 @@
 		<%@include file="includes/disability.jsp" %>
  		<%@include file="includes/employment.jsp" %>	
 		<%@include file="includes/plan.jsp" %>
-		<%@include file="includes/issues.jsp" %>
+		<%@include file="includes/caseIssues.jsp" %>
 		<%@include file="includes/communications.jsp" %>
 		<%@include file="includes/linkedCases.jsp" %>
 		<%@include file="includes/linkedEnquiries.jsp" %>

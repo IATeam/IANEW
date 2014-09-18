@@ -1,4 +1,3 @@
-
 <!----------------------------------------------------------------------------------------------
 	Created By: Quang Nhan
 	Created Date: 02/08/2014
@@ -31,7 +30,7 @@
 			<div class="four columns"><s:select list="titleSelectList.{name}" name="theTitle" value="iamodel.contact.titleType.name" headerKey="-1" headerValue="Select Title" /></div>
 	
 			<div class='inputfield four columns'>
-				<s:label for="firstName" value="First Name:" />
+				<s:label for="firstname" value="First Name:" />
 				<div><s:textfield id="firstname" name="iamodel.contact.firstname" /></div>
 				<!-- <sj:autocompleter placeholder="enter first name" id="firstName" name="iamodel.contact.firstname" list="%{firstNameAuto}" /> -->
 			</div>
@@ -62,7 +61,7 @@
 		</div>
 		
 		<div class="row">
-			<div class="four columns"><s:select list="culturalBackgroundSelectList.{culturalBackgroundName}" name="theCulturalBackground" value="iamodel.contact.accommodation.accommodationName" headerKey="-1"  headerValue="Select Cultural Background" /></div>
+			<div class="four columns"><s:select list="culturalBackgroundSelectList.{culturalBackgroundName}" name="theCulturalBackground" value="iamodel.contact.culturalBackground.culturalBackgroundName" headerKey="-1"  headerValue="Select Cultural Background" /></div>
 			
 			<div class="textarea twelve columns omega">
 				<s:label for="culturalBackgroundComments" value="Comments:" />

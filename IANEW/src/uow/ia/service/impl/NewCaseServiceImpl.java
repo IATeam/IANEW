@@ -82,6 +82,9 @@ NewCaseService {
 	@Resource
 	private StatusTypesDao<StatusTypes> statusTypesDao;
 	
+	@Resource
+	private ReviewFrequenciesDao<ReviewFrequencies> reviewFrequenciesDao;
+	
 	@Override
 	public List<DangerTypes> findDangerTypes() {
 		return dangerTypesDao.find(" from DangerTypes order by display_order");
@@ -174,6 +177,11 @@ NewCaseService {
 				" from ContactTypes t where t.contactTypeName =?",
 				new Object[] { "Advocate" });
 		return contactsDao.find(" from Contacts t where t.contactType =:contactType order by t.lastname asc, t.firstname asc","contactType", c);
+	}
+
+	@Override
+	public List<ReviewFrequencies> findReviewFrequencies() {
+		return reviewFrequenciesDao.find("from ReviewFrequencies");
 	}
 
 

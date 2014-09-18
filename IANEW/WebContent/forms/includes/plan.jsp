@@ -84,17 +84,17 @@ function changeContact(selectedPerson) {
 </script>
 <section>
 	<h3 class="sixteen columns"  style="float:none;">Plan</h3>
-	<input type="image" src="/IANEW/resources/images/plusButton.png" alt="Hide/Show" id="btnShowHide" value="ShowHide" onclick="divHide(this);return false;" class="divHideButton"/>
-	<div class="greybackground">
-		<div id="plansDiv" class="toggled startShown">
+<!-- 	<input type="image" src="/IANEW/resources/images/plusButton.png" alt="Hide/Show" id="btnShowHide" value="ShowHide" onclick="divHide(this);return false;" class="divHideButton"/>
+ -->	<div class="greybackground">
+		<div id="plansDiv" >
 			<fieldset>
 				<div class="row">
 					<div class="three columns">
-						<s:select list="#{'Weekly' : 'Weekly', 'Monthly' : 'Monthly', 'Bi-Monthly' : 'Bi-Monthly'}" name="theCommunication" headerKey="-1" headerValue="Review Frequency" />
+						<s:select list="reviewFrequencyList.{frequencyName}" name="theReviewFrequency" value="iamodel.plan.reviewFrequency.frequencyName" headerKey="-1" headerValue="Review Frequency" />
 					</div>
 					<div class="three columns">
 					<s:label for="createdDate" value="Created Date:" />
-					    <s:date name="createdDate" format="dd/MM/yyyy"/>
+					    <s:date name="iamodel.plan.createdDateTime" format="dd/MM/yyyy"/>
 				    </div>
 				    <div class="three columns">
 					<s:label for="createdBy" value="Created By:" />
@@ -102,53 +102,54 @@ function changeContact(selectedPerson) {
 				    </div>
 				    <div class="three columns omega">
 						<s:label for="completionDate" value="Completion Date:" />
-					    <s:date name="completionDate" format="dd/MM/yyyy"/>
+					    <s:date name="iamodel.plan.closedDateTime" format="dd/MM/yyyy"/>
 					</div>
-					    <div class="four columns"><s:select list="statusSelectList.{statusName}" name="theStatus" headerKey="-1" headerValue="Status" /></div>
+					    <div class="four columns"><s:select list="statusSelectList.{statusName}" name="theStatus" value="iamodel.plan.statusType.statusName" headerKey="-1" headerValue="Status" /></div>
 				</div>
 				<div class="row">
 					<div class="inputfield five columns omega">
 						<s:label for="lastReviewDate" value="Last Review Date:" />
-						<div><input type="date" id="lastReviewDate" name=""></div>
+						<div><input type="date" id="lastReviewDate" name="iamodel.plan.lastReviewedDate"></div>
 					</div>
 					<div class="inputfield five columns omega">
 						<s:label for="planProvidedDate" value="Plan Provided Date:" />
-						<div><input type="date" id="planProvidedDate" name=""></div>
+						<div><input type="date" id="planProvidedDate" name="iamodel.plan.providedPlanDate"></div>
 					</div>
 					<div class="inputfield six columns omega">
 						<s:label for="consentSignedDate" value="Consent Signed Date:" />
-						<div><input type="date" id="consentSignedDate" name=""></div>
+						<div><input type="date" id="consentSignedDate" name="iamodel.plan.consentSignedDate"></div>
 					</div>
 				</div>
 				<div class="row">
 					<div class='inputfield four columns'>
 									<s:label for="firstNameContact" value="Support First Name:" />
-									<div><s:textfield id="firstNameContact" Key="firstName" name="contact.firstname" ></s:textfield></div>
+									<div><s:textfield id="supportFirstName" name="iamodel.plan.supportPerson.firstname" ></s:textfield></div>
 								</div>
 								<div class="inputfield four columns">
 									<s:label for="otherNameContact" value="Support Other Name:" />
-									<div><s:textfield id="otherNameContact" name="contact.othername"></s:textfield></div>
+									<div><s:textfield id="supportOtherName" name="iamodel.plan.supportPerson.othername"></s:textfield></div>
 								</div>
 								
 								<div class="inputfield four columns omega">
 									<s:label for="lastNameContact" value="Support Last Name:" />
-									<div><s:textfield id="lastNameContact" name="contact.lastname" Key="lastname" ></s:textfield></div>
+									<div><s:textfield id="supportLastName" name="iamodel.plan.supportPerson.lastname"></s:textfield></div>
 				</div>
 				
 				<div class="inputfield four columns omega">
 									<s:label for="mobileContact" value="Support Mobile#:" />
-									<div><s:textfield id="mobileContact" name="contact.mobilephone" ></s:textfield></div>
+									<div><s:textfield id="supportMobile" name="iamodel.plan.supportPerson.mobilephone" ></s:textfield></div>
 								</div>
 				</div>
 				<div class="row">
 					<div class="textarea sixteen columns omega">
 						<s:label for="notes" value="Notes:" />
-						<s:textarea id="notes" cssClass="oneLineTextArea" name=""/> 
+						<s:textarea id="notes" cssClass="oneLineTextArea" name="iamodel.plan.notes"/> 
 					</div>
 				</div>
 			</fieldset>
 			<br>
-			<div class="fieldsetborder">
+			<%@include file="planDeveloper.jsp" %>
+			<%-- <div class="fieldsetborder">
 				<h4 class="sixteen columns"  style="float:none;">Developed By</h4>
 				<article id="itDeveloper">
 					<s:iterator value="developerSet">		
@@ -264,153 +265,12 @@ function changeContact(selectedPerson) {
 					});
 				});
 				</script>
-			</div>	
+			</div>	 --%>
 			<br>
-			<div class="fieldsetborder">
-				<h4 class="sixteen columns"  style="float:none;">Goals</h4>
-				<article id="itGoal">
-					<s:iterator value="goalSet">		
-						<section class="secIssue sixteen columns curveBorder">
-						<input type="image" src="/IANEW/resources/images/undoButtonImage.png" alt="undoButton" id="btnUndo" value="Undo" onclick="undoButton(this);return false;" class="undoButton"/>
-							<div class="row">
-								<div class="three columns">
-									<s:select list="goalSelectList.{goalTypeName}" name="theGoal" headerKey="-1" headerValue="Goal Type" />
-								</div>
-								<div class="three columns">
-									<s:label for="createdDate" value="Created Date:" />
-								    <s:date name="createdDate" format="dd/MM/yyyy"/>
-							    </div>
-							    <div class="three columns">
-									<s:label for="createdBy" value="Created By:" />
-								    <s:date name="createdBy" format="dd/MM/yyyy"/>
-							    </div>
-							   	<div class="three columns">
-									<s:label for="completedDate" value="Completed Date:" />
-								    <s:date name="completedDate" format="dd/MM/yyyy"/>
-							    </div>
-							    <div class="three columns">
-							    	<s:select list="statusSelectList.{statusName}" name="theStatus" headerKey="-1" headerValue="Status" />
-						    	</div>
-							</div>
-							<div class="row">
-								<div class="textarea fifteen columns omega">
-									<s:label for="goalDescription" value="Goal Description" />
-									<s:textarea id="" cssClass="oneLineTextArea" name=""/> 
-								</div>
-							</div>			
-							<div class="row">
-								<div class="textarea fifteen columns omega">
-									<s:label for="goalAction" value="Goal Action" />
-									<s:textarea id="" cssClass="oneLineTextArea" name=""/> 
-								</div>
-							</div>
-						</section>
-					</s:iterator>
-				</article>
-				
-				<article id="artGoal" class="row" style="visibility: hidden; display: none;">
-					<section class="secIssue sixteen columns curveBorder">
-						<input type="image" src="/IANEW/resources/images/undoButtonImage.png" alt="undoButton" id="btnUndo" value="Undo" onclick="undoButton(this);return false;" class="undoButton"/>
-						<div class="row">
-							<div class="three columns">
-								<s:select list="goalSelectList.{goalTypeName}" name="theGoal" headerKey="-1" headerValue="Goal Type" />
-							</div>
-							<div class="three columns">
-								<s:label for="createdDate" value="Created Date:" />
-							    <s:date name="createdDate" format="dd/MM/yyyy"/>
-						    </div>
-						    <div class="three columns">
-								<s:label for="createdBy" value="Created By:" />
-							    <s:date name="createdBy" format="dd/MM/yyyy"/>
-						    </div>
-						   	<div class="three columns">
-								<s:label for="completedDate" value="Completed Date:" />
-							    <s:date name="completedDate" format="dd/MM/yyyy"/>
-						    </div>
-						    <div class="three columns">
-						    	<s:select list="statusSelectList.{statusName}" name="theStatus" headerKey="-1" headerValue="Status" />
-					    	</div>
-						</div>
-						<div class="row">
-							<div class="textarea fifteen columns omega">
-								<s:label for="goalDescription" value="Goal Description" />
-								<s:textarea id="" cssClass="oneLineTextArea" name=""/> 
-							</div>
-						</div>			
-						<div class="row">
-							<div class="textarea fifteen columns omega">
-								<s:label for="goalAction" value="Goal Action" />
-								<s:textarea id="" cssClass="oneLineTextArea" name=""/> 
-							</div>
-						</div>
-					</section>
-				</article>
-				<div class="row">
-					<div class="thirteen columns alpha"><p></p></div>
-					<input type="button" id="btnAddGoal" value="Add Goal" class="three columns" />
-				</div>
-	
-				<script>
-				$(function(){
-					$("#btnAddGoal").click(function(){ 
-						$("#artGoal section").clone().appendTo("#itGoal");
-					});
-				});
-				</script>
-				</div>
-				<br>
-			<div class="fieldsetborder">
-				<h4 class="sixteen columns"  style="float:none;">Risks</h4>
-				<article id="itRisk">
-					<s:iterator value="riskSet">		
-						<section class="secIssue sixteen columns curveBorder">
-						<input type="image" src="/IANEW/resources/images/undoButtonImage.png" alt="undoButton" id="btnUndo" value="Undo" onclick="undoButton(this);return false;" class="undoButton"/>
-							<div class="row">
-								<div class="textarea fifteen columns omega">
-									<s:label for="riskDescription" value="Risk Description" />
-									<s:textarea id="" cssClass="oneLineTextArea" name=""/> 
-								</div>
-							</div>			
-							<div class="row">
-								<div class="textarea fifteen columns omega">
-									<s:label for="riskManagement" value="Risk Management" />
-									<s:textarea id="" cssClass="oneLineTextArea" name=""/> 
-								</div>
-							</div>
-						</section>
-					</s:iterator>
-				</article>
-				
-				<article id="artRisk" class="row" style="visibility: hidden; display: none;">
-					<section class="secIssue sixteen columns curveBorder">
-						<input type="image" src="/IANEW/resources/images/undoButtonImage.png" alt="undoButton" id="btnUndo" value="Undo" onclick="undoButton(this);return false;" class="undoButton"/>
-						<div class="row">
-								<div class="textarea fifteen columns omega">
-									<s:label for="riskDescription" value="Risk Description" />
-									<s:textarea id="" cssClass="oneLineTextArea" name=""/> 
-								</div>
-							</div>			
-							<div class="row">
-								<div class="textarea fifteen columns omega">
-									<s:label for="riskManagement" value="Risk Management" />
-									<s:textarea id="" cssClass="oneLineTextArea" name=""/> 
-								</div>
-							</div>
-					</section>
-				</article>
-				<div class="row">
-					<div class="thirteen columns alpha"><p></p></div>
-					<input type="button" id="btnAddRisk" value="Add Risk" class="three columns" />
-				</div>
-	
-				<script>
-				$(function(){
-					$("#btnAddRisk").click(function(){ 
-						$("#artRisk section").clone().appendTo("#itRisk");
-					});
-				});
-				</script>
-			</div>
+			<%@include file="goals.jsp" %>
+			<br>
+			<%@include file="risks.jsp" %>
+			
 		</div>
 	</div>
 </section>

@@ -15,6 +15,7 @@ import uow.ia.bean.GoalTypes;
 import uow.ia.bean.IndividualCases;
 import uow.ia.bean.IssueTypes;
 import uow.ia.bean.PriorityTypes;
+import uow.ia.bean.ReviewFrequencies;
 import uow.ia.bean.StatusTypes;
 import uow.ia.bean.TitleTypes;
 
@@ -69,4 +70,6 @@ public interface NewCaseService {
 	public IndividualCases getCase(int id);
 	
 	public List<Contacts> findAdvocates();
+	
+	public List<ReviewFrequencies> findReviewFrequencies();
 }

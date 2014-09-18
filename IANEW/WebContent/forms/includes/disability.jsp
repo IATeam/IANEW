@@ -18,6 +18,9 @@
 						Moved iteration to iterDisability.jsp to accommodate ajax deletion
 						Updated javascript primaryUpdate with a argument to allow more direct dom
 						calling and update primary flag value.
+		17/09/2014 -	David Forbes modified theDisability with value attribute
+		18/09/2014 -	Quang Nhan Add validation refer to enquiryValidation.js file and fix index bugs
+						when it is a new enquiry
 	==============================================	
 	Description: A jsp page that displays a list of enquiries
 ------------------------------------------------------------------------------------------------>
@@ -32,29 +35,37 @@
 		<%@include file="iterDisabilities.jsp" %>
 	</article>	
 		
-	<!-- Hidden disability to be added to iterator if needs to be added -->
-	<s:textfield id="disabilitySize" name="iamodel.contact.disabilitiesList.size" value="%{iamodel.contact.disabilitiesList.size}"/>
+	<!-- disabilitySize(hidden field) used to assign index value when adding or deleting -->	
+	<s:if test="%{iamodel.contact.disabilitiesList.size > 0}">
+		<s:hidden id="disabilitySize" name="iamodel.contact.disabilitiesList.size" value="%{iamodel.contact.disabilitiesList.size}"/>
+		<s:set name="index" value="iamodel.contact.disabilitiesList.size" />
+		<article id="artDisability" class="hidden">
+	</s:if>
 	
-	<s:if test="%{iamodel.contact.disabilitiesList.size > 0}"><article id="artDisability" class="hidden"></s:if>
-	<s:else><article id="artDisability""></s:else>
+	<s:else>
+		<s:hidden id="disabilitySize" name="iamodel.contact.disabilitiesList.size" value="0"/>
+		<s:set name="index" value="0" />
+		<article id="artDisability">
+	</s:else>
 		<section class="sixteen columns curveBorder row">
-				<s:hidden name="iamodel.contact.disabilitiesList[%{iamodel.contact.disabilitiesList.size}].id"/>
-				<s:hidden name="iamodel.contact.disabilitiesList[%{iamodel.contact.disabilitiesList.size}].primaryFlag"/>
+				<s:hidden name="iamodel.contact.disabilitiesList[%{#index}].id"/>
+				<s:hidden name="iamodel.contact.disabilitiesList[%{#index}].primaryFlag"/>
 				
 				<s:div cssClass="four columns alpha">
 					<s:div cssClass="disabilityTypeSelect row four columns">
-						<s:select list="disabilitySelectList.{disabilityName}" name="theDisabilityList[%{iamodel.contact.disabilitiesList.size}]" headerKey="-1" headerValue="Select Disability" />
+						<s:select list="disabilitySelectList.{disabilityName}" name="theDisabilityList[%{#index}]" value="iamodel.contact.disabilitiesList.disabilityType.disabilityName" headerKey="-1" headerValue="Select Disability" />
 					</s:div>
+					
 					<s:div cssClass="row four columns" style="text-align: center">
-						
 						<input type="radio" name="primary" onclick="primaryUpdate(this)"/>
 						<s:label value="Primary Disability" />						
 					</s:div>
 				</s:div>
 				<s:div cssClass="textarea eleven columns">
 					<s:label for="disabilityDescription" value="Comment:" /> 
-					<s:textarea cssClass="disabilityDescription" cssClass="oneLineTextArea" name="iamodel.contact.disabilitiesList[%{iamodel.contact.disabilitiesList.size}].comments" /> 
+					<s:textarea cssClass="disabilityDescription" cssClass="oneLineTextArea" name="iamodel.contact.disabilitiesList[%{#index}].comments" /> 
 				</s:div>
+				<input type="button" value="delete" onclick="deleteSection(this)"/> 
 			</section>
 	</article>
 	

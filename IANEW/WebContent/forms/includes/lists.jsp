@@ -7,7 +7,7 @@
 					<p class="id"><s:property value="id"/></p>
 				</s:div>
 				<s:div cssClass="textarea five columns">
-					<s:label for="protege" value="Protege:" />
+					<s:label for="protege" value="Client:" />
 					<p><s:property value="contact.fullName" /></p>
 				</s:div>
 				<s:div cssClass="textarea two columns">

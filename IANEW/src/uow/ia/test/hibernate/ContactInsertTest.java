@@ -69,7 +69,7 @@ public class ContactInsertTest {
 	  		newContact.setLastname("To");
 	  		newContact.setTitleType(title);
 	  		newContact.setContactType(contactType);
-	  		newContact.setCulturalBackground(culturalBackground);
+	  		//newContact.setCulturalBackground(culturalBackground);
 	  		newContact.setCulturalBackgroundComment("kim is vietnamese");
 	  		newContact.setDangerType((DangerTypes)session.get(DangerTypes.class, 1));
 	  		newContact.setDob(Date.valueOf("1992-08-26"));

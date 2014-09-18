@@ -199,7 +199,23 @@ function deleteSection(button){
 	
 }
 
+$(document).on("click", ".undoButton", function(event) {
+	$(this).parent().remove();
+});
 
+function importantDiv(selectedDiv){
+	var isImportant = $(selectedDiv).parent("div").parent("section").css('backgroundColor');
+	if (isImportant == "rgb(255, 250, 250)")
+	{
+		$(selectedDiv).parent("div").parent("section").css({'background-color':'#fddabe'});
+		$(selectedDiv).css({'background':'orange'});
+	}
+	else
+	{
+		$(selectedDiv).parent("div").parent("section").css({'background-color':'snow'});
+		$(selectedDiv).css({'background':'#d6d6d6'});
+	}
+}
 
 
 
