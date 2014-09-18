@@ -9,8 +9,9 @@
 		21/08/2014 -	Quang Nhan
 						Added "Add Issue" button and functionality
 		01/08/2014 -	Quang Nhan
-						Reworked add issue function to have correct name attribute and functionality				
-
+						Reworked add issue function to have correct name attribute and functionality	
+		18/09/2014 -	Quang Nhan Add validation refer to enquiryValidation.js file and fix index bugs
+						when it is a new enquiry
 	==============================================	
 	Description: A jsp page that displays a list of enquiries
 ------------------------------------------------------------------------------------------------>
@@ -22,21 +23,30 @@
 	</article>
 	
 	<!-- hidden field to be used as marker for next index up -->
-	<s:textfield id="issueSize" name="iamodel.enquiryIssuesList.size" value="%{iamodel.enquiryIssuesList.size}"/>
 	
-	<s:if test="%{iamodel.enquiryIssuesList.size > 0}"><article id="artIssue" class="hidden"></s:if>
-	<s:else><article id="artIssue""></s:else>
+	
+	<s:if test="%{iamodel.enquiryIssuesList.size > 0}">
+		<s:hidden id="issueSize" name="iamodel.enquiryIssuesList.size" value="%{iamodel.enquiryIssuesList.size}"/>
+		<s:set name="index" value="iamodel.enquiryIssuesList.size" />
+		<article id="artIssue" class="hidden">
+	</s:if>
+	<s:else>
+		<s:hidden id="issueSize" name="iamodel.enquiryIssuesList.size" value="0"/>
+		<s:set name="index" value="iamodel.enquiryIssuesList.size" />
+		<article id="artIssue"">
+	</s:else>
 		<section class="secIssue sixteen columns curveBorder row">
 			<s:hidden name="iamodel.enquiryIssuesList[%{.enquiryIssuesList.size}].id"/>
 			
 			<div class="four columns">
-				<s:select list="issueSelectList.{issueName}" name="theIssueList[%{iamodel.enquiryIssuesList.size}]" headerKey="-1" headerValue="Select an Issue" />
+				<s:select list="issueSelectList.{issueName}" name="theIssueList[%{iamodel.enquiryIssuesList.size}]" value="iamodel.enquiryIssuesList.issue.issueName" headerKey="-1" headerValue="Select an Issue" />
 			</div>
 			
 			<div class="textarea eleven columns omega">
 				<s:label for="issuedescription" value="Issue Description:" />
 				<s:textarea id="" cssClass="oneLineTextArea" name="iamodel.enquiryIssuesList[%{iamodel.enquiryIssuesList.size}].comment"/> 
 			</div>
+			<input type="button" value="delete" onclick="deleteSection(this)"/> 
 		</section>
 	</article> 
 	<div class="row">

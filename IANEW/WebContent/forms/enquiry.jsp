@@ -105,11 +105,6 @@
 	
 	</s:div>
 	
-	<form id="abc" class="cmxform" method="get" novalidate="novalidate">
-	<label for="testfield">Test</label>
-	<textarea id="testfield" name="testfield"></textarea>
-	<input type="submit" value="Submit" name="submit">
-	</form>
 	
 	<script>
 

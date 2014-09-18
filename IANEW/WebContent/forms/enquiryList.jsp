@@ -98,8 +98,8 @@
 						<%@include file="/forms/includes/paginationToolSet.jsp" %>
 					</section>
 					<section class="four columns alpha">
-						<sj:submit id="open" targets="formDiv" cssClass="two columns alpha" value="Open Enquiry"/>
 						<sj:a id="btnNewE" targets="formDiv"  href="%{urlENew}" ><input type="button" class="two columns omega" value="New Enquiry"/></sj:a>
+						<sj:submit id="open" targets="formDiv" cssClass="two columns alpha" value="Open Enquiry"/>
 					</section>
 				</s:div>
 			</s:div>

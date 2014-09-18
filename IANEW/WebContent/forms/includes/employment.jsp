@@ -20,27 +20,34 @@
 	</article>
 	
 	<!-- hidden field to be used as marker for next index up -->
-	<s:textfield id="employmentSize" name="iamodel.contact.employmentsList.size" value="%{iamodel.contact.employmentsList.size}"/>
-	
-	<s:if test="%{iamodel.contact.employmentsList.size > 0 }"><article id="artEmployment" class="hidden"></s:if>
-	<s:else><article id="artEmployment"></s:else>
+	<s:if test="%{iamodel.contact.employmentsList.size > 0 }">
+		<s:hidden id="employmentSize" name="iamodel.contact.employmentsList.size" value="%{iamodel.contact.employmentsList.size}"/>
+		<s:set name="index" value="iamodel.contact.employmentsList.size" />
+		<article id="artEmployment" class="hidden">
+	</s:if>
+	<s:else>
+		<s:hidden id="employmentSize" name="iamodel.contact.employmentsList.size" value="0"/>
+		<s:set name="index" value="0" />
+		<article id="artEmployment">
+	</s:else>
 	<section class="secIssue sixteen columns curveBorder">
-		<s:hidden name="iamodel.contact.employmentsList[%{iamodel.contact.employmentsList.size}].id"/>
+		<s:hidden name="iamodel.contact.employmentsList[%{#index}].id"/>
 		<div class="row">
 			<div class="four columns">
-				<s:select list="employmentSelectList.{employmentName}" name="theEmploymentList[%{iamodel.contact.employmentsList.size}]" headerKey="-1" headerValue="Select Employment Type" />
+				<s:select list="employmentSelectList.{employmentName}" name="theEmploymentList[%{#index}]" value="iamodel.contact.employmentsList.employmentType.employmentName" headerKey="-1" headerValue="Select Employment Type" />
 			</div>
 			<div class="inputfield four columns">
 				<s:label for="workPhone" value="Work#:" />
-				<div><s:textfield name="iamodel.contact.employmentsList[%{iamodel.contact.employmentsList.size}].workphone" /></div>
+				<div><s:textfield name="iamodel.contact.employmentsList[%{#index}].workphone" /></div>
 			</div>
 		</div>
 		<div class="row">
 			<div class="textarea fifteen columns">
 				<s:label for="employmentComment" value="Comments:" /> 
-				<div><s:textarea cssClass="multiLineTextArea" name="iamodel.contact.employmentsList[%{iamodel.contact.employmentsList.size}].comments" /></div>
+				<div><s:textarea cssClass="multiLineTextArea" name="iamodel.contact.employmentsList[%{#index}].comments" /></div>
 			</div>
 		</div>
+		<input type="button" value="delete" onclick="deleteSection(this)"/> 
 	</section>
 	
 	</article>
