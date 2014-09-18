@@ -353,5 +353,9 @@ public class Enquiries implements java.io.Serializable {
 		issuesTypesString = issuesTypesString.trim();
 		return issuesTypesString;
 	}
+	
+	public String getFileNumber() {
+		return "E" + this.id;
+	}
 
 }

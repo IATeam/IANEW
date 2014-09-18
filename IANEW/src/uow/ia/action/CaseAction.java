@@ -2,7 +2,13 @@ package uow.ia.action;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+
+import org.apache.struts2.interceptor.SessionAware;
+
+import com.opensymphony.xwork2.ModelDriven;
+import com.opensymphony.xwork2.Preparable;
 
 import uow.ia.bean.AccommodationTypes;
 import uow.ia.bean.Addresses;
@@ -41,13 +47,13 @@ import uow.ia.bean.PriorityTypes;
 
 
 
-public class CaseAction extends BaseAction{
+public class CaseAction extends BaseAction implements SessionAware, ModelDriven<IndividualCases>, Preparable{
 	
 	/* 
 	 * form title (can either be new case/exisiting case/case list)
 	 */
 	private String formTitle;;
-	private IndividualCases iCase;
+	private IndividualCases iamodel;
 	private Contacts contact; //not calling from case to allow 'CASE' to share the same include jsp
 
 	/*
@@ -153,34 +159,34 @@ public class CaseAction extends BaseAction{
 	 * @return
 	 */
 	public String getExistingCase(){
-		setCase(caseServices.getCase(getHiddenid()));
-		setContact(iCase.getContact());
-		
-		setIssueSet(iCase.getCaseIssuesList());
-		setClientDisabilities(contact.getDisabilitiesList());
-		setLinkedCasesSet(iCase.getIndividualCasesList());
-		
-		//to be deleted
-		System.out.println(iCase.getIndividualCasesList().toString());
-		for (IndividualCases c : linkedCasesSet) {
-			System.out.println("case linked: " + c.getId() + " " + c.getDescription() );
-		}
-		
-		//setCreatedBy(case.getCreatedUserId().get);
-		setCreatedDate(iCase.getCreatedDateTime());
-		setUpdatedDate(iCase.getUpdatedDateTime());
-		setId(iCase.getId());
-		setDescription(iCase.getDescription());
-		setAddress(contact.getAddressesList());
-		
-		setTheGender(contact.getGenderType().getGenderName());
-		setTheDanger(contact.getDangerType().getDangerName());
-		setTheTitle(contact.getTitleType().getName());
-		//setTheEmployment(contact.getEmploymentsTypeSet());
-		setTheEmployment("Kim change databse need chagne code for this part");
-		setTheCulturalBackground(contact.getCulturalBackground().getCulturalBackgroundName());
-		setTheAccommodation(contact.getAccommodation().getAccommodationName());
-		
+		//set(caseServices.getCase(getHiddenid()));
+//		setContact(iamodel.getContact());
+//		
+//		setIssueSet(iamodel.getCaseIssuesList());
+//		setClientDisabilities(contact.getDisabilitiesList());
+//		setLinkedCasesSet(iamodel.getIndividualCasesList());
+//		
+//		//to be deleted
+//		System.out.println(iamodel.getIndividualCasesList().toString());
+//		for (IndividualCases c : linkedCasesSet) {
+//			System.out.println("case linked: " + c.getId() + " " + c.getDescription() );
+//		}
+//		
+//		//setCreatedBy(case.getCreatedUserId().get);
+//		setCreatedDate(iamodel.getCreatedDateTime());
+//		setUpdatedDate(iamodel.getUpdatedDateTime());
+//		setId(iamodel.getId());
+//		setDescription(iamodel.getDescription());
+//		setAddress(contact.getAddressesList());
+//		
+//		setTheGender(contact.getGenderType().getGenderName());
+//		setTheDanger(contact.getDangerType().getDangerName());
+//		setTheTitle(contact.getTitleType().getName());
+//		//setTheEmployment(contact.getEmploymentsTypeSet());
+//		setTheEmployment("Kim change databse need chagne code for this part");
+//		setTheCulturalBackground(contact.getCulturalBackground().getCulturalBackgroundName());
+//		setTheAccommodation(contact.getAccommodation().getAccommodationName());
+//		
 		activateLists();
 		
 		return SUCCESS;
@@ -318,16 +324,16 @@ public class CaseAction extends BaseAction{
 	}
 	
 
-	public IndividualCases getCase(){
-		return iCase;
+	public IndividualCases getIamodel(){
+		return iamodel;
 	}
 
 	/**
 	 * Setter for case
 	 * @param case
 	 */
-	public void setCase(IndividualCases iCase){
-		this.iCase = iCase;
+	public void setIamodel(IndividualCases iamodel){
+		this.iamodel = iamodel;
 	}
 	
 	public Contacts getContact() {
@@ -733,6 +739,29 @@ public class CaseAction extends BaseAction{
 	 */
 	public void setTotalNumberOfPages(int totalNumberOfPages) {
 		this.totalNumberOfPages = totalNumberOfPages;
+	}
+
+	@Override
+	public void prepare() throws Exception {
+		// TODO Auto-generated method stub
+		System.out.println("Prepare start");
+		System.out.println("hiddenid = " + getHiddenid());
+		if (!((Integer) getHiddenid() == null || (Integer)getHiddenid() == 0)) {
+			iamodel = caseServices.getCase(getHiddenid());
+			activateLists();
+		}
+	}
+
+	@Override
+	public IndividualCases getModel() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setSession(Map<String, Object> arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

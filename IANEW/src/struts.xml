@@ -82,7 +82,10 @@
     <!-- Case Forms -->
     <package name="case" namespace="/case" extends="struts-default">
     	
-    	<action name="getCase" class="uow.ia.action.CaseAction" method="getExistingCase">
+    	<action name="getExistingCase" class="uow.ia.action.CaseAction" method="getExistingCase">
+    		<interceptor-ref name="params"/>
+		     <interceptor-ref name="prepare"/>
+		     <interceptor-ref name="basicStack"/>
     		<result name="success">/forms/case.jsp</result>
     	</action>
     	<action name="newCase" class="uow.ia.action.CaseAction" method="newCase">
@@ -95,6 +98,15 @@
     		<result name="success">/forms/caseList.jsp</result>
     	</action>
     </package>
+    
+    <!-- <package name="caseList" namespace="/caseList" extends="struts-default">
+    	<action name="getCaseList" class="uow.ia.action.CaseListAction" method="getCaseList">
+    		<result name="success">/forms/caseList.jsp</result>
+    	</action>
+    	<action name="updateCaseList" class="uow.ia.action.CaseListAction" method="updateCaseList">
+    		<result name="success">/forms/caseList.jsp</result>
+    	</action>
+    </package> -->
     
      <!-- Links Forms -->
     <package name="links" namespace="/links" extends="struts-default">
