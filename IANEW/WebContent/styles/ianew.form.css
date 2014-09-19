@@ -7,6 +7,8 @@
 	Updates:
 		21/08/2014 -	Quang Nhan
 						Changed primary background
+		28/08/2014 -	Quang Nhan 
+						Added hidden class
 	==============================================	
 	Description: Stylesheet used for the forms
 ------------------------------------------------------------------------------------------------*/
@@ -50,9 +52,9 @@
 	margin: 0;
 	//border-top: solid 1px orange;
 	//border-radius: 30px;
-	box-shadow: 0px 2px 10px #bcbcbc;	
-	padding-bottom: 3px;
-	margin-bottom: 10px;
+	box-shadow: 0px 2px 10px #bcbcbc;
+	margin-bottom: 20px;
+	
 	padding-top:10px;
 }
 
@@ -179,7 +181,7 @@ label{
 
 /* unordered lists from  */
 .greybackground{
-	padding-top:10px;
+	padding-top: 3px;
 	padding-bottom: 3px;
 	background: #d6d6d6;
 	margin-bottom: 10px;
@@ -200,7 +202,9 @@ label{
 /* H styles */
 
 h3 {
+	color: blue;
 	font-size: 20px;
+	line-height: 30px;
 	color: grey;
 }
 
@@ -229,7 +233,7 @@ h4 {
 }
 
 .primary{
-	background: #fddabe;
+	background: #f9f8ec;
 }
 
 .form input[type=button], .form input[type=submit]{
@@ -305,6 +309,7 @@ h4 {
 }
 
 .hidden {
+	display:none;
 	visibility: hidden;
 }
 

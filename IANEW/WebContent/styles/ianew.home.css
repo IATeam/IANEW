@@ -9,6 +9,7 @@
 						pagination functionality by Quang Nhan
 		16/08/2014 -	Tested s:url workings see comment below. 
 						Moved javascript code to list.js file by Quang Nhan
+		01/08/2014 - 	Added styling to right pop up
 	==============================================	
 	Description: A jsp page that displays a list of enquiries
 ------------------------------------------------------------------------------------------------*/
@@ -18,9 +19,9 @@ body{
 	background-color: #404040;
 	color: white;
     padding: 0;
-    //border: 0;
     margin: 0;
-    overflow-Y: scroll;
+    //overflow-Y: scroll;
+    overflow: visible;
     height: 100%;
 }
 
@@ -168,7 +169,6 @@ header img{
 	height: 35px;
 	width: 100%;
 }
-
 
 
 @media screen  and (max-width: 640px){
