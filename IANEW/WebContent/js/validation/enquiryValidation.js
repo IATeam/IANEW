@@ -68,7 +68,19 @@ function validated(){
 			submitHandler: function(form) {
 				alert("Validation complete, submitting form!");
 				checkForm();
-				form.submit();
+				var url = form.attr('action');
+//				$.post(url, form.serialize(), function(data){
+//					alert("Data: " + data);
+//				});
+				
+				$.ajax({
+					//type: 'POST',
+					url: url,
+					data: form.serialize(),
+					success: function(data){
+						alert("return code")
+					}
+				})
 			}
 		});
 	 	

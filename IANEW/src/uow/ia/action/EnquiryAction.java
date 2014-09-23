@@ -192,7 +192,7 @@ ModelDriven<Enquiries>, Preparable{
 	public String getExistingEnquiry(){ //TODO:
 		System.out.println("Struts: start getExistingEnquiry");
 		
-		activateAutocomplete();
+		//activateAutocomplete();
 		activateLists();
 
 		setDob(iamodel.getContact().getDob().toString());

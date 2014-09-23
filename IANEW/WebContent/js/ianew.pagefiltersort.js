@@ -57,8 +57,8 @@ function changePage(e){
 		var totalNumberOfPages = parseInt($("#totalNumberOfPagesDiv").text());
 		var numberOfRecords = $("#numberOfRecords").val();
 		if(newPage > 0 && newPage <= totalNumberOfPages){
-			$("#page").val(newPage);			
-			$("#formDiv").load("enquiry/updateEnquiryList.action?numberOfRecords=" + numberOfRecords +"&page=" + newPage);
+			$("#page").val(newPage);
+			$("#formDiv").load("enquiryList/updateEnquiryList.action?numberOfRecords=" + numberOfRecords +"&page=" + newPage);
 		}
 		else{
 			alert("Please enter a page number between 1 and " + totalNumberOfPages);
