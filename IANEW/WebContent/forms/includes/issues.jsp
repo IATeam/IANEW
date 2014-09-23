@@ -9,28 +9,41 @@
 		21/08/2014 -	Quang Nhan
 						Added "Add Issue" button and functionality
 		01/08/2014 -	Quang Nhan
-						Reworked add issue function to have correct name attribute and functionality				
-
+						Reworked add issue function to have correct name attribute and functionality	
+		18/09/2014 -	Quang Nhan Add validation refer to enquiryValidation.js file and fix index bugs
+						when it is a new enquiry
 	==============================================	
 	Description: A jsp page that displays a list of enquiries
 ------------------------------------------------------------------------------------------------>
-
+<section>
+<input type="image" src="/IANEW/resources/images/plusButton.png" alt="Hide/Show" id="btnShowHide" value="ShowHide" onclick="divHide(this);return false;" class="divHideButton"/>
 <h3 class="sixteen columns" style="float:none;">Issues</h3>
-<s:div cssClass="greybackground">
+<div class="greybackground">
+<div id="issuesDiv" class="toggled hideable">	
 	<article id="itIssue">
 		<%@include file="iterIssues.jsp" %>
 	</article>
 	
 	<!-- hidden field to be used as marker for next index up -->
-	<s:textfield id="issueSize" name="iamodel.enquiryIssuesList.size" value="%{iamodel.enquiryIssuesList.size}"/>
 	
-	<s:if test="%{iamodel.enquiryIssuesList.size > 0}"><article id="artIssue" class="hidden"></s:if>
-	<s:else><article id="artIssue""></s:else>
+	
+	<s:if test="%{iamodel.enquiryIssuesList.size > 0}">
+		<s:hidden id="issueSize" name="iamodel.enquiryIssuesList.size" value="%{iamodel.enquiryIssuesList.size}"/>
+		<s:set name="index" value="iamodel.enquiryIssuesList.size" />
+		<article id="artIssue" class="hidden">
+	</s:if>
+	<s:else>
+		<s:hidden id="issueSize" name="iamodel.enquiryIssuesList.size" value="0"/>
+		<s:set name="index" value="iamodel.enquiryIssuesList.size" />
+		<article id="artIssue"">
+	</s:else>
 		<section class="secIssue sixteen columns curveBorder row">
+					<input type="image" src="/IANEW/resources/images/undoButtonImage.png" alt="undoButton" id="btnUndo" value="Undo" onclick="undoButton(this);return false;" class="undoButton"/>
+		
 			<s:hidden name="iamodel.enquiryIssuesList[%{.enquiryIssuesList.size}].id"/>
 			
 			<div class="four columns">
-				<s:select list="issueSelectList.{issueName}" name="theIssueList[%{iamodel.enquiryIssuesList.size}]" headerKey="-1" headerValue="Select an Issue" />
+				<s:select list="issueSelectList.{issueName}" name="theIssueList[%{iamodel.enquiryIssuesList.size}]" value="iamodel.enquiryIssuesList.issue.issueName" headerKey="-1" headerValue="Select an Issue" />
 			</div>
 			
 			<div class="textarea eleven columns omega">
@@ -40,10 +53,11 @@
 		</section>
 	</article> 
 	<div class="row">
-		<input type="button" id="btnNewIssue" value="New Issue Type" class="two columns" />
-		<div class="twelve columns alpha"><p></p></div>    
+		<div class="fourteen columns alpha"><p></p></div>    
 		<input type="button" id="btnAddIssue" value="Add Issue" class="two columns" onclick="addNewRecord('artIssue', 'issueSize', 'itIssue' )"/>
 		
 	</div>
 	
-</s:div>
+</div>
+</div>
+</section>

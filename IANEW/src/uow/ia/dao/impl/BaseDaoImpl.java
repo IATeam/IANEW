@@ -13,6 +13,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.metadata.ClassMetadata;
+import org.hibernate.search.FullTextSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.HibernateCallback;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
@@ -284,12 +285,17 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 
 	@Override
 	public Map<String, ClassMetadata> getAllClassMetadata() {
+		// TODO Auto-generated method stub
 		return sessionFactory.getAllClassMetadata();
 	}
-
+	
 	@Override
 	public Class getClassByObject(Object ob) {
 		return sessionFactory.getClassMetadata(ob.getClass()).getMappedClass();
 	}
-
+	
+	@Override
+	public FullTextSession getFullTextSession(){
+		return org.hibernate.search.Search.getFullTextSession(this.getCurrentSession());
+	}
 }

@@ -26,6 +26,7 @@
 	
 		<!--Hidden Fields to pass parameters between pages -->
 		<s:hidden id="hiddenid" name="hiddenid" />
+		
 		<s:hidden id="formTitle" name="formTitle" value="Existing Enquiry" />
 		<s:hidden id="totalNumberOfPages" name="totalNumberOfPages" />
 <!-- ---------------------------------------------------------------------------------------------- -->
@@ -65,6 +66,8 @@
 		
 	
 	<script>
+	
+	
 		$("#btnCancelLink").click(function(){ alert("Cancel Pressed")
 			hidePopUp($("#rightPopUp"));
 			//alert($("#hiddenid").val())
@@ -72,7 +75,7 @@
 
 		$("#btnLink").click(function(){ alert("Cancel Pressed")
 			
-			$("#linkedEnquiriesDiv").load("enquiry/updateLinkedEnquiries.action?hiddenid=" + $("#hiddenid").val());
+			$("#linkedEnquiriesDiv").load("enquiry/updateLinkedEnquiries.action?hiddenid=" + $("#hiddenid").val() + "&");
 			$("#linkedEnquiriesListDiv").hide();	
 		});
 	</script>

@@ -69,14 +69,14 @@
 	<s:url id="urlLinks" namespace="/links" action="links">
 		<s:param name="formTitle">Links</s:param>
 	</s:url>
-	<s:url id="urlSettings" namespace="/settings" action="settings">
-		<s:param name="formTitle">Settings</s:param>
-	</s:url>
 	<s:url id="urlReport" namespace="/report" action="report">
 		<s:param name="formTitle">Report</s:param>
 	</s:url>
 	<s:url id="urlTimeManagement" namespace="/timeManagement" action="timeManagement">
 		<s:param name="formTitle">Time Management</s:param>
+	</s:url>
+	<s:url id="urlSettings" namespace="/admin" action="startAdminPage">
+		<s:param name="formTitle">Settings</s:param>
 	</s:url>
 	
 	<div class="container">
@@ -87,7 +87,7 @@
 	<nav>
 		<ul id="main-menu" class="sm sm-simple">
 			<li><s:a id="aHome"href="/IANEW/home/home.jsp">Illawarra Advocacy</s:a></li>
-			
+
 			<li><s:a id="aE"href="#">Enquiry</s:a>
 				<ul>
 					<li><sj:a id="aENew" href="%{urlENew}" targets="formDiv" onclick="menuclicked()">New Enquiry</sj:a></li>
@@ -106,18 +106,16 @@
 			<li >
 				<li><sj:a id="report" href="%{urlReport}" targets="formDiv"  onclick="menuclicked()">Report</sj:a></li>
 			</li>
-			<li><sj:a id="timeManagement" href="%{urlTimeManagement}" targets="formDiv"  onclick="menuclicked()">Time Management</sj:a></li>
+			<li>
+				<li><sj:a id="timeManagement" href="%{urlTimeManagement}" targets="formDiv"  onclick="menuclicked()">Time Management</sj:a></li>
 			
 			<li>
 				<s:a href="#">Synchronize</s:a>
 				
 			</li>
-			
-			<li>
-				<li><sj:a id="settings" href="%{urlSettings}" targets="formDiv"  onclick="menuclicked()">Settings</sj:a></li>
-				
-			</li>
-			<li><sj:a id="links" href="%{urlLinks}" targets="formDiv"  onclick="menuclicked()">Links</sj:a></li>
+
+			<li><sj:a id="settings" href="%{urlSettings}" targets="formDiv" onclick="menuclicked()">Settings</sj:a></li>
+			<li><sj:a id="links" href="%{urlLinks}" targets="formDiv">Links</sj:a></li>
 		</ul>
 	</nav>
 
@@ -132,16 +130,25 @@
 <!-- Body of the content --------------------------------------------------------------------------- -->
 <!-- ----------------------------------------------------------------------------------------------- -->		
 	<div id="content">
-		<section id="secSearch">
-			<div id="divSearchBox"><s:textfield id="searchbox" onkeypress="return addActivity(this.value, event)"/><br/></div>
-			<div id="divRadio"><s:radio value="1" onclick="radioChecked(this.id)" name="radio" list="#{'1':'Database','2':'Document','3':'Report' }"/></div>
-			<!-- <button onclick="displayActivities()">display</button>
-			<button onclick="deleteLocalStorage()">clear</button> -->
-		</section>
+		<s:form id="searchForm" namespace="/" action="search" method="post" novalidate="novalidate">
+			<section id="secSearch">
+				<div id="divSearchBox">
+					<s:textfield id="searchbox" Key="searchString" name="searchString"/><br/>
+					<%-- onkeypress="return addActivity(this.value, event)" --%>
+				</div>
+				<div id="divRadio"><s:radio value="1" onclick="radioChecked(this.id)" name="radio" list="#{'1':'Database','2':'Document','3':'Report' }"/></div>
+				<!-- <button onclick="displayActivities()">display</button>
+				<button onclick="deleteLocalStorage()">clear</button> -->
+			</section>
+		</s:form>
 		
 		<section id="secSuggestions">
 			<!-- dynamically loads suggestions based on the key pressed from input box -->
-			<article id="artSuggestionList" />
+			<article id="artSuggestionList" >
+			<s:iterator value="list" var="Object">
+			<s:property /><br/>
+			</s:iterator>
+			</article>
 		</section>
 			
 		<section id="secLists">
@@ -177,6 +184,15 @@
 	</footer>
 	
 	<script>
+		$("#searchbox").keypress(function() {
+			if(event.which == 13) {
+				if ($("#searchbox").val() != null || $("#searchbox").val != "") {
+					event.preventDefault();
+					$("#searchForm").submit();
+				}
+			}
+		});
+		
 		$(function(){
 			$("#leftPopUp").hide();
 			$("#rightPopUp").hide();
@@ -185,6 +201,7 @@
 			//hideSlidingPanel();
 		});
 
+		
 		function hidePopUp(popUp){
 			$(popUp).hide('slow');
 			$("body").css("overflow-Y", "scroll")

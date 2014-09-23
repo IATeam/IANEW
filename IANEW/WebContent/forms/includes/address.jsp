@@ -13,16 +13,19 @@
 ------------------------------------------------------------------------------------------------>
 <%@ taglib prefix="sj" uri="/struts-jquery-tags" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
+<section>
+<input type="image" src="/IANEW/resources/images/plusButton.png" alt="Hide/Show" id="btnShowHide" value="ShowHide" onclick="divHide(this);return false;" class="divHideButton"/>
 <h3 class="sixteen columns" style="float:none;">Address</h3>
-<div class="fieldsetborder">
+<div class="greybackground">
+<div id="addressDiv" class="toggled hideable">	
 	<s:url var="urlUpdateAddress" action="updateAddressList" namespace="/enquiry">
 		<s:param name="address" />
 	</s:url> 
 	<fieldset>
-		<div class="row"> <s:text name="#session.user.username"></s:text>
+		<div class="row">
 		<!-- to do -->
 			<div class="four columns">
-				<s:select list="accomodationSelectList.{accommodationName}" name="theAccommodation" headerKey="-1" headerValue="Select an Accomodation Type"/>
+				<s:select list="accomodationSelectList.{accommodationName}" name="theAccommodation" value="iamodel.contact.accommodation.accommodationName"  headerKey="-1" headerValue="Select an Accomodation Type"/>
 			</div>
 			
 			<div class="textarea twelve columns">
@@ -35,43 +38,51 @@
 			<%@include file="iterAddresses.jsp" %>
 		</aticle>
 		
-		<s:textfield id="addressSize" name="iamodel.contact.addressesList.size" value="%{iamodel.contact.addressesList.size}"/>
 		<s:hidden id="createdUserId" name="" />
 		<s:hidden id="updatedUserId" name=""/>
 			
 		<!-- if contact has existing address display the address else display input field for address -->	
-		<s:if test="%{iamodel.contact.addressesList.size > 0}"><article id="artAddress" class="hidden"></s:if>
-		<s:else><article id="artAddress"></s:else>
+		<s:if test="%{iamodel.contact.addressesList.size > 0}">
+			<s:hidden id="addressSize" name="iamodel.contact.addressesList.size" value="%{iamodel.contact.addressesList.size}"/>
+			<s:set name="index" value="iamodel.contact.disabilitiesList.size" />
+			<article id="artAddress" class="hidden">
+		</s:if>
+		<s:else>
+			<s:hidden id="addressSize" name="iamodel.contact.addressesList.size" value="0"/>
+			<s:set name="index" value="0" />
+			<article id="artAddress">
+		</s:else>
 			<section class="sixteen columns curveBorder">
-				<s:hidden name="iamodel.contact.addressesList[%{iamodel.contact.addressesList.size}].id" />
+				<input type="image" src="/IANEW/resources/images/undoButtonImage.png" alt="undoButton" id="btnUndo" value="Undo" onclick="undoButton(this);return false;" class="undoButton"/>
+				<s:hidden name="iamodel.contact.addressesList[%{#index}].id" />
 				
 				<div class="row">
 					<div class="inputfield eight columns">
 						<s:label for="street" value="Street: " />
-						<div><s:textfield name="iamodel.contact.addressesList[%{iamodel.contact.addressesList.size}].street" /></div>
+						<div><s:textfield name="iamodel.contact.addressesList[%{#index}].street" /></div>
 					</div>
 					<div class="inputfield four columns">
 						<s:label for="city" value="Suburb" />
-						<div><s:textfield name="iamodel.contact.addressesList[%{iamodel.contact.addressesList.size}].suburb" /></div>
+						<div><s:textfield name="iamodel.contact.addressesList[%{#index}].suburb" /></div>
 					</div>
 					<div class="inputfield three columns">
 						<s:label for="state" value="State:" />
-						<div><s:textfield name="iamodel.contact.addressesList[%{iamodel.contact.addressesList.size}].state" /></div>
+						<div><s:textfield name="iamodel.contact.addressesList[%{#index}].state" /></div>
 					</div>
 				</div>
 				
 				<div class="row">
 					<div class="inputfield four columns">
 						<s:label for="country" value="Country:" />
-						<div><s:textfield name="iamodel.contact.addressesList[%{iamodel.contact.addressesList.size}].country" /></div>
+						<div><s:textfield name="iamodel.contact.addressesList[%{#index}].country" /></div>
 					</div>
 					<div class="inputfield four columns">
 						<s:label for="postCode" value="Post Code:" />
-						<div><s:textfield name="iamodel.contact.addressesList[%{iamodel.contact.addressesList.size}].postcode" /></div>
+						<div><s:textfield name="iamodel.contact.addressesList[%{#index}].postcode" /></div>
 					</div>
 					<div class="inputfield four columns">
 						<s:label for="homePhone" value="Home#:"/>
-						<div><s:textfield name="iamodel.contact.addressesList[%{iamodel.contact.addressesList.size}].homephone" /></div>
+						<div><s:textfield name="iamodel.contact.addressesList[%{#index}].homephone" /></div>
 					</div>
 				</div>
 			</section>
@@ -86,3 +97,5 @@
 	<s:hidden id="address" name="address.street" />
 	
 </div>
+</div>
+</section>

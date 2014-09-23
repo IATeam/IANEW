@@ -19,18 +19,25 @@
 ------------------------------------------------------------------------------------------------>
 
 
-<%@ taglib prefix="sj" uri="/struts-jquery-tags" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="US-ASCII"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <head>
 
 </head>
-
+<section>
+<input type="image" src="/IANEW/resources/images/plusButton.png" alt="Hide/Show" id="btnShowHide" value="ShowHide" onclick="divHide(this);return false;" class="divHideButton"/>
 <h3 class="sixteen columns" style="float:none;">Linked Cases</h3>
 <s:div cssClass="greybackground">
+<div id="linkedCasesDiv" class="toggled startShown">	
+
 
 	<s:url id="urlCLinked" namespace="/case" action="getLinkedCase" />
 		
 		<s:iterator value="linkedCasesSet">
 			<section class="secLinkedCases sixteen columns curveBorder">
+						<input type="image" src="/IANEW/resources/images/undoButtonImage.png" alt="undoButton" id="btnUndo" value="Undo" onclick="undoButton(this);return false;" class="undoButton"/>
+			
 				<s:div cssClass="textarea two columns">
 					<s:label for="caseID" value="Case#:" />
 					<s:text var="caseID" name="id" />
@@ -68,9 +75,9 @@
 	
 	<div>
 		<div class="row">
-			<div class="twelve columns alpha"><p></p></div>
-			<input type="button" id="btnOpen" value="View" class="two columns"/>
-			<input type="button" id="btnAddCase" value="Add Case" class="two columns omega"/>
+			<div class="ten columns alpha"><p></p></div>
+			<input type="button" id="btnOpen" value="View" class="three columns"/>
+			<input type="button" id="btnAddCase" value="Add Case" class="three columns omega"/>
 		</div>
 	</div>
 
@@ -97,5 +104,5 @@
 			showSlidingPanel();
 		});
 	});
-	</script>
-</s:div>
+	</script></div>
+</s:div></section>

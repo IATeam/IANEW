@@ -12,10 +12,10 @@
 	<section class="secIssue sixteen columns curveBorder">
 		<s:hidden name="iamodel.contact.employmentsList[%{#stat.index}].id"/>
 		<div class="row">
-			<div class="four columns"><s:select list="employmentSelectList.{employmentName}" name="iamodel.contact.employmentsList[%{#stat.index}].employmentType.employmentName" headerKey="-1" headerValue="Select Employment Type" /></div>
+			<div class="four columns"><s:select list="employmentSelectList.{employmentName}" name="theEmployment[%{#stat.index}]" headerKey="-1" headerValue="Select Employment Type" /></div>
 			<div class="inputfield four columns">
-				<s:label for="workPhone" value="Work#:" />
-				<div><s:textfield name="iamodel.contact.employmentsList[%{#stat.index}].workphone" /></div>
+				<s:label for="iamodel.contact.employmentsList[%{#stat.index}].workphone" value="Work#:" />
+				<div><s:textfield id="iamodel.contact.employmentsList[%{#stat.index}].workphone" cssClass="phone" name="iamodel.contact.employmentsList[%{#stat.index}].workphone" /></div>
 			</div>
 		</div>
 		<div class="row">
@@ -24,6 +24,5 @@
 				<div><s:textarea cssClass="multiLineTextArea" name="iamodel.contact.employmentsList[%{#stat.index}].comments" /></div>
 			</div>
 		</div>
-		<input type="button" value="delete" onclick="deleteSection(this)"/>
 	</section>
 </s:iterator>

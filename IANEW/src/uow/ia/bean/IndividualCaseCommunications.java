@@ -4,22 +4,55 @@ package uow.ia.bean;
 
 import java.sql.Date;
 
+import org.hibernate.search.annotations.DateBridge;
+import org.hibernate.search.annotations.DocumentId;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.IndexedEmbedded;
+import org.hibernate.search.annotations.Resolution;
+
 /**
  * @author Kim To
  * @version 1.0.3, 26/08/2014
  */
+
+@Indexed
 public class IndividualCaseCommunications implements java.io.Serializable {
 
+	@DocumentId
 	private Integer id;
+	
+	@IndexedEmbedded
 	private IndividualCases individualCase;
+	
+	@DateBridge(resolution = Resolution.DAY)
+	@Field
 	private Date communicationDate;
+	
+	@IndexedEmbedded
 	private CommunicationTypes communicationType;
+	
+	@Field
 	private String description;
+	
+	@Field
 	private Float timeSpent;
+	
+	@Field
 	private String importantFlag;
+	
+	@Field
 	private Integer createdUserId;
+	
+	@DateBridge(resolution = Resolution.DAY)
+	@Field
 	private Date createdDateTime;
+	
+	@Field
 	private Integer updatedUserId;
+	
+	@DateBridge(resolution = Resolution.DAY)
+	@Field
 	private Date updatedDateTime;
 
 	public IndividualCaseCommunications() {

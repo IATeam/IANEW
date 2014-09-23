@@ -1,23 +1,39 @@
 package uow.ia.action;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+
+import org.apache.struts2.interceptor.SessionAware;
+
+import com.opensymphony.xwork2.ModelDriven;
+import com.opensymphony.xwork2.Preparable;
+import com.sun.org.apache.xml.internal.security.keys.content.PGPData;
 
 import uow.ia.bean.AccommodationTypes;
 import uow.ia.bean.Addresses;
 import uow.ia.bean.ClientDisabilities;
+import uow.ia.bean.CommunicationTypes;
+import uow.ia.bean.ContactEmployments;
 import uow.ia.bean.Contacts;
 import uow.ia.bean.CulturalBackgroundTypes;
 import uow.ia.bean.DangerTypes;
 import uow.ia.bean.DisabilityTypes;
 import uow.ia.bean.EmploymentTypes;
+import uow.ia.bean.GoalTypes;
+import uow.ia.bean.IndividualCaseCommunications;
 import uow.ia.bean.IndividualCases;
 import uow.ia.bean.CaseIssues;
 import uow.ia.bean.GenderTypes;
 import uow.ia.bean.IssueTypes;
+import uow.ia.bean.PlanDevelopers;
+import uow.ia.bean.PlanGoals;
+import uow.ia.bean.ReviewFrequencies;
 import uow.ia.bean.StatusTypes;
 import uow.ia.bean.TitleTypes;
+import uow.ia.bean.PriorityTypes;
 
 /** ---------------------------------------------------------------------------------------------
  * @author: Quang Nhan
@@ -38,19 +54,20 @@ import uow.ia.bean.TitleTypes;
 
 
 
-public class CaseAction extends BaseAction{
+public class CaseAction extends BaseAction implements SessionAware, ModelDriven<IndividualCases>, Preparable{
 	
 	/* 
 	 * form title (can either be new case/exisiting case/case list)
 	 */
 	private String formTitle;;
-	private IndividualCases iCase;
+	private IndividualCases iamodel;
 	private Contacts contact; //not calling from case to allow 'CASE' to share the same include jsp
-	
+
 	/*
 	 * Lists for the drop down select options for the jsps
 	 * and its associated value variables
 	 */
+	/*
 	private List<TitleTypes> titleSelectList; 							private String theTitle;
 	private List<GenderTypes> genderSelectList; 						private String theGender;
 	private List<CulturalBackgroundTypes> culturalBackgroundSelectList;	private String theCulturalBackground;
@@ -62,15 +79,194 @@ public class CaseAction extends BaseAction{
 	private List<DangerTypes> dangerSelectList;							private String theDanger;
 	//Status_Type or criteria control value table 
 	private List<StatusTypes> statusSelectList;							private String theStatus;
+	*/
+	private List<TitleTypes> titleSelectList = new ArrayList<TitleTypes>(); 							
+	private String theTitle;
+	private List<GenderTypes> genderSelectList = new ArrayList<GenderTypes>(); 						
+	private String theGender;
+	private List<CulturalBackgroundTypes> culturalBackgroundSelectList = new ArrayList<CulturalBackgroundTypes>();	
+	private String theCulturalBackground;
+	private List<AccommodationTypes> accommodationSelectList = new ArrayList<AccommodationTypes>();			
+	private String theAccommodation;
+	private List<DisabilityTypes> disabilitySelectList = new ArrayList<DisabilityTypes>();					
+	private List<String> theDisabilityList = new ArrayList<String>();
+	private List<IssueTypes> issueSelectList = new ArrayList<IssueTypes>();							
+	private List<String> theIssueList = new ArrayList<String>();
+	private List<EmploymentTypes> employmentSelectList = new ArrayList<EmploymentTypes>();					
+	private List<String> theEmploymentList = new ArrayList<String>();
+	private List<DangerTypes> dangerSelectList = new ArrayList<DangerTypes>();							
+	private String theDanger;
+	private List<StatusTypes> statusSelectList = new ArrayList<StatusTypes>();							
+	private String theStatus;
+	private List<Contacts> advocateSelectList = new ArrayList<Contacts>();							
+	private String theAdvocate;
+	private List<PriorityTypes> prioritySelectList = new ArrayList<PriorityTypes>();						
+	private String thePriority;	
+	private List<CommunicationTypes> communicationSelectList = new ArrayList<CommunicationTypes>();			
+	private List<String> theCommunicationsList = new ArrayList<String>();
+	private List<GoalTypes> goalSelectList = new ArrayList<GoalTypes>();	
+	private List<String> theGoalList = new ArrayList<String>();
+	private List<ReviewFrequencies> reviewFrequencyList = new ArrayList<ReviewFrequencies>();
+	private String theReviewFrequencyString;
+	private List<Contacts> developerSelectList = new ArrayList<Contacts>();
 	
+	/**
+	 * @return the developerSelectList
+	 */
+	public List<Contacts> getDeveloperSelectList() {
+		return developerSelectList;
+	}
+
+	/**
+	 * @param developerSelectList the developerSelectList to set
+	 */
+	public void setDeveloperSelectList(List<Contacts> developerSelectList) {
+		this.developerSelectList = developerSelectList;
+	}
+
+	/**
+	 * @return the theReviewFrequencyString
+	 */
+	public String getTheReviewFrequencyString() {
+		return theReviewFrequencyString;
+	}
+
+	/**
+	 * @param theReviewFrequencyString the theReviewFrequencyString to set
+	 */
+	public void setTheReviewFrequencyString(String theReviewFrequencyString) {
+		this.theReviewFrequencyString = theReviewFrequencyString;
+	}
+
+	/**
+	 * @return the accommodationSelectList
+	 */
+	public List<AccommodationTypes> getAccommodationSelectList() {
+		return accommodationSelectList;
+	}
+
+	/**
+	 * @param accommodationSelectList the accommodationSelectList to set
+	 */
+	public void setAccommodationSelectList(
+			List<AccommodationTypes> accommodationSelectList) {
+		this.accommodationSelectList = accommodationSelectList;
+	}
+
+	/**
+	 * @return the reviewFrequencyList
+	 */
+	public List<ReviewFrequencies> getReviewFrequencyList() {
+		return reviewFrequencyList;
+	}
+
+	/**
+	 * @param reviewFrequencyList the reviewFrequencyList to set
+	 */
+	public void setReviewFrequencyList(List<ReviewFrequencies> reviewFrequencyList) {
+		this.reviewFrequencyList = reviewFrequencyList;
+	}
+
+	/**
+	 * @return the addressSet
+	 */
+	public List<Addresses> getAddressSet() {
+		return addressSet;
+	}
+
+	/**
+	 * @param addressSet the addressSet to set
+	 */
+	public void setAddressSet(List<Addresses> addressSet) {
+		this.addressSet = addressSet;
+	}
+
+	/**
+	 * @return the clientDisabilitiesSet
+	 */
+	public List<ClientDisabilities> getClientDisabilitiesSet() {
+		return clientDisabilitiesSet;
+	}
+
+	/**
+	 * @param clientDisabilitiesSet the clientDisabilitiesSet to set
+	 */
+	public void setClientDisabilitiesSet(
+			List<ClientDisabilities> clientDisabilitiesSet) {
+		this.clientDisabilitiesSet = clientDisabilitiesSet;
+	}
+
+	/**
+	 * @param titleSelectList the titleSelectList to set
+	 */
+	public void setTitleSelectList(List<TitleTypes> titleSelectList) {
+		this.titleSelectList = titleSelectList;
+	}
+
+	/**
+	 * @param genderSelectList the genderSelectList to set
+	 */
+	public void setGenderSelectList(List<GenderTypes> genderSelectList) {
+		this.genderSelectList = genderSelectList;
+	}
+
+	/**
+	 * @param culturalBackgroundSelectList the culturalBackgroundSelectList to set
+	 */
+	public void setCulturalBackgroundSelectList(
+			List<CulturalBackgroundTypes> culturalBackgroundSelectList) {
+		this.culturalBackgroundSelectList = culturalBackgroundSelectList;
+	}
+
+	/**
+	 * @param disabilitySelectList the disabilitySelectList to set
+	 */
+	public void setDisabilitySelectList(List<DisabilityTypes> disabilitySelectList) {
+		this.disabilitySelectList = disabilitySelectList;
+	}
+
+	/**
+	 * @param issueSelectList the issueSelectList to set
+	 */
+	public void setIssueSelectList(List<IssueTypes> issueSelectList) {
+		this.issueSelectList = issueSelectList;
+	}
+
+	/**
+	 * @param employmentSelectList the employmentSelectList to set
+	 */
+	public void setEmploymentSelectList(List<EmploymentTypes> employmentSelectList) {
+		this.employmentSelectList = employmentSelectList;
+	}
+
+	/**
+	 * @param dangerSelectList the dangerSelectList to set
+	 */
+	public void setDangerSelectList(List<DangerTypes> dangerSelectList) {
+		this.dangerSelectList = dangerSelectList;
+	}
+
+	/**
+	 * @param totalNumberOfRecords the totalNumberOfRecords to set
+	 */
+	public void setTotalNumberOfRecords(long totalNumberOfRecords) {
+		this.totalNumberOfRecords = totalNumberOfRecords;
+	}
+
+	/**
+	 * @param totalNumberOfPages the totalNumberOfPages to set
+	 */
+	public void setTotalNumberOfPages(long totalNumberOfPages) {
+		this.totalNumberOfPages = totalNumberOfPages;
+	}
 
 	/*
 	 * Sets variables for 1 to many relationship tables
 	 */
-	private Set<CaseIssues> issueSet;
-	private Set<IndividualCases> linkedCasesSet;
-	private Set<Addresses> addressSet;
-	private Set<ClientDisabilities> clientDisabilitiesSet;
+	private List<CaseIssues> issueSet;
+	private List<IndividualCases> linkedCasesSet;
+	private List<Addresses> addressSet;
+	private List<ClientDisabilities> clientDisabilitiesSet;
 
 	/*
 	 * status variables
@@ -88,7 +284,7 @@ public class CaseAction extends BaseAction{
 	 * Employment
 	 */
 	
-	private String profession, workPhone, employmentDescription, employmentComment;
+	//private String profession, workPhone, employmentDescription, employmentComment;
 	
 	/*
 	 * Sumamry
@@ -135,6 +331,11 @@ public class CaseAction extends BaseAction{
 	 */
 	public String newCase(){
 		activateLists();
+
+		setCreatedDate(new Date());
+		setUpdatedDate(new Date());
+		setCreatedBy("Michael Hall");
+		setUpdatedBy("Michael Hall");
 		return SUCCESS;
 	}
 
@@ -143,25 +344,25 @@ public class CaseAction extends BaseAction{
 	 * @return
 	 */
 	public String getExistingCase(){
-//		setCase(caseServices.getCase(getHiddenid()));
-//		setContact(iCase.getContact());
+		//set(caseServices.getCase(getHiddenid()));
+//		setContact(iamodel.getContact());
 //		
-//		setIssueSet(iCase.getCaseIssuesSet());
-//		setClientDisabilities(contact.getDisabilitiesSet());
-//		setLinkedCasesSet(iCase.getIndividualCasesSet());
+//		setIssueSet(iamodel.getCaseIssuesList());
+//		setClientDisabilities(contact.getDisabilitiesList());
+//		setLinkedCasesSet(iamodel.getIndividualCasesList());
 //		
 //		//to be deleted
-//		System.out.println(iCase.getIndividualCasesSet().toString());
+//		System.out.println(iamodel.getIndividualCasesList().toString());
 //		for (IndividualCases c : linkedCasesSet) {
 //			System.out.println("case linked: " + c.getId() + " " + c.getDescription() );
 //		}
 //		
 //		//setCreatedBy(case.getCreatedUserId().get);
-//		setCreatedDate(iCase.getCreatedDateTime());
-//		setUpdatedDate(iCase.getUpdatedDateTime());
-//		setId(iCase.getId());
-//		setDescription(iCase.getDescription());
-//		setAddress(contact.getAddressesSet());
+//		setCreatedDate(iamodel.getCreatedDateTime());
+//		setUpdatedDate(iamodel.getUpdatedDateTime());
+//		setId(iamodel.getId());
+//		setDescription(iamodel.getDescription());
+//		setAddress(contact.getAddressesList());
 //		
 //		setTheGender(contact.getGenderType().getGenderName());
 //		setTheDanger(contact.getDangerType().getDangerName());
@@ -171,7 +372,8 @@ public class CaseAction extends BaseAction{
 //		setTheCulturalBackground(contact.getCulturalBackground().getCulturalBackgroundName());
 //		setTheAccommodation(contact.getAccommodation().getAccommodationName());
 //		
-//		activateLists();
+		activateLists();
+		theAdvocate = iamodel.getAdvocate().getLastname() + ", " + iamodel.getAdvocate().getFirstname();
 		
 		return SUCCESS;
 	}
@@ -204,6 +406,11 @@ public class CaseAction extends BaseAction{
 		return SUCCESS;
 	}
 	
+	public String saveUpdateCase(){
+		
+		return SUCCESS;
+	}
+	
 	/* 
 	 * 
 	 * 
@@ -221,6 +428,7 @@ public class CaseAction extends BaseAction{
 	 * populate the Select List vairables
 	 */
 	private void activateLists(){
+		/*
 		titleSelectList=typesService.findTitleTypes();
 		genderSelectList=typesService.findGenderTypes();
 		culturalBackgroundSelectList=typesService.findCulturalBackgroundTypes();
@@ -230,9 +438,144 @@ public class CaseAction extends BaseAction{
 		dangerSelectList = typesService.findDangerTypes();
 		employmentSelectList = typesService.findEmploymentTypes();
 		statusSelectList = typesService.findStatusTypes();
+		*/
+		titleSelectList=caseServices.findTitleTypes();
+		genderSelectList=caseServices.findGenderTypes();
+		culturalBackgroundSelectList=caseServices.findCulturalBackgroundTypes();
+		accommodationSelectList = caseServices.findAccommodationTypes();
+		disabilitySelectList = caseServices.findDisabilityTypes();
+		issueSelectList = caseServices.findIssueTypes();
+		dangerSelectList = caseServices.findDangerTypes();
+		statusSelectList = typesService.findStatusTypes();
+		employmentSelectList = caseServices.findEmploymentTypes();
+		advocateSelectList = caseServices.findAdvocates();
+		prioritySelectList = caseServices.findPriorityTypes();
+		communicationSelectList = caseServices.findCommunicationTypes();
+		goalSelectList = caseServices.findGoalTypes();
+		reviewFrequencyList = caseServices.findReviewFrequencies();
+		developerSelectList = caseServices.findAdvocates();
+		
+		System.out.println(iamodel.getRisksList().size());
+		
+		if (getIamodel() != null) {
+			List<PlanGoals> planGoalsDB = getIamodel().getPlanGoalsList();
+			for (PlanGoals pg : planGoalsDB){
+				try {
+					theGoalList.add(pg.getGoalType().getGoalTypeName());
+				} catch (NullPointerException e) {
+					theGoalList.add(new String());
+				}
+			}
+			
+			List<CaseIssues> caseIssuesDB = getIamodel().getCaseIssuesList();
+			for (CaseIssues ci : caseIssuesDB) {
+				try {
+					theIssueList.add(ci.getIssue().getIssueName());
+				} catch(NullPointerException e) {
+					theIssueList.add(new String());
+				}
+			}
+			
+			List<IndividualCaseCommunications> communicationListDBCaseCommunications = getIamodel().getCommunicationsList();
+			for(IndividualCaseCommunications icc : communicationListDBCaseCommunications) {
+				try {
+					theCommunicationsList.add(icc.getCommunicationType().getCommunicationTypeName());
+				} catch(NullPointerException e) {
+					theCommunicationsList.add(new String());
+				}
+			}
+			
+			List<ClientDisabilities> disabilityDB = getIamodel().getContact().getDisabilitiesList();
+			for (ClientDisabilities cd : disabilityDB) {
+				try {
+					theDisabilityList.add(cd.getDisabilityType().getDisabilityName());
+				} catch(NullPointerException e) {
+					theDisabilityList.add(new String());
+				}
+			}
+			
+			List<ContactEmployments> employmentsDB = getIamodel().getContact().getEmploymentsList();
+			for (ContactEmployments ce : employmentsDB) {
+				try {
+					theEmploymentList.add(ce.getEmploymentType().getEmploymentName());
+				} catch(NullPointerException e) {
+					theEmploymentList.add(new String());
+				}
+			} 
+		}
 	}
 	
 	
+	public void setStatusSelectList(List<StatusTypes> statusSelectList) {
+		this.statusSelectList = statusSelectList;
+		}
+		public List<StatusTypes> getStatusSelectList() {
+		return statusSelectList;
+		}
+		public void setTheStatus(String theStatus) {
+		this.theStatus = theStatus;
+		}
+		public String getTheStatus() {
+		return theStatus;
+		}
+	
+	
+	public void setPrioritySelectList(List<PriorityTypes> prioritySelectList) {
+		this.prioritySelectList = prioritySelectList;
+		}
+		public List<PriorityTypes> getPrioritySelectList() {
+		return prioritySelectList;
+		}
+		public void setThePriority(String thePriority) {
+		this.thePriority = thePriority;
+		}
+		public String getThePriority() {
+		return thePriority;
+		}
+		
+		public void setCommunicationSelectList(List<CommunicationTypes> communicationSelectList) {
+			this.communicationSelectList = communicationSelectList;
+			}
+			public List<CommunicationTypes> getCommunicationSelectList() {
+			return communicationSelectList;
+			}
+			
+			
+			/**
+			 * @return the theCommunicationsList
+			 */
+			public List<String> getTheCommunicationsList() {
+				return theCommunicationsList;
+			}
+
+			/**
+			 * @param theCommunicationsList the theCommunicationsList to set
+			 */
+			public void setTheCommunicationsList(List<String> theCommunicationsList) {
+				this.theCommunicationsList = theCommunicationsList;
+			}
+
+			public void setGoalSelectList(List<GoalTypes> goalSelectList) {
+				this.goalSelectList = goalSelectList;
+				}
+				public List<GoalTypes> getGoalSelectList() {
+				return goalSelectList;
+				}		
+			
+	/**
+				 * @return the theGoalList
+				 */
+				public List<String> getTheGoalList() {
+					return theGoalList;
+				}
+
+				/**
+				 * @param theGoalList the theGoalList to set
+				 */
+				public void setTheGoalList(List<String> theGoalList) {
+					this.theGoalList = theGoalList;
+				}
+
 	/**
 	 * Getter for the form title
 	 * @return String
@@ -250,16 +593,16 @@ public class CaseAction extends BaseAction{
 	}
 	
 
-	public IndividualCases getCase(){
-		return iCase;
+	public IndividualCases getIamodel(){
+		return iamodel;
 	}
 
 	/**
 	 * Setter for case
 	 * @param case
 	 */
-	public void setCase(IndividualCases iCase){
-		this.iCase = iCase;
+	public void setIamodel(IndividualCases iamodel){
+		this.iamodel = iamodel;
 	}
 	
 	public Contacts getContact() {
@@ -341,13 +684,19 @@ public class CaseAction extends BaseAction{
 	public List<DisabilityTypes> getDisabilitySelectList() {
 		return disabilitySelectList;
 	}
-
-	public String getTheDisability() {
-		return theDisability;
+	
+	/**
+	 * @return the theDisabilityList
+	 */
+	public List<String> getTheDisabilityList() {
+		return theDisabilityList;
 	}
 
-	public void setTheDisability(String theDisability) {
-		this.theDisability = theDisability;
+	/**
+	 * @param theDisabilityList the theDisabilityList to set
+	 */
+	public void setTheDisabilityList(List<String> theDisabilityList) {
+		this.theDisabilityList = theDisabilityList;
 	}
 
 	/**
@@ -358,12 +707,19 @@ public class CaseAction extends BaseAction{
 		return issueSelectList;
 	}
 
-	public String getTheIssue() {
-		return theIssue;
+
+	/**
+	 * @return the theIssueList
+	 */
+	public List<String> getTheIssueList() {
+		return theIssueList;
 	}
 
-	public void setTheIssue(String theIssue) {
-		this.theIssue = theIssue;
+	/**
+	 * @param theIssueList the theIssueList to set
+	 */
+	public void setTheIssueList(List<String> theIssueList) {
+		this.theIssueList = theIssueList;
 	}
 
 	/**
@@ -372,14 +728,6 @@ public class CaseAction extends BaseAction{
 	 */
 	public List<EmploymentTypes> getEmploymentSelectList() {
 		return employmentSelectList;
-	}
-
-	public String getTheEmployment() {
-		return theEmployment;
-	}
-
-	public void setTheEmployment(String theEmployment) {
-		this.theEmployment = theEmployment;
 	}
 
 	/**
@@ -405,7 +753,7 @@ public class CaseAction extends BaseAction{
 		this.caseList = caseList;
 	}
 
-	public Set<IndividualCases> getLinkedCasesSet() {
+	public List<IndividualCases> getLinkedCasesSet() {
 		return linkedCasesSet;
 	}
 	
@@ -418,41 +766,59 @@ public class CaseAction extends BaseAction{
 	}
 
 	
+	/**
+	 * Getter for advocate type
+	 * @return List
+	 */
+	public List<Contacts> setAdvocateSelectList(List<Contacts> advocateSelectList) {
+		return this.advocateSelectList = advocateSelectList;
+	}
+	
+	public List<Contacts> getAdvocateSelectList() {
+		return advocateSelectList;
+	}
 
+	public String getTheAdvocate() {
+		return theAdvocate;
+	}
+
+	public void setTheAdvocate(String theAdvocate) {
+		this.theAdvocate = theAdvocate;
+	}
 	/*------------------------------------------------Pagination Variables
 	 * 
 	 */
 
-	public Set<CaseIssues> getIssueSet() {
+	public List<CaseIssues> getIssueSet() {
 		return issueSet;
 	}
 
-	public void setIssueSet(Set<CaseIssues> issueSet) {
-		this.issueSet = issueSet;
+	public void setIssueSet(List<CaseIssues> list) {
+		this.issueSet = list;
 	}
 
-	public Set<IndividualCases> getLinkedEquiriesSet() {
+	public List<IndividualCases> getLinkedEquiriesSet() {
 		return linkedCasesSet;
 	}
 
-	public void setLinkedCasesSet(Set<IndividualCases> linkedCasesSet) {
-		this.linkedCasesSet = linkedCasesSet;
+	public void setLinkedCasesSet(List<IndividualCases> list) {
+		this.linkedCasesSet = list;
 	}
 
-	public Set<Addresses> getAddress() {
+	public List<Addresses> getAddress() {
 		return addressSet;
 	}
 
-	public void setAddress(Set<Addresses> address) {
-		this.addressSet = address;
+	public void setAddress(List<Addresses> list) {
+		this.addressSet = list;
 	}
 
-	public Set<ClientDisabilities> getClientDisabilities() {
+	public List<ClientDisabilities> getClientDisabilities() {
 		return clientDisabilitiesSet;
 	}
 
-	public void setClientDisabilities(Set<ClientDisabilities> clientDisabilitiesSet) {
-		this.clientDisabilitiesSet = clientDisabilitiesSet;
+	public void setClientDisabilities(List<ClientDisabilities> list) {
+		this.clientDisabilitiesSet = list;
 	}
 
 	/**
@@ -648,4 +1014,28 @@ public class CaseAction extends BaseAction{
 	public void setTotalNumberOfPages(int totalNumberOfPages) {
 		this.totalNumberOfPages = totalNumberOfPages;
 	}
+
+	@Override
+	public void prepare() throws Exception {
+		// TODO Auto-generated method stub
+		System.out.println("Prepare start");
+		System.out.println("hiddenid = " + getHiddenid());
+		if (!((Integer) getHiddenid() == null || (Integer)getHiddenid() == 0)) {
+			iamodel = caseServices.getCase(getHiddenid());
+			activateLists();
+		}
+	}
+
+	@Override
+	public IndividualCases getModel() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setSession(Map<String, Object> arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 }

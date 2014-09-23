@@ -3,6 +3,10 @@ package uow.ia.bean;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.search.annotations.DocumentId;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
+
 
 
 // Generated Aug 9, 2014 1:06:20 PM by Hibernate Tools 4.0.0
@@ -10,12 +14,23 @@ import java.util.List;
 /**
  * @author Kim To
  * @version 1.0.3, 30/08/2014
+ * 
+ * History:
+ * 15/09/2014 Add search annotation
  */
-public class AccommodationTypes implements java.io.Serializable {
 
+@Indexed
+public class AccommodationTypes implements java.io.Serializable {
+	
+	@DocumentId
 	private Integer id;
+	
+	@Field
 	private String accommodationName;
+	
+	@Field
 	private String accommodationDescription;
+	
 	private List<Contacts> contactsList = new ArrayList<Contacts>();
 
 	public AccommodationTypes() {

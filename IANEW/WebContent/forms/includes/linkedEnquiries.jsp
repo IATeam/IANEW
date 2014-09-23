@@ -28,37 +28,25 @@
 <head>
 
 </head>
-
+<section>
+<input type="image" src="/IANEW/resources/images/plusButton.png" alt="Hide/Show" id="btnShowHide" value="ShowHide" onclick="divHide(this);return false;" class="divHideButton"/>
 <h3 class="sixteen columns" style="float:none;">Linked Enquiries</h3>
-<s:div id="linkedEnquiriesField" cssClass="greybackground">
-
+<div class="greybackground">
+<div id="linkedEnquiriesDiv" class="toggled hideable">	
 	<s:url id="urlELinked" namespace="/enquiry" action="getLinkedEnquiry" />
-		
-	<s:iterator value="linkedEnquiriesList" status="stat">
-		<section class="secLinkedEnquiries sixteen columns curveBorder"  onclick="bandSelected(this)">
-			<s:div cssClass="textarea one columns">
-				<s:label value="E#:" />
-				<s:div cssClass="id"><s:property  value="id"/></s:div>
-			</s:div>
-			<s:div cssClass="textarea three columns">
-				<s:label for="date" value="Date:" />
-				<!-- <s:property value="updatedDateTime"/> -->
-				<s:date name="updatedDateTime" format="dd MMM yyyy"/>
-			</s:div>
-			<div class="textarea eleven columns omega">
-				<s:label for="description" value="Description:" />
-				<div><s:textarea id="description" cssClass="multiLineTextArea" name="description" readonly="true"/></div>
-			</div>
-		</section>
-	</s:iterator>
 	
-	<s:hidden id="hiddenid" name="hiddenid"/>
+	<article id="itLikedEnquiries">
+		<%@include file="iterLinkedEnquiries.jsp"%>
+	</article>
+	
+	<s:hidden id="hiddenid" name="hiddenid" />
+	<s:hidden name="iamodel.parentEnquiry" />
 	
 	<div>
 		<div class="row">
-			<div class="twelve columns alpha"><p></p></div>
-			<input type="button" id="btnView" value="View" class="two columns"/>
-			<input type="button" id="btnAddEnquiry" value="Add Enquiry" class="two columns omega"/>
+			<div class="ten columns alpha"><p></p></div>
+			<input type="button" id="btnView" value="View" class="three columns"/>
+			<input type="button" id="btnAddEnquiry" value="Add Enquiry" class="three columns omega"/>
 		</div>
 	</div>
 
@@ -87,7 +75,6 @@
 			$('#rightPopUp').show("slow");
 			$('#rightPopUp').load("enquiry/getEnquiry.action?hiddenid=" + id +"&formTitle=Existing Enquiry" );
 			
-			//alert(id);
 		});
 
 		$('#btnAddEnquiry').click(function(){
@@ -96,4 +83,6 @@
 		});
 	});
 	</script>
-</s:div>
+</div>
+</div>
+</section>

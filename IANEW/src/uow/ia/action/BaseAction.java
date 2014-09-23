@@ -10,6 +10,8 @@ import uow.ia.service.ContactService;
 import uow.ia.service.CaseService;
 import uow.ia.service.EnquiryService;
 import uow.ia.service.TypesService;
+import uow.ia.service.UtilService;
+
 
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -35,6 +37,23 @@ public class BaseAction extends ActionSupport{
 
 	@Resource
 	protected AdminService adminService;
+	
+	@Resource
+	protected UtilService utilService;
+
+	/**
+	 * @return the utilService
+	 */
+	public UtilService getUtilService() {
+		return utilService;
+	}
+
+	/**
+	 * @param utilService the utilService to set
+	 */
+	public void setUtilService(UtilService utilService) {
+		this.utilService = utilService;
+	}
 
 	public CaseService getCaseServices() {
 		return caseServices;

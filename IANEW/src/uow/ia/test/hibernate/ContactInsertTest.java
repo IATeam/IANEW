@@ -55,8 +55,6 @@ public class ContactInsertTest {
 	  @SuppressWarnings("unchecked")
 	  //save
   	  Transaction tx = null;
-  	  try{
-    		tx = session.beginTransaction();
 	  		Contacts newContact = new Contacts();
 	  		TitleTypes title = (TitleTypes)session.get(TitleTypes.class, 1);
 	  		AccommodationTypes accommodation = (AccommodationTypes)session.get(AccommodationTypes.class, 3);
@@ -71,7 +69,7 @@ public class ContactInsertTest {
 	  		newContact.setLastname("To");
 	  		newContact.setTitleType(title);
 	  		newContact.setContactType(contactType);
-	  		newContact.setCulturalBackground(culturalBackground);
+	  		//newContact.setCulturalBackground(culturalBackground);
 	  		newContact.setCulturalBackgroundComment("kim is vietnamese");
 	  		newContact.setDangerType((DangerTypes)session.get(DangerTypes.class, 1));
 	  		newContact.setDob(Date.valueOf("1992-08-26"));
@@ -81,14 +79,6 @@ public class ContactInsertTest {
 	  		newContact.setMobilephone("0401520752");
 	  		newContact.setTitleType(titleType);
 	  		
-	  		// set client disability
-	  		ClientDisabilities cDisability = new ClientDisabilities();
-	  		cDisability.setComments("primary disability");
-	  		cDisability.setContact(newContact);
-	  		cDisability.setDisabilityType((DisabilityTypes)session.get(DisabilityTypes.class, 2));
-	  		cDisability.setPrimaryFlag("Y");
-	  		
-	  		newContact.getDisabilitiesList().add(cDisability);
 	  		
 	  		// set client employment
 	  		EmploymentTypes etype = (EmploymentTypes)session.get(EmploymentTypes.class, 2);
@@ -102,18 +92,19 @@ public class ContactInsertTest {
 	  		newContact.getEmploymentsList().add(employment);
 	  		
 	  		// set contact address
-	  		Addresses address = new Addresses();
-	  		address.setStreet("Unit 2/19 Sperry Street");
-	  		address.setContact(newContact);
-	  		address.setCountry("Australia");
-	  		address.setHomephone("021323234");
-	  		address.setPostcode("2500");
-	  		address.setState("NSW");
-	  		address.setSuburb("Wollongong");
-	  		
-	  		newContact.getAddressesList().add(address);
-	  		newContact.getAddressesList().add(new Addresses());
-	  		
+//	  		Addresses address = new Addresses();
+//	  		address.setStreet("Unit 2/19 Sperry Street");
+//	  		address.setContact(newContact);
+//	  		address.setCountry("Australia");
+//	  		address.setHomephone("021323234");
+//	  		address.setPostcode("2500");
+//	  		address.setState("NSW");
+//	  		address.setSuburb("Wollongong");
+//	  		
+//	  		newContact.getAddressesList().add(address);
+
+	try{
+		tx = session.beginTransaction();
 	  		session.saveOrUpdate(newContact);
 	  		tx.commit();
   	}catch(RuntimeException e){
@@ -124,6 +115,23 @@ public class ContactInsertTest {
   		}
   		throw e;
   	}
+  	  
+
+		// set client disability
+		ClientDisabilities cDisability = new ClientDisabilities();
+		cDisability.setComments("primary disability");
+		cDisability.setContact(newContact);
+		cDisability.setDisabilityType((DisabilityTypes)session.get(DisabilityTypes.class, 2));
+		cDisability.setPrimaryFlag("Y");
+		
+		try {
+			tx = session.beginTransaction();
+			session.saveOrUpdate(cDisability);
+			tx.commit();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		//newContact.getDisabilitiesList().add(cDisability);
 	  
   }
   @BeforeMethod

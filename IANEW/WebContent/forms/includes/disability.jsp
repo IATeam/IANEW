@@ -18,49 +18,61 @@
 						Moved iteration to iterDisability.jsp to accommodate ajax deletion
 						Updated javascript primaryUpdate with a argument to allow more direct dom
 						calling and update primary flag value.
+		17/09/2014 -	David Forbes modified theDisability with value attribute
+		18/09/2014 -	Quang Nhan Add validation refer to enquiryValidation.js file and fix index bugs
+						when it is a new enquiry
 	==============================================	
 	Description: A jsp page that displays a list of enquiries
 ------------------------------------------------------------------------------------------------>
 
 <!-- TODO LATER: add js function to click to select primary disability -->
+<section>
+<input type="image" src="/IANEW/resources/images/plusButton.png" alt="Hide/Show" id="btnShowHide" value="ShowHide" onclick="divHide(this);return false;" class="divHideButton"/>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <h3 class="sixteen columns" style="float:none;">Disability</h3>
-<s:div cssClass="greybackground">
-
+<div class="greybackground">
+<div id="disabilityDiv" class="toggled hideable">	
 
 	<article id="itDisability">
 		<%@include file="iterDisabilities.jsp" %>
 	</article>	
 		
-	<!-- Hidden disability to be added to iterator if needs to be added -->
-	<s:textfield id="disabilitySize" name="iamodel.contact.disabilitiesList.size" value="%{iamodel.contact.disabilitiesList.size}"/>
+	<!-- disabilitySize(hidden field) used to assign index value when adding or deleting -->	
+	<s:if test="%{iamodel.contact.disabilitiesList.size > 0}">
+		<s:hidden id="disabilitySize" name="iamodel.contact.disabilitiesList.size" value="%{iamodel.contact.disabilitiesList.size}"/>
+		<s:set name="index" value="iamodel.contact.disabilitiesList.size" />
+		<article id="artDisability" class="hidden">
+	</s:if>
 	
-	<s:if test="%{iamodel.contact.disabilitiesList.size > 0}"><article id="artDisability" class="hidden"></s:if>
-	<s:else><article id="artDisability""></s:else>
+	<s:else>
+		<s:hidden id="disabilitySize" name="iamodel.contact.disabilitiesList.size" value="0"/>
+		<s:set name="index" value="0" />
+		<article id="artDisability">
+	</s:else>
 		<section class="sixteen columns curveBorder row">
-				<s:hidden name="iamodel.contact.disabilitiesList[%{iamodel.contact.disabilitiesList.size}].id"/>
-				<s:hidden name="iamodel.contact.disabilitiesList[%{iamodel.contact.disabilitiesList.size}].primaryFlag"/>
+				<s:hidden name="iamodel.contact.disabilitiesList[%{#index}].id"/>
+				<s:hidden name="iamodel.contact.disabilitiesList[%{#index}].primaryFlag"/>
+							<input type="image" src="/IANEW/resources/images/undoButtonImage.png" alt="undoButton" id="btnUndo" value="Undo" onclick="undoButton(this);return false;" class="undoButton"/>
 				
 				<s:div cssClass="four columns alpha">
 					<s:div cssClass="disabilityTypeSelect row four columns">
-						<s:select list="disabilitySelectList.{disabilityName}" name="theDisabilityList[%{iamodel.contact.disabilitiesList.size}]" headerKey="-1" headerValue="Select Disability" />
+						<s:select list="disabilitySelectList.{disabilityName}" name="theDisabilityList[%{#index}]" value="iamodel.contact.disabilitiesList.disabilityType.disabilityName" headerKey="-1" headerValue="Select Disability" />
 					</s:div>
+					
 					<s:div cssClass="row four columns" style="text-align: center">
-						
 						<input type="radio" name="primary" onclick="primaryUpdate(this)"/>
 						<s:label value="Primary Disability" />						
 					</s:div>
 				</s:div>
 				<s:div cssClass="textarea eleven columns">
 					<s:label for="disabilityDescription" value="Comment:" /> 
-					<s:textarea cssClass="disabilityDescription" cssClass="oneLineTextArea" name="iamodel.contact.disabilitiesList[%{iamodel.contact.disabilitiesList.size}].comments" /> 
+					<s:textarea cssClass="disabilityDescription" cssClass="oneLineTextArea" name="iamodel.contact.disabilitiesList[%{#index}].comments" /> 
 				</s:div>
 			</section>
 	</article>
 	
 	<div class="row">
-		<input type="button" id="btnNewDisability" value ="New Disability Type" class="two columns" />
-		<div class="twelve columns alpha"><p></p></div>
+		<div class="fourteen columns alpha"><p></p></div>
 		<input type="button" id="btnAddDisability" value="Add Disability" class="two columns" onclick="addNewRecord('artDisability', 'disabilitySize', 'itDisability' )"/>
 	</div>
 	
@@ -109,4 +121,6 @@
 	});
 	</script>
 	
-</s:div>
+</div>
+</div>
+</section>

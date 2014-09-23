@@ -34,11 +34,23 @@ public class ContactUpdateTest {
 	
 	@Test
 	public void f() {
-		Contacts updateContact = (Contacts)session.get(Contacts.class, 11);
+		Contacts updateContact = new Contacts();
+		updateContact.setId(102);
+		//updateContact.setFirstname("To");
+		updateContact.setOthername("Kim");
 		
-		updateContact.setAccommodation((AccommodationTypes)session.get(AccommodationTypes.class, 2));
-		updateContact.setDob(Date.valueOf("1992-07-23"));
-		updateContact.setAccommodationComment("kim test first update");
+		AccommodationTypes acc = new AccommodationTypes();
+		acc.setId(1);
+		acc.setAccommodationName("Aged Care");
+		acc.setAccommodationDescription("rag");
+		updateContact.setAccommodation(acc);
+		
+		
+//		Contacts updateContact = (Contacts)session.get(Contacts.class, 11);
+//		
+//		updateContact.setAccommodation((AccommodationTypes)session.get(AccommodationTypes.class, 2));
+//		updateContact.setDob(Date.valueOf("1992-07-23"));
+//		updateContact.setAccommodationComment("kim test first update");
 		
 //		Set<ClientDisabilities> disabilitySet = updateContact.getDisabilitiesSet();
 //		for (ClientDisabilities d : disabilitySet) {
@@ -59,6 +71,7 @@ public class ContactUpdateTest {
 		try {
 			tx = session.beginTransaction();
 			session.saveOrUpdate(updateContact);
+			//session.merge(updateContact);
 			tx.commit();
 		} catch (Exception e) {
 			tx.rollback();

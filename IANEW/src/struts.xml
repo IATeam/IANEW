@@ -82,7 +82,10 @@
     <!-- Case Forms -->
     <package name="case" namespace="/case" extends="struts-default">
     	
-    	<action name="getCase" class="uow.ia.action.CaseAction" method="getExistingCase">
+    	<action name="getExistingCase" class="uow.ia.action.CaseAction" method="getExistingCase">
+    		<interceptor-ref name="params"/>
+		     <interceptor-ref name="prepare"/>
+		     <interceptor-ref name="basicStack"/>
     		<result name="success">/forms/case.jsp</result>
     	</action>
     	<action name="newCase" class="uow.ia.action.CaseAction" method="newCase">
@@ -94,6 +97,9 @@
     	<action name="updateCaseList" class="uow.ia.action.CaseAction" method="updateCaseList">
     		<result name="success">/forms/caseList.jsp</result>
     	</action>
+    	<action name="saveUpdateEnquiry" class="uow.ia.action.CaseAction" method="saveUpdateEnquiry">
+    		<result name="success">/forms/case.jsp</result>
+    	</action>
     </package>
     
      <!-- Links Forms -->
@@ -102,6 +108,14 @@
     		<result name="success">/forms/{1}.jsp</result>
     	</action>
     </package>
+    
+    <!-- Settings Forms -->
+    <package name="settings" namespace="/admin" extends="struts-default">
+    	<action name="*" class="uow.ia.action.AdminAction">
+    		<result name="success">/forms/{1}.jsp</result>
+    	</action>
+    </package>
+    
     <!--  <package name="example" namespace="/" extends="struts-default">
        <action name="*" class="uow.ia.action.Listing">
            <result name="success">Listing.jsp</result>
@@ -110,10 +124,11 @@
     </package>-->
     
     <package name="settings" namespace="/settings" extends="struts-default">
-    	<action name="settings" class="uow.ia.action.SettingsAction" method="settings">
+    	<action name="settings" class="uow.ia.action.SettingsAction" method="startAdminPage">
     		<result name="success">/forms/settings.jsp</result>
     	</action>
-    </package><package name="report" namespace="/report" extends="struts-default">
+    </package>
+    <package name="report" namespace="/report" extends="struts-default">
     	<action name="report" class="uow.ia.action.ReportAction" method="report">
     		<result name="success">/forms/report.jsp</result>
     	</action>

@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.hibernate.metadata.ClassMetadata;
+import org.hibernate.search.FullTextSession;
 
 /**
  * Base Dao
@@ -202,4 +203,6 @@ public interface BaseDao<T> {
 	public Map<String, ClassMetadata> getAllClassMetadata();
 	
 	public Class getClassByObject(Object ob);
+	
+	public FullTextSession getFullTextSession();
 }
