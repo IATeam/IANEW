@@ -47,52 +47,57 @@ public class createExcelFileTest {
 	@Test
 	public void f() {
 		try{
-//			String filename = "data.xls";
-//			HSSFWorkbook hwb=new HSSFWorkbook();
-//			HSSFSheet sheet =  hwb.createSheet("new sheet");
-//
-//			HSSFRow rowhead=   sheet.createRow((short)0);
-//			rowhead.createCell(0).setCellValue("Id");
-//			rowhead.createCell(1).setCellValue("First Name");
-//			rowhead.createCell(2).setCellValue("Lastname");
-//			rowhead.createCell(3).setCellValue("Email");
-//			rowhead.createCell(4).setCellValue("Accommocation");
-//			
-//			int index = 1;
-//			for (Contacts c : contactList) {
-//				HSSFRow row=   sheet.createRow(index);
-//				row.createCell(0).setCellValue(c.getId().toString());
-//				row.createCell(1).setCellValue(c.getFirstname());
-//				row.createCell(2).setCellValue(c.getLastname());
-//				row.createCell(3).setCellValue(c.getEmail());
-//				row.createCell(4).setCellValue(c.getAccommodation().getAccommodationName());
-//				index++;
-//			}
-//		FileOutputStream fileOut =  new FileOutputStream(filename);
-//		hwb.write(fileOut);
-//		fileOut.close();
+			String filename = "data.xls";
+			HSSFWorkbook hwb=new HSSFWorkbook();
+			HSSFSheet sheet =  hwb.createSheet("new sheet");
+
+			HSSFRow rowhead=   sheet.createRow((short)0);
+			rowhead.createCell(0).setCellValue("Id");
+			rowhead.createCell(1).setCellValue("First Name");
+			rowhead.createCell(2).setCellValue("Lastname");
+			rowhead.createCell(3).setCellValue("Email");
+			rowhead.createCell(4).setCellValue("Accommocation");
 			
-			Method[] list = Contacts.class.getDeclaredMethods();
-			Contacts contact = (Contacts)session.get(Contacts.class, 1);
-			//Field[] field = Contacts.class.getDeclaredFields();
-			for (Class c : Configuration.class.getClasses()) {
-				System.out.println(c.getName());
+			int index = 1;
+			List<Contacts> contactList = session.createQuery("from Contacts").list();
+			for (Contacts c : contactList) {
+				HSSFRow row=   sheet.createRow(index);
+				row.createCell(0).setCellValue(c.getId().toString());
+				row.createCell(1).setCellValue(c.getFirstname());
+				row.createCell(2).setCellValue(c.getLastname());
+				row.createCell(3).setCellValue(c.getEmail());
+				if (c.getAccommodation() != null) {
+					row.createCell(4).setCellValue(c.getAccommodation().getAccommodationName());
+				} else {
+					row.createCell(4).setCellValue("");
+				}
+				index++;
 			}
+		FileOutputStream fileOut =  new FileOutputStream(filename);
+		hwb.write(fileOut);
+		fileOut.close();
+			
+//			Method[] list = Contacts.class.getDeclaredMethods();
+//			Contacts contact = (Contacts)session.get(Contacts.class, 1);
+//			//Field[] field = Contacts.class.getDeclaredFields();
+//			for (Class c : Configuration.class.getClasses()) {
+//				System.out.println(c.getName());
+//			}
 			
 //			for (Field f : field) {
 //				System.out.println(f.getName());
 //				Object object = f.get(contact);
 //			}
-			for (Method m : list) {
-				System.out.println(m.getName());
-				Class type = (Class) m.getReturnType();
-				if (m.toString().equals("public java.lang.String uow.ia.bean.Contacts.getLastname()")) {
-						Object object = m.invoke(contact, null);
-						
-						System.out.println(type.toString());
-						System.out.println(object.toString());
-				}
-			}
+//			for (Method m : list) {
+//				System.out.println(m.getName());
+//				Class type = (Class) m.getReturnType();
+//				if (m.toString().equals("public java.lang.String uow.ia.bean.Contacts.getLastname()")) {
+//						Object object = m.invoke(contact, null);
+//						
+//						System.out.println(type.toString());
+//						System.out.println(object.toString());
+//				}
+//			}
 			System.out.println("Your excel file has been generated!");
 
 		} catch ( Exception ex ) {

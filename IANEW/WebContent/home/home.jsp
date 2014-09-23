@@ -20,7 +20,7 @@
     pageEncoding="US-ASCII"%>
 <%@ taglib prefix="sj" uri="/struts-jquery-tags" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <s:head/>
@@ -56,7 +56,6 @@
 		<s:param name="formTitle">New Enquiry</s:param>
 		<s:param name="hiddenid">null</s:param>
 	</s:url>
-
 	<s:url id="urlEExisting" namespace="/enquiry" action="getEnquiry">
 		<s:param name="hiddenid">1</s:param>
 		<s:param name="formTitle">Existing Enquiry</s:param>
@@ -70,14 +69,14 @@
 	<s:url id="urlLinks" namespace="/links" action="links">
 		<s:param name="formTitle">Links</s:param>
 	</s:url>
-	<s:url id="urlSettings" namespace="/settings" action="settings">
-		<s:param name="formTitle">Settings</s:param>
-	</s:url>
 	<s:url id="urlReport" namespace="/report" action="report">
 		<s:param name="formTitle">Report</s:param>
 	</s:url>
 	<s:url id="urlTimeManagement" namespace="/timeManagement" action="timeManagement">
 		<s:param name="formTitle">Time Management</s:param>
+	</s:url>
+	<s:url id="urlSettings" namespace="/admin" action="startAdminPage">
+		<s:param name="formTitle">Settings</s:param>
 	</s:url>
 	
 	<div class="container">
@@ -88,10 +87,11 @@
 	<nav>
 		<ul id="main-menu" class="sm sm-simple">
 			<li><s:a id="aHome"href="/IANEW/home/home.jsp">Illawarra Advocacy</s:a></li>
-			
-			<li><sj:a id="menuENew" href="%{urlENew}" targets="formDiv" onclick="menuclicked()">Enquiry</sj:a>
+
+			<li><s:a id="aE"href="#">Enquiry</s:a>
 				<ul>
 					<li><sj:a id="aENew" href="%{urlENew}" targets="formDiv" onclick="menuclicked()">New Enquiry</sj:a></li>
+					<li><sj:a id="aEExisting" href="%{urlEExisting}" targets="formDiv" onclick="menuclicked()">Existing Enquiry Test</sj:a></li>
 					<li><sj:a id="aEList" href="%{urlEList}" targets="formDiv" onclick="menuclicked()">Enquiry List</sj:a>
 				</ul>
 			</li>
@@ -104,23 +104,18 @@
 			</li>
 			
 			<li >
-
 				<li><sj:a id="report" href="%{urlReport}" targets="formDiv"  onclick="menuclicked()">Report</sj:a></li>
 			</li>
-			<li><sj:a id="timeManagement" href="%{urlTimeManagement}" targets="formDiv"  onclick="menuclicked()">Time Management</sj:a></li>
+			<li>
+				<li><sj:a id="timeManagement" href="%{urlTimeManagement}" targets="formDiv"  onclick="menuclicked()">Time Management</sj:a></li>
 			
-
 			<li>
 				<s:a href="#">Synchronize</s:a>
 				
 			</li>
-			
-			<li>
 
-				<li><sj:a id="settings" href="%{urlSettings}" targets="formDiv"  onclick="menuclicked()">Settings</sj:a></li>
-				
-			</li>
-			<li><sj:a id="links" href="%{urlLinks}" targets="formDiv"  onclick="menuclicked()">Links</sj:a></li>
+			<li><sj:a id="settings" href="%{urlSettings}" targets="formDiv" onclick="menuclicked()">Settings</sj:a></li>
+			<li><sj:a id="links" href="%{urlLinks}" targets="formDiv">Links</sj:a></li>
 		</ul>
 	</nav>
 
@@ -178,7 +173,7 @@
 	</div>
 	
 	<s:div id="leftPopUp" style="background: yellow; position: fixed; top: 20%; box-shadow: 3px 3px 5px grey;">left</s:div>
-	<s:div id="rightPopUp" style="background: yellow; position: fixed; top: 20%; box-shadow: 3px 3px 5px grey; right: 0">right</s:div>
+	<s:div id="rightPopUp">right</s:div>
 	
 <!-- ----------------------------------------------------------------------------------------------- -->
 <!-- Home Page Footer ------------------------------------------------------------------------------ -->

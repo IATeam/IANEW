@@ -16,6 +16,7 @@ import uow.ia.bean.AccommodationTypes;
 import uow.ia.bean.Addresses;
 import uow.ia.bean.ClientDisabilities;
 import uow.ia.bean.CommunicationTypes;
+import uow.ia.bean.ContactEmployments;
 import uow.ia.bean.Contacts;
 import uow.ia.bean.CulturalBackgroundTypes;
 import uow.ia.bean.DangerTypes;
@@ -75,12 +76,11 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 	private List<AccommodationTypes> accommodationSelectList = new ArrayList<AccommodationTypes>();			
 	private String theAccommodation;
 	private List<DisabilityTypes> disabilitySelectList = new ArrayList<DisabilityTypes>();					
-	private String theDisability;
-	//private List<IndividualCases> caseTypeSelectList;					private String theCaseType;
+	private List<String> theDisabilityList = new ArrayList<String>();
 	private List<IssueTypes> issueSelectList = new ArrayList<IssueTypes>();							
 	private List<String> theIssueList = new ArrayList<String>();
 	private List<EmploymentTypes> employmentSelectList = new ArrayList<EmploymentTypes>();					
-	private String theEmployment;
+	private List<String> theEmploymentList = new ArrayList<String>();
 	private List<DangerTypes> dangerSelectList = new ArrayList<DangerTypes>();							
 	private String theDanger;
 	private List<StatusTypes> statusSelectList = new ArrayList<StatusTypes>();							
@@ -392,6 +392,11 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 		return SUCCESS;
 	}
 	
+	public String saveUpdateCase(){
+		
+		return SUCCESS;
+	}
+	
 	/* 
 	 * 
 	 * 
@@ -454,6 +459,24 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 					theCommunicationsList.add(new String());
 				}
 			}
+			
+			List<ClientDisabilities> disabilityDB = getIamodel().getContact().getDisabilitiesList();
+			for (ClientDisabilities cd : disabilityDB) {
+				try {
+					theDisabilityList.add(cd.getDisabilityType().getDisabilityName());
+				} catch(NullPointerException e) {
+					theDisabilityList.add(new String());
+				}
+			}
+			
+			List<ContactEmployments> employmentsDB = getIamodel().getContact().getEmploymentsList();
+			for (ContactEmployments ce : employmentsDB) {
+				try {
+					theEmploymentList.add(ce.getEmploymentType().getEmploymentName());
+				} catch(NullPointerException e) {
+					theEmploymentList.add(new String());
+				}
+			} 
 		}
 	}
 	
@@ -636,13 +659,19 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 	public List<DisabilityTypes> getDisabilitySelectList() {
 		return disabilitySelectList;
 	}
-
-	public String getTheDisability() {
-		return theDisability;
+	
+	/**
+	 * @return the theDisabilityList
+	 */
+	public List<String> getTheDisabilityList() {
+		return theDisabilityList;
 	}
 
-	public void setTheDisability(String theDisability) {
-		this.theDisability = theDisability;
+	/**
+	 * @param theDisabilityList the theDisabilityList to set
+	 */
+	public void setTheDisabilityList(List<String> theDisabilityList) {
+		this.theDisabilityList = theDisabilityList;
 	}
 
 	/**
@@ -674,14 +703,6 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 	 */
 	public List<EmploymentTypes> getEmploymentSelectList() {
 		return employmentSelectList;
-	}
-
-	public String getTheEmployment() {
-		return theEmployment;
-	}
-
-	public void setTheEmployment(String theEmployment) {
-		this.theEmployment = theEmployment;
 	}
 
 	/**

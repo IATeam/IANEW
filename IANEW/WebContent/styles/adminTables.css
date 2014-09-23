@@ -1,0 +1,26 @@
+@CHARSET "UTF-8";
+
+.tableBackground{
+	background-color: white;
+}
+
+table, td, th {
+    border: 1px solid grey;
+    box-shadow: 2px 2px 3px grey;
+   
+}
+
+table{
+	width: 100%;
+}
+
+th {
+    background-color: orange;
+    color: white;
+    height: 50px;
+    
+}
+
+td{
+	background-color: grey;
+}

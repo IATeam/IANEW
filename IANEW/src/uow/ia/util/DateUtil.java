@@ -29,7 +29,17 @@ public class DateUtil {
 		return dateString;
 	}
 	
+	/**
+	 * @author Quang
+	 * 01/09/2014 modified to throw back null if date is either "" or null
+	 * @param date
+	 * @return Date
+	 * @throws ParseException
+	 */
 	public static Date yyyymmddDate(String date) throws ParseException {
+		if(date.equals("") || date == null || date.isEmpty()){
+			return null;
+		}
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		dateDate = formatter.parse(date);
 		return dateDate;
@@ -53,5 +63,7 @@ public class DateUtil {
 		dateString = formatter.format(dateDate);
 		return dateString;
 	}
+	
+	
 	
 }

@@ -16,7 +16,40 @@
 				displays the form status detail.
 ------------------------------------------------------------------------------------------------>
 
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<div class="formStatus">
+	
+		<div class="row">
+			<div class="six columns">
+				<s:label for="createdDate" value="Created Date:" />
+			    <s:date name="iamodel.createdDateTime" format="dd MMM yyyy"/>
+			   
+				<s:label for="lastUpdatedOn" value="Last Updated On:" />
+				<s:date name="iamodel.updatedDateTime" format="dd MMM yyyy"/>
+				<br>
+				<s:label for="createdBy" value="Created By:" />
+				
+				<s:label for="iamodel.lastUpdatedBy" value="Last Updated By:" />
+				
+				<!-- <s:text id="lastUpdatedBy" name="" /> -->
+			</div>
+			<div class="nine columns">
+				<div class="row">
+			
+					<div class="three columns"><s:select list="dangerSelectList.{dangerName}" name="theDanger" value="iamodel.contact.dangerType.dangerName" headerKey="-1" headerValue="Flag Danger" /></div>
+					<div class="three columns"><s:select list="statusSelectList.{statusName}" name="theStatus" value="iamodel.statusType.statusName" headerKey="-1" headerValue="Form Status" /></div>
+					<s:div cssClass="two columns">
+						<s:label for="id" value="Enquiry#:" />
+						<s:property value="iamodel.id" />
+					</s:div>
+				</div>
+			</div>
+		</div>
+		<s:hidden name="iamodel.createdDateTime"/>
+		<s:hidden name="iamodel.updatedDateTime"/>
+</div>
+
+
+<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="US-ASCII"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <script>
@@ -114,4 +147,4 @@ function changePriorityColour(selectList) {
 			<s:select id="status" list="statusSelectList.{statusName}" name="theStatus" headerKey="-1" headerValue="Enquiry Status" />
 		</div>
 	</s:elseif>			
-</div>
+</div> --%>

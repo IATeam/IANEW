@@ -33,26 +33,13 @@
 <s:div id="linkedEnquiriesField" cssClass="greybackground">
 
 	<s:url id="urlELinked" namespace="/enquiry" action="getLinkedEnquiry" />
-		
-	<s:iterator value="linkedEnquiriesList" status="stat">
-		<section class="secLinkedEnquiries sixteen columns curveBorder"  onclick="bandSelected(this)">
-			<s:div cssClass="textarea one columns">
-				<s:label value="E#:" />
-				<s:div cssClass="id"><s:property  value="id"/></s:div>
-			</s:div>
-			<s:div cssClass="textarea three columns">
-				<s:label for="date" value="Date:" />
-				<!-- <s:property value="updatedDateTime"/> -->
-				<s:date name="updatedDateTime" format="dd MMM yyyy"/>
-			</s:div>
-			<div class="textarea eleven columns omega">
-				<s:label for="description" value="Description:" />
-				<div><s:textarea id="description" cssClass="multiLineTextArea" name="description" readonly="true"/></div>
-			</div>
-		</section>
-	</s:iterator>
 	
-	<s:hidden id="hiddenid" name="hiddenid"/>
+	<article id="itLikedEnquiries">
+		<%@include file="iterLinkedEnquiries.jsp"%>
+	</article>
+	
+	<s:hidden id="hiddenid" name="hiddenid" />
+	<s:hidden name="iamodel.parentEnquiry" />
 	
 	<div>
 		<div class="row">
@@ -87,7 +74,6 @@
 			$('#rightPopUp').show("slow");
 			$('#rightPopUp').load("enquiry/getEnquiry.action?hiddenid=" + id +"&formTitle=Existing Enquiry" );
 			
-			//alert(id);
 		});
 
 		$('#btnAddEnquiry').click(function(){

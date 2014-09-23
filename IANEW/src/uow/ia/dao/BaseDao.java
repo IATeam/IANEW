@@ -202,5 +202,7 @@ public interface BaseDao<T> {
 	
 	public Map<String, ClassMetadata> getAllClassMetadata();
 	
+	public Class getClassByObject(Object ob);
+	
 	public FullTextSession getFullTextSession();
 }

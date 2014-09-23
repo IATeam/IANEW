@@ -180,23 +180,56 @@ function updateNameIndex(ele, index){
  * @param {} button
  */
 function deleteSection(button){ 
+
 	var hidden =  $(button).parent().find("input:hidden").first();
 	var index = $(hidden).attr('name').match(/[0-9]+/g);
 	var listType = $(hidden).attr('name').match(/\.(.*)\[/);
 	var url = "enquiry/deleteFromList.action?deleteFrom=" + listType[1] + "&index=" + index + "&hiddenid=" + $("#hiddenid").val();
-	
+		
 	//load the specified dom
+	if(hidden.val() == ""){
+		
+		var section = $(button).parent();
+		var parent = $(section).parent();
+		if($(parent).prop('id').match(/it.*/))
+			$(section).remove();
+		else{
+			$(parent).addClass("hidden");
+			//TODO: not completely working at the moment
+			setEmpty($(parent).find("[name]"));
+		}
+	}else{
+		if(listType[1] === "enquiryIssuesList")	$("#itIssue").load(url);
+		else{
+			var refinedType = listType[1].match(/contact.(.*)/)
+			url = "enquiry/deleteFromList.action?deleteFrom=" + refinedType[1] + "&index=" + index + "&hiddenid=" + $("#hiddenid").val();
 	
-	if(listType[1] === "enquiryIssuesList")	$("#itIssue").load(url);
-	else{
-		var refinedType = listType[1].match(/contact.(.*)/)
-		url = "enquiry/deleteFromList.action?deleteFrom=" + refinedType[1] + "&index=" + index + "&hiddenid=" + $("#hiddenid").val();
-
-		if(refinedType[1] === "addressesList")				$("#itAddress").load(url);
-		else if(refinedType[1] === "disabilitiesList")		$("#itDisability").load(url);
-		else if(refinedType[1] === "employmentsList")		$("#itEmployment").load(url);
+			if(refinedType[1] === "addressesList")				$("#itAddress").load(url);
+			else if(refinedType[1] === "disabilitiesList")		$("#itDisability").load(url);
+			else if(refinedType[1] === "employmentsList")		$("#itEmployment").load(url);
+		}
 	}
 	
+	
+}
+
+/**
+ * TODO: bug needs fixing
+ * @param {} elements
+ */
+function setEmpty(elements){
+	$(elements).each(function(){ 
+		if(!$(this).is("input:radio") && !$(this).is("input:hidden")){
+			if(this.nodeName == "SELECT"){
+				if ($(this).val() != -1){
+					$(this).val('-1')
+				}
+			}else if( $(this).val().length != ""){
+				alert("setting empty")
+				$(this).val('');
+			}
+		}
+	});
 }
 
 $(document).on("click", ".undoButton", function(event) {

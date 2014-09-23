@@ -44,7 +44,7 @@
 </head>
 <body>
 	<s:set var="formType">case</s:set>
-	<s:form id="caseForm" cssClass="cmxform form container" namespace='/case' method="post" novalidate="novalidate">  
+	<s:form id="caseForm" cssClass="cmxform form container" namespace='/case' method="post" action="saveUpdateEnquiry" novalidate="novalidate">  
 <!-- ---------------------------------------------------------------------------------------------- -->
 <!-- Header of the form --------------------------------------------------------------------------- -->
 <!-- ---------------------------------------------------------------------------------------------- -->	

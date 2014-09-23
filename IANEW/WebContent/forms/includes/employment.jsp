@@ -3,94 +3,61 @@
 	Created Date: 02/08/2014
 	==============================================
 	Updates:
-		10/08/2014 - 	Added iteration by Quang Nhan
 		14/08/2014 	- 	Connect and retrieve data called by the action class and added 
 						pagination functionality by Quang Nhan
+		01/09/2014 -	Quang Nhan
+						Updated employment to support 1 to many and add Add Employment functionality
 		08/09/2014 -	Quang Nhan
-						changed all ccontact to iamodel.contact
+						changed all iamodel.contact to iamodel.contact
 	==============================================	
-	Description: A jsp page that displays a address of contact
+	Description: A jsp page that displays a list of enquiries
 ------------------------------------------------------------------------------------------------>
-<%@ taglib prefix="sj" uri="/struts-jquery-tags" %>
-<%@ taglib prefix="s" uri="/struts-tags" %>
-<h3 class="sixteen columns" style="float:none;">Address</h3>
-<div class="fieldsetborder">
-	<s:url var="urlUpdateAddress" action="updateAddressList" namespace="/enquiry">
-		<s:param name="address" />
-	</s:url> 
-	<fieldset>
-		<div class="row">
-		<!-- to do -->
-			<div class="four columns">
-				<s:select list="accomodationSelectList.{accommodationName}" name="theAccommodation" value="iamodel.contact.accommodation.accommodationName"  headerKey="-1" headerValue="Select an Accomodation Type"/>
-			</div>
-			
-			<div class="textarea twelve columns">
-				<s:label for="accomodationComments" value="Comments:" />
-				<div><s:textarea id="accomodationComments" cssClass="oneLineTextArea" name="iamodel.contact.accommodationComment" /></div> 
-			</div>
-		</div>
-		
-		<aticle id="itAddress">
-			<%@include file="iterAddresses.jsp" %>
-		</aticle>
-		
-		<s:hidden id="createdUserId" name="" />
-		<s:hidden id="updatedUserId" name=""/>
-			
-		<!-- if contact has existing address display the address else display input field for address -->	
-		<s:if test="%{iamodel.contact.addressesList.size > 0}">
-			<s:hidden id="addressSize" name="iamodel.contact.addressesList.size" value="%{iamodel.contact.addressesList.size}"/>
-			<s:set name="index" value="iamodel.contact.disabilitiesList.size" />
-			<article id="artAddress" class="hidden">
-		</s:if>
-		<s:else>
-			<s:hidden id="addressSize" name="iamodel.contact.addressesList.size" value="0"/>
-			<s:set name="index" value="0" />
-			<article id="artAddress">
-		</s:else>
-			<section class="sixteen columns curveBorder">
-				<s:hidden name="iamodel.contact.addressesList[%{#index}].id" />
-				
-				<div class="row">
-					<div class="inputfield eight columns">
-						<s:label for="street" value="Street: " />
-						<div><s:textfield name="iamodel.contact.addressesList[%{#index}].street" /></div>
-					</div>
-					<div class="inputfield four columns">
-						<s:label for="city" value="Suburb" />
-						<div><s:textfield name="iamodel.contact.addressesList[%{#index}].suburb" /></div>
-					</div>
-					<div class="inputfield three columns">
-						<s:label for="state" value="State:" />
-						<div><s:textfield name="iamodel.contact.addressesList[%{#index}].state" /></div>
-					</div>
-				</div>
-				
-				<div class="row">
-					<div class="inputfield four columns">
-						<s:label for="country" value="Country:" />
-						<div><s:textfield name="iamodel.contact.addressesList[%{#index}].country" /></div>
-					</div>
-					<div class="inputfield four columns">
-						<s:label for="postCode" value="Post Code:" />
-						<div><s:textfield name="iamodel.contact.addressesList[%{#index}].postcode" /></div>
-					</div>
-					<div class="inputfield four columns">
-						<s:label for="homePhone" value="Home#:"/>
-						<div><s:textfield name="iamodel.contact.addressesList[%{#index}].homephone" /></div>
-					</div>
-				</div>
-				<input type="button" value="delete" onclick="deleteSection(this)"/> 
-			</section>
-		</article>
-		
-		<div class="row">
-			<div class="fourteen columns alpha"><p></p></div>
-			<input type="button" id="btnAddAddress" value="Add Address" class="two columns" onclick="addNewRecord('artAddress', 'addressSize', 'itAddress')" />
-		</div>
-		
-	</fieldset>
-	<s:hidden id="address" name="address.street" />
+
+<h3 class="sixteen columns" style="float:none;">Employment</h3>
+<s:div cssClass="greybackground">
+	<article id="itEmployment">
+		<%@include file="iterEmployments.jsp" %>
+	</article>
 	
-</div>
+	<!-- hidden field to be used as marker for next index up -->
+	<s:if test="%{iamodel.contact.employmentsList.size > 0 }">
+		<s:hidden id="employmentSize" name="iamodel.contact.employmentsList.size" value="%{iamodel.contact.employmentsList.size}"/>
+		<s:set name="index" value="iamodel.contact.employmentsList.size" />
+		<article id="artEmployment" class="hidden">
+	</s:if>
+	<s:else>
+		<s:hidden id="employmentSize" name="iamodel.contact.employmentsList.size" value="0"/>
+		<s:set name="index" value="0" />
+		<article id="artEmployment">
+	</s:else>
+	<section class="secIssue sixteen columns curveBorder">
+		<s:hidden name="iamodel.contact.employmentsList[%{#index}].id"/>
+		<div class="row">
+			<div class="four columns">
+				<s:select list="employmentSelectList.{employmentName}" name="theEmploymentList[%{#index}]" headerKey="-1" headerValue="Select Employment Type" />
+			</div>
+			<div class="inputfield four columns">
+				<s:label for="workPhone" value="Work#:" />
+				<div><s:textfield name="iamodel.contact.employmentsList[%{#index}].workphone" /></div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="textarea fifteen columns">
+				<s:label for="employmentComment" value="Comments:" /> 
+				<div><s:textarea cssClass="multiLineTextArea" name="iamodel.contact.employmentsList[%{#index}].comments" /></div>
+			</div>
+		</div>
+		<input type="button" value="delete" onclick="deleteSection(this)"/> 
+	</section>
+	
+	</article>
+	
+	<div class="row">
+		<input type="button" id="btnNewIssue" value="New Emp Type" class="two columns" />
+		<div class="twelve columns alpha"><p></p></div>
+		
+		<!-- addNewRecord function is located in ianew.form.js -->
+		<input type="button" id="btnAddIssue" value="Add Issue" class="two columns" onclick="addNewRecord('artEmployment', 'employmentSize', 'itEmployment' )"/>
+	</div>
+	
+</s:div>

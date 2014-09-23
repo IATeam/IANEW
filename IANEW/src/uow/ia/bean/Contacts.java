@@ -597,7 +597,11 @@ public class Contacts implements java.io.Serializable {
 	
 	@Override
 	public String toString() {
-		return this.firstname + " " + this.lastname;
+		if (this.titleType != null) {
+			return this.titleType.getName() + " " + this.firstname + " " + this.lastname;
+		} else {
+			return this.firstname + " " + this.lastname;
+		}
 	}
 
 	public String getFullName() {

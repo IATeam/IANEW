@@ -9,17 +9,16 @@ import uow.ia.bean.Contacts;
 import uow.ia.bean.Users;
 import uow.ia.util.SearchUtil;
 
-import com.google.common.base.Objects;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionContext;
-import com.opensymphony.xwork2.Preparable;
 
-public class LoginAction extends BaseAction
-//implements Preparable
-{
+public class LoginAction extends BaseAction{
 
 	private String username;
 	private String password;
+	
+	private List list = null;
+	private String searchString = null;
 		
 	public String execute(){
 		
@@ -27,7 +26,7 @@ public class LoginAction extends BaseAction
 		Users user = adminService.login(username, password);
 		if(user!=null) {
 			Map<String, Object> session = ActionContext.getContext().getSession();
-			session.put("user",user);
+			session.put(USER,user);
             session.put("context", new Date());
 			return SUCCESS;
 		} else {
@@ -50,9 +49,6 @@ public class LoginAction extends BaseAction
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	private List list = null;
-	private String searchString = null;
 	
 	
 	/**
@@ -106,9 +102,4 @@ public class LoginAction extends BaseAction
 		
 		return SUCCESS;
 	}
-
-//	@Override
-//	public void prepare() throws Exception {
-//		// TODO Auto-generated method stub
-//	}
 }

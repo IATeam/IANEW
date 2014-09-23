@@ -101,3 +101,13 @@ function deselectAll(){
 		$('.toggled').hide('slide');
 	}
 }
+
+function checkHiddenID(){
+	if($("#hiddenid").val() == ''){
+		alert("No enquiry has been selected! Please select an enquiry.");
+		return false;
+	}else
+		var check = confirmAction('Are you sure you want to open the selected enquiry?', 'enquiry', 'getEnquiry');
+		if(check)return true;
+		else return false;
+	}

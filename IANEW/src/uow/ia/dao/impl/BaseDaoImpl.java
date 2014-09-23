@@ -67,7 +67,6 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 	public void update(T o) {
 		this.getCurrentSession().update(o);
 		// getHibernateTemplate().update(o);
-		// getHibernateTemplate().update(o);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -289,7 +288,12 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 		// TODO Auto-generated method stub
 		return sessionFactory.getAllClassMetadata();
 	}
-
+	
+	@Override
+	public Class getClassByObject(Object ob) {
+		return sessionFactory.getClassMetadata(ob.getClass()).getMappedClass();
+	}
+	
 	@Override
 	public FullTextSession getFullTextSession(){
 		return org.hibernate.search.Search.getFullTextSession(this.getCurrentSession());

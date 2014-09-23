@@ -1,4 +1,3 @@
-
 <!----------------------------------------------------------------------------------------------
 	Created By: Quang Nhan
 	Created Date: 27/07/2014
@@ -17,6 +16,8 @@
 						Added the feature for users to retrieve new enquiry set for pagination. (added changePage())
 		28/08/2014 - 	Quang Nhan
 						Moved iterator to its own jsps so case list can use it
+		13/09/2014 - 	David Forbes
+						Added OnClick method to buttons open Enquiry and new enquiry
 	==============================================	
 	Description: A jsp page that displays a list of enquiries. Refer to technical document about
 				using Skeleton design styling for mobile and windows application.
@@ -36,6 +37,7 @@
 <title>Illawarra Advocacy: Enquiry List</title>
 <script src="<s:url value='/js/ianew.lists.js' encode='false' includeParams='none'/>"></script>
 <script src="<s:url value='/js/ianew.pagefiltersort.js' encode='false' includeParams='none'/>"></script>
+<script src="<s:url value='/js/popUpBoxAction.js' encode='false' includeParams='none'/>" ></script>
 <s:head/>
 <sj:head/>
 </head>
@@ -55,7 +57,7 @@
 
 	
 		
-	<s:form id="listForm" cssClass="form container" method="post" action="%{urlExisting}">
+	<s:form id="listForm" cssClass="form container" method="post" action="%{urlExisting}"  >
 			
 			<!--Hidden Fields to pass parameters between pages -->
 			<s:hidden id="hiddenid" name="hiddenid" />
@@ -93,16 +95,22 @@
 			<s:div style="background:#444444; margin-top: 10px; padding: 5px;">
 				<s:div cssClass="row">
 					<section class="four columns">
-						<input type="button" class="three columns" value="Close"  onclick="deselectAll()"/>
+						<input type="button" class="three columns" value="Close"  onclick="confirmAction('Are you sure you want to Close?', 'home', 'home')"/>
 					</section >
 					<section class="eight columns">
 						<%@include file="/forms/includes/paginationToolSet.jsp" %>
 					</section>
 					<section class="four columns alpha">
-						<sj:submit id="open" targets="formDiv" cssClass="two columns alpha" value="Open Enquiry"/>
-						<sj:a id="btnNewE" targets="formDiv"  href="%{urlENew}" ><input type="button" class="two columns omega" value="New Enquiry"/></sj:a>
+
+						<sj:submit id="open" targets="formDiv" cssClass="two columns alpha" value="Open Enquiry" onBeforeTopics="beforeSubmit"/>
+						<sj:a id="btnNewE" targets="formDiv"  href="%{urlENew}" ><input type="button" class="two columns omega" value="New Enquiry" onclick="confirmAction('Are you sure you want to create a new enquiry?', 'enquiry', 'newEnquiry')"/></sj:a>
 					</section>
 				</s:div>
+<script type="text/javascript">
+	$.subscribe('beforeSubmit', function(event,data) {
+    	event.originalEvent.options.submit = checkHiddenID();          
+	});
+</script>
 			</s:div>
 		</s:form>
 		<h1>Number of Records: </h1><s:text name="numberOfRecords"/>
