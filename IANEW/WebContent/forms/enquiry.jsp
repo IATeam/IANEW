@@ -89,7 +89,7 @@
 <!-- iterator - footer for enquiry form ----------------------------------------------------------- -->
 <!-- ---------------------------------------------------------------------------------------------- -->
 			<footer>
-				<s:div cssClass="row">
+				<s:div cssClass="row" cssStyle="padding-top:10px;">
 					<section class="six columns">
 						<input id="btnCancel" type="button" class="three columns alpha" value="Cancel" onclick="confirmAction('Are you sure you want to Cancel?', 'home', 'home')"/>
 						<input id="btnNewEnquiry" type="button" class="three columns omega" value="New Enquiry" onclick="confirmAction('Are you sure you want to create a new enquiry?', 'enquiry', 'newEnquiry')"/>
