@@ -26,10 +26,12 @@
 ------------------------------------------------------------------------------------------------>
 
 <!-- TODO LATER: add js function to click to select primary disability -->
+<section>
+<input type="image" src="/IANEW/resources/images/plusButton.png" alt="Hide/Show" id="btnShowHide" value="ShowHide" onclick="divHide(this);return false;" class="divHideButton"/>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <h3 class="sixteen columns" style="float:none;">Disability</h3>
-<s:div cssClass="greybackground">
-
+<div class="greybackground">
+<div id="disabilityDiv" class="toggled hideable">	
 
 	<article id="itDisability">
 		<%@include file="iterDisabilities.jsp" %>
@@ -50,6 +52,7 @@
 		<section class="sixteen columns curveBorder row">
 				<s:hidden name="iamodel.contact.disabilitiesList[%{#index}].id"/>
 				<s:hidden name="iamodel.contact.disabilitiesList[%{#index}].primaryFlag"/>
+							<input type="image" src="/IANEW/resources/images/undoButtonImage.png" alt="undoButton" id="btnUndo" value="Undo" onclick="undoButton(this);return false;" class="undoButton"/>
 				
 				<s:div cssClass="four columns alpha">
 					<s:div cssClass="disabilityTypeSelect row four columns">
@@ -65,13 +68,11 @@
 					<s:label for="disabilityDescription" value="Comment:" /> 
 					<s:textarea cssClass="disabilityDescription" cssClass="oneLineTextArea" name="iamodel.contact.disabilitiesList[%{#index}].comments" /> 
 				</s:div>
-				<input type="button" value="delete" onclick="deleteSection(this)"/> 
 			</section>
 	</article>
 	
 	<div class="row">
-		<input type="button" id="btnNewDisability" value ="New Disability Type" class="two columns" />
-		<div class="twelve columns alpha"><p></p></div>
+		<div class="fourteen columns alpha"><p></p></div>
 		<input type="button" id="btnAddDisability" value="Add Disability" class="two columns" onclick="addNewRecord('artDisability', 'disabilitySize', 'itDisability' )"/>
 	</div>
 	
@@ -120,4 +121,6 @@
 	});
 	</script>
 	
-</s:div>
+</div>
+</div>
+</section>

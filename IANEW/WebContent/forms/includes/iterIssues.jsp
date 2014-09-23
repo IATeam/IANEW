@@ -13,6 +13,5 @@
 			<s:label for="issuedescription" value="Issue Description:" />
 			<s:textarea id="" cssClass="oneLineTextArea" name="iamodel.enquiryIssuesList[%{#stat.index}].comment"/> 
 		</div>
-		<input type="button" value="delete" onclick="deleteSection(this)"/>
-	</section>
+			</section>
 </s:iterator>

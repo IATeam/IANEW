@@ -50,6 +50,7 @@
 <script src="<s:url value='/js/jquery/jquery.validate.js' encode='false' includeParams='none'/>" ></script>
 <script src="<s:url value='/js/validation/enquiryValidation.js' encode='false' includeParams='none'/>" ></script>
 <script src="<s:url value='/js/ianew.form.js' encode='false' includeParams='none'/>" ></script>
+<script src="<s:url value='/js/ianew.lists.js' encode='false' includeParams='none'/>" ></script>
 <script src="<s:url value='/js/popUpBoxAction.js' encode='false' includeParams='none'/>" ></script>
 <s:head/>
 
@@ -58,6 +59,7 @@
 	
 
 	<s:div cssClass="form container">
+	<s:set var="formType">enquiry</s:set>
 		<s:form id="enquiryForm" action="saveUpdateEnquiry" cssClass="cmxform" namespace='/enquiry' method="post"> 
 			<s:hidden name="iamodel.contact.id" />
 			
@@ -81,7 +83,6 @@
 				<%@include file="includes/linkedEnquiries.jsp" %>
 			</s:div>
 			<s:div id="linkedEnquiriesListDiv" style="box-shadow: 5px 5px 0 grey;"/>
-			<input type="submit" value="Submit" name="submit">
 			<s:div cssClass="clear"></s:div>
 			
 <!-- ---------------------------------------------------------------------------------------------- -->
@@ -93,11 +94,11 @@
 						<input id="btnCancel" type="button" class="three columns alpha" value="Cancel" onclick="confirmAction('Are you sure you want to Cancel?', 'home', 'home')"/>
 						<input id="btnNewEnquiry" type="button" class="three columns omega" value="New Enquiry" onclick="confirmAction('Are you sure you want to create a new enquiry?', 'enquiry', 'newEnquiry')"/>
 					</section>
-					<section class="six columns"><p></p></section>
-					<section class="four columns omega">
-						<input id="createCase" type="button" value="Create Case" class="two columns alpha" onclick="confirmAction('Are you sure you want to create a case?', 'case', 'newCase')"/>
+					<section class="four columns"><p></p></section>
+					<section class="six columns omega">
+						<input id="createCase" type="button" value="Create Case" class="three columns alpha" onclick="confirmAction('Are you sure you want to create a case?', 'case', 'newCase')"/>
 <%-- 						<sj:submit formIds="enquiryForm" name="submit" cssClass="submit two columns omega" value="Submit" onclick="checkForm()"/>
- --%>						<s:submit name="submit" cssClass="two columns omega" value="Submit" onclick="confirmAction('Are you sure you want to save the enquiry?', 'enquiry', 'saveUpdateEnquiry')"/>
+ --%>						<s:submit name="submit" cssClass="three columns omega" value="Submit" onclick="confirmAction('Are you sure you want to save the enquiry?', 'enquiry', 'saveUpdateEnquiry')"/>
 					</section>
 				</s:div>
 			</footer>

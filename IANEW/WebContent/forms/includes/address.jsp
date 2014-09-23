@@ -13,8 +13,11 @@
 ------------------------------------------------------------------------------------------------>
 <%@ taglib prefix="sj" uri="/struts-jquery-tags" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
+<section>
+<input type="image" src="/IANEW/resources/images/plusButton.png" alt="Hide/Show" id="btnShowHide" value="ShowHide" onclick="divHide(this);return false;" class="divHideButton"/>
 <h3 class="sixteen columns" style="float:none;">Address</h3>
-<div class="fieldsetborder">
+<div class="greybackground">
+<div id="addressDiv" class="toggled hideable">	
 	<s:url var="urlUpdateAddress" action="updateAddressList" namespace="/enquiry">
 		<s:param name="address" />
 	</s:url> 
@@ -50,6 +53,7 @@
 			<article id="artAddress">
 		</s:else>
 			<section class="sixteen columns curveBorder">
+				<input type="image" src="/IANEW/resources/images/undoButtonImage.png" alt="undoButton" id="btnUndo" value="Undo" onclick="undoButton(this);return false;" class="undoButton"/>
 				<s:hidden name="iamodel.contact.addressesList[%{#index}].id" />
 				
 				<div class="row">
@@ -81,7 +85,6 @@
 						<div><s:textfield name="iamodel.contact.addressesList[%{#index}].homephone" /></div>
 					</div>
 				</div>
-				<input type="button" value="delete" onclick="deleteSection(this)"/> 
 			</section>
 		</article>
 		
@@ -94,3 +97,5 @@
 	<s:hidden id="address" name="address.street" />
 	
 </div>
+</div>
+</section>

@@ -28,10 +28,11 @@
 <head>
 
 </head>
-
+<section>
+<input type="image" src="/IANEW/resources/images/plusButton.png" alt="Hide/Show" id="btnShowHide" value="ShowHide" onclick="divHide(this);return false;" class="divHideButton"/>
 <h3 class="sixteen columns" style="float:none;">Linked Enquiries</h3>
-<s:div id="linkedEnquiriesField" cssClass="greybackground">
-
+<div class="greybackground">
+<div id="linkedEnquiriesDiv" class="toggled hideable">	
 	<s:url id="urlELinked" namespace="/enquiry" action="getLinkedEnquiry" />
 	
 	<article id="itLikedEnquiries">
@@ -43,9 +44,9 @@
 	
 	<div>
 		<div class="row">
-			<div class="twelve columns alpha"><p></p></div>
-			<input type="button" id="btnView" value="View" class="two columns"/>
-			<input type="button" id="btnAddEnquiry" value="Add Enquiry" class="two columns omega"/>
+			<div class="ten columns alpha"><p></p></div>
+			<input type="button" id="btnView" value="View" class="three columns"/>
+			<input type="button" id="btnAddEnquiry" value="Add Enquiry" class="three columns omega"/>
 		</div>
 	</div>
 
@@ -82,4 +83,6 @@
 		});
 	});
 	</script>
-</s:div>
+</div>
+</div>
+</section>

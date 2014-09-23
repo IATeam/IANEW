@@ -13,11 +13,11 @@
 
 <script>
 function expandAll() {
-	$(".startShown").show();
+	$(".hideable").show();
 	$(".divHideButton").attr("src","/IANEW/resources/images/minusButton.png");
 }
 function collapseAll() {
-	$(".startShown").hide();
+	$(".hideable").hide();
 	$(".divHideButton").attr("src","/IANEW/resources/images/plusButton.png");
 }
 </script>

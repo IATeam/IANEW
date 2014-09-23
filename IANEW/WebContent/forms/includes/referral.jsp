@@ -21,10 +21,12 @@
 	Description: A component of the contact that is to be displayed on both enquiry and case forms that 
 				displays referral info.
 ------------------------------------------------------------------------------------------------>
-
+<section>
+<input type="image" src="/IANEW/resources/images/plusButton.png" alt="Hide/Show" id="btnShowHide" value="ShowHide" onclick="divHide(this);return false;" class="divHideButton"/>
 <h3 class="sixteen columns" style="float:none;">Referral</h3>
-<s:div cssClass="fieldsetborder">
-	<fieldset>
+<div class="greybackground">
+<div id="referalDiv" class="toggled hideable">		
+<fieldset>
 		<s:div cssClass="row">
 			<s:div cssClass="inputfield six columns">
 				<s:label for="inquisitor" value="Inquisitor:" />
@@ -42,4 +44,6 @@
 			</s:div>
 		</s:div>
 	</fieldset>
-</s:div>
+</div>
+</div>
+</section>

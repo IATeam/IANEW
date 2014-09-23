@@ -4,7 +4,6 @@
 <article id="itGoal">
 <s:iterator value="iamodel.planGoalsList" status="stat">		
 	<section class="secIssue sixteen columns curveBorder">
-		<input type="image" src="/IANEW/resources/images/undoButtonImage.png" alt="undoButton" id="btnUndo" value="Undo" onclick="return false;" class="undoButton"/>
 		<s:hidden name="iamodel.planGoalsList[%{#stat.index}].id"/>
 		<%-- <s:hidden name="iamodel.planGoalsList[%{#stat.index}].statusType.id" /> --%>
 		<div class="row">

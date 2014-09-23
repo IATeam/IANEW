@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="US-ASCII"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
-<input type="image" src="/IANEW/resources/images/undoButtonImage.png" alt="undoButton" id="btnUndo" value="Undo" onclick="return false;" class="undoButton"/>
 <s:iterator value="iamodel.caseIssuesList" status="stat">
 	<section class="secIssue sixteen columns curveBorder">
 		<s:hidden name="iamodel.caseIssuesList[%{#stat.index}].id"/>

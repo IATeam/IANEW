@@ -2,7 +2,6 @@
 <s:iterator value="iamodel.communicationsList" status="stat">		
 	<section class="secIssue sixteen columns curveBorder">
 		<s:hidden name="iamodel.communicationsList[%{#stat.index}].id"/>
-		<input type="image" src="/IANEW/resources/images/undoButtonImage.png" alt="undoButton" id="btnUndo" value="Undo" onclick="return false;" class="undoButton"/>
 			<div class="row">
 				<div class="three columns">
 					<s:select list="communicationSelectList.{communicationTypeName}" name="theCommunicationsList" headerKey="-1" headerValue="Select Communication Type" />
@@ -22,6 +21,7 @@
 			<div class="inputfield two columns omega">
 			    <s:label for="timespent" value="Time Spent:" />
 				<div><input type="text" name="iamodel.communicationsList[%{#stat.index}].timeSpent"></div>
+			</div>
 			</div>
 			<div class="row">
 				<div class="textarea fourteen columns omega">

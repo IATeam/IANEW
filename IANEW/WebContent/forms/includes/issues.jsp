@@ -15,9 +15,11 @@
 	==============================================	
 	Description: A jsp page that displays a list of enquiries
 ------------------------------------------------------------------------------------------------>
-
+<section>
+<input type="image" src="/IANEW/resources/images/plusButton.png" alt="Hide/Show" id="btnShowHide" value="ShowHide" onclick="divHide(this);return false;" class="divHideButton"/>
 <h3 class="sixteen columns" style="float:none;">Issues</h3>
-<s:div cssClass="greybackground">
+<div class="greybackground">
+<div id="issuesDiv" class="toggled hideable">	
 	<article id="itIssue">
 		<%@include file="iterIssues.jsp" %>
 	</article>
@@ -36,6 +38,8 @@
 		<article id="artIssue"">
 	</s:else>
 		<section class="secIssue sixteen columns curveBorder row">
+					<input type="image" src="/IANEW/resources/images/undoButtonImage.png" alt="undoButton" id="btnUndo" value="Undo" onclick="undoButton(this);return false;" class="undoButton"/>
+		
 			<s:hidden name="iamodel.enquiryIssuesList[%{.enquiryIssuesList.size}].id"/>
 			
 			<div class="four columns">
@@ -46,14 +50,14 @@
 				<s:label for="issuedescription" value="Issue Description:" />
 				<s:textarea id="" cssClass="oneLineTextArea" name="iamodel.enquiryIssuesList[%{iamodel.enquiryIssuesList.size}].comment"/> 
 			</div>
-			<input type="button" value="delete" onclick="deleteSection(this)"/> 
 		</section>
 	</article> 
 	<div class="row">
-		<input type="button" id="btnNewIssue" value="New Issue Type" class="two columns" />
-		<div class="twelve columns alpha"><p></p></div>    
+		<div class="fourteen columns alpha"><p></p></div>    
 		<input type="button" id="btnAddIssue" value="Add Issue" class="two columns" onclick="addNewRecord('artIssue', 'issueSize', 'itIssue' )"/>
 		
 	</div>
 	
-</s:div>
+</div>
+</div>
+</section>

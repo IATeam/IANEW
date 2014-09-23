@@ -39,7 +39,6 @@
 				<div><s:textfield name="iamodel.contact.addressesList[%{#stat.index}].homephone"></s:textfield></div>
 			</div>
 		</div>
-		<input type="button" value="delete" onclick="deleteSection(this)"/> 
 	</section>
 </s:iterator>
 <!-- Note the delete button will call the deleteSection function in ianew.form.js -->

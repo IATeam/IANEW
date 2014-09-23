@@ -69,7 +69,6 @@
 		<%@include file="includes/communications.jsp" %>
 		<%@include file="includes/linkedCases.jsp" %>
 		<%@include file="includes/linkedEnquiries.jsp" %>
-		<%@include file="includes/referral.jsp" %>
 		
 <!-- ---------------------------------------------------------------------------------------------- -->
 <!-- iterator - footer for case form ----------------------------------------------------------- -->
@@ -85,10 +84,10 @@
 					<input type="button" class="three columns alpha" value="Cancel"/>
 					<input type="button" class="three columns omega" value="New Case" />
 				</section>
-				<section class="six columns"><p></p></section>
-				<section class="four columns omega">
-					<input type="button" value="Create Case" class="two columns alpha"/>
-					<s:submit type="submit" cssClass="two columns omega" value="Save" onClick="return false;" />
+				<section class="four columns"><p></p></section>
+				<section class="six columns omega">
+					<input type="button" value="Create Case" class="three columns alpha"/>
+					<s:submit type="submit" cssClass="three columns omega" value="Save" onClick="return false;" />
 				</section>
 			</s:div>
 		</footer>

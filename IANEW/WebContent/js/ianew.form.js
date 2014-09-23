@@ -250,5 +250,23 @@ function importantDiv(selectedDiv){
 	}
 }
 
+function undoButton(selectedDiv){
+	$(selectedDiv).parent("section").hide();
 
+}
+
+function divHide(clickedButton){
+	var buttonImage = $(clickedButton).attr("src");
+	
+	if (buttonImage == "/IANEW/resources/images/minusButton.png")
+	{
+		$(clickedButton).attr("src", "/IANEW/resources/images/plusButton.png");
+		
+	}
+	else 
+	{	
+		$(clickedButton).attr("src", "/IANEW/resources/images/minusButton.png");
+	}
+	$(clickedButton).siblings("div").children("div").slideToggle();
+}
 

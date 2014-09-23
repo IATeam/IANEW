@@ -83,10 +83,11 @@ function changeContact(selectedPerson) {
 }
 </script>
 <section>
-	<h3 class="sixteen columns"  style="float:none;">Plan</h3>
+<input type="image" src="/IANEW/resources/images/plusButton.png" alt="Hide/Show" id="btnShowHide" value="ShowHide" onclick="divHide(this);return false;" class="divHideButton"/>	<h3 class="sixteen columns"  style="float:none;">Plan</h3>
 <!-- 	<input type="image" src="/IANEW/resources/images/plusButton.png" alt="Hide/Show" id="btnShowHide" value="ShowHide" onclick="divHide(this);return false;" class="divHideButton"/>
- -->	<div class="greybackground">
-		<div id="plansDiv" >
+ -->	
+<div class="greybackground">
+<div id="linkedEnquiriesDiv" class="toggled hideable">	
 			<fieldset>
 				<div class="row">
 					<div class="three columns">

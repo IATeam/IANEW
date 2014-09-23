@@ -21,9 +21,16 @@
 ------------------------------------------------------------------------------------------------>
 <%@ taglib prefix="sj" uri="/struts-jquery-tags" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
-
-<input type="button" id="contactSearch" /><h3 class="sixteen columns"  style="float:none;">Personal Details</h3>
-<div class="fieldsetborder">
+<section>
+<input type="image" src="/IANEW/resources/images/plusButton.png" alt="Hide/Show" id="btnShowHide" value="ShowHide" onclick="divHide(this);return false;" class="divHideButton"/>
+<s:if test="%{#formType=='case'}">
+	<h3 class="sixteen columns"  style="float:none;">Client Details</h3>
+</s:if>
+<s:elseif test="%{#formType=='enquiry'}">
+	<h3 class="sixteen columns"  style="float:none;">Personal Details</h3>
+</s:elseif>
+<div class="greybackground">
+<div id="personalDetailsDiv" class="toggled hideable">
 	<fieldset>
 		<s:hidden name="iamodel.contact.id" />
 		<div class="row">
@@ -85,3 +92,5 @@
 		
 	</script>
 </div>
+</div>
+</section>

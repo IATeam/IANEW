@@ -24,6 +24,5 @@
 				<div><s:textarea cssClass="multiLineTextArea" name="iamodel.contact.employmentsList[%{#stat.index}].comments" /></div>
 			</div>
 		</div>
-		<input type="button" value="delete" onclick="deleteSection(this)"/>
 	</section>
 </s:iterator>

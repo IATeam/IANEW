@@ -360,6 +360,7 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 //		setTheAccommodation(contact.getAccommodation().getAccommodationName());
 //		
 		activateLists();
+		theAdvocate = iamodel.getAdvocate().getLastname() + ", " + iamodel.getAdvocate().getFirstname();
 		
 		return SUCCESS;
 	}

@@ -19,7 +19,6 @@
 			<s:label for="disabilityDescription" value="Comment:" /> 
 			<s:textarea cssClass="disabilityDescription" cssClass="oneLineTextArea" name="iamodel.contact.disabilitiesList[%{#stat.index}].comments"></s:textarea> 
 		</s:div>
-		<input type="button" value="delete" onclick="deleteSection(this)"/>
 	</section>
 </s:iterator>
 <!-- Note the delete button will call the deleteSection function in ianew.form.js -->

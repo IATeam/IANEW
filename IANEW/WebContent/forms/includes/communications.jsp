@@ -27,11 +27,9 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 
 <section>
-<h3 class="fifteen columns" style="float:none;">Communications</h3>
-<!-- <input type="image" src="/IANEW/resources/images/plusButton.png" alt="Hide/Show" id="btnShowHide" value="ShowHide" onclick="divHide(this);return false;" class="divHideButton"/>
- -->
-<s:div cssClass="greybackground">
-<div id="communicationsDiv">
+<input type="image" src="/IANEW/resources/images/plusButton.png" alt="Hide/Show" id="btnShowHide" value="ShowHide" onclick="divHide(this);return false;" class="divHideButton"/><h3 class="fifteen columns" style="float:none;">Communications</h3>
+<div class="greybackground">
+<div id="communicationsDiv" class="toggled hideable">	
 	<%-- <s:if test="" > --%>
 	<article id="itCommunication">
 		<%@include file="iterCommunications.jsp" %>
@@ -60,6 +58,7 @@
 				<s:label for="timespent" value="Time Spent:" />
 				<div><input type="text" name=""></div>
 			</div>
+			</div>
 			<div class="row">
 				<div class="textarea fourteen columns omega">
 				<s:label for="comments" value="Comments:" />
@@ -82,5 +81,5 @@
 	});
 	</script>
 	</div>
-</s:div>
+</div>
 </section>

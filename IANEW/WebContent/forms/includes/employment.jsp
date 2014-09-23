@@ -12,9 +12,11 @@
 	==============================================	
 	Description: A jsp page that displays a list of enquiries
 ------------------------------------------------------------------------------------------------>
-
+<section>
+<input type="image" src="/IANEW/resources/images/plusButton.png" alt="Hide/Show" id="btnShowHide" value="ShowHide" onclick="divHide(this);return false;" class="divHideButton"/>
 <h3 class="sixteen columns" style="float:none;">Employment</h3>
-<s:div cssClass="greybackground">
+<div class="greybackground">
+<div id="employmentDiv" class="toggled hideable">	
 	<article id="itEmployment">
 		<%@include file="iterEmployments.jsp" %>
 	</article>
@@ -31,6 +33,7 @@
 		<article id="artEmployment">
 	</s:else>
 	<section class="secIssue sixteen columns curveBorder">
+			<input type="image" src="/IANEW/resources/images/undoButtonImage.png" alt="undoButton" id="btnUndo" value="Undo" onclick="undoButton(this);return false;" class="undoButton"/>	
 		<s:hidden name="iamodel.contact.employmentsList[%{#index}].id"/>
 		<div class="row">
 			<div class="four columns">
@@ -47,17 +50,17 @@
 				<div><s:textarea cssClass="multiLineTextArea" name="iamodel.contact.employmentsList[%{#index}].comments" /></div>
 			</div>
 		</div>
-		<input type="button" value="delete" onclick="deleteSection(this)"/> 
 	</section>
 	
 	</article>
 	
 	<div class="row">
-		<input type="button" id="btnNewIssue" value="New Emp Type" class="two columns" />
-		<div class="twelve columns alpha"><p></p></div>
+		<div class="fourteen columns alpha"><p></p></div>
 		
 		<!-- addNewRecord function is located in ianew.form.js -->
 		<input type="button" id="btnAddIssue" value="Add Issue" class="two columns" onclick="addNewRecord('artEmployment', 'employmentSize', 'itEmployment' )"/>
 	</div>
 	
-</s:div>
+</div>
+</div>
+</section>

@@ -1,6 +1,9 @@
+<section>
+<input type="image" src="/IANEW/resources/images/plusButton.png" alt="Hide/Show" id="btnShowHide" value="ShowHide" onclick="divHide(this);return false;" class="divHideButton"/>
 <h3 class="sixteen columns" style="float:none;">Issues</h3>
-<s:div cssClass="greybackground">
-	<article id="itIssue">
+<div class="greybackground">
+<div id="caseIssuesDiv" class="toggled hideable">		
+<article id="itIssue">
 		<%@include file="iterCaseIssues.jsp" %>
 	</article>
 	
@@ -33,10 +36,10 @@
 		</section>
 	</article> 
 	<div class="row">
-		<input type="button" id="btnNewIssue" value="New Issue Type" class="two columns" />
-		<div class="twelve columns alpha"><p></p></div>    
+		<div class="fourteen columns alpha"><p></p></div>    
 		<input type="button" id="btnAddIssue" value="Add Issue" class="two columns" onclick="addNewRecord('artIssue', 'issueSize', 'itIssue' )"/>
 		
 	</div>
-	
-</s:div>
+</div>
+</div>
+</section>
