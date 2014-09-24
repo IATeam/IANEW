@@ -17,26 +17,75 @@
     <constant name="struts.ui.templateDir" value="template" />
     <constant name="struts.ui.templateSuffix" value="ftl" />
     
+    
+    
     <!-- Enquiry Forms -->
     <package name="enquiry" namespace="/enquiry" extends="struts-default">
     	<action name="getEnquiry" class="uow.ia.action.EnquiryAction" method="getExistingEnquiry">
+		    	<interceptor-ref name="params"/>
+		     <interceptor-ref name="prepare"/>
+		     <interceptor-ref name="basicStack"/>
     		<result name="success">/forms/enquiry.jsp</result>
     	</action>
     	<action name="newEnquiry" class="uow.ia.action.EnquiryAction" method="newEnquiry">
     		<result name="success">/forms/enquiry.jsp</result>
     	</action>
-    	<action name="enquiryList" class="uow.ia.action.EnquiryAction" method="enquiryList">
+    	
+    	<action name="saveUpdateEnquiry" class="uow.ia.action.EnquiryAction" method="saveUpdateEnquiry">
+    	<interceptor-ref name="params"/>
+		     <interceptor-ref name="prepare"/>
+		     <interceptor-ref name="basicStack"/>
+    		<result name="success">/forms/enquiry.jsp</result>
+    		<result name="error">/forms/enquiry.jsp</result>
+    		<result name="input">/forms/enquiry.jsp</result>
+    	</action>
+    	<action name="updateAddressList" class="uow.ia.action.EnquiryAction" method="updateAddressList">
+    		<result name="success">/forms/includes/address.jsp</result>
+    		<result name="input">/forms/enquiry.jsp</result>
+    	</action>
+    	<action name="updateLinkedEnquiries" class="uow.ia.action.EnquiryAction" method="updateLinkedEnquiries">
+    		<result name="success">/forms/includes/linkedEnquiries.jsp</result>
+    	</action>
+    	<action name="deleteFromList" class="uow.ia.action.EnquiryAction" method="deleteFromList">
+    		<interceptor-ref name="params"/>
+		     <interceptor-ref name="prepare"/>
+		     <interceptor-ref name="basicStack"/>
+    		<result name="disabilityUpdate">/forms/includes/iterDisabilities.jsp</result>
+    		<result name="issueUpdate">/forms/includes/iterIssues.jsp</result>
+    		<result name="addressUpdate">/forms/includes/iterAddresses.jsp</result>
+    		<result name="employmentUpdate">/forms/includes/iterEmployments.jsp</result>
+    	</action>
+    </package>
+    
+    <!-- Enquiry List Forms-->
+    <package name="enquiryList" namespace="/enquiryList" extends="struts-default">
+    	<action name="getEnquiryList" class="uow.ia.action.EnquiryListAction" method="getEnquiryList">
     		<result name="success">/forms/enquiryList.jsp</result>
     	</action>
-    	<action name="updateEnquiryList" class="uow.ia.action.EnquiryAction" method="updateEnquiryList">
+    	<action name="updateEnquiryList" class="uow.ia.action.EnquiryListAction" method="updateEnquiryList">
     		<result name="success">/forms/enquiryList.jsp</result>
     	</action>
+    	
+    	<action name="getLinkedEnquiriesList" class="uow.ia.action.EnquiryListAction" method="getLinkedEnquiriesList">
+    		<result name="success">/forms/includes/linkedEnquiriesList.jsp</result>
+    	</action>
+    	<action name="updateLinkedEnquiriesList" class="uow.ia.action.EnquiryListAction" method="updateLinkedEnquiriesList">
+    		<result name="success">/forms/includes/linkedEnquiriesList.jsp</result>
+    	</action>
+    	<action name="linkEnquiry" class="uow.ia.action.EnquiryListAction" method="updateEnquiryList">
+    		<result name="success">/forms/enquiryList.jsp</result>
+    	</action>
+    	
+    	
     </package>
     
     <!-- Case Forms -->
     <package name="case" namespace="/case" extends="struts-default">
     	
-    	<action name="getCase" class="uow.ia.action.CaseAction" method="getExistingCase">
+    	<action name="getExistingCase" class="uow.ia.action.CaseAction" method="getExistingCase">
+    		<interceptor-ref name="params"/>
+		     <interceptor-ref name="prepare"/>
+		     <interceptor-ref name="basicStack"/>
     		<result name="success">/forms/case.jsp</result>
     	</action>
     	<action name="newCase" class="uow.ia.action.CaseAction" method="newCase">
@@ -48,14 +97,25 @@
     	<action name="updateCaseList" class="uow.ia.action.CaseAction" method="updateCaseList">
     		<result name="success">/forms/caseList.jsp</result>
     	</action>
+    	<action name="saveUpdateEnquiry" class="uow.ia.action.CaseAction" method="saveUpdateEnquiry">
+    		<result name="success">/forms/case.jsp</result>
+    	</action>
     </package>
     
      <!-- Links Forms -->
     <package name="links" namespace="/links" extends="struts-default">
-    	<action name="links" class="uow.ia.action.LinksAction" method="links">
-    		<result name="success">/forms/links.jsp</result>
+    	<action name="*" class="uow.ia.action.LinksAction">
+    		<result name="success">/forms/{1}.jsp</result>
     	</action>
     </package>
+    
+    <!-- Settings Forms -->
+    <package name="settings" namespace="/admin" extends="struts-default">
+    	<action name="*" class="uow.ia.action.AdminAction">
+    		<result name="success">/forms/{1}.jsp</result>
+    	</action>
+    </package>
+    
     <!--  <package name="example" namespace="/" extends="struts-default">
        <action name="*" class="uow.ia.action.Listing">
            <result name="success">Listing.jsp</result>
@@ -63,11 +123,12 @@
        </action>
     </package>-->
     
-   <package name="settings" namespace="/settings" extends="struts-default">
-    	<action name="settings" class="uow.ia.action.SettingsAction" method="settings">
+    <package name="settings" namespace="/settings" extends="struts-default">
+    	<action name="settings" class="uow.ia.action.SettingsAction" method="startAdminPage">
     		<result name="success">/forms/settings.jsp</result>
     	</action>
-    </package><package name="report" namespace="/report" extends="struts-default">
+    </package>
+    <package name="report" namespace="/report" extends="struts-default">
     	<action name="report" class="uow.ia.action.ReportAction" method="report">
     		<result name="success">/forms/report.jsp</result>
     	</action>

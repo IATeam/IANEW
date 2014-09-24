@@ -5,17 +5,30 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.hibernate.search.annotations.DocumentId;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
+
 // Generated Aug 9, 2014 1:06:20 PM by Hibernate Tools 4.0.0
 
 /**
  * @author Kim To
  * @version 1.0.4, 31/08/2014
  */
+
+@Indexed
 public class PriorityTypes implements java.io.Serializable {
 
+	@DocumentId
 	private Integer id;
+	
+	@Field
 	private String priorityName;
+	
+	@Field
 	private String color;
+	
+	@Field
 	private Integer displayOrder;
 	private List<IndividualCases> individualCasesList = new ArrayList<IndividualCases>();
 	/**

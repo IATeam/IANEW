@@ -8,37 +8,93 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import org.hibernate.search.annotations.DateBridge;
+import org.hibernate.search.annotations.DocumentId;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.IndexedEmbedded;
+import org.hibernate.search.annotations.Resolution;
+
 import uow.ia.util.DateUtil;
 
 
 /**
  * @author Kim To
- * @version 1.0.5, 30/08/2014
+ * @version 1.0.6, 09/09/2014
  */
-public class Contacts implements java.io.Serializable {
 
+@Indexed
+public class Contacts implements java.io.Serializable {
+	@DocumentId
 	private Integer id;
+	
+	@IndexedEmbedded
 	private TitleTypes titleType;
+	
+	@Field
 	private String firstname;
+	
+	@Field
 	private String lastname;
+	
+	@Field
 	private String othername;
+	
+	@IndexedEmbedded
 	private GenderTypes genderType;
+	
+	@IndexedEmbedded
 	private ContactTypes contactType;
+	
+	@Field
 	private String mobilephone;
+	
+	@Field
 	private String email;
+	
+	@IndexedEmbedded
 	private AccommodationTypes accommodation;
+	
+	@Field
 	private String accommodationComment;
+	
+	@IndexedEmbedded
 	private CulturalBackgroundTypes culturalBackground;
+	
+	@Field
 	private String culturalBackgroundComment;
+	
+	@IndexedEmbedded
 	private DangerTypes dangerType;
+	
+	@Field
 	private String identification;
+	
+	@DateBridge(resolution = Resolution.DAY)
+	@Field
 	private Date dob;
+	
+	//@Field
 	private Integer createdUserId;
+	
+	@DateBridge(resolution = Resolution.DAY)
+	@Field
 	private Date createdDateTime;
+	
+	//@Field
 	private Integer updatedUserId;
+	
+	@DateBridge(resolution = Resolution.DAY)
+	@Field
 	private Date updatedDateTime;
+	
+	@IndexedEmbedded
 	private StatusTypes status;
+	
+	//@Field
 	private String timestamp;
+	
 	private List<Addresses> addressesList = new ArrayList<Addresses>();
 	private List<ClientDisabilities> disabilitiesList = new ArrayList<ClientDisabilities>();
 	private List<Enquiries> enquiriesList = new ArrayList<Enquiries>();
@@ -537,6 +593,15 @@ public class Contacts implements java.io.Serializable {
 	 */
 	public void setAdvocateCasesList(List<IndividualCases> advocateCasesList) {
 		this.advocateCasesList = advocateCasesList;
+	}
+	
+	@Override
+	public String toString() {
+		if (this.titleType != null) {
+			return this.titleType.getName() + " " + this.firstname + " " + this.lastname;
+		} else {
+			return this.firstname + " " + this.lastname;
+		}
 	}
 
 	public String getFullName() {

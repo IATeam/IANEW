@@ -6,28 +6,67 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.search.annotations.DateBridge;
+import org.hibernate.search.annotations.DocumentId;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.IndexedEmbedded;
+import org.hibernate.search.annotations.Resolution;
+
 
 /**
  * @author Kim To
  * @version 1.0.4, 30/08/2014
  */
+
+@Indexed
 public class Enquiries implements java.io.Serializable {
 
+	@DocumentId
 	private Integer id;
+	
+	@IndexedEmbedded
 	private Contacts contact;
+	
+	@IndexedEmbedded
 	private EnquiryTypes enquiryType;
+	
+	@IndexedEmbedded
 	private StatusTypes statusType;
+	
+	@Field
 	private String description;
+	
+	//@Field
 	private Integer createdUserId;
+	
+	@DateBridge(resolution = Resolution.DAY)
+	@Field
 	private Date createdDateTime;
+	
+	@Field
 	private String inquisitor;
+	
+	@Field
 	private String referralBy;
+	
+	@Field
 	private String referralTo;
+	
+	@DateBridge(resolution = Resolution.DAY)
+	@Field
 	private Date updatedDateTime;
+	
+	//@Field
 	private Integer updatedUserId;
+	
+	@Field
 	private String outOfCoverageFlag;
+	
 	private List<Enquiries> enquiriesList = new ArrayList<Enquiries>();
+	
 	private Enquiries parentEnquiry; 
+	
 	private List<EnquiryIssues> enquiryIssuesList = new ArrayList<EnquiryIssues>();
 
 
@@ -313,6 +352,10 @@ public class Enquiries implements java.io.Serializable {
 		}
 		issuesTypesString = issuesTypesString.trim();
 		return issuesTypesString;
+	}
+	
+	public String getFileNumber() {
+		return "E" + this.id;
 	}
 
 }

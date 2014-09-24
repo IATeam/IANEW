@@ -4,21 +4,47 @@ import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.hibernate.search.annotations.DateBridge;
+import org.hibernate.search.annotations.DocumentId;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.IndexedEmbedded;
+import org.hibernate.search.annotations.Resolution;
+
 // Generated Aug 9, 2014 1:06:20 PM by Hibernate Tools 4.0.0
 
 /**
  * @author Kim To
  * @version 1.0.3, 29/08/2014
  */
+
+@Indexed
 public class EnquiryIssues implements java.io.Serializable {
 
+	@DocumentId
 	private Integer id;
+	
+	@IndexedEmbedded
 	private Enquiries enquiry;
+	
+	@IndexedEmbedded
 	private IssueTypes issue;
+	
+	@Field
 	private String comment;
+	
+	@Field
 	private Integer createdUserId;
+	
+	@DateBridge(resolution = Resolution.DAY)
+	@Field
 	private Date createdDateTime;
+	
+	@Field
 	private Integer updatedUserId;
+	
+	@DateBridge(resolution = Resolution.DAY)
+	@Field
 	private Date updatedDateTime;
 	/**
 	 * 

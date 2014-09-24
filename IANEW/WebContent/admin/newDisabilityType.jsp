@@ -19,7 +19,21 @@
 			<s:textfield id="disabilityName" name="disabilityName" />
 			<s:label for="disabiltyDescription" value="Description" />
 			<s:textarea id="disabilityDescription" name ="disabilityDescription" />
+			<table>
+				<tr>
+					<th>Disability Name</th>
+					<th>Disability Description</th>
+				</tr>
+				<s:iterator value="disabilitySelectList" status="stat">
+				<tr>
+					<td><s:property value="disabilityName"></s:property></td>
+					<td><s:property value="disabilityDescription"></s:property></td>
+				</tr>
+				</s:iterator>
+			</table>
+			
 		</div>
+		
 		<input type="button" value="Cancel" id="btnCancel"/>
 		<input type="button" value="edit" id="btnEdit"/>
 		<sj:submit id="save" targets="disabilityTypeSelect" cssClass="two columns alpha" value="Save" onclick=""/>

@@ -15,9 +15,7 @@
 	Description: A component of the contact that is to be displayed on both enquiry and case forms that 
 				displays the form status detail.
 ------------------------------------------------------------------------------------------------>
-
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="US-ASCII"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="US-ASCII"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <script>
 function changeDangerColour(selectList) {
@@ -39,7 +37,7 @@ function changeDangerColour(selectList) {
 
 function changePriorityColour(selectList) {
 	var selectedPriority = $(selectList).val();
-	
+
 	if (selectedPriority == -1)
 	{
 		 $(selectList).css({'background':'grey'});
@@ -53,40 +51,40 @@ function changePriorityColour(selectList) {
     </s:iterator>
 }
 </script>
-
+<section>
 <div class="formStatus"  style="padding-top:10px;margin-top:1px;">
 	<div class="four columns">
-		<s:label for="createdDate" value="Created Date:" />
-	    <s:date name="createdDate" format="dd MMM yyyy"/>
+		<s:label for="iamodel.createdDateTime" value="Created Date:" />
+	    <s:date name="iamodel.createdDateTime" format="dd MMM yyyy"/>
    	</div>						
 	    
 	<div class="four columns">
-		<s:label for="lastUpdatedOn" value="Last Updated On:" />
-		<s:date name="updatedDate" format="dd MMM yyyy"/>
+		<s:label for="iamodel.updatedDateTime" value="Last Updated On:" />
+		<s:date name="iamodel.updatedDateTime" format="dd MMM yyyy"/>
 	</div>
 	
 	<div class="three columns">
-		<s:select list="dangerSelectList.{dangerName}" name="theDanger" headerKey="-1" headerValue="Flag Danger" cssClass="coloured" onChange="changeDangerColour(this)"/>
+		<s:select list="dangerSelectList.{dangerName}" name="theDanger" value="iamodel.contact.dangerType.dangerName" headerKey="-1" headerValue="Flag Danger" cssClass="coloured" cssStyle="background: %{iamodel.contact.dangerType.symbol}" onChange="changeDangerColour(this)"/>
 	</div>
 	
 	<s:if test="%{#formType=='case'}">
 		<div class="two columns">
-			<s:textfield id="healthIssueComment" name="" cssClass="colouredRed"></s:textfield>		
+			<s:textfield id="iamodel.healthIssueComment" name="" cssClass="colouredRed"></s:textfield>		
 		</div>
 		
 		<s:div cssClass="two columns">
-			<s:label for="id" value="Case#:" cssStyle="padding-left:20px;"/>
-			<s:property value="id" />
+			<s:label for="iamodel.id" value="Case#:" cssStyle="padding-left:20px;"/>
+			<s:property value="iamodel.id" />
 		</s:div>
 	</s:if>					
 	<s:elseif test="%{#formType=='enquiry'}">
 		<div class="two columns">
-			<s:textfield id="healthIssueComment" name="" cssClass="colouredRed"></s:textfield>		
+			<s:textfield id="iamodel.healthIssueComment" name="" cssClass="colouredRed"></s:textfield>		
 		</div>
 		
 		<s:div cssClass="two columns">
-			<s:label for="id" value="Enquiry#:" cssStyle="padding-left:20px;" />
-			<s:property value="id" />
+			<s:label for="iamodel.id" value="Enquiry#:" cssStyle="padding-left:20px;" />
+			<s:property value="iamodel.id" />
 		</s:div>
 	</s:elseif>				
 	<div class="four columns">
@@ -95,23 +93,24 @@ function changePriorityColour(selectList) {
 	</div>		
 	<s:if test="%{#formType=='case'}">			
 		<div class="four columns">	
-			<s:label for="lastUpdatedBy" value="Last Updated By:" />
-			<s:property value="updatedBy"/>
+			<s:label for="iamodel.lastUpdatedBy" value="Last Updated By:" />
+			<s:property value="iamodel.lastUpdatedBy"/>
 		</div>			
 		<div class="three columns">
-			<s:select list="prioritySelectList.{priorityName}" name="thePriority" headerKey="-1" headerValue="Priority Level" cssClass="coloured" onChange="changePriorityColour(this)"/>
+			<s:select list="prioritySelectList.{priorityName}" name="thePriority" value="iamodel.priorityType.priorityName" headerKey="-1" headerValue="Priority Level" cssClass="coloured" cssStyle="background: %{iamodel.priorityType.color}" onChange="changePriorityColour(this)"/>
 		</div>
 		<div class="two columns">
-			<s:select id="status" list="statusSelectList.{statusName}" name="theStatus" headerKey="-1" headerValue="Case Status" />
+			<s:select id="status" list="statusSelectList.{statusName}" name="theStatus" value="iamodel.statusType.statusName" headerKey="-1" headerValue="Case Status" />
 		</div>
 	</s:if>		
 	<s:elseif test="%{#formType=='enquiry'}">
-		<div class="seven columns">	
-			<s:label for="lastUpdatedBy" value="Last Updated By:" />
-			<s:property value="updatedBy"/>
+		<div class="four columns">	
+			<s:label for="iamodel.lastUpdatedBy" value="Last Updated By:" />
+			<s:property value="iamodel.lastUpdatedBy"/>
 		</div>			
 		<div class="two columns">
-			<s:select id="status" list="statusSelectList.{statusName}" name="theStatus" headerKey="-1" headerValue="Enquiry Status" />
+			<s:select id="status" list="statusSelectList.{statusName}" name="theStatus" value="iamodel.statusType.statusName" headerKey="-1" headerValue="Enquiry Status" />
 		</div>
 	</s:elseif>			
 </div>
+</section>

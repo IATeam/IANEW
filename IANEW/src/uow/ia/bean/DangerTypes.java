@@ -4,19 +4,34 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import org.hibernate.search.annotations.DocumentId;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
+
 // Generated Aug 9, 2014 1:06:20 PM by Hibernate Tools 4.0.0
 
 /**
  * @author Kim To
  * @version 1.0.3, 30/08/2014
  */
+@Indexed
 public class DangerTypes implements java.io.Serializable {
 
+	@DocumentId
 	private Integer id;
+	
+	@Field
 	private String dangerName;
+	
+	@Field
 	private String dangerDescription;
+	
+	//@Field
 	private String symbol;
+	
+	//@Field
 	private Integer displayOrder;
+	
 	private List<Contacts> contactsList = new ArrayList<Contacts>();
 
 	public DangerTypes() {

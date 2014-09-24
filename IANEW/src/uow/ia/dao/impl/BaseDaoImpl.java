@@ -6,11 +6,14 @@ package uow.ia.dao.impl;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.metadata.ClassMetadata;
+import org.hibernate.search.FullTextSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.HibernateCallback;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
@@ -63,6 +66,13 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 	@Override
 	public void update(T o) {
 		this.getCurrentSession().update(o);
+		// getHibernateTemplate().update(o);
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public T merge(T o) {
+		return (T) this.getCurrentSession().merge(o);
 		// getHibernateTemplate().update(o);
 	}
 
@@ -273,4 +283,19 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 		// return null;
 	}
 
+	@Override
+	public Map<String, ClassMetadata> getAllClassMetadata() {
+		// TODO Auto-generated method stub
+		return sessionFactory.getAllClassMetadata();
+	}
+	
+	@Override
+	public Class getClassByObject(Object ob) {
+		return sessionFactory.getClassMetadata(ob.getClass()).getMappedClass();
+	}
+	
+	@Override
+	public FullTextSession getFullTextSession(){
+		return org.hibernate.search.Search.getFullTextSession(this.getCurrentSession());
+	}
 }

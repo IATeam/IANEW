@@ -9,7 +9,7 @@
             <column name="id" />
             <generator class="identity" />
         </id>
-        <property name="communicationDate" type="date">
+        <property name="communicationDate" type="java.sql.Date">
             <column name="communication_date" length="10" />
         </property>
         <property name="description" type="string">

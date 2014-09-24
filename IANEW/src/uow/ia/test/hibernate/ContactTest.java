@@ -99,7 +99,7 @@ public class ContactTest {
 	  System.out.println("email: " + contact.getEmail());
 	  System.out.println("accommodation: " + contact.getAccommodation().getAccommodationName());
 	  System.out.println("accommodationComment: " + contact.getAccommodationComment());
-	  System.out.println("culturalBackgroundId: " + contact.getCulturalBackground().getCulturalBackgroundName());
+	  //System.out.println("culturalBackgroundId: " + contact.getCulturalBackground().getCulturalBackgroundName());
 	  System.out.println("culturalBackgroundComment: " + contact.getCulturalBackgroundComment());
 	  System.out.println("dangerFlagId: " + contact.getDangerType().getDangerName());
 	  System.out.println("identification: " + contact.getIdentification());

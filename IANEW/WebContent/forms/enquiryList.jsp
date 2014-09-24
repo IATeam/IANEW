@@ -14,6 +14,10 @@
 						reorder syntax to be consistent throughout the jsps
 		26/08/2014 -	Quang Nhna
 						Added the feature for users to retrieve new enquiry set for pagination. (added changePage())
+		28/08/2014 - 	Quang Nhan
+						Moved iterator to its own jsps so case list can use it
+		13/09/2014 - 	David Forbes
+						Added OnClick method to buttons open Enquiry and new enquiry
 	==============================================	
 	Description: A jsp page that displays a list of enquiries. Refer to technical document about
 				using Skeleton design styling for mobile and windows application.
@@ -25,17 +29,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ taglib prefix="sj" uri="/struts-jquery-tags"%>
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 
 <html>
 <head>
-<s:head/>
-<sj:head/>
 <title>Illawarra Advocacy: Enquiry List</title>
 <script src="<s:url value='/js/ianew.lists.js' encode='false' includeParams='none'/>"></script>
 <script src="<s:url value='/js/ianew.pagefiltersort.js' encode='false' includeParams='none'/>"></script>
-
+<script src="<s:url value='/js/popUpBoxAction.js' encode='false' includeParams='none'/>" ></script>
+<s:head/>
+<sj:head/>
 </head>
 <body>
  
@@ -45,13 +49,21 @@
 	<!-- 
 	there is a strange behavior with this s:url link.
 	-->
-	<s:url var="urlEExisting" namespace="/enquiry" action="getEnquiry" includeContext="false"/>		
+	<s:url var="urlExisting" namespace="/enquiry" action="getEnquiry" includeContext="false"/>		
 	<s:url var="urlENew" namespace="/enquiry" action="newEnquiry" />
-	<s:url var="urlUpdate" namespace="/enquiry" action="updateEnquiryList" includeContext="false"/>
 
+	<!-- Change namespace and action for appropriate urls for pagination purposes-->
+	<s:url var="urlUpdate" namespace="/enquiryList" action="updateEnquiryList" includeContext="false"/>
 
-	<s:form id="enquiryForm" cssClass="form container" method="post" action="%{urlEExisting}">
-
+	
+		
+	<s:form id="listForm" cssClass="form container" method="post" action="%{urlExisting}"  >
+			
+			<!--Hidden Fields to pass parameters between pages -->
+			<s:hidden id="hiddenid" name="hiddenid" />
+			<s:hidden id="formTitle" name="formTitle" value="Existing Enquiry" />
+			<s:hidden id="totalNumberOfPages" name="totalNumberOfPages" />
+			
 			<section class="imageContainer">
 				<s:div cssClass="row">
 					<img class="seven columns" src="<s:url value='/resources/images/logo.png'/>"/>
@@ -73,46 +85,9 @@
 <!-- iterator - used to iterate a list or set ----------------------------------------------------- -->
 <!-- ---------------------------------------------------------------------------------------------- -->	
 			<!-- status="..." use attribute to get status info of iteration (index, count, first, even last, odd info) -->
-			<s:div cssClass="list">
-				<s:iterator value="enquiryList">
-					<s:div cssClass="curveBorder sixteen columns iteratorlist" onclick="bandSelected(this)">
-						<s:div cssClass="row">
-							<s:div cssClass="textarea two columns">
-								<s:label for="id" value="Enquiry#:" />
-								<p class="id"><s:property value="id"/></p>
-							</s:div>
-							<s:div cssClass="textarea five columns">
-								<s:label for="protege" value="Protege:" />
-								<p><s:property value="contact.getFullName()" /></p>
-							</s:div>
-							<s:div cssClass="textarea two columns">
-								<s:label value="Date:" />
-								<p><s:property value="updatedDateTime" /></p>
-							</s:div>
-							<s:div cssClass="textarea six columns omega">
-								<s:label for="issues" value="Issues:" />
-								<p><s:property value="getIssuesTypes()" /></p>
-							</s:div>
-						</s:div>
-						
-						<s:div cssClass="row toggled">
-							<s:div cssClass="textarea fifteen columns omega">
-								<s:label for="description" value="Description:" />
-								<s:div><s:textarea cssClass="multiLineTextArea" name="description" readonly="true"/></s:div>
-							</s:div>
-						</s:div>
-					</s:div>
-				</s:iterator>
-			</s:div>
 			
+			<%@include file="/forms/includes/lists.jsp" %>
 			<s:div cssClass="clear"/>
-			
-			
-			<!--Hidden Fields to pass parameters between pages -->
-			<s:hidden id="hiddenid" name="hiddenid" />
-			<s:hidden id="formTitle" name="formTitle" value="Existing Enquiry" />
-			<s:hidden id="totalNumberOfPages" name="totalNumberOfPages" />
-			
 <!-- ----------------------------------------------------------------------------------------------------------------------- -->
 <!-- the footer of the form containing the cancel, open enquiry and new enquiry as well as the pagination functions -------- -->
 <!-- ----------------------------------------------------------------------------------------------------------------------- -->
@@ -120,19 +95,25 @@
 			<s:div style="background:#444444; margin-top: 10px; padding: 5px;">
 				<s:div cssClass="row">
 					<section class="four columns">
-						<input type="button" class="three columns" value="Close"  onclick="deselectAll()"/>
+						<input type="button" class="three columns" value="Close"  onclick="confirmAction('Are you sure you want to Close?', 'home', 'home')"/>
 					</section >
 					<section class="eight columns">
 						<%@include file="/forms/includes/paginationToolSet.jsp" %>
-						
 					</section>
 					<section class="four columns alpha">
-						<sj:submit id="open" targets="formDiv" cssClass="two columns alpha" value="Open Enquiry" onclick="openExistingEnquiry()"/>
-						<sj:a id="btnNewE" targets="formDiv"  href="%{urlENew}" ><input type="button" class="two columns omega" value="New Enquiry"/></sj:a>
+
+						<sj:submit id="open" targets="formDiv" cssClass="two columns alpha" value="Open Enquiry" onBeforeTopics="beforeSubmit"/>
+						<sj:a id="btnNewE" targets="formDiv"  href="%{urlENew}" ><input type="button" class="two columns omega" value="New Enquiry" onclick="confirmAction('Are you sure you want to create a new enquiry?', 'enquiry', 'newEnquiry')"/></sj:a>
 					</section>
 				</s:div>
+<script type="text/javascript">
+	$.subscribe('beforeSubmit', function(event,data) {
+    	event.originalEvent.options.submit = checkHiddenID();          
+	});
+</script>
 			</s:div>
 		</s:form>
+		<h1>Number of Records: </h1><s:text name="numberOfRecords"/>
 <!-- ---------------------------------------------------------------------------------------------- -->
 <!-- Hidden form to pass pagination to action class submitted by the prev and next buttons -------- -->
 <!-- ---------------------------------------------------------------------------------------------- -->

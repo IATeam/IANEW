@@ -40,10 +40,11 @@
 	<link href="<s:url value='/styles/import/skeleton.css' encode='false' includeParams='none'/>" rel="stylesheet" type="text/css"
 		      media="all"/>
 	<script src="<s:url value='/js/ianew.lists.js' encode='false' includeParams='none'/>"></script>
+	<script src="<s:url value='/js/ianew.form.js' encode='false' includeParams='none'/>" ></script>
 </head>
 <body>
 	<s:set var="formType">case</s:set>
-	<s:form id="caseForm" cssClass="cmxform form container" namespace='/case' method="post" novalidate="novalidate">  
+	<s:form id="caseForm" cssClass="cmxform form container" namespace='/case' method="post" action="saveUpdateEnquiry" novalidate="novalidate">  
 <!-- ---------------------------------------------------------------------------------------------- -->
 <!-- Header of the form --------------------------------------------------------------------------- -->
 <!-- ---------------------------------------------------------------------------------------------- -->	
@@ -64,11 +65,10 @@
 		<%@include file="includes/disability.jsp" %>
  		<%@include file="includes/employment.jsp" %>	
 		<%@include file="includes/plan.jsp" %>
-		<%@include file="includes/issues.jsp" %>
+		<%@include file="includes/caseIssues.jsp" %>
 		<%@include file="includes/communications.jsp" %>
 		<%@include file="includes/linkedCases.jsp" %>
 		<%@include file="includes/linkedEnquiries.jsp" %>
-		<%@include file="includes/referral.jsp" %>
 		
 <!-- ---------------------------------------------------------------------------------------------- -->
 <!-- iterator - footer for case form ----------------------------------------------------------- -->
@@ -84,10 +84,10 @@
 					<input type="button" class="three columns alpha" value="Cancel"/>
 					<input type="button" class="three columns omega" value="New Case" />
 				</section>
-				<section class="six columns"><p></p></section>
-				<section class="four columns omega">
-					<input type="button" value="Create Case" class="two columns alpha"/>
-					<s:submit type="submit" cssClass="two columns omega" value="Save" onClick="return false;" />
+				<section class="four columns"><p></p></section>
+				<section class="six columns omega">
+					<input type="button" value="Create Case" class="three columns alpha"/>
+					<s:submit type="submit" cssClass="three columns omega" value="Save" onClick="return false;" />
 				</section>
 			</s:div>
 		</footer>

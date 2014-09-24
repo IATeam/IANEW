@@ -13,6 +13,17 @@
 				pages like enquiry and case lists
 ------------------------------------------------------------------------------------------------*/
 
+
+//this prevents assocating the submit buttons in the formList
+//to register and enter key pressed.
+$('#listForm').bind("keyup keypress", function(e) { 
+  var code = e.keyCode || e.which; 
+  if (code  == 13) {          
+    e.preventDefault();
+    return false;
+  }
+});
+
 /**
  * This function is called when the next button pressed for pagination
  */
@@ -33,7 +44,6 @@ function nextPage(){
  */
 function prevPage(){
 	var currentPageNumber = parseInt($("#pageTextField").val());
-	
 	if(currentPageNumber > 1 ){
 		var prevPageNumber = currentPageNumber - 1;
 		$("#pageTextField").val(prevPageNumber);
@@ -47,7 +57,7 @@ function changePage(e){
 		var totalNumberOfPages = parseInt($("#totalNumberOfPagesDiv").text());
 		var numberOfRecords = $("#numberOfRecords").val();
 		if(newPage > 0 && newPage <= totalNumberOfPages){
-			$("#page").val(newPage);
+			$("#page").val(newPage);			
 			$("#formDiv").load("enquiry/updateEnquiryList.action?numberOfRecords=" + numberOfRecords +"&page=" + newPage);
 		}
 		else{

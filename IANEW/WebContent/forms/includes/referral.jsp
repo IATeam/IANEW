@@ -21,40 +21,29 @@
 	Description: A component of the contact that is to be displayed on both enquiry and case forms that 
 				displays referral info.
 ------------------------------------------------------------------------------------------------>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="US-ASCII"%>
-<%@ taglib prefix="s" uri="/struts-tags" %>
-
 <section>
-<h3 class="sixteen columns" style="float:none;">Referral</h3>
 <input type="image" src="/IANEW/resources/images/plusButton.png" alt="Hide/Show" id="btnShowHide" value="ShowHide" onclick="divHide(this);return false;" class="divHideButton"/>
-<s:div cssClass="greybackground">
-<div id="referralDiv" class="toggled startShown">
-
-	<fieldset>
+<h3 class="sixteen columns" style="float:none;">Referral</h3>
+<div class="greybackground">
+<div id="referalDiv" class="toggled hideable">		
+<fieldset>
 		<s:div cssClass="row">
-			<s:if test="%{#formType=='enquiry'}">
-				<s:div cssClass="inputfield six columns">
-					<s:label for="inquisitor" value="Inquisitor:" />
-					<s:div><s:textfield id="inquisitor" name="inquisitor"></s:textfield></s:div>
-				</s:div>
-				
-				<s:div cssClass="inputfield five columns">
-					<s:label for="referredBy" value="Referred By:" />
-					<s:div><s:textfield id="referredBy" name="referredBy"></s:textfield></s:div>
-				</s:div>
-				
-				<s:div cssClass="inputfield five columns">
-					<s:label for="referredTo" value="Referred To:" />
-					<s:div><s:textfield id="referredTo" name="referredTo"></s:textfield></s:div>
-				</s:div>
-			</s:if>
-			<s:elseif test="%{#formType=='case'}">
-				<s:div cssClass="inputfield sixteen columns">
-					<s:label for="referredTo" value="Referred To:" />
-					<s:div><s:textfield id="referredTo" name="referredTo"></s:textfield></s:div>
-				</s:div>
-			</s:elseif>	
+			<s:div cssClass="inputfield six columns">
+				<s:label for="inquisitor" value="Inquisitor:" />
+				<s:div><s:textfield id="inquisitor" name="iamodel.inquisitor"></s:textfield></s:div>
+			</s:div>
+			
+			<s:div cssClass="inputfield five columns">
+				<s:label for="referredBy" value="Referred By:" />
+				<s:div><s:textfield id="referredBy" name="iamodel.referralBy"></s:textfield></s:div>
+			</s:div>
+			
+			<s:div cssClass="inputfield five columns">
+				<s:label for="referredTo" value="Referred To:" />
+				<s:div><s:textfield id="referredTo" name="iamodel.referralTo"></s:textfield></s:div>
+			</s:div>
 		</s:div>
-	</fieldset></div>
-</s:div></section>
+	</fieldset>
+</div>
+</div>
+</section>

@@ -6,116 +6,58 @@
 		10/08/2014 - 	Added iteration by Quang Nhan
 		14/08/2014 	- 	Connect and retrieve data called by the action class and added 
 						pagination functionality by Quang Nhan
-<<<<<<< HEAD
-		16/08/2014 -	Tested s:url workings see comment below. 
-						Moved javascript code to list.js file by Quang Nhan
-=======
-<<<<<<< HEAD
 		21/08/2014 -	Quang Nhan
 						Added "Add Issue" button and functionality
-						
-=======
-		16/08/2014 -	Tested s:url workings see comment below. 
-						Moved javascript code to list.js file by Quang Nhan
->>>>>>> refs/remotes/origin/master
->>>>>>> refs/remotes/origin/Quang
+		01/08/2014 -	Quang Nhan
+						Reworked add issue function to have correct name attribute and functionality	
+		18/09/2014 -	Quang Nhan Add validation refer to enquiryValidation.js file and fix index bugs
+						when it is a new enquiry
 	==============================================	
 	Description: A jsp page that displays a list of enquiries
 ------------------------------------------------------------------------------------------------>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="US-ASCII"%>
-<%@ taglib prefix="s" uri="/struts-tags" %>
-
 <section>
-<h3 class="sixteen columns" style="float:none;">Issues</h3>
 <input type="image" src="/IANEW/resources/images/plusButton.png" alt="Hide/Show" id="btnShowHide" value="ShowHide" onclick="divHide(this);return false;" class="divHideButton"/>
-<s:div cssClass="greybackground">
-<div id="issuesDiv" class="toggled startShown">	
+<h3 class="sixteen columns" style="float:none;">Issues</h3>
+<div class="greybackground">
+<div id="issuesDiv" class="toggled hideable">	
 	<article id="itIssue">
-		<s:iterator value="issueSet">		
-			<section class="secIssue sixteen columns curveBorder">
-			<div class="row">
-			<div class="four columns"><s:select list="issueSelectList.{issueName}" name="" headerKey="-1" headerValue="Select an Issue" /></div>
-			<s:if test="%{#formType=='case'}">
-				<div class="three columns">
-				<s:label for="createdDate" value="Created Date:" />
-				    <s:date name="createdDate" format="dd/MM/yyyy"/>
-			    </div>
-			    <div class="three columns">
-				<s:label for="createdBy" value="Created By:" />
-				    <s:date name="createdBy" format="dd/MM/yyyy"/>
-			    </div>
-			    <div class="three columns">
-					<s:label for="completedDate" value="Completed Date:"  />
-				    <s:date name="completedDate" format="dd/MM/yyyy"/>
-			    </div>
-				    <div class="three columns"><s:select list="issueSelectList.{issueName}" value="issue" name="" headerKey="-1" headerValue="Status" /></div>
-							</s:if>
-				
-				</div>
-				<div class="row">
-					<div class="textarea fifteen columns omega">
-					<s:label for="comments" value="Comments:" />
-					<s:textarea id="" cssClass="oneLineTextArea" name=""/> 
-					</div>
-				</div>
-			<s:elseif test="%{#formType=='enquiry'}">
-				<div class="textarea eleven columns omega">
-					<s:label for="issuedescription" value="Issue Description:" />
-					<s:textarea id="" cssClass="oneLineTextArea" name="" /> 
-				</div>
-			</s:elseif>
-		</section>
-		</s:iterator>
+		<%@include file="iterIssues.jsp" %>
 	</article>
 	
-	<article id="artIssue" class="row" style="visibility: hidden; display: none;">
-		<section class="secIssue sixteen columns curveBorder">
+	<!-- hidden field to be used as marker for next index up -->
+	
+	
+	<s:if test="%{iamodel.enquiryIssuesList.size > 0}">
+		<s:hidden id="issueSize" name="iamodel.enquiryIssuesList.size" value="%{iamodel.enquiryIssuesList.size}"/>
+		<s:set name="index" value="iamodel.enquiryIssuesList.size" />
+		<article id="artIssue" class="hidden">
+	</s:if>
+	<s:else>
+		<s:hidden id="issueSize" name="iamodel.enquiryIssuesList.size" value="0"/>
+		<s:set name="index" value="iamodel.enquiryIssuesList.size" />
+		<article id="artIssue"">
+	</s:else>
+		<section class="secIssue sixteen columns curveBorder row">
 					<input type="image" src="/IANEW/resources/images/undoButtonImage.png" alt="undoButton" id="btnUndo" value="Undo" onclick="undoButton(this);return false;" class="undoButton"/>
 		
-			<div class="row">
-			<div class="three columns"><s:select list="issueSelectList.{issueName}" name="" headerKey="-1" headerValue="Select an Issue" /></div>
-			<s:if test="%{#formType=='case'}">
-				<div class="three columns">
-				<s:label for="createdDate" value="Created Date:" />
-				    <s:date name="createdDate" format="dd/MM/yyyy"/>
-			    </div>
-			    <div class="three columns">
-				<s:label for="createdBy" value="Created By:" />
-				    <s:date name="createdBy" format="dd/MM/yyyy"/>
-			    </div>
-			    <div class="three columns">
-					<s:label for="completedDate" value="Completed Date:"  />
-				    <s:date name="completedDate" format="dd/MM/yyyy"/>
-			    </div>
-				    <div class="three columns"><s:select list="statusSelectList.{statusName}" value="theStatus" name="" headerKey="-1" headerValue="Status" /></div>
-							</s:if>
-				
-				</div>
-				<div class="row">
-					<div class="textarea fifteen columns omega">
-					<s:label for="comments" value="Comments:" />
-					<s:textarea id="" cssClass="oneLineTextArea" name=""/> 
-					</div>
-				</div>
-			<s:elseif test="%{#formType=='enquiry'}">
-				<div class="textarea eleven columns omega">
-					<s:label for="issuedescription" value="Issue Description:" />
-					<s:textarea id="" cssClass="oneLineTextArea" name="" /> 
-					</div>
-			</s:elseif>
+			<s:hidden name="iamodel.enquiryIssuesList[%{.enquiryIssuesList.size}].id"/>
+			
+			<div class="four columns">
+				<s:select list="issueSelectList.{issueName}" name="theIssueList[%{iamodel.enquiryIssuesList.size}]" value="iamodel.enquiryIssuesList.issue.issueName" headerKey="-1" headerValue="Select an Issue" />
+			</div>
+			
+			<div class="textarea eleven columns omega">
+				<s:label for="issuedescription" value="Issue Description:" />
+				<s:textarea id="" cssClass="oneLineTextArea" name="iamodel.enquiryIssuesList[%{iamodel.enquiryIssuesList.size}].comment"/> 
+			</div>
 		</section>
-	</article>
+	</article> 
 	<div class="row">
-		<div class="thirteen columns alpha"><p></p></div>
-		<input type="button" id="btnAddIssue" value="Add Issue" class="three columns" />
+		<div class="fourteen columns alpha"><p></p></div>    
+		<input type="button" id="btnAddIssue" value="Add Issue" class="two columns" onclick="addNewRecord('artIssue', 'issueSize', 'itIssue' )"/>
+		
 	</div>
 	
-	<script>
-	$(function(){
-		$("#btnAddIssue").click(function(){ 
-			$("#artIssue section").clone().appendTo("#itIssue");
-		});
-	});
-	</script></div>
-</s:div></section>
+</div>
+</div>
+</section>

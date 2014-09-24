@@ -10,18 +10,15 @@
     pageEncoding="US-ASCII"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ taglib prefix="sj" uri="/struts-jquery-tags"%>
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
 <head>
+<title>Case List</title>
+<script src="<s:url value='/js/ianew.lists.js' encode='false' includeParams='none'/>"></script>
+<script src="<s:url value='/js/ianew.pagefiltersort.js' encode='false' includeParams='none'/>"></script>
 <s:head/>
 <sj:head/>
-<title>Case List</title>
-<link href="<s:url value='/styles/ianew.form.css' encode='false' includeParams='none'/>" rel="stylesheet" type="text/css"
-		      media="all"/>
-	<link href="<s:url value='/styles/import/skeleton.css' encode='false' includeParams='none'/>" rel="stylesheet" type="text/css"
-		      media="all"/>
-
 </head>
 <body>
 <!-- 
@@ -31,12 +28,16 @@
 	</s:url>
 	<s:url id="urlUpdate" namespace="/case" action="updateCaseList" includeContext="false"/>
 	 -->
-
+	<s:url var="urlCExisting" namespace="/case" action="getExistingCase" includeContext="false"/>		
+	 
+	<s:form id="caseForm" cssClass="form container" method="post" action="%{urlCExisting}">
 	
+			
+			<!--Hidden Fields to pass parameters between pages -->
+			<s:hidden id="hiddenid" name="hiddenid" />
+			<s:hidden id="formTitle" name="formTitle" value="Existing Case" />
 	
-	
-	<s:form id="caseForm" method="post" action="%{urlCExisting}">
-	
+			<s:hidden id="totalNumberOfPages" name="totalNumberOfPages" />
 		<div class="form container">  
 			<section class="imageContainer">
 				<div class="row">
@@ -57,7 +58,6 @@
 				</div>
 			</section>
 			
-			<!-- iterator -->
 			<!-- status="..." use attribute to get status info of iteration (index, count, first, even last, odd info) -->
 			<div class="caseList">
 				<s:iterator value="caseList">
@@ -68,8 +68,8 @@
 								<p class="caseID"><s:property value="id"/></p>
 							</s:div>
 							<s:div cssClass="textarea five columns">
-								<s:label for="protege" value="Protege:" />
-								<p><s:property value="contact.getFullName()" /></p>
+								<s:label for="protege" value="Client:" />
+								<p><s:property value="contact.fullName" /></p>
 							</s:div>
 							<s:div cssClass="textarea two columns">
 								<s:label value="Date:" />
@@ -77,7 +77,7 @@
 							</s:div>
 							<s:div cssClass="textarea six columns omega">
 								<s:label for="issues" value="Issues:" />
-								<p><s:property value="getIssuesTypes()" /></p>
+								<p><s:property value="issueTypes" /></p>
 							</s:div>
 						</div>
 						
@@ -90,15 +90,9 @@
 					</div>
 				</s:iterator>
 			</div>
-			</div>
+			
 			<div class="clear"></div>
 			
-			
-			<!--Hidden Fields to pass parameters between pages -->
-	<s:hidden id="caseID" name="caseID" />
-	<s:hidden id="formTitle" name="formTitle" value="Existing Case" />
-	
-	<s:hidden id="totalNumberOfPages" name="totalNumberOfPages" />
 			
 			
 <!--------- the footer of the form containing the cancel, open case and new case as well as the pagination functions --------->
@@ -137,7 +131,7 @@
 		</s:form>
 		
 <!----- Hidden form to pass pagination to action class submitted by the prev and next buttons ------------------------------------------------------------------->
-		<div>
+		<div ">
 			<s:form id="paginationForm" method="post" action="%{urlUpdate}" namespace="case">
 				<s:hidden id="page" name="page" />
 				<s:hidden id="numberOfRecords" name="numberOfRecords" />
@@ -147,7 +141,7 @@
 	<script>
 		function nextPage(){
 			var currentPageNumber = parseInt($("#pageTextField").val());
-			var totalNumberOfPages = parseInt( $("#totalNumberOfPagesDiv").text());
+			var totalNumberOfPages = parseInt( $("#totalNumberOfPagesDiv").text())
 			
 			if(currentPageNumber < totalNumberOfPages){ 
 				var nextPageNumber = currentPageNumber + 1;
@@ -171,7 +165,7 @@
 			$(selectedDiv).addClass("listSelected");
 
 			$(selectedDiv).children("div").last().slideToggle();
-			$("#caseID").val($(selectedDiv).find('.caseID').text());
+			$("#hiddenid").val($(selectedDiv).find('.caseID').text());
 			//alert($(selectedDiv).find('.caseID').text())
 		}
 		function deselectAll(){
@@ -181,7 +175,7 @@
 			}
 		}
 		$('#new').click(function(){
-			alert($('#caseID').val());
+			alert($('#caseID').val())
 		});
 		
 		$(function(){

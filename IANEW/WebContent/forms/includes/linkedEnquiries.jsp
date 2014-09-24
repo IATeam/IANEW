@@ -23,43 +23,24 @@
 				parent enquiry into the list as well (if it already is not).
 ------------------------------------------------------------------------------------------------>
 
-
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="US-ASCII"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
+<%@ taglib prefix="sj" uri="/struts-jquery-tags" %>
 <head>
 
 </head>
 <section>
-<h3 class="sixteen columns" style="float:none;">Linked Enquiries</h3>
 <input type="image" src="/IANEW/resources/images/plusButton.png" alt="Hide/Show" id="btnShowHide" value="ShowHide" onclick="divHide(this);return false;" class="divHideButton"/>
-
-<s:div cssClass="greybackground">
-<div id="linkedEnquiriesDiv" class="toggled startShown">	
-
+<h3 class="sixteen columns" style="float:none;">Linked Enquiries</h3>
+<div class="greybackground">
+<div id="linkedEnquiriesDiv" class="toggled hideable">	
 	<s:url id="urlELinked" namespace="/enquiry" action="getLinkedEnquiry" />
-		
-	<s:iterator value="linkedEnquiriesSet">
-		<section class="secLinkedEnquiries sixteen columns curveBorder"  onclick="bandSelected(this)">
-					<input type="image" src="/IANEW/resources/images/undoButtonImage.png" alt="undoButton" id="btnUndo" value="Undo" onclick="undoButton(this);return false;" class="undoButton"/>
-		
-			<s:div cssClass="textarea one columns">
-				<s:label value="E#:" />
-				<s:div cssClass="id"><s:property  value="id"/></s:div>
-			</s:div>
-			<s:div cssClass="textarea three columns">
-				<s:label for="date" value="Date:" />
-				<!-- <s:property value="updatedDateTime"/> -->
-				<s:date name="updatedDateTime" format="dd MMM yyyy"/>
-			</s:div>
-			<div class="textarea eleven columns omega">
-				<s:label for="description" value="Description:" />
-				<div><s:textarea id="description" cssClass="multiLineTextArea" name="description" readonly="true"/></div>
-			</div>
-		</section>
-	</s:iterator>
 	
-	<s:hidden id="hiddenid" name="hiddenid"/>
+	<article id="itLikedEnquiries">
+		<%@include file="iterLinkedEnquiries.jsp"%>
+	</article>
+	
+	<s:hidden id="hiddenid" name="hiddenid" />
+	<s:hidden name="iamodel.parentEnquiry" />
 	
 	<div>
 		<div class="row">
@@ -89,12 +70,19 @@
 			showSlidingPanel();
 		}); */
 
-		/* $('#btnView').click(function(){
+		$('#btnView').click(function(){
 			var id = $("#hiddenid").val();
+			$('#rightPopUp').show("slow");
 			$('#rightPopUp').load("enquiry/getEnquiry.action?hiddenid=" + id +"&formTitle=Existing Enquiry" );
-			$('#rightPopUp').show("slow"); */
-			//alert(id);
-	});
+			
+		});
 
-	</script></div>
-</s:div></section>
+		$('#btnAddEnquiry').click(function(){
+			$("#linkedEnquiriesListDiv").show();
+			$('#linkedEnquiriesListDiv').load("enquiryList/getLinkedEnquiriesList.action");
+		});
+	});
+	</script>
+</div>
+</div>
+</section>

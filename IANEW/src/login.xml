@@ -18,6 +18,9 @@
     		<result name="success">/home/home.jsp</result>
     		<result name="error">/forms/login.jsp</result>
     	</action>
+    	<action name="search" class="uow.ia.action.LoginAction" method="search">
+    		<result name="success">/home/home.jsp</result>
+    	</action>
    	</package>
 </struts>
     

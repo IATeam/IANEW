@@ -9,17 +9,15 @@
 	
 	Note: syntax order: <tag id name class value list(for select) ...>
 ------------------------------------------------------------------------------------------------>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="US-ASCII"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 
 <script>
 function expandAll() {
-	$(".startShown").show();
+	$(".hideable").show();
 	$(".divHideButton").attr("src","/IANEW/resources/images/minusButton.png");
 }
 function collapseAll() {
-	$(".startShown").hide();
+	$(".hideable").hide();
 	$(".divHideButton").attr("src","/IANEW/resources/images/plusButton.png");
 }
 </script>

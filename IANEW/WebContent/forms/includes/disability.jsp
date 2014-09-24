@@ -4,13 +4,7 @@
 	==============================================
 	Updates:
 		10/08/2014 - 	Added iteration by Quang Nhan
-<<<<<<< HEAD
-		14/08/2014 	- 	Connect and retrieve data called by the action class and added 
-						pagination functionality by Quang Nhan
-		16/08/2014 -	Tested s:url workings see comment below. 
-						Moved javascript code to list.js file by Quang Nhan
-=======
-<<<<<<< HEAD
+
 		12/08/2014 - 	Quang Nhan
 						Migrate code into new project setup
 		14/08/2014 	- 	Connect and retrieve data called by the action class and added 
@@ -18,85 +12,105 @@
 		21/08/2014 -	Added 'Add Disability' and functionality
 						Add radio button for selecting primary disability option and jquery functions
 						to change the background color
-=======
-		14/08/2014 	- 	Connect and retrieve data called by the action class and added 
-						pagination functionality by Quang Nhan
-		16/08/2014 -	Tested s:url workings see comment below. 
-						Moved javascript code to list.js file by Quang Nhan
->>>>>>> refs/remotes/origin/master
->>>>>>> refs/remotes/origin/Quang
+		08/09/2014 -	Quang Nhan
+						changed all iamodel.contact to iamodel.contact
+		16/09/2014 -	Quang Nhan
+						Moved iteration to iterDisability.jsp to accommodate ajax deletion
+						Updated javascript primaryUpdate with a argument to allow more direct dom
+						calling and update primary flag value.
+		17/09/2014 -	David Forbes modified theDisability with value attribute
+		18/09/2014 -	Quang Nhan Add validation refer to enquiryValidation.js file and fix index bugs
+						when it is a new enquiry
 	==============================================	
 	Description: A jsp page that displays a list of enquiries
 ------------------------------------------------------------------------------------------------>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="US-ASCII"%>
-<%@ taglib prefix="s" uri="/struts-tags" %>
 
 <!-- TODO LATER: add js function to click to select primary disability -->
-
 <section>
-<h3 class="sixteen columns" style="float:none;">Disability</h3>
 <input type="image" src="/IANEW/resources/images/plusButton.png" alt="Hide/Show" id="btnShowHide" value="ShowHide" onclick="divHide(this);return false;" class="divHideButton"/>
-<s:div cssClass="greybackground">
-<div id="disabilityDiv" class="toggled startShown">	
+<%@ taglib prefix="s" uri="/struts-tags"%>
+<h3 class="sixteen columns" style="float:none;">Disability</h3>
+<div class="greybackground">
+<div id="disabilityDiv" class="toggled hideable">	
+
 	<article id="itDisability">
-		<s:iterator value="clientDisabilitiesSet">
-			<section class="sixteen columns curveBorder row">
+		<%@include file="iterDisabilities.jsp" %>
+	</article>	
+		
+	<!-- disabilitySize(hidden field) used to assign index value when adding or deleting -->	
+	<s:if test="%{iamodel.contact.disabilitiesList.size > 0}">
+		<s:hidden id="disabilitySize" name="iamodel.contact.disabilitiesList.size" value="%{iamodel.contact.disabilitiesList.size}"/>
+		<s:set name="index" value="iamodel.contact.disabilitiesList.size" />
+		<article id="artDisability" class="hidden">
+	</s:if>
+	
+	<s:else>
+		<s:hidden id="disabilitySize" name="iamodel.contact.disabilitiesList.size" value="0"/>
+		<s:set name="index" value="0" />
+		<article id="artDisability">
+	</s:else>
+		<section class="sixteen columns curveBorder row">
+				<s:hidden name="iamodel.contact.disabilitiesList[%{#index}].id"/>
+				<s:hidden name="iamodel.contact.disabilitiesList[%{#index}].primaryFlag"/>
+							<input type="image" src="/IANEW/resources/images/undoButtonImage.png" alt="undoButton" id="btnUndo" value="Undo" onclick="undoButton(this);return false;" class="undoButton"/>
+				
 				<s:div cssClass="four columns alpha">
 					<s:div cssClass="disabilityTypeSelect row four columns">
-						<s:select list="disabilitySelectList.{disabilityName}" name="getDisabilityType().getDisabilityName()" headerKey="-1" headerValue="Select Disability" />
+						<s:select list="disabilitySelectList.{disabilityName}" name="theDisabilityList[%{#index}]" value="iamodel.contact.disabilitiesList.disabilityType.disabilityName" headerKey="-1" headerValue="Select Disability" />
 					</s:div>
+					
 					<s:div cssClass="row four columns" style="text-align: center">
-						
-						<input type="radio" name="primary" />
+						<input type="radio" name="primary" onclick="primaryUpdate(this)"/>
 						<s:label value="Primary Disability" />						
 					</s:div>
 				</s:div>
 				<s:div cssClass="textarea eleven columns">
-					<s:label for="disabilityDescription" value="Disability Description:" /> 
-					<s:textarea cssClass="disabilityDescription" cssClass="oneLineTextArea" name="comments"></s:textarea> 
+					<s:label for="disabilityDescription" value="Comment:" /> 
+					<s:textarea cssClass="disabilityDescription" cssClass="oneLineTextArea" name="iamodel.contact.disabilitiesList[%{#index}].comments" /> 
 				</s:div>
 			</section>
-		</s:iterator>
-	</article>
-	
-	<!-- Hidden disability to be added to iterator if needs to be added -->
-	<article id="artDisability" style='visiblity: hidden; display: none;'>
-		<section class="sixteen columns curveBorder row">
-					<input type="image" src="/IANEW/resources/images/undoButtonImage.png" alt="undoButton" id="btnUndo" value="Undo" onclick="undoButton(this);return false;" class="undoButton"/>
-		
-			<s:div cssClass="four columns alpha">
-				<s:div cssClass="row four columns">
-					<s:select list="disabilitySelectList.{disabilityName}" name="theDisability" headerKey="-1" headerValue="Select Disability" />
-				</s:div>
-				<s:div cssClass="row four columns" style="text-align: center">
-					<input type="radio" name="primary" onchange="primaryUpdate()"/>
-					<s:label value="Primary Disability" />
-				</s:div>
-			</s:div>
-			<s:div cssClass="textarea eleven columns">
-				<s:label for="disabilityDescription" value="Disability Description:" /> 
-				<s:textarea cssClass="disabilityDescription" cssClass="oneLineTextArea"></s:textarea> 
-			</s:div>
-		</section>
 	</article>
 	
 	<div class="row">
-		<div class="thirteen columns alpha"><p></p></div>
-		<input type="button" id="btnAddDisability" value="Add Disability" class="three columns" />
+		<div class="fourteen columns alpha"><p></p></div>
+		<input type="button" id="btnAddDisability" value="Add Disability" class="two columns" onclick="addNewRecord('artDisability', 'disabilitySize', 'itDisability' )"/>
 	</div>
 	
 	<script>
-	function primaryUpdate(){ 
+	
+	function primaryUpdate(radio){ 
 		if($('[name="primary"]').is(':checked')){
-			$('[name="primary"]:checked').parents("section").addClass("primary");
-			$('[name="primary"]:unchecked').parents("section").removeClass("primary");
+			$(radio).parents("section").addClass("primary");
+			var otherRadio = $('input[name="primary"]:unchecked');
+
+			$(otherRadio).parents("section").removeClass("primary");
+			var eachRadio = $(otherRadio).parents("section").find("input[name*='Flag']");
+
+			$(eachRadio).each(function(){
+				$(this).val(null);
+			});
+			var primaryFlag = $(radio).parents("section").find("input[name*='Flag']").first();
+				$(primaryFlag).val("Y");
+		
 		}
 	};
 	
 	$(function(){
-		$("#btnAddDisability").click(function(){ 
-			$("#artDisability section").clone().appendTo("#itDisability");
+		//mark the check box if primary
+		var it = $("#itDisability").find("section");
+		
+		$(it).each(function(index, section){
+			//grab names in this section with primaryFlag substring.
+			var deep = $(section).find("input[name*='Flag']")
+			
+			//mark as check and assign the section with class primary
+			$(deep).each(function(){
+				if($(this).val()=='Y'){
+					var radios = $(section).find("[name='primary']").first();
+					$(radios).prop("checked", true);
+					$(section).addClass("primary");
+				}
+			});
 		});
 		
 		$("#btnNewDisability").click(function(){
@@ -104,9 +118,9 @@
 				$("#leftPopUp").show("slow");
 			});
 		});
-		
 	});
 	</script>
-</div>	
-</s:div>
+	
+</div>
+</div>
 </section>

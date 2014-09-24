@@ -14,25 +14,23 @@
 	
 	Note: syntax order: <tag id name class value list(for select) ...>
 ------------------------------------------------------------------------------------------------>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="US-ASCII"%>
-<%@ taglib prefix="s" uri="/struts-tags" %>
 
 <section>
-<h3 class="sixteen columns" style="float:none;">Summary</h3>
 <input type="image" src="/IANEW/resources/images/plusButton.png" alt="Hide/Show" id="btnShowHide" value="ShowHide" onclick="divHide(this);return false;" class="divHideButton"/>
-
-<s:div cssClass="greybackground">
-<div id="summaryDiv" class="toggled startShown">	
+<h3 class="sixteen columns" style="float:none;">Summary</h3>
+<div class="greybackground">
+<div id="issuesDiv" class="toggled hideable">	
 	<fieldset>
 		<s:div cssClass="row">
 			<s:div cssClass="four columns">
-				<s:select  name="" cssClass="four columns" list="#{'1':'type' }" headerKey="-1" headerValue="Type" />
+				<s:select  name="theEnquiry" cssClass="four columns" list="enquiryTypeSelectList.{enquiryTypeName}" value="iamodel.enquiryType.enquiryTypeName" headerKey="-1" headerValue="Type" />
 			</s:div>
 			<s:div cssClass="textarea twelve columns">
 				<s:label for="description" value="Description:" />
-				<s:div><s:textarea id="description" name="description"  cssClass="multiLineTextArea" /></s:div>
+				<s:div><s:textarea id="description" name="iamodel.description" cssClass="multiLineTextArea" /></s:div>
 			</s:div>
 		</s:div>
-	</fieldset></div>
-</s:div></section>
+	</fieldset>
+</div>
+</div>
+</section>
