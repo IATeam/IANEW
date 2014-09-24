@@ -924,9 +924,11 @@ public class AdminAction extends BaseAction{
 		issueType.setIssueDescription(getIssueDescription());
 		System.out.println("name: " + getIssueName());
 		System.out.println("description: " + getIssueDescription());
-		
-		//adminService.saveIssueType(issueType);
-		return SUCCESS;
+		if(adminService.saveIssueType(issueType))
+			return SUCCESS;
+		else {
+			return ERROR;
+		}
 	}
 	/* ----------------------------------------------------------------------------------------------------------
 	 * Issue Getters & Setters
