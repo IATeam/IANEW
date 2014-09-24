@@ -31,42 +31,7 @@ import uow.ia.service.CaseService;
 @Service(CaseService.SERVICENAME)
 public class CaseServiceImpl  implements
 CaseService {
-	
-	//static Logger logger = Logger.getLogger(ClassName.class);
-	
-	@Resource
-    private TitleTypesDao<TitleTypes> titleTypesDao;
-	
-	@Resource
-	private GenderTypesDao<GenderTypes> genderTypesDao;
-	
-	@Resource
-	private CulturalBackgroundTypesDao<CulturalBackgroundTypes> culturalBackgroundTypesDao;
-	
-	@Resource
-    private AccommodationTypesDao<AccommodationTypes> accommodationTypesDao;
-	
-	@Resource
-	private DisabilityTypesDao<DisabilityTypes> disabilityTypesDao;
-	
-	@Resource
-	private IssueTypesDao<IssueTypes> issueTypesDao;
-	
-	@Resource
-	private EnquiryTypesDao<EnquiryTypes> enquiryTypesDao;
-	
-	@Resource
-	private EmploymentTypesDao<EmploymentTypes> employmentTypesDao;
-	
-	@Resource
-	private CommunicationTypesDao<CommunicationTypes> communicationTypesDao;
-	
-	@Resource
-	private GoalTypesDao<GoalTypes> goalTypesDao;
-	
-	@Resource
-	private PriorityTypesDao<PriorityTypes> priorityTypesDao;
-	
+
 	@Resource
 	private ContactsDao<Contacts> contactsDao;
 	
@@ -84,72 +49,6 @@ CaseService {
 	
 	@Resource
 	private ReviewFrequenciesDao<ReviewFrequencies> reviewFrequenciesDao;
-	
-	@Override
-	public List<DangerTypes> findDangerTypes() {
-		return dangerTypesDao.find(" from DangerTypes order by display_order");
-	}
-	
-	@Override
-	public List<StatusTypes> findStatusTypes() {
-		return statusTypesDao.find(" from StatusTypes order by display_order");
-	}
-	
-	@Override
-	public List<AccommodationTypes> findAccommodationTypes() {
-		//logger.info("EnquiryService.findAccommodationTypes called");
-		return accommodationTypesDao.find(" from AccommodationTypes");
-	}
-
-	@Override
-	public List<TitleTypes> findTitleTypes() {
-		return titleTypesDao.find(" from TitleTypes");
-	}
-
-	@Override
-	public List<GenderTypes> findGenderTypes() {
-		return genderTypesDao.find(" from GenderTypes");
-	}
-
-	@Override
-	public List<CulturalBackgroundTypes> findCulturalBackgroundTypes() {
-		return culturalBackgroundTypesDao.find(" from CulturalBackgroundTypes");
-	}
-
-	@Override
-	public List<DisabilityTypes> findDisabilityTypes() {
-		return disabilityTypesDao.find(" from DisabilityTypes");
-	}
-
-	@Override
-	public List<IssueTypes> findIssueTypes() {
-		return issueTypesDao.find(" from IssueTypes");
-	}
-	
-	@Override
-	public List<EnquiryTypes> findEnquiryTypes() {
-		return enquiryTypesDao.find(" from EnquiryTypes");
-	}
-
-	@Override
-	public List<EmploymentTypes> findEmploymentTypes() {
-		return employmentTypesDao.find(" from EmploymentTypes");
-	}
-
-	@Override
-	public List<CommunicationTypes> findCommunicationTypes() {
-		return communicationTypesDao.find(" from CommunicationTypes");
-	}
-
-	@Override
-	public List<GoalTypes> findGoalTypes() {
-		return goalTypesDao.find(" from GoalTypes");
-	}
-	
-	@Override
-	public List<PriorityTypes> findPriorityTypes() {
-		return priorityTypesDao.find(" from PriorityTypes order by display_order");
-	}
 	
 	@Override
 	public List<IndividualCases> findCases() {

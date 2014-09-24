@@ -439,19 +439,19 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 		employmentSelectList = typesService.findEmploymentTypes();
 		statusSelectList = typesService.findStatusTypes();
 		*/
-		titleSelectList=caseServices.findTitleTypes();
-		genderSelectList=caseServices.findGenderTypes();
-		culturalBackgroundSelectList=caseServices.findCulturalBackgroundTypes();
-		accommodationSelectList = caseServices.findAccommodationTypes();
-		disabilitySelectList = caseServices.findDisabilityTypes();
-		issueSelectList = caseServices.findIssueTypes();
-		dangerSelectList = caseServices.findDangerTypes();
+		titleSelectList=typesService.findTitleTypes();
+		genderSelectList=typesService.findGenderTypes();
+		culturalBackgroundSelectList=typesService.findCulturalBackgroundTypes();
+		accommodationSelectList = typesService.findAccommodationTypes();
+		disabilitySelectList = typesService.findDisabilityTypes();
+		issueSelectList = typesService.findIssueTypes();
+		dangerSelectList = typesService.findDangerTypes();
 		statusSelectList = typesService.findStatusTypes();
-		employmentSelectList = caseServices.findEmploymentTypes();
+		employmentSelectList = typesService.findEmploymentTypes();
 		advocateSelectList = caseServices.findAdvocates();
-		prioritySelectList = caseServices.findPriorityTypes();
-		communicationSelectList = caseServices.findCommunicationTypes();
-		goalSelectList = caseServices.findGoalTypes();
+		prioritySelectList = typesService.findPriorityTypes();
+		communicationSelectList = typesService.findCommunicationTypes();
+		goalSelectList = typesService.findGoalTypes();
 		reviewFrequencyList = caseServices.findReviewFrequencies();
 		developerSelectList = caseServices.findAdvocates();
 		

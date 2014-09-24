@@ -3,6 +3,8 @@
  */
 package uow.ia.service.impl;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -528,5 +530,13 @@ public class TypesServiceImpl implements TypesService {
 		} else {
 			return null;
 		}
+	}
+	
+	@Override
+	public List<?> find(String name) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, ClassNotFoundException, NoSuchMethodException, SecurityException {
+		Class<?> c = Class.forName("uow.ia.dao."+name+"Dao");
+		Method method = c.getMethod("find", String.class);
+		List<?> l = (List) method.invoke(enquiryTypesDao, " from "+name);
+		return l;
 	}
 }

@@ -1,6 +1,7 @@
 package uow.ia.action;
 
 
+import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLData;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -28,8 +29,10 @@ import uow.ia.bean.IssueTypes;
 import uow.ia.bean.StatusTypes;
 import uow.ia.bean.TitleTypes;
 import uow.ia.bean.Users;
+
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
+
 import uow.ia.util.DateUtil;
 
 
@@ -85,7 +88,7 @@ ModelDriven<Enquiries>, Preparable{
 		this.hiddenid = hiddenid;
 	}
 
-	private List<EnquiryTypes> enquiryTypeSelectList = new ArrayList<EnquiryTypes>();
+	private List<?> enquiryTypeSelectList = new ArrayList<EnquiryTypes>();
 	/*
 	 * Lists for the drop down select options for the jsps
 	 * and its associated value variables
@@ -169,7 +172,15 @@ ModelDriven<Enquiries>, Preparable{
 	 * @return String
 	 */
 	public String newEnquiry(){ //TODO:
-
+		try {
+			typesService.find("EnquiryTypes");
+		} catch (IllegalAccessException | IllegalArgumentException
+				| InvocationTargetException | ClassNotFoundException
+				| NoSuchMethodException | SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		System.out.println("Struts: start newEnquiry");
 		//activateAutocomplete();
 
@@ -458,6 +469,7 @@ ModelDriven<Enquiries>, Preparable{
 	/**
 	 * populate the Select List variables
 	 */
+	@SuppressWarnings("unchecked")
 	private void activateLists(){
 		setTitleSelectList(typesService.findTitleTypes());
 		genderSelectList=typesService.findGenderTypes();
@@ -469,7 +481,15 @@ ModelDriven<Enquiries>, Preparable{
 		employmentSelectList = typesService.findEmploymentTypes();
 		//setEmploymentList(contact.getEmploymentType());
 		statusSelectList = typesService.findStatusTypes();
-		enquiryTypeSelectList = typesService.findEnquiryTypes();
+		//enquiryTypeSelectList = typesService.findEnquiryTypes();
+		try {
+			enquiryTypeSelectList = typesService.find("EnquiryTypes");
+		} catch (IllegalAccessException | IllegalArgumentException
+				| InvocationTargetException | ClassNotFoundException
+				| NoSuchMethodException | SecurityException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 		if(iamodel != null){
 			theDisabilityList = new ArrayList<String>();
@@ -614,7 +634,7 @@ ModelDriven<Enquiries>, Preparable{
 		return statusSelectList;
 	}
 
-	public List<EnquiryTypes> getEnquiryTypeSelectList() {
+	public List<?> getEnquiryTypeSelectList() {
 		return enquiryTypeSelectList;
 	}
 

@@ -23,37 +23,6 @@ public interface CaseService {
 	
 	public static final String SERVICENAME = "CaseService";
 	
-	public List<DangerTypes> findDangerTypes();
-	
-	public List<StatusTypes> findStatusTypes();
-	
-	public List<TitleTypes> findTitleTypes();
-	
-	public List<GenderTypes> findGenderTypes();
-	
-	public List<CulturalBackgroundTypes> findCulturalBackgroundTypes();
-	
-	public List<AccommodationTypes> findAccommodationTypes();
-	
-	public List<PriorityTypes> findPriorityTypes();
-	
-	/** 
-     * retrieve with List<object> of Disability Types from Disability_Types table
-     *  
-     * @return List<Object>
-     */
-	public List<DisabilityTypes> findDisabilityTypes();
-	
-	public List<IssueTypes> findIssueTypes();
-	
-	public List<EnquiryTypes> findEnquiryTypes();
-	
-	public List<EmploymentTypes> findEmploymentTypes();
-	
-	public List<CommunicationTypes> findCommunicationTypes();
-	
-	public List<GoalTypes> findGoalTypes();
-	
 	public List<IndividualCases> findCases();
 	
 	/** 

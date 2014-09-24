@@ -3,6 +3,7 @@
  */
 package uow.ia.service;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 import uow.ia.bean.AccommodationTypes;
@@ -27,7 +28,7 @@ import uow.ia.bean.TitleTypes;
  */
 public interface TypesService {
 	public static final String SERVICENAME = "TypesService";
-	
+
 	public List<AccommodationTypes> findAccommodationTypes();
 	
 	public List<CulturalBackgroundTypes> findCulturalBackgroundTypes();
@@ -99,4 +100,6 @@ public interface TypesService {
 	public EnquiryTypes getEnquiryTypeByName(String name);
 	
 	public EmploymentTypes getEmploymentTypeByName(String name);
+	
+	public List<?> find(String name) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, ClassNotFoundException, NoSuchMethodException, SecurityException;
 }
