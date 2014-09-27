@@ -5,6 +5,7 @@ package uow.ia.service.impl;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -13,6 +14,8 @@ import org.springframework.stereotype.Service;
 
 import uow.ia.bean.AccommodationTypes;
 import uow.ia.bean.CommunicationTypes;
+import uow.ia.bean.CriteriaControlValues;
+import uow.ia.bean.CriteriaControls;
 import uow.ia.bean.CulturalBackgroundTypes;
 import uow.ia.bean.DangerTypes;
 import uow.ia.bean.DisabilityTypes;
@@ -27,6 +30,8 @@ import uow.ia.bean.StatusTypes;
 import uow.ia.bean.TitleTypes;
 import uow.ia.dao.AccommodationTypesDao;
 import uow.ia.dao.CommunicationTypesDao;
+import uow.ia.dao.CriteriaControlValuesDao;
+import uow.ia.dao.CriteriaControlsDao;
 import uow.ia.dao.CulturalBackgroundTypesDao;
 import uow.ia.dao.DangerTypesDao;
 import uow.ia.dao.DisabilityTypesDao;
@@ -75,6 +80,12 @@ public class TypesServiceImpl implements TypesService {
 	
 	@Resource
 	private StatusTypesDao<StatusTypes> statusTypesDao;
+	
+	@Resource
+	private CriteriaControlsDao<CriteriaControls> criteriaControlsDao;
+	
+	@Resource
+	private CriteriaControlValuesDao<CriteriaControlValues> criteriaControlValuesDao;
 	
 	@Resource
 	private TitleTypesDao<TitleTypes> titleTypesDao;
@@ -156,8 +167,29 @@ public class TypesServiceImpl implements TypesService {
 	 * @see uow.ia.service.TypesService#findStatusTypes()
 	 */
 	@Override
-	public List<StatusTypes> findStatusTypes() {
-		return statusTypesDao.find(" from StatusTypes order by display_order");
+	public List<StatusTypes> findStatusTypes(int id) {
+		List<StatusTypes> tmpList=new ArrayList<StatusTypes>();
+		StatusTypes tmpStatusTypes = null;
+		Class entityClass = StatusTypes.class;
+		CriteriaControls control = criteriaControlsDao.get(CriteriaControls.class, id);
+		if(control!=null) {
+			List<CriteriaControlValues> values = control.getCriteriaControlValuesList();
+			for (CriteriaControlValues criteriaControlValues : values) {
+				System.out.println("value is: "+criteriaControlValues.getValue());
+				tmpStatusTypes = statusTypesDao.get(StatusTypes.class,Integer.parseInt(criteriaControlValues.getValue()));
+				System.out.println(tmpStatusTypes.getStatusName());
+				tmpList.add(tmpStatusTypes);
+			}
+			if(!tmpList.isEmpty()) {
+				return tmpList;
+			} else {
+				return null;
+			}
+		} else {
+			return null;
+		}
+		
+		//return statusTypesDao.find(" from StatusTypes order by display_order");
 	}
 
 	/* (non-Javadoc)

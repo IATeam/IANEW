@@ -470,7 +470,7 @@ ModelDriven<Enquiries>, Preparable{
 		dangerSelectList = typesService.findDangerTypes();
 		employmentSelectList = typesService.findEmploymentTypes();
 		//setEmploymentList(contact.getEmploymentType());
-		statusSelectList = typesService.findStatusTypes();
+		statusSelectList = typesService.findStatusTypes(1);
 		enquiryTypeSelectList = typesService.findEnquiryTypes();
 
 		if(iamodel != null){

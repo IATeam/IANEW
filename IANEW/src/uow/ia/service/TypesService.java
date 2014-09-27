@@ -45,7 +45,7 @@ public interface TypesService {
 	
 	public List<IssueTypes> findIssueTypes();
 	
-	public List<StatusTypes> findStatusTypes();
+	public List<StatusTypes> findStatusTypes(int id);
 	
 	public List<TitleTypes> findTitleTypes();
 	
