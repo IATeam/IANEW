@@ -17,6 +17,7 @@
 <h3 class="sixteen columns" style="float:none;">Employment</h3>
 <div class="greybackground">
 <div id="employmentDiv" class="toggled hideable">	
+
 	<article id="itEmployment">
 		<%@include file="iterEmployments.jsp" %>
 	</article>
