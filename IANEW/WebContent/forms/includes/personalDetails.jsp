@@ -52,13 +52,12 @@
 				
 			</div>
 		</div>
-		<!-- name="iamodel.contact.genderType.genderName" -->
 		<div class="row">
 			<div class="four columns"><s:select list="genderSelectList.{genderName}" name="theGender" value="iamodel.contact.genderType.genderName" headerKey="-1" headerValue="Select Gender"/></div>
 			<!-- style="padding-right: 15px;" -->
 			<div class="inputfield eight columns" >
 				<s:label for="identification" value="Identification:" />
-				<div><s:textfield id="identification" name="iamodel.contact.identification"></s:textfield></div>
+				<div><s:textfield id="identification" name="iamodel.contact.identification" /></div>
 			</div>
 			
 			<div class="inputfield four columns omega ">
@@ -79,18 +78,15 @@
 		<div class="row">
 			<div class="inputfield four columns">
 				<s:label for="email" value="Email:" />
-				<div><s:textfield id="email" name="iamodel.contact.email"></s:textfield></div>
+				<div><s:textfield id="email" name="iamodel.contact.email" /></div>
 			</div>
 			
 			<div class="inputfield four columns omega">
 				<s:label for="mobile" value="Mobile#:" />
-				<div><s:textfield id="mobile" name="iamodel.contact.mobilephone" ></s:textfield></div>
+				<div><s:textfield id="mobile" name="iamodel.contact.mobilephone" /></div>
 			</div>
 		</div>
 	</fieldset>
-	<script>
-		
-	</script>
 </div>
 </div>
 </section>
