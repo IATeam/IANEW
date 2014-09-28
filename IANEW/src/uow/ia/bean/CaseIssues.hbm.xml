@@ -16,16 +16,10 @@
             <column name="completed_date" length="10" />
         </property>
         <property name="createdDateTime" type="date">
-            <column name="created_date_time" length="10" />
-        </property>
-        <property name="createdUserId" type="java.lang.Integer">
-            <column name="created_user_id" />
+            <column name="created_date_time" length="10"  sql-type="datetime"/>
         </property>
         <property name="updatedDateTime" type="date">
-            <column name="updated_date_time" length="10" />
-        </property>
-        <property name="updatedUserId" type="java.lang.Integer">
-            <column name="updated_user_id" />
+            <column name="updated_date_time" length="10"  sql-type="datetime"/>
         </property>
         
         <!-- Many to one relationship -->
@@ -37,6 +31,12 @@
         </many-to-one>
         <many-to-one name="statusType" class="uow.ia.bean.StatusTypes">
         	<column name="status_id" not-null="true"/>
+        </many-to-one>
+        <many-to-one name="createdUser" class="uow.ia.bean.Contacts">
+        	<column name="created_user_id" not-null="false"/>
+        </many-to-one>
+        <many-to-one name="updatedUser" class="uow.ia.bean.Contacts">
+        	<column name="updated_user_id" not-null="false"/>
         </many-to-one>
     </class>
 </hibernate-mapping>

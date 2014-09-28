@@ -16,7 +16,11 @@ import org.hibernate.search.annotations.Resolution;
 
 /**
  * @author Kim To
- * @version 1.0.4, 30/08/2014
+ * @version 1.0.5, 28/09/2014
+ * 
+ * Modification History:
+ * 		28/09/2014 - Change from Integer createdUserId and Integer updatedUserId to Contacts createdUser and Contacts updatedUser
+ * 					 Change constructor, setters, and getters
  */
 
 @Indexed
@@ -37,13 +41,6 @@ public class Enquiries implements java.io.Serializable {
 	@Field
 	private String description;
 	
-	//@Field
-	private Integer createdUserId;
-	
-	@DateBridge(resolution = Resolution.DAY)
-	@Field
-	private Date createdDateTime;
-	
 	@Field
 	private String inquisitor;
 	
@@ -53,12 +50,17 @@ public class Enquiries implements java.io.Serializable {
 	@Field
 	private String referralTo;
 	
+	private Contacts createdUser;
+	
+	@DateBridge(resolution = Resolution.DAY)
+	@Field
+	private Date createdDateTime;
+	
+	private Contacts updatedUser;
+	
 	@DateBridge(resolution = Resolution.DAY)
 	@Field
 	private Date updatedDateTime;
-	
-	//@Field
-	private Integer updatedUserId;
 	
 	@Field
 	private String outOfCoverageFlag;
@@ -77,51 +79,47 @@ public class Enquiries implements java.io.Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-
-
 	/**
 	 * @param id
 	 * @param contact
 	 * @param enquiryType
 	 * @param statusType
 	 * @param description
-	 * @param createdUserId
-	 * @param createdDateTime
 	 * @param inquisitor
 	 * @param referralBy
 	 * @param referralTo
+	 * @param createdUser
+	 * @param createdDateTime
+	 * @param updatedUser
 	 * @param updatedDateTime
-	 * @param updatedUserId
 	 * @param outOfCoverageFlag
 	 * @param enquiriesList
 	 * @param parentEnquiry
 	 * @param enquiryIssuesList
 	 */
 	public Enquiries(Integer id, Contacts contact, EnquiryTypes enquiryType,
-			StatusTypes statusType, String description, Integer createdUserId,
-			Date createdDateTime, String inquisitor, String referralBy,
-			String referralTo, Date updatedDateTime, Integer updatedUserId,
+			StatusTypes statusType, String description, String inquisitor,
+			String referralBy, String referralTo, Contacts createdUser,
+			Date createdDateTime, Contacts updatedUser, Date updatedDateTime,
 			String outOfCoverageFlag, List<Enquiries> enquiriesList,
 			Enquiries parentEnquiry, List<EnquiryIssues> enquiryIssuesList) {
-		super();
 		this.id = id;
 		this.contact = contact;
 		this.enquiryType = enquiryType;
 		this.statusType = statusType;
 		this.description = description;
-		this.createdUserId = createdUserId;
-		this.createdDateTime = createdDateTime;
 		this.inquisitor = inquisitor;
 		this.referralBy = referralBy;
 		this.referralTo = referralTo;
+		this.createdUser = createdUser;
+		this.createdDateTime = createdDateTime;
+		this.updatedUser = updatedUser;
 		this.updatedDateTime = updatedDateTime;
-		this.updatedUserId = updatedUserId;
 		this.outOfCoverageFlag = outOfCoverageFlag;
 		this.enquiriesList = enquiriesList;
 		this.parentEnquiry = parentEnquiry;
 		this.enquiryIssuesList = enquiryIssuesList;
 	}
-
 
 
 	/**
@@ -197,20 +195,6 @@ public class Enquiries implements java.io.Serializable {
 	}
 
 	/**
-	 * @return the createdUserId
-	 */
-	public Integer getCreatedUserId() {
-		return this.createdUserId;
-	}
-
-	/**
-	 * @param createdUserId the createdUserId to set
-	 */
-	public void setCreatedUserId(Integer createdUserId) {
-		this.createdUserId = createdUserId;
-	}
-
-	/**
 	 * @return the createdDateTime
 	 */
 	public Date getCreatedDateTime() {
@@ -267,6 +251,34 @@ public class Enquiries implements java.io.Serializable {
 	}
 
 	/**
+	 * @return the createdUser
+	 */
+	public Contacts getCreatedUser() {
+		return createdUser;
+	}
+
+	/**
+	 * @param createdUser the createdUser to set
+	 */
+	public void setCreatedUser(Contacts createdUser) {
+		this.createdUser = createdUser;
+	}
+
+	/**
+	 * @return the updatedUser
+	 */
+	public Contacts getUpdatedUser() {
+		return updatedUser;
+	}
+
+	/**
+	 * @param updatedUser the updatedUser to set
+	 */
+	public void setUpdatedUser(Contacts updatedUser) {
+		this.updatedUser = updatedUser;
+	}
+
+	/**
 	 * @return the updatedDateTime
 	 */
 	public Date getUpdatedDateTime() {
@@ -279,22 +291,6 @@ public class Enquiries implements java.io.Serializable {
 	public void setUpdatedDateTime(Date updatedDateTime) {
 		this.updatedDateTime = updatedDateTime;
 	}
-
-	/**
-	 * @return the updatedUserId
-	 */
-	public Integer getUpdatedUserId() {
-		return this.updatedUserId;
-	}
-
-	/**
-	 * @param updatedUserId the updatedUserId to set
-	 */
-	public void setUpdatedUserId(Integer updatedUserId) {
-		this.updatedUserId = updatedUserId;
-	}
-
-	
 
 	/**
 	 * @return the outOfCoverageFlag

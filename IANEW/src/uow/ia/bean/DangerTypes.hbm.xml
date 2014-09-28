@@ -13,7 +13,7 @@
             <column name="danger_name" />
         </property>
         <property name="dangerDescription" type="string">
-            <column name="danger_description" />
+            <column name="danger_description" sql-type="longtext"/>
         </property>
         <property name="symbol" type="string">
             <column name="symbol" length="45" />

@@ -2,7 +2,10 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated Aug 9, 2014 1:06:21 PM by Hibernate Tools 4.0.0 -->
-<!-- Modified by Kim To, v.1.0.2, 29/08/2014 -->
+<!-- Modified by Kim To, v.1.0.3, 27/09/2014 -->
+<!-- Modification History
+		27/09/2014:   Map Contacts to createdUserId and updatedUserId
+ -->
 <hibernate-mapping>
     <class name="uow.ia.bean.Addresses" table="Addresses" dynamic-insert="true">
         <id name="id" type="java.lang.Integer">
@@ -27,22 +30,22 @@
         <property name="homephone" type="string">
         	<column name="homephone"/>
         </property>
-        <property generated="never"  name="createdUserId" type="java.lang.Integer">
-   			<column name="created_user_id"/>
+  		<property name="createdDateTime" type="date">
+   			<column length="10" name="created_date_time" sql-type="datetime"/>
   		</property>
-  		<property generated="never"  name="createdDateTime" type="date">
-   			<column length="10" name="created_date_time"/>
-  		</property>
-  		<property generated="never"  name="updatedUserId" type="java.lang.Integer">
-   			<column name="updated_user_id"/>
-  		</property>
-  		<property generated="never"  name="updatedDateTime" type="date">
-   		<column length="10" name="updated_date_time"/>
+  		<property name="updatedDateTime" type="date">
+   		<column length="10" name="updated_date_time" sql-type="datetime"/>
    		</property>
         
         <!-- Many to one relationship -->
         <many-to-one name="contact" class="uow.ia.bean.Contacts">
         	<column name="contact_id" not-null="false"/>
+        </many-to-one>
+        <many-to-one name="createdUser" class="uow.ia.bean.Contacts">
+        	<column name="created_user_id" not-null="false"/>
+        </many-to-one>
+        <many-to-one name="updatedUser" class="uow.ia.bean.Contacts">
+        	<column name="updated_user_id" not-null="false"/>
         </many-to-one>
     </class>
 </hibernate-mapping>

@@ -2,7 +2,10 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated Aug 9, 2014 1:06:21 PM by Hibernate Tools 4.0.0 -->
-<!-- Modified by Kim To, v.1.0.3, 29/08/2014 -->
+<!-- Modified by Kim To, v.1.0.4, 28/09/2014 
+	Modification History:
+		28/09/2014	Mods to map Contacts to created_user_id and updated_user_id
+-->
 <hibernate-mapping>
     <class name="uow.ia.bean.Plans" table="Plans" dynamic-insert="true">
         <id name="id" type="java.lang.Integer">
@@ -12,34 +15,28 @@
 			</generator>
         </id>
         <property name="createdDateTime" type="java.sql.Date">
-            <column name="created_date_time" length="19" />
+            <column name="created_date_time" length="19" sql-type="datetime"/>
         </property>
         <property name="closedDateTime" type="java.sql.Date">
-            <column name="closed_date_time" length="19" />
+            <column name="closed_date_time" length="19" sql-type="datetime"/>
         </property>
-        <property name="lastReviewedDate" type="date">
+        <property name="lastReviewedDate" type="java.sql.Date">
             <column name="last_reviewed_date" length="10" />
         </property>
-        <property name="providedPlanDate" type="date">
+        <property name="providedPlanDate" type="java.sql.Date">
             <column name="provided_plan_date" length="10" />
         </property>
-        <property name="consentSignedDate" type="date">
+        <property name="consentSignedDate" type="java.sql.Date">
             <column name="consent_signed_date" length="10" />
         </property>
-        <property name="authorisedByDate" type="date">
+        <property name="authorisedByDate" type="java.sql.Date">
             <column name="authorised_by_date" length="10" />
         </property>
         <property name="notes" type="string">
             <column name="notes" />
         </property>
         <property name="updatedDateTime" type="java.sql.Date">
-            <column name="updated_date_time" length="19" />
-        </property>
-        <property name="updatedUserId" type="java.lang.Integer">
-            <column name="updated_user_id" />
-        </property>
-        <property name="createdUserId" type="java.lang.Integer">
-            <column name="created_user_id" />
+            <column name="updated_date_time" length="19" sql-type="datetime"/>
         </property>
         
         <!-- One to one relationship -->
@@ -57,6 +54,12 @@
         </many-to-one>
         <many-to-one name="authorisedBy" class="uow.ia.bean.Contacts">
         	<column name="authorised_by_id" not-null="false"/>
+        </many-to-one>
+        <many-to-one name="createdUser" class="uow.ia.bean.Contacts">
+        	<column name="created_user_id" not-null="false"/>
+        </many-to-one>
+        <many-to-one name="updatedUser" class="uow.ia.bean.Contacts">
+        	<column name="updated_user_id" not-null="false"/>
         </many-to-one>
     </class>
 </hibernate-mapping>

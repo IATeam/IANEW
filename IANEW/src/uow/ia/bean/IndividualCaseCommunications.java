@@ -13,7 +13,11 @@ import org.hibernate.search.annotations.Resolution;
 
 /**
  * @author Kim To
- * @version 1.0.3, 26/08/2014
+ * @version 1.0.4, 28/09/2014
+ * 
+ * Modification History:
+ * 		28/09/2014 Change Integer createdUserId and Integer updatedUserId to Contacts createdUser and Contacts updatedUser
+ * 				   Mods to constructor, setters, and getters
  */
 
 @Indexed
@@ -41,15 +45,13 @@ public class IndividualCaseCommunications implements java.io.Serializable {
 	@Field
 	private String importantFlag;
 	
-	@Field
-	private Integer createdUserId;
+	private Contacts createdUser;
 	
 	@DateBridge(resolution = Resolution.DAY)
 	@Field
 	private Date createdDateTime;
 	
-	@Field
-	private Integer updatedUserId;
+	private Contacts updatedUser;
 	
 	@DateBridge(resolution = Resolution.DAY)
 	@Field
@@ -57,6 +59,7 @@ public class IndividualCaseCommunications implements java.io.Serializable {
 
 	public IndividualCaseCommunications() {
 	}
+	
 	/**
 	 * @param id
 	 * @param individualCase
@@ -65,17 +68,16 @@ public class IndividualCaseCommunications implements java.io.Serializable {
 	 * @param description
 	 * @param timeSpent
 	 * @param importantFlag
-	 * @param createdUserId
+	 * @param createdUser
 	 * @param createdDateTime
-	 * @param updatedUserId
+	 * @param updatedUser
 	 * @param updatedDateTime
 	 */
 	public IndividualCaseCommunications(Integer id,
 			IndividualCases individualCase, Date communicationDate,
 			CommunicationTypes communicationType, String description,
-			Float timeSpent, String importantFlag, Integer createdUserId,
-			Date createdDateTime, Integer updatedUserId, Date updatedDateTime) {
-		super();
+			Float timeSpent, String importantFlag, Contacts createdUser,
+			Date createdDateTime, Contacts updatedUser, Date updatedDateTime) {
 		this.id = id;
 		this.individualCase = individualCase;
 		this.communicationDate = communicationDate;
@@ -83,11 +85,13 @@ public class IndividualCaseCommunications implements java.io.Serializable {
 		this.description = description;
 		this.timeSpent = timeSpent;
 		this.importantFlag = importantFlag;
-		this.createdUserId = createdUserId;
+		this.createdUser = createdUser;
 		this.createdDateTime = createdDateTime;
-		this.updatedUserId = updatedUserId;
+		this.updatedUser = updatedUser;
 		this.updatedDateTime = updatedDateTime;
 	}
+
+
 	public Integer getId() {
 		return this.id;
 	}
@@ -145,12 +149,18 @@ public class IndividualCaseCommunications implements java.io.Serializable {
 		this.description = description;
 	}
 
-	public Integer getCreatedUserId() {
-		return this.createdUserId;
+	/**
+	 * @return the createdUser
+	 */
+	public Contacts getCreatedUser() {
+		return createdUser;
 	}
 
-	public void setCreatedUserId(Integer createdUserId) {
-		this.createdUserId = createdUserId;
+	/**
+	 * @param createdUser the createdUser to set
+	 */
+	public void setCreatedUser(Contacts createdUser) {
+		this.createdUser = createdUser;
 	}
 
 	public Date getCreatedDateTime() {
@@ -176,18 +186,21 @@ public class IndividualCaseCommunications implements java.io.Serializable {
 	public void setImportantFlag(String importantFlag) {
 		this.importantFlag = importantFlag;
 	}
+	
 	/**
-	 * @return the updatedUserId
+	 * @return the updatedUser
 	 */
-	public Integer getUpdatedUserId() {
-		return this.updatedUserId;
+	public Contacts getUpdatedUser() {
+		return updatedUser;
 	}
+
 	/**
-	 * @param updatedUserId the updatedUserId to set
+	 * @param updatedUser the updatedUser to set
 	 */
-	public void setUpdatedUserId(Integer updatedUserId) {
-		this.updatedUserId = updatedUserId;
+	public void setUpdatedUser(Contacts updatedUser) {
+		this.updatedUser = updatedUser;
 	}
+
 	/**
 	 * @return the udpatedDateTime
 	 */

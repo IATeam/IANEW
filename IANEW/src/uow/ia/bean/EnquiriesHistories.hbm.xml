@@ -2,20 +2,20 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated Aug 9, 2014 1:06:21 PM by Hibernate Tools 4.0.0 -->
+<!-- @author Kim To, @version 1.0.1, 28/09/2014
+	Modification History:
+		Mods add and delete properties
+ -->
 <hibernate-mapping>
     <class name="uow.ia.bean.EnquiriesHistories" table="Enquiries_Histories" catalog="ianew">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
             <generator class="identity" />
         </id>
-        <timestamp name="timestamp" column="TIMESTAMP" />
         <property name="action" type="string">
             <column name="action" length="10" not-null="true" />
         </property>
-        <property name="changeOrder" type="int">
-            <column name="change_order" not-null="true" />
-        </property>
-        <property name="enquiryId" type="int">
+        <property name="enquiryId" type="java.lang.Integer">
             <column name="enquiry_id" not-null="true" />
         </property>
         <property name="contactId" type="java.lang.Integer">
@@ -28,7 +28,7 @@
             <column name="status_id" />
         </property>
         <property name="description" type="string">
-            <column name="description" />
+            <column name="description" sql-type="longtext"/>
         </property>
         <property name="inquisitor" type="string">
             <column name="inquisitor" />
@@ -45,8 +45,14 @@
         <property name="outOfCoverageFlag" type="string">
             <column name="out_of_coverage_flag" length="45" />
         </property>
-        <property name="createdUserId" type="int">
-            <column name="created_user_id" not-null="true" />
+        <property name="changeOrder" type="java.lang.Integer">
+            <column name="change_order" />
+        </property>
+        <property name="createdUserId" type="java.lang.Integer">
+            <column name="created_user_id" not-null="false" />
+        </property>
+        <property name="createdDateTime" type="java.sql.Date">
+            <column name="created_date_time" not-null="false" sql-type="datetime"/>
         </property>
     </class>
 </hibernate-mapping>

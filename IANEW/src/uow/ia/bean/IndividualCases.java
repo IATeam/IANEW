@@ -18,7 +18,10 @@ import org.hibernate.search.annotations.Resolution;
 /**
  * Bean class for Individual Case
  * @author Kim To
- * @version 1.0.7, 30/08/2014
+ * @version 1.0.8, 28/09/2014
+ * 
+ * Modification History:
+ * 		28/09/2014	Change from Integer createdUserId and Integer updatedUserId to Contacts createdUser and Contacts updatedUser
  */
 
 @Indexed
@@ -49,15 +52,13 @@ public class IndividualCases implements java.io.Serializable {
 	@Field
 	private Date createdDateTime;
 	
-	@Field
-	private Integer createdUserId;
+	private Contacts createdUser;
 	
 	@DateBridge(resolution = Resolution.DAY)
 	@Field
 	private Date updatedDateTime;
 	
-	@Field
-	private Integer updatedUserId;
+	private Contacts updatedUser;
 	
 	@Field
 	private String referredTo;
@@ -86,9 +87,6 @@ public class IndividualCases implements java.io.Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-
-
-
 	/**
 	 * @param id
 	 * @param contact
@@ -98,9 +96,9 @@ public class IndividualCases implements java.io.Serializable {
 	 * @param priorityType
 	 * @param serviceProviderId
 	 * @param createdDateTime
-	 * @param createdUserId
+	 * @param createdUser
 	 * @param updatedDateTime
-	 * @param updatedUserId
+	 * @param updatedUser
 	 * @param referredTo
 	 * @param risksList
 	 * @param oldCase
@@ -115,15 +113,14 @@ public class IndividualCases implements java.io.Serializable {
 	public IndividualCases(Integer id, Contacts contact, Contacts advocate,
 			String description, StatusTypes statusType,
 			PriorityTypes priorityType, Integer serviceProviderId,
-			Date createdDateTime, Integer createdUserId, Date updatedDateTime,
-			Integer updatedUserId, String referredTo, List<Risks> risksList,
+			Date createdDateTime, Contacts createdUser, Date updatedDateTime,
+			Contacts updatedUser, String referredTo, List<Risks> risksList,
 			IndividualCases oldCase, Enquiries relatedEnquiry, Plans plan,
 			List<PlanGoals> planGoalsList,
 			List<PlanDevelopers> planDevelopersList,
 			List<IndividualCases> individualCasesList,
 			List<CaseIssues> caseIssuesList,
 			List<IndividualCaseCommunications> communicationsList) {
-		super();
 		this.id = id;
 		this.contact = contact;
 		this.advocate = advocate;
@@ -132,9 +129,9 @@ public class IndividualCases implements java.io.Serializable {
 		this.priorityType = priorityType;
 		this.serviceProviderId = serviceProviderId;
 		this.createdDateTime = createdDateTime;
-		this.createdUserId = createdUserId;
+		this.createdUser = createdUser;
 		this.updatedDateTime = updatedDateTime;
-		this.updatedUserId = updatedUserId;
+		this.updatedUser = updatedUser;
 		this.referredTo = referredTo;
 		this.risksList = risksList;
 		this.oldCase = oldCase;
@@ -146,8 +143,6 @@ public class IndividualCases implements java.io.Serializable {
 		this.caseIssuesList = caseIssuesList;
 		this.communicationsList = communicationsList;
 	}
-
-
 
 
 	/**
@@ -267,17 +262,17 @@ public class IndividualCases implements java.io.Serializable {
 	}
 
 	/**
-	 * @return the createdUserId
+	 * @return the createdUser
 	 */
-	public Integer getCreatedUserId() {
-		return this.createdUserId;
+	public Contacts getCreatedUser() {
+		return this.createdUser;
 	}
 
 	/**
-	 * @param createdUserId the createdUserId to set
+	 * @param createdUser the createdUser to set
 	 */
-	public void setCreatedUserId(Integer createdUserId) {
-		this.createdUserId = createdUserId;
+	public void setCreatedUser(Contacts createdUser) {
+		this.createdUser = createdUser;
 	}
 
 	/**
@@ -295,17 +290,17 @@ public class IndividualCases implements java.io.Serializable {
 	}
 
 	/**
-	 * @return the updatedUserId
+	 * @return the updatedUser
 	 */
-	public Integer getUpdatedUserId() {
-		return this.updatedUserId;
+	public Contacts getUpdatedUser() {
+		return this.updatedUser;
 	}
 
 	/**
-	 * @param updatedUserId the updatedUserId to set
+	 * @param updatedUser the updatedUser to set
 	 */
-	public void setUpdatedUserId(Integer updatedUserId) {
-		this.updatedUserId = updatedUserId;
+	public void setUpdatedUser(Contacts updatedUser) {
+		this.updatedUser = updatedUser;
 	}
 
 	/**

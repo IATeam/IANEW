@@ -15,7 +15,7 @@
             <column name="messages" />
         </property>
         <property name="description" type="string">
-            <column name="description" />
+            <column name="description" sql-type="longtext"/>
         </property>
     </class>
 </hibernate-mapping>

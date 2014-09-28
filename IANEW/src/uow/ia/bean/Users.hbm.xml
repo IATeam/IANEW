@@ -14,8 +14,9 @@
         <property name="password" type="string">
             <column name="password" />
         </property>
-        <property name="contactId" type="java.lang.Integer">
-            <column name="contact_id" />
-        </property>
+        
+        <many-to-one class="uow.ia.bean.Contacts" name="contact">
+			<column name="contact_id" not-null="false"/>
+		</many-to-one>
     </class>
 </hibernate-mapping>
