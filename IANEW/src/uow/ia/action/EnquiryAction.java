@@ -276,8 +276,8 @@ ModelDriven<Enquiries>, Preparable{
 				
 			if(al.get(i).getId() == null){
 				al.get(i).setContact(iamodel.getContact());
-				al.get(i).setCreatedUserId(user.getContactId());
-				al.get(i).setUpdatedUserId(user.getContactId());
+				al.get(i).setCreatedUser(user.getContact());
+				al.get(i).setUpdatedUser(user.getContact());
 			}
 		}
 		
@@ -292,8 +292,8 @@ ModelDriven<Enquiries>, Preparable{
 		
 				if(eil.get(i).getId() == null){
 					eil.get(i).setEnquiry(getIamodel());
-					eil.get(i).setCreatedUserId(user.getContactId());
-					eil.get(i).setUpdatedUserId(user.getContactId());
+					eil.get(i).setCreatedUser(user.getContact());
+					eil.get(i).setUpdatedUser(user.getContact());
 				}
 			}
 		}
@@ -308,8 +308,8 @@ ModelDriven<Enquiries>, Preparable{
 	
 			if(cdl.get(i).getId() == null){
 				cdl.get(i).setContact(iamodel.getContact());
-				cdl.get(i).setCreatedUserId(user.getContactId());
-				cdl.get(i).setUpdatedUserId(user.getContactId());
+				cdl.get(i).setCreatedUser(user.getContact());
+				cdl.get(i).setUpdatedUser(user.getContact());
 				
 			}
 			}
@@ -325,8 +325,8 @@ ModelDriven<Enquiries>, Preparable{
 		
 				if(cel.get(i).getId() == null){
 					cel.get(i).setContact(iamodel.getContact());
-					cel.get(i).setCreatedUserId(user.getContactId());
-					cel.get(i).setUpdatedUserId(user.getContactId());
+					cel.get(i).setCreatedUser(user.getContact());
+					cel.get(i).setUpdatedUser(user.getContact());
 					
 				}
 			}
@@ -470,7 +470,7 @@ ModelDriven<Enquiries>, Preparable{
 		dangerSelectList = typesService.findDangerTypes();
 		employmentSelectList = typesService.findEmploymentTypes();
 		//setEmploymentList(contact.getEmploymentType());
-		statusSelectList = typesService.findStatusTypes();
+		statusSelectList = typesService.findStatusTypes(1);
 		enquiryTypeSelectList = typesService.findEnquiryTypes();
 
 		if(iamodel != null){
@@ -787,9 +787,9 @@ ModelDriven<Enquiries>, Preparable{
 		System.out.println(
 			"Enquiry id: " + e.getId() + 
 			"\ncreated date: " + e.getCreatedDateTime() + 
-			"\ncreated User: " + e.getCreatedUserId() +
+			"\ncreated User: " + e.getCreatedUser().getFullName() +
 			"\nupdated date: " + e.getUpdatedDateTime() +
-			"\nupdated User: " + e.getUpdatedUserId() +
+			"\nupdated User: " + e.getUpdatedUser().getFullName() +
 			"\nenquiry type: " + e.getEnquiryType().getEnquiryTypeName() +
 			"\nstatus type: " + e.getStatusType().getStatusName() + 
 			"\ndescription: " + e.getDescription() +

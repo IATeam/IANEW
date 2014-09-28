@@ -18,7 +18,7 @@
             <column name="date" length="10" />
         </property>
         <property name="description" type="string">
-            <column name="description" />
+            <column name="description" sql-type="longtext"/>
         </property>
         <property name="contactLinkId" type="java.lang.Integer">
             <column name="contact_link_id" />

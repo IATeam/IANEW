@@ -2,48 +2,48 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated Aug 9, 2014 1:06:21 PM by Hibernate Tools 4.0.0 -->
+<!-- @author Kim To, @version 1.0.1, 28/09/2014
+	Modification History:
+		28/09/2014	Change to match the correct table structure
+ -->
 <hibernate-mapping>
     <class name="uow.ia.bean.PlanGoalsHistories" table="Plan_Goals_Histories" catalog="ianew">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
             <generator class="identity" />
         </id>
-        <timestamp name="timestamp" column="timestamp" />
         <property name="action" type="string">
-            <column name="action" length="10" not-null="true" />
+            <column name="action" length="1" not-null="true" />
         </property>
-        <property name="planGoalId" type="int">
+        <property name="planGoalId" type="java.lang.Integer">
             <column name="plan_goal_id" not-null="true" />
         </property>
-        <property name="planId" type="java.lang.Integer">
-            <column name="plan_id" />
+        <property name="caseId" type="java.lang.Integer">
+            <column name="case_id" />
         </property>
-        <property name="oldGoalTypeId" type="java.lang.Integer">
-            <column name="old_goal_type_id" />
+        <property name="goalTypeId" type="java.lang.Integer">
+            <column name="goal_type_id" />
         </property>
-        <property name="newGoalTypeId" type="java.lang.Integer">
-            <column name="new_goal_type_id" />
+        <property name="completionDateTime" type="java.sql.Date">
+            <column name="completion_date_time" sql-type="datetime"/>
         </property>
-        <property name="oldCompletionDateTime" type="timestamp">
-            <column name="old_completion_date_time" length="19" />
+        <property name="goalDescription" type="string">
+            <column name="goal_description" sql-type="longtext"/>
         </property>
-        <property name="newCompletionDateTime" type="timestamp">
-            <column name="new_completion_date_time" length="19" />
+        <property name="goalAction" type="string">
+            <column name="goal_action" sql-type="longtext"/>
         </property>
-        <property name="oldGoalDescription" type="string">
-            <column name="old_goal_description" />
+        <property name="statusId" type="java.lang.Integer">
+            <column name="status_id" />
         </property>
-        <property name="newGoalDescription" type="string">
-            <column name="new_goal_description" />
-        </property>
-        <property name="oldGoalAction" type="string">
-            <column name="old_goal_action" />
-        </property>
-        <property name="newGoalAction" type="string">
-            <column name="new_goal_action" />
+        <property name="changeOrder" type="java.lang.Integer">
+            <column name="change_order" />
         </property>
         <property name="createdUserId" type="java.lang.Integer">
             <column name="created_user_id" />
+        </property>
+        <property name="createdDateTime" type="java.sql.Date">
+            <column name="created_date_time" sql-type="datetime"/>
         </property>
     </class>
 </hibernate-mapping>

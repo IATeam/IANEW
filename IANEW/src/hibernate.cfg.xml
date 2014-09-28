@@ -15,7 +15,7 @@
         <!-- hibernate search configuration -->
         <!-- @author Kim To -->
 		<property name="hibernate.search.default.indexBase"> 
-			/indexes 
+			indexes 
 		</property> 
         
         <mapping resource="uow/ia/bean/CaseIssues.hbm.xml" />
@@ -68,6 +68,7 @@
         <mapping resource="uow/ia/bean/IaCommunicationsHistories.hbm.xml" />
         <mapping resource="uow/ia/bean/CaseIssuesHistories.hbm.xml" />
         <mapping resource="uow/ia/bean/ContactEmployments.hbm.xml" />
+        <mapping resource="uow/ia/bean/ContactEmploymentsHistories.hbm.xml" />
         
         <!-- Enable listener -->
         <event type="post-update"> 

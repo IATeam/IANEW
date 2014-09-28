@@ -21,7 +21,11 @@ import uow.ia.util.DateUtil;
 
 /**
  * @author Kim To
- * @version 1.0.6, 09/09/2014
+ * @version 1.0.7, 28/09/2014
+ * 
+ * Modification History:
+ * 		28/09/2014:  Change Integer createdUserId and Integer updatedUserId to Contacts createdUser and Contacts updatedUser
+ * 					 Mods to constructor and setters and getters
  */
 
 @Indexed
@@ -75,15 +79,13 @@ public class Contacts implements java.io.Serializable {
 	@Field
 	private Date dob;
 	
-	//@Field
-	private Integer createdUserId;
+	private Contacts createdUser;
 	
 	@DateBridge(resolution = Resolution.DAY)
 	@Field
 	private Date createdDateTime;
 	
-	//@Field
-	private Integer updatedUserId;
+	private Contacts updatedUser;
 	
 	@DateBridge(resolution = Resolution.DAY)
 	@Field
@@ -127,9 +129,9 @@ public class Contacts implements java.io.Serializable {
 	 * @param dangerType
 	 * @param identification
 	 * @param dob
-	 * @param createdUserId
+	 * @param createdUser
 	 * @param createdDateTime
-	 * @param updatedUserId
+	 * @param updatedUser
 	 * @param updatedDateTime
 	 * @param status
 	 * @param timestamp
@@ -147,8 +149,8 @@ public class Contacts implements java.io.Serializable {
 			AccommodationTypes accommodation, String accommodationComment,
 			CulturalBackgroundTypes culturalBackground,
 			String culturalBackgroundComment, DangerTypes dangerType,
-			String identification, Date dob, Integer createdUserId,
-			Date createdDateTime, Integer updatedUserId, Date updatedDateTime,
+			String identification, Date dob, Contacts createdUser,
+			Date createdDateTime, Contacts updatedUser, Date updatedDateTime,
 			StatusTypes status, String timestamp,
 			List<Addresses> addressesList,
 			List<ClientDisabilities> disabilitiesList,
@@ -157,7 +159,6 @@ public class Contacts implements java.io.Serializable {
 			List<ContactEmployments> employmentsList,
 			List<PlanDevelopers> planDevelopersList,
 			List<IndividualCases> advocateCasesList) {
-		super();
 		this.id = id;
 		this.titleType = titleType;
 		this.firstname = firstname;
@@ -174,9 +175,9 @@ public class Contacts implements java.io.Serializable {
 		this.dangerType = dangerType;
 		this.identification = identification;
 		this.dob = dob;
-		this.createdUserId = createdUserId;
+		this.createdUser = createdUser;
 		this.createdDateTime = createdDateTime;
-		this.updatedUserId = updatedUserId;
+		this.updatedUser = updatedUser;
 		this.updatedDateTime = updatedDateTime;
 		this.status = status;
 		this.timestamp = timestamp;
@@ -383,25 +384,20 @@ public class Contacts implements java.io.Serializable {
 	public void setDob(Date dob) {
 		this.dob = dob;
 	}
-	/**
-	 * @return the createdUserId
-	 */
-	public Integer getCreatedUserId() {
-		return this.createdUserId;
-	}
-
-
-
 
 	/**
-	 * @param createdUserId the createdUserId to set
+	 * @return the createdUser
 	 */
-	public void setCreatedUserId(Integer createdUserId) {
-		this.createdUserId = createdUserId;
+	public Contacts getCreatedUser() {
+		return createdUser;
 	}
 
-
-
+	/**
+	 * @param createdUser the createdUser to set
+	 */
+	public void setCreatedUser(Contacts createdUser) {
+		this.createdUser = createdUser;
+	}
 
 	/**
 	 * @return the createdDateTime
@@ -409,9 +405,6 @@ public class Contacts implements java.io.Serializable {
 	public Date getCreatedDateTime() {
 		return this.createdDateTime;
 	}
-
-
-
 
 	/**
 	 * @param createdDateTime the createdDateTime to set
@@ -421,27 +414,19 @@ public class Contacts implements java.io.Serializable {
 	}
 
 
-
-
 	/**
-	 * @return the updatedUserId
+	 * @return the updatedUser
 	 */
-	public Integer getUpdatedUserId() {
-		return this.updatedUserId;
+	public Contacts getUpdatedUser() {
+		return updatedUser;
 	}
 
-
-
-
 	/**
-	 * @param updatedUserId the updatedUserId to set
+	 * @param updatedUser the updatedUser to set
 	 */
-	public void setUpdatedUserId(Integer updatedUserId) {
-		this.updatedUserId = updatedUserId;
+	public void setUpdatedUser(Contacts updatedUser) {
+		this.updatedUser = updatedUser;
 	}
-
-
-
 
 	/**
 	 * @return the updatedDateTime
@@ -449,9 +434,6 @@ public class Contacts implements java.io.Serializable {
 	public Date getUpdatedDateTime() {
 		return this.updatedDateTime;
 	}
-
-
-
 
 	/**
 	 * @param updatedDateTime the updatedDateTime to set

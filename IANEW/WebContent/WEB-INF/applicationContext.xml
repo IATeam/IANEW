@@ -102,7 +102,7 @@
 			<value>
 				hibernate.dialect=org.hibernate.dialect.MySQLDialect
 				hibernate.show_sql=true
-				hibernate.hbm2ddl.auto=update
+				hibernate.hbm2ddl.auto=validate
 				hibernate.current_session_context_class=org.springframework.orm.hibernate4.SpringSessionContext
 				hibernate.connection.autocommit=true
 			</value>

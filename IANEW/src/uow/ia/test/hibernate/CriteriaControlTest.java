@@ -1,5 +1,7 @@
 package uow.ia.test.hibernate;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -17,6 +19,7 @@ import org.testng.log4testng.Logger;
 
 import uow.ia.bean.CriteriaControlValues;
 import uow.ia.bean.CriteriaControls;
+import uow.ia.bean.StatusTypes;
 
 /*
  * Test fetching criteria control records
@@ -33,13 +36,38 @@ public class CriteriaControlTest {
 
 	@Test
 	public void f() {
-		CriteriaControls control = (CriteriaControls)session.get(CriteriaControls.class, 1);
+		// what user will need to passed in 
+		Class entityClass = StatusTypes.class;
+		Integer id = 1;
+		
+		// start getting object
+		CriteriaControls control = (CriteriaControls)session.get(CriteriaControls.class, id);
 		System.out.println("control id: " + control.getId());
 		
 		List<CriteriaControlValues> values = control.getCriteriaControlValuesList();
 		for (CriteriaControlValues v : values) {
 			System.out.println("value id: " + v.getValue());
 		}
+		
+		String valueString = "";
+		for (int i = 0; i < values.size(); i++) {
+			if (i == values.size() - 1) {
+				valueString += values.get(i).getValue();
+			} else {
+				valueString += values.get(i).getValue() + ",";
+			}
+		}
+		
+		List list = session.createSQLQuery("SELECT * FROM " + control.getTableName() + " WHERE " + 
+										control.getColumnName() + " IN (" + valueString + ")").addEntity(entityClass).list();
+		
+		List<StatusTypes> statusList = new ArrayList<StatusTypes>();
+		statusList.addAll(list);
+		
+		for (StatusTypes st : statusList) {
+			System.out.println("Status Types : " + st.getId() + " " + st.getStatusName());
+		}
+		
 	}
 	
 	@AfterMethod

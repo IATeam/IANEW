@@ -11,7 +11,11 @@ import org.hibernate.search.annotations.Resolution;
 
 /**
  * @author Kim To
- * @version 1.0.3, 26/08/2014
+ * @version 1.0.4, 28/09/2014
+ * 
+ * Modification History:
+ * 		28/09/2014 - Mods to change Integer createdUserId and Integer updatedUserId to Contacts createdUser and Contacts updatedUser
+ * 				   - Mods to constructor, setters and getters
  */
 @Indexed
 public class ContactEmployments implements java.io.Serializable{
@@ -31,15 +35,13 @@ public class ContactEmployments implements java.io.Serializable{
 	@Field
 	private String comments;
 	
-	//@Field
-	private Integer createdUserId;
+	private Contacts createdUser;
 	
 	@DateBridge(resolution = Resolution.DAY)
 	@Field
 	private Date createdDateTime;
 	
-	//@Field
-	private Integer updatedUserId;
+	private Contacts updatedUser;
 	
 	@DateBridge(resolution = Resolution.DAY)
 	@Field
@@ -57,26 +59,27 @@ public class ContactEmployments implements java.io.Serializable{
 	 * @param employmentType
 	 * @param workphone
 	 * @param comments
-	 * @param createdUserId
+	 * @param createdUser
 	 * @param createdDateTime
-	 * @param updatedUserId
+	 * @param updatedUser
 	 * @param updatedDateTime
 	 */
 	public ContactEmployments(Integer id, Contacts contact,
 			EmploymentTypes employmentType, String workphone, String comments,
-			Integer createdUserId, Date createdDateTime, Integer updatedUserId,
+			Contacts createdUser, Date createdDateTime, Contacts updatedUser,
 			Date updatedDateTime) {
 		this.id = id;
 		this.contact = contact;
 		this.employmentType = employmentType;
 		this.workphone = workphone;
 		this.comments = comments;
-		this.createdUserId = createdUserId;
+		this.createdUser = createdUser;
 		this.createdDateTime = createdDateTime;
-		this.updatedUserId = updatedUserId;
+		this.updatedUser = updatedUser;
 		this.updatedDateTime = updatedDateTime;
 	}
-	
+
+
 	/**
 	 * @return the id
 	 */
@@ -141,18 +144,21 @@ public class ContactEmployments implements java.io.Serializable{
 	public void setComments(String comments) {
 		this.comments = comments;
 	}
+	
 	/**
-	 * @return the createdUserId
+	 * @return the createdUser
 	 */
-	public Integer getCreatedUserId() {
-		return this.createdUserId;
+	public Contacts getCreatedUser() {
+		return this.createdUser;
 	}
+
 	/**
-	 * @param createdUserId the createdUserId to set
+	 * @param createdUser the createdUser to set
 	 */
-	public void setCreatedUserId(Integer createdUserId) {
-		this.createdUserId = createdUserId;
+	public void setCreatedUser(Contacts createdUser) {
+		this.createdUser = createdUser;
 	}
+
 	/**
 	 * @return the createdDateTime
 	 */
@@ -165,18 +171,21 @@ public class ContactEmployments implements java.io.Serializable{
 	public void setCreatedDateTime(Date createdDateTime) {
 		this.createdDateTime = createdDateTime;
 	}
+	
 	/**
-	 * @return the updatedUserId
+	 * @return the updatedUser
 	 */
-	public Integer getUpdatedUserId() {
-		return this.updatedUserId;
+	public Contacts getUpdatedUser() {
+		return this.updatedUser;
 	}
+
 	/**
-	 * @param updatedUserId the updatedUserId to set
+	 * @param updatedUser the updatedUser to set
 	 */
-	public void setUpdatedUserId(Integer updatedUserId) {
-		this.updatedUserId = updatedUserId;
+	public void setUpdatedUser(Contacts updatedUser) {
+		this.updatedUser = updatedUser;
 	}
+
 	/**
 	 * @return the updatedDateTime
 	 */

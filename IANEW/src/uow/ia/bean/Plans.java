@@ -17,7 +17,10 @@ import org.hibernate.search.annotations.Resolution;
  * Bean class of Plans
  * 
  * @author Kim To
- * @version 1.0.3, 28/08/2014
+ * @version 1.0.4, 28/09/2014
+ * 
+ * Modification History:
+ * 		28/09/2014	Change from Integer to Contacts for createdUser and updatedUser
  */
 
 @Indexed
@@ -28,10 +31,6 @@ public class Plans implements java.io.Serializable {
 	
 	@IndexedEmbedded
 	private StatusTypes statusType;
-	
-	@DateBridge(resolution = Resolution.DAY)
-	@Field
-	private Date createdDateTime;
 	
 	@DateBridge(resolution = Resolution.DAY)
 	@Field
@@ -65,15 +64,17 @@ public class Plans implements java.io.Serializable {
 	@Field
 	private String notes;
 	
+	private Contacts createdUser;
+	
+	@DateBridge(resolution = Resolution.DAY)
+	@Field
+	private Date createdDateTime;
+	
+	private Contacts updatedUser;
+	
 	@DateBridge(resolution = Resolution.DAY)
 	@Field
 	private Date updatedDateTime;
-	
-	@Field
-	private Integer updatedUserId;
-	
-	@Field
-	private Integer createdUserId;
 	
 	private IndividualCases individualCase;
 
@@ -84,11 +85,9 @@ public class Plans implements java.io.Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-
 	/**
 	 * @param id
 	 * @param statusType
-	 * @param createdDateTime
 	 * @param closedDateTime
 	 * @param lastReviewedDate
 	 * @param reviewFrequency
@@ -98,22 +97,21 @@ public class Plans implements java.io.Serializable {
 	 * @param authorisedBy
 	 * @param authorisedByDate
 	 * @param notes
+	 * @param createdUser
+	 * @param createdDateTime
+	 * @param updatedUser
 	 * @param updatedDateTime
-	 * @param updatedUserId
-	 * @param createdUserId
 	 * @param individualCase
 	 */
-	public Plans(Integer id, StatusTypes statusType, Date createdDateTime,
-			Date closedDateTime, Date lastReviewedDate,
-			ReviewFrequencies reviewFrequency, Date providedPlanDate,
-			Date consentSignedDate, Contacts supportPerson,
-			Contacts authorisedBy, Date authorisedByDate, String notes,
-			Date updatedDateTime, Integer updatedUserId, Integer createdUserId,
+	public Plans(Integer id, StatusTypes statusType, Date closedDateTime,
+			Date lastReviewedDate, ReviewFrequencies reviewFrequency,
+			Date providedPlanDate, Date consentSignedDate,
+			Contacts supportPerson, Contacts authorisedBy,
+			Date authorisedByDate, String notes, Contacts createdUser,
+			Date createdDateTime, Contacts updatedUser, Date updatedDateTime,
 			IndividualCases individualCase) {
-		super();
 		this.id = id;
 		this.statusType = statusType;
-		this.createdDateTime = createdDateTime;
 		this.closedDateTime = closedDateTime;
 		this.lastReviewedDate = lastReviewedDate;
 		this.reviewFrequency = reviewFrequency;
@@ -123,9 +121,10 @@ public class Plans implements java.io.Serializable {
 		this.authorisedBy = authorisedBy;
 		this.authorisedByDate = authorisedByDate;
 		this.notes = notes;
+		this.createdUser = createdUser;
+		this.createdDateTime = createdDateTime;
+		this.updatedUser = updatedUser;
 		this.updatedDateTime = updatedDateTime;
-		this.updatedUserId = updatedUserId;
-		this.createdUserId = createdUserId;
 		this.individualCase = individualCase;
 	}
 
@@ -274,6 +273,35 @@ public class Plans implements java.io.Serializable {
 	public void setNotes(String notes) {
 		this.notes = notes;
 	}
+	
+	/**
+	 * @return the createdUser
+	 */
+	public Contacts getCreatedUser() {
+		return createdUser;
+	}
+
+	/**
+	 * @param createdUser the createdUser to set
+	 */
+	public void setCreatedUser(Contacts createdUser) {
+		this.createdUser = createdUser;
+	}
+
+	/**
+	 * @return the updatedUser
+	 */
+	public Contacts getUpdatedUser() {
+		return updatedUser;
+	}
+
+	/**
+	 * @param updatedUser the updatedUser to set
+	 */
+	public void setUpdatedUser(Contacts updatedUser) {
+		this.updatedUser = updatedUser;
+	}
+
 	/**
 	 * @return the updatedDateTime
 	 */
@@ -286,31 +314,6 @@ public class Plans implements java.io.Serializable {
 	public void setUpdatedDateTime(Date updatedDateTime) {
 		this.updatedDateTime = updatedDateTime;
 	}
-	/**
-	 * @return the updatedUserId
-	 */
-	public Integer getUpdatedUserId() {
-		return this.updatedUserId;
-	}
-	/**
-	 * @param updatedUserId the updatedUserId to set
-	 */
-	public void setUpdatedUserId(Integer updatedUserId) {
-		this.updatedUserId = updatedUserId;
-	}
-	/**
-	 * @return the createdUserId
-	 */
-	public Integer getCreatedUserId() {
-		return this.createdUserId;
-	}
-	/**
-	 * @param createdUserId the createdUserId to set
-	 */
-	public void setCreatedUserId(Integer createdUserId) {
-		this.createdUserId = createdUserId;
-	}
-
 
 	/**
 	 * @return the individualCase

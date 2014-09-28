@@ -446,7 +446,7 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 		disabilitySelectList = typesService.findDisabilityTypes();
 		issueSelectList = typesService.findIssueTypes();
 		dangerSelectList = typesService.findDangerTypes();
-		statusSelectList = typesService.findStatusTypes();
+		statusSelectList = typesService.findStatusTypes(1);
 		employmentSelectList = typesService.findEmploymentTypes();
 		advocateSelectList = caseServices.findAdvocates();
 		prioritySelectList = typesService.findPriorityTypes();

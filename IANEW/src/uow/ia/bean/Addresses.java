@@ -15,7 +15,12 @@ import org.hibernate.search.annotations.Resolution;
  * Bean class for Addresses
  * 
  * @author Kim To
- * @version 1.0.2, 29/08/2014
+ * @version 1.0.3, 27/09/2014
+ * 
+ * Modification History:
+ * 		27/09/2014
+ * 			Change from Integer createdUserId and Integer updatedUserId to Contacts object
+ * 			Mods to constructor, setters and getters
  */
 
 @Indexed
@@ -42,18 +47,12 @@ public class Addresses implements java.io.Serializable {
 	@Field
 	private String homephone;
 	
-	//@Field
-	private Integer createdUserId;
+	private Contacts createdUser;
 	
-	@DateBridge(resolution = Resolution.DAY)
-	@Field
 	private Date createdDateTime;
 	
-	//@Field
-	private Integer updatedUserId;
+	private Contacts updatedUser;
 	
-	@DateBridge(resolution = Resolution.DAY)
-	@Field
 	private Date updatedDateTime;
 	
 	@IndexedEmbedded
@@ -62,6 +61,7 @@ public class Addresses implements java.io.Serializable {
 	public Addresses() {
 	}
 
+	
 	/**
 	 * @param id
 	 * @param street
@@ -70,17 +70,16 @@ public class Addresses implements java.io.Serializable {
 	 * @param state
 	 * @param country
 	 * @param homephone
-	 * @param createdUserId
+	 * @param createdUser
 	 * @param createdDateTime
-	 * @param updatedUserId
+	 * @param updatedUser
 	 * @param updatedDateTime
 	 * @param contact
 	 */
 	public Addresses(Integer id, String street, String suburb, String postcode,
 			String state, String country, String homephone,
-			Integer createdUserId, Date createdDateTime, Integer updatedUserId,
+			Contacts createdUser, Date createdDateTime, Contacts updatedUser,
 			Date updatedDateTime, Contacts contact) {
-		super();
 		this.id = id;
 		this.street = street;
 		this.suburb = suburb;
@@ -88,12 +87,13 @@ public class Addresses implements java.io.Serializable {
 		this.state = state;
 		this.country = country;
 		this.homephone = homephone;
-		this.createdUserId = createdUserId;
+		this.createdUser = createdUser;
 		this.createdDateTime = createdDateTime;
-		this.updatedUserId = updatedUserId;
+		this.updatedUser = updatedUser;
 		this.updatedDateTime = updatedDateTime;
 		this.contact = contact;
 	}
+
 
 	public Integer getId() {
 		return this.id;
@@ -163,19 +163,22 @@ public class Addresses implements java.io.Serializable {
 		this.homephone = homephone;
 	}
 
-	/**
-	 * @return the createdUserId
-	 */
-	public Integer getCreatedUserId() {
-		return this.createdUserId;
-	}
 
 	/**
-	 * @param createdUserId the createdUserId to set
+	 * @return the createdUser
 	 */
-	public void setCreatedUserId(Integer createdUserId) {
-		this.createdUserId = createdUserId;
+	public Contacts getCreatedUser() {
+		return createdUser;
 	}
+
+
+	/**
+	 * @param createdUser the createdUser to set
+	 */
+	public void setCreatedUser(Contacts createdUser) {
+		this.createdUser = createdUser;
+	}
+
 
 	/**
 	 * @return the createdDateTime
@@ -191,19 +194,22 @@ public class Addresses implements java.io.Serializable {
 		this.createdDateTime = createdDateTime;
 	}
 
-	/**
-	 * @return the updatedUserId
-	 */
-	public Integer getUpdatedUserId() {
-		return this.updatedUserId;
-	}
 
 	/**
-	 * @param updatedUserId the updatedUserId to set
+	 * @return the updatedUser
 	 */
-	public void setUpdatedUserId(Integer updatedUserId) {
-		this.updatedUserId = updatedUserId;
+	public Contacts getUpdatedUser() {
+		return updatedUser;
 	}
+
+
+	/**
+	 * @param updatedUser the updatedUser to set
+	 */
+	public void setUpdatedUser(Contacts updatedUser) {
+		this.updatedUser = updatedUser;
+	}
+
 
 	/**
 	 * @return the updatedDateTime

@@ -2,20 +2,24 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated Aug 9, 2014 1:06:21 PM by Hibernate Tools 4.0.0 -->
+<!-- @author Kim To, v1.0.1, 28/09/2014
+	Modification History:
+		28/09/2014: Add property display_order
+ -->
 <hibernate-mapping>
     <class name="uow.ia.bean.AddressesHistories" table="Addresses_Histories" catalog="ianew">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
             <generator class="identity" />
         </id>
-        <property name="addressId" type="int">
+        <property name="addressId" type="java.lang.Integer">
             <column name="address_id" not-null="true" />
         </property>
         <property name="action" type="string">
             <column name="action" length="10" not-null="true" />
         </property>
         <property name="street" type="string">
-            <column name="stret" />
+            <column name="street" />
         </property>
         <property name="suburb" type="string">
             <column name="suburb" />
@@ -32,11 +36,14 @@
         <property name="homephone" type="string">
             <column name="homephone" />
         </property>
-        <property name="createdUserId" type="int">
-            <column name="created_user_id" not-null="true" />
+        <property name="changeOrder" type="java.lang.Integer">
+            <column name="change_order" />
         </property>
-        <property name="createdDateTime" type="timestamp">
-            <column name="created_date_time" length="19" not-null="true" />
+        <property name="createdUserId" type="java.lang.Integer">
+            <column name="created_user_id" not-null="false" />
+        </property>
+        <property name="createdDateTime" type="java.sql.Date">
+            <column name="created_date_time" length="19" not-null="false" sql-type="datetime"/>
         </property>
     </class>
 </hibernate-mapping>

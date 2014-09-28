@@ -45,7 +45,7 @@ public interface TypesService {
 	
 	public List<IssueTypes> findIssueTypes();
 	
-	public List<StatusTypes> findStatusTypes();
+	public List<StatusTypes> findStatusTypes(int id);
 	
 	public List<TitleTypes> findTitleTypes();
 	
@@ -58,25 +58,25 @@ public interface TypesService {
 	/*
 	 * 
 	 */
-	public int getDangerTypeId(String name);
+	public DangerTypes getDangerTypeId(String name);
 	
-	public int getStatusTypeId(String name);
+	public StatusTypes getStatusTypeId(String name);
 	
-	public int getTitleTypeId(String name);
+	public TitleTypes getTitleTypeId(String name);
 	
-	public int getGenderTypeId(String name);
+	public GenderTypes getGenderTypeId(String name);
 	
-	public int getCulturalBackgroundTypeId(String name);
+	public CulturalBackgroundTypes getCulturalBackgroundTypeId(String name);
 	
-	public int getAccommodationTypeId(String name);
+	public AccommodationTypes getAccommodationTypeId(String name);
 	
-	public int getDisabilityTypeId(String name);
+	public DisabilityTypes getDisabilityTypeId(String name);
 	
-	public int getIssueTypeId(String name);
+	public IssueTypes getIssueTypeId(String name);
 	
-	public int getEnquiryTypeId(String name);
+	public EnquiryTypes getEnquiryTypeId(String name);
 	
-	public int getEmploymentTypeId(String name);
+	public EmploymentTypes getEmploymentTypeId(String name);
 
 	/*
 	 *

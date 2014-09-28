@@ -2,7 +2,10 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated Aug 9, 2014 1:06:21 PM by Hibernate Tools 4.0.0 -->
-<!-- Modified by Kim To, v.1.0.2, 29/08/2014 -->
+<!-- Modified by Kim To, v.1.0.3, 28/09/2014 
+	Modification History:
+		28/09/2014	Map Contacts to created_user_id and updated_user_id
+-->
 <hibernate-mapping>
     <class name="uow.ia.bean.Risks" table="Risks" dynamic-insert="true">
         <id name="id" type="java.lang.Integer">
@@ -10,27 +13,27 @@
             <generator class="identity" />
         </id>
         <property name="riskDescription" type="string">
-            <column name="risk_description" />
+            <column name="risk_description" sql-type="longtext"/>
         </property>
         <property name="riskManagement" type="string">
-            <column name="risk_management" />
-        </property>
-        <property name="createdUserId" type="java.lang.Integer">
-            <column name="created_user_id" />
+            <column name="risk_management" sql-type="longtext"/>
         </property>
         <property name="createdDateTime" type="java.sql.Date">
-            <column name="created_date_time" length="19" />
-        </property>
-        <property name="updatedUserId" type="java.lang.Integer">
-            <column name="updated_user_id" />
+            <column name="created_date_time" length="19" sql-type="datetime"/>
         </property>
         <property name="updatedDateTime" type="java.sql.Date">
-            <column name="updated_date_time" length="19" />
+            <column name="updated_date_time" length="19" sql-type="datetime"/>
         </property>
         
         <!-- Many to one relationship -->
         <many-to-one class="uow.ia.bean.IndividualCases" name="individualCase">
         	<column name="case_id" not-null="true"/>
+        </many-to-one>
+        <many-to-one class="uow.ia.bean.Contacts" name="createdUser">
+        	<column name="created_user_id" not-null="false"/>
+        </many-to-one>
+        <many-to-one class="uow.ia.bean.Contacts" name="updatedUser">
+        	<column name="updated_user_id" not-null="false"/>
         </many-to-one>
     </class>
 </hibernate-mapping>

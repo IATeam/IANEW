@@ -2,54 +2,48 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated Aug 9, 2014 1:06:21 PM by Hibernate Tools 4.0.0 -->
+<!-- @author Kim To, @version 1.0.1, 28/09/2014
+	Modification History:
+		28/09/2014 - Mods to properties to match table structure
+ -->
 <hibernate-mapping>
     <class name="uow.ia.bean.IaCommunicationsHistories" table="IA_Communications_Histories" catalog="ianew">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
             <generator class="identity" />
         </id>
-        <timestamp name="timestamp" column="timestamp" />
         <property name="action" type="string">
             <column name="action" length="10" not-null="true" />
         </property>
-        <property name="communicationId" type="int">
-            <column name="communication_id" not-null="true" />
+        <property name="caseCommunicationId" type="java.lang.Integer">
+            <column name="case_communication_id" not-null="true" />
         </property>
         <property name="caseId" type="java.lang.Integer">
             <column name="case_id" />
         </property>
-        <property name="oldCommunicationDate" type="date">
-            <column name="old_communication_date" length="10" />
+        <property name="communicationDate" type="java.sql.Date">
+            <column name="communication_date" length="10" />
         </property>
-        <property name="newCommunicationDate" type="date">
-            <column name="new_communication_date" length="10" />
+        <property name="communicationTypeId" type="java.lang.Integer">
+            <column name="communication_type_id" />
         </property>
-        <property name="oldCommunicationTypeId" type="java.lang.Integer">
-            <column name="old_communication_type_id" />
+        <property name="description" type="string">
+            <column name="description" sql-type="longtext"/>
         </property>
-        <property name="newCommunicationTypeId" type="java.lang.Integer">
-            <column name="new_communication_type_id" />
+        <property name="timeSpent" type="java.lang.Float">
+            <column name="time_spent" precision="12" scale="2" />
         </property>
-        <property name="oldDescription" type="string">
-            <column name="old_description" />
+        <property name="importantFlag" type="string">
+            <column name="important_flag" />
         </property>
-        <property name="newDescription" type="string">
-            <column name="new_description" />
-        </property>
-        <property name="oldTimeSpent" type="java.lang.Float">
-            <column name="old_time_spent" precision="12" scale="0" />
-        </property>
-        <property name="newTimeSpent" type="java.lang.Float">
-            <column name="new_time_spent" precision="12" scale="0" />
-        </property>
-        <property name="oldImportantFlag" type="string">
-            <column name="old_important_flag" />
-        </property>
-        <property name="newImportantFlag" type="string">
-            <column name="new_important_flag" />
+        <property name="changeOrder" type="java.lang.Integer">
+            <column name="change_order" />
         </property>
         <property name="createdUserId" type="java.lang.Integer">
             <column name="created_user_id" />
+        </property>
+        <property name="createdDateTime" type="java.sql.Date">
+            <column name="created_date_time" sql-type="datetime"/>
         </property>
     </class>
 </hibernate-mapping>

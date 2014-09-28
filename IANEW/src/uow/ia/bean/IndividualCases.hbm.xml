@@ -2,7 +2,10 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated Aug 9, 2014 1:06:21 PM by Hibernate Tools 4.0.0 -->
-<!-- Modified By Kim To, v.1.0.6, 30/08/2014 -->
+<!-- Modified By Kim To, v.1.0.7, 28/09/2014 
+	Modification History:
+		28/09/2014	Mods to map Contacts to created_user_id and updated_user_id
+-->
 <hibernate-mapping>
     <class name="uow.ia.bean.IndividualCases" table="Individual_Cases"  dynamic-insert="true">
         <id name="id" type="java.lang.Integer">
@@ -10,22 +13,16 @@
             <generator class="identity" />
         </id>
         <property name="description" type="string">
-            <column name="description" />
+            <column name="description" sql-type="longtext"/>
         </property>
         <property name="serviceProviderId" type="java.lang.Integer">
             <column name="service_provider_id" />
         </property>
         <property name="createdDateTime" type="java.sql.Date">
-            <column name="created_date_time" length="19" />
-        </property>
-        <property name="createdUserId" type="java.lang.Integer">
-            <column name="created_user_id" />
+            <column name="created_date_time" length="19" sql-type="datetime"/>
         </property>
         <property name="updatedDateTime" type="java.sql.Date">
-            <column name="updated_date_time" length="19" />
-        </property>
-        <property name="updatedUserId" type="java.lang.Integer">
-            <column name="updated_user_id" />
+            <column name="updated_date_time" length="19" sql-type="datetime"/>
         </property>
         <property name="referredTo" type="string">
             <column name="referred_to" />
@@ -44,6 +41,12 @@
         </many-to-one>
         <many-to-one class="uow.ia.bean.StatusTypes" name="statusType">
         	<column name="case_status_id" not-null="false"/>
+        </many-to-one>
+        <many-to-one class="uow.ia.bean.Contacts" name="createdUser">
+        	<column name="created_user_id" not-null="false" />
+        </many-to-one>
+        <many-to-one class="uow.ia.bean.Contacts" name="updatedUser">
+        	<column name="updated_user_id" not-null="false" />
         </many-to-one>
         
         <!-- One-to-many relationship -->
