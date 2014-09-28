@@ -11,32 +11,29 @@
 <body>
 	<h3>New Enquiry Type</h3>
 	
-	<s:url var="urlDisType" namespace="/admin" action="saveNewEnquiryType" includeContext="false"/>
+	<s:url var="urlEnType" namespace="/admin" action="saveNewEnquiryType" includeContext="false"/>
 	
-	<s:form id="newDisabilityTypeForm" method="post" action="%{urlDisType}">
-		<div>
+	<s:form id="newEnquiryTypeForm" method="post" action="%{urlEnType}">
+		<div class="greybackground">>
 			<s:label for="enquiryTypeName" value="Name: "/>
 			<s:textfield id="enquiryTypeName" name="enquiryTypeName" />
 			<s:label for="enquiryTypeDescription" value="Description" />
 			<s:textarea id="enquiryTypeDescription" name ="enquiryTypeDescription" />
 			<table>
-				<tr>
+				<thead>
 					<th>Enquiry Type Name</th>
 					<th>Enquiry Type Description</th>
-				</tr>
-				<s:iterator value="enquiryTypeSelectList" status="stat">
-				<tr>
-					<td><s:property value="enquiryTypeName"></s:property></td>
-					<td><s:property value="enquiryTypeDescription"></s:property></td>
-				</tr>
-				</s:iterator>
+				</thead>
+				<tbody id="tbodyEnquiryType">
+					<%@include file="iterEnquiryTypes.jsp" %>
+				</tbody>
 			</table>
 			
 		</div>
 		
 		<input type="button" value="Cancel" id="btnCancel"/>
 		<input type="button" value="edit" id="btnEdit"/>
-		<sj:submit id="save" targets="enquiryTypeSelect" cssClass="two columns alpha" value="Save" onclick=""/>
+		<sj:submit id="saveNewEnquiryType" targets="tbodyEnquiryType" cssClass="two columns alpha" value="Save"/>
 	</s:form>
 	<script>
 	$("#btnCancel").click(function(){

@@ -11,32 +11,29 @@
 <body>
 	<h3>New Danger Type</h3>
 	
-	<s:url var="urlDisType" namespace="/admin" action="saveNewDangerType" includeContext="false"/>
+	<s:url var="urlDanType" namespace="/admin" action="saveNewDangerType" includeContext="false"/>
 	
-	<s:form id="newDisabilityTypeForm" method="post" action="%{urlDisType}">
-		<div>
+	<s:form id="newDangerTypeForm" method="post" action="%{urlDanType}">
+		<div class="greybackground">
 			<s:label for="dangerName" value="Name: "/>
 			<s:textfield id="dangerName" name="dangerName" />
 			<s:label for="dangerDescription" value="Description" />
 			<s:textarea id="dangerDescription" name ="DangerDescription" />
 			<table>
-				<tr>
+				<thead>
 					<th>Danger Name</th>
 					<th>Danger Description</th>
-				</tr>
-				<s:iterator value="dangerSelectList" status="stat">
-				<tr>
-					<td><s:property value="dangerName"></s:property></td>
-					<td><s:property value="dangerDescription"></s:property></td>
-				</tr>
-				</s:iterator>
+				</thead>
+				<tbody id="tbodyDangerType">
+					<%@include file="iterDangerTypes.jsp" %>
+				</tbody>
 			</table>
 			
 		</div>
 		
 		<input type="button" value="Cancel" id="btnCancel"/>
 		<input type="button" value="edit" id="btnEdit"/>
-		<sj:submit id="save" targets="dangerTypeSelect" cssClass="two columns alpha" value="Save" onclick=""/>
+		<sj:submit id="saveNewDangerType" targets="tbodyDangerType" cssClass="two columns alpha" value="Save"/>
 	</s:form>
 	<script>
 	$("#btnCancel").click(function(){

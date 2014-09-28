@@ -11,28 +11,26 @@
 <body>
 	<h3>New Status Type</h3>
 	
-	<s:url var="urlDisType" namespace="/admin" action="saveNewStatusType" includeContext="false"/>
+	<s:url var="urlStaType" namespace="/admin" action="saveNewStatusType" includeContext="false"/>
 	
-	<s:form id="newDisabilityTypeForm" method="post" action="%{urlDisType}">
-		<div>
+	<s:form id="newStatusTypeForm" method="post" action="%{urlStaType}">
+		<div class="greybackground">
 			<s:label for="statusName" value="Name: "/>
 			<s:textfield id="statusName" name="statusName" />
 			<table>
-				<tr>
+				<thead>
 					<th>Status Name</th>
-				</tr>
-				<s:iterator value="statusSelectList" status="stat">
-				<tr>
-					<td><s:property value="statusName"></s:property></td>
-				</tr>
-				</s:iterator>
+				</thead>
+				<tbody id="tbodyStatusType">
+					<%@include file="iterStatusTypes.jsp" %>
+				</tbody>
 			</table>
 			
 		</div>
 		
 		<input type="button" value="Cancel" id="btnCancel"/>
 		<input type="button" value="edit" id="btnEdit"/>
-		<sj:submit id="save" targets="statusTypeSelect" cssClass="two columns alpha" value="Save" onclick=""/>
+		<sj:submit id="saveNewStatus" targets="tbodyStatusType" cssClass="two columns alpha" value="Save"/>
 	</s:form>
 	<script>
 	$("#btnCancel").click(function(){

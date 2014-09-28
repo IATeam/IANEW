@@ -11,32 +11,28 @@
 <body>
 	<h3>New Cultural Background Type</h3>
 	
-	<s:url var="urlDisType" namespace="/admin" action="saveNewCulturalBackgroundType" includeContext="false"/>
+	<s:url var="urlCulType" namespace="/admin" action="saveNewculturalBackgroundType" includeContext="false"/>
 	
-	<s:form id="newDisabilityTypeForm" method="post" action="%{urlDisType}">
-		<div>
+	<s:form id="newCulturalBackgroundTypeForm" method="post" action="%{urlCulType}">
+		<div class="greybackground">
 			<s:label for="culturalBackgroundName" value="Name: "/>
 			<s:textfield id="culturalBackgroundName" name="culturalBackgroundName" />
 			<s:label for="culturalBackgroundDescription" value="Description" />
 			<s:textarea id="culturalBackgroundDescription" name ="culturalBackgroundDescription" />
 			<table>
-				<tr>
+				<thead>
 					<th>Cultural Background Type Name</th>
 					<th>Cultural Background Type Description</th>
-				</tr>
-				<s:iterator value="culturalBackgroundSelectList" status="stat">
-				<tr>
-					<td><s:property value="culturalBackgroundName"></s:property></td>
-					<td><s:property value="culturalBackgroundDescription"></s:property></td>
-				</tr>
-				</s:iterator>
+				</thead>
+				<tbody id="tbodyCulturalBackgroundType">
+					<%@include file="iterCulturalBackgroundTypes.jsp" %>
+				</tbody>
 			</table>
-			
 		</div>
 		
 		<input type="button" value="Cancel" id="btnCancel"/>
 		<input type="button" value="edit" id="btnEdit"/>
-		<sj:submit id="save" targets="culturalBackgroundSelect" cssClass="two columns alpha" value="Save" onclick=""/>
+		<sj:submit id="saveNewCulturalBackgroundType" targets="tbodyCulturalBackgroundType" cssClass="two columns alpha" value="Save"/>
 	</s:form>
 	<script>
 	$("#btnCancel").click(function(){
