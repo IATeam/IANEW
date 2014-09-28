@@ -13,7 +13,10 @@ import org.hibernate.search.annotations.Resolution;
 
 /**
  * @author Kim To
- * @version 1.0.3, 29/08/2014
+ * @version 1.0.4, 28/09/2014
+ * 
+ * Modification History:
+ * 		28/09/2014	Change from Integer to Contacts for createdUser and updatedUser
  */
 
 @Indexed
@@ -28,15 +31,13 @@ public class Risks implements java.io.Serializable {
 	@Field
 	private String riskManagement;
 	
-	@Field
-	private Integer createdUserId;
+	private Contacts createdUser;
 	
 	@DateBridge(resolution = Resolution.DAY)
 	@Field
 	private Date createdDateTime;
 	
-	@Field
-	private Integer updatedUserId;
+	private Contacts updatedUser;
 	
 	@DateBridge(resolution = Resolution.DAY)
 	@Field
@@ -52,30 +53,31 @@ public class Risks implements java.io.Serializable {
 	public Risks() {
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	/**
 	 * @param id
 	 * @param riskDescription
 	 * @param riskManagement
-	 * @param createdUserId
+	 * @param createdUser
 	 * @param createdDateTime
-	 * @param updatedUserId
+	 * @param updatedUser
 	 * @param updatedDateTime
 	 * @param individualCase
 	 */
 	public Risks(Integer id, String riskDescription, String riskManagement,
-			Integer createdUserId, Date createdDateTime, Integer updatedUserId,
+			Contacts createdUser, Date createdDateTime, Contacts updatedUser,
 			Date updatedDateTime, IndividualCases individualCase) {
-		super();
 		this.id = id;
 		this.riskDescription = riskDescription;
 		this.riskManagement = riskManagement;
-		this.createdUserId = createdUserId;
+		this.createdUser = createdUser;
 		this.createdDateTime = createdDateTime;
-		this.updatedUserId = updatedUserId;
+		this.updatedUser = updatedUser;
 		this.updatedDateTime = updatedDateTime;
 		this.individualCase = individualCase;
 	}
+
+
 
 	/**
 	 * @return the id
@@ -126,18 +128,20 @@ public class Risks implements java.io.Serializable {
 		this.individualCase = individualCase;
 	}
 
+	
+
 	/**
-	 * @return the createdUserId
+	 * @return the createdUser
 	 */
-	public Integer getCreatedUserId() {
-		return this.createdUserId;
+	public Contacts getCreatedUser() {
+		return createdUser;
 	}
 
 	/**
-	 * @param createdUserId the createdUserId to set
+	 * @param createdUser the createdUser to set
 	 */
-	public void setCreatedUserId(Integer createdUserId) {
-		this.createdUserId = createdUserId;
+	public void setCreatedUser(Contacts createdUser) {
+		this.createdUser = createdUser;
 	}
 
 	/**
@@ -155,17 +159,17 @@ public class Risks implements java.io.Serializable {
 	}
 
 	/**
-	 * @return the updatedUserId
+	 * @return the updatedUser
 	 */
-	public Integer getUpdatedUserId() {
-		return this.updatedUserId;
+	public Contacts getUpdatedUser() {
+		return updatedUser;
 	}
 
 	/**
-	 * @param updatedUserId the updatedUserId to set
+	 * @param updatedUser the updatedUser to set
 	 */
-	public void setUpdatedUserId(Integer updatedUserId) {
-		this.updatedUserId = updatedUserId;
+	public void setUpdatedUser(Contacts updatedUser) {
+		this.updatedUser = updatedUser;
 	}
 
 	/**

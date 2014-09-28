@@ -2,18 +2,18 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated Aug 9, 2014 1:06:21 PM by Hibernate Tools 4.0.0 -->
+<!-- @author Kim To, @version 1.0.1, 28/09/2014
+	Modification History:
+		28/09/2014 Change to match table structure
+ -->
 <hibernate-mapping>
     <class name="uow.ia.bean.IndividualCasesHistories" table="Individual_Cases_Histories" catalog="ianew">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
             <generator class="identity" />
         </id>
-        <timestamp name="timestamp" column="timestamp" />
         <property name="action" type="string">
             <column name="action" length="10" not-null="true" />
-        </property>
-        <property name="changeOrder" type="java.lang.Integer">
-            <column name="change_order" not-null="true" />
         </property>
         <property name="caseId" type="java.lang.Integer">
             <column name="case_id" not-null="true" />
@@ -28,7 +28,7 @@
             <column name="case_status_id" />
         </property>
         <property name="description" type="string">
-            <column name="description" />
+            <column name="description" sql-type="longtext"/>
         </property>
         <property name="priorityId" type="java.lang.Integer">
             <column name="priority_id" />
@@ -42,11 +42,17 @@
         <property name="oldCaseId" type="java.lang.Integer">
             <column name="old_case_id" />
         </property>
-        <property name="createdUserId" type="java.lang.Integer">
-            <column name="created_user_id" not-null="true" />
-        </property>
         <property name="relatedEnquiryId" type="java.lang.Integer">
-            <column name="related_enquiry_id" not-null="true" />
+            <column name="related_enquiry_id" not-null="false" />
+        </property>
+        <property name="changeOrder" type="java.lang.Integer">
+            <column name="change_order" not-null="true" />
+        </property>
+        <property name="createdUserId" type="java.lang.Integer">
+            <column name="created_user_id" not-null="false" />
+        </property>
+        <property name="createdDateTime" type="java.sql.Date">
+            <column name="created_date_time" not-null="false" sql-type="datetime"/>
         </property>
         
     </class>

@@ -2,38 +2,38 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated Aug 9, 2014 1:06:21 PM by Hibernate Tools 4.0.0 -->
+<!-- @author Kim To, @version 1.0.1, 28/09/2014
+	Modification History:
+		28/09/2014	Modst to map bean to table correctly
+ -->
 <hibernate-mapping>
     <class name="uow.ia.bean.PlansHistories" table="Plans_Histories" catalog="ianew">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
             <generator class="identity" />
         </id>
-        <timestamp name="timestamp" column="TIMESTAMP" />
-        <property name="planId" type="int">
-            <column name="plan_id" not-null="true" />
+        <property name="caseId" type="java.lang.Integer">
+            <column name="case_id" not-null="true" />
         </property>
         <property name="action" type="string">
-            <column name="action" length="10" not-null="true" />
-        </property>
-        <property name="changeOrder" type="int">
-            <column name="change_order" not-null="true" />
+            <column name="action" length="1" not-null="true" />
         </property>
         <property name="statusId" type="java.lang.Integer">
             <column name="status_id" />
         </property>
-        <property name="closedDate" type="date">
-            <column name="closed_date" length="10" />
+        <property name="closedDateTime" type="java.sql.Date">
+            <column name="closed_date_time" length="10" sql-type="datetime"/>
         </property>
-        <property name="lastReviewedDate" type="date">
+        <property name="lastReviewedDate" type="java.sql.Date">
             <column name="last_reviewed_date" length="10" />
         </property>
         <property name="reviewFrequencyId" type="java.lang.Integer">
             <column name="review_frequency_id" />
         </property>
-        <property name="providedPlanDate" type="date">
+        <property name="providedPlanDate" type="java.sql.Date">
             <column name="provided_plan_date" length="10" />
         </property>
-        <property name="consentSignedDate" type="date">
+        <property name="consentSignedDate" type="java.sql.Date">
             <column name="consent_signed_date" length="10" />
         </property>
         <property name="supportPersonId" type="java.lang.Integer">
@@ -42,14 +42,20 @@
         <property name="authorisedById" type="java.lang.Integer">
             <column name="authorised_by_id" />
         </property>
-        <property name="authorisedByDate" type="date">
+        <property name="authorisedByDate" type="java.sql.Date">
             <column name="authorised_by_date" length="10" />
         </property>
         <property name="notes" type="string">
             <column name="notes" />
         </property>
+        <property name="changeOrder" type="java.lang.Integer">
+            <column name="change_order" />
+        </property>
         <property name="createdUserId" type="java.lang.Integer">
             <column name="created_user_id" />
+        </property>
+        <property name="createdDateTime" type="java.sql.Date">
+            <column name="created_date_time" sql-type="datetime"/>
         </property>
     </class>
 </hibernate-mapping>

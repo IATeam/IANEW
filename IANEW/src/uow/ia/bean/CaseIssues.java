@@ -13,7 +13,12 @@ import org.hibernate.search.annotations.Resolution;
 
 /**
  * @author Kim To
- * @version 1.0.2, 29/08/2014
+ * @version 1.0.3, 27/09/2014
+ * 
+ * Modification History:
+ * 		27/09/2014
+ * 			Change Integer createdUserId and Integer updatedUserId to Contacts object
+ * 			Change constructor, setters and getters
  */
 
 @Indexed
@@ -42,18 +47,17 @@ public class CaseIssues implements java.io.Serializable {
 	@Field
 	private Date createdDateTime;
 	
-	//@Field
-	private Integer createdUserId;
+	private Contacts createdUser;
 	
 	@DateBridge(resolution = Resolution.DAY)
 	@Field
 	private Date updatedDateTime;
 	
-	//@Field
-	private Integer updatedUserId;
+	private Contacts updatedUser;
 
 	public CaseIssues() {
 	}
+	
 	/**
 	 * @param id
 	 * @param individualCase
@@ -62,15 +66,14 @@ public class CaseIssues implements java.io.Serializable {
 	 * @param statusType
 	 * @param completedDate
 	 * @param createdDateTime
-	 * @param createdUserId
+	 * @param createdUser
 	 * @param updatedDateTime
-	 * @param udpatedUserId
+	 * @param updatedUser
 	 */
 	public CaseIssues(Integer id, IndividualCases individualCase,
 			IssueTypes issue, String comments, StatusTypes statusType,
-			Date completedDate, Date createdDateTime, Integer createdUserId,
-			Date updatedDateTime, Integer updatedUserId) {
-		super();
+			Date completedDate, Date createdDateTime, Contacts createdUser,
+			Date updatedDateTime, Contacts updatedUser) {
 		this.id = id;
 		this.individualCase = individualCase;
 		this.issue = issue;
@@ -78,10 +81,12 @@ public class CaseIssues implements java.io.Serializable {
 		this.statusType = statusType;
 		this.completedDate = completedDate;
 		this.createdDateTime = createdDateTime;
-		this.createdUserId = createdUserId;
+		this.createdUser = createdUser;
 		this.updatedDateTime = updatedDateTime;
-		this.updatedUserId = updatedUserId;
+		this.updatedUser = updatedUser;
 	}
+
+
 	public Integer getId() {
 		return this.id;
 	}
@@ -155,13 +160,20 @@ public class CaseIssues implements java.io.Serializable {
 	}
 
 
-	public Integer getCreatedUserId() {
-		return this.createdUserId;
+	/**
+	 * @return the createdUser
+	 */
+	public Contacts getCreatedUser() {
+		return this.createdUser;
 	}
 
-	public void setCreatedUserId(Integer createdUserId) {
-		this.createdUserId = createdUserId;
+	/**
+	 * @param createdUser the createdUser to set
+	 */
+	public void setCreatedUser(Contacts createdUser) {
+		this.createdUser = createdUser;
 	}
+
 	/**
 	 * @return the createdDateTime
 	 */
@@ -186,17 +198,21 @@ public class CaseIssues implements java.io.Serializable {
 	public void setUpdatedDateTime(Date updatedDateTime) {
 		this.updatedDateTime = updatedDateTime;
 	}
+
 	/**
-	 * @return the udpatedUserId
+	 * @return the updatedUser
 	 */
-	public Integer getUpdatedUserId() {
-		return this.updatedUserId;
+	public Contacts getUpdatedUser() {
+		return this.updatedUser;
 	}
+
 	/**
-	 * @param udpatedUserId the udpatedUserId to set
+	 * @param updatedUser the updatedUser to set
 	 */
-	public void setUpdatedUserId(Integer updatedUserId) {
-		this.updatedUserId = updatedUserId;
+	public void setUpdatedUser(Contacts updatedUser) {
+		this.updatedUser = updatedUser;
 	}
+	
+	
 
 }

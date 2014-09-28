@@ -2,36 +2,36 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated Aug 9, 2014 1:06:21 PM by Hibernate Tools 4.0.0 -->
+<!-- @author Kim To, @version 1.0.1, 28/09/2014
+	Modification History:
+		28/09/2014 - Mods to change properties to match table structure
+ -->
 <hibernate-mapping>
     <class name="uow.ia.bean.EnquiryIssuesHistories" table="Enquiry_Issues_Histories" catalog="ianew">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
             <generator class="identity" />
         </id>
-        <timestamp name="timestamp" column="timestamp" />
-        <property name="enquiryIssueId" type="int">
+        <property name="enquiryIssueId" type="java.lang.Integer">
             <column name="enquiry_issue_id" not-null="true" />
-        </property>
-        <property name="enquiryId" type="java.lang.Integer">
-            <column name="enquiry_id" />
-        </property>
-        <property name="oldIssueId" type="java.lang.Integer">
-            <column name="old_issue_id" />
-        </property>
-        <property name="newIssueId" type="java.lang.Integer">
-            <column name="new_issue_id" />
-        </property>
-        <property name="oldComment" type="string">
-            <column name="old_comment" />
-        </property>
-        <property name="newComment" type="string">
-            <column name="new_comment" />
         </property>
         <property name="action" type="string">
             <column name="action" length="10" not-null="true" />
         </property>
-        <property name="createdUserId" type="int">
-            <column name="created_user_id" not-null="true" />
+        <property name="enquiryId" type="java.lang.Integer">
+            <column name="enquiry_id" />
+        </property>
+        <property name="issueId" type="java.lang.Integer">
+            <column name="issue_id" />
+        </property>
+        <property name="comment" type="string">
+            <column name="comment" sql-type="longtext"/>
+        </property>
+        <property name="createdUserId" type="java.lang.Integer">
+            <column name="created_user_id" not-null="false" />
+        </property>
+        <property name="createdDateTime" type="java.sql.Date">
+            <column name="created_date_time" not-null="false" sql-type="datetime"/>
         </property>
     </class>
 </hibernate-mapping>

@@ -14,7 +14,12 @@ import org.hibernate.search.annotations.Resolution;
 
 /**
  * @author Kim To
- * @veersion 1.0.3, 29/08/2014
+ * @version 1.0.4, 28/09/2014
+ * 
+ * Modification History:
+ * 		28/09/2014
+ * 			Change Integer createdUserId and Integer updatedUserId to Contacts
+ * 			Mods to construtor, setters, and getters.
  */
 @Indexed
 public class ClientDisabilities implements java.io.Serializable {
@@ -34,15 +39,13 @@ public class ClientDisabilities implements java.io.Serializable {
 	@Field
 	private String primaryFlag;
 	
-	//@Field
-	private Integer createdUserId;
+	private Contacts createdUser;
 	
 	@DateBridge(resolution = Resolution.DAY)
 	@Field
 	private Date createdDateTime;
 	
-	//@Field
-	private Integer updatedUserId;
+	private Contacts updatedUser;
 	
 	@DateBridge(resolution = Resolution.DAY)
 	@Field
@@ -57,24 +60,23 @@ public class ClientDisabilities implements java.io.Serializable {
 	 * @param disabilityType
 	 * @param comments
 	 * @param primaryFlag
-	 * @param createdUserId
+	 * @param createdUser
 	 * @param createdDateTime
-	 * @param updatedUserId
+	 * @param updatedUser
 	 * @param updatedDateTime
 	 */
 	public ClientDisabilities(Integer id, Contacts contact,
 			DisabilityTypes disabilityType, String comments,
-			String primaryFlag, Integer createdUserId, Date createdDateTime,
-			Integer updatedUserId, Date updatedDateTime) {
-		super();
+			String primaryFlag, Contacts createdUser, Date createdDateTime,
+			Contacts updatedUser, Date updatedDateTime) {
 		this.id = id;
 		this.contact = contact;
 		this.disabilityType = disabilityType;
 		this.comments = comments;
 		this.primaryFlag = primaryFlag;
-		this.createdUserId = createdUserId;
+		this.createdUser = createdUser;
 		this.createdDateTime = createdDateTime;
-		this.updatedUserId = updatedUserId;
+		this.updatedUser = updatedUser;
 		this.updatedDateTime = updatedDateTime;
 	}
 
@@ -131,17 +133,17 @@ public class ClientDisabilities implements java.io.Serializable {
 	}
 
 	/**
-	 * @return the createdUserId
+	 * @return the createdUser
 	 */
-	public Integer getCreatedUserId() {
-		return this.createdUserId;
+	public Contacts getCreatedUser() {
+		return createdUser;
 	}
 
 	/**
-	 * @param createdUserId the createdUserId to set
+	 * @param createdUser the createdUser to set
 	 */
-	public void setCreatedUserId(Integer createdUserId) {
-		this.createdUserId = createdUserId;
+	public void setCreatedUser(Contacts createdUser) {
+		this.createdUser = createdUser;
 	}
 
 	/**
@@ -159,17 +161,17 @@ public class ClientDisabilities implements java.io.Serializable {
 	}
 
 	/**
-	 * @return the updatedUserId
+	 * @return the updatedUser
 	 */
-	public Integer getUpdatedUserId() {
-		return this.updatedUserId;
+	public Contacts getUpdatedUser() {
+		return updatedUser;
 	}
 
 	/**
-	 * @param updatedUserId the updatedUserId to set
+	 * @param updatedUser the updatedUser to set
 	 */
-	public void setUpdatedUserId(Integer updatedUserId) {
-		this.updatedUserId = updatedUserId;
+	public void setUpdatedUser(Contacts updatedUser) {
+		this.updatedUser = updatedUser;
 	}
 
 	/**

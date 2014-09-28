@@ -2,24 +2,21 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated Aug 9, 2014 1:06:21 PM by Hibernate Tools 4.0.0 -->
-<!-- Modified by Kim To, v.1.0.2, 29/08/2014 -->
+<!-- Modified by Kim To, v.1.0.3, 28/09/2014 
+	Modification History:
+		28/09/2014	Mods to map Contacts to created_user_id and updated_user_id
+-->
 <hibernate-mapping>
     <class name="uow.ia.bean.PlanDevelopers" table="Plan_Developers" dynamic-insert="true">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
             <generator class="identity" />
         </id>
-        <property generated="never"  name="createdUserId" type="java.lang.Integer">
-   			<column name="created_user_id"/>
+		<property generated="never"  name="createdDateTime" type="java.sql.Date">
+		    <column length="10" name="created_date_time" sql-type="datetime"/>
 		</property>
-		<property generated="never"  name="createdDateTime" type="date">
-		    <column length="10" name="created_date_time"/>
-		</property>
-		<property generated="never"  name="updatedUserId" type="java.lang.Integer">
-		    <column name="updated_user_id"/>
-		</property>
-		<property generated="never"  name="updatedDateTime" type="date">
-		    <column length="10" name="updated_date_time"/>
+		<property generated="never"  name="updatedDateTime" type="java.sql.Date">
+		    <column length="10" name="updated_date_time" sql-type="datetime"/>
 		</property>
 		
 		<!-- many to one relationship -->
@@ -28,6 +25,12 @@
 		</many-to-one>
 		<many-to-one class="uow.ia.bean.IndividualCases" name="individualCase">
 			<column name="case_id" not-null="true"/>
+		</many-to-one>
+		<many-to-one class="uow.ia.bean.Contacts" name="createdUser">
+			<column name="created_user_id" not-null="false"/>
+		</many-to-one>
+		<many-to-one class="uow.ia.bean.Contacts" name="updatedUser">
+			<column name="updated_user_id" not-null="false"/>
 		</many-to-one>
     </class>
 </hibernate-mapping>

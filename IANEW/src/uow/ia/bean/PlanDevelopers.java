@@ -15,7 +15,10 @@ import org.hibernate.search.annotations.Resolution;
 
 /**
  * @author Kim To
- * @version 1.0.3, 26/08/2014
+ * @version 1.0.4, 28/09/2014
+ * 
+ * Modification History:
+ * 		28/09/2014	Change from Integer createdUserId and Integer UpdatedUserId to Contacts createdUser and Contacts updatedUser
  */
 
 @Indexed
@@ -30,15 +33,13 @@ public class PlanDevelopers implements java.io.Serializable {
 	@IndexedEmbedded
 	private Contacts contact;
 	
-	@Field
-	private Integer createdUserId;
+	private Contacts createdUser;
 	
 	@DateBridge(resolution = Resolution.DAY)
 	@Field
 	private Date createdDateTime;
 	
-	@Field
-	private Integer updatedUserId;
+	private Contacts updatedUser;
 	
 	@DateBridge(resolution = Resolution.DAY)
 	@Field
@@ -49,6 +50,27 @@ public class PlanDevelopers implements java.io.Serializable {
 	 */
 	public PlanDevelopers() {
 		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @param id
+	 * @param individualCase
+	 * @param contact
+	 * @param createdUser
+	 * @param createdDateTime
+	 * @param updatedUser
+	 * @param updatedDateTime
+	 */
+	public PlanDevelopers(Integer id, IndividualCases individualCase,
+			Contacts contact, Contacts createdUser, Date createdDateTime,
+			Contacts updatedUser, Date updatedDateTime) {
+		this.id = id;
+		this.individualCase = individualCase;
+		this.contact = contact;
+		this.createdUser = createdUser;
+		this.createdDateTime = createdDateTime;
+		this.updatedUser = updatedUser;
+		this.updatedDateTime = updatedDateTime;
 	}
 
 	/**
@@ -80,27 +102,6 @@ public class PlanDevelopers implements java.io.Serializable {
 	}
 
 	/**
-	 * @param id
-	 * @param individualCase
-	 * @param contact
-	 * @param createdUserId
-	 * @param createdDateTime
-	 * @param updatedUserId
-	 * @param updatedDateTime
-	 */
-	public PlanDevelopers(Integer id, IndividualCases individualCase,
-			Contacts contact, Integer createdUserId, Date createdDateTime,
-			Integer updatedUserId, Date updatedDateTime) {
-		this.id = id;
-		this.individualCase = individualCase;
-		this.contact = contact;
-		this.createdUserId = createdUserId;
-		this.createdDateTime = createdDateTime;
-		this.updatedUserId = updatedUserId;
-		this.updatedDateTime = updatedDateTime;
-	}
-
-	/**
 	 * @return the id
 	 */
 	public Integer getId() {
@@ -114,17 +115,19 @@ public class PlanDevelopers implements java.io.Serializable {
 	}
 
 	/**
-	 * @return the createdUserId
+	 * @return the createdUser
 	 */
-	public Integer getCreatedUserId() {
-		return this.createdUserId;
+	public Contacts getCreatedUser() {
+		return this.createdUser;
 	}
+
 	/**
-	 * @param createdUserId the createdUserId to set
+	 * @param createdUser the createdUser to set
 	 */
-	public void setCreatedUserId(Integer createdUserId) {
-		this.createdUserId = createdUserId;
+	public void setCreatedUser(Contacts createdUser) {
+		this.createdUser = createdUser;
 	}
+
 	/**
 	 * @return the createdDateTime
 	 */
@@ -137,18 +140,21 @@ public class PlanDevelopers implements java.io.Serializable {
 	public void setCreatedDateTime(Date createdDateTime) {
 		this.createdDateTime = createdDateTime;
 	}
+	
 	/**
-	 * @return the updatedUserId
+	 * @return the updatedUser
 	 */
-	public Integer getUpdatedUserId() {
-		return this.updatedUserId;
+	public Contacts getUpdatedUser() {
+		return this.updatedUser;
 	}
+
 	/**
-	 * @param updatedUserId the updatedUserId to set
+	 * @param updatedUser the updatedUser to set
 	 */
-	public void setUpdatedUserId(Integer updatedUserId) {
-		this.updatedUserId = updatedUserId;
+	public void setUpdatedUser(Contacts updatedUser) {
+		this.updatedUser = updatedUser;
 	}
+
 	/**
 	 * @return the updatedDateTime
 	 */

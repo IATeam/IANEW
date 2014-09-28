@@ -2,7 +2,11 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated Aug 9, 2014 1:06:21 PM by Hibernate Tools 4.0.0 -->
-<!-- Modified By Kim To, v.1.0.3, 29/08/2014 -->
+<!-- Modified By Kim To, v.1.0.4, 28/09/2014 -->
+<!-- Modification History:
+		28/09/2014 
+			Map Contacts to created_user_id and updated_user_id
+ -->
 <hibernate-mapping>
     <class name="uow.ia.bean.ClientDisabilities" table="Client_Disabilities" dynamic-insert="true">
         <id name="id" type="java.lang.Integer">
@@ -16,24 +20,23 @@
             <column name="primary_flag" length="45" />
         </property>
         <property name="createdDateTime" type="date">
-            <column name="created_date_time" length="10" />
-        </property>
-        <property name="createdUserId" type="java.lang.Integer">
-            <column name="created_user_id" />
+            <column name="created_date_time" length="10" sql-type="datetime"/>
         </property>
         <property name="updatedDateTime" type="date">
-            <column name="updated_date_time" length="10" />
-        </property>
-        <property name="updatedUserId" type="java.lang.Integer">
-            <column name="updated_user_id" />
-        </property>
-        
+            <column name="updated_date_time" length="10" sql-type="datetime"/>
+        </property>     
         
         <many-to-one class="uow.ia.bean.Contacts" name="contact">
         	<column name="contact_id" not-null="false"/>
         </many-to-one>
         <many-to-one class="uow.ia.bean.DisabilityTypes" name="disabilityType">
         	<column name="disability_id" not-null="false"/>
+        </many-to-one>
+        <many-to-one class="uow.ia.bean.Contacts" name="createdUser">
+        	<column name="created_user_id" not-null="false"/>
+        </many-to-one>
+        <many-to-one class="uow.ia.bean.Contacts" name="updatedUser">
+        	<column name="updated_user_id" not-null="false"/>
         </many-to-one>
     </class>
 </hibernate-mapping>

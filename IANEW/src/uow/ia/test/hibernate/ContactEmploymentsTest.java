@@ -32,7 +32,7 @@ public class ContactEmploymentsTest {
 		  System.out.println("contact: " + ce.getContact().getFirstname() + " " + ce.getContact().getLastname());
 		  System.out.println("comment: " + ce.getComments());
 		  System.out.println("employment name: " + ce.getEmploymentType().getEmploymentName());
-		  System.out.println("created user: " + ce.getCreatedUserId());
+		  //System.out.println("created user: " + ce.getCreatedUserId());
 	}
 	
 	@AfterMethod

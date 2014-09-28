@@ -2,48 +2,45 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated Aug 9, 2014 1:06:21 PM by Hibernate Tools 4.0.0 -->
+<!-- @author Kim To, version 1.0.1, 28/09/2014
+	Modification History:
+		28/09/2014: Change properties
+ -->
 <hibernate-mapping>
     <class name="uow.ia.bean.CaseIssuesHistories" table="Case_Issues_Histories" catalog="ianew">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
             <generator class="identity" />
         </id>
-        <timestamp name="timestamp" column="TIMESTAMP" />
-        <property name="issueId" type="int">
-            <column name="issue_id" not-null="true" />
-        </property>
         <property name="action" type="string">
             <column name="action" length="10" not-null="true" />
+        </property>
+        <property name="caseIssueId" type="java.lang.Integer">
+            <column name="case_issue_id" not-null="true" />
         </property>
         <property name="caseId" type="java.lang.Integer">
             <column name="case_id" />
         </property>
-        <property name="oldIssueTypeId" type="java.lang.Integer">
-            <column name="old_issue_type_id" />
+        <property name="issueTypeId" type="java.lang.Integer">
+            <column name="issue_type_id" />
         </property>
-        <property name="newIssueTypeId" type="java.lang.Integer">
-            <column name="new_issue_type_id" />
+        <property name="comments" type="string">
+            <column name="comments" />
         </property>
-        <property name="oldComments" type="string">
-            <column name="old_comments" />
+        <property name="statusId" type="java.lang.Integer">
+            <column name="status_id" />
         </property>
-        <property name="newComments" type="string">
-            <column name="new_comments" />
+        <property name="completedDate" type="java.sql.Date">
+            <column name="completed_date" length="10" />
         </property>
-        <property name="oldStatusId" type="java.lang.Integer">
-            <column name="old_status_id" />
-        </property>
-        <property name="newStatusId" type="java.lang.Integer">
-            <column name="new_status_id" />
-        </property>
-        <property name="oldCompletedDate" type="date">
-            <column name="old_completed_date" length="10" />
-        </property>
-        <property name="newCompletedDate" type="date">
-            <column name="new_completed_date" length="10" />
+        <property name="changeOrder" type="java.lang.Integer">
+            <column name="change_order"/>
         </property>
         <property name="createdUserId" type="java.lang.Integer">
             <column name="created_user_id" />
+        </property>
+        <property name="createdDateTime" type="java.sql.Date">
+            <column name="created_date_time" sql-type="datetime"/>
         </property>
     </class>
 </hibernate-mapping>

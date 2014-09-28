@@ -68,6 +68,7 @@
         <mapping resource="uow/ia/bean/IaCommunicationsHistories.hbm.xml" />
         <mapping resource="uow/ia/bean/CaseIssuesHistories.hbm.xml" />
         <mapping resource="uow/ia/bean/ContactEmployments.hbm.xml" />
+        <mapping resource="uow/ia/bean/ContactEmploymentsHistories.hbm.xml" />
         
         <!-- Enable listener -->
         <event type="post-update"> 
