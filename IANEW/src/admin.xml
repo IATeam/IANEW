@@ -18,7 +18,71 @@
     		<result name="success">/admin/newDisabilityType.jsp</result>
     	</action>
     	<action name="saveNewDisabilityType" class="uow.ia.action.AdminAction" method="saveNewDisabilityType">
-    		<result name="success">/home/home.jsp</result>
+    		<result name="success">/admin/iterDisabilityTypes.jsp</result>
+   			 <result name="input"></result>
+    	</action>
+    	<action name="getAccommodationTypeForm" class="uow.ia.action.AdminAction" method="getAccommodationTypeForm">
+    		<result name="success">/admin/newAccommodationType.jsp</result>
+    	</action>
+    	<action name="saveNewAccommodationType" class="uow.ia.action.AdminAction" method="saveNewAccommodationType">
+    		<result name="success">/admin/iterAccommodationTypes.jsp</result>
+    		<result name="input"></result>
+    	</action>
+    	<action name="getNewculturalBackgroundTypeForm" class="uow.ia.action.AdminAction" method="getNewculturalBackgroundTypeForm">
+    		<result name="success">/admin/newCulturalBackgroundType.jsp</result>
+    	</action>
+    	<action name="saveNewculturalBackgroundType" class="uow.ia.action.AdminAction" method="saveNewculturalBackgroundType">
+    		<result name="success">/admin/iterCulturalBackgroundTypes.jsp</result>
+    		<result name="input"></result>
+    	</action>
+    	<action name="getDangerTypeForm" class="uow.ia.action.AdminAction" method="getDangerTypeForm">
+    		<result name="success">/admin/newDangerType.jsp</result>
+    	</action>
+    	<action name="saveNewDangerType" class="uow.ia.action.AdminAction" method="saveNewDangerType">
+    		<result name="success">/admin/iterDangerTypes.jsp</result>
+    		<result name="input"></result>
+    	</action>
+    	<action name="getEmploymentTypeForm" class="uow.ia.action.AdminAction" method="getEmploymentTypeForm">
+    		<result name="success">/admin/newEmploymentType.jsp</result>
+    	</action>
+    	<action name="saveNewEmploymentType" class="uow.ia.action.AdminAction" method="saveNewEmploymentType">
+    		<result name="success">/admin/iterEmploymentTypes.jsp</result>
+    		<result name="input"></result>
+    	</action>
+    	<action name="getEnquiryTypeForm" class="uow.ia.action.AdminAction" method="getEnquiryTypeForm">
+    		<result name="success">/admin/newEnquiryType.jsp</result>
+    	</action>
+    	<action name="saveNewEnquiryType" class="uow.ia.action.AdminAction" method="saveNewEnquiryType">
+    		<result name="success">/admin/iterEnquiryTypes.jsp</result>
+    		<result name="input"></result>
+    	</action>
+    	<action name="getGenderTypeForm" class="uow.ia.action.AdminAction" method="getGenderTypeForm">
+    		<result name="success">/admin/newGenderType.jsp</result>
+    	</action>
+    	<action name="saveNewGenderType" class="uow.ia.action.AdminAction" method="saveNewGenderType">
+    		<result name="success">/admin/iterGenderTypes.jsp</result>
+    		<result name="input"></result>
+    	</action>
+    	<action name="getIssueTypeForm" class="uow.ia.action.AdminAction" method="getIssueTypeForm">
+    		<result name="success">/admin/newIssueType.jsp</result>
+    	</action>
+    	<action name="saveNewIssueType" class="uow.ia.action.AdminAction" method="saveNewIssueType">
+    		<result name="success">/admin/iterIssueTypes.jsp</result>
+    		<result name="input"></result>
+    	</action>
+    	<action name="getStatusTypeForm" class="uow.ia.action.AdminAction" method="getStatusTypeForm">
+    		<result name="success">/admin/newStatusType.jsp</result>
+    	</action>
+    	<action name="saveNewStatusType" class="uow.ia.action.AdminAction" method="saveNewStatusType">
+    		<result name="success">/admin/iterStatusTypes.jsp</result>
+    		<result name="input"></result>
+    	</action>
+    	<action name="getTitleTypesForm" class="uow.ia.action.AdminAction" method="getTitleTypesForm">
+    		<result name="success">/admin/newTitleType.jsp</result>
+    	</action>
+    	<action name="saveNewTitleType" class="uow.ia.action.AdminAction" method="saveNewTitleType">
+    		<result name="success">/admin/iterTitleTypes.jsp</result>
+    		<result name="input"></result>
     	</action>
     	<action name="startAdminPage" class="uow.ia.action.AdminAction" method="startAdminPage">
     		<result name="success">/admin/admin.jsp</result>

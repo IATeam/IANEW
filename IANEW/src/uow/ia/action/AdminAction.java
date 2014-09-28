@@ -103,8 +103,10 @@ public class AdminAction extends BaseAction{
 		accommodationType.setAccommodationDescription(getAccommodationDescription());
 		System.out.println("name: " + getAccommodationName());
 		System.out.println("description: " + getAccommodationDescription());
-		if(adminService.saveAccommodationType(accommodationType))
+		if(adminService.saveAccommodationType(accommodationType)){
+			accommodationSelectList = adminService.findAccommodationTypes();
 			return SUCCESS;
+		}
 		else {
 			return ERROR;
 		}
@@ -191,8 +193,10 @@ public class AdminAction extends BaseAction{
 		culturalBackgroundType.setCulturalBackgroundDescription(culturalBackgroundDescription);
 		System.out.println("name: " + getCulturalBackgroundName());
 		System.out.println("description: " + getCulturalBackgroundDescription());
-		if(adminService.saveCulturalBackgroundType(culturalBackgroundType))
+		if(adminService.saveCulturalBackgroundType(culturalBackgroundType)){
+			culturalBackgroundSelectList = adminService.findCulturalBackgroundTypes();
 			return SUCCESS;
+		}
 		else {
 			return ERROR;
 		}
@@ -289,8 +293,10 @@ public class AdminAction extends BaseAction{
 		dangerType.setDangerDescription(getDangerDescription());
 		System.out.println("name: " + getDangerName());
 		System.out.println("description: " + getDangerDescription());
-		if(adminService.saveDangerType(dangerType))
+		if(adminService.saveDangerType(dangerType)){
+			dangerSelectList = adminService.findDangerTypes();
 			return SUCCESS;
+		}
 		else {
 			return ERROR;
 		}
@@ -381,8 +387,10 @@ public class AdminAction extends BaseAction{
 		employmentType.setEmploymentDescription(getEmploymentDescription());
 		System.out.println("name: " + getEmploymentName());
 		System.out.println("description: " + getEmploymentDescription());
-		if(adminService.saveEmploymentType(employmentType))
+		if(adminService.saveEmploymentType(employmentType)){
+			employmentSelectList = adminService.findEmploymentTypes();
 			return SUCCESS;
+		}
 		else {
 			return ERROR;
 		}
@@ -477,8 +485,10 @@ public class AdminAction extends BaseAction{
 		enquiryType.setEnquiryTypeDescription(getEnquiryTypeDescription());
 		System.out.println("name: " + getEnquiryTypeName());
 		System.out.println("description: " + getEnquiryTypeDescription());
-		if(adminService.saveEnquiryType(enquiryType))
+		if(adminService.saveEnquiryType(enquiryType)){
+			enquiryTypeSelectList = adminService.findEnquiryTypes();
 			return SUCCESS;
+		}
 		else {
 			return ERROR;
 		}
@@ -565,8 +575,10 @@ public class AdminAction extends BaseAction{
 		genderType.setGenderCode(getGenderCode());
 		System.out.println("name: " + getGenderName());
 		System.out.println("description: " + getGenderCode());
-		if(adminService.saveGenderType(genderType))
+		if(adminService.saveGenderType(genderType)){
+			genderSelectList = adminService.findGenderTypes();
 			return SUCCESS;
+		}
 		else {
 			return ERROR;
 		}
@@ -658,8 +670,10 @@ public class AdminAction extends BaseAction{
 		statusType = new StatusTypes();
 		statusType.setStatusName(getStatusName());
 		System.out.println("name: " + getStatusName());
-		if(adminService.saveStatusType(statusType))
+		if(adminService.saveStatusType(statusType)){
+			statusSelectList = adminService.findStatusTypes();
 			return SUCCESS;
+		}
 		else {
 			return ERROR;
 		}
@@ -742,8 +756,10 @@ public class AdminAction extends BaseAction{
 		titleType = new TitleTypes();
 		titleType.setName(getTitleName());
 		System.out.println("name: " + getTitleName());
-		if(adminService.saveTitleType(titleType))
+		if(adminService.saveTitleType(titleType)){
+			titleSelectList = adminService.findTitleTypes();
 			return SUCCESS;
+		}
 		else {
 			return ERROR;
 		}
@@ -809,6 +825,7 @@ public class AdminAction extends BaseAction{
 	
 	
 	public String getDisabilityTypeForm(){
+		DisabilitySelectList = adminService.findDisabilityTypes();
 		return SUCCESS;
 	}
 	
@@ -833,8 +850,10 @@ public class AdminAction extends BaseAction{
 		disabilityType.setDisabilityDescription(getDisabilityDescription());
 		System.out.println("name: " + getDisabilityName());
 		System.out.println("description: " + getDisabilityDescription());
-		if(adminService.saveDisabilityType(disabilityType))
+		if(adminService.saveDisabilityType(disabilityType)){
+			DisabilitySelectList = adminService.findDisabilityTypes();
 			return SUCCESS;
+		}
 		else {
 			return ERROR;
 		}
@@ -924,8 +943,10 @@ public class AdminAction extends BaseAction{
 		issueType.setIssueDescription(getIssueDescription());
 		System.out.println("name: " + getIssueName());
 		System.out.println("description: " + getIssueDescription());
-		if(adminService.saveIssueType(issueType))
+		if(adminService.saveIssueType(issueType)){
+			IssueTypeList = adminService.findIssueTypes();
 			return SUCCESS;
+		}
 		else {
 			return ERROR;
 		}

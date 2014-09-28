@@ -13,28 +13,25 @@
 	
 	<s:url var="urlIssueType" namespace="/admin" action="saveNewIssueType" includeContext="false"/>
 	
-	<s:form id="newDisabilityTypeForm" method="post" action="%{urlIssueType}">
-		<div>
+	<s:form id="newIssueTypeForm" method="post" action="%{urlIssueType}">
+		<div class="greybackground">
 			<s:label for="issueName" value="Name: "/>
 			<s:textfield id="issueName" name="issueName" />
 			<s:label for="issueDescription" value="Description" />
 			<s:textarea id="issueDescription" name ="issueDescription" />
 			<table>
-				<tr>
+				<thead>
 					<th>Issue Name</th>
 					<th>Issue Description</th>
-				</tr>
-				<s:iterator value="IssueTypeList" status="stat">
-				<tr>
-					<td><s:property value="issueName"></s:property></td>
-					<td><s:property value="issueDescription"></s:property></td>
-				</tr>
-				</s:iterator>
+				</thead>
+				<tbody id="tbodyIssueType">
+					<%@include file="iterIssueTypes.jsp" %>
+				</tbody>
 			</table>
 		</div>
 		<input type="button" value="Cancel" id="btnCancel"/>
 		<input type="button" value="edit" id="btnEdit"/>
-		<sj:submit id="save" targets="issueSelectList" cssClass="two columns alpha" value="Save" onclick=""/>
+		<sj:submit id="saveNewIssue" targets="tbodyIssueType" cssClass="two columns alpha" value="Save"/>
 	</s:form>
 	<script>
 	$("#btnCancel").click(function(){

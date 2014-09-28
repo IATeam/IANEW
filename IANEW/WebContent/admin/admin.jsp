@@ -15,7 +15,8 @@
 	      media="all"/>
 </head>
 <body>
-	<s:div>
+	<s:div cssClass="form container">
+
 
 <!-- ---------------------------------------------------------------------------------------------- -->
 <!-- Header of the form --------------------------------------------------------------------------- -->
@@ -24,19 +25,21 @@
 <!-- ---------------------------------------------------------------------------------------------- -->
 <!-- Content of the form -------------------------------------------------------------------------- -->
 <!-- ---------------------------------------------------------------------------------------------- -->	
-		<%@include file="/admin/newDisabilityType.jsp" %>
-		<%@include file="/admin/newIssueType.jsp" %>
 		<%@include file="/admin/newAccommodationType.jsp" %>
-		<%@include file="/admin/newCulturalBackgroundType.jsp" %>
+		<%--<%@include file="/admin/newCulturalBackgroundType.jsp" %>
 		<%@include file="/admin/newDangerType.jsp" %>
+		<%@include file="/admin/newDisabilityType.jsp" %>
 		<%@include file="/admin/newEmploymentType.jsp" %>
 		<%@include file="/admin/newEnquiryType.jsp" %>
 		<%@include file="/admin/newGenderType.jsp" %>
+		<%@include file="/admin/newIssueType.jsp" %>
 		<%@include file="/admin/newStatusType.jsp" %>
 		<%@include file="/admin/newTitleType.jsp" %>
-		<%@include file="/admin/newUser.jsp" %>
 		
 		
-		</s:div>
+		<%@include file="/admin/newUser.jsp" %>--%>
+		
+		
+	</s:div>
 </body>
 </html>

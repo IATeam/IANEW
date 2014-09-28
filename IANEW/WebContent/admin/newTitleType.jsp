@@ -12,28 +12,26 @@
 <body>
 	<h3>New Title Type</h3>
 	
-	<s:url var="urlDisType" namespace="/admin" action="saveNewTitleType" includeContext="false"/>
+	<s:url var="urlTiType" namespace="/admin" action="saveNewTitleType" includeContext="false"/>
 	
-	<s:form id="newDisabilityTypeForm" method="post" action="%{urlDisType}">
-		<divs>
+	<s:form id="newTitleTypeForm" method="post" action="%{urlTiType}">
+		<div class="greybackground">
 			<s:label for="titleName" value="Name: "/>
 			<s:textfield id="titleName" name="titleName" />
 			<table>
-				<tr>
+				<thead>
 					<th>Title Name</th>
-				</tr>
-				<s:iterator value="titleSelectList" status="stat">
-				<tr>
-					<td><s:property value="name"></s:property></td>
-				</tr>
-				</s:iterator>
+				</thead>
+				<tbody id="tbodyTitleType">
+					<%@include file="iterTitleTypes.jsp" %>
+				</tbody>
 			</table>
 			
 		</div>
 		
 		<input type="button" value="Cancel" id="btnCancel"/>
 		<input type="button" value="edit" id="btnEdit"/>
-		<sj:submit id="save" targets="titleTypeSelect" cssClass="two columns alpha" value="Save" onclick=""/>
+		<sj:submit id="saveNewTitleType" targets="tbodyTitleType" cssClass="two columns alpha" value="Save"/>
 	</s:form>
 	<script>
 	$("#btnCancel").click(function(){

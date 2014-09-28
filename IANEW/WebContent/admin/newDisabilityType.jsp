@@ -13,35 +13,35 @@
 	
 	<s:url var="urlDisType" namespace="/admin" action="saveNewDisabilityType" includeContext="false"/>
 	
-	<s:form id="newDisabilityTypeForm" method="post" action="%{urlDisType}">
-		<div>
+	<s:form id="newDisabilityTypeForm" method="post" action="%{urlDisType}" onsubmit="clearDisabilityInput();">
+		<div class="greybackground">
 			<s:label for="disabilityName" value="Name: "/>
 			<s:textfield id="disabilityName" name="disabilityName" />
 			<s:label for="disabiltyDescription" value="Description" />
 			<s:textarea id="disabilityDescription" name ="disabilityDescription" />
 			<table>
-				<tr>
+				<thead>
 					<th>Disability Name</th>
 					<th>Disability Description</th>
-				</tr>
-				<s:iterator value="disabilitySelectList" status="stat">
-				<tr>
-					<td><s:property value="disabilityName"></s:property></td>
-					<td><s:property value="disabilityDescription"></s:property></td>
-				</tr>
-				</s:iterator>
+				</thead>
+				<tbody id="tbodyDisabilityType">
+				<%@include file="iterDisabilityTypes.jsp" %>
+				</tbody>
 			</table>
-			
 		</div>
-		
 		<input type="button" value="Cancel" id="btnCancel"/>
 		<input type="button" value="edit" id="btnEdit"/>
-		<sj:submit id="save" targets="disabilityTypeSelect" cssClass="two columns alpha" value="Save" onclick=""/>
+		<sj:submit id="saveNewDisabilityType" targets="tbodyDisabilityType" cssClass="two columns alpha" value="Save" />
 	</s:form>
 	<script>
 	$("#btnCancel").click(function(){
 		$('#leftPopUp').hide("slow");
 	});
+	
+	function clearDisabilityInput(){
+		$('#disabilityName').val('');
+		$('#disabilityDescription').val('');
+	}
 	</script>
 </body>
 </html>
