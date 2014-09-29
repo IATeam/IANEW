@@ -230,10 +230,8 @@ public class TypesServiceImpl implements TypesService {
 	 */
 
 	@Override
-	public DangerTypes getDangerTypeId(String name) {
-		DangerTypes o = dangerTypesDao.get(
-				" from DangerTypes t where t.dangerName =?",
-				new Object[] { name });
+	public DangerTypes getDangerTypeId(int id) {
+		DangerTypes o = dangerTypesDao.get(DangerTypes.class, id);
 		if (o != null) {
 			return o;
 		} else {
@@ -247,10 +245,8 @@ public class TypesServiceImpl implements TypesService {
 	 */
 
 	@Override
-	public StatusTypes getStatusTypeId(String name) {
-		StatusTypes o = statusTypesDao.get(
-				" from StatusTypes t where t.statusName =?",
-				new Object[] { name });
+	public StatusTypes getStatusTypeId(int id) {
+		StatusTypes o = statusTypesDao.get(StatusTypes.class, id);
 		if (o != null) {
 			return o;
 		} else {
@@ -264,10 +260,8 @@ public class TypesServiceImpl implements TypesService {
 	 */
 
 	@Override
-	public TitleTypes getTitleTypeId(String name) {
-		TitleTypes o = titleTypesDao.get(
-				" from TitleTypes t where t.name =?",
-				new Object[] { name });
+	public TitleTypes getTitleTypeId(int id) {
+		TitleTypes o = titleTypesDao.get(TitleTypes.class, id);
 		if (o != null) {
 			return o;
 		} else {
@@ -281,10 +275,8 @@ public class TypesServiceImpl implements TypesService {
 	 */
 	
 	@Override
-	public GenderTypes getGenderTypeId(String name) {
-		GenderTypes o = genderTypesDao.get(
-				" from GenderTypes t where t.genderName =?",
-				new Object[] { name });
+	public GenderTypes getGenderTypeId(int id) {
+		GenderTypes o = genderTypesDao.get(GenderTypes.class, id);
 		if (o != null) {
 			return o;
 		} else {
@@ -298,10 +290,9 @@ public class TypesServiceImpl implements TypesService {
 	 */
 
 	@Override
-	public CulturalBackgroundTypes getCulturalBackgroundTypeId(String name) {
+	public CulturalBackgroundTypes getCulturalBackgroundTypeId(int id) {
 		CulturalBackgroundTypes o = culturalBackgroundTypesDao
-				.get(" from CulturalBackgroundTypes t where t.culturalBackgroundName =?",
-						new Object[] { name });
+				.get(CulturalBackgroundTypes.class, id);
 		if (o != null) {
 			return o;
 		} else {
@@ -315,10 +306,8 @@ public class TypesServiceImpl implements TypesService {
 	 */
 
 	@Override
-	public AccommodationTypes getAccommodationTypeId(String name) {
-		AccommodationTypes o = accommodationTypesDao.get(
-				" from AccommodationTypes t where t.accommodationName =?",
-				new Object[] { name });
+	public AccommodationTypes getAccommodationTypeId(int id) {
+		AccommodationTypes o = accommodationTypesDao.get(AccommodationTypes.class, id);
 		if (o != null) {
 			return o;
 		} else {
@@ -332,10 +321,8 @@ public class TypesServiceImpl implements TypesService {
 	 */
 
 	@Override
-	public DisabilityTypes getDisabilityTypeId(String name) {
-		DisabilityTypes o = disabilityTypesDao.get(
-				" from DisabilityTypes t where t.disabilityName =?",
-				new Object[] { name });
+	public DisabilityTypes getDisabilityTypeId(int id) {
+		DisabilityTypes o = disabilityTypesDao.get(DisabilityTypes.class, id);
 		if (o != null) {
 			return o;
 		} else {
@@ -349,10 +336,8 @@ public class TypesServiceImpl implements TypesService {
 	 */
 
 	@Override
-	public IssueTypes getIssueTypeId(String name) {
-		IssueTypes o = issueTypesDao.get(
-				" from IssueTypes t where t.issueName =?",
-				new Object[] { name });
+	public IssueTypes getIssueTypeId(int id) {
+		IssueTypes o = issueTypesDao.get(IssueTypes.class, id);
 		if (o != null) {
 			return o;
 		} else {
@@ -366,10 +351,8 @@ public class TypesServiceImpl implements TypesService {
 	 */
 
 	@Override
-	public EnquiryTypes getEnquiryTypeId(String name) {
-		EnquiryTypes o = enquiryTypesDao.get(
-				" from EnquiryTypes t where t.enquiryTypeName =?",
-				new Object[] { name });
+	public EnquiryTypes getEnquiryTypeId(int id) {
+		EnquiryTypes o = enquiryTypesDao.get(EnquiryTypes.class, id);
 		if (o != null) {
 			return o;
 		} else {
@@ -383,10 +366,8 @@ public class TypesServiceImpl implements TypesService {
 	 */
 	
 	@Override
-	public EmploymentTypes getEmploymentTypeId(String name) {
-		EmploymentTypes o = employmentTypesDao.get(
-				" from EmploymentTypes t where t.employmentName =?",
-				new Object[] { name });
+	public EmploymentTypes getEmploymentTypeId(int id) {
+		EmploymentTypes o = employmentTypesDao.get(EmploymentTypes.class, id);
 		if (o != null) {
 			return o;
 		} else {

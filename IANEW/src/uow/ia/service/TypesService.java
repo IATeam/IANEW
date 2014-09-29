@@ -58,25 +58,25 @@ public interface TypesService {
 	/*
 	 * 
 	 */
-	public DangerTypes getDangerTypeId(String name);
+	public DangerTypes getDangerTypeId(int id);
 	
-	public StatusTypes getStatusTypeId(String name);
+	public StatusTypes getStatusTypeId(int id);
 	
-	public TitleTypes getTitleTypeId(String name);
+	public TitleTypes getTitleTypeId(int id);
 	
-	public GenderTypes getGenderTypeId(String name);
+	public GenderTypes getGenderTypeId(int id);
 	
-	public CulturalBackgroundTypes getCulturalBackgroundTypeId(String name);
+	public CulturalBackgroundTypes getCulturalBackgroundTypeId(int id);
 	
-	public AccommodationTypes getAccommodationTypeId(String name);
+	public AccommodationTypes getAccommodationTypeId(int id);
 	
-	public DisabilityTypes getDisabilityTypeId(String name);
+	public DisabilityTypes getDisabilityTypeId(int id);
 	
-	public IssueTypes getIssueTypeId(String name);
+	public IssueTypes getIssueTypeId(int id);
 	
-	public EnquiryTypes getEnquiryTypeId(String name);
+	public EnquiryTypes getEnquiryTypeId(int id);
 	
-	public EmploymentTypes getEmploymentTypeId(String name);
+	public EmploymentTypes getEmploymentTypeId(int id);
 
 	/*
 	 *
