@@ -11,7 +11,7 @@ import java.sql.Date;
  * @version 1.0.1, 28/09/2014
  * 
  * Modification History:
- * 		Mods to bean structure to match table structure
+ * 		Mods to bean structure to match table structure 
  */
 public class PlanDevelopersHistories implements java.io.Serializable {
 

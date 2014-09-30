@@ -159,7 +159,7 @@
 				<s:url var="existingCase" namespace="/case" action="getExistingCase">
 					<s:param name="hiddenid"><s:property value="value.id" /></s:param>
 				</s:url>
-				<s:a href="%{existingCase}">Case</s:a><br/>
+				<s:a href="%{existingCase}">Case</s:a><br/> 
 			</s:elseif>
 				</s:iterator>
 			</article>

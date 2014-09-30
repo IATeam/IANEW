@@ -110,7 +110,7 @@ public class LoginAction extends BaseAction{
 					maps.put(1, o);
 				} else if (o instanceof Enquiries) {
 					maps.put(2, o);
-					System.out.println("Enquiry");
+					System.out.println("Enquiry ");
 				} else if (o instanceof IndividualCases) {
 					maps.put(3, o);
 				}
