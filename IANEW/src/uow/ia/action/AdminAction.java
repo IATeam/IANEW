@@ -37,7 +37,7 @@ public class AdminAction extends BaseAction{
 	 * 		Start Method for Admin page		
 	 * 				
 	 */
-	public String startAdminPage(){
+	public String startAdminPage(){ System.out.println("Struts: start startAdminPage");
 		DisabilitySelectList = adminService.findDisabilityTypes();
 		IssueTypeList = adminService.findIssueTypes();
 		setAccommodationSelectList(adminService.findAccommodationTypes());
@@ -50,14 +50,24 @@ public class AdminAction extends BaseAction{
 		setTitleSelectList(adminService.findTitleTypes());
 		setContactsSelectList(adminService.findContacts());
 
-
-		
 		for(TitleTypes i: titleSelectList  ){
 			System.out.println(i.getName());
 
 		}
 		return SUCCESS;
 	}
+	
+	public String adminAdvocatePage(){
+		System.out.println("ADVOCATE PAGE");
+
+		return SUCCESS;
+	}
+	
+	public String adminUserPage(){
+		return SUCCESS;
+	}
+	
+	
 	
 	/**
 	 * @author davidforbes
