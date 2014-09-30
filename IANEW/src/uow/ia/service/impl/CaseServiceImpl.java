@@ -4,6 +4,8 @@
  */
 package uow.ia.service.impl;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 import uow.ia.bean.ContactTypes;
 import uow.ia.bean.Contacts;
 import uow.ia.bean.DangerTypes;
+import uow.ia.bean.Enquiries;
 import uow.ia.bean.IndividualCases;
 import uow.ia.bean.ReviewFrequencies;
 import uow.ia.bean.StatusTypes;
@@ -152,6 +155,34 @@ CaseService {
 			System.out.println(e);
 			return false;
 		}
+	}
+
+	@Override
+	public List<IndividualCases> getLinkedIndividualCases(int id) {
+		IndividualCases individualCases = individualCasesDao.get(IndividualCases.class, id);
+		if(individualCases!=null) {
+			List<IndividualCases> tmpCases = new ArrayList<IndividualCases>();
+			if(individualCases.getOldCase()!=null) {
+				tmpCases.add(individualCases.getOldCase());
+				// if someone has a parent that means the parent always has at least one child
+				//if(enquiries.getParentEnquiry().getEnquiriesList()!=null) {
+					Iterator<IndividualCases> iterator = individualCases.getOldCase().getIndividualCasesList().iterator();
+					while (iterator.hasNext()) {
+						tmpCases.add(iterator.next());
+					}
+				//}
+			} else if(individualCases.getIndividualCasesList()!=null) { //selected enquire is parent and has some children
+				tmpCases.add(individualCases);	
+				Iterator<IndividualCases> iterator = individualCases.getIndividualCasesList().iterator();
+				while (iterator.hasNext()) {
+					tmpCases.add(iterator.next());
+				}
+			} else { // the selected enquire is the parent and no children
+				tmpCases.add(individualCases);
+			}
+			return tmpCases;
+		}
+		return null;
 	}
 
 }

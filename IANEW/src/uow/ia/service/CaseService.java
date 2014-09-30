@@ -3,6 +3,7 @@ package uow.ia.service;
 import java.util.List;
 
 import uow.ia.bean.Contacts;
+import uow.ia.bean.Enquiries;
 import uow.ia.bean.IndividualCases;
 import uow.ia.bean.ReviewFrequencies;
 
@@ -28,6 +29,8 @@ public interface CaseService {
 	public List<Contacts> findAdvocates();
 	
 	public List<ReviewFrequencies> findReviewFrequencies();
+	
+	public List<IndividualCases> getLinkedIndividualCases(int id);
 	
 	public boolean saveOrUpdateCase(IndividualCases ic, Contacts c);
 	
