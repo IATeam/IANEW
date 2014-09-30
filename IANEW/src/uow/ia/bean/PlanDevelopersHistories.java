@@ -18,7 +18,7 @@ public class PlanDevelopersHistories implements java.io.Serializable {
 	private Integer id;
 	private String action;
 	private Integer planDeveloperId;
-	private Integer planId;
+	private Integer caseId;
 	private Integer contactId;
 	private Integer changeOrder;
 	private Integer createdUserId;
@@ -38,12 +38,12 @@ public class PlanDevelopersHistories implements java.io.Serializable {
 	 * @param createdDateTime
 	 */
 	public PlanDevelopersHistories(Integer id, String action,
-			Integer planDeveloperId, Integer planId, Integer contactId,
+			Integer planDeveloperId, Integer caseId, Integer contactId,
 			Integer changeOrder, Integer createdUserId, Date createdDateTime) {
 		this.id = id;
 		this.action = action;
 		this.planDeveloperId = planDeveloperId;
-		this.planId = planId;
+		this.caseId = caseId;
 		this.contactId = contactId;
 		this.changeOrder = changeOrder;
 		this.createdUserId = createdUserId;
@@ -92,18 +92,19 @@ public class PlanDevelopersHistories implements java.io.Serializable {
 		this.planDeveloperId = planDeveloperId;
 	}
 
+
 	/**
-	 * @return the planId
+	 * @return the caseId
 	 */
-	public Integer getPlanId() {
-		return this.planId;
+	public Integer getCaseId() {
+		return caseId;
 	}
 
 	/**
-	 * @param planId the planId to set
+	 * @param caseId the caseId to set
 	 */
-	public void setPlanId(Integer planId) {
-		this.planId = planId;
+	public void setCaseId(Integer caseId) {
+		this.caseId = caseId;
 	}
 
 	/**
