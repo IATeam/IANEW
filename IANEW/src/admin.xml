@@ -87,5 +87,8 @@
     	<action name="startAdminPage" class="uow.ia.action.AdminAction" method="startAdminPage">
     		<result name="success">/admin/admin.jsp</result>
     	</action>
+    	<action name="adminAdvocatePage" class="uow.ia.action.AdminAction" method="adminAdvocatePage">
+    		<result name="success">/admin/advocateSettings.jsp</result>
+    	</action>
    	</package>
 </struts>
