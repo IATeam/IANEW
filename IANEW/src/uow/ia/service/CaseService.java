@@ -30,7 +30,7 @@ public interface CaseService {
 	
 	public List<ReviewFrequencies> findReviewFrequencies();
 	
-	public List<IndividualCases> getLinkedIndividualCases(int id);
+	public List<IndividualCases> getLinkedIndividualCases(int type,int id);
 	
 	public boolean saveOrUpdateCase(IndividualCases ic, Contacts c);
 	

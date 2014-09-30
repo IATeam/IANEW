@@ -158,7 +158,7 @@ CaseService {
 	}
 
 	@Override
-	public List<IndividualCases> getLinkedIndividualCases(int id) {
+	public List<IndividualCases> getLinkedIndividualCases(int type, int id) {
 		IndividualCases individualCases = individualCasesDao.get(IndividualCases.class, id);
 		if(individualCases!=null) {
 			List<IndividualCases> tmpCases = new ArrayList<IndividualCases>();
@@ -166,19 +166,35 @@ CaseService {
 				tmpCases.add(individualCases.getOldCase());
 				// if someone has a parent that means the parent always has at least one child
 				//if(enquiries.getParentEnquiry().getEnquiriesList()!=null) {
+				if(type!=0){
 					Iterator<IndividualCases> iterator = individualCases.getOldCase().getIndividualCasesList().iterator();
 					while (iterator.hasNext()) {
 						tmpCases.add(iterator.next());
 					}
+				} else {
+					Iterator<IndividualCases> iterator = individualCases.getOldCase().getIndividualCasesList().iterator();
+					while (iterator.hasNext()) {
+						tmpCases.add(iterator.next());
+					}
+					for (int i=0;i<tmpCases.size();i++) {
+						if(tmpCases.get(i).getId()==id) {
+							tmpCases.remove(i);
+						}
+					}
+				}
 				//}
 			} else if(individualCases.getIndividualCasesList()!=null) { //selected enquire is parent and has some children
-				tmpCases.add(individualCases);	
+				if(type!=0){
+					tmpCases.add(individualCases);
+				}	
 				Iterator<IndividualCases> iterator = individualCases.getIndividualCasesList().iterator();
 				while (iterator.hasNext()) {
 					tmpCases.add(iterator.next());
 				}
 			} else { // the selected enquire is the parent and no children
-				tmpCases.add(individualCases);
+				if(type!=0){
+					tmpCases.add(individualCases);
+				}	
 			}
 			return tmpCases;
 		}
