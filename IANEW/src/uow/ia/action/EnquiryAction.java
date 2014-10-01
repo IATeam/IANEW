@@ -216,7 +216,7 @@ ModelDriven<Enquiries>, Preparable{
 			}
 		}
 		
-		linkedEnquiriesList = enquiryService.getLinkedEnquiry(getHiddenid());
+		linkedEnquiriesList = enquiryService.getLinkedEnquiry(0,getHiddenid());
 		
 		System.out.println("Struts: start getExistingEnquiry");
 		return SUCCESS;
@@ -235,7 +235,7 @@ ModelDriven<Enquiries>, Preparable{
 		System.out.println(getLinkedEnquiriesList().size());
 		iamodel.setParentEnquiry(enquiryService.getEnquiry(getHiddenid()));
 		*/
-		linkedEnquiriesList = enquiryService.getLinkedEnquiry(getHiddenid());
+		linkedEnquiriesList = enquiryService.getLinkedEnquiry(0,getHiddenid());
 		System.out.println(getLinkedEnquiriesList().size() + " id: " + getHiddenid());
 		//System.out.println(iamodel.getParentEnquiry());
 		try{
@@ -364,7 +364,7 @@ ModelDriven<Enquiries>, Preparable{
 		else if(enquiryService.saveOrUpdateEnquiry(iamodel)){
 			activateLists();
 			setIamodel(iamodel);
-			linkedEnquiriesList = enquiryService.getLinkedEnquiry(iamodel.getId());
+			linkedEnquiriesList = enquiryService.getLinkedEnquiry(0,iamodel.getId());
 			System.out.println("save existing successfully");
 			System.out.println("Struts: end saveUpdateEnquiry");
 			return SUCCESS;
