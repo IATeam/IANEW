@@ -2,10 +2,22 @@ package uow.ia.service;
 
 import java.util.List;
 
+import uow.ia.bean.AccommodationTypes;
+import uow.ia.bean.CommunicationTypes;
 import uow.ia.bean.Contacts;
-import uow.ia.bean.Enquiries;
+import uow.ia.bean.CulturalBackgroundTypes;
+import uow.ia.bean.DangerTypes;
+import uow.ia.bean.DisabilityTypes;
+import uow.ia.bean.EmploymentTypes;
+import uow.ia.bean.EnquiryTypes;
+import uow.ia.bean.GenderTypes;
+import uow.ia.bean.GoalTypes;
 import uow.ia.bean.IndividualCases;
+import uow.ia.bean.IssueTypes;
+import uow.ia.bean.PriorityTypes;
 import uow.ia.bean.ReviewFrequencies;
+import uow.ia.bean.StatusTypes;
+import uow.ia.bean.TitleTypes;
 
 public interface CaseService {
 	
@@ -29,18 +41,4 @@ public interface CaseService {
 	public List<Contacts> findAdvocates();
 	
 	public List<ReviewFrequencies> findReviewFrequencies();
-	
-	public List<IndividualCases> getLinkedIndividualCases(int type,int id);
-	
-	public boolean saveOrUpdateCase(IndividualCases ic, Contacts c);
-	
-	public boolean saveCase(IndividualCases ic);
-	
-	public boolean deleteCase(IndividualCases ic);
-	
-	public boolean updateCase(IndividualCases ic);
-	
-	public IndividualCases mergeCase(IndividualCases ic);
-	
-	public boolean saveOrUpdateCase(IndividualCases ic);
 }

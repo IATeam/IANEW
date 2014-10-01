@@ -4,27 +4,24 @@
  */
 package uow.ia.service.impl;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
+
+import javassist.bytecode.stackmap.TypeData.ClassName;
 
 import javax.annotation.Resource;
 
+import org.apache.log4j.Logger;
+import org.apache.log4j.lf5.Log4JLogRecord;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
-import uow.ia.bean.ContactTypes;
-import uow.ia.bean.Contacts;
-import uow.ia.bean.DangerTypes;
-import uow.ia.bean.Enquiries;
-import uow.ia.bean.IndividualCases;
-import uow.ia.bean.ReviewFrequencies;
-import uow.ia.bean.StatusTypes;
-import uow.ia.dao.ContactTypesDao;
-import uow.ia.dao.ContactsDao;
-import uow.ia.dao.DangerTypesDao;
-import uow.ia.dao.IndividualCasesDao;
-import uow.ia.dao.ReviewFrequenciesDao;
-import uow.ia.dao.StatusTypesDao;
+import com.sun.tools.xjc.reader.xmlschema.bindinfo.BIConversion.Static;
+
+import uow.ia.bean.*;
+import uow.ia.dao.*;
 import uow.ia.service.CaseService;
 
 /**
@@ -84,121 +81,6 @@ CaseService {
 	@Override
 	public List<ReviewFrequencies> findReviewFrequencies() {
 		return reviewFrequenciesDao.find("from ReviewFrequencies");
-	}
-
-	@Override
-	public boolean saveOrUpdateCase(IndividualCases ic, Contacts c) {
-		ic.setContact(c);
-		c.getIndividualCasesList().add(ic);
-		try {
-			contactsDao.saveOrUpdate(c);
-			return true;
-		} catch (Exception e2) {
-			System.out.println(e2);
-			return false;
-		}
-	}
-
-	@Override
-	public boolean saveCase(IndividualCases ic) {
-		try {
-			individualCasesDao.save(ic);
-			System.out.println("saveCase called");
-			return true;
-		} catch (Exception e) {
-			System.out.println(e);
-			return false;
-		}
-	}
-
-	@Override
-	public boolean deleteCase(IndividualCases ic) {
-		try {
-			individualCasesDao.delete(ic);
-			System.out.println("deleteCase called");
-			return true;
-		} catch (Exception e) {
-			System.out.println(e);
-			return false;
-		}
-	}
-
-	@Override
-	public boolean updateCase(IndividualCases ic) {
-		try {
-			individualCasesDao.update(ic);
-			System.out.println("updateCase called");
-			return true;
-		} catch (Exception e) {
-			System.out.println(e);
-			return false;
-		}
-	}
-
-	@Override
-	public IndividualCases mergeCase(IndividualCases ic) {
-		try {
-			ic = individualCasesDao.merge(ic);
-			return ic;
-		} catch (Exception e) {
-			System.out.println(e);
-			return null;
-		}
-	}
-
-	@Override
-	public boolean saveOrUpdateCase(IndividualCases ic) {
-		try {
-			individualCasesDao.saveOrUpdate(ic);
-			return true;
-		} catch (Exception e) {
-			System.out.println(e);
-			return false;
-		}
-	}
-
-	@Override
-	public List<IndividualCases> getLinkedIndividualCases(int type, int id) {
-		IndividualCases individualCases = individualCasesDao.get(IndividualCases.class, id);
-		if(individualCases!=null) {
-			List<IndividualCases> tmpCases = new ArrayList<IndividualCases>();
-			if(individualCases.getOldCase()!=null) {
-				tmpCases.add(individualCases.getOldCase());
-				// if someone has a parent that means the parent always has at least one child
-				//if(enquiries.getParentEnquiry().getEnquiriesList()!=null) {
-				if(type!=0){
-					Iterator<IndividualCases> iterator = individualCases.getOldCase().getIndividualCasesList().iterator();
-					while (iterator.hasNext()) {
-						tmpCases.add(iterator.next());
-					}
-				} else {
-					Iterator<IndividualCases> iterator = individualCases.getOldCase().getIndividualCasesList().iterator();
-					while (iterator.hasNext()) {
-						tmpCases.add(iterator.next());
-					}
-					for (int i=0;i<tmpCases.size();i++) {
-						if(tmpCases.get(i).getId()==id) {
-							tmpCases.remove(i);
-						}
-					}
-				}
-				//}
-			} else if(individualCases.getIndividualCasesList()!=null) { //selected enquire is parent and has some children
-				if(type!=0){
-					tmpCases.add(individualCases);
-				}	
-				Iterator<IndividualCases> iterator = individualCases.getIndividualCasesList().iterator();
-				while (iterator.hasNext()) {
-					tmpCases.add(iterator.next());
-				}
-			} else { // the selected enquire is the parent and no children
-				if(type!=0){
-					tmpCases.add(individualCases);
-				}	
-			}
-			return tmpCases;
-		}
-		return null;
 	}
 
 }

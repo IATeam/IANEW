@@ -34,7 +34,7 @@ public interface EnquiryService {
 
 	public Enquiries getEnquiry(int id);
 	
-	public List<Enquiries> getLinkedEnquiry(int type, int id);
+	public List<Enquiries> getLinkedEnquiry(int id);
 	
 	public boolean saveOrUpdateEnquiry(Enquiries e, Contacts c);
 	

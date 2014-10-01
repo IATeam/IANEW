@@ -116,7 +116,7 @@ public class EnquiryServiceImpl implements EnquiryService {
 	 */
 
 	@Override
-	public List<Enquiries> getLinkedEnquiry(int type, int id) {
+	public List<Enquiries> getLinkedEnquiry(int id) {
 		Enquiries enquiries = enquiriesDao.get(Enquiries.class, id);
 		if(enquiries!=null) {
 			List<Enquiries> tmpEnquiries = new ArrayList<Enquiries>();
@@ -124,35 +124,19 @@ public class EnquiryServiceImpl implements EnquiryService {
 				tmpEnquiries.add(enquiries.getParentEnquiry());
 				// if someone has a parent that means the parent always has at least one child
 				//if(enquiries.getParentEnquiry().getEnquiriesList()!=null) {
-				if(type!=0){
 					Iterator<Enquiries> iterator = enquiries.getParentEnquiry().getEnquiriesList().iterator();
 					while (iterator.hasNext()) {
 						tmpEnquiries.add(iterator.next());
 					}
-				} else {
-					Iterator<Enquiries> iterator = enquiries.getParentEnquiry().getEnquiriesList().iterator();
-					while (iterator.hasNext()) {
-						tmpEnquiries.add(iterator.next());
-					}
-					for (int i=0;i<tmpEnquiries.size();i++) {
-						if(tmpEnquiries.get(i).getId()==id) {
-							tmpEnquiries.remove(i);
-						}
-					}
-				}
 				//}
 			} else if(enquiries.getEnquiriesList()!=null) { //selected enquire is parent and has some children
-				if(type!=0){
-					tmpEnquiries.add(enquiries);
-				}
+				tmpEnquiries.add(enquiries);	
 				Iterator<Enquiries> iterator = enquiries.getEnquiriesList().iterator();
 				while (iterator.hasNext()) {
 					tmpEnquiries.add(iterator.next());
 				}
 			} else { // the selected enquire is the parent and no children
-				if(type!=0){
-					tmpEnquiries.add(enquiries);
-				}
+				tmpEnquiries.add(enquiries);
 			}
 			return tmpEnquiries;
 		}
