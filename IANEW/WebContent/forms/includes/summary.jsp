@@ -26,11 +26,13 @@
 		<fieldset>
 			<s:div cssClass="row">
 				<s:div cssClass="four columns">
+
 					<s:select name="theEnquiryTypeId" cssClass="four columns" list="enquiryTypeSelectList" listValue="enquiryTypeName" listKey="id" headerKey="-1" headerValue="Select Type" />
 				</s:div>
 				<s:div cssClass="textarea twelve columns">
 					<s:label for="notes" value="Notes:" />
 					<s:div><s:textarea id="notes" name="iamodel.description" cssClass="multiLineTextArea" tooltip="Enter notes related to this enquiry"/></s:div>
+
 				</s:div>
 			</s:div>
 		</fieldset>
