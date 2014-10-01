@@ -82,7 +82,7 @@
 		<s:param name="formTitle">Advocate Settings</s:param>
 	</s:url>
 	<s:url id="urlAddUser" namespace="/admin" action="adminUserPage">
-		<s:param name="formTitle">User Settings</s:param>
+		<s:param name="formTitle">Client Settings</s:param>
 	</s:url>
 	
 	<div class="container">
@@ -124,7 +124,7 @@
 				<ul>
 					<li><sj:a id="sAddNewType" href="%{urlAddType}" targets="formDiv" onclick="menuclicked()">Type Settings</sj:a></li>
 					<li><sj:a id="sAddAdvocate" href="%{urlAddAdvocate}" targets="formDiv" onclick="menuclicked()">Advocate Settings</sj:a></li>
-					<li><sj:a id="sAddUser" href="%{urlAddUser}" targets="formDiv" onclick="menuclicked()">User Settings</sj:a></li>
+					<li><sj:a id="sAddUser" href="%{urlAddUser}" targets="formDiv" onclick="menuclicked()">Client Settings</sj:a></li>
 				</ul>
 			</li>
 			<li><sj:a id="links" href="%{urlLinks}" targets="formDiv">Links</sj:a></li>

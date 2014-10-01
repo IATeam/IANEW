@@ -481,4 +481,7 @@ public interface AdminService {
 	     *  @date 16/09/2014
 	     */
 		public boolean updateContact(Contacts c);
+		
+		public List<Contacts> findAdvocates();
+
 }

@@ -1,6 +1,7 @@
 package uow.ia.action;
 
 import uow.ia.bean.ClientDisabilities;
+import uow.ia.bean.ContactTypes;
 import uow.ia.bean.DisabilityTypes;
 import uow.ia.bean.EmploymentTypes;
 import uow.ia.bean.IssueTypes;
@@ -12,6 +13,7 @@ import uow.ia.bean.GenderTypes;
 import uow.ia.bean.StatusTypes;
 import uow.ia.bean.TitleTypes;
 import uow.ia.bean.Contacts;
+
 
 
 import java.util.List;
@@ -37,9 +39,9 @@ public class AdminAction extends BaseAction{
 	 * 		Start Method for Admin page		
 	 * 				
 	 */
-	public String startAdminPage(){ System.out.println("Struts: start startAdminPage");
-		DisabilitySelectList = adminService.findDisabilityTypes();
-		IssueTypeList = adminService.findIssueTypes();
+	public String startAdminPage(){ 
+		setDisabilitySelectList(adminService.findDisabilityTypes());
+		setIssueTypeList(adminService.findIssueTypes());
 		setAccommodationSelectList(adminService.findAccommodationTypes());
 		setCulturalBackgroundSelectList(adminService.findCulturalBackgroundTypes());
 		setDangerSelectList(adminService.findDangerTypes());
@@ -50,16 +52,12 @@ public class AdminAction extends BaseAction{
 		setTitleSelectList(adminService.findTitleTypes());
 		setContactsSelectList(adminService.findContacts());
 
-		for(TitleTypes i: titleSelectList  ){
-			System.out.println(i.getName());
-
-		}
 		return SUCCESS;
 	}
 	
 	public String adminAdvocatePage(){
-		System.out.println("ADVOCATE PAGE");
-
+		setAdvocateSelectList(adminService.findAdvocates());
+		//advocateSelectList = admin
 		return SUCCESS;
 	}
 	
@@ -123,7 +121,7 @@ public class AdminAction extends BaseAction{
 	}
 	
 	public String updateAccommodationType(){
-		//adminService.updateDisabilityType(disabilityType);
+		adminService.updateDisabilityType(disabilityType);
 		return SUCCESS;
 	}
 	
@@ -1097,5 +1095,41 @@ public class AdminAction extends BaseAction{
 		this.contactsSelectList = contactsSelectList;
 	}
 	
+	/**
+	 * @author davidforbes
+	 * @date 30/09/2014 -	
+	 * 		Advocate Fields & Methods		
+	 * 				
+	 */
+	
+	private List<Contacts> advocateSelectList;	
+
+	
+	/**
+	 * @author davidforbes
+	 * @date 30/09/2014 -	
+	 * 		Advocate Type ActionMethods		
+	 * 				
+	 */
+	
+	public String getAdvocateForm(){
+		return SUCCESS;
+	}
+
+	/**
+	 * @author davidforbes
+	 * @date 30/09/2014 -	
+	 * 		Advocate Getters & Setters		
+	 * 				  
+	 */
+	
+
+	public List<Contacts> getAdvocateSelectList() {
+		return advocateSelectList;
+	}
+
+	public void setAdvocateSelectList(List<Contacts> advocateSelectList) {
+		this.advocateSelectList = advocateSelectList;
+	}
 
 }

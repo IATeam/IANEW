@@ -10,6 +10,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import uow.ia.bean.AccommodationTypes;
+import uow.ia.bean.ContactTypes;
 import uow.ia.bean.Contacts;
 import uow.ia.bean.CulturalBackgroundTypes;
 import uow.ia.bean.DangerTypes;
@@ -22,6 +23,7 @@ import uow.ia.bean.StatusTypes;
 import uow.ia.bean.TitleTypes;
 import uow.ia.bean.Users;
 import uow.ia.dao.AccommodationTypesDao;
+import uow.ia.dao.ContactTypesDao;
 import uow.ia.dao.ContactsDao;
 import uow.ia.dao.CulturalBackgroundTypesDao;
 import uow.ia.dao.DangerTypesDao;
@@ -581,5 +583,16 @@ public class AdminServiceImpl implements AdminService {
 			System.out.println(e);
 			return false;
 		}
+	}
+	
+	@Resource
+	private ContactTypesDao<ContactTypes> contactTypesDao;
+	
+	@Override
+	public List<Contacts> findAdvocates() {
+		ContactTypes c = contactTypesDao.get(
+				" from ContactTypes t where t.contactTypeName =?",
+				new Object[] { "Advocate" });
+		return ContactsDao.find(" from Contacts t where t.contactType =:contactType order by t.lastname asc, t.firstname asc","contactType", c);
 	}
 }

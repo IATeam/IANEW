@@ -13,12 +13,13 @@
 	
 	<s:url var="urlAccType" namespace="/admin" action="saveNewAccommodationType" includeContext="false"/>
 	
-	<s:form id="newAccommodationTypeForm" method="post" action="%{urlAccType}">
+	<s:form id="newAccommodationTypeForm" method="post" action="%{urlAccType}" onsubmit="clearInput()" >
 		<div class="greybackground">
 			<s:label for="accommodationName" value="Name: "/>
 			<s:textfield id="accommodationName" name="accommodationName" />
 			<s:label for="accommodationDescription" value="Description" />
 			<s:textarea id="accommodationDescription" name ="accommodationDescription" />
+			<sj:submit id="saveNewAccommodationType" targets="tbodyAccommodationType" cssClass="two columns alpha" value="Save" />
 			<table>
 				<thead>
 					<th>Accommodation Name</th>
@@ -30,16 +31,16 @@
 			</table>
 		</div>
 		
-		<input type="button" value="Cancel" id="btnCancel"/>
-		<input type="button" value="edit" id="btnEdit"/>
-		<sj:submit id="saveNewAccommodationType" targets="tbodyAccommodationType" cssClass="two columns alpha" value="Save"/>
+		<input type="button" value="Update changes" id="btnEditAccommodation" class="hidden"/>
 	</s:form>
 	<script>
 	$("#btnCancel").click(function(){
 		$('#leftPopUp').hide("slow");
 	});
-	$('#accommodationName').val('');
-	$('#accommodationDescription').val('');
+	function clearInput(){
+		$('#accommodationName').val('');
+		$('#accommodationDescription').val('');
+	}
 	</script>
 </body>
 </html>

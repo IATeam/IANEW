@@ -90,5 +90,8 @@
     	<action name="adminAdvocatePage" class="uow.ia.action.AdminAction" method="adminAdvocatePage">
     		<result name="success">/admin/advocateSettings.jsp</result>
     	</action>
+    	<action name="adminUserPage" class="uow.ia.action.AdminAction" method="adminUserPage">
+    		<result name="success">/admin/userSettings.jsp</result>
+    	</action>
    	</package>
 </struts>
