@@ -7,10 +7,9 @@
 		<s:hidden name="iamodel.contact.disabilitiesList[%{#stat.index}].primaryFlag"/>
 		<s:div cssClass="four columns alpha">
 			<s:div cssClass="disabilityTypeSelect row four columns">
-				<s:select list="disabilitySelectList.{disabilityName}" name="theDisabilityList[%{#stat.index}]" headerKey="-1" headerValue="Select Disability" />
+				<s:select list="disabilitySelectList" listKey="id" listValue="disabilityName" name="theDisabilityListId[%{#stat.index}]" headerKey="-1" headerValue="Select Disability" />
 			</s:div>
 			<s:div cssClass="row four columns" style="text-align: center">
-				
 				<input type="radio" name="primary"  onclick="primaryUpdate(this)"/>
 				<s:label value="Primary Disability"/>
 			</s:div>

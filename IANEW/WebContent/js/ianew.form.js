@@ -129,7 +129,7 @@ function removeNullAndUpdateIndex(articleEle, iterator, sizeEle){
  * @param {} index
  * @return {}
  */
-function removeSecNull(ele, section, index){
+function removeSecNull(ele, section, index){ 
 	var isAllNull = true; 
 	$(ele).each(function(){ 
 		if(!$(this).is("input:radio") && !$(this).is("input:hidden")){
@@ -137,13 +137,13 @@ function removeSecNull(ele, section, index){
 				if ($(this).val() != -1){
 					isAllNull = false;
 				}
-			}else if( $(this).val().length != ""){
+			}else if( $(this).val().length > 0){
 				isAllNull = false;
 			}
 		}
 	});
 	//(isAllNull);
-	if(isAllNull === true){//alert("in removing null");
+	if(isAllNull === true){
 		$(section).remove();
 		return index;
 	}else{
@@ -181,34 +181,36 @@ function updateNameIndex(ele, index){
  */
 function deleteSection(button){ 
 
-	var hidden =  $(button).parent().find("input:hidden").first();
-	var index = $(hidden).attr('name').match(/[0-9]+/g);
-	var listType = $(hidden).attr('name').match(/\.(.*)\[/);
-	var url = "enquiry/deleteFromList.action?deleteFrom=" + listType[1] + "&index=" + index + "&hiddenid=" + $("#hiddenid").val();
-		
-	//load the specified dom
-	if(hidden.val() == ""){
-		
-		var section = $(button).parent();
-		var parent = $(section).parent();
-		if($(parent).prop('id').match(/it.*/))
-			$(section).remove();
-		else{
-			$(parent).addClass("hidden");
-			//TODO: not completely working at the moment
-			setEmpty($(parent).find("[name]"));
-		}
-	}else{
-		if(listType[1] === "enquiryIssuesList")	$("#itIssue").load(url);
-		else{
-			var refinedType = listType[1].match(/contact.(.*)/)
-			url = "enquiry/deleteFromList.action?deleteFrom=" + refinedType[1] + "&index=" + index + "&hiddenid=" + $("#hiddenid").val();
+	//grab this index, iterate through the bands below and change the index
 	
-			if(refinedType[1] === "addressesList")				$("#itAddress").load(url);
-			else if(refinedType[1] === "disabilitiesList")		$("#itDisability").load(url);
-			else if(refinedType[1] === "employmentsList")		$("#itEmployment").load(url);
-		}
-	}
+//	var hidden =  $(button).parent().find("input:hidden").first();
+//	var index = $(hidden).attr('name').match(/[0-9]+/g);
+//	var listType = $(hidden).attr('name').match(/\.(.*)\[/);
+//	var url = "enquiry/deleteFromList.action?deleteFrom=" + listType[1] + "&index=" + index + "&hiddenid=" + $("#hiddenid").val();
+//		
+//	//load the specified dom
+//	if(hidden.val() == ""){
+//		
+//		var section = $(button).parent();
+//		var parent = $(section).parent();
+//		if($(parent).prop('id').match(/it.*/))
+//			$(section).remove();
+//		else{
+//			$(parent).addClass("hidden");
+//			//TODO: not completely working at the moment
+//			setEmpty($(parent).find("[name]"));
+//		}
+//	}else{
+//		if(listType[1] === "enquiryIssuesList")	$("#itIssue").load(url);
+//		else{
+//			var refinedType = listType[1].match(/contact.(.*)/)
+//			url = "enquiry/deleteFromList.action?deleteFrom=" + refinedType[1] + "&index=" + index + "&hiddenid=" + $("#hiddenid").val();
+//	
+//			if(refinedType[1] === "addressesList")				$("#itAddress").load(url);
+//			else if(refinedType[1] === "disabilitiesList")		$("#itDisability").load(url);
+//			else if(refinedType[1] === "employmentsList")		$("#itEmployment").load(url);
+//		}
+//	}
 	
 	
 }
@@ -225,7 +227,7 @@ function setEmpty(elements){
 					$(this).val('-1')
 				}
 			}else if( $(this).val().length != ""){
-				alert("setting empty")
+				
 				$(this).val('');
 			}
 		}

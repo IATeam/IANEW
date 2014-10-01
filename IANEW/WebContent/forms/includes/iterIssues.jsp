@@ -6,7 +6,7 @@
 		<s:hidden name="iamodel.enquiryIssuesList[%{#stat.index}].id"/>
 		
 		<div class="four columns">
-			<s:select list="issueSelectList.{issueName}" name="theIssueList[%{#stat.index}]" headerKey="-1" headerValue="Select an Issue" />
+			<s:select list="issueSelectList" listValue="issueName" listKey="id" name="theIssueListId[%{#stat.index}]" headerKey="-1" headerValue="Select an Issue" />
 		</div>
 		
 		<div class="textarea eleven columns omega">

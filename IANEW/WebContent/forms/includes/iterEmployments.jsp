@@ -12,7 +12,9 @@
 	<section class="secIssue sixteen columns curveBorder">
 		<s:hidden name="iamodel.contact.employmentsList[%{#stat.index}].id"/>
 		<div class="row">
-			<div class="four columns"><s:select list="employmentSelectList.{employmentName}" name="theEmployment[%{#stat.index}]" headerKey="-1" headerValue="Select Employment Type" /></div>
+			<div class="four columns">
+				<s:select list="employmentSelectList" listValue="employmentName" listKey="id" name="theEmploymentListId[%{#stat.index}]" headerKey="-1" headerValue="Select Employment Type" />
+			</div>
 			<div class="inputfield four columns">
 				<s:label for="iamodel.contact.employmentsList[%{#stat.index}].workphone" value="Work#:" />
 				<div><s:textfield id="iamodel.contact.employmentsList[%{#stat.index}].workphone" cssClass="phone" name="iamodel.contact.employmentsList[%{#stat.index}].workphone" /></div>

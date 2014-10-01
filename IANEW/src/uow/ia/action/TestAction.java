@@ -1,7 +1,9 @@
 package uow.ia.action;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import uow.ia.bean.EmploymentTypes;
 import uow.ia.bean.Enquiries;
 import uow.ia.bean.EnquiryIssues;
 import uow.ia.bean.IssueTypes;
@@ -13,10 +15,25 @@ public class TestAction extends BaseAction{
 	
 	int id;
 	Enquiries iamodel;
-	List<EnquiryIssues> issuesSelectList;
+	List<EmploymentTypes> employmentSelectList = new ArrayList<EmploymentTypes>();;
 	
-	int issueid;
+	int employmentid;
+	String employmentName;
 	
+	
+	
+	public String getEmploymentName() {
+		return employmentName;
+	}
+
+
+
+	public void setEmploymentName(String employmentName) {
+		this.employmentName = employmentName;
+	}
+
+
+
 	public int getId() {
 		return id;
 	}
@@ -44,26 +61,28 @@ public class TestAction extends BaseAction{
 
 	
 
-	public List<EnquiryIssues> getIssuesSelectList() {
-		return issuesSelectList;
+
+
+	public List<EmploymentTypes> getEmploymentSelectList() {
+		return employmentSelectList;
 	}
 
 
 
-	public void setIssuesSelectList(List<EnquiryIssues> issuesSelectList) {
-		this.issuesSelectList = issuesSelectList;
+	public void setEmploymentSelectList(List<EmploymentTypes> employmentSelectList) {
+		this.employmentSelectList = employmentSelectList;
 	}
 
 
 
-	public int getIssueid() {
-		return issueid;
+	public int getEmploymentid() {
+		return employmentid;
 	}
 
 
 
-	public void setIssueid(int issueid) {
-		this.issueid = issueid;
+	public void setEmploymentid(int employmentid) {
+		this.employmentid = employmentid;
 	}
 
 
@@ -71,7 +90,27 @@ public class TestAction extends BaseAction{
 	public String execute() {
 		System.out.println("id: " + id);
 		iamodel = enquiryService.getEnquiry(1);
+		System.out.println(iamodel.getId());
+		employmentSelectList = typesService.findEmploymentTypes();
+		System.out.print(iamodel.getContact().getEmploymentsList().get(0).getEmploymentType().getId()+ "name " + iamodel.getContact().getEmploymentsList().get(0).getWorkphone());
+		employmentid = iamodel.getContact().getEmploymentsList().get(0).getEmploymentType().getId();
 		
 		return SUCCESS;
+	}
+	
+	public String save(){
+		System.out.println("employmentid: " + getEmploymentid());
+		if(getEmploymentid() != -1)
+			iamodel.getContact().getEmploymentsList().get(0).setEmploymentType(typesService.getEmploymentTypeId(getEmploymentid()));
+		
+		
+		if(enquiryService.saveOrUpdateEnquiry(iamodel)){
+			System.out.println("Save update successful");
+			return SUCCESS;
+		}else{
+			System.out.println("Eorror save unsuccessful");
+			return ERROR;
+		}
+			
 	}
 }

@@ -78,7 +78,9 @@
 	<s:url id="urlSettings" namespace="/admin" action="startAdminPage">
 		<s:param name="formTitle">Settings</s:param>
 	</s:url>
-	
+	<s:url id="urlTest" namespace="/test" action="test">
+		<s:param name="id">1</s:param>
+	</s:url>
 	<div class="container">
 	
 <!-- ---------------------------------------------------------------------------------------------- -->
@@ -110,7 +112,7 @@
 				<li><sj:a id="timeManagement" href="%{urlTimeManagement}" targets="formDiv"  onclick="menuclicked()">Time Management</sj:a></li>
 			
 			<li>
-				<s:a href="#">Synchronize</s:a>
+				<sj:a id="syncho" href="%{urlTest}" targets="formDiv">Synchronize</sj:a>
 				
 			</li>
 

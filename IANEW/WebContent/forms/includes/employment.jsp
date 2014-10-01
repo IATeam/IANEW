@@ -9,6 +9,7 @@
 						Updated employment to support 1 to many and add Add Employment functionality
 		08/09/2014 -	Quang Nhan
 						changed all iamodel.contact to iamodel.contact
+		29/09/2014 -	Quang Nhan modified select list to accommodate value by id rather than name
 	==============================================	
 	Description: A jsp page that displays a list of enquiries
 ------------------------------------------------------------------------------------------------>
@@ -26,7 +27,7 @@
 	<s:if test="%{iamodel.contact.employmentsList.size > 0 }">
 		<s:hidden id="employmentSize" name="iamodel.contact.employmentsList.size" value="%{iamodel.contact.employmentsList.size}"/>
 		<s:set name="index" value="iamodel.contact.employmentsList.size" />
-		<article id="artEmployment" class="hidden">
+		<article id="artEmployment" class="hidden"> 
 	</s:if>
 	<s:else>
 		<s:hidden id="employmentSize" name="iamodel.contact.employmentsList.size" value="0"/>
@@ -38,7 +39,7 @@
 		<s:hidden name="iamodel.contact.employmentsList[%{#index}].id"/>
 		<div class="row">
 			<div class="four columns">
-				<s:select list="employmentSelectList.{employmentName}" name="theEmploymentList[%{#index}]" headerKey="-1" headerValue="Select Employment Type" />
+				<s:select list="employmentSelectList" listKey="id" listValue="employmentName" name="theEmploymentListId[%{#index}]" headerKey="-1" headerValue="Select Employment Type" />
 			</div>
 			<div class="inputfield four columns">
 				<s:label for="workPhone" value="Work#:" />

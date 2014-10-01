@@ -10,6 +10,7 @@
 						reorder syntax to be consistent throughout the jsps
 		27/08/2014 -	Quang Nhan changed the label from description to notes as requested
 						by client.
+		29/09/2014 -	Quang Nhan modified select list to accommodate value by id rather than name
 	==============================================	
 	Description: A component of the contact that is to be displayed on both enquiry and case forms that 
 				displays the summary details.
@@ -25,11 +26,11 @@
 		<fieldset>
 			<s:div cssClass="row">
 				<s:div cssClass="four columns">
-					<s:select tooltip="Hi" tooltipDelay="10" name="theEnquiry" cssClass="four columns" list="enquiryTypeSelectList.{enquiryTypeName}" value="iamodel.enquiryType.enquiryTypeName" headerKey="-1" headerValue="Type" />
+					<s:select name="theEnquiryTypeId" cssClass="four columns" list="enquiryTypeSelectList" listValue="enquiryTypeName" listKey="id" headerKey="-1" headerValue="Select Type" />
 				</s:div>
 				<s:div cssClass="textarea twelve columns">
-					<s:label for="description" value="Notes:" />
-					<s:div><s:textarea id="description" name="iamodel.description" cssClass="multiLineTextArea" tooltip="Enter notes related to this enquiry"/></s:div>
+					<s:label for="notes" value="Notes:" />
+					<s:div><s:textarea id="notes" name="iamodel.description" cssClass="multiLineTextArea" tooltip="Enter notes related to this enquiry"/></s:div>
 				</s:div>
 			</s:div>
 		</fieldset>
@@ -43,7 +44,7 @@
 	</s:iterator>
 </s:div>
 <script>
-$("select option").each(function(){
+/* $("select option").each(function(){
 	if($(this).val() != -1)
 	{
 		if($("#" + $(this).val())){
@@ -52,7 +53,7 @@ $("select option").each(function(){
 		}
 	}
 })
-$(function(){$("[tootip]").tooltip();})
+$(function(){$("[tootip]").tooltip();}) */
 
 
 </script>

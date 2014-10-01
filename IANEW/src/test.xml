@@ -6,6 +6,9 @@
     	<action name="test" class="uow.ia.action.TestAction">
     		<result name="success">/testQuang/test.jsp</result>
     	</action>
+    	<action name="save" class="uow.ia.action.TestAction" method="save">
+    		<result name="success">/testQuang/test.jsp</result>
+    	</action>
    	</package>
 </struts>
     

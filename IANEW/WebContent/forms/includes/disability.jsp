@@ -21,6 +21,7 @@
 		17/09/2014 -	David Forbes modified theDisability with value attribute
 		18/09/2014 -	Quang Nhan Add validation refer to enquiryValidation.js file and fix index bugs
 						when it is a new enquiry
+		29/09/2014 -	Quang Nhan modified select list to accommodate value by id rather than name
 	==============================================	
 	Description: A jsp page that displays a list of enquiries
 ------------------------------------------------------------------------------------------------>
@@ -52,11 +53,11 @@
 		<section class="sixteen columns curveBorder row">
 				<s:hidden name="iamodel.contact.disabilitiesList[%{#index}].id"/>
 				<s:hidden name="iamodel.contact.disabilitiesList[%{#index}].primaryFlag"/>
-							<input type="image" src="/IANEW/resources/images/undoButtonImage.png" alt="undoButton" id="btnUndo" value="Undo" onclick="undoButton(this);return false;" class="undoButton"/>
+				<input type="image" src="/IANEW/resources/images/undoButtonImage.png" alt="undoButton" id="btnUndo" value="Undo" onclick="undoButton(this);return false;" class="undoButton"/>
 				
 				<s:div cssClass="four columns alpha">
 					<s:div cssClass="disabilityTypeSelect row four columns">
-						<s:select list="disabilitySelectList.{disabilityName}" name="theDisabilityList[%{#index}]" value="iamodel.contact.disabilitiesList.disabilityType.disabilityName" headerKey="-1" headerValue="Select Disability" />
+						<s:select list="disabilitySelectList" listKey="id" listValue="disabilityName" name="theDisabilityListId[%{#index}]" headerKey="-1" headerValue="Select Disability" />
 					</s:div>
 					
 					<s:div cssClass="row four columns" style="text-align: center">
@@ -87,10 +88,13 @@
 			var eachRadio = $(otherRadio).parents("section").find("input[name*='Flag']");
 
 			$(eachRadio).each(function(){
-				$(this).val(null);
+				if($(this).val() == 'Y'){ alert($(this).attr("id"));
+					this.value = null;
+				}
+					
 			});
 			var primaryFlag = $(radio).parents("section").find("input[name*='Flag']").first();
-				$(primaryFlag).val("Y");
+			$(primaryFlag).val("Y");
 		
 		}
 	};

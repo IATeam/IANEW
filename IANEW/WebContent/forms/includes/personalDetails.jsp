@@ -15,6 +15,7 @@
 		08/09/2014 -	Quang Nhan
 						changed all ccontact to iamodel.contact
 		15/09/2014 -	Quang Changed back all name in select list to the...
+		29/09/2014 -	Quang Nhan modified select list to accommodate value by id rather than name
 	==============================================	
 	Description: A component of the contact that is to be displayed on both enquiry and case forms that 
 				displays the personal detail.
@@ -34,7 +35,7 @@
 	<fieldset>
 		<s:hidden name="iamodel.contact.id" />
 		<div class="row">
-			<div class="four columns"><s:select list="titleSelectList.{name}" name="theTitle" value="iamodel.contact.titleType.name" headerKey="-1" headerValue="Select Title" /></div>
+			<div class="four columns"><s:select list="titleSelectList" listKey="id" listValue="name" name="theTitleTypeId" headerKey="-1" headerValue="Select Title" /></div>
 	
 			<div class='inputfield four columns'>
 				<s:label for="firstname" value="First Name:" />
@@ -53,7 +54,7 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="four columns"><s:select list="genderSelectList.{genderName}" name="theGender" value="iamodel.contact.genderType.genderName" headerKey="-1" headerValue="Select Gender"/></div>
+			<div class="four columns"><s:select list="genderSelectList" listKey="id" listValue="genderName" name="theGenderTypeId" headerKey="-1" headerValue="Select Gender"/></div>
 			<!-- style="padding-right: 15px;" -->
 			<div class="inputfield eight columns" >
 				<s:label for="identification" value="Identification:" />
@@ -67,7 +68,7 @@
 		</div>
 		
 		<div class="row">
-			<div class="four columns"><s:select list="culturalBackgroundSelectList.{culturalBackgroundName}" name="theCulturalBackground" value="iamodel.contact.culturalBackground.culturalBackgroundName" headerKey="-1"  headerValue="Select Cultural Background" /></div>
+			<div class="four columns"><s:select list="culturalBackgroundSelectList" listKey="id" listValue="culturalBackgroundName" name="theCulturalBackgroundTypeId" headerKey="-1"  headerValue="Select Cultural Background" /></div>
 			
 			<div class="textarea twelve columns omega">
 				<s:label for="culturalBackgroundComments" value="Comments:" />

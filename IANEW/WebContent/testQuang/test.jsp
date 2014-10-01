@@ -8,6 +8,10 @@
 <title>Test file</title>
 </head>
 <body>
-	<s:select list="issuesSelectList" name="issueid"/>
+	<s:form action="save" namespace="/test" method="post">
+		<s:select list="employmentSelectList" listKey="id" listValue="employmentName" name="employmentid" headerKey="-1" headerValue="Select Disability" />
+		<s:submit/>
+	</s:form>
+	
 </body>
 </html>

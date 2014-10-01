@@ -4,6 +4,7 @@ package uow.ia.action;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLData;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -29,8 +30,10 @@ import uow.ia.bean.IssueTypes;
 import uow.ia.bean.StatusTypes;
 import uow.ia.bean.TitleTypes;
 import uow.ia.bean.Users;
+
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
+
 import uow.ia.util.DateUtil;
 
 
@@ -58,6 +61,8 @@ import uow.ia.util.DateUtil;
  * 					Implements SessionAware and used reflection to updated enquiry.
  * 16/09/2014 -		Quang Nhan
  * 					Update all functions to accommodate preparable
+ * 29/09/2014 -		Quang Nhan
+ * 					Updated all type from names to id
  * ==============================================
  * 	Description: An action class to linking the service from spring to the enquiry jsp pages
  *
@@ -79,13 +84,6 @@ ModelDriven<Enquiries>, Preparable{
 	//private Contacts ccontact;
 	//not calling from enquiry to allow 'CASE' to share the same include jsp
 	
-	/**
-	 * @param hiddenid the hiddenid to set
-	 */
-	public void setHiddenid(Integer hiddenid) {
-		this.hiddenid = hiddenid;
-	}
-
 	private List<EnquiryTypes> enquiryTypeSelectList = new ArrayList<EnquiryTypes>();
 	/*
 	 * Lists for the drop down select options for the jsps
@@ -100,45 +98,28 @@ ModelDriven<Enquiries>, Preparable{
 	private List<DisabilityTypes> disabilitySelectList = new ArrayList<DisabilityTypes>();
 	private List<IssueTypes> issueSelectList = new ArrayList<IssueTypes>();
 	private List<EmploymentTypes> employmentSelectList = new ArrayList<EmploymentTypes>();
-	private String theEnquiry;
-	private String theTitle; 							
-	private String theGender;
-	private String theCulturalBackground;
-	private String theAccommodation;
-	private String theDanger;
-	private String theStatus;
-	private List<String> theDisabilityList = new ArrayList<String>();
-	private List<String> theIssueList = new ArrayList<String>();
-	private List<String> theEmploymentList = new ArrayList<String>();
-	private List<String> firstNameAuto;
+	private int theEnquiryTypeId;
+	private int theTitleTypeId; 							
+	private int theGenderTypeId;
+	private int theCulturalBackgroundTypeId;
+	private int theAccommodationTypeId;
+	private int theDangerTypeId;
+	private int theStatusTypeId;
 	
-	public List<String> getFirstNameAuto() {
-		return firstNameAuto;
-	}
+	
+	
+	
 
-	public void setFirstNameAuto(List<String> firstNameAuto) {
-		this.firstNameAuto = firstNameAuto;
-	}
+	private List<Integer> theDisabilityListId = new ArrayList<Integer>();
+	private List<Integer> theIssueListId = new ArrayList<Integer>();
+	private List<Integer> theEmploymentListId = new ArrayList<Integer>();
+	private List<String> firstNameAuto;
 
 	private List<Enquiries> linkedEnquiriesList;
 	
 	//vairiable used to get enquiry id from enquiry list;
-	int hiddenid;
+	private int hiddenid;
 	
-	public int getHiddenid() { 
-		return hiddenid;
-	}
-
-	public void setHiddenid(int hiddenid) {
-		this.hiddenid = hiddenid;
-	}
- 
-	Addresses address;
-	ClientDisabilities clientDisability;
-	EnquiryIssues enquiryIssue;
-	
-
-	EnquiryIssues issue;
 	
 	Date today;
 	
@@ -157,13 +138,6 @@ ModelDriven<Enquiries>, Preparable{
 	 * Action Methods
 	 * ----------------------------------------------------------------------------------------------------------
 	 * ----------------------------------------------------------------------------------------------------------*/
-	public Addresses getAddress() {
-		return address;
-	}
-	
-	public void setAddress(Addresses address) {
-		this.address = address;
-	}
 
 	/**
 	 * Action Method to create a new enquiry
@@ -194,29 +168,39 @@ ModelDriven<Enquiries>, Preparable{
 		//activateAutocomplete();
 		activateLists();
 		
-		if (iamodel.getContact().getDob() != null) {
-			setDob(iamodel.getContact().getDob().toString());
-		}
+		try{ theEnquiryTypeId = iamodel.getEnquiryType().getId(); }catch (NullPointerException n){}
+		try{ theAccommodationTypeId = iamodel.getContact().getAccommodation().getId(); }catch (NullPointerException n){}
+		try{ theCulturalBackgroundTypeId = iamodel.getContact().getCulturalBackground().getId(); }catch (NullPointerException n){}
+		try{ theDangerTypeId = iamodel.getContact().getDangerType().getId(); }catch (NullPointerException n){}
+		try{ theGenderTypeId = iamodel.getContact().getGenderType().getId(); }catch (NullPointerException n){}
+		try{ theStatusTypeId = iamodel.getStatusType().getId(); }catch (NullPointerException n){}
+		try{ theTitleTypeId = iamodel.getContact().getTitleType().getId(); }catch (NullPointerException n){}
+		
+		
+		try{ setDob(iamodel.getContact().getDob().toString()); }catch (NullPointerException n) {}
+		
+		
 		
 		if(iamodel.getContact().getEmploymentsList().size() > 0){
 			for(ContactEmployments ce: iamodel.getContact().getEmploymentsList()){
-				theEmploymentList.add(ce.getEmploymentType().getEmploymentName());
+				theEmploymentListId.add(ce.getEmploymentType().getId());
+				
 			}
 		}
 		
 		if(iamodel.getContact().getDisabilitiesList().size() > 0){
 			for(ClientDisabilities cd: iamodel.getContact().getDisabilitiesList()){
-				theDisabilityList.add(cd.getDisabilityType().getDisabilityName());
+				theDisabilityListId.add(cd.getDisabilityType().getId());
+				
 			}
 		}
 		
 		if(iamodel.getEnquiryIssuesList().size() > 0){
 			for(EnquiryIssues is: iamodel.getEnquiryIssuesList()){
-				theIssueList.add(is.getIssue().getIssueName());
+				theIssueListId.add(is.getIssue().getId());
 			}
 		}
 		
-		linkedEnquiriesList = enquiryService.getLinkedEnquiry(getHiddenid());
 		
 		System.out.println("Struts: start getExistingEnquiry");
 		return SUCCESS;
@@ -264,11 +248,19 @@ ModelDriven<Enquiries>, Preparable{
 	public String saveUpdateEnquiry(){ //TODO
 		System.out.println("Struts: start SaveUpdateEnquiry");
 		
-		System.out.println("parent enquiry is" +  iamodel.getParentEnquiry());
+		Date saveDate = null;
+		try {
+			saveDate = DateUtil.yyyymmddDate(getDob());
+		} catch (ParseException e) {
+			System.out.println("Problem with date: " + e.getMessage());
+		}
+		
+		java.sql.Date date = null;
+		try{ date = new java.sql.Date(saveDate.getTime()); } catch(NullPointerException n){}
+		
+		iamodel.getContact().setDob(date);
+		
 		Users user = (Users)userSession.get(USER);
-		
-		//System.out.println(iamodel.getId());
-		
 		
 		//addresses setup
 		List<Addresses> al = iamodel.getContact().getAddressesList();
@@ -276,81 +268,71 @@ ModelDriven<Enquiries>, Preparable{
 				
 			if(al.get(i).getId() == null){
 				al.get(i).setContact(iamodel.getContact());
-				al.get(i).setCreatedUser(user.getContact());
-				al.get(i).setUpdatedUser(user.getContact());
+				//al.get(i).setCreatedUser(user.getContact());
+				//al.get(i).setUpdatedUser(user.getContact());
+				
 			}
 		}
 		
-		
 		//enquiry issues set up
 		List<EnquiryIssues> eil = iamodel.getEnquiryIssuesList();
-		if(theIssueList != null)
-		for(int i = 0; i < theIssueList.size(); i++){
-			if (getTheIssueList().size() > 0) {
-				if(getTheIssueList().get(i) != "-1")
-					eil.get(i).setIssue(typesService.getIssueTypeByName(getTheIssueList().get(i)));
+		if (getTheIssueListId().size() > 0) {
+			for(int i = 0; i < theIssueListId.size(); i++){
+				if(getTheIssueListId().get(i) != -1)
+					eil.get(i).setIssue(typesService.getIssueTypeId(getTheIssueListId().get(i)));
 		
 				if(eil.get(i).getId() == null){
 					eil.get(i).setEnquiry(getIamodel());
-					eil.get(i).setCreatedUser(user.getContact());
-					eil.get(i).setUpdatedUser(user.getContact());
+//					eil.get(i).setCreatedUser(user.getContact());
+//					eil.get(i).setUpdatedUser(user.getContact());
 				}
 			}
 		}
 		
 		//client disabilities set up
 		List<ClientDisabilities> cdl = iamodel.getContact().getDisabilitiesList();
-		if(theDisabilityList != null)
-		for(int i = 0; i < theDisabilityList.size(); i++){
-			if (getTheDisabilityList().size() > 0) {
-			if(getTheDisabilityList().get(i) != "-1")
-				cdl.get(i).setDisabilityType(typesService.getDisabilityTypeByName(getTheDisabilityList().get(i)));
-	
-			if(cdl.get(i).getId() == null){
-				cdl.get(i).setContact(iamodel.getContact());
-				cdl.get(i).setCreatedUser(user.getContact());
-				cdl.get(i).setUpdatedUser(user.getContact());
-				
-			}
-			}
-		}
+		if (getTheDisabilityListId().size() > 0) {
+			for(int i = 0; i < theDisabilityListId.size(); i++){
+				if(getTheDisabilityListId().get(i) != -1){
+					cdl.get(i).setDisabilityType(typesService.getDisabilityTypeId(getTheDisabilityListId().get(i)));
+				}
 		
-		//contact employments set up
-		List<ContactEmployments> cel = iamodel.getContact().getEmploymentsList();
-		if(theEmploymentList != null)
-		for(int i = 0; i < theEmploymentList.size(); i++){
-			if (getTheEmploymentList().size() > 0) {
-				if(getTheEmploymentList().get(i) != "-1")
-					cel.get(i).setEmploymentType(typesService.getEmploymentTypeByName(getTheEmploymentList().get(i)));
-		
-				if(cel.get(i).getId() == null){
-					cel.get(i).setContact(iamodel.getContact());
-					cel.get(i).setCreatedUser(user.getContact());
-					cel.get(i).setUpdatedUser(user.getContact());
+				if(cdl.get(i).getId() == null){
+					cdl.get(i).setContact(iamodel.getContact());
+//					cdl.get(i).setCreatedUser(user.getContact());
+//					cdl.get(i).setUpdatedUser(user.getContact());
 					
 				}
 			}
 		}
 		
-		//TODO: add a checker to see if value has changed first
-		/*
-		iamodel.setStatusType(typesService.getStatusTypeByName(getTheStatus()));
-		iamodel.setEnquiryType(typesService.getEnquiryTypeByName(getTheEnquiry()));
-		iamodel.getContact().setTitleType(typesService.getTitleTypeByName(getTheTitle()));
-		iamodel.getContact().setGenderType(typesService.getGenderTypeByName(getTheGender()));
-		iamodel.getContact().setDangerType(typesService.getDangerTypeByName(getTheDanger()));;
-		//iamodel.getContact().setGenderType(enquiryService.getGenderTypeByName(getTheCulturalBackground()));
-		System.out.println("just before updating");
-		*/
-		iamodel.setStatusType(typesService.getStatusTypeByName(getTheStatus()));
-		iamodel.setEnquiryType(typesService.getEnquiryTypeByName(getTheEnquiry()));
+		//contact employments set up
+		List<ContactEmployments> cel = iamodel.getContact().getEmploymentsList();
+		if (getTheEmploymentListId().size() > 0) {
+			for(int i = 0; i < theEmploymentListId.size(); i++){
+				if(getTheEmploymentListId().get(i) != -1)
+					cel.get(i).setEmploymentType(typesService.getEmploymentTypeId(getTheEmploymentListId().get(i)));
 		
-		iamodel.getContact().setCulturalBackground(typesService.getCulturalBackgroundTypeByName(getTheCulturalBackground()));
-		iamodel.getContact().setTitleType(typesService.getTitleTypeByName(getTheTitle()));
-		iamodel.getContact().setGenderType(typesService.getGenderTypeByName(getTheGender()));
-		iamodel.getContact().setDangerType(typesService.getDangerTypeByName(getTheDanger()));
-		iamodel.getContact().setAccommodation(typesService.getAccommodationTypeByName(getTheAccommodation()));
-
+				if(cel.get(i).getId() == null){
+					cel.get(i).setContact(iamodel.getContact());
+//					cel.get(i).setCreatedUser(user.getContact());
+//					cel.get(i).setUpdatedUser(user.getContact());
+					
+				}
+			}
+		}
+		
+		
+		iamodel.setStatusType(typesService.getStatusTypeId(getTheStatusTypeId()));
+		iamodel.setEnquiryType(typesService.getEnquiryTypeId(getTheEnquiryTypeId()));
+		
+		iamodel.getContact().setCulturalBackground(typesService.getCulturalBackgroundTypeId(getTheCulturalBackgroundTypeId()));
+		iamodel.getContact().setTitleType(typesService.getTitleTypeId(getTheTitleTypeId()));
+		iamodel.getContact().setGenderType(typesService.getGenderTypeId(getTheGenderTypeId()));
+		iamodel.getContact().setDangerType(typesService.getDangerTypeId(getTheDangerTypeId()));
+		iamodel.getContact().setAccommodation(typesService.getAccommodationTypeId(getTheAccommodationTypeId()));
+		
+		System.out.println("Start to save");
 		if(iamodel.getId() == null){
 			if(enquiryService.saveOrUpdateEnquiry(iamodel, iamodel.getContact())){
 				activateLists();
@@ -360,6 +342,7 @@ ModelDriven<Enquiries>, Preparable{
 				return SUCCESS;
 			}
 		}
+		
 		
 		else if(enquiryService.saveOrUpdateEnquiry(iamodel)){
 			activateLists();
@@ -377,61 +360,61 @@ ModelDriven<Enquiries>, Preparable{
 		
 	}
 	
-	String deleteFrom;
-	int index;
-	
-	
-
-	public String getDeleteFrom() {
-		return deleteFrom;
-	}
-
-	public void setDeleteFrom(String deleteFrom) {
-		this.deleteFrom = deleteFrom;
-	}
-
-	public int getIndex() {
-		return index;
-	}
-
-	public void setIndex(int index) {
-		this.index = index;
-	}
-
-	public String deleteFromList(){ //TODO:
-		System.out.println("Struts: start deleteFromList");
-		
-		String returnString = "error";
-		
-		System.out.println("index" + index);
-		System.out.println("deleteFrom: " + deleteFrom);
-		
-		System.out.println("iamodel disalist size: " +iamodel.getContact().getDisabilitiesList().size());
-		switch(deleteFrom){
-		case "disabilitiesList": 
-			System.out.println("deleting list id: " + index + " from " + deleteFrom); 
-			iamodel.getContact().getDisabilitiesList().remove(index); returnString = "disabilityUpdate"; break;
-		case "enquiryIssuesList": 
-			System.out.println("deleting list id: " + index + " from " + deleteFrom); 
-			iamodel.getEnquiryIssuesList().remove(index); returnString = "issueUpdate" ; break;
-		case "addressesList": 
-			System.out.println("deleting list id: " + index + " from " + deleteFrom); 
-			iamodel.getContact().getAddressesList().remove(index); returnString = "addressUpdate"; break;
-		case "employmentsList": 
-			System.out.println("deleting list id: " + index + " from " + deleteFrom); 
-			iamodel.getContact().getEmploymentsList().remove(index); returnString = "employmentUpdate"; break;
-		default: System.out.println("Error deleting list");
-		}
-		
-		if(enquiryService.saveOrUpdateEnquiry(iamodel)){
-			System.out.println("Struts: delete successful");
-			activateLists();
-			setIamodel(iamodel);
-		}
-		System.out.println(returnString);
-		System.out.println("Struts: end deleteFromList");
-		return returnString;
-	}
+//	String deleteFrom;
+//	int index;
+//	
+//	
+//
+//	public String getDeleteFrom() {
+//		return deleteFrom;
+//	}
+//
+//	public void setDeleteFrom(String deleteFrom) {
+//		this.deleteFrom = deleteFrom;
+//	}
+//
+//	public int getIndex() {
+//		return index;
+//	}
+//
+//	public void setIndex(int index) {
+//		this.index = index;
+//	}
+//
+//	public String deleteFromList(){ //TODO:
+//		System.out.println("Struts: start deleteFromList");
+//		
+//		String returnString = "error";
+//		
+//		System.out.println("index" + index);
+//		System.out.println("deleteFrom: " + deleteFrom);
+//		
+//		System.out.println("iamodel disalist size: " +iamodel.getContact().getDisabilitiesList().size());
+//		switch(deleteFrom){
+//		case "disabilitiesList": 
+//			System.out.println("deleting list id: " + index + " from " + deleteFrom); 
+//			iamodel.getContact().getDisabilitiesList().remove(index); returnString = "disabilityUpdate"; break;
+//		case "enquiryIssuesList": 
+//			System.out.println("deleting list id: " + index + " from " + deleteFrom); 
+//			iamodel.getEnquiryIssuesList().remove(index); returnString = "issueUpdate" ; break;
+//		case "addressesList": 
+//			System.out.println("deleting list id: " + index + " from " + deleteFrom); 
+//			iamodel.getContact().getAddressesList().remove(index); returnString = "addressUpdate"; break;
+//		case "employmentsList": 
+//			System.out.println("deleting list id: " + index + " from " + deleteFrom); 
+//			iamodel.getContact().getEmploymentsList().remove(index); returnString = "employmentUpdate"; break;
+//		default: System.out.println("Error deleting list");
+//		}
+//		
+//		if(enquiryService.saveOrUpdateEnquiry(iamodel)){
+//			System.out.println("Struts: delete successful");
+//			activateLists();
+//			setIamodel(iamodel);
+//		}
+//		System.out.println(returnString);
+//		System.out.println("Struts: end deleteFromList");
+//		return returnString;
+//	}
 	
 	/* 
 	 * ----------------------------------------------------------------------------------------------------------
@@ -469,43 +452,12 @@ ModelDriven<Enquiries>, Preparable{
 		issueSelectList = typesService.findIssueTypes();
 		dangerSelectList = typesService.findDangerTypes();
 		employmentSelectList = typesService.findEmploymentTypes();
-		//setEmploymentList(contact.getEmploymentType());
 		statusSelectList = typesService.findStatusTypes(1);
 		enquiryTypeSelectList = typesService.findEnquiryTypes();
 
-		if(iamodel != null){
-			theDisabilityList = new ArrayList<String>();
-			theEmploymentList = new ArrayList<String>();
-			theIssueList = new ArrayList<String>();
-			
-			//setTheTitle(getIamodel().getContact().getTitleType().getName());
-			
-			
-			for(ClientDisabilities cd: getIamodel().getContact().getDisabilitiesList()){
-				try{
-					theDisabilityList.add(cd.getDisabilityType().getDisabilityName());
-				}catch(NullPointerException e){
-					theDisabilityList.add(new String());
-				}
-			}
-			
-			for(ContactEmployments ce: getIamodel().getContact().getEmploymentsList()){
-				try{
-					theEmploymentList.add(ce.getEmploymentType().getEmploymentName());
-				}catch(NullPointerException e){
-					theEmploymentList.add(new String());
-				}
-			}
-			
-			for(EnquiryIssues ei: getIamodel().getEnquiryIssuesList()){
-				try{
-					theIssueList.add(ei.getIssue().getIssueName());
-				}catch(NullPointerException e){
-					theIssueList.add(new String());
-				}
-			}
-			
-		}
+		theDisabilityListId = new ArrayList<Integer>();
+		theEmploymentListId = new ArrayList<Integer>();
+		theIssueListId = new ArrayList<Integer>();
 		
 	}
 	
@@ -624,6 +576,94 @@ ModelDriven<Enquiries>, Preparable{
 		this.enquiryTypeSelectList = enquiryTypeSelectList;
 	}
 
+	public int getTheEnquiryTypeId() {
+		return theEnquiryTypeId;
+	}
+
+	public void setTheEnquiryTypeId(int theEnquiryTypeId) {
+		this.theEnquiryTypeId = theEnquiryTypeId;
+	}
+
+	public int getTheTitleTypeId() {
+		return theTitleTypeId;
+	}
+
+	public void setTheTitleTypeId(int theTitleTypeId) {
+		this.theTitleTypeId = theTitleTypeId;
+	}
+
+	public int getTheGenderTypeId() {
+		return theGenderTypeId;
+	}
+
+	public void setTheGenderTypeId(int theGenderTypeId) {
+		this.theGenderTypeId = theGenderTypeId;
+	}
+
+	public int getTheCulturalBackgroundTypeId() {
+		return theCulturalBackgroundTypeId;
+	}
+
+	public void setTheCulturalBackgroundTypeId(int theCulturalBackgroundTypeId) {
+		this.theCulturalBackgroundTypeId = theCulturalBackgroundTypeId;
+	}
+
+	public int getTheAccommodationTypeId() {
+		return theAccommodationTypeId;
+	}
+
+	public void setTheAccommodationTypeId(int theAccommodationTypeId) {
+		this.theAccommodationTypeId = theAccommodationTypeId;
+	}
+
+	public int getTheDangerTypeId() {
+		return theDangerTypeId;
+	}
+
+	public void setTheDangerTypeId(int theDangerTypeId) {
+		this.theDangerTypeId = theDangerTypeId;
+	}
+
+	public int getTheStatusTypeId() {
+		return theStatusTypeId;
+	}
+
+	public void setTheStatusTypeId(int theStatusTypeId) {
+		this.theStatusTypeId = theStatusTypeId;
+	}
+
+	public List<Integer> getTheDisabilityListId() {
+		return theDisabilityListId;
+	}
+
+	public void setTheDisabilityListId(List<Integer> theDisabilityListId) {
+		this.theDisabilityListId = theDisabilityListId;
+	}
+
+	public List<Integer> getTheIssueListId() {
+		return theIssueListId;
+	}
+
+	public void setTheIssueListId(List<Integer> theIssueListId) {
+		this.theIssueListId = theIssueListId;
+	}
+
+	public List<Integer> getTheEmploymentListId() {
+		return theEmploymentListId;
+	}
+
+	public void setTheEmploymentListId(List<Integer> theEmploymentListId) {
+		this.theEmploymentListId = theEmploymentListId;
+	}
+
+	public List<String> getFirstNameAuto() {
+		return firstNameAuto;
+	}
+
+	public void setFirstNameAuto(List<String> firstNameAuto) {
+		this.firstNameAuto = firstNameAuto;
+	}
+
 	public List<Enquiries> getLinkedEnquiriesList() {
 		return linkedEnquiriesList;
 	}
@@ -632,89 +672,17 @@ ModelDriven<Enquiries>, Preparable{
 		this.linkedEnquiriesList = linkedEnquiriesList;
 	}
 	
-	public String getTheTitle() {
-		return theTitle;
+
+
+
+	public int getHiddenid() { 
+		return hiddenid;
 	}
 
-	public void setTheTitle(String theTitle) {
-		this.theTitle = theTitle;
+	public void setHiddenid(int hiddenid) {
+		this.hiddenid = hiddenid;
 	}
 	
-	
-	
-	
-	public String getTheGender() {
-		return theGender;
-	}
-
-	public void setTheGender(String theGender) {
-		this.theGender = theGender;
-	}
-
-	public String getTheCulturalBackground() {
-		return theCulturalBackground;
-	}
-
-	public void setTheCulturalBackground(String theCulturalBackground) {
-		this.theCulturalBackground = theCulturalBackground;
-	}
-
-	public String getTheAccommodation() {
-		return theAccommodation;
-	}
-
-	public void setTheAccommodation(String theAccommodation) {
-		this.theAccommodation = theAccommodation;
-	}
-
-	public List<String> getTheDisabilityList() {
-		return theDisabilityList;
-	}
-
-	public void setTheDisabilityList(List<String> theDisabilityList) {
-		this.theDisabilityList = theDisabilityList;
-	}
-
-	public String getTheEnquiry() {
-		return theEnquiry;
-	}
-
-	public void setTheEnquiry(String theEnquiry) {
-		this.theEnquiry = theEnquiry;
-	}
-
-	public List<String> getTheIssueList() {
-		return theIssueList;
-	}
-
-	public void setTheIssueList(List<String> theIssueList) {
-		this.theIssueList = theIssueList;
-	}
-
-	public List<String> getTheEmployment() {
-		return theEmploymentList;
-	}
-
-	public void setTheEmployment(List<String> theEmploymentList) {
-		this.theEmploymentList = theEmploymentList;
-	}
-
-	public String getTheDanger() {
-		return theDanger;
-	}
-
-	public void setTheDanger(String theDanger) {
-		this.theDanger = theDanger;
-	}
-
-	public String getTheStatus() {
-		return theStatus;
-	}
-
-	public void setTheStatus(String theStatus) {
-		this.theStatus = theStatus;
-	}
-
 	public Map<String, Object> getUserSession() {
 		return userSession;
 	}
@@ -724,15 +692,6 @@ ModelDriven<Enquiries>, Preparable{
 	}
 
 	
-	
-	public List<String> getTheEmploymentList() {
-		return theEmploymentList;
-	}
-
-	public void setTheEmploymentList(List<String> theEmploymentList) {
-		this.theEmploymentList = theEmploymentList;
-	}
-
 	private void printContact(Contacts c){
 		System.out.println(">>>Start Printing Contact Information: ");
 		//TODO: missing created and updated user date and id

@@ -22,7 +22,7 @@
  */
 
 function validated(){	
-
+	expandAll();
 	$('#enquiryForm').validate({ 
 			rules: {
 				//summary
@@ -66,10 +66,16 @@ function validated(){
 			},
 			
 			
-			submitHandler: function(form) {
+			submitHandler: function() {
+				
+				removeNullAndUpdateIndex($("#artAddress"), $("#itAddress"), $("#addressSize"));
+				removeNullAndUpdateIndex($("#artDisability"), $("#itDisability"), $("#disabilitySize"));
+				removeNullAndUpdateIndex($("#artIssue"), $("#itIssue"), $("#issueSize"));
+				removeNullAndUpdateIndex($("#artEmployment"), $("#itEmployment"), $("#employmentSize"));
 				alert("Validation complete, submitting form!");
-				checkForm();
-				form.submit();
+				$.post('/IANEW/enquiry/saveUpdateEnquiry.action', 
+				$('#enquiryForm').serialize()
+				);
 			}
 		});
 	 	
