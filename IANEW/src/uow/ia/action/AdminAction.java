@@ -16,7 +16,13 @@ import uow.ia.bean.Contacts;
 
 
 
+
+
+
+import java.sql.PreparedStatement;
 import java.util.List;
+
+import com.opensymphony.xwork2.Preparable;
 
 /**
  * @author Quang
@@ -25,7 +31,7 @@ import java.util.List;
  * 				Updated Disability Type methods to integrate enquiryService
  * 				
  */
-public class AdminAction extends BaseAction{
+public class AdminAction extends BaseAction implements Preparable{
 	/* 
 	 * 
 	 * ----------------------------------------------------------------------------------------------------------
@@ -120,8 +126,14 @@ public class AdminAction extends BaseAction{
 		}
 	}
 	
-	public String updateAccommodationType(){
-		adminService.updateDisabilityType(disabilityType);
+	public String updateAccommodationTypes(){
+		System.out.println("Struts: start updateAccommodationType");
+		//adminService.updateDisabilityType(disabilityType);
+		for(AccommodationTypes at: getAccommodationSelectList()){
+			//System.out.println(at.getAccommodationName());
+			adminService.updateAccommodationType(at);
+		}
+		System.out.println("Struts: end updateAccommodationType");
 		return SUCCESS;
 	}
 	
@@ -1130,6 +1142,12 @@ public class AdminAction extends BaseAction{
 
 	public void setAdvocateSelectList(List<Contacts> advocateSelectList) {
 		this.advocateSelectList = advocateSelectList;
+	}
+
+	@Override
+	public void prepare() throws Exception {
+		setAccommodationSelectList(adminService.findAccommodationTypes());
+		
 	}
 
 }

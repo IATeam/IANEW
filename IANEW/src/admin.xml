@@ -28,6 +28,10 @@
     		<result name="success">/admin/iterAccommodationTypes.jsp</result>
     		<result name="input"></result>
     	</action>
+    	<action name="updateAccommodationTypes" class="uow.ia.action.AdminAction" method="updateAccommodationTypes">
+    		<result name="success">/admin/iterAccommodationTypes.jsp</result>
+    		<result name="input"></result>
+    	</action>
     	<action name="getNewculturalBackgroundTypeForm" class="uow.ia.action.AdminAction" method="getNewculturalBackgroundTypeForm">
     		<result name="success">/admin/newCulturalBackgroundType.jsp</result>
     	</action>

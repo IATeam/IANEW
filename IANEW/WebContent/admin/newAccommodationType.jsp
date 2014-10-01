@@ -11,28 +11,32 @@
 <body>
 	<h3>New Accommodation Type</h3>
 	
-	<s:url var="urlAccType" namespace="/admin" action="saveNewAccommodationType" includeContext="false"/>
-	
-	<s:form id="newAccommodationTypeForm" method="post" action="%{urlAccType}" onsubmit="clearInput()" >
+	<s:url var="urlNewAccType" namespace="/admin" action="saveNewAccommodationType" includeContext="false"/>
+	<s:url var="urlUpdateAccType" namespace="/admin" action="updateAccommodationTypes" includeContext="false"/>
+
+	<s:form id="newAccommodationTypeForm" method="post" action="%{urlNewAccType}" onsubmit="clearInput()" >
 		<div class="greybackground">
 			<s:label for="accommodationName" value="Name: "/>
 			<s:textfield id="accommodationName" name="accommodationName" />
 			<s:label for="accommodationDescription" value="Description" />
 			<s:textarea id="accommodationDescription" name ="accommodationDescription" />
 			<sj:submit id="saveNewAccommodationType" targets="tbodyAccommodationType" cssClass="two columns alpha" value="Save" />
-			<table>
-				<thead>
-					<th>Accommodation Name</th>
-					<th>Accommodation Description</th>
-				</thead>
-				<tbody id="tbodyAccommodationType">
-					<%@include file="iterAccommodationTypes.jsp" %>
-				</tbody>
-			</table>
 		</div>
+	</s:form>	
 		
-		<input type="button" value="Update changes" id="btnEditAccommodation" class="hidden"/>
+	<s:form id="editAccommodationTypeForm" method="post" action="%{urlUpdateAccType}">		
+		<table>
+			<thead>
+				<th>Accommodation Name</th>
+				<th>Accommodation Description</th>
+			</thead>
+			<tbody id="tbodyAccommodationType">
+				<%@include file="iterAccommodationTypes.jsp" %>
+			</tbody>
+		</table>
+		<sj:submit targets = "tbodyAccommodationType" value="Update changes" id="btnEditAccommodation" cssClass="hidden" onclick="hideBtn(this)"/>
 	</s:form>
+	
 	<script>
 	$("#btnCancel").click(function(){
 		$('#leftPopUp').hide("slow");
