@@ -11,7 +11,7 @@ import java.sql.Date;
  * @version 1.0.1, 28/09/2014
  * 
  * Modification History:
- * 		Mods to bean structure to match table structure
+ * 		Mods to bean structure to match table structure 
  */
 public class PlanDevelopersHistories implements java.io.Serializable {
 
@@ -92,12 +92,16 @@ public class PlanDevelopersHistories implements java.io.Serializable {
 		this.planDeveloperId = planDeveloperId;
 	}
 
-	
-
+	/**
+	 * @return the caseId
+	 */
 	public Integer getCaseId() {
 		return caseId;
 	}
 
+	/**
+	 * @param caseId the caseId to set
+	 */
 	public void setCaseId(Integer caseId) {
 		this.caseId = caseId;
 	}
