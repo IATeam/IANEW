@@ -21,7 +21,7 @@
 				<s:label for="culturalBackgroundName" value="Name: "/>
 				<s:textfield id="culturalBackgroundName" name="culturalBackgroundName" />
 				<s:label for="culturalBackgroundDescription" value="Description" />
-				<s:textarea id="culturalBackgroundDescription" name ="culturalBackgroundDescription" />
+				<s:textarea id="culturalBackgroundDescription" name ="culturalBackgroundDescription" cols="70" rows="1" />
 				<sj:submit id="saveNewCulturalBackgroundType" targets="tbodyCulturalBackgroundType" cssClass="two columns alpha" value="Save"/>
 			</s:form>
 			<s:form id="editCulturalBackgroundTypeForm" method="post" action="%{urlUpdateCulType}">

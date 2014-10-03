@@ -21,7 +21,7 @@
 				<s:label for="accommodationName" value="Name: "/>
 				<s:textfield id="accommodationName" name="accommodationName" />
 				<s:label for="accommodationDescription" value="Description" />
-				<s:textarea id="accommodationDescription" name ="accommodationDescription" />
+				<s:textarea id="accommodationDescription"  name ="accommodationDescription" cols="70" rows="1" />
 				<sj:submit id="saveNewAccommodationType" targets="tbodyAccommodationType" cssClass="two columns alpha" value="Save" />
 			</s:form>	
 			<s:form id="editAccommodationTypeForm" method="post" action="%{urlUpdateAccType}">		

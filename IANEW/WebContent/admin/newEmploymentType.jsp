@@ -21,7 +21,7 @@
 				<s:label for="employmentName" value="Name: "/>
 				<s:textfield id="employmentName" name="employmentName" />
 				<s:label for="employmentDescription" value="Description" />
-				<s:textarea id="employmentDescription" name ="employmentDescription" />
+				<s:textarea id="employmentDescription" name ="employmentDescription" cols="70" rows="1"/>
 				<sj:submit id="saveNewEmployment" targets="tbodyEmploymentType" cssClass="two columns alpha" value="Save"/>
 			</s:form>
 			<s:form id="editEmploymentTypeForm" method="post" action="%{urlUpdateEmpType}">

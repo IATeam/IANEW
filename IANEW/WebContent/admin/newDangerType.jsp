@@ -12,7 +12,6 @@
 	<section>
 	<input type="image" src="/IANEW/resources/images/plusButton.png" alt="Hide/Show" id="btnShowHide" value="ShowHide" onclick="divHide(this);return false;" class="divHideButton"/>
 	<h3>New Danger Type</h3>
-	
 	<s:url var="urlDanType" namespace="/admin" action="saveNewDangerType" includeContext="false"/>
 	<s:url var="urlUpdateDanType" namespace="/admin" action="updateDangerType" includeContext="false"/>
 	
@@ -22,7 +21,7 @@
 				<s:label for="dangerName" value="Name: "/>
 				<s:textfield id="dangerName" name="dangerName" />
 				<s:label for="dangerDescription" value="Description" />
-				<s:textarea id="dangerDescription" name ="DangerDescription" />
+				<s:textarea id="dangerDescription" name ="DangerDescription" cols="70" rows="1" />
 				<sj:submit id="saveNewDangerType" targets="tbodyDangerType" cssClass="two columns alpha" value="Save"/>
 			</s:form>
 			<s:form id="editDangerTypeForm" method="post" action="%{urlUpdateDanType}">

@@ -21,7 +21,7 @@
 				<s:label for="disabilityName" value="Name: "/>
 				<s:textfield id="disabilityName" name="disabilityName" />
 				<s:label for="disabiltyDescription" value="Description" />
-				<s:textarea id="disabilityDescription" name ="disabilityDescription" />
+				<s:textarea id="disabilityDescription" name ="disabilityDescription" cols="70" rows="1"/>
 				<sj:submit id="saveNewDisabilityType" targets="tbodyDisabilityType" cssClass="two columns alpha" value="Save" />
 			</s:form>
 			<s:form id="editDisabilityTypeForm" method="post" action="%{urlUpdateDisType}">

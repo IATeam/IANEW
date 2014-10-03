@@ -22,7 +22,7 @@
 				<s:label for="issueName" value="Name: "/>
 				<s:textfield id="issueName" name="issueName" />
 				<s:label for="issueDescription" value="Description" />
-				<s:textarea id="issueDescription" name ="issueDescription" />
+				<s:textarea id="issueDescription" name ="issueDescription" cols="70" rows="1"/>
 				<sj:submit id="saveNewIssue" targets="tbodyIssueType" cssClass="two columns alpha" value="Save"/>
 			</s:form>
 			<s:form id="editIssueTypeForm" method="post" action="%{urlUpdateIssueType}">

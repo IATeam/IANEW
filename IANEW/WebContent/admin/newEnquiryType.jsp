@@ -21,7 +21,7 @@
 				<s:label for="enquiryTypeName" value="Name: "/>
 				<s:textfield id="enquiryTypeName" name="enquiryTypeName" />
 				<s:label for="enquiryTypeDescription" value="Description" />
-				<s:textarea id="enquiryTypeDescription" name ="enquiryTypeDescription" />
+				<s:textarea id="enquiryTypeDescription" name ="enquiryTypeDescription" cols="70" rows="1"/>
 				<sj:submit id="saveNewEnquiryType" targets="tbodyEnquiryType" cssClass="two columns alpha" value="Save"/>
 			</s:form>
 			<s:form id="editEnquiryTypeForm" method="post" action="%{urlUpdateEnType}">

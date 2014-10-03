@@ -21,7 +21,7 @@
 				<s:label for="genderName" value="Name: "/>
 				<s:textfield id="genderName" name="genderName" />
 				<s:label for="genderCode" value="Code" />
-				<s:textarea id="genderCode" name ="genderCode" />
+				<s:textarea id="genderCode" name ="genderCode" cols="70" rows="1"/>
 				<sj:submit id="saveNewGender" targets="tbodyGenderType" cssClass="two columns alpha" value="Save"/>
 			</s:form>
 			<s:form id="editGenderTypeForm" method="post" action="%{urlUpdateGenType}">
