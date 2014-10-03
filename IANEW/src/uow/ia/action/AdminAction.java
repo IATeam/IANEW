@@ -68,6 +68,7 @@ public class AdminAction extends BaseAction implements Preparable{
 	}
 	
 	public String adminUserPage(){
+		setClientSelectList(adminService.findClients());
 		return SUCCESS;
 	}
 	
@@ -127,13 +128,8 @@ public class AdminAction extends BaseAction implements Preparable{
 	}
 	
 	public String updateAccommodationTypes(){
-		System.out.println("Struts: start updateAccommodationType");
-		//adminService.updateDisabilityType(disabilityType);
-		for(AccommodationTypes at: getAccommodationSelectList()){
-			//System.out.println(at.getAccommodationName());
+		for(AccommodationTypes at: getAccommodationSelectList())
 			adminService.updateAccommodationType(at);
-		}
-		System.out.println("Struts: end updateAccommodationType");
 		return SUCCESS;
 	}
 	
@@ -223,7 +219,10 @@ public class AdminAction extends BaseAction implements Preparable{
 	}
 	
 	public String updateCultualBackgroundType(){
-		//adminService.updateDisabilityType(disabilityType);
+		System.out.println("Struts: start updateCulturalType");
+		for(CulturalBackgroundTypes ct: getCulturalBackgroundSelectList())
+			adminService.updateCulturalBackgroundType(ct);
+		System.out.println("Struts: end updateCulturalType");
 		return SUCCESS;
 	}
 	
@@ -323,8 +322,11 @@ public class AdminAction extends BaseAction implements Preparable{
 	}
 	
 	public String updateDangerType(){
-		//adminService.updateDisabilityType(disabilityType);
-		return SUCCESS;
+		System.out.println("Struts: start updateDangerType");
+		for(DangerTypes dt: getDangerSelectList())
+			adminService.updateDangerType(dt);
+		System.out.println("Struts: end updateDangerType");
+		return SUCCESS;		
 	}
 	
 	/**
@@ -417,7 +419,8 @@ public class AdminAction extends BaseAction implements Preparable{
 	}
 	
 	public String updateEmploymentType(){
-		//adminService.updateDisabilityType(disabilityType);
+		for(EmploymentTypes et: getEmploymentSelectList())
+			adminService.updateEmploymentType(et);
 		return SUCCESS;
 	}
 	
@@ -515,7 +518,8 @@ public class AdminAction extends BaseAction implements Preparable{
 	}
 	
 	public String updateEnquiryType(){
-		//adminService.updateDisabilityType(disabilityType);
+		for(EnquiryTypes et: getEnquiryTypeSelectList())
+			adminService.updateEnquiryType(et);
 		return SUCCESS;
 	}
 	
@@ -605,7 +609,8 @@ public class AdminAction extends BaseAction implements Preparable{
 	}
 	
 	public String updateGenderType(){
-		//adminService.updateDisabilityType(disabilityType);
+		for(GenderTypes gt: getGenderSelectList())
+			adminService.updateGenderType(gt);
 		return SUCCESS;
 	}
 	
@@ -700,7 +705,8 @@ public class AdminAction extends BaseAction implements Preparable{
 	}
 	
 	public String updateStatusType(){
-		//adminService.updateDisabilityType(disabilityType);
+		for(StatusTypes st: getStatusSelectList())
+			adminService.updateStatusType(st);
 		return SUCCESS;
 	}
 	
@@ -786,7 +792,8 @@ public class AdminAction extends BaseAction implements Preparable{
 	}
 	
 	public String updateTitleType(){
-		//adminService.updateDisabilityType(disabilityType);
+		for(TitleTypes tt: getTitleSelectList())
+			adminService.updateTitleType(tt);
 		return SUCCESS;
 	}
 	
@@ -880,7 +887,10 @@ public class AdminAction extends BaseAction implements Preparable{
 	}
 	
 	public String updateDisabilityType(){
-		//adminService.updateDisabilityType(disabilityType);
+		System.out.println("Struts: start updateDisabilityType");
+		for(DisabilityTypes dt: getDisabilitySelectList())
+			adminService.updateDisabilityType(dt);
+		System.out.println("Struts: end updateDisabilityType");
 		return SUCCESS;
 	}
 	/* ----------------------------------------------------------------------------------------------------------
@@ -971,6 +981,13 @@ public class AdminAction extends BaseAction implements Preparable{
 			return ERROR;
 		}
 	}
+	
+	public String updateIssueType(){
+		for(IssueTypes it: getIssueTypeList())
+			adminService.updateIssueType(it);
+		return SUCCESS;
+	}
+	
 	/* ----------------------------------------------------------------------------------------------------------
 	 * Issue Getters & Setters
 	 * ----------------------------------------------------------------------------------------------------------
@@ -1134,8 +1151,6 @@ public class AdminAction extends BaseAction implements Preparable{
 	 * 		Advocate Getters & Setters		
 	 * 				  
 	 */
-	
-
 	public List<Contacts> getAdvocateSelectList() {
 		return advocateSelectList;
 	}
@@ -1143,11 +1158,58 @@ public class AdminAction extends BaseAction implements Preparable{
 	public void setAdvocateSelectList(List<Contacts> advocateSelectList) {
 		this.advocateSelectList = advocateSelectList;
 	}
+	
+	/**
+	 * @author davidforbes
+	 * @date 03/10/2014 -	
+	 * 		Client Fields & Methods		
+	 * 				
+	 */
+	
+	private List<Contacts> clientSelectList;	
 
+	
+	/**
+	 * @author davidforbes
+	 * @date 03/10/2014 -	
+	 * 		Client Type ActionMethods		
+	 * 				
+	 */
+	
+	public String getClientForm(){
+		return SUCCESS;
+	}
+	
+	/**
+	 * @author davidforbes
+	 * @date 03/10/2014 -	
+	 * 		Client Getters & Setters		
+	 * 				  
+	 */
+	
+	public List<Contacts> getClientSelectList() {
+		return clientSelectList;
+	}
+
+	public void setClientSelectList(List<Contacts> clientSelectList) {
+		this.clientSelectList = clientSelectList;
+	}
+
+	/**
+	 * 
+	 * prepare function used to update the tables
+	 */
 	@Override
 	public void prepare() throws Exception {
 		setAccommodationSelectList(adminService.findAccommodationTypes());
-		
+		setCulturalBackgroundSelectList(adminService.findCulturalBackgroundTypes());
+		setDangerSelectList(adminService.findDangerTypes());
+		setDisabilitySelectList(adminService.findDisabilityTypes());
+		setEmploymentSelectList(adminService.findEmploymentTypes());
+		setEnquiryTypeSelectList(adminService.findEnquiryTypes());
+		setIssueTypeList(adminService.findIssueTypes());
+		setStatusSelectList(adminService.findStatusTypes());
+		setTitleSelectList(adminService.findTitleTypes());
 	}
 
 }

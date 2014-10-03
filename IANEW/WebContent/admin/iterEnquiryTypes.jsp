@@ -2,7 +2,11 @@
 
 <s:iterator value="enquiryTypeSelectList" status="stat">
 <tr>
-<td><s:property value="%{enquiryTypeName}"></s:property></td>
-<td><s:property value="%{enquiryTypeDescription}"></s:property></td>
+<td data-ref="enquiryTypeSelectList.enquiryTypeName" ondblclick="edit(this, 'btnEditEnquiry')">
+	<s:property value="%{enquiryTypeName}" />
+</td>
+<td data-ref="enquiryTypeSelectList.enquiryTypeDescription" ondblclick="edit(this, 'btnEditEnquiry')">
+	<s:property value="%{enquiryTypeDescription}" />
+</td>
 </tr>
 </s:iterator>

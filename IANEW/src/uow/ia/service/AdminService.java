@@ -51,16 +51,6 @@ public interface AdminService {
 	public boolean saveAccommodationType(AccommodationTypes a);
 	
 	/** 
-     * delete Accommodation Types object to Accommodation_Types table
-     * 
-     * @param AccommodationTypes a
-     * @return List<Object>
-     *  @author davidforbes
-     *  @date 09/09/2014
-     */
-	public boolean deleteAccommodationType(AccommodationTypes a);
-	
-	/** 
      * update Accommodation Types object to Accommodation_Types table
      *  @author davidforbes
      *  @date 09/09/2014
@@ -91,16 +81,6 @@ public interface AdminService {
      *  @date 13/09/2014
      */
 	public boolean saveCulturalBackgroundType(CulturalBackgroundTypes cbt);
-	
-	/** 
-     * delete Cultural Background Types object to CulturalBackground_Types table
-     * 
-     * @param CulturalBackgroundTypes cbt
-     * @return List<Object>
-     *  @author davidforbes
-     *  @date 13/09/2014
-     */
-	public boolean deleteCulturalBackgroundType(CulturalBackgroundTypes cbt);
 	
 	/** 
      * update Cultural Background  Types object to CulturalBackground_Types table
@@ -134,16 +114,6 @@ public interface AdminService {
 	public boolean saveDangerType(DangerTypes dt);
 	
 	/** 
-     * delete DangerTypes object to Danger_Types table
-     * 
-     * @param DangerTypes dt
-     * @return List<Object>
-     *  @author davidforbes
-     *  @date 14/09/2014
-     */
-	public boolean deleteDangerType(DangerTypes dt);
-	
-	/** 
      * update DangerTypes object to Danger_Types table
      *  @author davidforbes
      *  @date 14/09/2014
@@ -173,16 +143,6 @@ public interface AdminService {
 	     *  @date 14/09/2014
 	     */
 		public boolean saveEmploymentType(EmploymentTypes et);
-		
-		/** 
-	     * delete EmploymentType object to Employment_Types table
-	     * 
-	     * @param DangerTypes et
-	     * @return List<Object>
-	     *  @author davidforbes
-	     *  @date 14/09/2014
-	     */
-		public boolean deleteEmploymentType(EmploymentTypes et);
 		
 		/** 
 	     * update EmploymentType object to Employment_Types table
@@ -215,15 +175,6 @@ public interface AdminService {
 	     */
 		public boolean saveEnquiryType(EnquiryTypes enqt);
 		
-		/** 
-	     * delete EnquiryType object to Enquiry_Types table
-	     * 
-	     * @param EnquiryTypes enqt
-	     * @return List<Object>
-	     *  @author davidforbes
-	     *  @date 14/09/2014
-	     */
-		public boolean deleteEnquiryType(EnquiryTypes enqt);
 		
 		/** 
 	     * update EnquiryType object to Enquiry_Types table
@@ -257,16 +208,6 @@ public interface AdminService {
 		public boolean saveGenderType(GenderTypes gt);
 		
 		/** 
-	     * delete GenderType object to Gender_Types table
-	     * 
-	     * @param GenderTypes gt
-	     * @return List<Object>
-	     *  @author davidforbes
-	     *  @date 14/09/2014
-	     */
-		public boolean deleteGenderType(GenderTypes gt);
-		
-		/** 
 	     * update GenderType object to Gender_Types table
 	     *  @author davidforbes
 	     *  @date 14/09/2014
@@ -296,16 +237,6 @@ public interface AdminService {
 	     *  @date 14/09/2014
 	     */
 		public boolean saveStatusType(StatusTypes st);
-		
-		/** 
-	     * delete StatusType object to Status_Types table
-	     * 
-	     * @param StatusType st
-	     * @return List<Object>
-	     *  @author davidforbes
-	     *  @date 14/09/2014
-	     */
-		public boolean deleteStatusType(StatusTypes st);
 		
 		/** 
 	     * update StatusType object to Status_Types table
@@ -339,16 +270,6 @@ public interface AdminService {
 		public boolean saveTitleType(TitleTypes tt);
 		
 		/** 
-	     * delete TitleType object to Title_Types table
-	     * 
-	     * @param TitleType tt
-	     * @return List<Object>
-	     *  @author davidforbes
-	     *  @date 14/09/2014
-	     */
-		public boolean deleteTitleType(TitleTypes tt);
-		
-		/** 
 	     * update TitleType object to Title_Types table
 	     *  @author davidforbes
 	     *  @date 14/09/2014
@@ -377,14 +298,6 @@ public interface AdminService {
      * @return List<Object>
      */
 	public boolean saveDisabilityType(DisabilityTypes d);
-	
-	/** 
-     * delete Disability Types object to Disability_Types table
-     * 
-     * @param DisabilityTypes d
-     * @return List<Object>
-     */
-	public boolean deleteDisabilityType(DisabilityTypes d);
 	
 	/** 
      * update Disability Types object to Disability_Types table
@@ -417,16 +330,6 @@ public interface AdminService {
      *  @date 09/09/2014
      */
 	public boolean saveIssueType(IssueTypes i);
-	
-	/** 
-     * delete Issue Types object to Issue_Types table
-     * 
-     * @param IssueTypes i
-     * @return List<Object>
-     *  @author davidforbes
-     *  @date 09/09/2014
-     */
-	public boolean deleteIssueType(IssueTypes i);
 	
 	/** 
      * update Issue Types object to Issue_Types table
@@ -462,15 +365,6 @@ public interface AdminService {
 	     */
 		public boolean saveContact(Contacts c);
 		
-		/** 
-	     * delete Contact object to Contacts table
-	     * 
-	     * @param IssueTypes i
-	     * @return List<Object>
-	     *  @author davidforbes
-	     *  @date 16/09/2014
-	     */
-		public boolean deleteContact(Contacts c);
 		
 		/** 
 	     * update Contacts object to Contacts table
@@ -483,5 +377,9 @@ public interface AdminService {
 		public boolean updateContact(Contacts c);
 		
 		public List<Contacts> findAdvocates();
+		
+		public List<Contacts> findClients();
+
+		
 
 }

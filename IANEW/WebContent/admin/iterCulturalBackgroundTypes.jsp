@@ -2,7 +2,11 @@
 
 <s:iterator value="culturalBackgroundSelectList" status="stat">
 <tr>
-<td><s:property value="%{culturalBackgroundName}"></s:property></td>
-<td><s:property value="%{culturalBackgroundDescription}"></s:property></td>
+<td data-ref="culturalBackgroundSelectList.culturalBackgroundName" ondblclick="edit(this, 'btnEditCulturalBackground')">
+	<s:property value="%{culturalBackgroundName}" />
+</td>
+<td data-ref="culturalBackgroundSelectList.culturalBackgroundDescription" ondblclick="edit(this, 'btnEditCulturalBackground')">
+	<s:property value="%{culturalBackgroundDescription}" />
+</td>
 </tr>
 </s:iterator>

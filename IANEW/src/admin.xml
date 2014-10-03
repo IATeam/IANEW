@@ -6,6 +6,9 @@
 	Created Date: 22/08/2014
 	==============================================
 	Updates:
+	edited by David 21/09 - actions for all types
+	edited by David 30/09 - split setting structure
+	edited by David 02/10 - edit
 		
 	==============================================	
 	Description: configuration xml file for Admin tasks
@@ -14,13 +17,6 @@
 
 <struts>
  	<package name="admin" namespace="/admin" extends="struts-default">
-    	<action name="getDisabilityTypeForm" class="uow.ia.action.AdminAction" method="getDisabilityTypeForm">
-    		<result name="success">/admin/newDisabilityType.jsp</result>
-    	</action>
-    	<action name="saveNewDisabilityType" class="uow.ia.action.AdminAction" method="saveNewDisabilityType">
-    		<result name="success">/admin/iterDisabilityTypes.jsp</result>
-   			 <result name="input"></result>
-    	</action>
     	<action name="getAccommodationTypeForm" class="uow.ia.action.AdminAction" method="getAccommodationTypeForm">
     		<result name="success">/admin/newAccommodationType.jsp</result>
     	</action>
@@ -39,6 +35,10 @@
     		<result name="success">/admin/iterCulturalBackgroundTypes.jsp</result>
     		<result name="input"></result>
     	</action>
+    	<action name="updateCulturalBackgroundTypes" class="uow.ia.action.AdminAction" method="updateCultualBackgroundType">
+    		<result name="success">/admin/iterCulturalBackgroundTypes.jsp</result>
+    		<result name="input"></result>
+    	</action>
     	<action name="getDangerTypeForm" class="uow.ia.action.AdminAction" method="getDangerTypeForm">
     		<result name="success">/admin/newDangerType.jsp</result>
     	</action>
@@ -46,10 +46,29 @@
     		<result name="success">/admin/iterDangerTypes.jsp</result>
     		<result name="input"></result>
     	</action>
+    	<action name="updateDangerTypes" class="uow.ia.action.AdminAction" method="updateDangerType">
+    		<result name="success">/admin/iterDangerTypes.jsp</result>
+    		<result name="input"></result>
+    	</action>
+    	<action name="getDisabilityTypeForm" class="uow.ia.action.AdminAction" method="getDisabilityTypeForm">
+    		<result name="success">/admin/newDisabilityType.jsp</result>
+    	</action>
+    	<action name="saveNewDisabilityType" class="uow.ia.action.AdminAction" method="saveNewDisabilityType">
+    		<result name="success">/admin/iterDisabilityTypes.jsp</result>
+   			 <result name="input"></result>
+    	</action>
+    	<action name="updateDisabilityTypes" class="uow.ia.action.AdminAction" method="updateDisabilityType">
+    		<result name="success">/admin/iterDisabilityTypes.jsp</result>
+    		<result name="input"></result>
+    	</action>
     	<action name="getEmploymentTypeForm" class="uow.ia.action.AdminAction" method="getEmploymentTypeForm">
     		<result name="success">/admin/newEmploymentType.jsp</result>
     	</action>
     	<action name="saveNewEmploymentType" class="uow.ia.action.AdminAction" method="saveNewEmploymentType">
+    		<result name="success">/admin/iterEmploymentTypes.jsp</result>
+    		<result name="input"></result>
+    	</action>
+    	<action name="updateEmploymentTypes" class="uow.ia.action.AdminAction" method="updateEmploymentType">
     		<result name="success">/admin/iterEmploymentTypes.jsp</result>
     		<result name="input"></result>
     	</action>
@@ -60,10 +79,18 @@
     		<result name="success">/admin/iterEnquiryTypes.jsp</result>
     		<result name="input"></result>
     	</action>
+    	<action name="updateEnquiryTypes" class="uow.ia.action.AdminAction" method="updateEnquiryType">
+    		<result name="success">/admin/iterEnquiryTypes.jsp</result>
+    		<result name="input"></result>
+    	</action>
     	<action name="getGenderTypeForm" class="uow.ia.action.AdminAction" method="getGenderTypeForm">
     		<result name="success">/admin/newGenderType.jsp</result>
     	</action>
     	<action name="saveNewGenderType" class="uow.ia.action.AdminAction" method="saveNewGenderType">
+    		<result name="success">/admin/iterGenderTypes.jsp</result>
+    		<result name="input"></result>
+    	</action>
+    	<action name="updateGenderTypes" class="uow.ia.action.AdminAction" method="updateGenderType">
     		<result name="success">/admin/iterGenderTypes.jsp</result>
     		<result name="input"></result>
     	</action>
@@ -74,10 +101,18 @@
     		<result name="success">/admin/iterIssueTypes.jsp</result>
     		<result name="input"></result>
     	</action>
+    	<action name="updateIssueTypes" class="uow.ia.action.AdminAction" method="updateIssueType">
+    		<result name="success">/admin/iterIssueTypes.jsp</result>
+    		<result name="input"></result>
+    	</action>
     	<action name="getStatusTypeForm" class="uow.ia.action.AdminAction" method="getStatusTypeForm">
     		<result name="success">/admin/newStatusType.jsp</result>
     	</action>
     	<action name="saveNewStatusType" class="uow.ia.action.AdminAction" method="saveNewStatusType">
+    		<result name="success">/admin/iterStatusTypes.jsp</result>
+    		<result name="input"></result>
+    	</action>
+    	<action name="updateStatusTypes" class="uow.ia.action.AdminAction" method="updateStatusType">
     		<result name="success">/admin/iterStatusTypes.jsp</result>
     		<result name="input"></result>
     	</action>
@@ -88,6 +123,10 @@
     		<result name="success">/admin/iterTitleTypes.jsp</result>
     		<result name="input"></result>
     	</action>
+    	<action name="updateTitleTypes" class="uow.ia.action.AdminAction" method="updateTitleType">
+    		<result name="success">/admin/iterTitleTypes.jsp</result>
+    		<result name="input"></result>
+    	</action>
     	<action name="startAdminPage" class="uow.ia.action.AdminAction" method="startAdminPage">
     		<result name="success">/admin/admin.jsp</result>
     	</action>
@@ -95,7 +134,7 @@
     		<result name="success">/admin/advocateSettings.jsp</result>
     	</action>
     	<action name="adminUserPage" class="uow.ia.action.AdminAction" method="adminUserPage">
-    		<result name="success">/admin/userSettings.jsp</result>
+    		<result name="success">/admin/clientSettings.jsp</result>
     	</action>
    	</package>
 </struts>

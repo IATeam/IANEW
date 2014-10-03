@@ -2,7 +2,11 @@
 
 <s:iterator value="disabilitySelectList" status="stat">
 <tr>
-<td><s:property value="%{disabilityName}"></s:property></td>
-<td><s:property value="%{disabilityDescription}"></s:property></td>
+<td data-ref="disabilitySelectList.disabilityName" ondblclick="edit(this, 'btnEditDisability')">
+	<s:property value="%{disabilityName}" />
+</td>
+<td data-ref="disabilitySelectList.disabilityDescription" ondblclick="edit(this, 'btnEditDisability')">
+	<s:property value="%{disabilityDescription}" />
+</td>
 </tr>
 </s:iterator>

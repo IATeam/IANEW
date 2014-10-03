@@ -73,17 +73,6 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	@Override
-	public boolean deleteAccommodationType(AccommodationTypes a) {
-		try {
-			AccommodationTypesDao.delete(a);
-			return true;
-		} catch (Exception e) {
-			System.out.println(e);
-			return false;
-		}
-	}
-	
-	@Override
 	public boolean updateAccommodationType(AccommodationTypes a) {
 		try {
 			AccommodationTypesDao.update(a);
@@ -113,17 +102,6 @@ public class AdminServiceImpl implements AdminService {
 	public boolean saveCulturalBackgroundType(CulturalBackgroundTypes cbt) {
 		try {
 			CulturalBackgroundTypesDao.save(cbt);
-			return true;
-		} catch (Exception e) {
-			System.out.println(e);
-			return false;
-		}
-	}
-	
-	@Override
-	public boolean deleteCulturalBackgroundType(CulturalBackgroundTypes cbt) {
-		try {
-			CulturalBackgroundTypesDao.delete(cbt);
 			return true;
 		} catch (Exception e) {
 			System.out.println(e);
@@ -169,17 +147,6 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	@Override
-	public boolean deleteDangerType(DangerTypes dt) {
-		try {
-			DangerTypesDao.delete(dt);
-			return true;
-		} catch (Exception e) {
-			System.out.println(e);
-			return false;
-		}
-	}
-	
-	@Override
 	public boolean updateDangerType(DangerTypes dt) {
 		try {
 			DangerTypesDao.update(dt);
@@ -209,17 +176,6 @@ public class AdminServiceImpl implements AdminService {
 	public boolean saveEmploymentType(EmploymentTypes et) {
 		try {
 			EmploymentTypesDao.save(et);
-			return true;
-		} catch (Exception e) {
-			System.out.println(e);
-			return false;
-		}
-	}
-	
-	@Override
-	public boolean deleteEmploymentType(EmploymentTypes et) {
-		try {
-			EmploymentTypesDao.delete(et);
 			return true;
 		} catch (Exception e) {
 			System.out.println(e);
@@ -265,17 +221,6 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	@Override
-	public boolean deleteEnquiryType(EnquiryTypes enqt) {
-		try {
-			EnquiryTypesDao.delete(enqt);
-			return true;
-		} catch (Exception e) {
-			System.out.println(e);
-			return false;
-		}
-	}
-	
-	@Override
 	public boolean updateEnquiryType(EnquiryTypes enqt) {
 		try {
 			EnquiryTypesDao.update(enqt);
@@ -305,17 +250,6 @@ public class AdminServiceImpl implements AdminService {
 	public boolean saveGenderType(GenderTypes gt) {
 		try {
 			GenderTypesDao.save(gt);
-			return true;
-		} catch (Exception e) {
-			System.out.println(e);
-			return false;
-		}
-	}
-	
-	@Override
-	public boolean deleteGenderType(GenderTypes gt) {
-		try {
-			GenderTypesDao.delete(gt);
 			return true;
 		} catch (Exception e) {
 			System.out.println(e);
@@ -361,17 +295,6 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	@Override
-	public boolean deleteStatusType(StatusTypes st) {
-		try {
-			StatusTypesDao.delete(st);
-			return true;
-		} catch (Exception e) {
-			System.out.println(e);
-			return false;
-		}
-	}
-	
-	@Override
 	public boolean updateStatusType(StatusTypes st) {
 		try {
 			StatusTypesDao.update(st);
@@ -401,17 +324,6 @@ public class AdminServiceImpl implements AdminService {
 	public boolean saveTitleType(TitleTypes tt) {
 		try {
 			TitleTypesDao.save(tt);
-			return true;
-		} catch (Exception e) {
-			System.out.println(e);
-			return false;
-		}
-	}
-	
-	@Override
-	public boolean deleteTitleType(TitleTypes tt) {
-		try {
-			TitleTypesDao.delete(tt);
 			return true;
 		} catch (Exception e) {
 			System.out.println(e);
@@ -452,17 +364,6 @@ public class AdminServiceImpl implements AdminService {
 	public boolean saveDisabilityType(DisabilityTypes d) {
 		try {
 			disabilityTypesDao.save(d);
-			return true;
-		} catch (Exception e) {
-			System.out.println(e);
-			return false;
-		}
-	}
-	
-	@Override
-	public boolean deleteDisabilityType(DisabilityTypes d) {
-		try {
-			disabilityTypesDao.delete(d);
 			return true;
 		} catch (Exception e) {
 			System.out.println(e);
@@ -517,17 +418,6 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	@Override
-	public boolean deleteIssueType(IssueTypes i) {
-		try {
-			issueTypesDao.delete(i);
-			return true;
-		} catch (Exception e) {
-			System.out.println(e);
-			return false;
-		}
-	}
-	
-	@Override
 	public boolean updateIssueType(IssueTypes i) {
 		try {
 			issueTypesDao.update(i);
@@ -564,17 +454,6 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	@Override
-	public boolean deleteContact(Contacts c) {
-		try {
-			ContactsDao.delete(c);
-			return true;
-		} catch (Exception e) {
-			System.out.println(e);
-			return false;
-		}
-	}
-	
-	@Override
 	public boolean updateContact(Contacts c) {
 		try {
 			ContactsDao.update(c);
@@ -593,6 +472,14 @@ public class AdminServiceImpl implements AdminService {
 		ContactTypes c = contactTypesDao.get(
 				" from ContactTypes t where t.contactTypeName =?",
 				new Object[] { "Advocate" });
+		return ContactsDao.find(" from Contacts t where t.contactType =:contactType order by t.lastname asc, t.firstname asc","contactType", c);
+	}
+	
+	@Override
+	public List<Contacts> findClients() {
+		ContactTypes c = contactTypesDao.get(
+				" from ContactTypes t where t.contactTypeName =?",
+				new Object[] { "Client" });
 		return ContactsDao.find(" from Contacts t where t.contactType =:contactType order by t.lastname asc, t.firstname asc","contactType", c);
 	}
 }

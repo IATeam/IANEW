@@ -9,33 +9,34 @@
 <title>New Status Type</title>
 </head>
 <body>
+<section>
+<input type="image" src="/IANEW/resources/images/plusButton.png" alt="Hide/Show" id="btnShowHide" value="ShowHide" onclick="divHide(this);return false;" class="divHideButton"/>
 	<h3>New Status Type</h3>
-	
 	<s:url var="urlStaType" namespace="/admin" action="saveNewStatusType" includeContext="false"/>
+	<s:url var="urlUpdateStaType" namespace="/admin" action="updateStatusType" includeContext="false"/>
 	
-	<s:form id="newStatusTypeForm" method="post" action="%{urlStaType}">
-		<div class="greybackground">
-			<s:label for="statusName" value="Name: "/>
-			<s:textfield id="statusName" name="statusName" />
-			<table>
-				<thead>
-					<th>Status Name</th>
-				</thead>
-				<tbody id="tbodyStatusType">
-					<%@include file="iterStatusTypes.jsp" %>
-				</tbody>
-			</table>
-			
+	<div class="greybackground">
+		<div id="statusType" class="toggled hideable">
+			<s:form id="newStatusTypeForm" method="post" action="%{urlStaType}">
+				<s:label for="statusName" value="Name: "/>
+				<s:textfield id="statusName" name="statusName" />
+				<sj:submit id="saveNewStatus" targets="tbodyStatusType" cssClass="two columns alpha" value="Save"/>
+			</s:form>
+			<s:form id="editStatusTypeForm" method="post" action="%{urlUpdateStaType}">
+				<table>
+					<thead>
+					<tr>
+						<th>Status Name</th>
+					</tr>
+					</thead>
+					<tbody id="tbodyStatusType">
+						<%@include file="iterStatusTypes.jsp" %>
+					</tbody>
+				</table>
+				<sj:submit targets = "tbodyStatusType" value="Update changes" id="btnEditStatus" cssClass="hidden" onclick="hideBtn(this)"/>
+			</s:form>	
 		</div>
-		
-		<input type="button" value="Cancel" id="btnCancel"/>
-		<input type="button" value="edit" id="btnEdit"/>
-		<sj:submit id="saveNewStatus" targets="tbodyStatusType" cssClass="two columns alpha" value="Save"/>
-	</s:form>
-	<script>
-	$("#btnCancel").click(function(){
-		$('#leftPopUp').hide("slow");
-	});
-	</script>
+	</div>
+	</section>
 </body>
 </html>

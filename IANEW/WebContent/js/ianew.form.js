@@ -169,9 +169,6 @@ function updateNameIndex(ele, index){
 		var newName = $(this).attr('name').replace(oldIndex, newIndex);
 		$(this).attr('name', newName);
 	});
-	
-	
-	
 }
 
 /**

@@ -2,6 +2,8 @@
 
 <s:iterator value="statusSelectList" status="stat">
 <tr>
-<td><s:property value="%{statusName}"></s:property></td>
+<td data-ref="statusSelectList.statusName" ondblclick="edit(this, 'btnEditStatus')">
+	<s:property value="%{statusName}" />
+</td>
 </tr>
 </s:iterator>

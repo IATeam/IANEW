@@ -9,36 +9,37 @@
 <title>New Employment Type</title>
 </head>
 <body>
+	<section>
+	<input type="image" src="/IANEW/resources/images/plusButton.png" alt="Hide/Show" id="btnShowHide" value="ShowHide" onclick="divHide(this);return false;" class="divHideButton"/>
 	<h3>New Employment Type</h3>
-	
 	<s:url var="urlEmpType" namespace="/admin" action="saveNewEmploymentType" includeContext="false"/>
+	<s:url var="urlUpdateEmpType" namespace="/admin" action="updateEmploymentType" includeContext="false"/>
 	
-	<s:form id="newEmploymentTypeForm" method="post" action="%{urlEmpType}">
-		<div class="greybackground">
-			<s:label for="employmentName" value="Name: "/>
-			<s:textfield id="employmentName" name="employmentName" />
-			<s:label for="employmentDescription" value="Description" />
-			<s:textarea id="employmentDescription" name ="employmentDescription" />
-			<table>
-				<thead>
-					<th>Employment Name</th>
-					<th>Employment Description</th>
-				</thead>
-				<tbody id="tbodyEmploymentType">
-					<%@include file="iterEmploymentTypes.jsp" %>
-				</tbody>
-			</table>
-			
+	<div class="greybackground">
+		<div id="employmentType" class="toggled hideable">
+			<s:form id="newEmploymentTypeForm" method="post" action="%{urlEmpType}">
+				<s:label for="employmentName" value="Name: "/>
+				<s:textfield id="employmentName" name="employmentName" />
+				<s:label for="employmentDescription" value="Description" />
+				<s:textarea id="employmentDescription" name ="employmentDescription" />
+				<sj:submit id="saveNewEmployment" targets="tbodyEmploymentType" cssClass="two columns alpha" value="Save"/>
+			</s:form>
+			<s:form id="editEmploymentTypeForm" method="post" action="%{urlUpdateEmpType}">
+				<table>
+					<thead>
+						<tr>
+							<th>Employment Name</th>
+							<th>Employment Description</th>
+						</tr>
+					</thead>
+					<tbody id="tbodyEmploymentType">
+						<%@include file="iterEmploymentTypes.jsp" %>
+					</tbody>
+				</table>
+				<sj:submit targets = "tbodyEmploymentType" value="Update changes" id="btnEditEmployment" cssClass="hidden" onclick="hideBtn(this)"/>
+			</s:form>
 		</div>
-		
-		<input type="button" value="Cancel" id="btnCancel"/>
-		<input type="button" value="edit" id="btnEdit"/>
-		<sj:submit id="saveNewEmployment" targets="tbodyEmploymentType" cssClass="two columns alpha" value="Save"/>
-	</s:form>
-	<script>
-	$("#btnCancel").click(function(){
-		$('#leftPopUp').hide("slow");
-	});
-	</script>
+	</div>
+	</section>
 </body>
 </html>
