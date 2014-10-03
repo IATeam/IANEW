@@ -12,11 +12,12 @@
 						Reworked add issue function to have correct name attribute and functionality	
 		18/09/2014 -	Quang Nhan Add validation refer to enquiryValidation.js file and fix index bugs
 						when it is a new enquiry
+						Added img delete button and modified expand button
 	==============================================	
 	Description: A jsp page that displays a list of enquiries
 ------------------------------------------------------------------------------------------------>
 <section>
-<input type="image" src="/IANEW/resources/images/plusButton.png" alt="Hide/Show" id="btnShowHide" value="ShowHide" onclick="divHide(this);return false;" class="divHideButton"/>
+<img src="/IANEW/resources/images/plusButton.png" alt="Hide/Show" onclick="divHide(this);return false;" class="divHideButton"/>
 <h3 class="sixteen columns" style="float:none;">Issues</h3>
 <div class="greybackground">
 <div id="issuesDiv" class="toggled hideable">	
@@ -38,8 +39,7 @@
 		<article id="artIssue"">
 	</s:else>
 		<section class="secIssue sixteen columns curveBorder row">
-					<input type="image" src="/IANEW/resources/images/undoButtonImage.png" alt="undoButton" id="btnUndo" value="Undo" onclick="undoButton(this);return false;" class="undoButton"/>
-		
+			<img src="/IANEW/resources/images/undoButtonImage.png" alt="undoButton" onclick="undoButton(this);" class="undoButton"/>
 			<s:hidden name="iamodel.enquiryIssuesList[%{.enquiryIssuesList.size}].id"/>
 			
 			<div class="four columns">

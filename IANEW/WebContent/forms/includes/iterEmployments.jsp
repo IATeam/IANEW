@@ -3,13 +3,17 @@
 	Created Date: 16/09/2014
 	==============================================
 	Updates:
+		29/08/2014 -	Quang Nhan added img delete button
+						Modified select list to accommodate value by id rather than name
 	==============================================	
 	Description: A jsp page that displays iterator for employment
+	
 ------------------------------------------------------------------------------------------------>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 
 <s:iterator value="iamodel.contact.employmentsList" status="stat">
 	<section class="secIssue sixteen columns curveBorder">
+		<img src="/IANEW/resources/images/undoButtonImage.png" alt="undoButton" onclick="undoButton(this);" class="undoButton"/>
 		<s:hidden name="iamodel.contact.employmentsList[%{#stat.index}].id"/>
 		<div class="row">
 			<div class="four columns">

@@ -266,13 +266,17 @@ ModelDriven<Enquiries>, Preparable{
 		
 		//addresses setup
 		List<Addresses> al = iamodel.getContact().getAddressesList();
+		System.out.println("checking address");
 		for(int i = 0; i < al.size(); i++){
-				
 			if(al.get(i).getId() == null){
 				al.get(i).setContact(iamodel.getContact());
 				//al.get(i).setCreatedUser(user.getContact());
 				//al.get(i).setUpdatedUser(user.getContact());
-				
+			}
+			else if(al.get(i).getId() == -1){
+				System.out.println("Removing a false address");
+				iamodel.getContact().getAddressesList().remove(i);
+				i--;
 			}
 		}
 		
@@ -282,7 +286,7 @@ ModelDriven<Enquiries>, Preparable{
 			for(int i = 0; i < theIssueListId.size(); i++){
 				if(getTheIssueListId().get(i) != -1)
 					eil.get(i).setIssue(typesService.getIssueTypeId(getTheIssueListId().get(i)));
-		
+				
 				if(eil.get(i).getId() == null){
 					eil.get(i).setEnquiry(getIamodel());
 //					eil.get(i).setCreatedUser(user.getContact());
