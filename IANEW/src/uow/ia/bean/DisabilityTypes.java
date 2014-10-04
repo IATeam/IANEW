@@ -24,7 +24,6 @@ public class DisabilityTypes implements java.io.Serializable {
 	@Field
 	private String disabilityName;
 	
-	@Field
 	private String disabilityDescription;
 	
 	private List<ClientDisabilities> clientDisabilitiesList = new ArrayList<ClientDisabilities>();

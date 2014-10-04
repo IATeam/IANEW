@@ -23,7 +23,6 @@ public class ContactTypes implements java.io.Serializable {
 	@Field
 	private String contactTypeName;
 	
-	@Field
 	private String contactTypeDescription;
 	private List<Contacts> contactsList = new ArrayList<Contacts>();
 

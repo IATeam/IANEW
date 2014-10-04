@@ -23,13 +23,10 @@ public class DangerTypes implements java.io.Serializable {
 	@Field
 	private String dangerName;
 	
-	@Field
 	private String dangerDescription;
 	
-	//@Field
 	private String symbol;
 	
-	//@Field
 	private Integer displayOrder;
 	
 	private List<Contacts> contactsList = new ArrayList<Contacts>();

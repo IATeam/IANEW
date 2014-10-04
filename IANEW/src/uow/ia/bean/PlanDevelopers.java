@@ -18,7 +18,7 @@ import org.hibernate.search.annotations.Resolution;
  * @version 1.0.4, 28/09/2014
  * 
  * Modification History:
- * 		28/09/2014	Change from Integer createdUserId and Integer UpdatedUserId to Contacts createdUser and Contacts updatedUser
+ * 		28/09/2014	Change from Integer createdUserId and Integer UpdatedUserId to Contacts createdUser and Contacts updatedUser 
  */
 
 @Indexed
@@ -35,14 +35,10 @@ public class PlanDevelopers implements java.io.Serializable {
 	
 	private Contacts createdUser;
 	
-	@DateBridge(resolution = Resolution.DAY)
-	@Field
 	private Date createdDateTime;
 	
 	private Contacts updatedUser;
 	
-	@DateBridge(resolution = Resolution.DAY)
-	@Field
 	private Date updatedDateTime;
 	
 	/**

@@ -25,7 +25,6 @@ public class EmploymentTypes implements java.io.Serializable {
 	@Field
 	private String employmentName;
 	
-	@Field
 	private String employmentDescription;
 	
 	private List<ContactEmployments> contactEmploymentsList = new ArrayList<ContactEmployments>();

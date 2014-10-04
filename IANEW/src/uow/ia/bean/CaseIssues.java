@@ -39,18 +39,12 @@ public class CaseIssues implements java.io.Serializable {
 	@IndexedEmbedded
 	private StatusTypes statusType;
 	
-	@DateBridge(resolution = Resolution.DAY)
-	@Field
 	private Date completedDate;
 	
-	@DateBridge(resolution = Resolution.DAY)
-	@Field
 	private Date createdDateTime;
 	
 	private Contacts createdUser;
 	
-	@DateBridge(resolution = Resolution.DAY)
-	@Field
 	private Date updatedDateTime;
 	
 	private Contacts updatedUser;

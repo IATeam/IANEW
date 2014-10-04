@@ -17,7 +17,14 @@
     <constant name="struts.ui.templateDir" value="template" />
     <constant name="struts.ui.templateSuffix" value="ftl" />
     
-    
+    <package name="client" namespace="/client" extends="struts-default">
+    	<action name="getClientDetails" class="uow.ia.action.ClientAction" method="getExistingClientDetails">
+    		<interceptor-ref name="params"/>
+    		<interceptor-ref name="prepare"/>
+    		<interceptor-ref name="basicStack" />
+    		<result name="success">/forms/clientDetails.jsp</result>
+    	</action>
+    </package>
     
     <!-- Enquiry Forms -->
     <package name="enquiry" namespace="/enquiry" extends="struts-default">

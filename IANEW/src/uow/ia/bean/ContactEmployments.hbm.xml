@@ -16,7 +16,7 @@
             <column name="workphone" />
         </property>
         <property name="comments" type="java.lang.String">
-            <column name="comments" sql-type="longtext"/>
+            <column name="comments" />
         </property>
         <property name="createdDateTime" type="java.sql.Date">
             <column name="created_date_time" sql-type="datetime"/>

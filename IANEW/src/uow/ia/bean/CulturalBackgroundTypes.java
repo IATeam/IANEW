@@ -24,7 +24,6 @@ public class CulturalBackgroundTypes implements java.io.Serializable {
 	@Field
 	private String culturalBackgroundName;
 	
-	@Field
 	private String culturalBackgroundDescription;
 	private List<Contacts> contactsList = new ArrayList<Contacts>();
 

@@ -24,7 +24,6 @@ public class EnquiryTypes implements java.io.Serializable {
 	@Field
 	private String enquiryTypeName;
 	
-	@Field
 	private String enquiryTypeDescription;
 	
 	private List<Enquiries> enquiriesList = new ArrayList<Enquiries>();

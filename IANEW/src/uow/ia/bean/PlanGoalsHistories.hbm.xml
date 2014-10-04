@@ -28,10 +28,10 @@
             <column name="completion_date_time" sql-type="datetime"/>
         </property>
         <property name="goalDescription" type="string">
-            <column name="goal_description" sql-type="longtext"/>
+            <column name="goal_description" />
         </property>
         <property name="goalAction" type="string">
-            <column name="goal_action" sql-type="longtext"/>
+            <column name="goal_action" />
         </property>
         <property name="statusId" type="java.lang.Integer">
             <column name="status_id" />

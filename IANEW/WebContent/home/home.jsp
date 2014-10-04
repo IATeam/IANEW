@@ -159,11 +159,7 @@
 		
 		<section id="secSuggestions">
 			<!-- dynamically loads suggestions based on the key pressed from input box -->
-			<article id="artSuggestionList" >
-			<s:iterator value="list" var="Object">
-			<s:property /><br/>
-			</s:iterator>
-			</article>
+			<%@include file="/forms/search/search.jsp" %>
 		</section>
 			
 		<section id="secLists">

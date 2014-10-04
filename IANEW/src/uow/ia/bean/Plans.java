@@ -32,23 +32,15 @@ public class Plans implements java.io.Serializable {
 	@IndexedEmbedded
 	private StatusTypes statusType;
 	
-	@DateBridge(resolution = Resolution.DAY)
-	@Field
 	private Date closedDateTime;
 	
-	@DateBridge(resolution = Resolution.DAY)
-	@Field
 	private Date lastReviewedDate;
 	
 	@IndexedEmbedded
 	private ReviewFrequencies reviewFrequency;
 	
-	@DateBridge(resolution = Resolution.DAY)
-	@Field
 	private Date providedPlanDate;
 	
-	@DateBridge(resolution = Resolution.DAY)
-	@Field
 	private Date consentSignedDate;
 	
 	@IndexedEmbedded
@@ -57,8 +49,6 @@ public class Plans implements java.io.Serializable {
 	@IndexedEmbedded
 	private Contacts authorisedBy;
 	
-	@DateBridge(resolution = Resolution.DAY)
-	@Field
 	private Date authorisedByDate;
 	
 	@Field
@@ -66,14 +56,10 @@ public class Plans implements java.io.Serializable {
 	
 	private Contacts createdUser;
 	
-	@DateBridge(resolution = Resolution.DAY)
-	@Field
 	private Date createdDateTime;
 	
 	private Contacts updatedUser;
 	
-	@DateBridge(resolution = Resolution.DAY)
-	@Field
 	private Date updatedDateTime;
 	
 	private IndividualCases individualCase;

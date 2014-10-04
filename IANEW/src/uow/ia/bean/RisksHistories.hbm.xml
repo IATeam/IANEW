@@ -19,10 +19,10 @@
             <column name="action" length="1" not-null="true" />
         </property>
         <property name="riskDescription" type="string">
-            <column name="risk_description" sql-type="longtext"/>
+            <column name="risk_description" />
         </property>
         <property name="riskManagement" type="string">
-            <column name="risk_management" sql-type="longtext"/>
+            <column name="risk_management" />
         </property>
         <property name="caseId" type="java.lang.Integer">
             <column name="case_id" />

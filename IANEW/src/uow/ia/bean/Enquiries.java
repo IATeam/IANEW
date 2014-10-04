@@ -62,7 +62,6 @@ public class Enquiries implements java.io.Serializable {
 	@Field
 	private Date updatedDateTime;
 	
-	@Field
 	private String outOfCoverageFlag;
 	
 	private List<Enquiries> enquiriesList = new ArrayList<Enquiries>();
@@ -352,6 +351,15 @@ public class Enquiries implements java.io.Serializable {
 	
 	public String getFileNumber() {
 		return "E" + this.id;
+	}
+	
+	public String toString(){
+		return "Client: " + this.contact.getFirstname() + " " + this.contact.getOthername() + " " + this.contact.getLastname() +
+				". Description: " + this.description;
+	}
+	
+	public String entityName(){
+		return "Enquiries";
 	}
 
 }

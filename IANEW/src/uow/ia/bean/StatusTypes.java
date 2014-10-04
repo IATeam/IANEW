@@ -25,7 +25,6 @@ public class StatusTypes implements java.io.Serializable {
 	@Field
 	private String statusName;
 	
-	@Field
 	private Integer displayOrder;
 	
 	private List<Enquiries> enquiriesList = new ArrayList<Enquiries>();
