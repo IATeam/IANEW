@@ -37,7 +37,6 @@
 	<link href="<s:url value='/styles/import/sm-simple-modified.css' encode='false' includeParams='none'/>" rel="stylesheet" type="text/css" media="all"/>
 	
 	
-	<script src="<s:url value='/js/ianew.home.js' encode='false' includeParams='none'/>"></script>
 	<script src="<s:url value='/js/ianew.radioActions.js' encode='false' includeParams='none'/>"></script>
 	<script src="<s:url value='/js/jquery/jquery.smartmenus.js' encode='false' includeParams='none'/>"></script>
 	<script src="<s:url value='/js/jquery/jquery.validate.js' encode='false' includeParams='none'/>"></script>
@@ -185,14 +184,6 @@
 	
 	<s:div id="leftPopUp" style="background: yellow; position: fixed; top: 20%; box-shadow: 3px 3px 5px grey;">left</s:div>
 	<s:div id="rightPopUp">right</s:div>
-	
-	<b><c:out value="${pageContext.request.remoteUser}"/></b>
-	<form action="/IANEW/j_spring_security_logout" method="post">
-      <input type="submit" value="Log out" />
-      <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-    </form>
-	
-	
 	
 <!-- ----------------------------------------------------------------------------------------------- -->
 <!-- Home Page Footer ------------------------------------------------------------------------------ -->
