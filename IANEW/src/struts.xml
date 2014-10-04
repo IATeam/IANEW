@@ -105,29 +105,36 @@
      <!-- Links Forms -->
     <package name="links" namespace="/links" extends="struts-default">
     	<action name="*" class="uow.ia.action.LinksAction">
-    		<result name="success">/forms/{1}.jsp</result>
+    		<result name="success">/forms/links.jsp</result>
     	</action>
     </package>
     
     <!-- Settings Forms -->
-    <package name="settings" namespace="/admin" extends="struts-default">
-    	<action name="*" class="uow.ia.action.AdminAction">
-    		<result name="success">/forms/{1}.jsp</result>
+    <!-- <package name="Typesettings" namespace="/admin" extends="struts-default">
+    	<action name="Typesettings" class="uow.ia.action.AdminAction" method="startAdminPage">
+    		<result name="success">/admin/admin.jsp</result>
+    	</action>
+    </package>
+    <package name="Advocatesettings" namespace="/admin" extends="struts-default">
+    	<action name="Advocatesettings" class="uow.ia.action.AdminAction" method="adminAdvocatePage">
+    		<result name="success">/admin/advocateSettings.jsp</result>
     	</action>
     </package>
     
-    <!--  <package name="example" namespace="/" extends="struts-default">
+     <package name="example" namespace="/" extends="struts-default">
        <action name="*" class="uow.ia.action.Listing">
            <result name="success">Listing.jsp</result>
            <result name="redirect" type="redirect">${redirectUrl}</result>
        </action>
     </package>-->
     
-    <package name="settings" namespace="/settings" extends="struts-default">
+   <!-- <package name="settings" namespace="/settings" extends="struts-default">
     	<action name="settings" class="uow.ia.action.SettingsAction" method="startAdminPage">
     		<result name="success">/forms/settings.jsp</result>
     	</action>
-    </package>
+    </package>-->
+    
+    
     <package name="report" namespace="/report" extends="struts-default">
     	<action name="report" class="uow.ia.action.ReportAction" method="report">
     		<result name="success">/forms/report.jsp</result>
@@ -139,5 +146,7 @@
     </package>
     
      <include file="login.xml"/>
+     <!-- Settings Forms -->
      <include file="admin.xml" />
+     <include file="test.xml" />
 </struts>

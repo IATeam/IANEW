@@ -9,39 +9,37 @@
 <title>New Gender Type</title>
 </head>
 <body>
+<section>
+<input type="image" src="/IANEW/resources/images/plusButton.png" alt="Hide/Show" id="btnShowHide" value="ShowHide" onclick="divHide(this);return false;" class="divHideButton"/>
 	<h3>New Gender Type</h3>
+	<s:url var="urlGenType" namespace="/admin" action="saveNewGenderType" includeContext="false"/>
+	<s:url var="urlUpdateGenType" namespace="/admin" action="updateGenderType" includeContext="false"/>
 	
-	<s:url var="urlDisType" namespace="/admin" action="saveNewGenderType" includeContext="false"/>
-	
-	<s:form id="newDisabilityTypeForm" method="post" action="%{urlDisType}">
-		<div>
-			<s:label for="genderName" value="Name: "/>
-			<s:textfield id="genderName" name="genderName" />
-			<s:label for="genderCode" value="Code" />
-			<s:textarea id="genderCode" name ="genderCode" />
-			<table>
-				<tr>
-					<th>Gender Name</th>
-					<th>Gender Code</th>
-				</tr>
-				<s:iterator value="genderSelectList" status="stat">
-				<tr>
-					<td><s:property value="genderName"></s:property></td>
-					<td><s:property value="genderDescription"></s:property></td>
-				</tr>
-				</s:iterator>
-			</table>
-			
+	<div class="greybackground">
+		<div id="genderType" class="toggled hideable">
+			<s:form id="newGenderTypeForm" method="post" action="%{urlGenType}">		
+				<s:label for="genderName" value="Name: "/>
+				<s:textfield id="genderName" name="genderName" />
+				<s:label for="genderCode" value="Code" />
+				<s:textarea id="genderCode" name ="genderCode" cols="70" rows="1"/>
+				<sj:submit id="saveNewGender" targets="tbodyGenderType" cssClass="two columns alpha" value="Save"/>
+			</s:form>
+			<s:form id="editGenderTypeForm" method="post" action="%{urlUpdateGenType}">
+				<table>
+					<thead>
+					<tr>
+						<th>Gender Name</th>
+						<th>Gender Code</th>
+					</tr>
+					</thead>
+					<tbody id="tbodyGenderType">
+						<%@include file="iterGenderTypes.jsp" %>
+					</tbody>
+				</table>
+				<sj:submit targets = "tbodyGenderType" value="Update changes" id="btnEditGender" cssClass="hidden" onclick="hideBtn(this)"/>
+			</s:form>
 		</div>
-		
-		<input type="button" value="Cancel" id="btnCancel"/>
-		<input type="button" value="edit" id="btnEdit"/>
-		<sj:submit id="save" targets="genderTypeSelect" cssClass="two columns alpha" value="Save" onclick=""/>
-	</s:form>
-	<script>
-	$("#btnCancel").click(function(){
-		$('#leftPopUp').hide("slow");
-	});
-	</script>
+	</div>
+	</section>
 </body>
 </html>

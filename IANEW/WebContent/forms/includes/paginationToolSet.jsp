@@ -9,7 +9,8 @@
 	
 	Note: syntax order: <tag id name class value list(for select) ...>
 ------------------------------------------------------------------------------------------------>
-
+<%@taglib prefix="s" uri="/struts-tags" %>
+<%@taglib prefix="sj" uri="/struts-jquery-tags" %>
 <s:div cssClass="row">
 	<s:div cssClass="one column alpha"><p></p></s:div>
 	<s:if test='%{formTitle=="Enquiry List"}'>

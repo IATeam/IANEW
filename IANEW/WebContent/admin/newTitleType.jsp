@@ -10,35 +10,35 @@
 <title>New Title Type</title>
 </head>
 <body>
+	<section>
+	<input type="image" src="/IANEW/resources/images/plusButton.png" alt="Hide/Show" id="btnShowHide" value="ShowHide" onclick="divHide(this);return false;" class="divHideButton"/>
 	<h3>New Title Type</h3>
 	
-	<s:url var="urlDisType" namespace="/admin" action="saveNewTitleType" includeContext="false"/>
+	<s:url var="urlTiType" namespace="/admin" action="saveNewTitleType" includeContext="false"/>
+	<s:url var="urlUpdateTiType" namespace="/admin" action="updateTitleType" includeContext="false"/>
 	
-	<s:form id="newDisabilityTypeForm" method="post" action="%{urlDisType}">
-		<divs>
-			<s:label for="titleName" value="Name: "/>
-			<s:textfield id="titleName" name="titleName" />
-			<table>
-				<tr>
-					<th>Title Name</th>
-				</tr>
-				<s:iterator value="titleSelectList" status="stat">
-				<tr>
-					<td><s:property value="name"></s:property></td>
-				</tr>
-				</s:iterator>
-			</table>
-			
+	<div class="greybackground">
+			<div id="titleType" class="toggled hideable">
+				<s:form id="newTitleTypeForm" method="post" action="%{urlTiType}">
+					<s:label for="titleName" value="Name: "/>
+					<s:textfield id="titleName" name="titleName" />
+					<sj:submit id="saveNewTitleType" targets="tbodyTitleType" cssClass="two columns alpha" value="Save"/>
+				</s:form>
+				<s:form id="editTitleTypeForm" method="post" action="%{urlUpdateTiType}">
+					<table>
+						<thead>
+							<tr>
+								<th>Title Name</th>
+							</tr>
+						</thead>
+						<tbody id="tbodyTitleType">
+							<%@include file="iterTitleTypes.jsp" %>
+						</tbody>
+					</table>
+					<sj:submit targets = "tbodyTitleType" value="Update changes" id="btnEditTitle" cssClass="hidden" onclick="hideBtn(this)"/>
+				</s:form>
+			</div>
 		</div>
-		
-		<input type="button" value="Cancel" id="btnCancel"/>
-		<input type="button" value="edit" id="btnEdit"/>
-		<sj:submit id="save" targets="titleTypeSelect" cssClass="two columns alpha" value="Save" onclick=""/>
-	</s:form>
-	<script>
-	$("#btnCancel").click(function(){
-		$('#leftPopUp').hide("slow");
-	});
-	</script>
+		</section>
 </body>
 </html>

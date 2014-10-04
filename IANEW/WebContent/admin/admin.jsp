@@ -13,10 +13,12 @@
 	      media="all"/>
 <link href="<s:url value='/styles/adminTables.css' encode='false' includeParams='none'/>" rel="stylesheet" type="text/css"
 	      media="all"/>
+<script src="<s:url value='/js/ianew.form.js' encode='false' includeParams='none'/>" ></script>
+<script src="<s:url value='/js/ianew.admin.js' encode='false' includeParams='none'/>" ></script>     
 </head>
 <body>
-	<s:div>
-
+	<s:div cssClass="form container">
+	<s:set var="formType">enquiry</s:set>
 <!-- ---------------------------------------------------------------------------------------------- -->
 <!-- Header of the form --------------------------------------------------------------------------- -->
 <!-- ---------------------------------------------------------------------------------------------- -->	
@@ -25,18 +27,21 @@
 <!-- Content of the form -------------------------------------------------------------------------- -->
 <!-- ---------------------------------------------------------------------------------------------- -->	
 		<%@include file="/admin/newAccommodationType.jsp" %>
-		<%@include file="/admin/newDisabilityType.jsp" %>
-		<%@include file="/admin/newIssueType.jsp" %>
+		<%@include file="/admin/newCommunicationType.jsp" %>
 		<%@include file="/admin/newCulturalBackgroundType.jsp" %>
 		<%@include file="/admin/newDangerType.jsp" %>
+		<%@include file="/admin/newDisabilityType.jsp" %>
 		<%@include file="/admin/newEmploymentType.jsp" %>
 		<%@include file="/admin/newEnquiryType.jsp" %>
 		<%@include file="/admin/newGenderType.jsp" %>
+		<%@include file="/admin/newIssueType.jsp" %>
 		<%@include file="/admin/newStatusType.jsp" %>
 		<%@include file="/admin/newTitleType.jsp" %>
-		<%@include file="/admin/newUser.jsp" %>
 		
 		
-		</s:div>
+		<%--<%@include file="/admin/newUser.jsp" %>--%>
+		
+		
+	</s:div>
 </body>
 </html>

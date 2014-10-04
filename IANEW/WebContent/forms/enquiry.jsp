@@ -26,6 +26,8 @@
 						Added OnClick method to buttons 
 		14/09/2014 -	Quang Revised the function to remove null sections and definition when the form is submitted
 		16/09/2014 -	Rework the submit to allow Jquery's validation
+		25/09/2014 -	Quang Nhan
+						Moved referral section above summary requested by client
 	==============================================	
 	Description: A jsp page that displays enquiry list for both new and existing
 	
@@ -72,10 +74,10 @@
 <!-- Content of the form -------------------------------------------------------------------------- -->
 <!-- ---------------------------------------------------------------------------------------------- -->		
 			<%@include file="includes/formStatus.jsp" %>
+			<%@include file="includes/referral.jsp" %>
 			<%@include file="includes/summary.jsp" %>
 			<%@include file="includes/personalDetails.jsp" %>
 			<%@include file="includes/address.jsp" %>
-			<%@include file="includes/referral.jsp" %>
 			<%@include file="includes/employment.jsp" %>
 			<%@include file="includes/disability.jsp" %>
 			<%@include file="includes/issues.jsp" %>
@@ -96,7 +98,8 @@
 					</section>
 					<section class="four columns"><p></p></section>
 					<section class="six columns omega">
-						<input id="createCase" type="button" value="Create Case" class="three columns alpha" onclick="confirmAction('Are you sure you want to create a case?', 'case', 'newCase')"/>
+<!-- 						<input id="createCase" type="button" value="Create Case" class="three columns alpha" onclick="confirmAction('Are you sure you want to create a case?', 'case', 'newCase')"/>
+ -->						<input id="createCase" type="button" value="Create Case" class="three columns alpha" onclick="checkForm()"/>
 <%-- 						<sj:submit formIds="enquiryForm" name="submit" cssClass="submit two columns omega" value="Submit" onclick="checkForm()"/>
  --%>						<s:submit name="submit" cssClass="three columns omega" value="Submit" onclick="confirmAction('Are you sure you want to save the enquiry?', 'enquiry', 'saveUpdateEnquiry')"/>
 					</section>
@@ -117,40 +120,13 @@
 		
 	}); */
 
-		
-		
 	
-/* 	$("#abc").validate();
 	
-	$('#enquiryForm').validate({ 
-		rules: {
-			"iamodel.contact.firstname": "required",
-			lastName: "required"
-//			theGender: { selectcheck: true },
-//			email: {
-//				email: true,
-//				required: true
-//			}
-		},
-		messages: {
-			"iamodel.contact.firstname": "Require protege's first name.",
-			lastName: "Require protege's last name."
-//			email: "Invalid email",
-//			email: {
-//				email: "Require a valid email",
-//				required: "Require an email address"
-//			}
-		}
-	});
-	jQuery.validator.addMethod('selectcheck', function(value){
-		return (value != '-1');
-	}, "Please select a gender");
- */
 
 
 
 	
-	$("#test").click(function(){
+	/* $("#test").click(function(){
 		
 		var ele = $("#enquiryForm").find("article")
 		
@@ -171,12 +147,14 @@
 		//$("#enquiryForm").find('input[type="button"]').attr("disabled", "disable");
 		//$("#btnView").attr("disabled", null);
 		//$("#btnAddEnquiry").attr("disabled", null);
-	}
+	} */
 	function checkForm(){
-		removeNullAndUpdateIndex($("#artAddress"), $("#itAddress"), $("#addressSize"));
+		alert("removed null");
+		//removeNullAndUpdateIndex($("#artAddress"), $("#itAddress"), $("#addressSize"));
 		removeNullAndUpdateIndex($("#artDisability"), $("#itDisability"), $("#disabilitySize"));
-		removeNullAndUpdateIndex($("#artIssue"), $("#itIssue"), $("#issueSize"));
-		removeNullAndUpdateIndex($("#artEmployment"), $("#itEmployment"), $("#employmentSize"));
+		/* removeNullAndUpdateIndex($("#artIssue"), $("#itIssue"), $("#issueSize"));
+		removeNullAndUpdateIndex($("#artEmployment"), $("#itEmployment"), $("#employmentSize")); */
+		
 	}
 	</script>
 </body>

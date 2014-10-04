@@ -12,6 +12,10 @@
 						secion is between two non null sections
 		16/08/2014 -	Quang Nhan
 				 		Added functionality to delete a section dynamically using ajax and load
+		29/08/2014 -	Quang Nhan
+						Amended undo button to properly to set the id -1 if existing to allow
+						proper deletion on the action class
+						Revised removeSecNull to accommodate the id = -1 condition
 	==============================================	
 	Description: This js is for the common functions in the forms
 ------------------------------------------------------------------------------------------------*/
@@ -108,7 +112,7 @@ function removeNullAndUpdateIndex(articleEle, iterator, sizeEle){
 	var ele = $(articleEle).find("[name]");
 	var counter = 0;
 	
-	//removes any null in the iterator starting backward backwards
+	//removes any null in the iterator
 	for(var i = 0; i < section.length; i++){
 		var itEle = $(section[i]).find("[name]");
 		counter = removeSecNull(itEle, section[i], counter);
@@ -129,21 +133,35 @@ function removeNullAndUpdateIndex(articleEle, iterator, sizeEle){
  * @param {} index
  * @return {}
  */
-function removeSecNull(ele, section, index){
+function removeSecNull(ele, section, index){ 
 	var isAllNull = true; 
 	$(ele).each(function(){ 
-		if(!$(this).is("input:radio") && !$(this).is("input:hidden")){
-			if(this.nodeName == "SELECT"){
-				if ($(this).val() != -1){
+		//ignore input tag with type radio
+		if(!$(this).is("input:radio")){
+			
+			//set isAllNull if tag input has id of value -1 this is for
+			//deleting bands in the action class
+			if($(this).is("input[name*='.id']") && $(this).val() == -1)
+				isAllNull = false;
+				
+			//ignore input tag of type hidden
+			else if(!$(this).is("input:hidden")){
+				
+				//set isAllNull = false if is select tag and 
+				//is not of -1 as an option
+				if(this.nodeName == "SELECT"){
+					if ($(this).val() != -1){
+						isAllNull = false;
+					}
+				//set isAllNull if input has some value
+				}else if( $(this).val().length > 0){
 					isAllNull = false;
 				}
-			}else if( $(this).val().length != ""){
-				isAllNull = false;
 			}
 		}
 	});
-	//(isAllNull);
-	if(isAllNull === true){//alert("in removing null");
+	//return index to update the hidden field size value
+	if(isAllNull === true){
 		$(section).remove();
 		return index;
 	}else{
@@ -169,9 +187,6 @@ function updateNameIndex(ele, index){
 		var newName = $(this).attr('name').replace(oldIndex, newIndex);
 		$(this).attr('name', newName);
 	});
-	
-	
-	
 }
 
 /**
@@ -181,34 +196,36 @@ function updateNameIndex(ele, index){
  */
 function deleteSection(button){ 
 
-	var hidden =  $(button).parent().find("input:hidden").first();
-	var index = $(hidden).attr('name').match(/[0-9]+/g);
-	var listType = $(hidden).attr('name').match(/\.(.*)\[/);
-	var url = "enquiry/deleteFromList.action?deleteFrom=" + listType[1] + "&index=" + index + "&hiddenid=" + $("#hiddenid").val();
-		
-	//load the specified dom
-	if(hidden.val() == ""){
-		
-		var section = $(button).parent();
-		var parent = $(section).parent();
-		if($(parent).prop('id').match(/it.*/))
-			$(section).remove();
-		else{
-			$(parent).addClass("hidden");
-			//TODO: not completely working at the moment
-			setEmpty($(parent).find("[name]"));
-		}
-	}else{
-		if(listType[1] === "enquiryIssuesList")	$("#itIssue").load(url);
-		else{
-			var refinedType = listType[1].match(/contact.(.*)/)
-			url = "enquiry/deleteFromList.action?deleteFrom=" + refinedType[1] + "&index=" + index + "&hiddenid=" + $("#hiddenid").val();
+	//grab this index, iterate through the bands below and change the index
 	
-			if(refinedType[1] === "addressesList")				$("#itAddress").load(url);
-			else if(refinedType[1] === "disabilitiesList")		$("#itDisability").load(url);
-			else if(refinedType[1] === "employmentsList")		$("#itEmployment").load(url);
-		}
-	}
+//	var hidden =  $(button).parent().find("input:hidden").first();
+//	var index = $(hidden).attr('name').match(/[0-9]+/g);
+//	var listType = $(hidden).attr('name').match(/\.(.*)\[/);
+//	var url = "enquiry/deleteFromList.action?deleteFrom=" + listType[1] + "&index=" + index + "&hiddenid=" + $("#hiddenid").val();
+//		
+//	//load the specified dom
+//	if(hidden.val() == ""){
+//		
+//		var section = $(button).parent();
+//		var parent = $(section).parent();
+//		if($(parent).prop('id').match(/it.*/))
+//			$(section).remove();
+//		else{
+//			$(parent).addClass("hidden");
+//			//TODO: not completely working at the moment
+//			setEmpty($(parent).find("[name]"));
+//		}
+//	}else{
+//		if(listType[1] === "enquiryIssuesList")	$("#itIssue").load(url);
+//		else{
+//			var refinedType = listType[1].match(/contact.(.*)/)
+//			url = "enquiry/deleteFromList.action?deleteFrom=" + refinedType[1] + "&index=" + index + "&hiddenid=" + $("#hiddenid").val();
+//	
+//			if(refinedType[1] === "addressesList")				$("#itAddress").load(url);
+//			else if(refinedType[1] === "disabilitiesList")		$("#itDisability").load(url);
+//			else if(refinedType[1] === "employmentsList")		$("#itEmployment").load(url);
+//		}
+//	}
 	
 	
 }
@@ -225,16 +242,17 @@ function setEmpty(elements){
 					$(this).val('-1')
 				}
 			}else if( $(this).val().length != ""){
-				alert("setting empty")
+				
 				$(this).val('');
 			}
 		}
 	});
 }
 
-$(document).on("click", ".undoButton", function(event) {
-	$(this).parent().remove();
-});
+//$(document).on("click", ".undoButton", function(event) {
+//	//$(this).parent().remove();
+//	$(selectedDiv).parent("section").children("input[name*='.id']").val("-1");
+//});
 
 function importantDiv(selectedDiv){
 	var isImportant = $(selectedDiv).parent("div").parent("section").css('backgroundColor');
@@ -249,10 +267,26 @@ function importantDiv(selectedDiv){
 		$(selectedDiv).css({'background':'#d6d6d6'});
 	}
 }
-
+/*
+ * 
+ */
 function undoButton(selectedDiv){
-	$(selectedDiv).parent("section").hide();
-
+	//$(selectedDiv).parent("section").hide();
+	alert("HI")
+	var section = $(selectedDiv).parent("section");
+	var id = $(selectedDiv).parent("section").children("input[name*='.id']");
+	//if contains value for id, then assign -1 otherwise completely remove it
+	if($(id).val() != ""){
+		$(selectedDiv).parent("section").children("input[name*='.id']").val("-1");
+		//$(section).css("visibility", "hidden");
+		//$(section).css("position", "absolute");
+		//$(section).css("top", "0");
+		$(section).css("display", "none");
+		
+		//$(selectedDiv).parents("article").addClass("hidden")
+	}
+	else
+		$(section).hide();
 }
 
 function divHide(clickedButton){

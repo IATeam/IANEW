@@ -8,13 +8,15 @@
 						pagination functionality by Quang Nhan
 		08/09/2014 -	Quang Nhan
 						changed all ccontact to iamodel.contact
+		29/09/2014 -	Quang Nhan modified select list to accommodate value by id rather than name
+						Added img delete button and modified expand button
 	==============================================	
 	Description: A jsp page that displays a address of contact
 ------------------------------------------------------------------------------------------------>
 <%@ taglib prefix="sj" uri="/struts-jquery-tags" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <section>
-<input type="image" src="/IANEW/resources/images/plusButton.png" alt="Hide/Show" id="btnShowHide" value="ShowHide" onclick="divHide(this);return false;" class="divHideButton"/>
+<img src="/IANEW/resources/images/plusButton.png" alt="Hide/Show" onclick="divHide(this);return false;" class="divHideButton"/>
 <h3 class="sixteen columns" style="float:none;">Address</h3>
 <div class="greybackground">
 <div id="addressDiv" class="toggled hideable">	
@@ -25,7 +27,7 @@
 		<div class="row">
 		<!-- to do -->
 			<div class="four columns">
-				<s:select list="accomodationSelectList.{accommodationName}" name="theAccommodation" value="iamodel.contact.accommodation.accommodationName"  headerKey="-1" headerValue="Select an Accomodation Type"/>
+				<s:select list="accomodationSelectList" listKey="id" listValue="accommodationName" name="theAccommodationTypeId" headerKey="-1" headerValue="Select an Accomodation Type"/>
 			</div>
 			
 			<div class="textarea twelve columns">
@@ -34,9 +36,9 @@
 			</div>
 		</div>
 		
-		<aticle id="itAddress">
+		<article id="itAddress">
 			<%@include file="iterAddresses.jsp" %>
-		</aticle>
+		</article>
 		
 		<s:hidden id="createdUserId" name="" />
 		<s:hidden id="updatedUserId" name=""/>
@@ -44,7 +46,7 @@
 		<!-- if contact has existing address display the address else display input field for address -->	
 		<s:if test="%{iamodel.contact.addressesList.size > 0}">
 			<s:hidden id="addressSize" name="iamodel.contact.addressesList.size" value="%{iamodel.contact.addressesList.size}"/>
-			<s:set name="index" value="iamodel.contact.disabilitiesList.size" />
+			<s:set name="index" value="iamodel.contact.addressesList.size" />
 			<article id="artAddress" class="hidden">
 		</s:if>
 		<s:else>
@@ -53,7 +55,7 @@
 			<article id="artAddress">
 		</s:else>
 			<section class="sixteen columns curveBorder">
-				<input type="image" src="/IANEW/resources/images/undoButtonImage.png" alt="undoButton" id="btnUndo" value="Undo" onclick="undoButton(this);return false;" class="undoButton"/>
+				<img src="/IANEW/resources/images/undoButtonImage.png" alt="undoButton" onclick="undoButton(this);" class="undoButton"/>
 				<s:hidden name="iamodel.contact.addressesList[%{#index}].id" />
 				
 				<div class="row">

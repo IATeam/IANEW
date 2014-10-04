@@ -10,8 +10,14 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import uow.ia.bean.AccommodationTypes;
+import uow.ia.bean.ContactTypes;
 import uow.ia.bean.Contacts;
+import uow.ia.bean.GenderTypes;
+import uow.ia.dao.AccommodationTypesDao;
+import uow.ia.dao.ContactTypesDao;
 import uow.ia.dao.ContactsDao;
+import uow.ia.dao.GenderTypesDao;
 import uow.ia.service.ContactService;
 
 
@@ -26,6 +32,9 @@ public class ContactServiceImpl implements ContactService {
 	
 	@Resource
 	private ContactsDao<Contacts> contactsDao;
+	
+	@Resource
+	private ContactTypesDao<ContactTypes> contactTypesDao;
 
 	@Override
 	public boolean saveContact(Contacts c) {
@@ -118,6 +127,22 @@ public class ContactServiceImpl implements ContactService {
 	@Override
 	public Contacts getContacts(int id) {
 		return contactsDao.get(Contacts.class, id);
+	}
+	
+	@Override
+	public List<Contacts> findAdvocates() {
+		ContactTypes c = contactTypesDao.get(
+				" from ContactTypes t where t.contactTypeName =?",
+				new Object[] { "Advocate" });
+		return contactsDao.find(" from Contacts t where t.contactType =:contactType order by t.lastname asc, t.firstname asc","contactType", c);
+	}
+	
+	@Override
+	public List<Contacts> findClients() {
+		ContactTypes c = contactTypesDao.get(
+				" from ContactTypes t where t.contactTypeName =?",
+				new Object[] { "Client" });
+		return contactsDao.find(" from Contacts t where t.contactType =:contactType order by t.lastname asc, t.firstname asc","contactType", c);
 	}
 
 }

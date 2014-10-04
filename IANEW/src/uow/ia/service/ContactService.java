@@ -5,7 +5,9 @@ package uow.ia.service;
 
 import java.util.List;
 
+import uow.ia.bean.AccommodationTypes;
 import uow.ia.bean.Contacts;
+import uow.ia.bean.GenderTypes;
 
 /**
  * @author ZhiYu Yang
@@ -36,5 +38,9 @@ public interface ContactService {
 	public List<Contacts> findContactsByPage(int pageNo, int rows);
 	
 	public Contacts getContacts(int id);
+	
+	public List<Contacts> findAdvocates();
+	
+	public List<Contacts> findClients();
 
 }

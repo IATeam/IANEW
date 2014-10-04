@@ -9,39 +9,37 @@
 <title>New Danger Type</title>
 </head>
 <body>
+	<section>
+	<input type="image" src="/IANEW/resources/images/plusButton.png" alt="Hide/Show" id="btnShowHide" value="ShowHide" onclick="divHide(this);return false;" class="divHideButton"/>
 	<h3>New Danger Type</h3>
+	<s:url var="urlDanType" namespace="/admin" action="saveNewDangerType" includeContext="false"/>
+	<s:url var="urlUpdateDanType" namespace="/admin" action="updateDangerType" includeContext="false"/>
 	
-	<s:url var="urlDisType" namespace="/admin" action="saveNewDangerType" includeContext="false"/>
-	
-	<s:form id="newDisabilityTypeForm" method="post" action="%{urlDisType}">
-		<div>
-			<s:label for="dangerName" value="Name: "/>
-			<s:textfield id="dangerName" name="dangerName" />
-			<s:label for="dangerDescription" value="Description" />
-			<s:textarea id="dangerDescription" name ="DangerDescription" />
-			<table>
-				<tr>
-					<th>Danger Name</th>
-					<th>Danger Description</th>
-				</tr>
-				<s:iterator value="dangerSelectList" status="stat">
-				<tr>
-					<td><s:property value="dangerName"></s:property></td>
-					<td><s:property value="dangerDescription"></s:property></td>
-				</tr>
-				</s:iterator>
-			</table>
-			
+	<div class="greybackground">
+		<div id="dangerType" class="toggled hideable">
+			<s:form id="newDangerTypeForm" method="post" action="%{urlDanType}">
+				<s:label for="dangerName" value="Name: "/>
+				<s:textfield id="dangerName" name="dangerName" />
+				<s:label for="dangerDescription" value="Description" />
+				<s:textarea id="dangerDescription" name ="DangerDescription" cols="70" rows="1" />
+				<sj:submit id="saveNewDangerType" targets="tbodyDangerType" cssClass="two columns alpha" value="Save"/>
+			</s:form>
+			<s:form id="editDangerTypeForm" method="post" action="%{urlUpdateDanType}">
+				<table>
+					<thead>
+						<tr>
+							<th>Danger Name</th>
+							<th>Danger Description</th>
+						</tr>
+					</thead>
+					<tbody id="tbodyDangerType">
+						<%@include file="iterDangerTypes.jsp" %>
+					</tbody>
+				</table>
+				<sj:submit targets = "tbodyDangerType" value="Update changes" id="btnEditDanger" cssClass="hidden" onclick="hideBtn(this)"/>
+			</s:form>		
 		</div>
-		
-		<input type="button" value="Cancel" id="btnCancel"/>
-		<input type="button" value="edit" id="btnEdit"/>
-		<sj:submit id="save" targets="dangerTypeSelect" cssClass="two columns alpha" value="Save" onclick=""/>
-	</s:form>
-	<script>
-	$("#btnCancel").click(function(){
-		$('#leftPopUp').hide("slow");
-	});
-	</script>
+	</div>
+	</section>
 </body>
 </html>

@@ -2,7 +2,12 @@
 /**
  * Created By Quang
  * Created Date: 11/08/2014
- * Last Updated
+ * 
+ * Updates:
+ * 		29/09/2014 -	Quang Nhan:
+ * 						Removed required fro identificatin, email, mobile phone, comment
+ * 						Added required for issues, flag, employment
+ *
  * Description: Client side validation for the enquiry form using
  * jquery's validation.js http://jqueryvalidation.org/
  */
@@ -22,27 +27,24 @@
  */
 
 function validated(){	
-
+	expandAll();
 	$('#enquiryForm').validate({ 
 			rules: {
 				//summary
 				theEnquiry								: 	{ 	selectcheck: 	true 	},
 				"iamodel.description"					: 		"required",
 				
-				
 				//personal inoformation
 				"iamodel.contact.firstname"				: 		"required",
 				"iamodel.contact.lastname"				: 		"required",
 				"iamodel.contact.identification"		:		"required",
-				"iamodel.contact.mobilephone"			: 	{	required: true,
-																phone: 		/[0-9\-\(\)\s]+/ },
+				"iamodel.contact.mobilephone"			: 	{	phone: 		/[0-9\-\(\)\s]+/ },
 				theGender								: 	{ 	selectcheck: 	true 	},
 				theCulturalBackground					: 	{	selectcheck: 	true 	},
-				"iamodel.contact.email"					: 	{	email: 			true,
-																required: 		true	},
+				"iamodel.contact.email"					: 	{	email: 			true	},
 				//address
 				theAccommodation						:	{ 	selectcheck: 	true 	},
-				"iamodel.contact.accommodationComment"	: 		"required",
+				//"iamodel.contact.accommodationComment"	: 	,
 				
 				//disability at least the first band must be filled
 				"theDisabilityList[0]"					:	{ 	selectcheck: 	true 	}
@@ -66,10 +68,16 @@ function validated(){
 			},
 			
 			
-			submitHandler: function(form) {
+			submitHandler: function() {
+				
+				removeNullAndUpdateIndex($("#artAddress"), $("#itAddress"), $("#addressSize"));
+				removeNullAndUpdateIndex($("#artDisability"), $("#itDisability"), $("#disabilitySize"));
+				removeNullAndUpdateIndex($("#artIssue"), $("#itIssue"), $("#issueSize"));
+				removeNullAndUpdateIndex($("#artEmployment"), $("#itEmployment"), $("#employmentSize"));
 				alert("Validation complete, submitting form!");
-				checkForm();
-				form.submit();
+				$.post('/IANEW/enquiry/saveUpdateEnquiry.action', 
+				$('#enquiryForm').serialize()
+				);
 			}
 		});
 	 	

@@ -76,10 +76,18 @@
 	<s:url id="urlTimeManagement" namespace="/timeManagement" action="timeManagement">
 		<s:param name="formTitle">Time Management</s:param>
 	</s:url>
-	<s:url id="urlSettings" namespace="/admin" action="startAdminPage">
-		<s:param name="formTitle">Settings</s:param>
+	<s:url id="urlAddType" namespace="/admin" action="startAdminPage">
+		<s:param name="formTitle">Type Settings</s:param>
 	</s:url>
-	
+	<s:url id="urlAddAdvocate" namespace="/admin" action="adminAdvocatePage">
+		<s:param name="formTitle">Advocate Settings</s:param>
+	</s:url>
+	<s:url id="urlAddUser" namespace="/admin" action="adminUserPage">
+		<s:param name="formTitle">Client Settings</s:param>
+	</s:url>
+	<s:url id="urlTest" namespace="/test" action="test">
+		<s:param name="id">1</s:param>
+	</s:url>
 	<div class="container">
 	
 <!-- ---------------------------------------------------------------------------------------------- -->
@@ -111,11 +119,17 @@
 				<li><sj:a id="timeManagement" href="%{urlTimeManagement}" targets="formDiv"  onclick="menuclicked()">Time Management</sj:a></li>
 			
 			<li>
-				<s:a href="#">Synchronize</s:a>
+				<sj:a id="syncho" href="%{urlTest}" targets="formDiv">Synchronize</sj:a>
 				
 			</li>
 
-			<li><sj:a id="settings" href="%{urlSettings}" targets="formDiv" onclick="menuclicked()">Settings</sj:a></li>
+			<li><s:a id="s"href="#">Settings</s:a>
+				<ul>
+					<li><sj:a id="sAddNewType" href="%{urlAddType}" targets="formDiv" onclick="menuclicked()">Type Settings</sj:a></li>
+					<li><sj:a id="sAddAdvocate" href="%{urlAddAdvocate}" targets="formDiv" onclick="menuclicked()">Advocate Settings</sj:a></li>
+					<li><sj:a id="sAddUser" href="%{urlAddUser}" targets="formDiv" onclick="menuclicked()">Client Settings</sj:a></li>
+				</ul>
+			</li>
 			<li><sj:a id="links" href="%{urlLinks}" targets="formDiv">Links</sj:a></li>
 		</ul>
 	</nav>

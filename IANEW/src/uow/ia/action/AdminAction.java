@@ -1,6 +1,6 @@
 package uow.ia.action;
 
-import uow.ia.bean.ClientDisabilities;
+import uow.ia.bean.CommunicationTypes;
 import uow.ia.bean.DisabilityTypes;
 import uow.ia.bean.EmploymentTypes;
 import uow.ia.bean.IssueTypes;
@@ -13,8 +13,9 @@ import uow.ia.bean.StatusTypes;
 import uow.ia.bean.TitleTypes;
 import uow.ia.bean.Contacts;
 
-
 import java.util.List;
+
+import com.opensymphony.xwork2.Preparable;
 
 /**
  * @author Quang
@@ -23,7 +24,12 @@ import java.util.List;
  * 				Updated Disability Type methods to integrate enquiryService
  * 				
  */
-public class AdminAction extends BaseAction{
+public class AdminAction extends BaseAction implements Preparable{
+	
+	
+	
+	//getContact().setAccommodation(typesService.getAccommodationTypeId(getTheAccommodationTypeId()));
+	
 	/* 
 	 * 
 	 * ----------------------------------------------------------------------------------------------------------
@@ -37,9 +43,9 @@ public class AdminAction extends BaseAction{
 	 * 		Start Method for Admin page		
 	 * 				
 	 */
-	public String startAdminPage(){
-		DisabilitySelectList = adminService.findDisabilityTypes();
-		IssueTypeList = adminService.findIssueTypes();
+	public String startAdminPage(){ 
+		setDisabilitySelectList(adminService.findDisabilityTypes());
+		setIssueTypeList(adminService.findIssueTypes());
 		setAccommodationSelectList(adminService.findAccommodationTypes());
 		setCulturalBackgroundSelectList(adminService.findCulturalBackgroundTypes());
 		setDangerSelectList(adminService.findDangerTypes());
@@ -49,13 +55,8 @@ public class AdminAction extends BaseAction{
 		setStatusSelectList(adminService.findStatusTypes());
 		setTitleSelectList(adminService.findTitleTypes());
 		setContactsSelectList(adminService.findContacts());
+		setCommunicationSelectList(adminService.findCommunicationTypes());
 
-
-		
-		for(TitleTypes i: titleSelectList  ){
-			System.out.println(i.getName());
-
-		}
 		return SUCCESS;
 	}
 	
@@ -103,15 +104,18 @@ public class AdminAction extends BaseAction{
 		accommodationType.setAccommodationDescription(getAccommodationDescription());
 		System.out.println("name: " + getAccommodationName());
 		System.out.println("description: " + getAccommodationDescription());
-		if(adminService.saveAccommodationType(accommodationType))
+		if(adminService.saveAccommodationType(accommodationType)){
+			accommodationSelectList = adminService.findAccommodationTypes();
 			return SUCCESS;
+		}
 		else {
 			return ERROR;
 		}
 	}
 	
-	public String updateAccommodationType(){
-		//adminService.updateDisabilityType(disabilityType);
+	public String updateAccommodationTypes(){
+		for(AccommodationTypes at: getAccommodationSelectList())
+			adminService.updateAccommodationType(at);
 		return SUCCESS;
 	}
 	
@@ -191,15 +195,20 @@ public class AdminAction extends BaseAction{
 		culturalBackgroundType.setCulturalBackgroundDescription(culturalBackgroundDescription);
 		System.out.println("name: " + getCulturalBackgroundName());
 		System.out.println("description: " + getCulturalBackgroundDescription());
-		if(adminService.saveCulturalBackgroundType(culturalBackgroundType))
+		if(adminService.saveCulturalBackgroundType(culturalBackgroundType)){
+			culturalBackgroundSelectList = adminService.findCulturalBackgroundTypes();
 			return SUCCESS;
+		}
 		else {
 			return ERROR;
 		}
 	}
 	
 	public String updateCultualBackgroundType(){
-		//adminService.updateDisabilityType(disabilityType);
+		System.out.println("Struts: start updateCulturalType");
+		for(CulturalBackgroundTypes ct: getCulturalBackgroundSelectList())
+			adminService.updateCulturalBackgroundType(ct);
+		System.out.println("Struts: end updateCulturalType");
 		return SUCCESS;
 	}
 	
@@ -289,16 +298,21 @@ public class AdminAction extends BaseAction{
 		dangerType.setDangerDescription(getDangerDescription());
 		System.out.println("name: " + getDangerName());
 		System.out.println("description: " + getDangerDescription());
-		if(adminService.saveDangerType(dangerType))
+		if(adminService.saveDangerType(dangerType)){
+			dangerSelectList = adminService.findDangerTypes();
 			return SUCCESS;
+		}
 		else {
 			return ERROR;
 		}
 	}
 	
 	public String updateDangerType(){
-		//adminService.updateDisabilityType(disabilityType);
-		return SUCCESS;
+		System.out.println("Struts: start updateDangerType");
+		for(DangerTypes dt: getDangerSelectList())
+			adminService.updateDangerType(dt);
+		System.out.println("Struts: end updateDangerType");
+		return SUCCESS;		
 	}
 	
 	/**
@@ -381,15 +395,18 @@ public class AdminAction extends BaseAction{
 		employmentType.setEmploymentDescription(getEmploymentDescription());
 		System.out.println("name: " + getEmploymentName());
 		System.out.println("description: " + getEmploymentDescription());
-		if(adminService.saveEmploymentType(employmentType))
+		if(adminService.saveEmploymentType(employmentType)){
+			employmentSelectList = adminService.findEmploymentTypes();
 			return SUCCESS;
+		}
 		else {
 			return ERROR;
 		}
 	}
 	
 	public String updateEmploymentType(){
-		//adminService.updateDisabilityType(disabilityType);
+		for(EmploymentTypes et: getEmploymentSelectList())
+			adminService.updateEmploymentType(et);
 		return SUCCESS;
 	}
 	
@@ -477,15 +494,18 @@ public class AdminAction extends BaseAction{
 		enquiryType.setEnquiryTypeDescription(getEnquiryTypeDescription());
 		System.out.println("name: " + getEnquiryTypeName());
 		System.out.println("description: " + getEnquiryTypeDescription());
-		if(adminService.saveEnquiryType(enquiryType))
+		if(adminService.saveEnquiryType(enquiryType)){
+			enquiryTypeSelectList = adminService.findEnquiryTypes();
 			return SUCCESS;
+		}
 		else {
 			return ERROR;
 		}
 	}
 	
 	public String updateEnquiryType(){
-		//adminService.updateDisabilityType(disabilityType);
+		for(EnquiryTypes et: getEnquiryTypeSelectList())
+			adminService.updateEnquiryType(et);
 		return SUCCESS;
 	}
 	
@@ -565,15 +585,18 @@ public class AdminAction extends BaseAction{
 		genderType.setGenderCode(getGenderCode());
 		System.out.println("name: " + getGenderName());
 		System.out.println("description: " + getGenderCode());
-		if(adminService.saveGenderType(genderType))
+		if(adminService.saveGenderType(genderType)){
+			genderSelectList = adminService.findGenderTypes();
 			return SUCCESS;
+		}
 		else {
 			return ERROR;
 		}
 	}
 	
 	public String updateGenderType(){
-		//adminService.updateDisabilityType(disabilityType);
+		for(GenderTypes gt: getGenderSelectList())
+			adminService.updateGenderType(gt);
 		return SUCCESS;
 	}
 	
@@ -658,15 +681,18 @@ public class AdminAction extends BaseAction{
 		statusType = new StatusTypes();
 		statusType.setStatusName(getStatusName());
 		System.out.println("name: " + getStatusName());
-		if(adminService.saveStatusType(statusType))
+		if(adminService.saveStatusType(statusType)){
+			statusSelectList = adminService.findStatusTypes();
 			return SUCCESS;
+		}
 		else {
 			return ERROR;
 		}
 	}
 	
 	public String updateStatusType(){
-		//adminService.updateDisabilityType(disabilityType);
+		for(StatusTypes st: getStatusSelectList())
+			adminService.updateStatusType(st);
 		return SUCCESS;
 	}
 	
@@ -742,15 +768,18 @@ public class AdminAction extends BaseAction{
 		titleType = new TitleTypes();
 		titleType.setName(getTitleName());
 		System.out.println("name: " + getTitleName());
-		if(adminService.saveTitleType(titleType))
+		if(adminService.saveTitleType(titleType)){
+			titleSelectList = adminService.findTitleTypes();
 			return SUCCESS;
+		}
 		else {
 			return ERROR;
 		}
 	}
 	
 	public String updateTitleType(){
-		//adminService.updateDisabilityType(disabilityType);
+		for(TitleTypes tt: getTitleSelectList())
+			adminService.updateTitleType(tt);
 		return SUCCESS;
 	}
 	
@@ -809,6 +838,7 @@ public class AdminAction extends BaseAction{
 	
 	
 	public String getDisabilityTypeForm(){
+		DisabilitySelectList = adminService.findDisabilityTypes();
 		return SUCCESS;
 	}
 	
@@ -833,15 +863,20 @@ public class AdminAction extends BaseAction{
 		disabilityType.setDisabilityDescription(getDisabilityDescription());
 		System.out.println("name: " + getDisabilityName());
 		System.out.println("description: " + getDisabilityDescription());
-		if(adminService.saveDisabilityType(disabilityType))
+		if(adminService.saveDisabilityType(disabilityType)){
+			DisabilitySelectList = adminService.findDisabilityTypes();
 			return SUCCESS;
+		}
 		else {
 			return ERROR;
 		}
 	}
 	
 	public String updateDisabilityType(){
-		//adminService.updateDisabilityType(disabilityType);
+		System.out.println("Struts: start updateDisabilityType");
+		for(DisabilityTypes dt: getDisabilitySelectList())
+			adminService.updateDisabilityType(dt);
+		System.out.println("Struts: end updateDisabilityType");
 		return SUCCESS;
 	}
 	/* ----------------------------------------------------------------------------------------------------------
@@ -924,10 +959,21 @@ public class AdminAction extends BaseAction{
 		issueType.setIssueDescription(getIssueDescription());
 		System.out.println("name: " + getIssueName());
 		System.out.println("description: " + getIssueDescription());
-		
-		//adminService.saveIssueType(issueType);
+		if(adminService.saveIssueType(issueType)){
+			IssueTypeList = adminService.findIssueTypes();
+			return SUCCESS;
+		}
+		else {
+			return ERROR;
+		}
+	}
+	
+	public String updateIssueType(){
+		for(IssueTypes it: getIssueTypeList())
+			adminService.updateIssueType(it);
 		return SUCCESS;
 	}
+	
 	/* ----------------------------------------------------------------------------------------------------------
 	 * Issue Getters & Setters
 	 * ----------------------------------------------------------------------------------------------------------
@@ -1064,5 +1110,110 @@ public class AdminAction extends BaseAction{
 		this.contactsSelectList = contactsSelectList;
 	}
 	
+	/**
+	 * @author davidforbes
+	 * @date 04/10/2014 -	
+	 * 		Communication Type Fields & Methods		
+	 * 				
+	 */
+	private CommunicationTypes communicationType;
+	private String communicationTypeName;
+	private List<CommunicationTypes> communicationSelectList;	
 
+	
+	/**
+	 * @author davidforbes
+	 * @date 04/10/2014 -	
+	 * 		Communication Type ActionMethods		
+	 * 				
+	 */
+	
+	public String getCommunicationTypeForm(){
+		return SUCCESS;
+	}
+	
+	public String saveNewCommunicationType(){
+		List<CommunicationTypes> communicationSelectList = adminService.findCommunicationTypes();
+		boolean exists = false;
+		
+		for(CommunicationTypes ct: communicationSelectList){
+			if(getCommunicationTypeName().equals(ct.getCommunicationTypeName())){
+				exists = true;
+				break;
+			}
+		}
+		
+		if(exists){
+			//asks the user to renter again.
+			return INPUT;
+		}
+		System.out.println("in saving commtype");
+		communicationType = new CommunicationTypes();
+		communicationType.setCommunicationTypeName(getCommunicationTypeName());
+		if(adminService.saveCommunicationType(communicationType)){
+			communicationSelectList = adminService.findCommunicationTypes();
+			//for(CommunicationTypes ct: )
+			return SUCCESS;
+		}
+		else {
+			return ERROR;
+		}
+	}
+	
+	public String updateCommunicationTypes(){
+		for(CommunicationTypes ct: getCommunicationSelectList())
+			adminService.updateCommunicationType(ct);
+		return SUCCESS;
+	}
+	
+	/**
+	 * @author davidforbes
+	 * @date 04/10/2014 -	
+	 * 		Communication Getters & Setters		
+	 * 				  
+	 */
+	
+	public CommunicationTypes getCommunicationType() {
+		return communicationType;
+	}
+
+	public void setCommunicationType(CommunicationTypes communicationType) {
+		this.communicationType = communicationType;
+	}
+
+	public String getCommunicationTypeName() {
+		return communicationTypeName;
+	}
+
+	public void setCommunicationTypeName(String communicationTypeName) {
+		this.communicationTypeName = communicationTypeName;
+	}
+
+	public List<CommunicationTypes> getCommunicationSelectList() {
+		return communicationSelectList;
+	}
+
+	public void setCommunicationSelectList(
+			List<CommunicationTypes> communicationSelectList) {
+		this.communicationSelectList = communicationSelectList;
+	}
+	
+	
+	/**
+	 * 
+	 * prepare function used to update the tables
+	 */
+	@Override
+	public void prepare() throws Exception {
+		setAccommodationSelectList(adminService.findAccommodationTypes());
+		setCulturalBackgroundSelectList(adminService.findCulturalBackgroundTypes());
+		setDangerSelectList(adminService.findDangerTypes());
+		setDisabilitySelectList(adminService.findDisabilityTypes());
+		setEmploymentSelectList(adminService.findEmploymentTypes());
+		setEnquiryTypeSelectList(adminService.findEnquiryTypes());
+		setIssueTypeList(adminService.findIssueTypes());
+		setStatusSelectList(adminService.findStatusTypes());
+		setTitleSelectList(adminService.findTitleTypes());
+		setCommunicationSelectList(adminService.findCommunicationTypes());
+	}
 }
