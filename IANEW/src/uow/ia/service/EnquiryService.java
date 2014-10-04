@@ -1,19 +1,10 @@
 package uow.ia.service;
 
 import java.util.List;
+import java.util.Map;
 
-import uow.ia.bean.AccommodationTypes;
 import uow.ia.bean.Contacts;
-import uow.ia.bean.CulturalBackgroundTypes;
-import uow.ia.bean.DangerTypes;
-import uow.ia.bean.DisabilityTypes;
-import uow.ia.bean.EmploymentTypes;
 import uow.ia.bean.Enquiries;
-import uow.ia.bean.EnquiryTypes;
-import uow.ia.bean.GenderTypes;
-import uow.ia.bean.IssueTypes;
-import uow.ia.bean.StatusTypes;
-import uow.ia.bean.TitleTypes;
 
 public interface EnquiryService {
 	
@@ -29,8 +20,12 @@ public interface EnquiryService {
      * @return List<Object>
      */
 	public List<Enquiries> findEnquiriesByPage(int pageNo, int rows);
+	
+	public List<Enquiries> findEnquiries(Map<String, Map<String, List<Map<String, List<Object>>>>> parametersMap, int pageNo, int rows);
 
 	public Long countEnquiries();
+	
+	public Long countEnquiries(Map<String, Map<String, List<Map<String, List<Object>>>>> parametersMap);
 
 	public Enquiries getEnquiry(int id);
 	

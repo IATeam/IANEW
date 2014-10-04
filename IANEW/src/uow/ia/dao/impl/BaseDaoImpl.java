@@ -5,13 +5,19 @@ package uow.ia.dao.impl;
 
 import java.io.Serializable;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 import org.hibernate.metadata.ClassMetadata;
 import org.hibernate.search.FullTextSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +26,7 @@ import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
 
 import uow.ia.dao.BaseDao;
+import uow.ia.util.DateUtil;
 
 /**
  * @author bruce
@@ -297,5 +304,28 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 	@Override
 	public FullTextSession getFullTextSession(){
 		return org.hibernate.search.Search.getFullTextSession(this.getCurrentSession());
+	}
+	
+	@Override
+	public List<T> search(Map<String, Object> parametersMap, Class clazz) {
+		// TODO Auto-generated method stub
+		Criteria criteria = this.getCurrentSession().createCriteria(clazz);
+		Set<String> keys = parametersMap.keySet();
+		
+		java.sql.Date startdayDate=null;
+		java.sql.Date enddayDate=null;
+		try {
+			startdayDate = new java.sql.Date(DateUtil.yyyymmddDate("2014-09-30").getTime());
+			enddayDate = new java.sql.Date(DateUtil.yyyymmddDate("2014-10-01").getTime());
+		} catch (ParseException e) {
+			// TODO Parse date
+			e.printStackTrace();
+		}
+		
+		for (String field : keys) {
+            criteria.add(Restrictions.between(field, startdayDate,enddayDate));
+            criteria.addOrder(Order.asc(field));
+        }
+		return criteria.list();
 	}
 }

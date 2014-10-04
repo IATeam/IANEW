@@ -20,6 +20,7 @@
     pageEncoding="US-ASCII"%>
 <%@ taglib prefix="sj" uri="/struts-jquery-tags" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -175,12 +176,23 @@
 	<s:div id="leftPopUp" style="background: yellow; position: fixed; top: 20%; box-shadow: 3px 3px 5px grey;">left</s:div>
 	<s:div id="rightPopUp">right</s:div>
 	
+	<b><c:out value="${pageContext.request.remoteUser}"/></b>
+	<form action="/IANEW/j_spring_security_logout" method="post">
+      <input type="submit" value="Log out" />
+      <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+    </form>
+	
+	
+	
 <!-- ----------------------------------------------------------------------------------------------- -->
 <!-- Home Page Footer ------------------------------------------------------------------------------ -->
 <!-- ----------------------------------------------------------------------------------------------- -->	
 	<footer id="statusBar">
 		<label>User's Name</label>
-		<button>logout</button>
+		<form action="/IANEW/j_spring_security_logout" method="post" style="display: inline-block; float: right; margin: 4px;"">
+	      <input type="submit" value="Log out" />
+	      <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+	    </form>
 	</footer>
 	
 	<script>

@@ -3,6 +3,7 @@
  */
 package uow.ia.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -86,6 +87,17 @@ public class ContactServiceImpl implements ContactService {
 		return contactsDao.find(
 				" from Contacts c where c.firstname = ? and c.lastname = ? ",
 				new Object[] { firstName, lastName });
+	}
+	
+	@Override
+	public List<Contacts> findContactsByNameLike(String name) {
+		List<Contacts> tmpList = new ArrayList<Contacts>();
+		name = "%"+name+"%";
+		tmpList.addAll(contactsDao.find(
+				" from Contacts c where c.firstname like ?", new Object[] {name}));
+		//tmpList.addAll(contactsDao.find(
+		//		" from Contacts c where c.lastname like %"+name+"%"));
+		return tmpList;
 	}
 
 	@Override

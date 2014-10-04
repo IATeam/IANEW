@@ -6,6 +6,8 @@ package uow.ia.service.impl;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javassist.bytecode.stackmap.TypeData.ClassName;
 
@@ -20,10 +22,12 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sun.tools.xjc.reader.xmlschema.bindinfo.BIConversion.Static;
+import com.sun.xml.rpc.processor.modeler.j2ee.xml.parameterModeType;
 
 import uow.ia.bean.*;
 import uow.ia.dao.*;
 import uow.ia.service.EnquiryService;
+import uow.ia.util.FilterSortHqlGen;
 
 /**
  * @author bruce
@@ -90,6 +94,14 @@ public class EnquiryServiceImpl implements EnquiryService {
 		return enquiriesDao.find(" from Enquiries", pageNo, rows);
 	}
 	
+
+	@Override
+	public List<Enquiries> findEnquiries(Map<String, Map<String, List<Map<String, List<Object>>>>> dataMap, int pageNo, int rows) {
+		
+		FilterSortHqlGen.HqlGen(dataMap);
+		return enquiriesDao.find(FilterSortHqlGen.finalHql, FilterSortHqlGen.param, pageNo,rows);
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * @see uow.ia.service.EnquiryService#countEnquiries()
@@ -98,6 +110,18 @@ public class EnquiryServiceImpl implements EnquiryService {
 	@Override
 	public Long countEnquiries() {
 		return enquiriesDao.count("select count(*) from Enquiries");
+	}
+	
+	@Override
+	public Long countEnquiries(
+			Map<String, Map<String, List<Map<String, List<Object>>>>> dataMap) {
+		String hql = "select count(*) ";
+		FilterSortHqlGen.CleanHqlGen();
+		FilterSortHqlGen.HqlGen(dataMap);
+		hql += FilterSortHqlGen.finalHql;
+		Long count = 0l;
+		count += enquiriesDao.count(hql,FilterSortHqlGen.param);
+		return count;
 	}
 	
 	/*

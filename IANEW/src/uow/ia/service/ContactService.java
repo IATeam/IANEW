@@ -27,6 +27,8 @@ public interface ContactService {
 	
 	public List<Contacts> findContactsByFullName(String firstName, String lastName);
 	
+	public List<Contacts> findContactsByNameLike(String name);
+	
 	public Long countContacts();
 	
 	public List<Contacts> findContacts();

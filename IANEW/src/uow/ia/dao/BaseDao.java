@@ -205,4 +205,6 @@ public interface BaseDao<T> {
 	public Class getClassByObject(Object ob);
 	
 	public FullTextSession getFullTextSession();
+	
+	public List<T> search(Map<String, Object> parametersMap, Class clazz);
 }
