@@ -6,6 +6,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.hibernate.search.FullTextSession;
+
 import uow.ia.bean.Enquiries;
 import uow.ia.bean.IndividualCases;
 import uow.ia.bean.Users;
@@ -44,6 +46,15 @@ public class LoginAction extends BaseAction{
 			Map<String, Object> session = ActionContext.getContext().getSession();
 			session.put(USER,user);
             session.put("context", new Date());
+            
+            FullTextSession fts = utilService.getFullTextSession();
+    		
+    		try {
+    			fts.createIndexer().startAndWait();
+    		} catch (InterruptedException e) {
+    			e.printStackTrace();
+    		}
+            
 			return SUCCESS;
 		} else {
 			return ERROR;

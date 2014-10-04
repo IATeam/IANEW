@@ -94,12 +94,12 @@ public class SearchUtil {
 		}
 		
 		FullTextSession fts = service.getFullTextSession();
-		
-		try {
-			fts.createIndexer().startAndWait();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+//		
+//		try {
+//			fts.createIndexer().startAndWait();
+//		} catch (InterruptedException e) {
+//			e.printStackTrace();
+//		}
 		
 		fts.getTransaction().begin();
 		
