@@ -15,13 +15,10 @@ import org.hibernate.search.annotations.Indexed;
  * @version 1.0.3, 30/08/2014
  */
 
-@Indexed
 public class CommunicationTypes implements java.io.Serializable {
 
-	@DocumentId
 	private Integer id;
 	
-	@Field
 	private String communicationTypeName;
 	
 	private List<IndividualCaseCommunications> individualCaseCommunicationsList = new ArrayList<IndividualCaseCommunications>();

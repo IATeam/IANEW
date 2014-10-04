@@ -144,25 +144,7 @@
 		
 		<section id="secSuggestions">
 			<!-- dynamically loads suggestions based on the key pressed from input box -->
-			<article id="artSuggestionList" >
-			<%-- <s:iterator value="list" var="Object">
-			<s:property /><br/>
-			</s:iterator> --%>
-			<s:iterator value="maps" var="Object">
-			<s:if test="key==2">
-				<s:url var="urlExisting" namespace="/enquiry" action="getEnquiry" >	
-					<s:param name="hiddenid"><s:property value="value.id" /></s:param>
-				</s:url>
-				<s:a href="%{urlExisting}">Enquiry</s:a><br/>
-			</s:if>
-			<s:elseif test="key==3">
-				<s:url var="existingCase" namespace="/case" action="getExistingCase">
-					<s:param name="hiddenid"><s:property value="value.id" /></s:param>
-				</s:url>
-				<s:a href="%{existingCase}">Case</s:a><br/> 
-			</s:elseif>
-				</s:iterator>
-			</article>
+			<%@include file="/forms/search/search.jsp" %>
 		</section>
 			
 		<section id="secLists">

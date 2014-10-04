@@ -13,7 +13,7 @@
             <generator class="identity" />
         </id>
         <property name="description" type="string">
-            <column name="description" sql-type="longtext"/>
+            <column name="description" />
         </property>
         <property name="serviceProviderId" type="java.lang.Integer">
             <column name="service_provider_id" />

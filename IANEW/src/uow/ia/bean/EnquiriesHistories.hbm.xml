@@ -28,7 +28,7 @@
             <column name="status_id" />
         </property>
         <property name="description" type="string">
-            <column name="description" sql-type="longtext"/>
+            <column name="description" />
         </property>
         <property name="inquisitor" type="string">
             <column name="inquisitor" />

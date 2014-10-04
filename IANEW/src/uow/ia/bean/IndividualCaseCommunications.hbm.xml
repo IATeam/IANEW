@@ -17,7 +17,7 @@
             <column name="communication_date" length="10" />
         </property>
         <property name="description" type="string">
-            <column name="description" sql-type="longtext"/>
+            <column name="description" />
         </property>
         <property name="timeSpent" type="java.lang.Float">
             <column name="time_spent" precision="12" scale="2" />

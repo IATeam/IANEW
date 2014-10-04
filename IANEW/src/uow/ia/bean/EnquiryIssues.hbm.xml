@@ -13,7 +13,7 @@
             <generator class="identity" />
         </id>
         <property name="comment" type="string">
-            <column name="comment" sql-type="longtext"/>
+            <column name="comment" />
         </property>
         <property name="createdDateTime" type="date">
             <column name="created_date_time" length="10" sql-type="datetime"/>

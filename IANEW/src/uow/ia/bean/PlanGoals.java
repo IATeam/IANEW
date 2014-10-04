@@ -34,20 +34,14 @@ public class PlanGoals implements java.io.Serializable {
 	@IndexedEmbedded
 	private GoalTypes goalType;
 	
-	@DateBridge(resolution = Resolution.DAY)
-	@Field
 	private Date completionDateTime;
 	
 	private Contacts createdUser;
 	
-	@DateBridge(resolution = Resolution.DAY)
-	@Field
 	private Date createdDateTime;
 	
 	private Contacts updatedUser;
 	
-	@DateBridge(resolution = Resolution.DAY)
-	@Field
 	private Date updatedDateTime;
 	
 	@Field

@@ -45,7 +45,6 @@ public class IndividualCases implements java.io.Serializable {
 	@IndexedEmbedded
 	private PriorityTypes priorityType;
 	
-	@Field
 	private Integer serviceProviderId;
 	
 	@DateBridge(resolution = Resolution.DAY)
@@ -67,7 +66,6 @@ public class IndividualCases implements java.io.Serializable {
 	
 	private IndividualCases oldCase;
 	
-	@IndexedEmbedded
 	private Enquiries relatedEnquiry;
 	
 	@IndexedEmbedded
@@ -500,6 +498,15 @@ public class IndividualCases implements java.io.Serializable {
 		}
 		issuesTypesString = issuesTypesString.trim();
 		return issuesTypesString;
+	}
+	
+	public String toString() {
+		return "Client: " + this.contact.getFirstname() + " " + this.contact.getOthername() + " " + this.contact.getLastname() + ". "
+				+ "Description: " + this.description;
+	}
+	
+	public String entityName() {
+		return "IndividualCases";
 	}
 
 }

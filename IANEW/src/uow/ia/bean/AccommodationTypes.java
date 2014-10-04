@@ -28,7 +28,6 @@ public class AccommodationTypes implements java.io.Serializable {
 	@Field
 	private String accommodationName;
 	
-	@Field
 	private String accommodationDescription;
 	
 	private List<Contacts> contactsList = new ArrayList<Contacts>();

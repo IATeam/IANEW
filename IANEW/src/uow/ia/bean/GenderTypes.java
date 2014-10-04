@@ -24,7 +24,6 @@ public class GenderTypes implements java.io.Serializable {
 	@Field
 	private String genderName;
 	
-	@Field
 	private String genderCode;
 	
 	private List<Contacts> contactsList = new ArrayList<Contacts>();

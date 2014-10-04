@@ -25,10 +25,8 @@ public class PriorityTypes implements java.io.Serializable {
 	@Field
 	private String priorityName;
 	
-	@Field
 	private String color;
 	
-	@Field
 	private Integer displayOrder;
 	private List<IndividualCases> individualCasesList = new ArrayList<IndividualCases>();
 	/**

@@ -33,28 +33,21 @@ public class IndividualCaseCommunications implements java.io.Serializable {
 	@Field
 	private Date communicationDate;
 	
-	@IndexedEmbedded
 	private CommunicationTypes communicationType;
 	
 	@Field
 	private String description;
 	
-	@Field
 	private Float timeSpent;
 	
-	@Field
 	private String importantFlag;
 	
 	private Contacts createdUser;
 	
-	@DateBridge(resolution = Resolution.DAY)
-	@Field
 	private Date createdDateTime;
 	
 	private Contacts updatedUser;
 	
-	@DateBridge(resolution = Resolution.DAY)
-	@Field
 	private Date updatedDateTime;
 
 	public IndividualCaseCommunications() {

@@ -25,7 +25,7 @@
             <column name="issue_id" />
         </property>
         <property name="comment" type="string">
-            <column name="comment" sql-type="longtext"/>
+            <column name="comment" />
         </property>
         <property name="createdUserId" type="java.lang.Integer">
             <column name="created_user_id" not-null="false" />

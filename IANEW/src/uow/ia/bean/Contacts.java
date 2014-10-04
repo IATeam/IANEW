@@ -91,7 +91,6 @@ public class Contacts implements java.io.Serializable {
 	@Field
 	private Date updatedDateTime;
 	
-	@IndexedEmbedded
 	private StatusTypes status;
 	
 	//@Field

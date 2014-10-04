@@ -22,10 +22,10 @@
             <column name="updated_date_time" length="19" sql-type="datetime"/>
         </property>
         <property name="goalDescription" type="string">
-            <column name="goal_description" sql-type="longtext"/>
+            <column name="goal_description" />
         </property>
         <property name="goalAction" type="string">
-            <column name="goal_action" sql-type="longtext"/>
+            <column name="goal_action" />
         </property>
         
         <!-- Many to one relationship -->

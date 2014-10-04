@@ -25,7 +25,6 @@ public class IssueTypes implements java.io.Serializable {
 	@Field
 	private String issueName;
 	
-	@Field
 	private String issueDescription;
 	private List<EnquiryIssues> enquiryIssuesList = new ArrayList<EnquiryIssues>();
 	private List<CaseIssues> caseIssuesList = new ArrayList<CaseIssues>();

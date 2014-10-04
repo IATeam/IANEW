@@ -38,14 +38,10 @@ public class EnquiryIssues implements java.io.Serializable {
 	
 	private Contacts createdUser;
 	
-	@DateBridge(resolution = Resolution.DAY)
-	@Field
 	private Date createdDateTime;
 	
 	private Contacts updatedUser;
 	
-	@DateBridge(resolution = Resolution.DAY)
-	@Field
 	private Date updatedDateTime;
 	/**
 	 * 
