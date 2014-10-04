@@ -28,6 +28,17 @@
     		<result name="success">/admin/iterAccommodationTypes.jsp</result>
     		<result name="input"></result>
     	</action>
+    	<action name="getCommunicationTypesForm" class="uow.ia.action.AdminAction" method="getCommunicationTypeForm">
+    		<result name="success">/admin/newCommunicationType.jsp</result>
+    	</action>
+    	<action name="saveNewCommunicationType" class="uow.ia.action.AdminAction" method="saveNewCommunicationType">
+    		<result name="success">/admin/iterCommunicationTypes.jsp</result>
+    		<result name="input"></result>
+    	</action>
+    	<action name="updateCommunicationTypes" class="uow.ia.action.AdminAction" method="updateCommunicationTypes">
+    		<result name="success">/admin/iterCommunicationTypes.jsp</result>
+    		<result name="input"></result>
+    	</action>
     	<action name="getNewculturalBackgroundTypeForm" class="uow.ia.action.AdminAction" method="getNewculturalBackgroundTypeForm">
     		<result name="success">/admin/newCulturalBackgroundType.jsp</result>
     	</action>
@@ -46,7 +57,7 @@
     		<result name="success">/admin/iterDangerTypes.jsp</result>
     		<result name="input"></result>
     	</action>
-    	<action name="updateDangerTypes" class="uow.ia.action.AdminAction" method="updateDangerType">
+    	<action name="updateDangerType" class="uow.ia.action.AdminAction" method="updateDangerType">
     		<result name="success">/admin/iterDangerTypes.jsp</result>
     		<result name="input"></result>
     	</action>
@@ -57,7 +68,7 @@
     		<result name="success">/admin/iterDisabilityTypes.jsp</result>
    			 <result name="input"></result>
     	</action>
-    	<action name="updateDisabilityTypes" class="uow.ia.action.AdminAction" method="updateDisabilityType">
+    	<action name="updateDisabilityType" class="uow.ia.action.AdminAction" method="updateDisabilityType">
     		<result name="success">/admin/iterDisabilityTypes.jsp</result>
     		<result name="input"></result>
     	</action>
@@ -68,7 +79,7 @@
     		<result name="success">/admin/iterEmploymentTypes.jsp</result>
     		<result name="input"></result>
     	</action>
-    	<action name="updateEmploymentTypes" class="uow.ia.action.AdminAction" method="updateEmploymentType">
+    	<action name="updateEmploymentType" class="uow.ia.action.AdminAction" method="updateEmploymentType">
     		<result name="success">/admin/iterEmploymentTypes.jsp</result>
     		<result name="input"></result>
     	</action>
@@ -79,7 +90,7 @@
     		<result name="success">/admin/iterEnquiryTypes.jsp</result>
     		<result name="input"></result>
     	</action>
-    	<action name="updateEnquiryTypes" class="uow.ia.action.AdminAction" method="updateEnquiryType">
+    	<action name="updateEnquiryType" class="uow.ia.action.AdminAction" method="updateEnquiryType">
     		<result name="success">/admin/iterEnquiryTypes.jsp</result>
     		<result name="input"></result>
     	</action>
@@ -90,7 +101,7 @@
     		<result name="success">/admin/iterGenderTypes.jsp</result>
     		<result name="input"></result>
     	</action>
-    	<action name="updateGenderTypes" class="uow.ia.action.AdminAction" method="updateGenderType">
+    	<action name="updateGenderType" class="uow.ia.action.AdminAction" method="updateGenderType">
     		<result name="success">/admin/iterGenderTypes.jsp</result>
     		<result name="input"></result>
     	</action>
@@ -101,7 +112,7 @@
     		<result name="success">/admin/iterIssueTypes.jsp</result>
     		<result name="input"></result>
     	</action>
-    	<action name="updateIssueTypes" class="uow.ia.action.AdminAction" method="updateIssueType">
+    	<action name="updateIssueType" class="uow.ia.action.AdminAction" method="updateIssueType">
     		<result name="success">/admin/iterIssueTypes.jsp</result>
     		<result name="input"></result>
     	</action>
@@ -112,7 +123,7 @@
     		<result name="success">/admin/iterStatusTypes.jsp</result>
     		<result name="input"></result>
     	</action>
-    	<action name="updateStatusTypes" class="uow.ia.action.AdminAction" method="updateStatusType">
+    	<action name="updateStatusType" class="uow.ia.action.AdminAction" method="updateStatusType">
     		<result name="success">/admin/iterStatusTypes.jsp</result>
     		<result name="input"></result>
     	</action>
@@ -123,17 +134,17 @@
     		<result name="success">/admin/iterTitleTypes.jsp</result>
     		<result name="input"></result>
     	</action>
-    	<action name="updateTitleTypes" class="uow.ia.action.AdminAction" method="updateTitleType">
+    	<action name="updateTitleType" class="uow.ia.action.AdminAction" method="updateTitleType">
     		<result name="success">/admin/iterTitleTypes.jsp</result>
     		<result name="input"></result>
     	</action>
     	<action name="startAdminPage" class="uow.ia.action.AdminAction" method="startAdminPage">
     		<result name="success">/admin/admin.jsp</result>
     	</action>
-    	<action name="adminAdvocatePage" class="uow.ia.action.AdminAction" method="adminAdvocatePage">
+    	<action name="adminAdvocatePage" class="uow.ia.action.ContactAction" method="adminAdvocatePage">
     		<result name="success">/admin/advocateSettings.jsp</result>
     	</action>
-    	<action name="adminUserPage" class="uow.ia.action.AdminAction" method="adminUserPage">
+    	<action name="adminUserPage" class="uow.ia.action.ContactAction" method="adminUserPage">
     		<result name="success">/admin/clientSettings.jsp</result>
     	</action>
    	</package>

@@ -27,6 +27,7 @@
 <!-- Content of the form -------------------------------------------------------------------------- -->
 <!-- ---------------------------------------------------------------------------------------------- -->	
 		<%@include file="/admin/newAccommodationType.jsp" %>
+		<%@include file="/admin/newCommunicationType.jsp" %>
 		<%@include file="/admin/newCulturalBackgroundType.jsp" %>
 		<%@include file="/admin/newDangerType.jsp" %>
 		<%@include file="/admin/newDisabilityType.jsp" %>

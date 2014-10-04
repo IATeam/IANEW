@@ -10,7 +10,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import uow.ia.bean.AccommodationTypes;
-import uow.ia.bean.ContactTypes;
+import uow.ia.bean.CommunicationTypes;
 import uow.ia.bean.Contacts;
 import uow.ia.bean.CulturalBackgroundTypes;
 import uow.ia.bean.DangerTypes;
@@ -23,9 +23,9 @@ import uow.ia.bean.StatusTypes;
 import uow.ia.bean.TitleTypes;
 import uow.ia.bean.Users;
 import uow.ia.dao.AccommodationTypesDao;
-import uow.ia.dao.ContactTypesDao;
 import uow.ia.dao.ContactsDao;
 import uow.ia.dao.CulturalBackgroundTypesDao;
+import uow.ia.dao.CommunicationTypesDao;
 import uow.ia.dao.DangerTypesDao;
 import uow.ia.dao.DisabilityTypesDao;
 import uow.ia.dao.EmploymentTypesDao;
@@ -464,22 +464,40 @@ public class AdminServiceImpl implements AdminService {
 		}
 	}
 	
+	/** 
+     * Accomodation Service methods
+     *  @author davidforbes
+     *  @date 09/09/2014
+     * 
+     */
+	
 	@Resource
-	private ContactTypesDao<ContactTypes> contactTypesDao;
+	private CommunicationTypesDao<CommunicationTypes> CommunicationTypesDao;
 	
 	@Override
-	public List<Contacts> findAdvocates() {
-		ContactTypes c = contactTypesDao.get(
-				" from ContactTypes t where t.contactTypeName =?",
-				new Object[] { "Advocate" });
-		return ContactsDao.find(" from Contacts t where t.contactType =:contactType order by t.lastname asc, t.firstname asc","contactType", c);
+	public List<CommunicationTypes> findCommunicationTypes() {
+		return CommunicationTypesDao.find(" from CommunicationTypes");
 	}
 	
 	@Override
-	public List<Contacts> findClients() {
-		ContactTypes c = contactTypesDao.get(
-				" from ContactTypes t where t.contactTypeName =?",
-				new Object[] { "Client" });
-		return ContactsDao.find(" from Contacts t where t.contactType =:contactType order by t.lastname asc, t.firstname asc","contactType", c);
+	public boolean saveCommunicationType(CommunicationTypes c) {
+		try {
+			CommunicationTypesDao.save(c);
+			return true;
+		} catch (Exception e) {
+			System.out.println(e);
+			return false;
+		}
+	}
+	
+	@Override
+	public boolean updateCommunicationType(CommunicationTypes c) {
+		try {
+			CommunicationTypesDao.update(c);
+			return true;
+		} catch (Exception e) {
+			System.out.println(e);
+			return false;
+		}
 	}
 }

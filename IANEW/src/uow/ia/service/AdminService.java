@@ -6,6 +6,7 @@ package uow.ia.service;
 import java.io.Serializable;
 import java.util.List;
 
+import uow.ia.bean.CommunicationTypes;
 import uow.ia.bean.DisabilityTypes;
 import uow.ia.bean.Users;
 import uow.ia.bean.IssueTypes;
@@ -376,9 +377,46 @@ public interface AdminService {
 	     */
 		public boolean updateContact(Contacts c);
 		
-		public List<Contacts> findAdvocates();
 		
-		public List<Contacts> findClients();
+		
+		
+		
+		 /* ----------------------------------------------------------------------------------------------------------
+		 * Communication Type ServiceMethods
+		 * ----------------------------------------------------------------------------------------------------------
+		 */
+		/** 
+	     * retrieve with List<object> of Communication Types from Communication_Types table
+	     *  @author davidforbes
+	     *  @date 04/10/2014
+	     * @return List<Object>
+	     */
+		public List<CommunicationTypes> findCommunicationTypes();
+		
+		/** 
+	     * save Communication Types object to Communication_Types table
+	     * 
+	     * @param CommunicationTypes c
+	     * @return List<Object>
+	     *  @author davidforbes
+	     *  @date 04/10/2014
+	     */
+		public boolean saveCommunicationType(CommunicationTypes c);
+		
+		/** 
+	     * update Communication Types object to Communication_Types table
+	     *  @author davidforbes
+	     *  @date 09/09/2014
+	     * @param CommunicationTypes a
+	     * @return List<Object>
+	     */
+		public boolean updateCommunicationType(CommunicationTypes c);
+		
+		 /* ----------------------------------------------------------------------------------------------------------
+			 * CulturalBackground Type ServiceMethods
+			 * ----------------------------------------------------------------------------------------------------------
+			 */
+		
 
 		
 

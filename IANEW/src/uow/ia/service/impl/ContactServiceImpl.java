@@ -9,8 +9,14 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import uow.ia.bean.AccommodationTypes;
+import uow.ia.bean.ContactTypes;
 import uow.ia.bean.Contacts;
+import uow.ia.bean.GenderTypes;
+import uow.ia.dao.AccommodationTypesDao;
+import uow.ia.dao.ContactTypesDao;
 import uow.ia.dao.ContactsDao;
+import uow.ia.dao.GenderTypesDao;
 import uow.ia.service.ContactService;
 
 
@@ -106,6 +112,42 @@ public class ContactServiceImpl implements ContactService {
 	@Override
 	public Contacts getContacts(int id) {
 		return contactsDao.get(Contacts.class, id);
+	}
+	
+	@Resource
+	private ContactTypesDao<ContactTypes> contactTypesDao;
+	
+	@Override
+	public List<Contacts> findAdvocates() {
+		ContactTypes c = contactTypesDao.get(
+				" from ContactTypes t where t.contactTypeName =?",
+				new Object[] { "Advocate" });
+		return contactsDao.find(" from Contacts t where t.contactType =:contactType order by t.lastname asc, t.firstname asc","contactType", c);
+	}
+
+	@Resource
+	private GenderTypesDao<GenderTypes> GenderTypesDao;
+	
+	@Override
+	public List<GenderTypes> findGenderTypes() {
+		return GenderTypesDao.find(" from GenderTypes");
+	}
+
+	@Resource
+	private AccommodationTypesDao<AccommodationTypes> AccommodationTypesDao;
+	
+	@Override
+	public List<AccommodationTypes> findAccommodationTypes() {
+		return AccommodationTypesDao.find(" from AccommodationTypes");
+	}
+	
+	
+	@Override
+	public List<Contacts> findClients() {
+		ContactTypes c = contactTypesDao.get(
+				" from ContactTypes t where t.contactTypeName =?",
+				new Object[] { "Client" });
+		return contactsDao.find(" from Contacts t where t.contactType =:contactType order by t.lastname asc, t.firstname asc","contactType", c);
 	}
 
 }

@@ -148,4 +148,5 @@
      <include file="login.xml"/>
      <!-- Settings Forms -->
      <include file="admin.xml" />
+     <include file="test.xml" />
 </struts>

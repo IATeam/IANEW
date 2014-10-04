@@ -3,17 +3,19 @@
 	Created Date: 16/09/2014
 	==============================================
 	Updates:
+		29/08/2014 -	Quang Nhan added img delete button
 	==============================================	
 	Description: A jsp page that displays iterator for address
 ------------------------------------------------------------------------------------------------>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <s:iterator value="iamodel.contact.addressesList" status="stat">
 	<section class="sixteen columns curveBorder">
+		<img src="/IANEW/resources/images/undoButtonImage.png" alt="undoButton" onclick="undoButton(this);" class="undoButton"/>
 		<s:hidden name="iamodel.contact.addressesList[%{#stat.index}].id"/>			
 		<div class="row">
 			<div class="inputfield eight columns">
 				<s:label for="address" value="Street" />
-				<div><s:textfield name="iamodel.contact.addressesList[%{#stat.index}].street"></s:textfield></div>
+				<div><s:textfield name="iamodel.contact.addressesList[%{#stat.index}].street" /></div>
 			</div>
 			<div class="inputfield four columns">
 				<s:label for="city" value="Suburb" />

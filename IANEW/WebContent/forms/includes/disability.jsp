@@ -21,14 +21,17 @@
 		17/09/2014 -	David Forbes modified theDisability with value attribute
 		18/09/2014 -	Quang Nhan Add validation refer to enquiryValidation.js file and fix index bugs
 						when it is a new enquiry
+		29/09/2014 -	Quang Nhan modified select list to accommodate value by id rather than name
+						Fixed bugs related to primary flag
+						Fixed primaryFlag js function relating to the bug that only assign "Y" to the
+						the first band
+						Added img delete button and modified expand button
 	==============================================	
 	Description: A jsp page that displays a list of enquiries
 ------------------------------------------------------------------------------------------------>
-
-<!-- TODO LATER: add js function to click to select primary disability -->
-<section>
-<input type="image" src="/IANEW/resources/images/plusButton.png" alt="Hide/Show" id="btnShowHide" value="ShowHide" onclick="divHide(this);return false;" class="divHideButton"/>
 <%@ taglib prefix="s" uri="/struts-tags"%>
+<section>
+<img src="/IANEW/resources/images/plusButton.png" alt="Hide/Show" onclick="divHide(this);return false;" class="divHideButton"/>
 <h3 class="sixteen columns" style="float:none;">Disability</h3>
 <div class="greybackground">
 <div id="disabilityDiv" class="toggled hideable">	
@@ -50,25 +53,25 @@
 		<article id="artDisability">
 	</s:else>
 		<section class="sixteen columns curveBorder row">
-				<s:hidden name="iamodel.contact.disabilitiesList[%{#index}].id"/>
-				<s:hidden name="iamodel.contact.disabilitiesList[%{#index}].primaryFlag"/>
-							<input type="image" src="/IANEW/resources/images/undoButtonImage.png" alt="undoButton" id="btnUndo" value="Undo" onclick="undoButton(this);return false;" class="undoButton"/>
+			<img src="/IANEW/resources/images/undoButtonImage.png" alt="undoButton" onclick="undoButton(this);" class="undoButton"/>
+			<s:hidden name="iamodel.contact.disabilitiesList[%{#index}].id"/>
+			<s:hidden name="iamodel.contact.disabilitiesList[%{#index}].primaryFlag"/>
+			
+			<s:div cssClass="four columns alpha">
+				<s:div cssClass="disabilityTypeSelect row four columns">
+					<s:select list="disabilitySelectList" listKey="id" listValue="disabilityName" name="theDisabilityListId[%{#index}]" headerKey="-1" headerValue="Select Disability" />
+				</s:div>
 				
-				<s:div cssClass="four columns alpha">
-					<s:div cssClass="disabilityTypeSelect row four columns">
-						<s:select list="disabilitySelectList.{disabilityName}" name="theDisabilityList[%{#index}]" value="iamodel.contact.disabilitiesList.disabilityType.disabilityName" headerKey="-1" headerValue="Select Disability" />
-					</s:div>
-					
-					<s:div cssClass="row four columns" style="text-align: center">
-						<input type="radio" name="primary" onclick="primaryUpdate(this)"/>
-						<s:label value="Primary Disability" />						
-					</s:div>
+				<s:div cssClass="row four columns" style="text-align: center">
+					<input type="radio" name="primary" onclick="primaryUpdate(this)"/>
+					<s:label value="Primary Disability" />						
 				</s:div>
-				<s:div cssClass="textarea eleven columns">
-					<s:label for="disabilityDescription" value="Comment:" /> 
-					<s:textarea cssClass="disabilityDescription" cssClass="oneLineTextArea" name="iamodel.contact.disabilitiesList[%{#index}].comments" /> 
-				</s:div>
-			</section>
+			</s:div>
+			<s:div cssClass="textarea eleven columns">
+				<s:label for="disabilityDescription" value="Comment:" /> 
+				<s:textarea cssClass="disabilityDescription" cssClass="oneLineTextArea" name="iamodel.contact.disabilitiesList[%{#index}].comments" /> 
+			</s:div>
+		</section>
 	</article>
 	
 	<div class="row">
@@ -80,18 +83,26 @@
 	
 	function primaryUpdate(radio){ 
 		if($('[name="primary"]').is(':checked')){
+			//add the css class primary to the section tag of the radio input
 			$(radio).parents("section").addClass("primary");
+
+			//find all unchecked input radio and remove the css calss primary
 			var otherRadio = $('input[name="primary"]:unchecked');
-
 			$(otherRadio).parents("section").removeClass("primary");
-			var eachRadio = $(otherRadio).parents("section").find("input[name*='Flag']");
 
-			$(eachRadio).each(function(){
-				$(this).val(null);
+			//find all primary flag tags
+			var eachprimary = $(otherRadio).parents("section").find("input[name*='Flag']");
+
+			// and assign empty value
+			$(eachprimary).each(function(){
+				if($(this).val() == 'Y'){
+					$(this).val("");
+				}	
 			});
-			var primaryFlag = $(radio).parents("section").find("input[name*='Flag']").first();
-				$(primaryFlag).val("Y");
-		
+			
+			//grab the hidden field with with the name primary flag and assign Y to its value
+			$(radio).parents("section").children("input[name*='Flag']").val("Y");
+
 		}
 	};
 	

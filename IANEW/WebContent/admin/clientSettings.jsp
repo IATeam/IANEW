@@ -16,6 +16,7 @@
 </head>
 <body>
 	<s:div cssClass="form container">
+	<s:set var="formType">client</s:set>
 
 
 <!-- ---------------------------------------------------------------------------------------------- -->
@@ -26,8 +27,8 @@
 <!-- Content of the form -------------------------------------------------------------------------- -->
 <!-- ---------------------------------------------------------------------------------------------- -->	
 		<%@include file="/admin/clientList.jsp" %>
-		
-
+		<%@include file="/admin/details.jsp" %> 
+		<%@include file="/admin/address.jsp" %> 
 		</s:div>
 </body>
 </html>

@@ -1,7 +1,6 @@
 package uow.ia.action;
 
-import uow.ia.bean.ClientDisabilities;
-import uow.ia.bean.ContactTypes;
+import uow.ia.bean.CommunicationTypes;
 import uow.ia.bean.DisabilityTypes;
 import uow.ia.bean.EmploymentTypes;
 import uow.ia.bean.IssueTypes;
@@ -14,12 +13,6 @@ import uow.ia.bean.StatusTypes;
 import uow.ia.bean.TitleTypes;
 import uow.ia.bean.Contacts;
 
-
-
-
-
-
-import java.sql.PreparedStatement;
 import java.util.List;
 
 import com.opensymphony.xwork2.Preparable;
@@ -32,6 +25,11 @@ import com.opensymphony.xwork2.Preparable;
  * 				
  */
 public class AdminAction extends BaseAction implements Preparable{
+	
+	
+	
+	//getContact().setAccommodation(typesService.getAccommodationTypeId(getTheAccommodationTypeId()));
+	
 	/* 
 	 * 
 	 * ----------------------------------------------------------------------------------------------------------
@@ -57,22 +55,10 @@ public class AdminAction extends BaseAction implements Preparable{
 		setStatusSelectList(adminService.findStatusTypes());
 		setTitleSelectList(adminService.findTitleTypes());
 		setContactsSelectList(adminService.findContacts());
+		setCommunicationSelectList(adminService.findCommunicationTypes());
 
 		return SUCCESS;
 	}
-	
-	public String adminAdvocatePage(){
-		setAdvocateSelectList(adminService.findAdvocates());
-		//advocateSelectList = admin
-		return SUCCESS;
-	}
-	
-	public String adminUserPage(){
-		setClientSelectList(adminService.findClients());
-		return SUCCESS;
-	}
-	
-	
 	
 	/**
 	 * @author davidforbes
@@ -1126,75 +1112,93 @@ public class AdminAction extends BaseAction implements Preparable{
 	
 	/**
 	 * @author davidforbes
-	 * @date 30/09/2014 -	
-	 * 		Advocate Fields & Methods		
+	 * @date 04/10/2014 -	
+	 * 		Communication Type Fields & Methods		
 	 * 				
 	 */
-	
-	private List<Contacts> advocateSelectList;	
+	private CommunicationTypes communicationType;
+	private String communicationTypeName;
+	private List<CommunicationTypes> communicationSelectList;	
 
 	
 	/**
 	 * @author davidforbes
-	 * @date 30/09/2014 -	
-	 * 		Advocate Type ActionMethods		
+	 * @date 04/10/2014 -	
+	 * 		Communication Type ActionMethods		
 	 * 				
 	 */
 	
-	public String getAdvocateForm(){
-		return SUCCESS;
-	}
-
-	/**
-	 * @author davidforbes
-	 * @date 30/09/2014 -	
-	 * 		Advocate Getters & Setters		
-	 * 				  
-	 */
-	public List<Contacts> getAdvocateSelectList() {
-		return advocateSelectList;
-	}
-
-	public void setAdvocateSelectList(List<Contacts> advocateSelectList) {
-		this.advocateSelectList = advocateSelectList;
-	}
-	
-	/**
-	 * @author davidforbes
-	 * @date 03/10/2014 -	
-	 * 		Client Fields & Methods		
-	 * 				
-	 */
-	
-	private List<Contacts> clientSelectList;	
-
-	
-	/**
-	 * @author davidforbes
-	 * @date 03/10/2014 -	
-	 * 		Client Type ActionMethods		
-	 * 				
-	 */
-	
-	public String getClientForm(){
+	public String getCommunicationTypeForm(){
 		return SUCCESS;
 	}
 	
+	public String saveNewCommunicationType(){
+		List<CommunicationTypes> communicationSelectList = adminService.findCommunicationTypes();
+		boolean exists = false;
+		
+		for(CommunicationTypes ct: communicationSelectList){
+			if(getCommunicationTypeName().equals(ct.getCommunicationTypeName())){
+				exists = true;
+				break;
+			}
+		}
+		
+		if(exists){
+			//asks the user to renter again.
+			return INPUT;
+		}
+		System.out.println("in saving commtype");
+		communicationType = new CommunicationTypes();
+		communicationType.setCommunicationTypeName(getCommunicationTypeName());
+		if(adminService.saveCommunicationType(communicationType)){
+			communicationSelectList = adminService.findCommunicationTypes();
+			//for(CommunicationTypes ct: )
+			return SUCCESS;
+		}
+		else {
+			return ERROR;
+		}
+	}
+	
+	public String updateCommunicationTypes(){
+		for(CommunicationTypes ct: getCommunicationSelectList())
+			adminService.updateCommunicationType(ct);
+		return SUCCESS;
+	}
+	
 	/**
 	 * @author davidforbes
-	 * @date 03/10/2014 -	
-	 * 		Client Getters & Setters		
+	 * @date 04/10/2014 -	
+	 * 		Communication Getters & Setters		
 	 * 				  
 	 */
 	
-	public List<Contacts> getClientSelectList() {
-		return clientSelectList;
+	public CommunicationTypes getCommunicationType() {
+		return communicationType;
 	}
 
-	public void setClientSelectList(List<Contacts> clientSelectList) {
-		this.clientSelectList = clientSelectList;
+	public void setCommunicationType(CommunicationTypes communicationType) {
+		this.communicationType = communicationType;
 	}
 
+	public String getCommunicationTypeName() {
+		return communicationTypeName;
+	}
+
+	public void setCommunicationTypeName(String communicationTypeName) {
+		this.communicationTypeName = communicationTypeName;
+	}
+
+	public List<CommunicationTypes> getCommunicationSelectList() {
+		return communicationSelectList;
+	}
+
+	public void setCommunicationSelectList(
+			List<CommunicationTypes> communicationSelectList) {
+		this.communicationSelectList = communicationSelectList;
+	}
+	
+	
 	/**
 	 * 
 	 * prepare function used to update the tables
@@ -1210,6 +1214,6 @@ public class AdminAction extends BaseAction implements Preparable{
 		setIssueTypeList(adminService.findIssueTypes());
 		setStatusSelectList(adminService.findStatusTypes());
 		setTitleSelectList(adminService.findTitleTypes());
+		setCommunicationSelectList(adminService.findCommunicationTypes());
 	}
-
 }
