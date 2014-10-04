@@ -27,12 +27,12 @@
 		<div class="row">
 		<!-- to do -->
 			<div class="four columns">
-				<s:select list="accomodationSelectList" listKey="id" listValue="accommodationName" name="theAccommodationTypeId" headerKey="-1" headerValue="Select an Accomodation Type"/>
+				<s:select list="accommodationSelectList" listKey="id" listValue="accommodationName" name="theAccommodationTypeId" headerKey="-1" headerValue="Select an Accomodation Type"/>
 			</div>
 			
 			<div class="textarea twelve columns">
-				<s:label for="accomodationComments" value="Comments:" />
-				<div><s:textarea id="accomodationComments" cssClass="oneLineTextArea" name="iamodel.contact.accommodationComment" /></div> 
+				<s:label for="accommodationComments" value="Comments:" />
+				<div><s:textarea id="accommodationComments" cssClass="oneLineTextArea" name="iamodel.contact.accommodationComment" /></div> 
 			</div>
 		</div>
 		

@@ -64,23 +64,9 @@
 			<s:hidden id="formTitle" name="formTitle" value="Existing Enquiry" />
 			<s:hidden id="totalNumberOfPages" name="totalNumberOfPages" />
 			
-			<section class="imageContainer">
-				<s:div cssClass="row">
-					<img class="seven columns" src="<s:url value='/resources/images/logo.png'/>"/>
-					<s:div cssClass="headerText nine columns">
-						<s:div cssClass="row"><s:text name="formTitle" /></s:div>
-						<s:div cssClass="row">
-							<s:div cssClass="nine columns" style="text-align: center;">
-								
-								<s:label for="sortBy" value="Sort by:"/>
-								<s:select list="#{'eid':'eID', 'date': 'Date', 'name':'Name'}" id="sortBy"/>
-								<s:label for="filter" value="Filter:"/>
-								<s:select list="#{'all':'all', 'closed': 'closed', 'opened':'opened'}" id="filter"/>
-							</s:div>
-						</s:div>
-					</s:div>
-				</s:div>
-			</section>
+			
+				<%@include file="includes/formHeader.jsp" %>
+				<%@include file="includes/filterSort.jsp" %>
 <!-- ---------------------------------------------------------------------------------------------- -->
 <!-- iterator - used to iterate a list or set ----------------------------------------------------- -->
 <!-- ---------------------------------------------------------------------------------------------- -->	
@@ -94,29 +80,35 @@
 			
 			<s:div style="background:#444444; margin-top: 10px; padding: 5px;">
 				<s:div cssClass="row">
+				
 					<section class="four columns">
 						<input type="button" class="three columns" value="Close"  onclick="confirmAction('Are you sure you want to Close?', 'home', 'home')"/>
 					</section >
+					
 					<section class="eight columns">
 						<%@include file="/forms/includes/paginationToolSet.jsp" %>
 					</section>
+					
 					<section class="four columns alpha">
-
 						<sj:submit id="open" targets="formDiv" cssClass="two columns alpha" value="Open Enquiry" onBeforeTopics="beforeSubmit"/>
 						<sj:a id="btnNewE" targets="formDiv"  href="%{urlENew}" ><input type="button" class="two columns omega" value="New Enquiry" onclick="confirmAction('Are you sure you want to create a new enquiry?', 'enquiry', 'newEnquiry')"/></sj:a>
 					</section>
+					
 				</s:div>
-<script type="text/javascript">
-	$.subscribe('beforeSubmit', function(event,data) {
-    	event.originalEvent.options.submit = checkHiddenID();          
-	});
-</script>
 			</s:div>
 		</s:form>
-		<h1>Number of Records: </h1><s:text name="numberOfRecords"/>
+		
+		
 <!-- ---------------------------------------------------------------------------------------------- -->
 <!-- Hidden form to pass pagination to action class submitted by the prev and next buttons -------- -->
 <!-- ---------------------------------------------------------------------------------------------- -->
 		<%@include file="/forms/includes/paginationForm.jsp" %>
+		
+		
+		<script type="text/javascript">
+			$.subscribe('beforeSubmit', function(event,data) {
+		    	event.originalEvent.options.submit = checkHiddenID();          
+			});
+		</script>
 </body>
 </html>

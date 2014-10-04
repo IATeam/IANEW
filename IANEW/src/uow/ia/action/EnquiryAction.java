@@ -1,16 +1,12 @@
 package uow.ia.action;
 
 
-import java.lang.reflect.InvocationTargetException;
-import java.sql.SQLData;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.beanutils.converters.SqlDateConverter;
 import org.apache.struts2.interceptor.SessionAware;
 
 import uow.ia.bean.AccommodationTypes;
@@ -76,19 +72,17 @@ ModelDriven<Enquiries>, Preparable{
 	
 	private final String ENQUIRY = "enquiry";
 	/* 
-	 * form title (can either be new enquiry/exisiting enquiry/enquiry list)
+	 * form title (can either be new enquiry/exisiting enquiry)
 	 */
 	private String formTitle;
 	private Enquiries iamodel;
+
 	
-	//private Contacts ccontact;
-	//not calling from enquiry to allow 'CASE' to share the same include jsp
-	
-	private List<EnquiryTypes> enquiryTypeSelectList = new ArrayList<EnquiryTypes>();
 	/*
 	 * Lists for the drop down select options for the jsps
 	 * and its associated value variables
 	 */
+	private List<EnquiryTypes> enquiryTypeSelectList = new ArrayList<EnquiryTypes>();
 	private List<TitleTypes> titleSelectList = new ArrayList<TitleTypes>();							
 	private List<GenderTypes> genderSelectList = new ArrayList<GenderTypes>();
 	private List<CulturalBackgroundTypes> culturalBackgroundSelectList = new ArrayList<CulturalBackgroundTypes>();
@@ -105,9 +99,6 @@ ModelDriven<Enquiries>, Preparable{
 	private int theAccommodationTypeId;
 	private int theDangerTypeId;
 	private int theStatusTypeId;
-	
-	
-	
 	
 
 	private List<Integer> theDisabilityListId = new ArrayList<Integer>();
@@ -144,18 +135,14 @@ ModelDriven<Enquiries>, Preparable{
 	 * @return String
 	 */
 	public String newEnquiry(){ //TODO:
-		
 		System.out.println("Struts: start newEnquiry");
 		//activateAutocomplete();
 
 		activateLists();
-
 		//linkedEnquiriesList = enquiryService.getLinkedEnquiry(getHiddenid());
 
 		System.out.println("Struts: end newEnquiry");
-		
 		return SUCCESS;
-	
 	}
 
 	/**
@@ -168,17 +155,16 @@ ModelDriven<Enquiries>, Preparable{
 		//activateAutocomplete();
 		activateLists();
 		
-		try{ theEnquiryTypeId = iamodel.getEnquiryType().getId(); }catch (NullPointerException n){}
-		try{ theAccommodationTypeId = iamodel.getContact().getAccommodation().getId(); }catch (NullPointerException n){}
-		try{ theCulturalBackgroundTypeId = iamodel.getContact().getCulturalBackground().getId(); }catch (NullPointerException n){}
-		try{ theDangerTypeId = iamodel.getContact().getDangerType().getId(); }catch (NullPointerException n){}
-		try{ theGenderTypeId = iamodel.getContact().getGenderType().getId(); }catch (NullPointerException n){}
-		try{ theStatusTypeId = iamodel.getStatusType().getId(); }catch (NullPointerException n){}
-		try{ theTitleTypeId = iamodel.getContact().getTitleType().getId(); }catch (NullPointerException n){}
+		try{ theEnquiryTypeId = iamodel.getEnquiryType().getId(); }									catch (NullPointerException n){}
+		try{ theAccommodationTypeId = iamodel.getContact().getAccommodation().getId(); }			catch (NullPointerException n){}
+		try{ theCulturalBackgroundTypeId = iamodel.getContact().getCulturalBackground().getId(); }	catch (NullPointerException n){}
+		try{ theDangerTypeId = iamodel.getContact().getDangerType().getId(); }						catch (NullPointerException n){}
+		try{ theGenderTypeId = iamodel.getContact().getGenderType().getId(); }						catch (NullPointerException n){}
+		try{ theStatusTypeId = iamodel.getStatusType().getId(); }									catch (NullPointerException n){}
+		try{ theTitleTypeId = iamodel.getContact().getTitleType().getId(); }						catch (NullPointerException n){}
 		
 		
 		try{ setDob(iamodel.getContact().getDob().toString()); }catch (NullPointerException n) {}
-		
 		
 		
 		if(iamodel.getContact().getEmploymentsList().size() > 0){
@@ -203,7 +189,6 @@ ModelDriven<Enquiries>, Preparable{
 
 		linkedEnquiriesList = enquiryService.getLinkedEnquiry(0,getHiddenid());
 
-		
 		System.out.println("Struts: start getExistingEnquiry");
 		return SUCCESS;
 	}
@@ -529,7 +514,7 @@ ModelDriven<Enquiries>, Preparable{
 	 * Getter for accommodation types
 	 * @return List
 	 */
-	public List<AccommodationTypes> getAccomodationSelectList() {
+	public List<AccommodationTypes> getAccommodationSelectList() {
 		return accommodationSelectList;
 	}
 

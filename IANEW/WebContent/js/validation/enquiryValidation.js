@@ -100,7 +100,11 @@ function validated(){
  			max: 9999
  		});
  	});	
-		
+	
+ 	$('[name*="workphone"], [name*="comments"]').each(function(){
+ 		alert("vvvv");
+ 	});
+ 	
 	jQuery.validator.addMethod('selectcheck', function(value){
 			return (value != '-1');
 		}, "Please select an option"); 
