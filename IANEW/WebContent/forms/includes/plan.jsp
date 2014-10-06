@@ -102,7 +102,7 @@ function changeContact(selectedPerson) {
 					    <s:date name="iamodel.plan.closedDateTime" format="dd/MM/yyyy"/>
 					</div>
 					    <div class="four columns">
-					    	<s:select list="planStatusSelectList.{statusName}" name="thePlanStatus" value="iamodel.plan.statusType.statusName" headerKey="-1" headerValue="Select Plan Status" />
+					    	<s:select list="planStatusSelectList" keyValue="id" keyName="statusName" name="thePlanStatus" value="iamodel.plan.statusType.statusName" headerKey="-1" headerValue="Select Plan Status" />
 					    </div>
 				</div>
 				<div class="row">
