@@ -101,7 +101,7 @@ public class TestAction extends BaseAction{
 	public String save(){
 		System.out.println("employmentid: " + getEmploymentid());
 		if(getEmploymentid() != -1)
-			iamodel.getContact().getEmploymentsList().get(0).setEmploymentType(typesService.getEmploymentTypeId(getEmploymentid()));
+			iamodel.getContact().getEmploymentsList().get(0).setEmploymentType(typesService.getEmploymentTypeById(getEmploymentid()));
 		
 		
 		if(enquiryService.saveOrUpdateEnquiry(iamodel)){

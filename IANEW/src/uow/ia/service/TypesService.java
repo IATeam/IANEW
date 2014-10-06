@@ -8,6 +8,7 @@ import java.util.List;
 
 import uow.ia.bean.AccommodationTypes;
 import uow.ia.bean.CommunicationTypes;
+import uow.ia.bean.ContactTypes;
 import uow.ia.bean.CulturalBackgroundTypes;
 import uow.ia.bean.DangerTypes;
 import uow.ia.bean.DisabilityTypes;
@@ -56,34 +57,38 @@ public interface TypesService {
 	
 	public List<PriorityTypes> findPriorityTypes();
 	
+	public List<ContactTypes> findContactTypes();
+	
 	/*
 	 * 
 	 */
-	public DangerTypes getDangerTypeId(int id);
+	public DangerTypes getDangerTypeById(int id);
 	
-	public StatusTypes getStatusTypeId(int id);
+	public StatusTypes getStatusTypeById(int id);
 	
-	public TitleTypes getTitleTypeId(int id);
+	public TitleTypes getTitleTypeById(int id);
 	
-	public GenderTypes getGenderTypeId(int id);
+	public GenderTypes getGenderTypeById(int id);
 	
-	public CulturalBackgroundTypes getCulturalBackgroundTypeId(int id);
+	public CulturalBackgroundTypes getCulturalBackgroundTypeById(int id);
 	
-	public AccommodationTypes getAccommodationTypeId(int id);
+	public AccommodationTypes getAccommodationTypeById(int id);
 	
-	public DisabilityTypes getDisabilityTypeId(int id);
+	public DisabilityTypes getDisabilityTypeById(int id);
 	
-	public IssueTypes getIssueTypeId(int id);
+	public IssueTypes getIssueTypeById(int id);
 	
-	public EnquiryTypes getEnquiryTypeId(int id);
+	public EnquiryTypes getEnquiryTypeById(int id);
 	
-	public EmploymentTypes getEmploymentTypeId(int id);
+	public EmploymentTypes getEmploymentTypeById(int id);
 	
-	public ReviewFrequencies getReviewFrequencyId(Integer id);
+	public ReviewFrequencies getReviewFrequencyById(Integer id);
 	
-	public GoalTypes getGoalTypeId(Integer id);
+	public GoalTypes getGoalTypeById(Integer id);
 	
-	public CommunicationTypes getCommunicationTypeId(Integer id);
+	public CommunicationTypes getCommunicationTypeById(Integer id);
+	
+	public ContactTypes getContactTypeById(Integer id);
 
 	/*
 	 *

@@ -271,7 +271,7 @@ ModelDriven<Enquiries>, Preparable{
 		if (getTheIssueListId().size() > 0) {
 			for(int i = 0; i < theIssueListId.size(); i++){
 				if(getTheIssueListId().get(i) != -1)
-					eil.get(i).setIssue(typesService.getIssueTypeId(getTheIssueListId().get(i)));
+					eil.get(i).setIssue(typesService.getIssueTypeById(getTheIssueListId().get(i)));
 				
 				if(eil.get(i).getId() == null){
 					eil.get(i).setEnquiry(getIamodel());
@@ -287,7 +287,7 @@ ModelDriven<Enquiries>, Preparable{
 		if (getTheDisabilityListId().size() > 0) {
 			for(int i = 0; i < theDisabilityListId.size(); i++){
 				if(getTheDisabilityListId().get(i) != -1){
-					cdl.get(i).setDisabilityType(typesService.getDisabilityTypeId(getTheDisabilityListId().get(i)));
+					cdl.get(i).setDisabilityType(typesService.getDisabilityTypeById(getTheDisabilityListId().get(i)));
 				}
 		
 				if(cdl.get(i).getId() == null){
@@ -305,7 +305,7 @@ ModelDriven<Enquiries>, Preparable{
 		if (getTheEmploymentListId().size() > 0) {
 			for(int i = 0; i < theEmploymentListId.size(); i++){
 				if(getTheEmploymentListId().get(i) != -1)
-					cel.get(i).setEmploymentType(typesService.getEmploymentTypeId(getTheEmploymentListId().get(i)));
+					cel.get(i).setEmploymentType(typesService.getEmploymentTypeById(getTheEmploymentListId().get(i)));
 		
 				if(cel.get(i).getId() == null){
 					cel.get(i).setContact(iamodel.getContact());
@@ -318,17 +318,17 @@ ModelDriven<Enquiries>, Preparable{
 		
 		System.out.println("setting types");
 		
-		iamodel.setEnquiryType(typesService.getEnquiryTypeId(getTheEnquiryTypeId()));
-		iamodel.setStatusType(typesService.getStatusTypeId(getTheStatusTypeId()));
+		iamodel.setEnquiryType(typesService.getEnquiryTypeById(getTheEnquiryTypeId()));
+		iamodel.setStatusType(typesService.getStatusTypeById(getTheStatusTypeId()));
 		
 		System.out.println("setting types");
-		iamodel.getContact().setCulturalBackground(typesService.getCulturalBackgroundTypeId(getTheCulturalBackgroundTypeId()));
-		iamodel.getContact().setTitleType(typesService.getTitleTypeId(getTheTitleTypeId()));
-		iamodel.getContact().setGenderType(typesService.getGenderTypeId(getTheGenderTypeId()));
+		iamodel.getContact().setCulturalBackground(typesService.getCulturalBackgroundTypeById(getTheCulturalBackgroundTypeId()));
+		iamodel.getContact().setTitleType(typesService.getTitleTypeById(getTheTitleTypeId()));
+		iamodel.getContact().setGenderType(typesService.getGenderTypeById(getTheGenderTypeId()));
 		System.out.println("danger1");
-		iamodel.getContact().setDangerType(typesService.getDangerTypeId(getTheDangerTypeId()));
-		System.out.println("danger2: accommid" + typesService.getAccommodationTypeId(getTheAccommodationTypeId()));
-		iamodel.getContact().setAccommodation(typesService.getAccommodationTypeId(getTheAccommodationTypeId()));
+		iamodel.getContact().setDangerType(typesService.getDangerTypeById(getTheDangerTypeId()));
+		System.out.println("danger2: accommid" + typesService.getAccommodationTypeById(getTheAccommodationTypeId()));
+		iamodel.getContact().setAccommodation(typesService.getAccommodationTypeById(getTheAccommodationTypeId()));
 		
 		
 		System.out.println("Start to save");

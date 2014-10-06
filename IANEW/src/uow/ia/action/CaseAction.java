@@ -1166,7 +1166,7 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 		
 		// set status
 		System.out.println("Save Case Status " + theStatus);
-		iamodel.setStatusType(typesService.getStatusTypeId(theStatus));
+		iamodel.setStatusType(typesService.getStatusTypeById(theStatus));
 		
 		// save advocate
 		System.out.println("Save Advocate");
@@ -1174,10 +1174,10 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 		
 		// save contact details
 		System.out.println("Save contact details");
-		iamodel.getContact().setCulturalBackground(typesService.getCulturalBackgroundTypeId(getTheCulturalBackgroundTypeId()));
-		iamodel.getContact().setTitleType(typesService.getTitleTypeId(getTheTitleTypeId()));
-		iamodel.getContact().setGenderType(typesService.getGenderTypeId(getTheGenderTypeId()));
-		iamodel.getContact().setDangerType(typesService.getDangerTypeId(getTheDangerTypeId()));
+		iamodel.getContact().setCulturalBackground(typesService.getCulturalBackgroundTypeById(getTheCulturalBackgroundTypeId()));
+		iamodel.getContact().setTitleType(typesService.getTitleTypeById(getTheTitleTypeId()));
+		iamodel.getContact().setGenderType(typesService.getGenderTypeById(getTheGenderTypeId()));
+		iamodel.getContact().setDangerType(typesService.getDangerTypeById(getTheDangerTypeId()));
 		
 		// save addresses
 		System.out.println("Save accommodation settings " + theAccommodationTypeId);
@@ -1204,7 +1204,7 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 		if (getTheDisabilityListId().size() > 0) {
 			for(int i = 0; i < theDisabilityListId.size(); i++){
 				if(getTheDisabilityListId().get(i) != -1){
-					cdl.get(i).setDisabilityType(typesService.getDisabilityTypeId(getTheDisabilityListId().get(i)));
+					cdl.get(i).setDisabilityType(typesService.getDisabilityTypeById(getTheDisabilityListId().get(i)));
 				}
 		
 				if(cdl.get(i).getId() == null){
@@ -1225,7 +1225,7 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 		if (getTheEmploymentListId().size() > 0) {
 			for(int i = 0; i < theEmploymentListId.size(); i++){
 				if(getTheEmploymentListId().get(i) != -1) {
-					cel.get(i).setEmploymentType(typesService.getEmploymentTypeId(getTheEmploymentListId().get(i)));
+					cel.get(i).setEmploymentType(typesService.getEmploymentTypeById(getTheEmploymentListId().get(i)));
 		
 					if(cel.get(i).getContact() == null){
 						cel.get(i).setContact(iamodel.getContact());
@@ -1243,8 +1243,8 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 		
 		// save plan
 		System.out.println("Save Plan");
-		iamodel.getPlan().setReviewFrequency(typesService.getReviewFrequencyId(theReviewFrequency));
-		iamodel.getPlan().setStatusType(typesService.getStatusTypeId(thePlanStatus));
+		iamodel.getPlan().setReviewFrequency(typesService.getReviewFrequencyById(theReviewFrequency));
+		iamodel.getPlan().setStatusType(typesService.getStatusTypeById(thePlanStatus));
 		
 		// closed
 //		if (theStatusTypeId == 3) {
@@ -1272,8 +1272,8 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 			for (int i = 0; i < theGoalList.size(); i++) {
 				System.out.println(theGoalList.get(i) + " " + theGoalStatusList.get(i));
 				if (theGoalList.get(i) != -1 && theGoalStatusList.get(i) != -1) {
-					pgl.get(i).setGoalType(typesService.getGoalTypeId(theGoalList.get(i)));
-					pgl.get(i).setStatusType(typesService.getStatusTypeId(theGoalStatusList.get(i)));
+					pgl.get(i).setGoalType(typesService.getGoalTypeById(theGoalList.get(i)));
+					pgl.get(i).setStatusType(typesService.getStatusTypeById(theGoalStatusList.get(i)));
 
 					
 					if (pgl.get(i).getIndividualCase() == null) {
@@ -1292,8 +1292,8 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 		if (theIssueListId.size() == theIssueStatusList.size()) {
 			for (int i = 0; i < theIssueListId.size(); i++) {
 				if (theIssueListId.get(i) != -1) {
-					cil.get(i).setIssue(typesService.getIssueTypeId(theIssueListId.get(i)));
-					cil.get(i).setStatusType(typesService.getStatusTypeId(theIssueStatusList.get(i)));
+					cil.get(i).setIssue(typesService.getIssueTypeById(theIssueListId.get(i)));
+					cil.get(i).setStatusType(typesService.getStatusTypeById(theIssueStatusList.get(i)));
 				}
 				
 				if (cil.get(i).getId() == null) {
@@ -1311,7 +1311,7 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 		List<IndividualCaseCommunications> icl = iamodel.getCommunicationsList();
 		for (int i = 0; i < theCommunicationsList.size(); i++) {
 			if (theCommunicationsList.get(i) != -1) {
-				icl.get(i).setCommunicationType(typesService.getCommunicationTypeId(theCommunicationsList.get(i)));
+				icl.get(i).setCommunicationType(typesService.getCommunicationTypeById(theCommunicationsList.get(i)));
 			}
 			
 			if (icl.get(i).getId() == null) {

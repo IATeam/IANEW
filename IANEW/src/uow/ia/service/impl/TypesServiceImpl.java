@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import uow.ia.bean.AccommodationTypes;
 import uow.ia.bean.CommunicationTypes;
+import uow.ia.bean.ContactTypes;
 import uow.ia.bean.CriteriaControlValues;
 import uow.ia.bean.CriteriaControls;
 import uow.ia.bean.CulturalBackgroundTypes;
@@ -32,6 +33,7 @@ import uow.ia.bean.StatusTypes;
 import uow.ia.bean.TitleTypes;
 import uow.ia.dao.AccommodationTypesDao;
 import uow.ia.dao.CommunicationTypesDao;
+import uow.ia.dao.ContactTypesDao;
 import uow.ia.dao.CriteriaControlValuesDao;
 import uow.ia.dao.CriteriaControlsDao;
 import uow.ia.dao.CulturalBackgroundTypesDao;
@@ -105,6 +107,9 @@ public class TypesServiceImpl implements TypesService {
 	@Resource
 	private ReviewFrequenciesDao<ReviewFrequencies> reviewFrequenciesDao;
 	
+	@Resource
+	private ContactTypesDao<ContactTypes> contactTypesDao;
+	
 	/* (non-Javadoc)
 	 * @see uow.ia.service.TypesService#findAccommodationTypes()
 	 */
@@ -167,6 +172,14 @@ public class TypesServiceImpl implements TypesService {
 	@Override
 	public List<IssueTypes> findIssueTypes() {
 		return issueTypesDao.find(" from IssueTypes");
+	}
+	
+	/* (non-Javadoc)
+	 * @see uow.ia.service.TypesService#findContactTypes()
+	 */
+	@Override
+	public List<ContactTypes> findContactTypes() {
+		return contactTypesDao.find(" from ContactTypes");
 	}
 
 	/* (non-Javadoc)
@@ -236,7 +249,7 @@ public class TypesServiceImpl implements TypesService {
 	 */
 
 	@Override
-	public DangerTypes getDangerTypeId(int id) {
+	public DangerTypes getDangerTypeById(int id) {
 		DangerTypes o = dangerTypesDao.get(DangerTypes.class, id);
 		if (o != null) {
 			return o;
@@ -251,7 +264,7 @@ public class TypesServiceImpl implements TypesService {
 	 */
 
 	@Override
-	public StatusTypes getStatusTypeId(int id) {
+	public StatusTypes getStatusTypeById(int id) {
 		StatusTypes o = statusTypesDao.get(StatusTypes.class, id);
 		if (o != null) {
 			return o;
@@ -266,7 +279,7 @@ public class TypesServiceImpl implements TypesService {
 	 */
 
 	@Override
-	public TitleTypes getTitleTypeId(int id) {
+	public TitleTypes getTitleTypeById(int id) {
 		TitleTypes o = titleTypesDao.get(TitleTypes.class, id);
 		if (o != null) {
 			return o;
@@ -281,7 +294,7 @@ public class TypesServiceImpl implements TypesService {
 	 */
 	
 	@Override
-	public GenderTypes getGenderTypeId(int id) {
+	public GenderTypes getGenderTypeById(int id) {
 		GenderTypes o = genderTypesDao.get(GenderTypes.class, id);
 		if (o != null) {
 			return o;
@@ -296,7 +309,7 @@ public class TypesServiceImpl implements TypesService {
 	 */
 
 	@Override
-	public CulturalBackgroundTypes getCulturalBackgroundTypeId(int id) {
+	public CulturalBackgroundTypes getCulturalBackgroundTypeById(int id) {
 		CulturalBackgroundTypes o = culturalBackgroundTypesDao
 				.get(CulturalBackgroundTypes.class, id);
 		if (o != null) {
@@ -312,7 +325,7 @@ public class TypesServiceImpl implements TypesService {
 	 */
 
 	@Override
-	public AccommodationTypes getAccommodationTypeId(int id) {
+	public AccommodationTypes getAccommodationTypeById(int id) {
 		System.out.println(id);
 		AccommodationTypes o = accommodationTypesDao.get(AccommodationTypes.class, id);
 		if (o != null) {
@@ -330,7 +343,7 @@ public class TypesServiceImpl implements TypesService {
 	 */
 
 	@Override
-	public DisabilityTypes getDisabilityTypeId(int id) {
+	public DisabilityTypes getDisabilityTypeById(int id) {
 		DisabilityTypes o = disabilityTypesDao.get(DisabilityTypes.class, id);
 		if (o != null) {
 			return o;
@@ -345,7 +358,7 @@ public class TypesServiceImpl implements TypesService {
 	 */
 
 	@Override
-	public IssueTypes getIssueTypeId(int id) {
+	public IssueTypes getIssueTypeById(int id) {
 		IssueTypes o = issueTypesDao.get(IssueTypes.class, id);
 		if (o != null) {
 			return o;
@@ -360,7 +373,7 @@ public class TypesServiceImpl implements TypesService {
 	 */
 
 	@Override
-	public EnquiryTypes getEnquiryTypeId(int id) {
+	public EnquiryTypes getEnquiryTypeById(int id) {
 		EnquiryTypes o = enquiryTypesDao.get(EnquiryTypes.class, id);
 		if (o != null) {
 			return o;
@@ -375,7 +388,7 @@ public class TypesServiceImpl implements TypesService {
 	 */
 	
 	@Override
-	public EmploymentTypes getEmploymentTypeId(int id) {
+	public EmploymentTypes getEmploymentTypeById(int id) {
 		EmploymentTypes o = employmentTypesDao.get(EmploymentTypes.class, id);
 		if (o != null) {
 			return o;
@@ -385,7 +398,7 @@ public class TypesServiceImpl implements TypesService {
 	}
 	
 	@Override
-	public ReviewFrequencies getReviewFrequencyId(Integer id) {
+	public ReviewFrequencies getReviewFrequencyById(Integer id) {
 		ReviewFrequencies o = reviewFrequenciesDao.get(ReviewFrequencies.class, id); 
 		if (o != null) {
 			return o;
@@ -395,14 +408,19 @@ public class TypesServiceImpl implements TypesService {
 	}
 	
 	@Override
-	public GoalTypes getGoalTypeId(Integer id) {
+	public GoalTypes getGoalTypeById(Integer id) {
 		return goalTypesDao.get(GoalTypes.class, id);
 		
 	}
 	
 	@Override
-	public CommunicationTypes getCommunicationTypeId(Integer id){
+	public CommunicationTypes getCommunicationTypeById(Integer id){
 		return communicationTypesDao.get(CommunicationTypes.class, id);
+	}
+	
+	@Override
+	public ContactTypes getContactTypeById(Integer id){
+		return contactTypesDao.get(ContactTypes.class, id);
 	}
 	
 	/*

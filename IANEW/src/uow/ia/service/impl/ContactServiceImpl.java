@@ -94,18 +94,22 @@ public class ContactServiceImpl implements ContactService {
 	public List<Contacts> findContactsByFullName(String firstName,
 			String lastName) {
 		return contactsDao.find(
-				" from Contacts c where c.firstname = ? and c.lastname = ? ",
-				new Object[] { firstName, lastName });
+				" from Contacts c where lower(c.firstname) = ? and lower(c.lastname) = ? ",
+				new Object[] { firstName.toLowerCase(), lastName.toLowerCase() });
 	}
 	
+	/**
+	 * search the input name like both firstname and lastname, return a list contacts which have similar
+	 * first name or last name
+	 */
 	@Override
 	public List<Contacts> findContactsByNameLike(String name) {
 		List<Contacts> tmpList = new ArrayList<Contacts>();
 		name = "%"+name+"%";
 		tmpList.addAll(contactsDao.find(
-				" from Contacts c where c.firstname like ?", new Object[] {name}));
-		//tmpList.addAll(contactsDao.find(
-		//		" from Contacts c where c.lastname like %"+name+"%"));
+				" from Contacts c where lower(c.firstname) like ?", new Object[] {name.toLowerCase()}));
+		tmpList.addAll(contactsDao.find(
+				" from Contacts c where lower(c.lastname) like ?", new Object[] {name.toLowerCase()}));
 		return tmpList;
 	}
 

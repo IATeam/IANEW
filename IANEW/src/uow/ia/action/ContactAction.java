@@ -123,10 +123,10 @@ public class ContactAction extends BaseAction implements Preparable{
 		}
 	}
 	
-	getContact().setCulturalBackground(typesService.getCulturalBackgroundTypeId(getTheCulturalBackgroundTypeId()));
-	getContact().setTitleType(typesService.getTitleTypeId(getTheTitleTypeId()));
-	getContact().setGenderType(typesService.getGenderTypeId(getTheGenderTypeId()));
-	getContact().setAccommodation(typesService.getAccommodationTypeId(getTheAccommodationTypeId()));
+	getContact().setCulturalBackground(typesService.getCulturalBackgroundTypeById(getTheCulturalBackgroundTypeId()));
+	getContact().setTitleType(typesService.getTitleTypeById(getTheTitleTypeId()));
+	getContact().setGenderType(typesService.getGenderTypeById(getTheGenderTypeId()));
+	getContact().setAccommodation(typesService.getAccommodationTypeById(getTheAccommodationTypeId()));
 	
 	System.out.println("Start to save");
 	if(contact.getId() == null){
