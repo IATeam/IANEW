@@ -14,7 +14,7 @@
 		<welcome-file>default.jsp</welcome-file>
 		<welcome-file>/forms/login.jsp</welcome-file>
 		-->
-		<welcome-file>/home/home.jsp</welcome-file>
+		<welcome-file>/forms/login.jsp</welcome-file>
 	</welcome-file-list>
 	
 	<context-param>
