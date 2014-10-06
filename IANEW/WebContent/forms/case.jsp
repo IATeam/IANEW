@@ -88,14 +88,14 @@
 				<section class="four columns"><p></p></section>
 				<section class="six columns omega">
 					<input type="button" value="Create Case" class="three columns alpha"/>
-					<s:submit type="submit" cssClass="three columns omega" value="Save" />
+					<s:submit targets="formDiv" type="submit" cssClass="three columns omega" value="Save" onclick="checkForm()"/>
 				</section>
 			</s:div>
 		</footer>
 	</s:form>	
 	<script>
 	function checkForm(){
-		alert("removed null");
+		//alert("removed null");
 		removeNullAndUpdateIndex($("#artAddress"), $("#itAddress"), $("#addressSize"));
 		removeNullAndUpdateIndex($("#artDisability"), $("#itDisability"), $("#disabilitySize"));
 		removeNullAndUpdateIndex($("#artIssue"), $("#itIssue"), $("#issueSize"));
