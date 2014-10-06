@@ -18,6 +18,8 @@ import uow.ia.bean.DisabilityTypes;
 import uow.ia.bean.EmploymentTypes;
 import uow.ia.bean.EnquiryTypes;
 import uow.ia.bean.GenderTypes;
+import uow.ia.bean.GoalTypes;
+import uow.ia.bean.PriorityTypes;
 import uow.ia.bean.IssueTypes;
 import uow.ia.bean.StatusTypes;
 import uow.ia.bean.TitleTypes;
@@ -31,7 +33,9 @@ import uow.ia.dao.DisabilityTypesDao;
 import uow.ia.dao.EmploymentTypesDao;
 import uow.ia.dao.EnquiryTypesDao;
 import uow.ia.dao.GenderTypesDao;
+import uow.ia.dao.GoalTypesDao;
 import uow.ia.dao.IssueTypesDao;
+import uow.ia.dao.PriorityTypesDao;
 import uow.ia.dao.StatusTypesDao;
 import uow.ia.dao.TitleTypesDao;
 import uow.ia.dao.UsersDao;
@@ -494,6 +498,80 @@ public class AdminServiceImpl implements AdminService {
 	public boolean updateCommunicationType(CommunicationTypes c) {
 		try {
 			CommunicationTypesDao.update(c);
+			return true;
+		} catch (Exception e) {
+			System.out.println(e);
+			return false;
+		}
+	}
+	
+	/** 
+     * Goal Service methods
+     *  @author davidforbes
+     *  @date 06/10/2014
+     * 
+     */
+	
+	@Resource
+	private GoalTypesDao<GoalTypes> GoalTypesDao;
+	
+	@Override
+	public List<GoalTypes> findGoalTypes() {
+		return GoalTypesDao.find(" from GoalTypes");
+	}
+	
+	@Override
+	public boolean saveGoalType(GoalTypes g) {
+		try {
+			GoalTypesDao.save(g);
+			return true;
+		} catch (Exception e) {
+			System.out.println(e);
+			return false;
+		}
+	}
+	
+	@Override
+	public boolean updateGoalType(GoalTypes g) {
+		try {
+			GoalTypesDao.update(g);
+			return true;
+		} catch (Exception e) {
+			System.out.println(e);
+			return false;
+		}
+	}
+	
+	/** 
+     * Priority Service methods
+     *  @author davidforbes
+     *  @date 06/10/2014
+     * 
+     */
+	
+	@Resource
+	private PriorityTypesDao<PriorityTypes> PriorityTypesDao;
+	
+	@Override
+	public List<PriorityTypes> findPriorityTypes() {
+		return PriorityTypesDao.find(" from PriorityTypes");
+	}
+	
+	@Override
+	public boolean savePriorityType(PriorityTypes p) {
+		try {
+			PriorityTypesDao.save(p);
+			return true;
+		} catch (Exception e) {
+			System.out.println(e);
+			return false;
+		}
+	}
+	
+	@Override
+	public boolean updatePriorityType(PriorityTypes p) {
+		try {
+			PriorityTypesDao.update(p);
 			return true;
 		} catch (Exception e) {
 			System.out.println(e);

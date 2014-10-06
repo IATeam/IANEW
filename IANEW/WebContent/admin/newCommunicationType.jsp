@@ -17,7 +17,7 @@
 
 	<div class="greybackground">
 		<div id="communicationType" class="toggled hideable">
-			<s:form id="newCommunicationTypeForm" method="post" action="%{urlNewComType}" onsubmit="clearInput()" >
+			<s:form id="newCommunicationTypeForm" method="post" action="%{urlNewComType}">
 				<s:label for="communicationTypeName" value="Name: "/>
 				<s:textfield id="communicationTypeName" name="communicationTypeName" />
 				<sj:submit id="saveNewCommunicationType" targets="tbodyCommunicationType" cssClass="two columns alpha" value="Save" />

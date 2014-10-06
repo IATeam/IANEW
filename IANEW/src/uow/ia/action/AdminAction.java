@@ -3,12 +3,14 @@ package uow.ia.action;
 import uow.ia.bean.CommunicationTypes;
 import uow.ia.bean.DisabilityTypes;
 import uow.ia.bean.EmploymentTypes;
+import uow.ia.bean.GoalTypes;
 import uow.ia.bean.IssueTypes;
 import uow.ia.bean.AccommodationTypes;
 import uow.ia.bean.CulturalBackgroundTypes;
 import uow.ia.bean.DangerTypes;
 import uow.ia.bean.EnquiryTypes;
 import uow.ia.bean.GenderTypes;
+import uow.ia.bean.PriorityTypes;
 import uow.ia.bean.StatusTypes;
 import uow.ia.bean.TitleTypes;
 import uow.ia.bean.Contacts;
@@ -18,10 +20,7 @@ import java.util.List;
 import com.opensymphony.xwork2.Preparable;
 
 /**
- * @author Quang
- * 
- * 25/08/2014 -	Quang Nhan
- * 				Updated Disability Type methods to integrate enquiryService
+ * @author David
  * 				
  */
 public class AdminAction extends BaseAction implements Preparable{
@@ -56,7 +55,9 @@ public class AdminAction extends BaseAction implements Preparable{
 		setTitleSelectList(adminService.findTitleTypes());
 		setContactsSelectList(adminService.findContacts());
 		setCommunicationSelectList(adminService.findCommunicationTypes());
-
+		setGoalSelectList(adminService.findGoalTypes());
+		setPrioritySelectList(adminService.findPriorityTypes());
+		
 		return SUCCESS;
 	}
 	
@@ -1133,10 +1134,10 @@ public class AdminAction extends BaseAction implements Preparable{
 	}
 	
 	public String saveNewCommunicationType(){
-		List<CommunicationTypes> communicationSelectList = adminService.findCommunicationTypes();
+		List<CommunicationTypes> communicationTypeList = adminService.findCommunicationTypes();
 		boolean exists = false;
 		
-		for(CommunicationTypes ct: communicationSelectList){
+		for(CommunicationTypes ct: communicationTypeList){
 			if(getCommunicationTypeName().equals(ct.getCommunicationTypeName())){
 				exists = true;
 				break;
@@ -1198,6 +1199,178 @@ public class AdminAction extends BaseAction implements Preparable{
 		this.communicationSelectList = communicationSelectList;
 	}
 	
+	/**
+	 * @author davidforbes
+	 * @date 06/10/2014 -	
+	 * 		Goal Type Fields & Methods		
+	 * 				
+	 */
+	private GoalTypes goalType;
+	private String goalTypeName;
+	private List<GoalTypes> goalSelectList;	
+
+	
+	/**
+	 * @author davidforbes
+	 * @date 06/10/2014 -	
+	 * 		Accommodation Type ActionMethods		
+	 * 				
+	 */
+	
+	public String getGoalTypeForm(){
+		return SUCCESS;
+	}
+	
+	public String saveNewGoalType(){
+		List<GoalTypes> goalTypeList = adminService.findGoalTypes();
+		boolean exists = false;
+		
+		for(GoalTypes gt: goalTypeList){
+			if(getGoalTypeName().equals(gt.getGoalTypeName())){
+				exists = true;
+				break;
+			}
+		}
+		
+		if(exists){
+			//asks the user to renter again.
+			return INPUT;
+		}
+		System.out.println("in saving distype");
+		goalType = new GoalTypes();
+		goalType.setGoalTypeName(getGoalTypeName());
+		System.out.println("name: " + getGoalTypeName());
+		if(adminService.saveGoalType(goalType)){
+			goalSelectList = adminService.findGoalTypes();
+			return SUCCESS;
+		}
+		else {
+			return ERROR;
+		}
+	}
+	
+	public String updateGoalTypes(){
+		for(GoalTypes gt: getGoalSelectList())
+			adminService.updateGoalType(gt);
+		return SUCCESS;
+	}
+	
+	/**
+	 * @author davidforbes
+	 * @date 06/10/2014 -	
+	 * 		Goal Getters & Setters		
+	 * 				  
+	 */
+	public GoalTypes getGoalType() {
+		return goalType;
+	}
+
+	public void setGoalType(GoalTypes goalType) {
+		this.goalType = goalType;
+	}
+
+	public String getGoalTypeName() {
+		return goalTypeName;
+	}
+
+	public void setGoalTypeName(String goalTypeName) {
+		this.goalTypeName = goalTypeName;
+	}
+
+	public List<GoalTypes> getGoalSelectList() {
+		return goalSelectList;
+	}
+
+	public void setGoalSelectList(List<GoalTypes> goalSelectList) {
+		this.goalSelectList = goalSelectList;
+	}
+	
+	/**
+	 * @author davidforbes
+	 * @date 06/10/2014 -	
+	 * 		Priority Type Fields & Methods		
+	 * 				
+	 */
+	private PriorityTypes priorityType;
+	private String priorityName;
+	private List<PriorityTypes> prioritySelectList;	
+
+	
+	/**
+	 * @author davidforbes
+	 * @date 06/10/2014 -	
+	 * 		Priority Type ActionMethods		
+	 * 				
+	 */
+	
+	public String getPriorityTypeForm(){
+		return SUCCESS;
+	}
+	
+	public String saveNewPriorityType(){
+		List<PriorityTypes> priorityTypeList = adminService.findPriorityTypes();
+		boolean exists = false;
+		
+		for(PriorityTypes pt: priorityTypeList){
+			if(getPriorityName().equals(pt.getPriorityName())){
+				exists = true;
+				break;
+			}
+		}
+		
+		if(exists){
+			//asks the user to renter again.
+			return INPUT;
+		}
+		System.out.println("in saving distype");
+		priorityType = new PriorityTypes();
+		priorityType.setPriorityName(getPriorityName());
+		System.out.println("name: " + getPriorityName());
+		if(adminService.savePriorityType(priorityType)){
+			prioritySelectList = adminService.findPriorityTypes();
+			return SUCCESS;
+		}
+		else {
+			return ERROR;
+		}
+	}
+	
+	public String updatePriorityTypes(){
+		for(PriorityTypes pt: getPrioritySelectList())
+			adminService.updatePriorityType(pt);
+		return SUCCESS;
+	}
+	
+	/**
+	 * @author davidforbes
+	 * @date 09/09/2014 -	
+	 * 		Priority Getters & Setters		
+	 * 				  
+	 */
+
+	public PriorityTypes getPriorityType() {
+		return priorityType;
+	}
+
+	public void setPriorityType(PriorityTypes priorityType) {
+		this.priorityType = priorityType;
+	}
+
+	public String getPriorityName() {
+		return priorityName;
+	}
+
+	public void setPriorityName(String priorityName) {
+		this.priorityName = priorityName;
+	}
+
+	public List<PriorityTypes> getPrioritySelectList() {
+		return prioritySelectList;
+	}
+
+	public void setPrioritySelectList(List<PriorityTypes> prioritySelectList) {
+		this.prioritySelectList = prioritySelectList;
+	}
 	
 	/**
 	 * 
@@ -1215,5 +1388,8 @@ public class AdminAction extends BaseAction implements Preparable{
 		setStatusSelectList(adminService.findStatusTypes());
 		setTitleSelectList(adminService.findTitleTypes());
 		setCommunicationSelectList(adminService.findCommunicationTypes());
+		setGoalSelectList(adminService.findGoalTypes());
+		setPrioritySelectList(adminService.findPriorityTypes());
 	}
+
 }

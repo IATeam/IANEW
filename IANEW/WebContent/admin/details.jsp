@@ -47,7 +47,7 @@
 		</div>
 		
 		<div class="row">
-			<div class="four columns"><s:select list="culturalBackgroundSelectList" listKey="id" listValue="culturalBackgroundName" name="theCulturalBackgroundTypeId" headerKey="-1"  headerValue="Select Cultural Background" /></div>
+			<%-- <div class="four columns"><s:select list="culturalBackgroundSelectList" listKey="id" listValue="culturalBackgroundName" name="theCulturalBackgroundTypeId" headerKey="-1"  headerValue="Select Cultural Background" /></div> --%>
 			
 			<div class="textarea twelve columns omega">
 				<s:label for="culturalBackgroundComments" value="Comments:" />
