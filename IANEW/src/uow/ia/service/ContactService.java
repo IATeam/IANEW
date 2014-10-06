@@ -15,7 +15,7 @@ import uow.ia.bean.GenderTypes;
  *
  */
 public interface ContactService {
-	public static final String SERVICENAME = "ContactService";
+	public static final String SERVICENAME = "contactService";
 	
 	public boolean saveContact(Contacts c);
 	

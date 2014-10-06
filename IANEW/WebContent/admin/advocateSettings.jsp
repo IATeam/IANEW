@@ -22,7 +22,7 @@
 <body>
 	<s:div cssClass="form container">
 	<s:set var="formType">enquiry</s:set>
-
+	<s:form id="advocateForm" action="saveOrUpdateContact" cssClass="cmxform" namespace='/admin' method="post">
 <!-- ---------------------------------------------------------------------------------------------- -->
 <!-- Header of the form --------------------------------------------------------------------------- -->
 <!-- ---------------------------------------------------------------------------------------------- -->	
@@ -33,8 +33,8 @@
 		<%@include file="/admin/advocateList.jsp" %>
 		<%@include file="/admin/details.jsp" %> 
 		<%@include file="/admin/address.jsp" %> 
-		
-
+		<sj:submit id="saveNewAdvocateType" targets="tbodyAdvocateType" cssClass="two columns alpha" value="Save" />
+		</s:form>
 		</s:div>
 </body>
 </html>

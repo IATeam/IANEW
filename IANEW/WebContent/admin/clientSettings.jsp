@@ -13,11 +13,15 @@
 	      media="all"/>
 <link href="<s:url value='/styles/adminTables.css' encode='false' includeParams='none'/>" rel="stylesheet" type="text/css"
 	      media="all"/>
+<script src="<s:url value='/js/jquery/jquery.validate.js' encode='false' includeParams='none'/>" ></script>
+<script src="<s:url value='/js/validation/enquiryValidation.js' encode='false' includeParams='none'/>" ></script>
+<script src="<s:url value='/js/ianew.form.js' encode='false' includeParams='none'/>" ></script>
+<script src="<s:url value='/js/ianew.lists.js' encode='false' includeParams='none'/>" ></script>
+<script src="<s:url value='/js/popUpBoxAction.js' encode='false' includeParams='none'/>" ></script>
 </head>
 <body>
 	<s:div cssClass="form container">
-	<s:set var="formType">client</s:set>
-
+	<s:set var="formType">case</s:set>
 
 <!-- ---------------------------------------------------------------------------------------------- -->
 <!-- Header of the form --------------------------------------------------------------------------- -->

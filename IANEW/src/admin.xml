@@ -105,6 +105,17 @@
     		<result name="success">/admin/iterGenderTypes.jsp</result>
     		<result name="input"></result>
     	</action>
+    	<action name="getGoalTypeForm" class="uow.ia.action.AdminAction" method="getGoalTypeForm">
+    		<result name="success">/admin/newGoalType.jsp</result>
+    	</action>
+    	<action name="saveNewGoalType" class="uow.ia.action.AdminAction" method="saveNewGoalType">
+    		<result name="success">/admin/iterGoalTypes.jsp</result>
+    		<result name="input"></result>
+    	</action>
+    	<action name="updateGoalTypes" class="uow.ia.action.AdminAction" method="updateGoalTypes">
+    		<result name="success">/admin/iterGoalTypes.jsp</result>
+    		<result name="input"></result>
+    	</action>
     	<action name="getIssueTypeForm" class="uow.ia.action.AdminAction" method="getIssueTypeForm">
     		<result name="success">/admin/newIssueType.jsp</result>
     	</action>
@@ -114,6 +125,17 @@
     	</action>
     	<action name="updateIssueType" class="uow.ia.action.AdminAction" method="updateIssueType">
     		<result name="success">/admin/iterIssueTypes.jsp</result>
+    		<result name="input"></result>
+    	</action>
+    	<action name="getPriorityTypeForm" class="uow.ia.action.AdminAction" method="getPriorityTypeForm">
+    		<result name="success">/admin/newPriorityType.jsp</result>
+    	</action>
+    	<action name="saveNewPriorityType" class="uow.ia.action.AdminAction" method="saveNewPriorityType">
+    		<result name="success">/admin/iterPriorityTypes.jsp</result>
+    		<result name="input"></result>
+    	</action>
+    	<action name="updatePriorityTypes" class="uow.ia.action.AdminAction" method="updatePriorityTypes">
+    		<result name="success">/admin/iterPriorityTypes.jsp</result>
     		<result name="input"></result>
     	</action>
     	<action name="getStatusTypeForm" class="uow.ia.action.AdminAction" method="getStatusTypeForm">
@@ -142,6 +164,9 @@
     		<result name="success">/admin/admin.jsp</result>
     	</action>
     	<action name="adminAdvocatePage" class="uow.ia.action.ContactAction" method="adminAdvocatePage">
+    		<interceptor-ref name="params"/>
+		     <interceptor-ref name="prepare"/>
+		     <interceptor-ref name="basicStack"/>
     		<result name="success">/admin/advocateSettings.jsp</result>
     	</action>
     	<action name="adminUserPage" class="uow.ia.action.ContactAction" method="adminUserPage">

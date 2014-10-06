@@ -18,8 +18,8 @@
 	</welcome-file-list>
 	
 	<context-param>
-		<param-name>webAppRootKey</param-name>
-		<param-value>log.root</param-value>
+	<param-name>webAppRootKey</param-name>
+	<param-value>log.root</param-value>
 	</context-param>
 	
 	<context-param>

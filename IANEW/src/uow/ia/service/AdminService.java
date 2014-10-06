@@ -3,11 +3,11 @@
  */
 package uow.ia.service;
 
-import java.io.Serializable;
 import java.util.List;
 
 import uow.ia.bean.CommunicationTypes;
 import uow.ia.bean.DisabilityTypes;
+import uow.ia.bean.GoalTypes;
 import uow.ia.bean.Users;
 import uow.ia.bean.IssueTypes;
 import uow.ia.bean.AccommodationTypes;
@@ -19,6 +19,7 @@ import uow.ia.bean.GenderTypes;
 import uow.ia.bean.StatusTypes;
 import uow.ia.bean.TitleTypes;
 import uow.ia.bean.Contacts;
+import uow.ia.bean.PriorityTypes;;
 
 /**
  * @author ZhiYu Yang
@@ -413,11 +414,67 @@ public interface AdminService {
 		public boolean updateCommunicationType(CommunicationTypes c);
 		
 		 /* ----------------------------------------------------------------------------------------------------------
-			 * CulturalBackground Type ServiceMethods
+		 * Goal Type ServiceMethods
+		 * ----------------------------------------------------------------------------------------------------------
+		 */
+		/** 
+	     * retrieve with List<object> of Goal Types from Goal_Types table
+	     *  @author davidforbes
+	     *  @date 06/10/2014
+	     * @return List<Object>
+	     */
+		public List<GoalTypes> findGoalTypes();
+		
+		/** 
+	     * save Goal Types object to Goal_Types table
+	     * 
+	     * @param GoalTypes g
+	     * @return List<Object>
+	     *  @author davidforbes
+	     *  @date 06/10/2014
+	     */
+		public boolean saveGoalType(GoalTypes g);
+		
+		/** 
+	     * update Goal Types object to Goal_Types table
+	     *  @author davidforbes
+	     *  @date 06/10/2014
+	     * @param GoalTypes g
+	     * @return List<Object>
+	     */
+		public boolean updateGoalType(GoalTypes g);
+		
+		
+		 /* ----------------------------------------------------------------------------------------------------------
+			 * Priority Type ServiceMethods
 			 * ----------------------------------------------------------------------------------------------------------
 			 */
-		
-
+			/** 
+		     * retrieve with List<object> of Priority Types from Priority_Types table
+		     *  @author davidforbes
+		     *  @date 06/10/2014
+		     * @return List<Object>
+		     */
+			public List<PriorityTypes> findPriorityTypes();
+			
+			/** 
+		     * save Priority Types object to Priority_Types table
+		     * 
+		     * @param PriorityTypes p
+		     * @return List<Object>
+		     *  @author davidforbes
+		     *  @date 06/10/2014
+		     */
+			public boolean savePriorityType(PriorityTypes p);
+			
+			/** 
+		     * update Priority Types object to Priority_Types table
+		     *  @author davidforbes
+		     *  @date 06/10/2014
+		     * @param PriorityTypes p
+		     * @return List<Object>
+		     */
+			public boolean updatePriorityType(PriorityTypes p);
 		
 
 }

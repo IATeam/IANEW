@@ -34,7 +34,9 @@
 		<%@include file="/admin/newEmploymentType.jsp" %>
 		<%@include file="/admin/newEnquiryType.jsp" %>
 		<%@include file="/admin/newGenderType.jsp" %>
+		<%@include file="/admin/newGoalType.jsp" %>
 		<%@include file="/admin/newIssueType.jsp" %>
+		<%@include file="/admin/newPriorityType.jsp" %>
 		<%@include file="/admin/newStatusType.jsp" %>
 		<%@include file="/admin/newTitleType.jsp" %>
 		
