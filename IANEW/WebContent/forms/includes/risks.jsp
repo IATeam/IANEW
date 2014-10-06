@@ -6,8 +6,11 @@
 	
 		<%@include file="iterRisks.jsp" %>
 	
+	<s:hidden id="riskSize" name="iamodel.risksList.size" value="%{iamodel.risksList.size}"/>
+	<s:set name="index" value="iamodel.risksList.size" />
 	<article id="artRisk" class="row" style="visibility: hidden; display: none;">
 		<section class="secIssue sixteen columns curveBorder">
+			<s:hidden name="iamodel.risksList[%{#index}].id"/>
 			<input type="image" src="/IANEW/resources/images/undoButtonImage.png" alt="undoButton" id="btnUndo" value="Undo" onclick="return false;" class="undoButton"/>
 			<div class="row">
 					<div class="textarea fifteen columns omega">

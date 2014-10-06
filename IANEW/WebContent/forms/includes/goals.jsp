@@ -29,9 +29,12 @@
 	<h4 class="sixteen columns"  style="float:none;">Goals</h4>
 		
 	<%@include file="iterGoals.jsp" %>
-			
+	
+	<s:set name="index" value="iamodel.planGoalsList.size" />
+	<s:hidden id="goalSize" name="iamodel.planGoalsList.size" value="%{iamodel.planGoalsList.size}"/>
 	<article id="artGoal" class="row" style="visibility: hidden; display: none;">
 		<section class="secIssue sixteen columns curveBorder">
+			<s:hidden name="iamodel.planGoalsList[%{#index}].id"/>
 			<input type="image" src="/IANEW/resources/images/undoButtonImage.png" alt="undoButton" id="btnUndo" value="Undo" class="undoButton"/>
 			<div class="row">
 				<div class="five columns">

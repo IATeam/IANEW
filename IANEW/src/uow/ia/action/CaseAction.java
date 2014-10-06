@@ -1156,10 +1156,12 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 		return SUCCESS;
 	}
 	private Map <String, Object> userSession;
+	
+	
 	public String saveUpdateCase(){ //TO DO
 		System.out.println("Start Saving Case");
 		
-		//Users user = (Users) userSession.get(USER);
+		Users user = (Users) userSession.get(USER);
 		java.util.Calendar cal = java.util.Calendar.getInstance();
 		java.util.Date utilDate = cal.getTime();
 		java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
@@ -1183,7 +1185,7 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 		System.out.println("Save accommodation settings " + theAccommodationTypeId);
 		if (theAccommodationTypeId != -1) {
 			//System.out.println(typesService.getAccommodationTypeId(theAccommodationTypeId));
-			//iamodel.getContact().setAccommodation(typesService.getAccommodationTypeId(theAccommodationTypeId));
+			iamodel.getContact().setAccommodation(typesService.getAccommodationTypeById(theAccommodationTypeId));
 		}
 		
 		System.out.println("checking address");
@@ -1205,15 +1207,19 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 			for(int i = 0; i < theDisabilityListId.size(); i++){
 				if(getTheDisabilityListId().get(i) != -1){
 					cdl.get(i).setDisabilityType(typesService.getDisabilityTypeById(getTheDisabilityListId().get(i)));
-				}
-		
-				if(cdl.get(i).getId() == null){
-					cdl.get(i).setContact(iamodel.getContact());
-					//cdl.get(i).setCreatedUser(user.getContact());
-					//cdl.get(i).setUpdatedUser(user.getContact());
 					
+					if(cdl.get(i).getId() == null){
+						cdl.get(i).setContact(iamodel.getContact());
+						cdl.get(i).setCreatedUser(user.getContact());
+						cdl.get(i).setUpdatedUser(user.getContact());
+						
+					} else {
+						cdl.get(i).setUpdatedUser(user.getContact());
+					}
 				} else {
-					//cdl.get(i).setUpdatedUser(user.getContact());
+					cdl.remove(i);
+					theDisabilityListId.remove(i);
+					i--;
 				}
 			}
 		}
@@ -1229,14 +1235,16 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 		
 					if(cel.get(i).getContact() == null){
 						cel.get(i).setContact(iamodel.getContact());
-						//cel.get(i).setCreatedUser(user.getContact());
-						//cel.get(i).setUpdatedUser(user.getContact());
+						cel.get(i).setCreatedUser(user.getContact());
+						cel.get(i).setUpdatedUser(user.getContact());
 						
 					} else {
-						//cel.get(i).setUpdatedUser(user.getContact());
+						cel.get(i).setUpdatedUser(user.getContact());
 					}
 				} else {
 					cel.remove(i);
+					theEmploymentListId.remove(i);
+					i--;
 				}
 			}
 		}
@@ -1257,10 +1265,13 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 		for (int i = 0; i < theDeveloperList.size(); i++) {
 			if (theDeveloperList.get(i) != -1) {
 				pdl.get(i).setContact(contactService.getContacts(theDeveloperList.get(i)));
-			}
-			
-			if (pdl.get(i).getId() == null) {
-				pdl.get(i).setIndividualCase(iamodel);
+				if (pdl.get(i).getId() == null) {
+					pdl.get(i).setIndividualCase(iamodel);
+				}
+			} else {
+				pdl.remove(i);
+				theDeveloperList.remove(i);
+				i--;
 			}
 		}
 		
@@ -1280,6 +1291,11 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 						pgl.get(i).setIndividualCase(iamodel);
 					}
 					// need to confirm with michael about the status list
+				} else {
+					pgl.remove(i);
+					theGoalList.remove(i);
+					theGoalStatusList.remove(i);
+					i--;
 				}
 			}
 		}
@@ -1291,17 +1307,21 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 		List<CaseIssues> cil = iamodel.getCaseIssuesList();
 		if (theIssueListId.size() == theIssueStatusList.size()) {
 			for (int i = 0; i < theIssueListId.size(); i++) {
-				if (theIssueListId.get(i) != -1) {
+				if (theIssueListId.get(i) != -1 && theIssueStatusList.get(i) != -1) {
 					cil.get(i).setIssue(typesService.getIssueTypeById(theIssueListId.get(i)));
 					cil.get(i).setStatusType(typesService.getStatusTypeById(theIssueStatusList.get(i)));
-				}
-				
-				if (cil.get(i).getId() == null) {
-					cil.get(i).setIndividualCase(iamodel);
-					//cil.get(i).setCreatedUser(user.getContact());
-					//cil.get(i).setUpdatedUser(user.getContact());
-				} else {
-					//cil.get(i).setUpdatedUser(user.getContact());
+					if (cil.get(i).getId() == null) {
+						cil.get(i).setIndividualCase(iamodel);
+						cil.get(i).setCreatedUser(user.getContact());
+						cil.get(i).setUpdatedUser(user.getContact());
+					} else {
+						cil.get(i).setUpdatedUser(user.getContact());
+					}
+				} else{
+					cil.remove(i);
+					theIssueListId.remove(i);
+					theIssueStatusList.remove(i);
+					i--;
 				}
 			}
 		}
@@ -1312,25 +1332,28 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 		for (int i = 0; i < theCommunicationsList.size(); i++) {
 			if (theCommunicationsList.get(i) != -1) {
 				icl.get(i).setCommunicationType(typesService.getCommunicationTypeById(theCommunicationsList.get(i)));
-			}
-			
-			if (icl.get(i).getId() == null) {
-				icl.get(i).setIndividualCase(iamodel);
+				if (icl.get(i).getId() == null) {
+					icl.get(i).setIndividualCase(iamodel);
+				}
+			} else {
+				icl.remove(i);
+				theCommunicationsList.remove(i);
+				i--;
 			}
 		}
 		
 		System.out.println("calling case services to save");
-//		if (iamodel.getId() == null) {
-//			if (caseServices.saveOrUpdateCase(iamodel, iamodel.getContact())) {
-//				activateLists();
-//				setIamodel(caseServices.getCase(iamodel.getId()));
-//				return SUCCESS;
-//			}
-//		} else if (caseServices.saveOrUpdateCase(iamodel)) {
-//			activateLists();
-//			setIamodel(caseServices.getCase(iamodel.getId()));
-//			return SUCCESS;
-//		}
+		if (iamodel.getId() == null) {
+			if (caseServices.saveOrUpdateCase(iamodel, iamodel.getContact())) {
+				activateLists();
+				setIamodel(caseServices.getCase(iamodel.getId()));
+				return SUCCESS;
+			}
+		} else if (caseServices.saveOrUpdateCase(iamodel)) {
+			activateLists();
+			setIamodel(caseServices.getCase(iamodel.getId()));
+			return SUCCESS;
+		}
 		
 		System.out.println("End Saving Case");
 		return SUCCESS;
@@ -1405,9 +1428,10 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 	}
 
 	@Override
-	public void setSession(Map<String, Object> arg0) {
+	public void setSession(Map<String, Object> session) {
 		// TODO Auto-generated method stub
-		
+		System.out.println("setSession called");
+		this.userSession = session;
 	}
 	
 }

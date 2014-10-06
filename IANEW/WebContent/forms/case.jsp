@@ -96,7 +96,12 @@
 	<script>
 	function checkForm(){
 		alert("removed null");
+		removeNullAndUpdateIndex($("#artAddress"), $("#itAddress"), $("#addressSize"));
 		removeNullAndUpdateIndex($("#artDisability"), $("#itDisability"), $("#disabilitySize"));
+		removeNullAndUpdateIndex($("#artIssue"), $("#itIssue"), $("#issueSize"));
+		removeNullAndUpdateIndex($("#artEmployment"), $("#itEmployment"), $("#employmentSize"));
+		removeNullAndUpdateIndex($("#artGoal"), $("#itGoal"), $("#goalSize"));
+		removeNullAndUpdateIndex($("#artRisk"), $("#itRisk"), $("#riskSize"));
 	}
 	</script>
 </body>
