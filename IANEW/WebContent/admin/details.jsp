@@ -2,10 +2,10 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <section>
 <input type="image" src="/IANEW/resources/images/plusButton.png" alt="Hide/Show" id="btnShowHide" value="ShowHide" onclick="divHide(this);return false;" class="divHideButton"/>
-<s:if test="%{#formType=='client'}">
+<s:if test="%{#formType=='case'}">
 	<h3 class="sixteen columns"  style="float:none;">Client Details</h3>
 </s:if>
-<s:elseif test="%{#formType=='advocate'}">
+<s:elseif test="%{#formType=='enquiry'}">
 	<h3 class="sixteen columns"  style="float:none;">Personal Details</h3>
 </s:elseif>
 	<h3>Personal Details</h3>
@@ -47,7 +47,7 @@
 		</div>
 		
 		<div class="row">
-			<%-- <div class="four columns"><s:select list="culturalBackgroundSelectList" listKey="id" listValue="culturalBackgroundName" name="theCulturalBackgroundTypeId" headerKey="-1"  headerValue="Select Cultural Background" /></div> --%>
+			<div class="four columns"><s:select list="culturalBackgroundSelectList" listKey="id" listValue="culturalBackgroundName" name="theCulturalBackgroundTypeId" headerKey="-1"  headerValue="Select Cultural Background" /></div>
 			
 			<div class="textarea twelve columns omega">
 				<s:label for="culturalBackgroundComments" value="Comments:" />

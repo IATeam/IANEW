@@ -23,12 +23,12 @@ public class ContactAction extends BaseAction implements Preparable{
 		setAccommodationSelectList(typesService.findAccommodationTypes());
 		setCulturalBackgroundSelectList(typesService.findCulturalBackgroundTypes());
 		setTitleSelectList(typesService.findTitleTypes());
-		for(TitleTypes tt: getTitleSelectList()){
-			System.out.println(tt.getName());
-		}
+	
 		try{ setTheAccommodationTypeId(getContact().getAccommodation().getId()); }catch (NullPointerException n){}
 		try{ setDob(getContact().getDob().toString()); }catch (NullPointerException n) {}
-		//try{ setTheTitleTypeId(getContact().getTitleType().getId()); }catch (NullPointerException n){}
+		try{ setTheTitleTypeId(getContact().getTitleType().getId()); }catch (NullPointerException n){}
+		try{ theCulturalBackgroundTypeId = getContact().getCulturalBackground().getId(); }	catch (NullPointerException n){}
+		
 		return SUCCESS;
 	}
 	
@@ -38,6 +38,12 @@ public class ContactAction extends BaseAction implements Preparable{
 		setAccommodationSelectList(typesService.findAccommodationTypes());
 		setCulturalBackgroundSelectList(typesService.findCulturalBackgroundTypes());
 		setTitleSelectList(typesService.findTitleTypes());
+		
+		try{ setTheAccommodationTypeId(getContact().getAccommodation().getId()); }catch (NullPointerException n){}
+		try{ setDob(getContact().getDob().toString()); }catch (NullPointerException n) {}
+		try{ setTheTitleTypeId(getContact().getTitleType().getId()); }catch (NullPointerException n){}
+		try{ theCulturalBackgroundTypeId = getContact().getCulturalBackground().getId(); }	catch (NullPointerException n){}
+		
 		
 		return SUCCESS;
 	}
@@ -57,6 +63,8 @@ public class ContactAction extends BaseAction implements Preparable{
 	private int theAccommodationTypeId;
 	private int theCulturalBackgroundTypeId;
 	private int theTitleTypeId; 
+	private int theGenderTypeId;
+	
 	private Contacts contact;
 	Map <String, Object> userSession;
 	String dob;
@@ -105,8 +113,8 @@ public class ContactAction extends BaseAction implements Preparable{
 	for(int i = 0; i < al.size(); i++){
 		if(al.get(i).getId() == null){
 			al.get(i).setContact(getContact());
-			//al.get(i).setCreatedUser(user.getContact());
-			//al.get(i).setUpdatedUser(user.getContact());
+			al.get(i).setCreatedUser(user.getContact());
+			al.get(i).setUpdatedUser(user.getContact());
 		}
 		else if(al.get(i).getId() == -1){
 			System.out.println("Removing a false address");
@@ -114,6 +122,12 @@ public class ContactAction extends BaseAction implements Preparable{
 			i--;
 		}
 	}
+	
+	getContact().setCulturalBackground(typesService.getCulturalBackgroundTypeId(getTheCulturalBackgroundTypeId()));
+	getContact().setTitleType(typesService.getTitleTypeId(getTheTitleTypeId()));
+	getContact().setGenderType(typesService.getGenderTypeId(getTheGenderTypeId()));
+	getContact().setAccommodation(typesService.getAccommodationTypeId(getTheAccommodationTypeId()));
+	
 	System.out.println("Start to save");
 	if(contact.getId() == null){
 		if(contactService.saveOrUpdateContact(this.getContact())){
@@ -255,6 +269,7 @@ public class ContactAction extends BaseAction implements Preparable{
 		setAccommodationSelectList(typesService.findAccommodationTypes());
 		setTitleSelectList(typesService.findTitleTypes());
 		setCulturalBackgroundSelectList(typesService.findCulturalBackgroundTypes());
+		setGenderSelectList(typesService.findGenderTypes());
 		
 	}
 
@@ -273,5 +288,13 @@ public class ContactAction extends BaseAction implements Preparable{
 
 	public void setTheCulturalBackgroundTypeId(int theCulturalBackgroundTypeId) {
 		this.theCulturalBackgroundTypeId = theCulturalBackgroundTypeId;
+	}
+
+	public int getTheGenderTypeId() {
+		return theGenderTypeId;
+	}
+
+	public void setTheGenderTypeId(int theGenderTypeId) {
+		this.theGenderTypeId = theGenderTypeId;
 	}
 }
