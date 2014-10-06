@@ -15,6 +15,7 @@ import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.lf5.Log4JLogRecord;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;

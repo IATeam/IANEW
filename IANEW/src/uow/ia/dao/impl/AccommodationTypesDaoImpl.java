@@ -23,36 +23,36 @@ import uow.ia.dao.AccommodationTypesDao;
 public class AccommodationTypesDaoImpl extends BaseDaoImpl<AccommodationTypes> 
 		implements AccommodationTypesDao<AccommodationTypes> {
 	
-	private SessionFactory sessionFactory;
-
-	public SessionFactory getSessionFactory() {
-		return sessionFactory;
-	}
-
-	@Autowired
-	public void setSessionFactory(SessionFactory sessionFactory) {
-
-		// the method name cannot be setSessionFactory since HibernateDaoSupport
-		// has this one.
-		// public void anyMethodName(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
-		// setSessionFactory(sessionFactory);
-
-	}
-
-	private Session getCurrentSession() {
-		return sessionFactory.getCurrentSession();
-	}
-	
-	@Override
-	public List<AccommodationTypes> find(String hql) {
-		List<AccommodationTypes> list = new ArrayList<AccommodationTypes>();
-		Iterator<AccommodationTypes> itor = this.getCurrentSession().createQuery(hql).iterate();
-		while(itor.hasNext()){
-			list.add(itor.next());
-		}
-		System.out.println("override find called");
-		return list;
-	}
+//	private SessionFactory sessionFactory;
+//
+//	public SessionFactory getSessionFactory() {
+//		return sessionFactory;
+//	}
+//
+//	@Autowired
+//	public void setSessionFactory(SessionFactory sessionFactory) {
+//
+//		// the method name cannot be setSessionFactory since HibernateDaoSupport
+//		// has this one.
+//		// public void anyMethodName(SessionFactory sessionFactory) {
+//		this.sessionFactory = sessionFactory;
+//		// setSessionFactory(sessionFactory);
+//
+//	}
+//
+//	private Session getCurrentSession() {
+//		return sessionFactory.getCurrentSession();
+//	}
+//	
+//	@Override
+//	public List<AccommodationTypes> find(String hql) {
+//		List<AccommodationTypes> list = new ArrayList<AccommodationTypes>();
+//		Iterator<AccommodationTypes> itor = this.getCurrentSession().createQuery(hql).iterate();
+//		while(itor.hasNext()){
+//			list.add(itor.next());
+//		}
+//		System.out.println("override find called");
+//		return list;
+//	}
 
 }

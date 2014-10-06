@@ -313,6 +313,7 @@ public class TypesServiceImpl implements TypesService {
 			System.out.println("accomm not null");
 			return o;
 		} else {
+			System.out.println("accomm null");
 			return null;
 		}
 	}
