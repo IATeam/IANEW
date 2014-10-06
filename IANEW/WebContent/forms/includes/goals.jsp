@@ -34,35 +34,27 @@
 		<section class="secIssue sixteen columns curveBorder">
 			<input type="image" src="/IANEW/resources/images/undoButtonImage.png" alt="undoButton" id="btnUndo" value="Undo" class="undoButton"/>
 			<div class="row">
-				<div class="three columns">
-					<s:select list="goalSelectList.{goalTypeName}" name="theGoal" headerKey="-1" headerValue="Goal Type" />
+				<div class="five columns">
+					<s:select list="goalSelectList" listValue="goalTypeName" listKey="id" name="theGoalList[%{iamodel.planGoalsList.size}]" headerKey="-1" headerValue="Select Goal Type" />
 				</div>
-				<div class="three columns">
-					<s:label for="createdDate" value="Created Date:" />
-				    <s:date name="createdDate" format="dd/MM/yyyy"/>
-			    </div>
-			    <div class="three columns">
-					<s:label for="createdBy" value="Created By:" />
-				    <s:date name="createdBy" format="dd/MM/yyyy"/>
-			    </div>
-			   	<div class="three columns">
-					<s:label for="completedDate" value="Completed Date:" />
+			   	<div class="six columns">
+					<s:label for="completedDate" value="Goal Completed Date:" />
 				    <s:date name="completedDate" format="dd/MM/yyyy"/>
 			    </div>
-			    <div class="three columns">
-			    	<s:select list="statusSelectList.{statusName}" name="theStatus" headerKey="-1" headerValue="Status" />
+			    <div class="four columns">
+			    	<s:select list="goalStatusSelectList" listValue="statusName" listKey="id" name="theGoalStatusList[%{iamodel.planGoalsList.size}]" headerKey="-1" headerValue="Select Goal Status" />
 		    	</div>
 			</div>
 			<div class="row">
 				<div class="textarea fifteen columns omega">
 					<s:label for="goalDescription" value="Goal Description" />
-					<s:textarea id="" cssClass="oneLineTextArea" name=""/> 
+					<s:textarea id="" cssClass="oneLineTextArea" name="iamodel.planGoalsList[%{iamodel.planGoals.size}].goalDescription"/> 
 				</div>
 			</div>			
 			<div class="row">
 				<div class="textarea fifteen columns omega">
 					<s:label for="goalAction" value="Goal Action" />
-					<s:textarea id="" cssClass="oneLineTextArea" name=""/> 
+					<s:textarea id="" cssClass="oneLineTextArea" name="iamodel.planGoalsList[%{iamodel.planGoals.size}].goalAction"/> 
 				</div>
 			</div>
 		</section>

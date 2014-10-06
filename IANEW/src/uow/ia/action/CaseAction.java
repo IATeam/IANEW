@@ -79,17 +79,93 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 	private List<GoalTypes> goalSelectList = new ArrayList<GoalTypes>();	
 	private List<ReviewFrequencies> reviewFrequencyList = new ArrayList<ReviewFrequencies>();
 	private List<Contacts> developerSelectList = new ArrayList<Contacts>();
-	
+	private List<StatusTypes> planStatusSelectList = new ArrayList<StatusTypes>();
+	private List<StatusTypes> goalStatusSelectList = new ArrayList<StatusTypes>();
+	private List<StatusTypes> caseIssueStatusSelectList = new ArrayList<StatusTypes>();
+	/**
+	 * @return the caseIssueStatusSelectList
+	 */
+	public List<StatusTypes> getCaseIssueStatusSelectList() {
+		return caseIssueStatusSelectList;
+	}
+
+	/**
+	 * @param caseIssueStatusSelectList the caseIssueStatusSelectList to set
+	 */
+	public void setCaseIssueStatusSelectList(
+			List<StatusTypes> caseIssueStatusSelectList) {
+		this.caseIssueStatusSelectList = caseIssueStatusSelectList;
+	}
+
 	/**
 	 * Lists of selected type ids
 	 */
 	private List<Integer> theDisabilityListId = new ArrayList<Integer>();						
+	/**
+	 * @return the planStatusSelectList
+	 */
+	public List<StatusTypes> getPlanStatusSelectList() {
+		return planStatusSelectList;
+	}
+
+	/**
+	 * @param planStatusSelectList the planStatusSelectList to set
+	 */
+	public void setPlanStatusSelectList(List<StatusTypes> planStatusSelectList) {
+		this.planStatusSelectList = planStatusSelectList;
+	}
+
+	/**
+	 * @return the goalStatusSelectList
+	 */
+	public List<StatusTypes> getGoalStatusSelectList() {
+		return goalStatusSelectList;
+	}
+
+	/**
+	 * @param goalStatusSelectList the goalStatusSelectList to set
+	 */
+	public void setGoalStatusSelectList(List<StatusTypes> goalStatusSelectList) {
+		this.goalStatusSelectList = goalStatusSelectList;
+	}
+
 	private List<Integer> theIssueListId = new ArrayList<Integer>();				
 	private List<Integer> theEmploymentListId = new ArrayList<Integer>();			
 	private List<Integer> theCommunicationsList = new ArrayList<Integer>();	
 	private List<Integer> theGoalList = new ArrayList<Integer>();
+	private List<Integer> theDeveloperList = new ArrayList<Integer>();
+	private List<Integer> theGoalStatusList = new ArrayList<Integer>();
+	private List<Integer> theIssueStatusList = new ArrayList<Integer>();
 	
 	
+	/**
+	 * @return the theIssueStatusList
+	 */
+	public List<Integer> getTheIssueStatusList() {
+		return theIssueStatusList;
+	}
+
+	/**
+	 * @param theIssueStatusList the theIssueStatusList to set
+	 */
+	public void setTheIssueStatusList(List<Integer> theIssueStatusList) {
+		this.theIssueStatusList = theIssueStatusList;
+	}
+
+	/**
+	 * @return the theGoalStatusList
+	 */
+	public List<Integer> getTheGoalStatusList() {
+		return theGoalStatusList;
+	}
+
+	/**
+	 * @param theGoalStatusList the theGoalStatusList to set
+	 */
+	public void setTheGoalStatusList(List<Integer> theGoalStatusList) {
+		this.theGoalStatusList = theGoalStatusList;
+	}
+
 	private String theReviewFrequencyString;
 	String dob;
 	private int theTitleTypeId; 							
@@ -97,16 +173,60 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 	private int theCulturalBackgroundTypeId;
 	private int theAccommodationTypeId;
 	private int theDangerTypeId;
-	private int theStatusTypeId;							
+	private int theStatus;							
 	private int theAdvocate;						
-	private int thePriority;	
+	private int thePriority;
+	private int thePlanStatus;
+	private int theReviewFrequency;
 	
 	
+	/**
+	 * @return the theReviewFrequency
+	 */
+	public int getTheReviewFrequency() {
+		return theReviewFrequency;
+	}
+
+	/**
+	 * @param theReviewFrequency the theReviewFrequency to set
+	 */
+	public void setTheReviewFrequency(int theReviewFrequency) {
+		this.theReviewFrequency = theReviewFrequency;
+	}
+
+	/**
+	 * @return the thePlanStatus
+	 */
+	public int getThePlanStatus() {
+		return thePlanStatus;
+	}
+
+	/**
+	 * @param thePlanStatus the thePlanStatus to set
+	 */
+	public void setThePlanStatus(int thePlanStatus) {
+		this.thePlanStatus = thePlanStatus;
+	}
+
 	/**
 	 * @return the formTitle
 	 */
 	public String getFormTitle() {
 		return formTitle;
+	}
+
+	/**
+	 * @return the theDeveloperList
+	 */
+	public List<Integer> getTheDeveloperList() {
+		return theDeveloperList;
+	}
+
+	/**
+	 * @param theDeveloperList the theDeveloperList to set
+	 */
+	public void setTheDeveloperList(List<Integer> theDeveloperList) {
+		this.theDeveloperList = theDeveloperList;
 	}
 
 	/**
@@ -631,15 +751,15 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 	/**
 	 * @return the theStatusTypeId
 	 */
-	public int getTheStatusTypeId() {
-		return theStatusTypeId;
+	public int getTheStatus() {
+		return theStatus;
 	}
 
 	/**
 	 * @param theStatusTypeId the theStatusTypeId to set
 	 */
-	public void setTheStatusTypeId(int theStatusTypeId) {
-		this.theStatusTypeId = theStatusTypeId;
+	public void setTheStatus(int theStatus) {
+		this.theStatus = theStatus;
 	}
 
 	/**
@@ -889,35 +1009,7 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 	 * Action Method
 	 * @return
 	 */
-	public String getExistingCase(){
-		//set(caseServices.getCase(getHiddenid()));
-//		setContact(iamodel.getContact());
-//		
-//		setIssueSet(iamodel.getCaseIssuesList());
-//		setClientDisabilities(contact.getDisabilitiesList());
-//		setLinkedCasesSet(iamodel.getIndividualCasesList());
-//		
-//		//to be deleted
-//		System.out.println(iamodel.getIndividualCasesList().toString());
-//		for (IndividualCases c : linkedCasesSet) {
-//			System.out.println("case linked: " + c.getId() + " " + c.getDescription() );
-//		}
-//		
-//		//setCreatedBy(case.getCreatedUserId().get);
-//		setCreatedDate(iamodel.getCreatedDateTime());
-//		setUpdatedDate(iamodel.getUpdatedDateTime());
-//		setId(iamodel.getId());
-//		setDescription(iamodel.getDescription());
-//		setAddress(contact.getAddressesList());
-//		
-//		setTheGender(contact.getGenderType().getGenderName());
-//		setTheDanger(contact.getDangerType().getDangerName());
-//		setTheTitle(contact.getTitleType().getName());
-//		//setTheEmployment(contact.getEmploymentsTypeSet());
-//		setTheEmployment("Kim change databse need chagne code for this part");
-//		setTheCulturalBackground(contact.getCulturalBackground().getCulturalBackgroundName());
-//		setTheAccommodation(contact.getAccommodation().getAccommodationName());
-//		
+	public String getExistingCase(){	
 		activateLists();
 		System.out.println("Set stuffs");
 		System.out.println("no");
@@ -935,13 +1027,11 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 			}
 			
 			if (iamodel.getContact().getGenderType() != null) {
-				setTheGenderTypeId(iamodel.getContact().getDangerType().getId());
+				setTheGenderTypeId(iamodel.getContact().getGenderType().getId());
 			}
 			
 			if (iamodel.getStatusType() != null) {
-				//setTheStatusTypeId(iamodel.getStatusType().getId());
-				theStatusTypeId = iamodel.getStatusType().getId();
-				System.out.println("status=" + theStatusTypeId);
+				setTheStatus(iamodel.getStatusType().getId());
 			}
 			
 			if (iamodel.getContact().getTitleType() != null) {
@@ -952,14 +1042,29 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 				theAdvocate = iamodel.getAdvocate().getId();
 			}
 			
-			//theAdvocate = iamodel.getAdvocate().getLastname() + ", " + iamodel.getAdvocate().getFirstname();
+			if (iamodel.getPlan() != null) {
+				if (iamodel.getPlan().getStatusType() != null) {
+					setThePlanStatus(iamodel.getPlan().getStatusType().getId());
+				}
+			}
+			
+			List<PlanDevelopers> planDevelopersDB = iamodel.getPlanDevelopersList();
+			for (PlanDevelopers pd : planDevelopersDB) {
+				try {
+					theDeveloperList.add(pd.getContact().getId());
+				} catch(NullPointerException e) {
+					theDeveloperList.add(new Integer(-1));
+				}
+			}
 			
 			List<PlanGoals> planGoalsDB = getIamodel().getPlanGoalsList();
 			for (PlanGoals pg : planGoalsDB){
 				try {
 					theGoalList.add(pg.getGoalType().getId());
+					theGoalStatusList.add(pg.getStatusType().getId());
 				} catch (NullPointerException e) {
 					theGoalList.add(new Integer(-1));
+					theGoalStatusList.add(new Integer(-1));
 				}
 			}
 			
@@ -967,8 +1072,10 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 			for (CaseIssues ci : caseIssuesDB) {
 				try {
 					theIssueListId.add(ci.getIssue().getId());
+					theIssueStatusList.add(ci.getStatusType().getId());
 				} catch(NullPointerException e) {
 					theIssueListId.add(new Integer(-1));
+					theIssueStatusList.add(new Integer(-1));
 				}
 			}
 			
@@ -976,6 +1083,7 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 			for(IndividualCaseCommunications icc : communicationListDBCaseCommunications) {
 				try {
 					theCommunicationsList.add(icc.getCommunicationType().getId());
+					System.out.println("communications " + icc.getTimeSpent() + " " + icc.getCommunicationType().getId());
 				} catch(NullPointerException e) {
 					theCommunicationsList.add(new Integer(-1));
 				}
@@ -1001,6 +1109,8 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 			
 			
 		}
+		
+		System.out.println("end get existing list");
 		return SUCCESS;
 	}
 	
@@ -1046,13 +1156,38 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 		return SUCCESS;
 	}
 	private Map <String, Object> userSession;
-	public String saveUpdateCase(){
+	public String saveUpdateCase(){ //TO DO
 		System.out.println("Start Saving Case");
 		
-		Users user = (Users) userSession.get(USER);
-		List<Addresses> al = iamodel.getContact().getAddressesList();
+		//Users user = (Users) userSession.get(USER);
+		java.util.Calendar cal = java.util.Calendar.getInstance();
+		java.util.Date utilDate = cal.getTime();
+		java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+		
+		// set status
+		System.out.println("Save Case Status " + theStatus);
+		iamodel.setStatusType(typesService.getStatusTypeId(theStatus));
+		
+		// save advocate
+		System.out.println("Save Advocate");
+		iamodel.setAdvocate(contactService.getContacts(theAdvocate));
+		
+		// save contact details
+		System.out.println("Save contact details");
+		iamodel.getContact().setCulturalBackground(typesService.getCulturalBackgroundTypeId(getTheCulturalBackgroundTypeId()));
+		iamodel.getContact().setTitleType(typesService.getTitleTypeId(getTheTitleTypeId()));
+		iamodel.getContact().setGenderType(typesService.getGenderTypeId(getTheGenderTypeId()));
+		iamodel.getContact().setDangerType(typesService.getDangerTypeId(getTheDangerTypeId()));
+		
+		// save addresses
+		System.out.println("Save accommodation settings " + theAccommodationTypeId);
+		if (theAccommodationTypeId != -1) {
+			//System.out.println(typesService.getAccommodationTypeId(theAccommodationTypeId));
+			//iamodel.getContact().setAccommodation(typesService.getAccommodationTypeId(theAccommodationTypeId));
+		}
 		
 		System.out.println("checking address");
+		List<Addresses> al = iamodel.getContact().getAddressesList();
 		for (int i = 0; i < al.size(); i++) {
 			if (al.get(i).getId() == null){
 				al.get(i).setContact(iamodel.getContact());
@@ -1063,6 +1198,7 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 			}
 		}
 		
+		// save disability
 		System.out.println("checking client disability");
 		List<ClientDisabilities> cdl = iamodel.getContact().getDisabilitiesList();
 		if (getTheDisabilityListId().size() > 0) {
@@ -1073,32 +1209,128 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 		
 				if(cdl.get(i).getId() == null){
 					cdl.get(i).setContact(iamodel.getContact());
-					cdl.get(i).setCreatedUser(user.getContact());
-					cdl.get(i).setUpdatedUser(user.getContact());
+					//cdl.get(i).setCreatedUser(user.getContact());
+					//cdl.get(i).setUpdatedUser(user.getContact());
 					
 				} else {
-					cdl.get(i).setUpdatedUser(user.getContact());
+					//cdl.get(i).setUpdatedUser(user.getContact());
 				}
 			}
 		}
 		
+		// save employments
 		System.out.println("Contact employments");
 		List<ContactEmployments> cel = iamodel.getContact().getEmploymentsList();
+		System.out.println();
 		if (getTheEmploymentListId().size() > 0) {
 			for(int i = 0; i < theEmploymentListId.size(); i++){
-				if(getTheEmploymentListId().get(i) != -1)
+				if(getTheEmploymentListId().get(i) != -1) {
 					cel.get(i).setEmploymentType(typesService.getEmploymentTypeId(getTheEmploymentListId().get(i)));
 		
-				if(cel.get(i).getId() == null){
-					cel.get(i).setContact(iamodel.getContact());
-					cel.get(i).setCreatedUser(user.getContact());
-					cel.get(i).setUpdatedUser(user.getContact());
-					
+					if(cel.get(i).getContact() == null){
+						cel.get(i).setContact(iamodel.getContact());
+						//cel.get(i).setCreatedUser(user.getContact());
+						//cel.get(i).setUpdatedUser(user.getContact());
+						
+					} else {
+						//cel.get(i).setUpdatedUser(user.getContact());
+					}
 				} else {
-					cel.get(i).setUpdatedUser(user.getContact());
+					cel.remove(i);
 				}
 			}
 		}
+		
+		// save plan
+		System.out.println("Save Plan");
+		iamodel.getPlan().setReviewFrequency(typesService.getReviewFrequencyId(theReviewFrequency));
+		iamodel.getPlan().setStatusType(typesService.getStatusTypeId(thePlanStatus));
+		
+		// closed
+//		if (theStatusTypeId == 3) {
+//			iamodel.getPlan().setClosedDateTime(sqlDate);
+//		}
+		
+		// save plan developers
+		System.out.println("Save plan developers");
+		List<PlanDevelopers> pdl = iamodel.getPlanDevelopersList();
+		for (int i = 0; i < theDeveloperList.size(); i++) {
+			if (theDeveloperList.get(i) != -1) {
+				pdl.get(i).setContact(contactService.getContacts(theDeveloperList.get(i)));
+			}
+			
+			if (pdl.get(i).getId() == null) {
+				pdl.get(i).setIndividualCase(iamodel);
+			}
+		}
+		
+		// save goals
+		System.out.println("Save goals");
+		List<PlanGoals> pgl = iamodel.getPlanGoalsList();
+		System.out.println(theGoalList.size() + " " + theGoalStatusList.size());
+		if (theGoalList.size() == theGoalStatusList.size()) {
+			for (int i = 0; i < theGoalList.size(); i++) {
+				System.out.println(theGoalList.get(i) + " " + theGoalStatusList.get(i));
+				if (theGoalList.get(i) != -1 && theGoalStatusList.get(i) != -1) {
+					pgl.get(i).setGoalType(typesService.getGoalTypeId(theGoalList.get(i)));
+					pgl.get(i).setStatusType(typesService.getStatusTypeId(theGoalStatusList.get(i)));
+
+					
+					if (pgl.get(i).getIndividualCase() == null) {
+						pgl.get(i).setIndividualCase(iamodel);
+					}
+					// need to confirm with michael about the status list
+				}
+			}
+		}
+		
+		System.out.println(pgl.size());
+		
+		// save case issues
+		System.out.println("Save case issues");
+		List<CaseIssues> cil = iamodel.getCaseIssuesList();
+		if (theIssueListId.size() == theIssueStatusList.size()) {
+			for (int i = 0; i < theIssueListId.size(); i++) {
+				if (theIssueListId.get(i) != -1) {
+					cil.get(i).setIssue(typesService.getIssueTypeId(theIssueListId.get(i)));
+					cil.get(i).setStatusType(typesService.getStatusTypeId(theIssueStatusList.get(i)));
+				}
+				
+				if (cil.get(i).getId() == null) {
+					cil.get(i).setIndividualCase(iamodel);
+					//cil.get(i).setCreatedUser(user.getContact());
+					//cil.get(i).setUpdatedUser(user.getContact());
+				} else {
+					//cil.get(i).setUpdatedUser(user.getContact());
+				}
+			}
+		}
+		
+		//save communications - need to find a better way
+		System.out.println("Save communications");
+		List<IndividualCaseCommunications> icl = iamodel.getCommunicationsList();
+		for (int i = 0; i < theCommunicationsList.size(); i++) {
+			if (theCommunicationsList.get(i) != -1) {
+				icl.get(i).setCommunicationType(typesService.getCommunicationTypeId(theCommunicationsList.get(i)));
+			}
+			
+			if (icl.get(i).getId() == null) {
+				icl.get(i).setIndividualCase(iamodel);
+			}
+		}
+		
+		System.out.println("calling case services to save");
+//		if (iamodel.getId() == null) {
+//			if (caseServices.saveOrUpdateCase(iamodel, iamodel.getContact())) {
+//				activateLists();
+//				setIamodel(caseServices.getCase(iamodel.getId()));
+//				return SUCCESS;
+//			}
+//		} else if (caseServices.saveOrUpdateCase(iamodel)) {
+//			activateLists();
+//			setIamodel(caseServices.getCase(iamodel.getId()));
+//			return SUCCESS;
+//		}
 		
 		System.out.println("End Saving Case");
 		return SUCCESS;
@@ -1150,7 +1382,9 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 		goalSelectList = typesService.findGoalTypes();
 		reviewFrequencyList = caseServices.findReviewFrequencies();
 		developerSelectList = caseServices.findAdvocates();
-		
+		planStatusSelectList = typesService.findStatusTypes(3);
+		goalStatusSelectList = typesService.findStatusTypes(4);
+		caseIssueStatusSelectList = typesService.findStatusTypes(5);
 	}
 
 	@Override

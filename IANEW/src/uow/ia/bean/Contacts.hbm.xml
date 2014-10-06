@@ -37,13 +37,13 @@
   <property generated="never"  name="identification" type="string">
    <column name="identification"/>
   </property>
-  <property generated="never"  name="dob" type="date">
+  <property generated="never"  name="dob" type="java.sql.Date">
    <column length="10" name="DOB"/>
   </property>
-  <property generated="never"  name="createdDateTime" type="date">
+  <property generated="never"  name="createdDateTime" type="java.sql.Date">
    <column length="10" name="created_date_time" sql-type="datetime"/>
   </property>
-  <property generated="never"  name="updatedDateTime" type="date">
+  <property generated="never"  name="updatedDateTime" type="java.sql.Date">
    <column length="10" name="updated_date_time" sql-type="datetime"/>
   </property>
   <property generated="never" name="timestamp" type="string">

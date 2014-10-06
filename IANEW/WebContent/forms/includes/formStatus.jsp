@@ -64,7 +64,7 @@ function changePriorityColour(selectList) {
 	</div>
 	
 	<div class="three columns">
-		<s:select list="dangerSelectList.{dangerName}" name="theDanger" value="iamodel.contact.dangerType.dangerName" headerKey="-1" headerValue="Flag" cssClass="coloured" cssStyle="background: %{iamodel.contact.dangerType.symbol}" onChange="changeDangerColour(this)"/>
+		<s:select list="dangerSelectList" listKey="id" listValue="dangerName" name="theDangerTypeId" headerKey="-1" headerValue="Flag" cssClass="coloured" cssStyle="background: %{iamodel.contact.dangerType.symbol}" onChange="changeDangerColour(this)"/>	
 	</div>
 	
 	<s:if test="%{#formType=='case'}">
@@ -100,7 +100,7 @@ function changePriorityColour(selectList) {
 			<s:select list="prioritySelectList.{priorityName}" name="thePriority" value="iamodel.priorityType.priorityName" headerKey="-1" headerValue="Priority Level" cssClass="coloured" cssStyle="background: %{iamodel.priorityType.color}" onChange="changePriorityColour(this)"/>
 		</div>
 		<div class="two columns">
-			<s:select id="status" list="statusSelectList.{statusName}" name="theStatus" value="iamodel.statusType.statusName" headerKey="-1" headerValue="Case Status" />
+			<s:select id="status" list="statusSelectList" listValue="statusName" listKey="id" name="theStatus" headerKey="-1" headerValue="Case Status" />
 		</div>
 	</s:if>		
 	<s:elseif test="%{#formType=='enquiry'}">

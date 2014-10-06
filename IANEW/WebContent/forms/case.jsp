@@ -94,7 +94,10 @@
 		</footer>
 	</s:form>	
 	<script>
-	
+	function checkForm(){
+		alert("removed null");
+		removeNullAndUpdateIndex($("#artDisability"), $("#itDisability"), $("#disabilitySize"));
+	}
 	</script>
 </body>
 </html>

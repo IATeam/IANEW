@@ -12,13 +12,13 @@
         <property name="comments" type="string">
             <column name="comments" />
         </property>
-        <property name="completedDate" type="date">
+        <property name="completedDate" type="java.sql.Date">
             <column name="completed_date" length="10" />
         </property>
-        <property name="createdDateTime" type="date">
+        <property name="createdDateTime" type="java.sql.Date">
             <column name="created_date_time" length="10"  sql-type="datetime"/>
         </property>
-        <property name="updatedDateTime" type="date">
+        <property name="updatedDateTime" type="java.sql.Date">
             <column name="updated_date_time" length="10"  sql-type="datetime"/>
         </property>
         

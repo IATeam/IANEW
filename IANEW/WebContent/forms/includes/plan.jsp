@@ -90,35 +90,33 @@ function changeContact(selectedPerson) {
 <div id="linkedEnquiriesDiv" class="toggled hideable">	
 			<fieldset>
 				<div class="row">
-					<div class="three columns">
-						<s:select list="reviewFrequencyList.{frequencyName}" name="theReviewFrequency" value="iamodel.plan.reviewFrequency.frequencyName" headerKey="-1" headerValue="Review Frequency" />
+					<div class="five columns">
+						<s:select list="reviewFrequencyList" listValue="frequencyName" listKey="id" name="theReviewFrequency" headerKey="-1" headerValue="Select Review Frequency" />
 					</div>
-					<div class="three columns">
+					<div class="four columns">
 					<s:label for="createdDate" value="Created Date:" />
 					    <s:date name="iamodel.plan.createdDateTime" format="dd/MM/yyyy"/>
-				    </div>
-				    <div class="three columns">
-					<s:label for="createdBy" value="Created By:" />
-					    <s:date name="createdBy" format="dd/MM/yyyy"/>
 				    </div>
 				    <div class="three columns omega">
 						<s:label for="completionDate" value="Completion Date:" />
 					    <s:date name="iamodel.plan.closedDateTime" format="dd/MM/yyyy"/>
 					</div>
-					    <div class="four columns"><s:select list="statusSelectList.{statusName}" name="theStatus" value="iamodel.plan.statusType.statusName" headerKey="-1" headerValue="Status" /></div>
+					    <div class="four columns">
+					    	<s:select list="planStatusSelectList.{statusName}" name="thePlanStatus" value="iamodel.plan.statusType.statusName" headerKey="-1" headerValue="Select Plan Status" />
+					    </div>
 				</div>
 				<div class="row">
 					<div class="inputfield five columns omega">
 						<s:label for="lastReviewDate" value="Last Review Date:" />
-						<div><input type="date" id="lastReviewDate" name="iamodel.plan.lastReviewedDate"></div>
+						<div><input type="date" name="iamodel.plan.lastReviewedDate" value="<s:property value="iamodel.plan.lastReviewedDate.toString()" />"></div>
 					</div>
 					<div class="inputfield five columns omega">
 						<s:label for="planProvidedDate" value="Plan Provided Date:" />
-						<div><input type="date" id="planProvidedDate" name="iamodel.plan.providedPlanDate"></div>
+						<div><input type="date" name="iamodel.plan.providedPlanDate" value="<s:property value="iamodel.plan.providedPlanDate.toString()"/>"></div>
 					</div>
 					<div class="inputfield six columns omega">
 						<s:label for="consentSignedDate" value="Consent Signed Date:" />
-						<div><input type="date" id="consentSignedDate" name="iamodel.plan.consentSignedDate"></div>
+						<div><input type="date" name="iamodel.plan.consentSignedDate" value="<s:property value="iamodel.plan.consentSignedDate.toString()"/>"></div>
 					</div>
 				</div>
 				<div class="row">

@@ -5,25 +5,16 @@
 <s:iterator value="iamodel.planGoalsList" status="stat">		
 	<section class="secIssue sixteen columns curveBorder">
 		<s:hidden name="iamodel.planGoalsList[%{#stat.index}].id"/>
-		<%-- <s:hidden name="iamodel.planGoalsList[%{#stat.index}].statusType.id" /> --%>
 		<div class="row">
-			<div class="three columns">
-				<s:select list="goalSelectList.{goalTypeName}" name="theGoalList[%{#stat.index}]" headerKey="-1" headerValue="Goal Type" />
+			<div class="five columns">
+				<s:select list="goalSelectList" listValue="goalTypeName" listKey="id" name="theGoalList[%{#stat.index}]" headerKey="-1" headerValue="Select Goal Type" />
 			</div>
-			<div class="three columns">
-				<s:label for="createdDate" value="Created Date:" />
-			    <s:date name="iamodel.planGoalsList[%{#stat.index}].createdDateTime" format="dd/MM/yyyy"/>
+		   	<div class="six columns">
+				<s:label for="completedDate" value="Goal Completed Date:" />
+			    <s:date name="iamodel.planGoalsList[%{#stat.index}].completionDateTime" format="dd/MM/yyyy" />
 		    </div>
-		    <div class="three columns">
-				<s:label for="createdBy" value="Created By:" />
-			    <s:date name="iamodel.planGoalsList[%{#stat.index}].createdUserId"/>
-		    </div>
-		   	<div class="three columns">
-				<s:label for="completedDate" value="Completed Date:" />
-			    <s:date name="iamodel.planGoalsList[%{#stat.index}].completionDateTime" format="dd/MM/yyyy"/>
-		    </div>
-		    <div class="three columns">
-		    	<s:select list="statusSelectList.{statusName}" name="iamodel.planGoalsList[%{#stat.index}].statusType.statusName" headerKey="-1" headerValue="Status" />
+		    <div class="four columns">
+		    	<s:select list="goalStatusSelectList" listValue="statusName" listKey="id" name="theGoalStatusList[%{#stat.index}]" headerKey="-1" headerValue="Select Goal Status" />
 	    	</div>
 		</div>
 		<div class="row">

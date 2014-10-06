@@ -17,6 +17,14 @@
 
 <article id="artDeveloper" class="row" style="visibility: hidden; display: none;">
 	<section class="secIssue sixteen columns curveBorder">
+	<input type="image" src="/IANEW/resources/images/undoButtonImage.png" alt="undoButton" id="btnUndo" value="Undo" onclick="undoButton(this);return false;" class="undoButton"/>
+		<div class="row">
+			<div class="fifteen columns">
+				<s:select list="developerSelectList" listKey="id" listValue="fullName" name="theDeveloperList[%{#stat.index}]" headerKey="-1" headerValue="Select a Plan Developer"/>
+			</div>
+		</div>
+	</section>
+	<%-- <section class="secIssue sixteen columns curveBorder">
 		<input type="image" src="/IANEW/resources/images/undoButtonImage.png" alt="undoButton" id="btnUndo" value="Undo" onclick="undoButton(this);return false;" class="undoButton"/>
 		<fieldset>
 			<div class="row">
@@ -76,11 +84,11 @@
 				</div>
 			</div>
 		</fieldset>
-	</section>
+	</section> --%>
 </article>
 <div class="row">
 	<div class="thirteen columns alpha"><p></p></div>
-	<input type="button" id="btnAddDeveloper" value="Add Developer" class="three columns" />
+	<input type="button" id="btnAddDeveloper" value="Add Plan Developer" class="three columns"/>
 </div>
 
 <script>

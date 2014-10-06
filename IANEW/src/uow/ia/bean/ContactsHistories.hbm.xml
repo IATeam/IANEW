@@ -60,7 +60,7 @@
         <property name="identification" type="string">
             <column name="identification" />
         </property>
-        <property name="dob" type="date">
+        <property name="dob" type="java.sql.Date">
             <column name="DOB" length="10" />
         </property>
         <property name="statusId" type="java.lang.Integer">

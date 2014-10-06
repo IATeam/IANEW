@@ -15,10 +15,10 @@
         <property name="comment" type="string">
             <column name="comment" />
         </property>
-        <property name="createdDateTime" type="date">
+        <property name="createdDateTime" type="java.sql.Date">
             <column name="created_date_time" length="10" sql-type="datetime"/>
         </property>
-        <property name="updatedDateTime" type="date">
+        <property name="updatedDateTime" type="java.sql.Date">
             <column name="updated_date_time" length="10" sql-type="datetime"/>
         </property>
         
