@@ -44,7 +44,8 @@
 </head>
 <body>
 	<s:set var="formType">case</s:set>
-	<s:form id="caseForm" cssClass="cmxform form container" namespace='/case' method="post" action="saveUpdateEnquiry" novalidate="novalidate">  
+	<s:form id="caseForm" cssClass="cmxform form container" namespace='/case' method="post" action="saveUpdateCase" novalidate="novalidate">  
+		<s:hidden name="iamodel.contact.id" />
 <!-- ---------------------------------------------------------------------------------------------- -->
 <!-- Header of the form --------------------------------------------------------------------------- -->
 <!-- ---------------------------------------------------------------------------------------------- -->	
@@ -87,13 +88,16 @@
 				<section class="four columns"><p></p></section>
 				<section class="six columns omega">
 					<input type="button" value="Create Case" class="three columns alpha"/>
-					<s:submit type="submit" cssClass="three columns omega" value="Save" onClick="return false;" />
+					<s:submit type="submit" cssClass="three columns omega" value="Save" />
 				</section>
 			</s:div>
 		</footer>
 	</s:form>	
 	<script>
-	
+	function checkForm(){
+		alert("removed null");
+		removeNullAndUpdateIndex($("#artDisability"), $("#itDisability"), $("#disabilitySize"));
+	}
 	</script>
 </body>
 </html>

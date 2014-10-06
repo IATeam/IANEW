@@ -4,12 +4,20 @@
 <s:iterator value="iamodel.caseIssuesList" status="stat">
 	<section class="secIssue sixteen columns curveBorder">
 		<s:hidden name="iamodel.caseIssuesList[%{#stat.index}].id"/>
-		
-		<div class="four columns">
-			<s:select list="issueSelectList.{issueName}" name="theIssueList[%{#stat.index}]" headerKey="-1" headerValue="Select an Issue" />
+		<div class="row">
+			<div class="five columns">
+				<s:select list="issueSelectList" listValue="issueName" listKey="id" name="theIssueListId[%{#stat.index}]" headerKey="-1" headerValue="Select an Issue" />
+			</div>
+			<div class="six columns">
+				<s:label for="completedDate" value="Issue Completed Date:"/>
+				<s:date name="iamodel.caseIssuesList[%{#stat.index}].completedDate" format="dd/MM/yyyy"/>
+			</div>
+			<div class="four columns">
+		    	<s:select list="caseIssueStatusSelectList" listValue="statusName" listKey="id" name="theIssueStatusList[%{#stat.index}]" headerKey="-1" headerValue="Select Issue Status" />
+	    	</div>
 		</div>
 		
-		<div class="textarea eleven columns omega">
+		<div class="textarea fifteen columns omega">
 			<s:label for="issuedescription" value="Issue Description:" />
 			<s:textarea cssClass="oneLineTextArea" name="iamodel.caseIssuesList[%{#stat.index}].comments"/> 
 		</div>

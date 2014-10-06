@@ -24,7 +24,7 @@
 <div id="advocateDetailsDiv" class="toggled hideable">	
 	<fieldset>
 		<div class="row">
-			<div class="sixteen columns"><s:select list="advocateSelectList.{lastname + ', ' + firstname}" name="theAdvocate" id="advocateList" headerKey="-1" headerValue="Select Advocate" onChange="changeContact(this)" /></div>
+			<div class="sixteen columns"><s:select list="advocateSelectList" listKey="id" listValue="fullName" name="theAdvocate" headerKey="-1" headerValue="Select Advocate" /></div>
 			<section class="five columns"><p></p></section>
 		</div>				
 	</fieldset>

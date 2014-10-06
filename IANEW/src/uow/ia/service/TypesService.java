@@ -18,6 +18,7 @@ import uow.ia.bean.GoalTypes;
 import uow.ia.bean.IndividualCases;
 import uow.ia.bean.IssueTypes;
 import uow.ia.bean.PriorityTypes;
+import uow.ia.bean.ReviewFrequencies;
 import uow.ia.bean.StatusTypes;
 import uow.ia.bean.TitleTypes;
 
@@ -77,6 +78,12 @@ public interface TypesService {
 	public EnquiryTypes getEnquiryTypeId(int id);
 	
 	public EmploymentTypes getEmploymentTypeId(int id);
+	
+	public ReviewFrequencies getReviewFrequencyId(Integer id);
+	
+	public GoalTypes getGoalTypeId(Integer id);
+	
+	public CommunicationTypes getCommunicationTypeId(Integer id);
 
 	/*
 	 *

@@ -30,10 +30,10 @@
         <property name="homephone" type="string">
         	<column name="homephone"/>
         </property>
-  		<property name="createdDateTime" type="date">
+  		<property name="createdDateTime" type="java.sql.Date">
    			<column length="10" name="created_date_time" sql-type="datetime"/>
   		</property>
-  		<property name="updatedDateTime" type="date">
+  		<property name="updatedDateTime" type="java.sql.Date">
    		<column length="10" name="updated_date_time" sql-type="datetime"/>
    		</property>
         

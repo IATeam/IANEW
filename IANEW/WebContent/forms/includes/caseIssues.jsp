@@ -25,11 +25,19 @@
 		
 			<s:hidden name="iamodel.caseIssuesList[%{.caseIssuesList.size}].id"/>
 			
-			<div class="four columns">
-				<s:select list="issueSelectList.{issueName}" name="theIssueList[%{iamodel.caseIssuesList.size}]" value="iamodel.caseIssuesList.issue.issueName" headerKey="-1" headerValue="Select an Issue" />
+			<div class="row">
+				<div class="five columns">
+					<s:select list="issueSelectList" listValue="issueName" listKey="id" name="theIssueListId[%{iamodel.caseIssuesList.size}]" headerKey="-1" headerValue="Select an Issue" />
+				</div>
+				<div class="six columns">
+					<s:label for="completedDate" value="Issue Completed Date:"/>
+				</div>
+				<div class="four columns">
+			    	<s:select list="caseIssueStatusSelectList" listValue="statusName" listKey="id" name="theIssueStatusList[%{iamodel.caseIssuesList.size}]" headerKey="-1" headerValue="Select Issue Status" />
+		    	</div>
 			</div>
 			
-			<div class="textarea eleven columns omega">
+			<div class="textarea fifteen columns omega">
 				<s:label for="issuedescription" value="Issue Description:" />
 				<s:textarea id="" cssClass="oneLineTextArea" name="iamodel.caseIssuesList[%{iamodel.caseIssuesList.size}].comments"/> 
 			</div>

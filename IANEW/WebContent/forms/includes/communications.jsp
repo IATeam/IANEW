@@ -41,20 +41,15 @@
 			<input type="image" src="/IANEW/resources/images/undoButtonImage.png" alt="undoButton" id="btnUndo" value="Undo" onclick="undoButton(this);return false;" class="undoButton"/>
 			
 			<div class="row">
-			<div class="three columns"><s:select list="communicationSelectList.{communicationTypeName}" name="theCommunicationsList" headerKey="-1" headerValue="Select Communication Type" /></div>
+			<div class="five columns">
+				<s:select list="communicationSelectList.{communicationTypeName}" name="theCommunicationsList" headerKey="-1" headerValue="Select Communication Type" />
+			</div>
 			<div class="three columns">
-			<s:label for="createdDate" value="Created Date:" />
-			    <s:date name="createdDate" format="dd/MM/yyyy"/>
-		    </div>
-		    <div class="three columns">
-			<s:label for="createdBy" value="Created By:" />
-			    <s:date name="createdBy" format="dd/MM/yyyy"/>
-		    </div>
-		    <div class="inputfield four columns omega">
-				<s:label for="communicationDate" value="Commun. Date:" />
+		    <div class="inputfield six columns omega">
+				<s:label for="communicationDate" value="Communication Date:" />
 				<div><input type="date" id="communicationDate" name="" format="dd/MM/yyyy"></div>
 			</div>
-			<div  class="inputfield two columns omega">
+			<div  class="inputfield four columns omega">
 				<s:label for="timespent" value="Time Spent:" />
 				<div><input type="text" name=""></div>
 			</div>
@@ -77,6 +72,16 @@
 	$(function(){
 		$("#btnAddCommunication").click(function(){ 
 			$("#artCommunication section").clone().appendTo("#itCommunication");
+		});
+
+		var it = $("#itCommunication").find("section");
+		$(it).each(function(index, section){
+			var isImportant = $(section).find(":hidden[name*='importantFlag']").val();
+			var button = $(section).find("input[name='importantFlag']");
+			if(isImportant == 'Y') {
+				button.css({'background':'orange'});
+				button.parent("div").parent("section").css({'background-color':'#fddabe'});	
+			}
 		});
 	});
 	</script>

@@ -25,7 +25,9 @@ import uow.ia.bean.GenderTypes;
 import uow.ia.bean.GoalTypes;
 import uow.ia.bean.IndividualCases;
 import uow.ia.bean.IssueTypes;
+import uow.ia.bean.PlanGoals;
 import uow.ia.bean.PriorityTypes;
+import uow.ia.bean.ReviewFrequencies;
 import uow.ia.bean.StatusTypes;
 import uow.ia.bean.TitleTypes;
 import uow.ia.dao.AccommodationTypesDao;
@@ -41,6 +43,7 @@ import uow.ia.dao.GenderTypesDao;
 import uow.ia.dao.GoalTypesDao;
 import uow.ia.dao.IssueTypesDao;
 import uow.ia.dao.PriorityTypesDao;
+import uow.ia.dao.ReviewFrequenciesDao;
 import uow.ia.dao.StatusTypesDao;
 import uow.ia.dao.TitleTypesDao;
 import uow.ia.service.CaseService;
@@ -99,6 +102,9 @@ public class TypesServiceImpl implements TypesService {
 	@Resource
 	private PriorityTypesDao<PriorityTypes> priorityTypesDao;
 
+	@Resource
+	private ReviewFrequenciesDao<ReviewFrequencies> reviewFrequenciesDao;
+	
 	/* (non-Javadoc)
 	 * @see uow.ia.service.TypesService#findAccommodationTypes()
 	 */
@@ -376,6 +382,27 @@ public class TypesServiceImpl implements TypesService {
 		} else {
 			return null;
 		}
+	}
+	
+	@Override
+	public ReviewFrequencies getReviewFrequencyId(Integer id) {
+		ReviewFrequencies o = reviewFrequenciesDao.get(ReviewFrequencies.class, id); 
+		if (o != null) {
+			return o;
+		} else {
+			return null;
+		}
+	}
+	
+	@Override
+	public GoalTypes getGoalTypeId(Integer id) {
+		return goalTypesDao.get(GoalTypes.class, id);
+		
+	}
+	
+	@Override
+	public CommunicationTypes getCommunicationTypeId(Integer id){
+		return communicationTypesDao.get(CommunicationTypes.class, id);
 	}
 	
 	/*
