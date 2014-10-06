@@ -189,7 +189,7 @@
 <!-- Home Page Footer ------------------------------------------------------------------------------ -->
 <!-- ----------------------------------------------------------------------------------------------- -->	
 	<footer id="statusBar">
-		<label>User's Name</label>
+		<label><c:out value="${pageContext.request.remoteUser}"/></label>
 		<form action="/IANEW/j_spring_security_logout" method="post" style="display: inline-block; float: right; margin: 4px;"">
 	      <input type="submit" value="Log out" />
 	      <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
