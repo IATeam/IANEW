@@ -13,6 +13,7 @@
 		18/09/2014 -	Quang Nhan Add validation refer to enquiryValidation.js file and fix index bugs
 						when it is a new enquiry
 						Added img delete button and modified expand button
+		06/10/2014 -	changed from [%{iamodel.enquiryIssuesList.size}] to [%{#index}]. 
 	==============================================	
 	Description: A jsp page that displays a list of enquiries
 ------------------------------------------------------------------------------------------------>
@@ -35,20 +36,20 @@
 	</s:if>
 	<s:else>
 		<s:hidden id="issueSize" name="iamodel.enquiryIssuesList.size" value="0"/>
-		<s:set name="index" value="iamodel.enquiryIssuesList.size" />
+		<s:set name="index" value="0" />
 		<article id="artIssue"">
 	</s:else>
 		<section class="secIssue sixteen columns curveBorder row">
 			<img src="/IANEW/resources/images/undoButtonImage.png" alt="undoButton" onclick="undoButton(this);" class="undoButton"/>
-			<s:hidden name="iamodel.enquiryIssuesList[%{.enquiryIssuesList.size}].id"/>
+			<s:hidden name="iamodel.enquiryIssuesList[%{#index}].id"/>
 			
 			<div class="four columns">
-				<s:select list="issueSelectList" listValue="issueName" listKey="id" name="theIssueListId[%{iamodel.enquiryIssuesList.size}]" value="iamodel.enquiryIssuesList.issue.issueName" headerKey="-1" headerValue="Select an Issue" />
+				<s:select list="issueSelectList" listValue="issueName" listKey="id" name="theIssueListId[%{#index}]" headerKey="-1" headerValue="Select Issue" />
 			</div>
 			
 			<div class="textarea eleven columns omega">
 				<s:label for="issuedescription" value="Issue Description:" />
-				<s:textarea id="" cssClass="oneLineTextArea" name="iamodel.enquiryIssuesList[%{iamodel.enquiryIssuesList.size}].comment"/> 
+				<s:textarea id="" cssClass="oneLineTextArea" name="iamodel.enquiryIssuesList[%{#index}].comment"/> 
 			</div>
 		</section>
 	</article> 

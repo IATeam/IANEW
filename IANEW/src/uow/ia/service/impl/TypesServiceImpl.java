@@ -307,8 +307,10 @@ public class TypesServiceImpl implements TypesService {
 
 	@Override
 	public AccommodationTypes getAccommodationTypeId(int id) {
+		System.out.println(id);
 		AccommodationTypes o = accommodationTypesDao.get(AccommodationTypes.class, id);
 		if (o != null) {
+			System.out.println("accomm not null");
 			return o;
 		} else {
 			return null;

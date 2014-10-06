@@ -27,7 +27,7 @@
 		<div class="row">
 		<!-- to do -->
 			<div class="four columns">
-				<s:select list="accommodationSelectList" listKey="id" listValue="accommodationName" name="theAccommodationTypeId" headerKey="-1" headerValue="Select an Accomodation Type"/>
+				<s:select list="accommodationSelectList" listKey="id" listValue="accommodationName" name="theAccommodationTypeId" headerKey="-1" headerValue="Select Accommodation Type"/>
 			</div>
 			
 			<div class="textarea twelve columns">

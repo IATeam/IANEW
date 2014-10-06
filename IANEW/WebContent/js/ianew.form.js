@@ -16,9 +16,18 @@
 						Amended undo button to properly to set the id -1 if existing to allow
 						proper deletion on the action class
 						Revised removeSecNull to accommodate the id = -1 condition
+		06/08/2014 -	Quang Nhan - update addNewRecord to remove all validation aftereffect if cloning
+						is done after submit and error was returned from validation function.
 	==============================================	
 	Description: This js is for the common functions in the forms
 ------------------------------------------------------------------------------------------------*/
+
+//$(document).ready(function(){
+//	$("#enquiryForm").find("option[value='-1']").each(function(){
+//		alert($(this).val());	
+//	});
+//});
+$("#enquiryForm").find("option[value='-1']").css("background-color", "pink");
 
 /**
  * Add a new Component/record to the list
@@ -66,6 +75,7 @@ function addNewRecord(article, size, iterator){
 		});
 		
 		updateIndex(articleEle, sizeEle);
+		
 						
 	}else{
 		$(articleEle).removeClass("hidden");
@@ -82,21 +92,32 @@ function addNewRecord(article, size, iterator){
 function updateIndex(articleEle, sizeEle ){ 
 	var ele = $(articleEle).find("[name]");
 	var sizeInt = parseInt($(sizeEle).val());
-
+	
 	$(sizeEle).val(sizeInt + 1);
 	
 	newIndex = "[" + $(sizeEle).val() + "]";
-	
+	alert("new index: " + newIndex)
 	//replaces the old index with the new one and clear the content
 	$(ele).each(function(){ 
 		var oldIndex = $(this).attr('name').match(/\[.\]/);
 		var newName = $(this).attr('name').replace(oldIndex, newIndex);
-		$(this).attr('name', newName); //alert(this.nodeName);
+		
+		var oldIdNum = $(this).attr('id').match(/[0-9]+/);
+		var newIdNum = $(this).attr('id').replace(oldIdNum, $(sizeEle).val());
+		
+		$(this).attr('name', newName);
+		$(this).attr('id', newIdNum);
 		if(this.nodeName === "SELECT")
 			$(this).val(-1);
 		else
 			$(this).val(null);
+		
+		//removes class error if it has
+		$(this).removeClass("error");
 	});
+	
+	//removes any cloned error message validation
+	$(articleEle).find("label[class='error']").remove();
 }
 
 /**
@@ -278,12 +299,7 @@ function undoButton(selectedDiv){
 	//if contains value for id, then assign -1 otherwise completely remove it
 	if($(id).val() != ""){
 		$(selectedDiv).parent("section").children("input[name*='.id']").val("-1");
-		//$(section).css("visibility", "hidden");
-		//$(section).css("position", "absolute");
-		//$(section).css("top", "0");
 		$(section).css("display", "none");
-		
-		//$(selectedDiv).parents("article").addClass("hidden")
 	}
 	else
 		$(section).hide();

@@ -46,11 +46,10 @@
 		<div class="row">
 			<div class="ten columns alpha"><p></p></div>
 			<input type="button" id="btnView" value="View" class="three columns"/>
-			<input type="button" id="btnAddEnquiry" value="Add Enquiry" class="three columns omega"/>
+			<input type="button" id="btnLinkEnquiry" value="Link" class="three columns omega"/>
 		</div>
 	</div>
 
-	
 	<script>
 	$(function(){
 		
@@ -74,10 +73,9 @@
 			var id = $("#hiddenid").val();
 			$('#rightPopUp').show("slow");
 			$('#rightPopUp').load("enquiry/getEnquiry.action?hiddenid=" + id +"&formTitle=Existing Enquiry" );
-			
 		});
 
-		$('#btnAddEnquiry').click(function(){
+		$('#btnLinkEnquiry').click(function(){
 			$("#linkedEnquiriesListDiv").show();
 			$('#linkedEnquiriesListDiv').load("enquiryList/getLinkedEnquiriesList.action");
 		});

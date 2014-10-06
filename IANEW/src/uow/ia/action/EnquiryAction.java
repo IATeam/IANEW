@@ -267,6 +267,7 @@ ModelDriven<Enquiries>, Preparable{
 		
 		//enquiry issues set up
 		List<EnquiryIssues> eil = iamodel.getEnquiryIssuesList();
+		System.out.println("checking issues");
 		if (getTheIssueListId().size() > 0) {
 			for(int i = 0; i < theIssueListId.size(); i++){
 				if(getTheIssueListId().get(i) != -1)
@@ -282,6 +283,7 @@ ModelDriven<Enquiries>, Preparable{
 		
 		//client disabilities set up
 		List<ClientDisabilities> cdl = iamodel.getContact().getDisabilitiesList();
+		System.out.println("checking disability");
 		if (getTheDisabilityListId().size() > 0) {
 			for(int i = 0; i < theDisabilityListId.size(); i++){
 				if(getTheDisabilityListId().get(i) != -1){
@@ -299,6 +301,7 @@ ModelDriven<Enquiries>, Preparable{
 		
 		//contact employments set up
 		List<ContactEmployments> cel = iamodel.getContact().getEmploymentsList();
+		System.out.println("checking employment");
 		if (getTheEmploymentListId().size() > 0) {
 			for(int i = 0; i < theEmploymentListId.size(); i++){
 				if(getTheEmploymentListId().get(i) != -1)
@@ -313,15 +316,20 @@ ModelDriven<Enquiries>, Preparable{
 			}
 		}
 		
+		System.out.println("setting types");
 		
-		iamodel.setStatusType(typesService.getStatusTypeId(getTheStatusTypeId()));
 		iamodel.setEnquiryType(typesService.getEnquiryTypeId(getTheEnquiryTypeId()));
+		iamodel.setStatusType(typesService.getStatusTypeId(getTheStatusTypeId()));
 		
+		System.out.println("setting types");
 		iamodel.getContact().setCulturalBackground(typesService.getCulturalBackgroundTypeId(getTheCulturalBackgroundTypeId()));
 		iamodel.getContact().setTitleType(typesService.getTitleTypeId(getTheTitleTypeId()));
 		iamodel.getContact().setGenderType(typesService.getGenderTypeId(getTheGenderTypeId()));
+		System.out.println("danger1");
 		iamodel.getContact().setDangerType(typesService.getDangerTypeId(getTheDangerTypeId()));
+		System.out.println("danger2: accommid" + typesService.getAccommodationTypeId(getTheAccommodationTypeId()));
 		iamodel.getContact().setAccommodation(typesService.getAccommodationTypeId(getTheAccommodationTypeId()));
+		
 		
 		System.out.println("Start to save");
 		if(iamodel.getId() == null){
