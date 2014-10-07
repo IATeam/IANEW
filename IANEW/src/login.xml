@@ -16,7 +16,7 @@
  	<package name="login" namespace="/" extends="struts-default">
     	<action name="login" class="uow.ia.action.LoginAction">
     		<result name="success">/home/home.jsp</result>
-    		<result name="error">/login.jsp?error=true</result>
+    		<result name="error">/forms/login.jsp</result>
     	</action>
     	<!-- <action name="login">
     		<result name="success">/login.jsp</result>

@@ -30,6 +30,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="US-ASCII"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
+<%@ taglib prefix="sj" uri="/struts-jquery-tags"%>
 <!DOCTYPE html>
 
 <html>
@@ -88,7 +89,7 @@
 				<section class="four columns"><p></p></section>
 				<section class="six columns omega">
 					<input type="button" value="Create Case" class="three columns alpha"/>
-					<s:submit targets="formDiv" type="submit" cssClass="three columns omega" value="Save" onclick="checkForm()"/>
+					<sj:submit targets="formDiv" type="submit" cssClass="three columns omega" value="Save" onClick="checkForm()"/>
 				</section>
 			</s:div>
 		</footer>
@@ -96,12 +97,38 @@
 	<script>
 	function checkForm(){
 		//alert("removed null");
-		removeNullAndUpdateIndex($("#artAddress"), $("#itAddress"), $("#addressSize"));
+		/* removeNullAndUpdateIndex($("#artAddress"), $("#itAddress"), $("#addressSize"));
 		removeNullAndUpdateIndex($("#artDisability"), $("#itDisability"), $("#disabilitySize"));
 		removeNullAndUpdateIndex($("#artIssue"), $("#itIssue"), $("#issueSize"));
 		removeNullAndUpdateIndex($("#artEmployment"), $("#itEmployment"), $("#employmentSize"));
 		removeNullAndUpdateIndex($("#artGoal"), $("#itGoal"), $("#goalSize"));
-		removeNullAndUpdateIndex($("#artRisk"), $("#itRisk"), $("#riskSize"));
+		removeNullAndUpdateIndex($("#artRisk"), $("#itRisk"), $("#riskSize")); */
+		removeNull();
+	}
+	
+	function removeNull() {
+		//alert("call kim method");
+		$("article").each(function(i, article) {
+			if ($(this).css("display") == "none") {
+				$("section", article).each(function() {
+					$(this).remove();
+				});
+			} /* else {
+				$("section", article).each(function(j, section) {
+					var isNull = 0;
+					$(":input", section).each(function() {
+						if ($.trim((this).val()) != "") {
+							return false;
+						}
+						isNull = 1;
+					});
+					
+					if (isNull == 1) {
+						$(this).remove();
+					}
+				});
+			} */
+		});
 	}
 	</script>
 </body>

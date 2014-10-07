@@ -7,6 +7,9 @@ import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+import com.sun.org.glassfish.external.statistics.Statistic;
+import com.sun.xml.rpc.processor.modeler.j2ee.xml.javaIdentifierType;
+
 /**
  * @author ZhiYu Yang
  * @date 14/08/2014
@@ -65,5 +68,35 @@ public class DateUtil {
 	}
 	
 	
+	/**
+	 * for saving
+	 * @author Kim To
+	 * 
+	 */
+	public static java.sql.Date ddmmyyyySqlDate(String date) throws ParseException {
+		java.sql.Date sqlDate = null;
+		java.util.Date utilDate = ddmmyyyyDate(date);
+		if (utilDate != null) {
+			sqlDate = new java.sql.Date(utilDate.getTime());
+		} else {
+			return null;
+		}
+		
+		return sqlDate;
+	}
 	
+	/**
+	 * @author Kim To
+	 */
+	public static java.sql.Date yyyymmddSqlDate(String date) throws ParseException {
+		java.sql.Date sqlDate = null;
+		java.util.Date utilDate = yyyymmddDate(date);
+		if (utilDate != null) {
+			sqlDate = new java.sql.Date(utilDate.getTime());
+		} else {
+			return null;
+		}
+		
+		return sqlDate;
+	}
 }

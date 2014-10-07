@@ -34,7 +34,7 @@
 	<script>
 	$(function(){
 		$("#btnAddRisk").click(function(){ 
-			$("#artRisk section").clone().appendTo("#itRisk");
+			$("#artRisk section").clone().appendTo("#itRisk").show();
 		});
 	});
 	</script>

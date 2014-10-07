@@ -102,21 +102,44 @@ function changeContact(selectedPerson) {
 					    <s:date name="iamodel.plan.closedDateTime" format="dd/MM/yyyy"/>
 					</div>
 					    <div class="four columns">
-					    	<s:select list="planStatusSelectList" keyValue="id" keyName="statusName" name="thePlanStatus" value="iamodel.plan.statusType.statusName" headerKey="-1" headerValue="Select Plan Status" />
+					    	<s:select list="planStatusSelectList" listValue="statusName" listKey="id" name="thePlanStatus" headerKey="-1" headerValue="Select Plan Status" />
 					    </div>
 				</div>
 				<div class="row">
-					<div class="inputfield five columns omega">
+					<div class="inputfield four columns">
 						<s:label for="lastReviewDate" value="Last Review Date:" />
-						<div><input type="date" name="iamodel.plan.lastReviewedDate" value="<s:property value="iamodel.plan.lastReviewedDate.toString()" />"></div>
+						<div><input type="date" name="lastReviewedDate" value="<s:property value="iamodel.plan.lastReviewedDate.toString()" />"></div>
 					</div>
-					<div class="inputfield five columns omega">
+					<div class="inputfield four columns">
 						<s:label for="planProvidedDate" value="Plan Provided Date:" />
-						<div><input type="date" name="iamodel.plan.providedPlanDate" value="<s:property value="iamodel.plan.providedPlanDate.toString()"/>"></div>
+						<div><input type="date" name="planProvidedDate" value="<s:property value="iamodel.plan.providedPlanDate.toString()"/>"></div>
 					</div>
-					<div class="inputfield six columns omega">
+					<div class="inputfield four columns omega">
 						<s:label for="consentSignedDate" value="Consent Signed Date:" />
-						<div><input type="date" name="iamodel.plan.consentSignedDate" value="<s:property value="iamodel.plan.consentSignedDate.toString()"/>"></div>
+						<div><input type="date" name="consentSignedDate" value="<s:property value="iamodel.plan.consentSignedDate.toString()"/>"></div>
+					</div>
+					<div class="inputfield four columns omega">
+						<s:label for="authorisedByDate" value="Authorised Date:"/>
+						<div><input type="date" name="authorisedByDate" value="<s:property value="iamodel.plan.authorisedByDate.toString()"/>"/></div>
+					</div>
+				</div>
+				<div class="row">
+					<div class='inputfield four columns'>
+						<s:label for="firstNameContact" value="Authorised First Name:" />
+						<div><s:textfield id="authorisedFirstName" name="iamodel.plan.authorisedBy.firstname" ></s:textfield></div>
+					</div>
+					<div class="inputfield four columns">
+						<s:label for="otherNameContact" value="Authorised Other Name:" />
+						<div><s:textfield id="authorisedOtherName" name="iamodel.plan.authorisedBy.othername"></s:textfield></div>
+					</div>
+					
+					<div class="inputfield four columns omega">
+						<s:label for="lastNameContact" value="Authorised Last Name:" />
+						<div><s:textfield id="authorisedLastName" name="iamodel.plan.authorisedBy.lastname"></s:textfield></div>
+					</div>
+					<div class="inputfield four columns omega">
+						<s:label for="mobileContact" value="Authorised Mobile#:" />
+						<div><s:textfield id="authorisedMobile" name="iamodel.plan.authorisedBy.mobilephone" ></s:textfield></div>
 					</div>
 				</div>
 				<div class="row">

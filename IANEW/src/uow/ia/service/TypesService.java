@@ -89,6 +89,8 @@ public interface TypesService {
 	public CommunicationTypes getCommunicationTypeById(Integer id);
 	
 	public ContactTypes getContactTypeById(Integer id);
+	
+	public PriorityTypes getPriorityTypeById(Integer id);
 
 	/*
 	 *

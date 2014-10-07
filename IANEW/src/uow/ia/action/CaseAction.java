@@ -11,6 +11,7 @@ import org.apache.struts2.interceptor.SessionAware;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
 import com.sun.org.apache.xml.internal.security.keys.content.PGPData;
+import com.sun.xml.rpc.processor.modeler.j2ee.xml.javaIdentifierType;
 
 import uow.ia.bean.AccommodationTypes;
 import uow.ia.bean.Addresses;
@@ -35,6 +36,7 @@ import uow.ia.bean.StatusTypes;
 import uow.ia.bean.TitleTypes;
 import uow.ia.bean.PriorityTypes;
 import uow.ia.bean.Users;
+import uow.ia.util.*;
 
 /** ---------------------------------------------------------------------------------------------
  * @author: Quang Nhan
@@ -136,6 +138,7 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 	private List<Integer> theDeveloperList = new ArrayList<Integer>();
 	private List<Integer> theGoalStatusList = new ArrayList<Integer>();
 	private List<Integer> theIssueStatusList = new ArrayList<Integer>();
+	private List<String> communicationDateList = new ArrayList<String>(); 
 	
 	
 	/**
@@ -143,6 +146,62 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 	 */
 	public List<Integer> getTheIssueStatusList() {
 		return theIssueStatusList;
+	}
+
+	/**
+	 * @return the communicationDateList
+	 */
+	public List<String> getCommunicationDateList() {
+		return communicationDateList;
+	}
+
+	/**
+	 * @param communicationDateList the communicationDateList to set
+	 */
+	public void setCommunicationDateList(List<String> communicationDateList) {
+		this.communicationDateList = communicationDateList;
+	}
+
+	/**
+	 * @return the lastReviewedDate
+	 */
+	public String getLastReviewedDate() {
+		return lastReviewedDate;
+	}
+
+	/**
+	 * @param lastReviewedDate the lastReviewedDate to set
+	 */
+	public void setLastReviewedDate(String lastReviewedDate) {
+		this.lastReviewedDate = lastReviewedDate;
+	}
+
+	/**
+	 * @return the planProvidedDate
+	 */
+	public String getPlanProvidedDate() {
+		return planProvidedDate;
+	}
+
+	/**
+	 * @param planProvidedDate the planProvidedDate to set
+	 */
+	public void setPlanProvidedDate(String planProvidedDate) {
+		this.planProvidedDate = planProvidedDate;
+	}
+
+	/**
+	 * @return the consentSignedDate
+	 */
+	public String getConsentSignedDate() {
+		return consentSignedDate;
+	}
+
+	/**
+	 * @param consentSignedDate the consentSignedDate to set
+	 */
+	public void setConsentSignedDate(String consentSignedDate) {
+		this.consentSignedDate = consentSignedDate;
 	}
 
 	/**
@@ -167,7 +226,7 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 	}
 
 	private String theReviewFrequencyString;
-	String dob;
+	private String dob;
 	private int theTitleTypeId; 							
 	private int theGenderTypeId;
 	private int theCulturalBackgroundTypeId;
@@ -178,6 +237,10 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 	private int thePriority;
 	private int thePlanStatus;
 	private int theReviewFrequency;
+	private String lastReviewedDate;
+	private String planProvidedDate;
+	private String consentSignedDate;
+	private String authorisedByDate;
 	
 	
 	/**
@@ -1046,6 +1109,31 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 				if (iamodel.getPlan().getStatusType() != null) {
 					setThePlanStatus(iamodel.getPlan().getStatusType().getId());
 				}
+				
+				if (iamodel.getPlan().getLastReviewedDate() != null) {
+					lastReviewedDate = iamodel.getPlan().getLastReviewedDate().toString();
+				}
+				
+				if (iamodel.getPlan().getAuthorisedByDate() != null) {
+					authorisedByDate = iamodel.getPlan().getAuthorisedByDate().toString();
+				}
+				
+				if (iamodel.getPlan().getConsentSignedDate() != null) {
+					consentSignedDate = iamodel.getPlan().getConsentSignedDate().toString();
+				}
+				
+				if (iamodel.getPlan().getProvidedPlanDate() != null) {
+					planProvidedDate = iamodel.getPlan().getProvidedPlanDate().toString();
+				}
+				
+				if (iamodel.getPlan().getReviewFrequency() != null) {
+					theReviewFrequency = iamodel.getPlan().getReviewFrequency().getId();
+				}
+				
+			}
+			
+			if (iamodel.getPriorityType() != null) {
+				setThePriority(iamodel.getPriorityType().getId());
 			}
 			
 			List<PlanDevelopers> planDevelopersDB = iamodel.getPlanDevelopersList();
@@ -1169,6 +1257,8 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 		// set status
 		System.out.println("Save Case Status " + theStatus);
 		iamodel.setStatusType(typesService.getStatusTypeById(theStatus));
+		iamodel.setPriorityType(typesService.getPriorityTypeById(thePriority));
+		iamodel.getContact().setDangerType(typesService.getDangerTypeById(theDangerTypeId));
 		
 		// save advocate
 		System.out.println("Save Advocate");
@@ -1176,10 +1266,19 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 		
 		// save contact details
 		System.out.println("Save contact details");
-		iamodel.getContact().setCulturalBackground(typesService.getCulturalBackgroundTypeById(getTheCulturalBackgroundTypeId()));
-		iamodel.getContact().setTitleType(typesService.getTitleTypeById(getTheTitleTypeId()));
-		iamodel.getContact().setGenderType(typesService.getGenderTypeById(getTheGenderTypeId()));
-		iamodel.getContact().setDangerType(typesService.getDangerTypeById(getTheDangerTypeId()));
+		System.out.println("CB=" + theCulturalBackgroundTypeId);
+		iamodel.getContact().setCulturalBackground(typesService.getCulturalBackgroundTypeById(theCulturalBackgroundTypeId));
+		iamodel.getContact().setTitleType(typesService.getTitleTypeById(theTitleTypeId));
+		iamodel.getContact().setGenderType(typesService.getGenderTypeById(theGenderTypeId));
+		iamodel.getContact().setDangerType(typesService.getDangerTypeById(theDangerTypeId));
+		
+		java.sql.Date sqlDobDate = null;
+		try {
+			sqlDobDate = DateUtil.yyyymmddSqlDate(dob);
+		} catch (Exception e) {
+			sqlDobDate = null;
+		}
+		iamodel.getContact().setDob(sqlDobDate);
 		
 		// save addresses
 		System.out.println("Save accommodation settings " + theAccommodationTypeId);
@@ -1210,11 +1309,11 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 					
 					if(cdl.get(i).getId() == null){
 						cdl.get(i).setContact(iamodel.getContact());
-						cdl.get(i).setCreatedUser(user.getContact());
-						cdl.get(i).setUpdatedUser(user.getContact());
+						//cdl.get(i).setCreatedUser(user.getContact());
+						//cdl.get(i).setUpdatedUser(user.getContact());
 						
 					} else {
-						cdl.get(i).setUpdatedUser(user.getContact());
+						//cdl.get(i).setUpdatedUser(user.getContact());
 					}
 				} else {
 					cdl.remove(i);
@@ -1235,11 +1334,11 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 		
 					if(cel.get(i).getContact() == null){
 						cel.get(i).setContact(iamodel.getContact());
-						cel.get(i).setCreatedUser(user.getContact());
-						cel.get(i).setUpdatedUser(user.getContact());
+						//cel.get(i).setCreatedUser(user.getContact());
+						//cel.get(i).setUpdatedUser(user.getContact());
 						
 					} else {
-						cel.get(i).setUpdatedUser(user.getContact());
+						//cel.get(i).setUpdatedUser(user.getContact());
 					}
 				} else {
 					cel.remove(i);
@@ -1253,7 +1352,37 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 		System.out.println("Save Plan");
 		iamodel.getPlan().setReviewFrequency(typesService.getReviewFrequencyById(theReviewFrequency));
 		iamodel.getPlan().setStatusType(typesService.getStatusTypeById(thePlanStatus));
+		java.sql.Date lastReviewedSqlDate = null;
+		try {
+			lastReviewedSqlDate = DateUtil.yyyymmddSqlDate(lastReviewedDate);
+		} catch (Exception e) {
+			lastReviewedSqlDate = null;
+		}
+		iamodel.getPlan().setLastReviewedDate(lastReviewedSqlDate);
 		
+		java.sql.Date planProvidedSqlDate = null;
+		try {
+			planProvidedSqlDate = DateUtil.yyyymmddSqlDate(planProvidedDate);
+		} catch (Exception e) {
+			planProvidedSqlDate = null;
+		}
+		iamodel.getPlan().setProvidedPlanDate(planProvidedSqlDate);
+		
+		java.sql.Date consentSignedSqlDate = null;
+		try {
+			consentSignedSqlDate = DateUtil.yyyymmddSqlDate(consentSignedDate);
+		} catch (Exception e) {
+			consentSignedSqlDate = null;
+		}
+		iamodel.getPlan().setConsentSignedDate(consentSignedSqlDate);
+		
+		java.sql.Date authorisedSqlDate = null;
+		try {
+			authorisedSqlDate = DateUtil.yyyymmddSqlDate(authorisedByDate);
+		} catch (Exception e) {
+			authorisedSqlDate = null;
+		}
+		iamodel.getPlan().setAuthorisedByDate(authorisedSqlDate);
 		// closed
 //		if (theStatusTypeId == 3) {
 //			iamodel.getPlan().setClosedDateTime(sqlDate);
@@ -1312,10 +1441,10 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 					cil.get(i).setStatusType(typesService.getStatusTypeById(theIssueStatusList.get(i)));
 					if (cil.get(i).getId() == null) {
 						cil.get(i).setIndividualCase(iamodel);
-						cil.get(i).setCreatedUser(user.getContact());
-						cil.get(i).setUpdatedUser(user.getContact());
+						//cil.get(i).setCreatedUser(user.getContact());
+						//cil.get(i).setUpdatedUser(user.getContact());
 					} else {
-						cil.get(i).setUpdatedUser(user.getContact());
+						//cil.get(i).setUpdatedUser(user.getContact());
 					}
 				} else{
 					cil.remove(i);
@@ -1329,16 +1458,26 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 		//save communications - need to find a better way
 		System.out.println("Save communications");
 		List<IndividualCaseCommunications> icl = iamodel.getCommunicationsList();
-		for (int i = 0; i < theCommunicationsList.size(); i++) {
-			if (theCommunicationsList.get(i) != -1) {
-				icl.get(i).setCommunicationType(typesService.getCommunicationTypeById(theCommunicationsList.get(i)));
-				if (icl.get(i).getId() == null) {
-					icl.get(i).setIndividualCase(iamodel);
+		if (theCommunicationsList.size() == icl.size()) {
+			for (int i = 0; i < theCommunicationsList.size(); i++) {
+				System.out.println("index" + i);
+				System.out.println(theCommunicationsList.get(i));
+				if (icl.get(i).getId() != null && icl.get(i).getId() == -1) {
+					icl.remove(i);
+					theCommunicationsList.remove(i);
+					i--;
+				} else {
+					if (theCommunicationsList.get(i) != -1) {
+						icl.get(i).setCommunicationType(typesService.getCommunicationTypeById(theCommunicationsList.get(i)));
+						if (icl.get(i).getId() == null) {
+							icl.get(i).setIndividualCase(iamodel);
+						}
+					} else {
+						icl.remove(i);
+						theCommunicationsList.remove(i);
+						i--;
+					}
 				}
-			} else {
-				icl.remove(i);
-				theCommunicationsList.remove(i);
-				i--;
 			}
 		}
 		
@@ -1371,6 +1510,20 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 	 * Other Methods & Setters and Getters
 	 * ----------------------------------------------------------------------------------------------------------
 	 * ----------------------------------------------------------------------------------------------------------*/
+
+	/**
+	 * @return the authorisedByDate
+	 */
+	public String getAuthorisedByDate() {
+		return authorisedByDate;
+	}
+
+	/**
+	 * @param authorisedByDate the authorisedByDate to set
+	 */
+	public void setAuthorisedByDate(String authorisedByDate) {
+		this.authorisedByDate = authorisedByDate;
+	}
 
 	/**
 	 * @return the theEmploymentListId
