@@ -423,6 +423,11 @@ public class TypesServiceImpl implements TypesService {
 		return contactTypesDao.get(ContactTypes.class, id);
 	}
 	
+	@Override
+	public PriorityTypes getPriorityTypeById(Integer id) {
+		return priorityTypesDao.get(PriorityTypes.class, id);
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * @see uow.ia.service.TypesService#getDangerType(java.lang.String)

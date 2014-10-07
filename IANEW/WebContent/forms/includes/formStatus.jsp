@@ -97,7 +97,7 @@ function changePriorityColour(selectList) {
 			<s:property value="iamodel.lastUpdatedBy"/>
 		</div>			
 		<div class="three columns">
-			<s:select list="prioritySelectList.{priorityName}" listKey="id" listValue="priorityName" name="thePriority" headerKey="-1" headerValue="Priority Level" cssClass="coloured" cssStyle="background: %{iamodel.priorityType.color}" onChange="changePriorityColour(this)"/>
+			<s:select list="prioritySelectList" listKey="id" listValue="priorityName" name="thePriority" headerKey="-1" headerValue="Priority Level" cssClass="coloured" cssStyle="background: %{iamodel.priorityType.color}" onChange="changePriorityColour(this)"/>
 		</div>
 		<div class="two columns">
 			<s:select id="status" list="statusSelectList" listValue="statusName" listKey="id" name="theStatus" headerKey="-1" headerValue="Case Status" />

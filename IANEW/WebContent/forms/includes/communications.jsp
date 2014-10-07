@@ -22,8 +22,6 @@
 	==============================================	
 	Description: A jsp page that displays a list of enquiries
 ------------------------------------------------------------------------------------------------>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="US-ASCII"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 
 <section>
@@ -35,43 +33,57 @@
 		<%@include file="iterCommunications.jsp" %>
 	</article>
 	
-	<article id="artCommunication" class="row" style="visibility: hidden; display: none;">
-	
+<%-- 	<s:if test="%{iamodel.communicationsList.size > 0}">
+ --%>		<s:hidden id="communicationSize" name="iamodel.communicationsList.size" value="%{iamodel.communicationsList.size}"/>
+		<s:set name="index" value="iamodel.communicationsList.size" />
+		<article id="artCommunication" class="row" style="visibility: hidden; display: none;">
+	<%-- </s:if>
+	<s:else>
+		<s:hidden id="communicationSize" name="iamodel.communicationsList.size" value="0"/>
+		<s:set name="index" value="0" />
+		<article id="artCommunication" class="row" >
+	</s:else> --%>
 		<section class="secIssue sixteen columns curveBorder">
+			<s:hidden name="iamodel.communicationsList[%{#index}].id"/>
+		
 			<input type="image" src="/IANEW/resources/images/undoButtonImage.png" alt="undoButton" id="btnUndo" value="Undo" onclick="undoButton(this);return false;" class="undoButton"/>
 			
 			<div class="row">
-			<div class="five columns">
-				<s:select list="communicationSelectList.{communicationTypeName}" name="theCommunicationsList" headerKey="-1" headerValue="Select Communication Type" />
-			</div>
-			<div class="three columns">
-		    <div class="inputfield six columns omega">
-				<s:label for="communicationDate" value="Communication Date:" />
-				<div><input type="date" id="communicationDate" name="" format="dd/MM/yyyy"></div>
-			</div>
-			<div  class="inputfield four columns omega">
-				<s:label for="timespent" value="Time Spent:" />
-				<div><input type="text" name=""></div>
-			</div>
+				<div class="five columns">
+					<s:select list="communicationSelectList" listValue="communicationTypeName" listKey="id" name="theCommunicationsList[%{#index}]" headerKey="-1" headerValue="Select Communication Type" />
+				</div>
+				<div class="inputfield six columns omega">
+					<s:label for="communicationDate" value="Communication Date:" />
+					<div>
+		 				<input type="date" name="iamodel.communicationsList[%{#index}].communicationDate" >
+		 		 	</div>
+				</div>
+				<div  class="inputfield four columns omega">
+					<s:label for="timespent" value="Time Spent:" />
+					<div>
+						<s:textfield name="iamodel.communicationsList[%{#index}].timeSpent"  />
+					</div>
+				</div>
 			</div>
 			<div class="row">
 				<div class="textarea fourteen columns omega">
-				<s:label for="comments" value="Comments:" />
-				<s:textarea id="" cssClass="oneLineTextArea" name=""/> 
+					<s:label for="comments" value="Communication Notes:" />
+					<s:textarea cssClass="oneLineTextArea" name="iamodel.communicationsList[%{#index}].description"/> 
 				</div>
-				<input type="button" id="btnImportant" value="" class="one columns" onclick="importantDiv(this)"/>
+				<s:hidden name="iamodel.communicationsList[%{#index}].importantFlag"/>
+				<input type="button" id="btnImportant" class="one columns" onclick="importantDiv(this)"/>
 			</div>
 		</section>
 	</article>
 	<div class="row">
 		<div class="thirteen columns alpha"><p></p></div>
-		<input type="button" id="btnAddCommunication" value="Add Communication" class="three columns" />
+		<input type="button" id="btnAddCommunication" value="Add Communication" class="three columns"/>
 	</div>
 	
 	<script>
 	$(function(){
 		$("#btnAddCommunication").click(function(){ 
-			$("#artCommunication section").clone().appendTo("#itCommunication");
+			$("#artCommunication section").clone().appendTo("#itCommunication").show();
 		});
 
 		var it = $("#itCommunication").find("section");
