@@ -74,7 +74,7 @@ function changePriorityColour(selectList) {
 		
 		<s:div cssClass="two columns">
 			<s:label for="iamodel.id" value="Case#:" cssStyle="padding-left:20px;"/>
-			<s:property value="iamodel.id" />
+			<s:text name="fileNumber" />
 		</s:div>
 	</s:if>					
 	<s:elseif test="%{#formType=='enquiry'}">

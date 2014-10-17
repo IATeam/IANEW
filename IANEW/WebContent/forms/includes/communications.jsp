@@ -28,34 +28,33 @@
 <input type="image" src="/IANEW/resources/images/plusButton.png" alt="Hide/Show" id="btnShowHide" value="ShowHide" onclick="divHide(this);return false;" class="divHideButton"/><h3 class="fifteen columns" style="float:none;">Communications</h3>
 <div class="greybackground">
 <div id="communicationsDiv" class="toggled hideable">	
-	<%-- <s:if test="" > --%>
 	<article id="itCommunication">
 		<%@include file="iterCommunications.jsp" %>
 	</article>
 	
-<%-- 	<s:if test="%{iamodel.communicationsList.size > 0}">
- --%>		<s:hidden id="communicationSize" name="iamodel.communicationsList.size" value="%{iamodel.communicationsList.size}"/>
+ 	<s:if test="%{iamodel.communicationsList.size > 0}">
+		<s:hidden id="communicationSize" name="iamodel.communicationsList.size" value="%{iamodel.communicationsList.size}"/>
 		<s:set name="index" value="iamodel.communicationsList.size" />
-		<article id="artCommunication" class="row" style="visibility: hidden; display: none;">
-	<%-- </s:if>
+		<article id="artCommunication" class="hidden">
+	</s:if>
 	<s:else>
 		<s:hidden id="communicationSize" name="iamodel.communicationsList.size" value="0"/>
 		<s:set name="index" value="0" />
-		<article id="artCommunication" class="row" >
-	</s:else> --%>
+		<article id="artCommunication" class="hidden" >
+	</s:else>
 		<section class="secIssue sixteen columns curveBorder">
-			<s:hidden name="iamodel.communicationsList[%{#index}].id"/>
 		
 			<input type="image" src="/IANEW/resources/images/undoButtonImage.png" alt="undoButton" id="btnUndo" value="Undo" onclick="undoButton(this);return false;" class="undoButton"/>
 			
+			<s:hidden name="iamodel.communicationsList[%{#index}].id"/>
 			<div class="row">
 				<div class="five columns">
 					<s:select list="communicationSelectList" listValue="communicationTypeName" listKey="id" name="theCommunicationsList[%{#index}]" headerKey="-1" headerValue="Select Communication Type" />
 				</div>
 				<div class="inputfield six columns omega">
 					<s:label for="communicationDate" value="Communication Date:" />
-					<div>
-		 				<input type="date" name="iamodel.communicationsList[%{#index}].communicationDate" >
+					<div>  				
+						<s:textfield id="DateId%{#index}" cssClass="DateInputClass" name="iamodel.communicationsList[%{#index}].communicationDate"/> 
 		 		 	</div>
 				</div>
 				<div  class="inputfield four columns omega">
@@ -77,13 +76,19 @@
 	</article>
 	<div class="row">
 		<div class="thirteen columns alpha"><p></p></div>
-		<input type="button" id="btnAddCommunication" value="Add Communication" class="three columns"/>
+		<input type="button" id="btnAddCommunication" value="Add Communication" class="three columns" />
 	</div>
 	
 	<script>
 	$(function(){
 		$("#btnAddCommunication").click(function(){ 
-			$("#artCommunication section").clone().appendTo("#itCommunication").show();
+			//var $clone = $("#artCommunication section").clone(true);
+			//$clone.appendTo("#itCommunication");
+			$("#artCommunication section").clone().appendTo("#itCommunication");
+			$("#itCommunication").find("input.DateInputClass").removeClass('hasDatepicker')
+			  .removeData('datepicker')
+			  .unbind()
+			  .datepicker(); 
 		});
 
 		var it = $("#itCommunication").find("section");

@@ -92,8 +92,10 @@ function validated(){
 				removeNullAndUpdateIndex($("#artEmployment"), $("#itEmployment"), $("#employmentSize"));
 				alert("Validation complete, submitting form!");
 				$.post('/IANEW/enquiry/saveUpdateEnquiry.action', 
-				$('#enquiryForm').serialize()
-				);
+						$('#enquiryForm').serialize(), function(data){
+						$('#formDiv').html(data);}
+						);
+
 			}
 		});
 	 	

@@ -66,7 +66,7 @@
 			//$("#slidingPanel").show("slide", {diretion: "right"}, 10);
 			//$("#slidingPanel").hide();
 			//hideSlidingPanel();
-			showSlidingPanel();
+			//showSlidingPanel();
 		}); */
 
 		$('#btnView').click(function(){

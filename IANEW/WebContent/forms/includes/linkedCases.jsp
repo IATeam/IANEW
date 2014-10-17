@@ -88,7 +88,7 @@
 			$("#ulistIssues li").first().clone().appendTo("#ulistIssues");
 		});
 		
-		$('body').click(function(){
+		/* $('body').click(function(){
 			
 			hideSlidingPanel();
 		});
@@ -101,8 +101,8 @@
 			//$("#slidingPanel").show("slide", {diretion: "right"}, 10);
 			//$("#slidingPanel").hide();
 			//hideSlidingPanel();
-			showSlidingPanel();
-		});
+			//showSlidingPanel();
+		}); */
 	});
 	</script></div>
 </s:div></section>

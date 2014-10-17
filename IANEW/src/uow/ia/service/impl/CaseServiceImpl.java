@@ -91,6 +91,13 @@ CaseService {
 		ic.setContact(c);
 		c.getIndividualCasesList().add(ic);
 		try {
+			if (ic.getPlan().getAuthorisedBy() != null) {
+				contactsDao.saveOrUpdate(ic.getPlan().getAuthorisedBy());
+			}
+			
+			if (ic.getPlan().getSupportPerson() != null) {
+				contactsDao.saveOrUpdate(ic.getPlan().getSupportPerson());
+			}
 			contactsDao.saveOrUpdate(c);
 			return true;
 		} catch (Exception e2) {

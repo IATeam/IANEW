@@ -37,49 +37,50 @@ $("#enquiryForm").find("option[value='-1']").css("background-color", "pink");
  * @param {} iterator
  */
 function addNewRecord(article, size, iterator){ 
-	var articleEle = document.getElementById(article);
-	var sizeEle = document.getElementById(size);
-	var iteratorEle = document.getElementById(iterator);
-	
-	//if article is not hidden then add to iterator
-	if(!$(articleEle).hasClass("hidden")){
-		
-		//search for elements with tagname textarea. if it has then 
-		//put it in a list to be copied over 
-		var textarea = $(articleEle).find("textarea");
-		var select = $(articleEle).find("select");
-		var tArray = []; var sArray = [];
-		
-		$(textarea).each(function(){
-			tArray.push(textarea.val());
-		});
-		$(select).each(function(){
-			sArray.push(select.val());
-		});
-		
-		//get section in article, clone and put in iterator
-		$("#" + article + " section").clone().appendTo("#"+iterator);
-		
-		//grab the last section added to the iterator and place the
-		//place the new value back into the textarea
-		var section = $("#"+iterator + " section").last();
-		textarea = $(section).find("textarea");
-		select = $(section).find("select");
-		
-		$(textarea).each(function(index, element){
-			$(element).val(tArray[index]);
-		});
-		
-		$(select).each(function(index, element){
-			$(element).val(sArray[index]);
-		});
-		
-		updateIndex(articleEle, sizeEle);
-		
-						
-	}else{
-		$(articleEle).removeClass("hidden");
-	}
+	$("#" + article + " section").clone().appendTo("#" + iterator);
+//	var articleEle = document.getElementById(article);
+//	var sizeEle = document.getElementById(size);
+//	var iteratorEle = document.getElementById(iterator);
+//	
+//	//if article is not hidden then add to iterator
+//	if(!$(articleEle).hasClass("hidden")){
+//		
+//		//search for elements with tagname textarea. if it has then 
+//		//put it in a list to be copied over 
+//		var textarea = $(articleEle).find("textarea");
+//		var select = $(articleEle).find("select");
+//		var tArray = []; var sArray = [];
+//		
+//		$(textarea).each(function(){
+//			tArray.push(textarea.val());
+//		});
+//		$(select).each(function(){
+//			sArray.push(select.val());
+//		});
+//		
+//		//get section in article, clone and put in iterator
+//		$("#" + article + " section").clone().appendTo("#"+iterator);
+//		
+//		//grab the last section added to the iterator and place the
+//		//place the new value back into the textarea
+//		var section = $("#"+iterator + " section").last();
+//		textarea = $(section).find("textarea");
+//		select = $(section).find("select");
+//		
+//		$(textarea).each(function(index, element){
+//			$(element).val(tArray[index]);
+//		});
+//		
+//		$(select).each(function(index, element){
+//			$(element).val(sArray[index]);
+//		});
+//		
+//		updateIndex(articleEle, sizeEle);
+//		
+//						
+//	}else{
+//		$(articleEle).removeClass("hidden");
+//	}
 }
 
 /**
@@ -301,8 +302,12 @@ function undoButton(selectedDiv){
 		$(selectedDiv).parent("section").children("input[name*='.id']").val("-1");
 		$(section).css("display", "none");
 	}
-	else
-		$(section).hide();
+	else{
+		
+		//$(section).hide();
+		$(section).remove();
+	}
+		
 }
 
 function divHide(clickedButton){

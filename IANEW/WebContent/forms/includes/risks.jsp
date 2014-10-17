@@ -6,36 +6,36 @@
 	
 		<%@include file="iterRisks.jsp" %>
 	
-	<s:hidden id="riskSize" name="iamodel.risksList.size" value="%{iamodel.risksList.size}"/>
-	<s:set name="index" value="iamodel.risksList.size" />
-	<article id="artRisk" class="row" style="visibility: hidden; display: none;">
+	<s:if test="%{iamodel.risksList.size > 0}">
+		<s:hidden id="riskSize" name="iamodel.risksList.size" value="%{iamodel.risksList.size}"/>
+		<s:set name="index" value="iamodel.risksList.size" />
+		<article id="artRisk" class="row hidden">
+	</s:if>
+	<s:else>
+		<s:hidden id="riskSize" name="iamodel.risksList.size" value="0"/>
+		<s:set name="index" value="iamodel.risksList.size" />
+		<article id="artRisk" class="row hidden">
+	</s:else>
 		<section class="secIssue sixteen columns curveBorder">
 			<s:hidden name="iamodel.risksList[%{#index}].id"/>
-			<input type="image" src="/IANEW/resources/images/undoButtonImage.png" alt="undoButton" id="btnUndo" value="Undo" onclick="return false;" class="undoButton"/>
-			<div class="row">
+				<input type="image" src="/IANEW/resources/images/undoButtonImage.png" alt="undoButton" id="btnUndo" value="Undo" onclick="undoButton(this);return false;" class="undoButton"/>
+ 
+ 				<div class="row">
 					<div class="textarea fifteen columns omega">
 						<s:label for="riskDescription" value="Risk Description" />
-						<s:textarea id="" cssClass="oneLineTextArea" name=""/> 
+						<s:textarea cssClass="oneLineTextArea" name="iamodel.risksList[%{#index}].riskDescription"/> 
 					</div>
 				</div>			
 				<div class="row">
 					<div class="textarea fifteen columns omega">
 						<s:label for="riskManagement" value="Risk Management" />
-						<s:textarea id="" cssClass="oneLineTextArea" name=""/> 
+						<s:textarea cssClass="oneLineTextArea" name="iamodel.risksList[%{#index}].riskManagement"/> 
 					</div>
 				</div>
 		</section>
 	</article>
 	<div class="row">
 		<div class="thirteen columns alpha"><p></p></div>
-		<input type="button" id="btnAddRisk" value="Add Risk" class="three columns" />
+		<input type="button" id="btnAddRisk" value="Add Risk" class="three columns" onclick="addNewRecord('artRisk','riskSize', 'itRisk');return false;" />
 	</div>
-
-	<script>
-	$(function(){
-		$("#btnAddRisk").click(function(){ 
-			$("#artRisk section").clone().appendTo("#itRisk").show();
-		});
-	});
-	</script>
 </div>

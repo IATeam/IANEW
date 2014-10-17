@@ -3,6 +3,7 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <s:iterator value="iamodel.caseIssuesList" status="stat">
 	<section class="secIssue sixteen columns curveBorder">
+		<input type="image" src="/IANEW/resources/images/undoButtonImage.png" alt="undoButton" id="btnUndo" value="Undo" onclick="undoButton(this);return false;" class="undoButton"/>
 		<s:hidden name="iamodel.caseIssuesList[%{#stat.index}].id"/>
 		<div class="row">
 			<div class="five columns">

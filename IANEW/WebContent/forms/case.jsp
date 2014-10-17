@@ -30,23 +30,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="US-ASCII"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
-<%@ taglib prefix="sj" uri="/struts-jquery-tags"%>
 <!DOCTYPE html>
 
 <html>
 <head>
+	<s:head/>
+ 	<script src="<s:url value='/js/jquery/jquery-ui.min.js' encode='false' includeParams='none'/>"></script>
 	<title>Case Form</title>
 	<link href="<s:url value='/styles/ianew.form.css' encode='false' includeParams='none'/>" rel="stylesheet" type="text/css"
 		      media="all"/>
 	<link href="<s:url value='/styles/import/skeleton.css' encode='false' includeParams='none'/>" rel="stylesheet" type="text/css"
 		      media="all"/>
 	<script src="<s:url value='/js/ianew.lists.js' encode='false' includeParams='none'/>"></script>
-	<script src="<s:url value='/js/ianew.form.js' encode='false' includeParams='none'/>" ></script>
+	<script src="<s:url value='/js/ianew.form.js' encode='false' includeParams='none'/>" ></script> 
+	
 </head>
 <body>
 	<s:set var="formType">case</s:set>
-	<s:form id="caseForm" cssClass="cmxform form container" namespace='/case' method="post" action="saveUpdateCase" novalidate="novalidate">  
+	<s:form id="caseForm" cssClass="cmxform form container" namespace="/case" method="post" action="saveUpdateCase" novalidate="novalidate">  
 		<s:hidden name="iamodel.contact.id" />
+		<s:hidden name="formTitle" />
 <!-- ---------------------------------------------------------------------------------------------- -->
 <!-- Header of the form --------------------------------------------------------------------------- -->
 <!-- ---------------------------------------------------------------------------------------------- -->	
@@ -57,10 +60,8 @@
 <!-- ---------------------------------------------------------------------------------------------- -->
 <!-- Content of the form -------------------------------------------------------------------------- -->
 <!-- ---------------------------------------------------------------------------------------------- -->		
-		<%-- 
 		<%@include file="includes/formStatus.jsp" %>
-		--%>
-		<%@include file="includes/formStatus.jsp" %>
+		<%@include file="includes/caseSummary.jsp" %>
 		<%@include file="includes/advocateDetails.jsp" %>
 		<%@include file="includes/personalDetails.jsp" %>
 		<%@include file="includes/address.jsp" %>	
@@ -89,46 +90,55 @@
 				<section class="four columns"><p></p></section>
 				<section class="six columns omega">
 					<input type="button" value="Create Case" class="three columns alpha"/>
-					<sj:submit targets="formDiv" type="submit" cssClass="three columns omega" value="Save" onClick="checkForm()"/>
-				</section>
+<%--   					<sj:submit targets="formDiv" type="submit" cssClass="three columns omega" value="Save" onClick="checkForm()"/>					
+ --%>  				
+  					<s:submit name="submit" cssClass="three columns omega" value="Submit" onclick="checkForm()"/>
+ 				</section>
 			</s:div>
 		</footer>
 	</s:form>	
 	<script>
+	
+	/* if (!$.datepicker.initialized) {
+	    $(document).mousedown($.datepicker._checkExternalClick)
+	        // !!!!!!!!!!
+	        // The next code line has to be added again so that the date picker
+	        // shows up when the popup is opened more than once without reloading
+	        // the "base" page.
+	        // !!!!!!!!!!
+	        .find(document.body).append($.datepicker.dpDiv);
+	    $.datepicker.initialized = true;
+	} */
+	
+	$(function() {
+		$(".DateInputClass").datepicker(); 
+		initialiseNewSection("artIssue", "itIssue");
+		initialiseNewSection("artCommunication", "itCommunication");
+		
+		if (!$.datepicker.initialized) {
+		    $(document).mousedown($.datepicker._checkExternalClick)
+		        // !!!!!!!!!!
+		        // The next code line has to be added again so that the date picker
+		        // shows up when the popup is opened more than once without reloading
+		        // the "base" page.
+		        // !!!!!!!!!!
+		        .find(document.body).append($.datepicker.dpDiv);
+		    $.datepicker.initialized = true;
+		}
+	});
+	
 	function checkForm(){
 		//alert("removed null");
-		/* removeNullAndUpdateIndex($("#artAddress"), $("#itAddress"), $("#addressSize"));
+		removeNullAndUpdateIndex($("#artAddress"), $("#itAddress"), $("#addressSize"));
 		removeNullAndUpdateIndex($("#artDisability"), $("#itDisability"), $("#disabilitySize"));
 		removeNullAndUpdateIndex($("#artIssue"), $("#itIssue"), $("#issueSize"));
 		removeNullAndUpdateIndex($("#artEmployment"), $("#itEmployment"), $("#employmentSize"));
 		removeNullAndUpdateIndex($("#artGoal"), $("#itGoal"), $("#goalSize"));
-		removeNullAndUpdateIndex($("#artRisk"), $("#itRisk"), $("#riskSize")); */
-		removeNull();
-	}
-	
-	function removeNull() {
-		//alert("call kim method");
-		$("article").each(function(i, article) {
-			if ($(this).css("display") == "none") {
-				$("section", article).each(function() {
-					$(this).remove();
-				});
-			} /* else {
-				$("section", article).each(function(j, section) {
-					var isNull = 0;
-					$(":input", section).each(function() {
-						if ($.trim((this).val()) != "") {
-							return false;
-						}
-						isNull = 1;
-					});
-					
-					if (isNull == 1) {
-						$(this).remove();
-					}
-				});
-			} */
-		});
+		removeNullAndUpdateIndex($("#artRisk"), $("#itRisk"), $("#riskSize")); 
+		removeNullAndUpdateIndex($("#artCommunication"), $("#itCommunication"), $("#communicationSize"));
+		removeNullAndUpdateIndex($("#artDeveloper"), $("#itDeveloper"), $("#planDeveloperSize"));
+		validated();
+		//$("#caseForm").submit();
 	}
 	</script>
 </body>

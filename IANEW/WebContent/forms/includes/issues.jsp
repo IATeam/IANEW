@@ -37,7 +37,7 @@
 	<s:else>
 		<s:hidden id="issueSize" name="iamodel.enquiryIssuesList.size" value="0"/>
 		<s:set name="index" value="0" />
-		<article id="artIssue"">
+		<article id="artIssue" class="hidden">
 	</s:else>
 		<section class="secIssue sixteen columns curveBorder row">
 			<img src="/IANEW/resources/images/undoButtonImage.png" alt="undoButton" onclick="undoButton(this);" class="undoButton"/>
@@ -55,7 +55,7 @@
 	</article> 
 	<div class="row">
 		<div class="fourteen columns alpha"><p></p></div>    
-		<input type="button" id="btnAddIssue" value="Add Issue" class="two columns" onclick="addNewRecord('artIssue', 'issueSize', 'itIssue' )"/>
+		<input type="button" id="btnAddIssue" value="Add Issue" class="two columns" onclick="addNewRecord('artIssue', 'issueSize', 'itIssue' ); return false;"/>
 		
 	</div>
 	

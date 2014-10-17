@@ -96,6 +96,9 @@
     		<result name="success">/forms/case.jsp</result>
     	</action>
     	<action name="newCase" class="uow.ia.action.CaseAction" method="newCase">
+    		<interceptor-ref name="params"/>
+		     <interceptor-ref name="prepare"/>
+		     <interceptor-ref name="basicStack"/>
     		<result name="success">/forms/case.jsp</result>
     	</action>
     	<action name="caseList" class="uow.ia.action.CaseAction" method="caseList">

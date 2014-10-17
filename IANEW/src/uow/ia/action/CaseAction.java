@@ -32,6 +32,7 @@ import uow.ia.bean.IssueTypes;
 import uow.ia.bean.PlanDevelopers;
 import uow.ia.bean.PlanGoals;
 import uow.ia.bean.ReviewFrequencies;
+import uow.ia.bean.Risks;
 import uow.ia.bean.StatusTypes;
 import uow.ia.bean.TitleTypes;
 import uow.ia.bean.PriorityTypes;
@@ -1060,11 +1061,8 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 	 */
 	public String newCase(){
 		activateLists();
-
 		setCreatedDate(new Date());
 		setUpdatedDate(new Date());
-		setCreatedBy("Michael Hall");
-		setUpdatedBy("Michael Hall");
 		return SUCCESS;
 	}
 
@@ -1074,132 +1072,136 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 	 */
 	public String getExistingCase(){	
 		activateLists();
+		initialiseDBList();
+		
 		System.out.println("Set stuffs");
 		System.out.println("no");
-		if (iamodel.getContact() != null) {
-			if (iamodel.getContact().getAccommodation() != null) {
-				setTheAccommodationTypeId(iamodel.getContact().getAccommodation().getId());
-			}
-			
-			if (iamodel.getContact().getCulturalBackground() != null) {
-				setTheCulturalBackgroundTypeId(iamodel.getContact().getCulturalBackground().getId());
-			}
-			
-			if (iamodel.getContact().getDangerType() != null) {
-				setTheDangerTypeId(iamodel.getContact().getDangerType().getId());
-			}
-			
-			if (iamodel.getContact().getGenderType() != null) {
-				setTheGenderTypeId(iamodel.getContact().getGenderType().getId());
-			}
-			
-			if (iamodel.getStatusType() != null) {
-				setTheStatus(iamodel.getStatusType().getId());
-			}
-			
-			if (iamodel.getContact().getTitleType() != null) {
-				setTheTitleTypeId(iamodel.getContact().getTitleType().getId());
-			}
-			
-			if (iamodel.getAdvocate() != null) {
-				theAdvocate = iamodel.getAdvocate().getId();
-			}
-			
-			if (iamodel.getPlan() != null) {
-				if (iamodel.getPlan().getStatusType() != null) {
-					setThePlanStatus(iamodel.getPlan().getStatusType().getId());
-				}
-				
-				if (iamodel.getPlan().getLastReviewedDate() != null) {
-					lastReviewedDate = iamodel.getPlan().getLastReviewedDate().toString();
-				}
-				
-				if (iamodel.getPlan().getAuthorisedByDate() != null) {
-					authorisedByDate = iamodel.getPlan().getAuthorisedByDate().toString();
-				}
-				
-				if (iamodel.getPlan().getConsentSignedDate() != null) {
-					consentSignedDate = iamodel.getPlan().getConsentSignedDate().toString();
-				}
-				
-				if (iamodel.getPlan().getProvidedPlanDate() != null) {
-					planProvidedDate = iamodel.getPlan().getProvidedPlanDate().toString();
-				}
-				
-				if (iamodel.getPlan().getReviewFrequency() != null) {
-					theReviewFrequency = iamodel.getPlan().getReviewFrequency().getId();
-				}
-				
-			}
-			
-			if (iamodel.getPriorityType() != null) {
-				setThePriority(iamodel.getPriorityType().getId());
-			}
-			
-			List<PlanDevelopers> planDevelopersDB = iamodel.getPlanDevelopersList();
-			for (PlanDevelopers pd : planDevelopersDB) {
-				try {
-					theDeveloperList.add(pd.getContact().getId());
-				} catch(NullPointerException e) {
-					theDeveloperList.add(new Integer(-1));
-				}
-			}
-			
-			List<PlanGoals> planGoalsDB = getIamodel().getPlanGoalsList();
-			for (PlanGoals pg : planGoalsDB){
-				try {
-					theGoalList.add(pg.getGoalType().getId());
-					theGoalStatusList.add(pg.getStatusType().getId());
-				} catch (NullPointerException e) {
-					theGoalList.add(new Integer(-1));
-					theGoalStatusList.add(new Integer(-1));
-				}
-			}
-			
-			List<CaseIssues> caseIssuesDB = getIamodel().getCaseIssuesList();
-			for (CaseIssues ci : caseIssuesDB) {
-				try {
-					theIssueListId.add(ci.getIssue().getId());
-					theIssueStatusList.add(ci.getStatusType().getId());
-				} catch(NullPointerException e) {
-					theIssueListId.add(new Integer(-1));
-					theIssueStatusList.add(new Integer(-1));
-				}
-			}
-			
-			List<IndividualCaseCommunications> communicationListDBCaseCommunications = getIamodel().getCommunicationsList();
-			for(IndividualCaseCommunications icc : communicationListDBCaseCommunications) {
-				try {
-					theCommunicationsList.add(icc.getCommunicationType().getId());
-					System.out.println("communications " + icc.getTimeSpent() + " " + icc.getCommunicationType().getId());
-				} catch(NullPointerException e) {
-					theCommunicationsList.add(new Integer(-1));
-				}
-			}
-			
-			List<ClientDisabilities> disabilityDB = getIamodel().getContact().getDisabilitiesList();
-			for (ClientDisabilities cd : disabilityDB) {
-				try {
-					theDisabilityListId.add(cd.getDisabilityType().getId());
-				} catch(NullPointerException e) {
-					theDisabilityListId.add(new Integer(-1));
-				}
-			}
-			
-			List<ContactEmployments> employmentsDB = getIamodel().getContact().getEmploymentsList();
-			for (ContactEmployments ce : employmentsDB) {
-				try {
-					theEmploymentListId.add(ce.getEmploymentType().getId());
-				} catch(NullPointerException e) {
-					theEmploymentListId.add(new Integer(-1));
-				}
-			} 
-			
-			
-		}
-		
 		System.out.println("end get existing list");
 		return SUCCESS;
+	}
+	
+	public void initialiseDBList() {
+		if (iamodel != null) {
+			if (iamodel.getContact() != null) {
+				if (iamodel.getContact().getAccommodation() != null) {
+					setTheAccommodationTypeId(iamodel.getContact().getAccommodation().getId());
+				}
+				
+				if (iamodel.getContact().getCulturalBackground() != null) {
+					setTheCulturalBackgroundTypeId(iamodel.getContact().getCulturalBackground().getId());
+				}
+				
+				if (iamodel.getContact().getDangerType() != null) {
+					setTheDangerTypeId(iamodel.getContact().getDangerType().getId());
+				}
+				
+				if (iamodel.getContact().getGenderType() != null) {
+					setTheGenderTypeId(iamodel.getContact().getGenderType().getId());
+				}
+				
+				if (iamodel.getStatusType() != null) {
+					setTheStatus(iamodel.getStatusType().getId());
+				}
+				
+				if (iamodel.getContact().getTitleType() != null) {
+					setTheTitleTypeId(iamodel.getContact().getTitleType().getId());
+				}
+				
+				if (iamodel.getAdvocate() != null) {
+					theAdvocate = iamodel.getAdvocate().getId();
+				}
+				
+				if (iamodel.getPlan() != null) {
+					if (iamodel.getPlan().getStatusType() != null) {
+						setThePlanStatus(iamodel.getPlan().getStatusType().getId());
+					}
+					
+					if (iamodel.getPlan().getLastReviewedDate() != null) {
+						lastReviewedDate = iamodel.getPlan().getLastReviewedDate().toString();
+					}
+					
+					if (iamodel.getPlan().getAuthorisedByDate() != null) {
+						authorisedByDate = iamodel.getPlan().getAuthorisedByDate().toString();
+					}
+					
+					if (iamodel.getPlan().getConsentSignedDate() != null) {
+						consentSignedDate = iamodel.getPlan().getConsentSignedDate().toString();
+					}
+					
+					if (iamodel.getPlan().getProvidedPlanDate() != null) {
+						planProvidedDate = iamodel.getPlan().getProvidedPlanDate().toString();
+					}
+					
+					if (iamodel.getPlan().getReviewFrequency() != null) {
+						theReviewFrequency = iamodel.getPlan().getReviewFrequency().getId();
+					}
+					
+				}
+				
+				if (iamodel.getPriorityType() != null) {
+					setThePriority(iamodel.getPriorityType().getId());
+				}
+				
+				List<PlanDevelopers> planDevelopersDB = iamodel.getPlanDevelopersList();
+				for (PlanDevelopers pd : planDevelopersDB) {
+					try {
+						theDeveloperList.add(pd.getContact().getId());
+					} catch(NullPointerException e) {
+						theDeveloperList.add(new Integer(-1));
+					}
+				}
+				
+				List<PlanGoals> planGoalsDB = getIamodel().getPlanGoalsList();
+				for (PlanGoals pg : planGoalsDB){
+					try {
+						theGoalList.add(pg.getGoalType().getId());
+						theGoalStatusList.add(pg.getStatusType().getId());
+					} catch (NullPointerException e) {
+						theGoalList.add(new Integer(-1));
+						theGoalStatusList.add(new Integer(-1));
+					}
+				}
+				
+				List<CaseIssues> caseIssuesDB = getIamodel().getCaseIssuesList();
+				for (CaseIssues ci : caseIssuesDB) {
+					try {
+						theIssueListId.add(ci.getIssue().getId());
+						theIssueStatusList.add(ci.getStatusType().getId());
+					} catch(NullPointerException e) {
+						theIssueListId.add(new Integer(-1));
+						theIssueStatusList.add(new Integer(-1));
+					}
+				}
+				
+				List<IndividualCaseCommunications> communicationListDBCaseCommunications = getIamodel().getCommunicationsList();
+				for(IndividualCaseCommunications icc : communicationListDBCaseCommunications) {
+					try {
+						theCommunicationsList.add(icc.getCommunicationType().getId());
+						System.out.println("communications " + icc.getTimeSpent() + " " + icc.getCommunicationType().getId());
+					} catch(NullPointerException e) {
+						theCommunicationsList.add(new Integer(-1));
+					}
+				}
+				
+				List<ClientDisabilities> disabilityDB = getIamodel().getContact().getDisabilitiesList();
+				for (ClientDisabilities cd : disabilityDB) {
+					try {
+						theDisabilityListId.add(cd.getDisabilityType().getId());
+					} catch(NullPointerException e) {
+						theDisabilityListId.add(new Integer(-1));
+					}
+				}
+				
+				List<ContactEmployments> employmentsDB = getIamodel().getContact().getEmploymentsList();
+				for (ContactEmployments ce : employmentsDB) {
+					try {
+						theEmploymentListId.add(ce.getEmploymentType().getId());
+					} catch(NullPointerException e) {
+						theEmploymentListId.add(new Integer(-1));
+					}
+				} 
+			}
+		}
 	}
 	
 
@@ -1227,7 +1229,10 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 		
 		setCaseList(caseServices.findCasesByPage(page,numberOfRecords));
 		totalNumberOfRecords = caseServices.countCases();
-		totalNumberOfPages = totalNumberOfRecords/numberOfRecords;
+		int mod = (int) totalNumberOfRecords % numberOfRecords;
+		if (mod!= 0)
+			mod = 1;
+		totalNumberOfPages = totalNumberOfRecords/numberOfRecords + mod;
 		System.out.println(totalNumberOfPages);
 		return SUCCESS;
 	}
@@ -1266,9 +1271,18 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 		
 		// save contact details
 		System.out.println("Save contact details");
-		System.out.println("CB=" + theCulturalBackgroundTypeId);
-		iamodel.getContact().setCulturalBackground(typesService.getCulturalBackgroundTypeById(theCulturalBackgroundTypeId));
-		iamodel.getContact().setTitleType(typesService.getTitleTypeById(theTitleTypeId));
+		if (theCulturalBackgroundTypeId != -1) { 
+			iamodel.getContact().setCulturalBackground(typesService.getCulturalBackgroundTypeById(theCulturalBackgroundTypeId));
+		} else {
+			iamodel.getContact().setCulturalBackground(null);
+		}
+		
+		if(theTitleTypeId != -1) {
+			iamodel.getContact().setTitleType(typesService.getTitleTypeById(theTitleTypeId));
+		} else {
+			iamodel.getContact().setTitleType(null);
+		}
+		
 		iamodel.getContact().setGenderType(typesService.getGenderTypeById(theGenderTypeId));
 		iamodel.getContact().setDangerType(typesService.getDangerTypeById(theDangerTypeId));
 		
@@ -1283,8 +1297,9 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 		// save addresses
 		System.out.println("Save accommodation settings " + theAccommodationTypeId);
 		if (theAccommodationTypeId != -1) {
-			//System.out.println(typesService.getAccommodationTypeId(theAccommodationTypeId));
 			iamodel.getContact().setAccommodation(typesService.getAccommodationTypeById(theAccommodationTypeId));
+		} else {
+			iamodel.getContact().setAccommodation(null);
 		}
 		
 		System.out.println("checking address");
@@ -1304,21 +1319,20 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 		List<ClientDisabilities> cdl = iamodel.getContact().getDisabilitiesList();
 		if (getTheDisabilityListId().size() > 0) {
 			for(int i = 0; i < theDisabilityListId.size(); i++){
-				if(getTheDisabilityListId().get(i) != -1){
-					cdl.get(i).setDisabilityType(typesService.getDisabilityTypeById(getTheDisabilityListId().get(i)));
-					
-					if(cdl.get(i).getId() == null){
-						cdl.get(i).setContact(iamodel.getContact());
-						//cdl.get(i).setCreatedUser(user.getContact());
+				if (cdl.get(i).getId() != null) {
+					if (cdl.get(i).getId() != -1) {
+						cdl.get(i).setDisabilityType(typesService.getDisabilityTypeById(getTheDisabilityListId().get(i)));
 						//cdl.get(i).setUpdatedUser(user.getContact());
-						
 					} else {
-						//cdl.get(i).setUpdatedUser(user.getContact());
+						cdl.remove(i);
+						theDisabilityListId.remove(i);
+						i--;
 					}
 				} else {
-					cdl.remove(i);
-					theDisabilityListId.remove(i);
-					i--;
+					cdl.get(i).setDisabilityType(typesService.getDisabilityTypeById(getTheDisabilityListId().get(i)));
+					cdl.get(i).setContact(iamodel.getContact());
+					//cdl.get(i).setCreatedUser(user.getContact());
+					//cdl.get(i).setUpdatedUser(user.getContact());
 				}
 			}
 		}
@@ -1329,78 +1343,70 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 		System.out.println();
 		if (getTheEmploymentListId().size() > 0) {
 			for(int i = 0; i < theEmploymentListId.size(); i++){
-				if(getTheEmploymentListId().get(i) != -1) {
-					cel.get(i).setEmploymentType(typesService.getEmploymentTypeById(getTheEmploymentListId().get(i)));
-		
-					if(cel.get(i).getContact() == null){
-						cel.get(i).setContact(iamodel.getContact());
-						//cel.get(i).setCreatedUser(user.getContact());
+				if (cel.get(i).getId() != null) {
+					if (cel.get(i).getId() != -1) {
+						cel.get(i).setEmploymentType(typesService.getEmploymentTypeById(getTheEmploymentListId().get(i)));
 						//cel.get(i).setUpdatedUser(user.getContact());
-						
 					} else {
-						//cel.get(i).setUpdatedUser(user.getContact());
+						cel.remove(i);
+						theEmploymentListId.remove(i);
+						i--;
 					}
 				} else {
-					cel.remove(i);
-					theEmploymentListId.remove(i);
-					i--;
+					cel.get(i).setEmploymentType(typesService.getEmploymentTypeById(getTheEmploymentListId().get(i)));
+					cel.get(i).setContact(iamodel.getContact());
+					//cel.get(i).setCreatedUser(user.getContact());
+					//cel.get(i).setUpdatedUser(user.getContact());
 				}
+			}
+		}
+		
+		//save risk
+		List<Risks> riskList = iamodel.getRisksList();
+		System.out.println("risk size " + riskList.size());
+		for (int i = 0; i < riskList.size(); i++) {
+			if (riskList.get(i).getId() != null) {
+				if(riskList.get(i).getId() == -1) {
+					riskList.remove(i);
+					i--;
+				} 
+			} else {
+				riskList.get(i).setIndividualCase(iamodel);
 			}
 		}
 		
 		// save plan
 		System.out.println("Save Plan");
-		iamodel.getPlan().setReviewFrequency(typesService.getReviewFrequencyById(theReviewFrequency));
-		iamodel.getPlan().setStatusType(typesService.getStatusTypeById(thePlanStatus));
-		java.sql.Date lastReviewedSqlDate = null;
-		try {
-			lastReviewedSqlDate = DateUtil.yyyymmddSqlDate(lastReviewedDate);
-		} catch (Exception e) {
-			lastReviewedSqlDate = null;
+		if (iamodel.getId() == null) {
+			iamodel.getPlan().setIndividualCase(iamodel);
 		}
-		iamodel.getPlan().setLastReviewedDate(lastReviewedSqlDate);
+		if (theReviewFrequency != -1) {
+			iamodel.getPlan().setReviewFrequency(typesService.getReviewFrequencyById(theReviewFrequency));
+		} else {
+			iamodel.getPlan().setReviewFrequency(null);
+		}
 		
-		java.sql.Date planProvidedSqlDate = null;
-		try {
-			planProvidedSqlDate = DateUtil.yyyymmddSqlDate(planProvidedDate);
-		} catch (Exception e) {
-			planProvidedSqlDate = null;
+		if (thePlanStatus != -1) {
+			iamodel.getPlan().setStatusType(typesService.getStatusTypeById(thePlanStatus));
+		} else {
+			iamodel.getPlan().setStatusType(null);
 		}
-		iamodel.getPlan().setProvidedPlanDate(planProvidedSqlDate);
-		
-		java.sql.Date consentSignedSqlDate = null;
-		try {
-			consentSignedSqlDate = DateUtil.yyyymmddSqlDate(consentSignedDate);
-		} catch (Exception e) {
-			consentSignedSqlDate = null;
-		}
-		iamodel.getPlan().setConsentSignedDate(consentSignedSqlDate);
-		
-		java.sql.Date authorisedSqlDate = null;
-		try {
-			authorisedSqlDate = DateUtil.yyyymmddSqlDate(authorisedByDate);
-		} catch (Exception e) {
-			authorisedSqlDate = null;
-		}
-		iamodel.getPlan().setAuthorisedByDate(authorisedSqlDate);
-		// closed
-//		if (theStatusTypeId == 3) {
-//			iamodel.getPlan().setClosedDateTime(sqlDate);
-//		}
 		
 		// save plan developers
-		System.out.println("Save plan developers");
 		List<PlanDevelopers> pdl = iamodel.getPlanDevelopersList();
+		System.out.println(pdl.size());
 		for (int i = 0; i < theDeveloperList.size(); i++) {
-			if (theDeveloperList.get(i) != -1) {
-				pdl.get(i).setContact(contactService.getContacts(theDeveloperList.get(i)));
-				if (pdl.get(i).getId() == null) {
-					pdl.get(i).setIndividualCase(iamodel);
+			if (pdl.get(i).getId() != null) {
+				if (pdl.get(i).getId() != -1) {
+					pdl.get(i).setContact(contactService.getContacts(theDeveloperList.get(i)));
+				} else {
+					pdl.remove(i);
+					theDeveloperList.remove(i);
+					i--;
 				}
 			} else {
-				pdl.remove(i);
-				theDeveloperList.remove(i);
-				i--;
+				pdl.get(i).setContact(contactService.getContacts(theDeveloperList.get(i)));
+				pdl.get(i).setIndividualCase(iamodel);
 			}
 		}
 		
@@ -1410,47 +1416,44 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 		System.out.println(theGoalList.size() + " " + theGoalStatusList.size());
 		if (theGoalList.size() == theGoalStatusList.size()) {
 			for (int i = 0; i < theGoalList.size(); i++) {
-				System.out.println(theGoalList.get(i) + " " + theGoalStatusList.get(i));
-				if (theGoalList.get(i) != -1 && theGoalStatusList.get(i) != -1) {
+				if(pgl.get(i).getId() != null) {
+					if (pgl.get(i).getId() != -1) {
+						pgl.get(i).setGoalType(typesService.getGoalTypeById(theGoalList.get(i)));
+						pgl.get(i).setStatusType(typesService.getStatusTypeById(theGoalStatusList.get(i)));
+					} else {
+						pgl.remove(i);
+						theGoalList.remove(i);
+						theGoalStatusList.remove(i);
+						i--;
+					}
+				} else {
 					pgl.get(i).setGoalType(typesService.getGoalTypeById(theGoalList.get(i)));
 					pgl.get(i).setStatusType(typesService.getStatusTypeById(theGoalStatusList.get(i)));
-
-					
-					if (pgl.get(i).getIndividualCase() == null) {
-						pgl.get(i).setIndividualCase(iamodel);
-					}
-					// need to confirm with michael about the status list
-				} else {
-					pgl.remove(i);
-					theGoalList.remove(i);
-					theGoalStatusList.remove(i);
-					i--;
+					pgl.get(i).setIndividualCase(iamodel);
 				}
 			}
 		}
 		
-		System.out.println(pgl.size());
-		
 		// save case issues
 		System.out.println("Save case issues");
 		List<CaseIssues> cil = iamodel.getCaseIssuesList();
-		if (theIssueListId.size() == theIssueStatusList.size()) {
+		System.out.println(cil.size() + " " + theIssueListId.size());
+		if (theIssueListId.size() == theIssueStatusList.size() && theIssueListId.size() == cil.size()) {
 			for (int i = 0; i < theIssueListId.size(); i++) {
-				if (theIssueListId.get(i) != -1 && theIssueStatusList.get(i) != -1) {
+				if (cil.get(i).getId() != null) {
+					if (cil.get(i).getId() != -1) {
+						cil.get(i).setIssue(typesService.getIssueTypeById(theIssueListId.get(i)));
+						cil.get(i).setStatusType(typesService.getStatusTypeById(theIssueStatusList.get(i)));
+					} else {
+						cil.remove(i);
+						theIssueListId.remove(i);
+						theIssueStatusList.remove(i);
+						i--;
+					}
+				} else {
 					cil.get(i).setIssue(typesService.getIssueTypeById(theIssueListId.get(i)));
 					cil.get(i).setStatusType(typesService.getStatusTypeById(theIssueStatusList.get(i)));
-					if (cil.get(i).getId() == null) {
-						cil.get(i).setIndividualCase(iamodel);
-						//cil.get(i).setCreatedUser(user.getContact());
-						//cil.get(i).setUpdatedUser(user.getContact());
-					} else {
-						//cil.get(i).setUpdatedUser(user.getContact());
-					}
-				} else{
-					cil.remove(i);
-					theIssueListId.remove(i);
-					theIssueStatusList.remove(i);
-					i--;
+					cil.get(i).setIndividualCase(iamodel);
 				}
 			}
 		}
@@ -1458,25 +1461,21 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 		//save communications - need to find a better way
 		System.out.println("Save communications");
 		List<IndividualCaseCommunications> icl = iamodel.getCommunicationsList();
+		System.out.println(theCommunicationsList.size());
 		if (theCommunicationsList.size() == icl.size()) {
 			for (int i = 0; i < theCommunicationsList.size(); i++) {
-				System.out.println("index" + i);
 				System.out.println(theCommunicationsList.get(i));
-				if (icl.get(i).getId() != null && icl.get(i).getId() == -1) {
-					icl.remove(i);
-					theCommunicationsList.remove(i);
-					i--;
-				} else {
-					if (theCommunicationsList.get(i) != -1) {
+				if (icl.get(i).getId() != null) {
+					if (icl.get(i).getId() != -1) {
 						icl.get(i).setCommunicationType(typesService.getCommunicationTypeById(theCommunicationsList.get(i)));
-						if (icl.get(i).getId() == null) {
-							icl.get(i).setIndividualCase(iamodel);
-						}
 					} else {
 						icl.remove(i);
 						theCommunicationsList.remove(i);
 						i--;
 					}
+				} else {
+					icl.get(i).setCommunicationType(typesService.getCommunicationTypeById(theCommunicationsList.get(i)));
+					icl.get(i).setIndividualCase(iamodel);
 				}
 			}
 		}
@@ -1486,11 +1485,13 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 			if (caseServices.saveOrUpdateCase(iamodel, iamodel.getContact())) {
 				activateLists();
 				setIamodel(caseServices.getCase(iamodel.getId()));
+				initialiseDBList();
 				return SUCCESS;
 			}
 		} else if (caseServices.saveOrUpdateCase(iamodel)) {
 			activateLists();
 			setIamodel(caseServices.getCase(iamodel.getId()));
+			initialiseDBList();
 			return SUCCESS;
 		}
 		
@@ -1570,7 +1571,7 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 		System.out.println("hiddenid2 = " + getHiddenid());
 		if (!((Integer) getHiddenid() == null || (Integer)getHiddenid() == 0)) {
 			iamodel = caseServices.getCase(getHiddenid());
-			//activateLists();
+			activateLists();
 		}
 	}
 

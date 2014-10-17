@@ -10,8 +10,8 @@
 			</div>
 		    <div class="inputfield six columns omega">
 				<s:label for="communicationDate" value="Communication Date:" />
-				<div>
-	 				<input type="date" name="iamodel.communicationsList[%{#stat.index}].communicationDate" />
+				<div>      					
+  				<s:textfield id="DateId%{#stat.index}" cssClass="DateInputClass" name="iamodel.communicationsList[%{#stat.index}].communicationDate"/> 
 	 			</div>
 			</div>
 			<div class="inputfield four columns omega">
@@ -19,6 +19,7 @@
 				<div>
 					<%-- <input type="text" name="iamodel.communicationsList[%{#stat.index}].timeSpent" value="<s:property value="iamodel.communicationsList[%{#stat.index}].timeSpent.toString()"/>"/> --%>
 					<s:textfield name="iamodel.communicationsList[%{#stat.index}].timeSpent"  />
+					
 				</div>
 			</div>
 		</div>
