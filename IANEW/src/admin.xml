@@ -18,159 +18,172 @@
 <struts>
  	<package name="admin" namespace="/admin" extends="struts-default">
     	<action name="getAccommodationTypeForm" class="uow.ia.action.AdminAction" method="getAccommodationTypeForm">
-    		<result name="success">/admin/newAccommodationType.jsp</result>
+    		<result name="success">/admin/typeSettings/includes/newAccommodationType.jsp</result>
     	</action>
     	<action name="saveNewAccommodationType" class="uow.ia.action.AdminAction" method="saveNewAccommodationType">
-    		<result name="success">/admin/iterAccommodationTypes.jsp</result>
+    		<result name="success">/admin/typeSettings/includes/iterators/iterAccommodationTypes.jsp</result>
     		<result name="input"></result>
     	</action>
     	<action name="updateAccommodationTypes" class="uow.ia.action.AdminAction" method="updateAccommodationTypes">
-    		<result name="success">/admin/iterAccommodationTypes.jsp</result>
+    		<result name="success">/admin/typeSettings/includes/iterators/iterAccommodationTypes.jsp</result>
     		<result name="input"></result>
     	</action>
     	<action name="getCommunicationTypesForm" class="uow.ia.action.AdminAction" method="getCommunicationTypeForm">
-    		<result name="success">/admin/newCommunicationType.jsp</result>
+    		<result name="success">/admin/typeSettings/includes/newCommunicationType.jsp</result>
     	</action>
     	<action name="saveNewCommunicationType" class="uow.ia.action.AdminAction" method="saveNewCommunicationType">
-    		<result name="success">/admin/iterCommunicationTypes.jsp</result>
+    		<result name="success">/admin/typeSettings/includes/iterators/iterCommunicationTypes.jsp</result>
     		<result name="input"></result>
     	</action>
     	<action name="updateCommunicationTypes" class="uow.ia.action.AdminAction" method="updateCommunicationTypes">
-    		<result name="success">/admin/iterCommunicationTypes.jsp</result>
+    		<result name="success">/admin/typeSettings/includes/iterators/iterCommunicationTypes.jsp</result>
     		<result name="input"></result>
     	</action>
     	<action name="getNewculturalBackgroundTypeForm" class="uow.ia.action.AdminAction" method="getNewculturalBackgroundTypeForm">
-    		<result name="success">/admin/newCulturalBackgroundType.jsp</result>
+    		<result name="success">/admin/typeSettings/includes/newCulturalBackgroundType.jsp</result>
     	</action>
     	<action name="saveNewculturalBackgroundType" class="uow.ia.action.AdminAction" method="saveNewculturalBackgroundType">
-    		<result name="success">/admin/iterCulturalBackgroundTypes.jsp</result>
+    		<result name="success">/admin/typeSettings/includes/iterators/iterCulturalBackgroundTypes.jsp</result>
     		<result name="input"></result>
     	</action>
     	<action name="updateCulturalBackgroundTypes" class="uow.ia.action.AdminAction" method="updateCultualBackgroundType">
-    		<result name="success">/admin/iterCulturalBackgroundTypes.jsp</result>
+    		<result name="success">/admin/typeSettings/includes/iterators/iterCulturalBackgroundTypes.jsp</result>
     		<result name="input"></result>
     	</action>
     	<action name="getDangerTypeForm" class="uow.ia.action.AdminAction" method="getDangerTypeForm">
-    		<result name="success">/admin/newDangerType.jsp</result>
+    		<result name="success">/admin/typeSettings/includes/newDangerType.jsp</result>
     	</action>
     	<action name="saveNewDangerType" class="uow.ia.action.AdminAction" method="saveNewDangerType">
-    		<result name="success">/admin/iterDangerTypes.jsp</result>
+    		<result name="success">/admin/typeSettings/includes/iterators/iterDangerTypes.jsp</result>
     		<result name="input"></result>
     	</action>
     	<action name="updateDangerType" class="uow.ia.action.AdminAction" method="updateDangerType">
-    		<result name="success">/admin/iterDangerTypes.jsp</result>
+    		<result name="success">/admin/typeSettings/includes/iterators/iterDangerTypes.jsp</result>
     		<result name="input"></result>
     	</action>
     	<action name="getDisabilityTypeForm" class="uow.ia.action.AdminAction" method="getDisabilityTypeForm">
-    		<result name="success">/admin/newDisabilityType.jsp</result>
+    		<result name="success">/admin/typeSettings/includes/newDisabilityType.jsp</result>
     	</action>
     	<action name="saveNewDisabilityType" class="uow.ia.action.AdminAction" method="saveNewDisabilityType">
-    		<result name="success">/admin/iterDisabilityTypes.jsp</result>
+    		<result name="success">/admin/typeSettings/includes/iterators/iterDisabilityTypes.jsp</result>
    			 <result name="input"></result>
     	</action>
     	<action name="updateDisabilityType" class="uow.ia.action.AdminAction" method="updateDisabilityType">
-    		<result name="success">/admin/iterDisabilityTypes.jsp</result>
+    		<result name="success">/admin/typeSettings/includes/iterators/iterDisabilityTypes.jsp</result>
     		<result name="input"></result>
     	</action>
     	<action name="getEmploymentTypeForm" class="uow.ia.action.AdminAction" method="getEmploymentTypeForm">
-    		<result name="success">/admin/newEmploymentType.jsp</result>
+    		<result name="success">/admin/typeSettings/includes/newEmploymentType.jsp</result>
     	</action>
     	<action name="saveNewEmploymentType" class="uow.ia.action.AdminAction" method="saveNewEmploymentType">
-    		<result name="success">/admin/iterEmploymentTypes.jsp</result>
+    		<result name="success">/admin/typeSettings/includes/iterators/iterEmploymentTypes.jsp</result>
     		<result name="input"></result>
     	</action>
     	<action name="updateEmploymentType" class="uow.ia.action.AdminAction" method="updateEmploymentType">
-    		<result name="success">/admin/iterEmploymentTypes.jsp</result>
+    		<result name="success">/admin/typeSettings/includes/iterators/iterEmploymentTypes.jsp</result>
     		<result name="input"></result>
     	</action>
     	<action name="getEnquiryTypeForm" class="uow.ia.action.AdminAction" method="getEnquiryTypeForm">
-    		<result name="success">/admin/newEnquiryType.jsp</result>
+    		<result name="success">/admin/typeSettings/includes/newEnquiryType.jsp</result>
     	</action>
     	<action name="saveNewEnquiryType" class="uow.ia.action.AdminAction" method="saveNewEnquiryType">
-    		<result name="success">/admin/iterEnquiryTypes.jsp</result>
+    		<result name="success">/admin/typeSettings/includes/iterators/iterEnquiryTypes.jsp</result>
     		<result name="input"></result>
     	</action>
     	<action name="updateEnquiryType" class="uow.ia.action.AdminAction" method="updateEnquiryType">
-    		<result name="success">/admin/iterEnquiryTypes.jsp</result>
+    		<result name="success">/admin/typeSettings/includes/iterators/iterEnquiryTypes.jsp</result>
     		<result name="input"></result>
     	</action>
     	<action name="getGenderTypeForm" class="uow.ia.action.AdminAction" method="getGenderTypeForm">
-    		<result name="success">/admin/newGenderType.jsp</result>
+    		<result name="success">/admin/typeSettings/includes/newGenderType.jsp</result>
     	</action>
     	<action name="saveNewGenderType" class="uow.ia.action.AdminAction" method="saveNewGenderType">
-    		<result name="success">/admin/iterGenderTypes.jsp</result>
+    		<result name="success">/admin/typeSettings/includes/iterators/iterGenderTypes.jsp</result>
     		<result name="input"></result>
     	</action>
     	<action name="updateGenderType" class="uow.ia.action.AdminAction" method="updateGenderType">
-    		<result name="success">/admin/iterGenderTypes.jsp</result>
+    		<result name="success">/admin/typeSettings/includes/iterators/iterGenderTypes.jsp</result>
     		<result name="input"></result>
     	</action>
     	<action name="getGoalTypeForm" class="uow.ia.action.AdminAction" method="getGoalTypeForm">
-    		<result name="success">/admin/newGoalType.jsp</result>
+    		<result name="success">/admin/typeSettings/includes/newGoalType.jsp</result>
     	</action>
     	<action name="saveNewGoalType" class="uow.ia.action.AdminAction" method="saveNewGoalType">
-    		<result name="success">/admin/iterGoalTypes.jsp</result>
+    		<result name="success">/admin/typeSettings/includes/iterators/iterGoalTypes.jsp</result>
     		<result name="input"></result>
     	</action>
     	<action name="updateGoalTypes" class="uow.ia.action.AdminAction" method="updateGoalTypes">
-    		<result name="success">/admin/iterGoalTypes.jsp</result>
+    		<result name="success">/admin/typeSettings/includes/iterators/iterGoalTypes.jsp</result>
     		<result name="input"></result>
     	</action>
     	<action name="getIssueTypeForm" class="uow.ia.action.AdminAction" method="getIssueTypeForm">
-    		<result name="success">/admin/newIssueType.jsp</result>
+    		<result name="success">/admin/typeSettings/includes/newIssueType.jsp</result>
     	</action>
     	<action name="saveNewIssueType" class="uow.ia.action.AdminAction" method="saveNewIssueType">
-    		<result name="success">/admin/iterIssueTypes.jsp</result>
+    		<result name="success">/admin/typeSettings/includes/iterators/iterIssueTypes.jsp</result>
     		<result name="input"></result>
     	</action>
     	<action name="updateIssueType" class="uow.ia.action.AdminAction" method="updateIssueType">
-    		<result name="success">/admin/iterIssueTypes.jsp</result>
+    		<result name="success">/admin/typeSettings/includes/iterators/iterIssueTypes.jsp</result>
     		<result name="input"></result>
     	</action>
     	<action name="getPriorityTypeForm" class="uow.ia.action.AdminAction" method="getPriorityTypeForm">
-    		<result name="success">/admin/newPriorityType.jsp</result>
+    		<result name="success">/admin/typeSettings/includes/newPriorityType.jsp</result>
     	</action>
     	<action name="saveNewPriorityType" class="uow.ia.action.AdminAction" method="saveNewPriorityType">
-    		<result name="success">/admin/iterPriorityTypes.jsp</result>
+    		<result name="success">/admin/typeSettings/includes/iterators/iterPriorityTypes.jsp</result>
     		<result name="input"></result>
     	</action>
     	<action name="updatePriorityTypes" class="uow.ia.action.AdminAction" method="updatePriorityTypes">
-    		<result name="success">/admin/iterPriorityTypes.jsp</result>
+    		<result name="success">/admin/typeSettings/includes/iterators/iterPriorityTypes.jsp</result>
     		<result name="input"></result>
     	</action>
     	<action name="getStatusTypeForm" class="uow.ia.action.AdminAction" method="getStatusTypeForm">
-    		<result name="success">/admin/newStatusType.jsp</result>
+    		<result name="success">/admin/typeSettings/includes/newStatusType.jsp</result>
     	</action>
     	<action name="saveNewStatusType" class="uow.ia.action.AdminAction" method="saveNewStatusType">
-    		<result name="success">/admin/iterStatusTypes.jsp</result>
+    		<result name="success">/admin/typeSettings/includes/iterators/iterStatusTypes.jsp</result>
     		<result name="input"></result>
     	</action>
     	<action name="updateStatusType" class="uow.ia.action.AdminAction" method="updateStatusType">
-    		<result name="success">/admin/iterStatusTypes.jsp</result>
+    		<result name="success">/admin/typeSettings/includes/iterators/iterStatusTypes.jsp</result>
     		<result name="input"></result>
     	</action>
     	<action name="getTitleTypesForm" class="uow.ia.action.AdminAction" method="getTitleTypesForm">
-    		<result name="success">/admin/newTitleType.jsp</result>
+    		<result name="success">/admin/typeSettings/includes/newTitleType.jsp</result>
     	</action>
     	<action name="saveNewTitleType" class="uow.ia.action.AdminAction" method="saveNewTitleType">
-    		<result name="success">/admin/iterTitleTypes.jsp</result>
+    		<result name="success">/admin/typeSettings/includes/iterators/iterTitleTypes.jsp</result>
     		<result name="input"></result>
     	</action>
     	<action name="updateTitleType" class="uow.ia.action.AdminAction" method="updateTitleType">
-    		<result name="success">/admin/iterTitleTypes.jsp</result>
+    		<result name="success">/admin/typeSettings/includes/iterators/iterTitleTypes.jsp</result>
     		<result name="input"></result>
     	</action>
     	<action name="startAdminPage" class="uow.ia.action.AdminAction" method="startAdminPage">
-    		<result name="success">/admin/admin.jsp</result>
+    		<result name="success">/admin/typeSettings/typeSettings.jsp</result>
+    	</action>
+    	<action name="userSettingsPage" class="uow.ia.action.ContactAction" method="userSettingsPage">
+    		<result name="success">/admin//contactSettings/userSettings/userSettings.jsp</result>
     	</action>
     	<action name="adminAdvocatePage" class="uow.ia.action.ContactAction" method="adminAdvocatePage">
     		<interceptor-ref name="params"/>
 		     <interceptor-ref name="prepare"/>
 		     <interceptor-ref name="basicStack"/>
-    		<result name="success">/admin/advocateSettings.jsp</result>
+    		<result name="success">/admin//contactSettings/advocateSettings/advocateSettings.jsp</result>
     	</action>
     	<action name="adminUserPage" class="uow.ia.action.ContactAction" method="adminUserPage">
-    		<result name="success">/admin/clientSettings.jsp</result>
+    		<interceptor-ref name="params"/>
+		     <interceptor-ref name="prepare"/>
+		     <interceptor-ref name="basicStack"/>
+    		<result name="success">/admin//contactSettings/clientSettings/clientSettings.jsp</result>
+    	</action>
+    	<action name="saveOrUpdateContact" class="uow.ia.action.ContactAction" method="saveOrUpdateContact">
+    		<result name="advocatesettings">/admin/advocateSettings.jsp</result>
+    		<result name="clientsettings">/admin/contactSettings/clientSettings/clientSettings.jsp</result>
+    	</action>
+    	<action name="getExistingContact" class="uow.ia.action.ContactAction" method="getExistingContact">
+    		<result name="success">/admin/contactSettings/shared/ajaxContact.jsp</result>
     	</action>
    	</package>
 </struts>

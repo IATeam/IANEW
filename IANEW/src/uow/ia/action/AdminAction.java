@@ -14,20 +14,19 @@ import uow.ia.bean.PriorityTypes;
 import uow.ia.bean.StatusTypes;
 import uow.ia.bean.TitleTypes;
 import uow.ia.bean.Contacts;
+import uow.ia.bean.Users;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.opensymphony.xwork2.Preparable;
+import com.sun.tools.xjc.reader.xmlschema.bindinfo.BIConversion.User;
 
 /**
  * @author David
  * 				
  */
-public class AdminAction extends BaseAction implements Preparable{
-	
-	
-	
-	//getContact().setAccommodation(typesService.getAccommodationTypeId(getTheAccommodationTypeId()));
+public class AdminAction extends BaseAction implements Preparable{	
 	
 	/* 
 	 * 
@@ -60,6 +59,8 @@ public class AdminAction extends BaseAction implements Preparable{
 		
 		return SUCCESS;
 	}
+	
+
 	
 	/**
 	 * @author davidforbes
@@ -1371,6 +1372,7 @@ public class AdminAction extends BaseAction implements Preparable{
 	public void setPrioritySelectList(List<PriorityTypes> prioritySelectList) {
 		this.prioritySelectList = prioritySelectList;
 	}
+
 	
 	/**
 	 * 
@@ -1391,5 +1393,7 @@ public class AdminAction extends BaseAction implements Preparable{
 		setGoalSelectList(adminService.findGoalTypes());
 		setPrioritySelectList(adminService.findPriorityTypes());
 	}
+
+
 
 }

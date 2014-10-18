@@ -5,10 +5,13 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.struts2.interceptor.SessionAware;
+
 import com.opensymphony.xwork2.Preparable;
 
 import uow.ia.bean.AccommodationTypes;
 import uow.ia.bean.Addresses;
+import uow.ia.bean.ContactTypes;
 import uow.ia.bean.Contacts;
 import uow.ia.bean.CulturalBackgroundTypes;
 import uow.ia.bean.GenderTypes;
@@ -16,13 +19,15 @@ import uow.ia.bean.TitleTypes;
 import uow.ia.bean.Users;
 import uow.ia.util.DateUtil;
 
-public class ContactAction extends BaseAction implements Preparable{
+public class ContactAction extends BaseAction implements Preparable, SessionAware{
+	private String formTitle;
 	public String adminAdvocatePage(){
 		setAdvocateSelectList(contactService.findAdvocates());
 		setGenderSelectList(typesService.findGenderTypes());
 		setAccommodationSelectList(typesService.findAccommodationTypes());
 		setCulturalBackgroundSelectList(typesService.findCulturalBackgroundTypes());
 		setTitleSelectList(typesService.findTitleTypes());
+		setContactType(1);
 	
 		try{ setTheAccommodationTypeId(getContact().getAccommodation().getId()); }catch (NullPointerException n){}
 		try{ setDob(getContact().getDob().toString()); }catch (NullPointerException n) {}
@@ -38,6 +43,8 @@ public class ContactAction extends BaseAction implements Preparable{
 		setAccommodationSelectList(typesService.findAccommodationTypes());
 		setCulturalBackgroundSelectList(typesService.findCulturalBackgroundTypes());
 		setTitleSelectList(typesService.findTitleTypes());
+		setContactType(2);
+
 		
 		try{ setTheAccommodationTypeId(getContact().getAccommodation().getId()); }catch (NullPointerException n){}
 		try{ setDob(getContact().getDob().toString()); }catch (NullPointerException n) {}
@@ -50,10 +57,27 @@ public class ContactAction extends BaseAction implements Preparable{
 	
 	/**
 	 * @author davidforbes
+	 * @date 16/09/2014 -	
+	 * 		User settings page		
+	 * 				
+	 */
+	public String userSettingsPage(){
+		setAdvocateSelectList(contactService.findAdvocates());
+		return SUCCESS;
+		
+	}
+	
+	
+	/**
+	 * @author davidforbes
 	 * @date 30/09/2014 -	
 	 * 		Advocate Fields & Methods		
 	 * 				
 	 */
+	
+	private int theAdvocate;						
+	private int hiddenid;
+	private int contactType;
 	
 	private List<Contacts> advocateSelectList;	
 	private List<GenderTypes> genderSelectList;
@@ -88,59 +112,59 @@ public class ContactAction extends BaseAction implements Preparable{
 		return SUCCESS;
 	}
 	
-	
-
-	public String saveOrUpdateContact(){
-	System.out.println("Struts: start SaveUpdateEnquiry");
-	
-	Date saveDate = null;
-	try {
-		saveDate = DateUtil.yyyymmddDate(getDob());
-	} catch (ParseException e) {
-		System.out.println("Problem with date: " + e.getMessage());
+	public String saveOrUpdateContact(){		
+		Date saveDate = null;
+		try {
+			saveDate = DateUtil.yyyymmddDate(getDob());
+		} catch (ParseException e) {
+			System.out.println("Problem with date: " + e.getMessage());
+		}		
+		java.sql.Date date = null;
+		try{ date = new java.sql.Date(saveDate.getTime()); } catch(NullPointerException n){}
+		
+		getContact().setDob(date);
+		
+		Users user = (Users)userSession.get(USER);
+				
+		//addresses setup
+		List<Addresses> al = getContact().getAddressesList();
+		for(int i = 0; i < al.size(); i++){
+			if(al.get(i).getId() == null)
+				al.get(i).setContact(getContact());
+			else if(al.get(i).getId() == -1){
+				getContact().getAddressesList().remove(i);
+				i--;
+			}
 	}
-	
-	java.sql.Date date = null;
-	try{ date = new java.sql.Date(saveDate.getTime()); } catch(NullPointerException n){}
-	
-	getContact().setDob(date);
-	
-	Users user = (Users)userSession.get(USER);
-	
-	//addresses setup
-	List<Addresses> al = getContact().getAddressesList();
-	System.out.println("checking address");
-	for(int i = 0; i < al.size(); i++){
-		if(al.get(i).getId() == null){
-			al.get(i).setContact(getContact());
-			al.get(i).setCreatedUser(user.getContact());
-			al.get(i).setUpdatedUser(user.getContact());
-		}
-		else if(al.get(i).getId() == -1){
-			System.out.println("Removing a false address");
-			getContact().getAddressesList().remove(i);
-			i--;
-		}
-	}
-	
 	getContact().setCulturalBackground(typesService.getCulturalBackgroundTypeById(getTheCulturalBackgroundTypeId()));
 	getContact().setTitleType(typesService.getTitleTypeById(getTheTitleTypeId()));
 	getContact().setGenderType(typesService.getGenderTypeById(getTheGenderTypeId()));
 	getContact().setAccommodation(typesService.getAccommodationTypeById(getTheAccommodationTypeId()));
-	
-	System.out.println("Start to save");
-	if(contact.getId() == null){
-		if(contactService.saveOrUpdateContact(this.getContact())){
-			activateLists();
-			setContact(contact);
-			System.out.println("save new enquiry successfully");
-			System.out.println("Struts: end saveUpdateEnquiry");
-			return SUCCESS;
+	System.out.println("Contact type: " + getContactType());
+	getContact().setContactType(typesService.getContactTypeById(getContactType()));
+		
+	if(contactService.saveOrUpdateContact(this.getContact())){
+		setAdvocateSelectList(contactService.findAdvocates());
+		setClientSelectList(contactService.findClients());
+
+		setGenderSelectList(typesService.findGenderTypes());
+		setAccommodationSelectList(typesService.findAccommodationTypes());
+		setCulturalBackgroundSelectList(typesService.findCulturalBackgroundTypes());
+		setTitleSelectList(typesService.findTitleTypes());
+		
+		setContactType(getContactType());
+		
+		try{ setTheAccommodationTypeId(getContact().getAccommodation().getId()); }catch (NullPointerException n){}
+		try{ setDob(getContact().getDob().toString()); }catch (NullPointerException n) {}
+		try{ setTheTitleTypeId(getContact().getTitleType().getId()); }catch (NullPointerException n){}
+		try{ theCulturalBackgroundTypeId = getContact().getCulturalBackground().getId(); }	catch (NullPointerException n){}
+		contact = new Contacts();
+		if(contactType == 1)
+			return "advocatesettings";
+		else {
+			return "clientsettings";
 		}
 	}
-	
-	System.out.println("Struts: save unsuccessful");
-	System.out.println("Struts: end saveUpdateEnquiry");
 	return ERROR;	
 	}
 	/**
@@ -216,6 +240,13 @@ public class ContactAction extends BaseAction implements Preparable{
 		this.titleSelectList = titleSelectList;
 	}
 
+	public int getTheAdvocate() {
+		return theAdvocate;
+	}
+
+	public void setTheAdvocate(int theAdvocate) {
+		this.theAdvocate = theAdvocate;
+	}
 
 	public Contacts getContact() {
 		return contact;
@@ -297,4 +328,41 @@ public class ContactAction extends BaseAction implements Preparable{
 	public void setTheGenderTypeId(int theGenderTypeId) {
 		this.theGenderTypeId = theGenderTypeId;
 	}
+
+
+	public void setSession(Map<String,Object> session) {
+		System.out.println("setSession called");
+		this.userSession = session;
+	}
+	
+	public String getExistingContact(){
+		contact = contactService.getContacts(getHiddenid());
+		return SUCCESS;
+	}
+
+	public int getHiddenid() {
+		return hiddenid;
+	}
+
+	public void setHiddenid(int hiddenid) {
+		this.hiddenid = hiddenid;
+	}
+
+	public int getContactType() {
+		return contactType;
+	}
+
+	public void setContactType(int contactType) {
+		this.contactType = contactType;
+	}
+
+	public String getFormTitle() {
+		return formTitle;
+	}
+
+	public void setFormTitle(String formTitle) {
+		this.formTitle = formTitle;
+	}
+
+
 }

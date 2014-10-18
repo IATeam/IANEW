@@ -29,7 +29,7 @@ function collapseAll() {
 			<s:div id="formTitle"><s:text name="formTitle" /></s:div>
 		</s:div>		
 	</s:div>
-	<s:if test="%{#formType=='case' || #formType=='enquiry'}">
+	<s:if test="%{#formType=='case' || #formType=='enquiry' || #formType=='advocate'}">
 		<s:div cssClass="row">
 			<section class="ten columns"><p></p></section>
 			<input type="button" class="three columns omega topButton" value="Expand All" onClick="expandAll()"/>

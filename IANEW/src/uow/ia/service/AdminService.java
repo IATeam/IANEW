@@ -29,6 +29,7 @@ import uow.ia.bean.PriorityTypes;;
 public interface AdminService {
 
 	public static final String SERVICENAME = "AdminService";
+
 	
 	 /* ----------------------------------------------------------------------------------------------------------
 	 * Accommodation Type ServiceMethods
@@ -475,6 +476,4 @@ public interface AdminService {
 		     * @return List<Object>
 		     */
 			public boolean updatePriorityType(PriorityTypes p);
-		
-
 }
