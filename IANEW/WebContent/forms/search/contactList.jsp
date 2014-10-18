@@ -2,14 +2,8 @@
     pageEncoding="US-ASCII"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
-<title>Insert title here</title>
-</head>
-<body>
-	<s:iterator value="contactList">
+<%-- 	<s:iterator value="contactList">
+		
 		<s:property value="titleType.name" />
 		<s:property value="firstname"/>
 		<s:property value="othername"/>
@@ -17,6 +11,44 @@
 		<s:property value="mobile"/>
 		<s:property value="email"/>
 		<s:property value="dob"/>
+	</s:iterator> --%>
+
+	<s:div cssClass="list">
+	<s:iterator value="contactList">
+		<s:div cssClass="curveBorder sixteen columns iteratorlist" onclick="bandSelected(this)">
+			<s:div cssClass="row">
+				<s:div cssClass="textarea two columns">
+					<s:label for="id" value="Client#:" />
+					<p class="id"><s:property value="id"/></p>
+				</s:div>
+				<s:div cssClass="textarea three columns">
+					<s:label value="firstname:" />
+					<p><s:property value="firstname" /></p>
+				</s:div>
+				<s:div cssClass="textarea three columns">
+					<s:label value="othername:" />
+					<p><s:property value="othername" /></p>
+				</s:div>
+				<s:div cssClass="textarea three columns">
+					<s:label value="lastname:" />
+					<p><s:property value="lastname" /></p>
+				</s:div>
+				<s:div cssClass="textarea two columns">
+					<s:label value="Title:" />
+					<p><s:property value="titleType.name" /></p>
+				</s:div>
+				<s:div cssClass="textarea two columns omega">
+					<s:label value="Gender:" />
+					<p><s:property value="genderType.genderName" /></p>
+				</s:div>
+			</s:div>
+			
+			<%-- <s:div cssClass="row toggled">
+				<s:div cssClass="textarea fifteen columns omega">
+					<s:label for="description" value="Description:" />
+					<s:div><s:textarea cssClass="multiLineTextArea" name="description" readonly="true"/></s:div>
+				</s:div>
+			</s:div> --%>
+		</s:div>
 	</s:iterator>
-</body>
-</html>
+</s:div>

@@ -82,9 +82,13 @@
     	<action name="linkEnquiry" class="uow.ia.action.EnquiryListAction" method="updateEnquiryList">
     		<result name="success">/forms/enquiryList.jsp</result>
     	</action>
-    	
-    	
     </package>
+    
+    <package name="contactList" namespace="/contactList" extends="struts-default">
+    	<action name="loadClientSearchResult" class="uow.ia.action.ContactListAction" method="loadClientSearchResult">
+    		<result name="success">/forms/search/contactList.jsp</result>
+    	</action>
+   	</package>
     
     <!-- Case Forms -->
     <package name="case" namespace="/case" extends="struts-default">
@@ -158,8 +162,11 @@
     	</action>
     </package>
     
+   	
      <include file="login.xml"/>
      <!-- Settings Forms -->
      <include file="admin.xml" />
      <include file="test.xml" />
+     
+     
 </struts>

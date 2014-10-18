@@ -36,7 +36,7 @@
 		
 		
 		
-		<%@include file="/forms/includes/lists.jsp" %>
+		<%@include file="/forms/includes/iterEnquiryList.jsp" %>
 			
 			
 		<s:div cssClass="clear"/>
@@ -73,7 +73,7 @@
 			//alert($("#hiddenid").val())
 		});
 
-		$("#btnLink").click(function(){ alert("Cancel Pressed")
+		$("#btnLink").click(function(){ alert("Link Pressed");
 			
 			$("#linkedEnquiriesDiv").load("enquiry/updateLinkedEnquiries.action?hiddenid=" + $("#hiddenid").val() + "&");
 			$("#linkedEnquiriesListDiv").hide();	

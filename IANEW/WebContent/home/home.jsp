@@ -150,7 +150,8 @@
 					<s:textfield id="searchbox" Key="searchString" name="searchString"/><br/>
 					<%-- onkeypress="return addActivity(this.value, event)" --%>
 				</div>
-				<div id="divRadio"><s:radio value="1" onclick="radioChecked(this.id)" name="radio" list="#{'1':'Database','2':'Document','3':'Report' }"/></div>
+				
+				<s:div id="divRadio"><s:radio value="1" onclick="radioChecked(this.id)" name="radio" list="#{'1':'Database','2':'Document','3':'Report' }"/></s:div>
 				<!-- <button onclick="displayActivities()">display</button>
 				<button onclick="deleteLocalStorage()">clear</button> -->
 			</section>

@@ -309,13 +309,18 @@ h4 {
 	 height: 20px;
 }
 
+.searchButton{
+	height: 20px;
+	width: 20px;
+}
+
 .hidden {
 	display:none;
 	visibility: hidden;
 }
 
 .topButton {
-	  text-shadow: -0.75px 0 black, 0 0.75px black, 0.75px 0 black, 0 -0.75px black;
+	text-shadow: -0.75px 0 black, 0 0.75px black, 0.75px 0 black, 0 -0.75px black;
 	color: white;
 	margin-bottom: 10px;
 	background-color: orange !important;

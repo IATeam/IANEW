@@ -10,10 +10,17 @@ import org.apache.lucene.queryParser.MultiFieldQueryParser;
 import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.queryParser.QueryParser;
 import org.apache.lucene.search.BooleanQuery;
+import org.apache.lucene.search.Query;
+import org.apache.lucene.search.Sort;
+import org.apache.lucene.search.SortField;
 import org.apache.lucene.util.Version;
+import org.hibernate.Filter;
 import org.hibernate.mapping.Collection;
 import org.hibernate.metadata.ClassMetadata;
+import org.hibernate.search.FullTextQuery;
 import org.hibernate.search.FullTextSession;
+
+import com.sun.tools.ws.wsdl.framework.Entity;
 
 import bsh.This;
 import uow.ia.bean.Contacts;
@@ -49,7 +56,7 @@ public class SearchUtil {
 						type.isInstance(new java.sql.Date(0)) || 
 						type.isInstance(new java.util.Date()) ||
 						type.isInstance(new Integer(0)) ) {
-						if (objectFieldName == null) {
+						if (objectFieldName == null) { 
 							this.fieldList.add(f.getName());
 						} else {
 							this.fieldList.add(objectFieldName + "." + f.getName());
@@ -65,7 +72,6 @@ public class SearchUtil {
 	public String[] SearchFields() {
 		
 		Map<String, ClassMetadata> map = service.getAllClassMetadata();
-		
 		for (ClassMetadata cm : map.values()) {
 			fieldCollection(cm.getMappedClass(), null);
 		}
@@ -108,5 +114,104 @@ public class SearchUtil {
 		fts.getTransaction().commit();
 		
 		return list;
+	}
+	
+	
+	/**
+	 * @Quang
+	 * @param searchString
+	 * @param service
+	 * @return List
+	 */
+	public List getResultList(String searchString, UtilService service) {
+		
+		FullTextSession fts = service.getFullTextSession();		
+		fts.getTransaction().begin();
+		
+		List list = fts.createFullTextQuery(getLuceneQuery(searchString)).list();
+		
+		fts.getTransaction().commit();
+		
+		return list;
+	}
+	
+	public int getTotalNumberOfRecords(String searchString, UtilService s, Class<?> entity){
+		FullTextQuery ftq = getQueryResult(searchString, s, entity);
+		return ftq.getResultSize();
+	}
+	
+	public List getPage(int startIndex, int pageSize, String sortField, String searchString, UtilService s, boolean asc, Class<?> entity){
+		FullTextQuery ftq = null;
+		
+		if(sortField == null){
+			ftq = getQueryResult(searchString, s, entity);
+		}else{
+			ftq = getSortedQueryResult(sortField, searchString, s, asc, entity);
+		}
+		
+		try{
+			ftq.setFirstResult(startIndex);
+			ftq.setMaxResults(pageSize);
+			
+		}catch(NullPointerException ne){}
+		
+		return ftq.list();
+	}
+	
+	private FullTextQuery getSortedQueryResult(String sortField, String searchString, UtilService s, boolean asc, Class<?> entity){
+		service = s;
+		FullTextSession fts = s.getFullTextSession();
+		
+		
+		FullTextQuery ftq = null;
+		try{
+			ftq = fts.createFullTextQuery(getLuceneQuery(searchString), entity);
+			
+		}catch(NullPointerException npe){
+			ftq = fts.createFullTextQuery(getLuceneQuery(searchString));
+		}
+		
+		Sort sort = new Sort(new SortField(sortField, SortField.STRING, asc));
+		
+		ftq.setSort(sort);
+		//ftq.enableFullTextFilter(filteringField);
+		return ftq;
+	}
+	
+	private FullTextQuery getQueryResult(String searchString, UtilService s, Class<?> entity){
+		service = s;
+		FullTextSession fts = s.getFullTextSession();
+		
+		
+		FullTextQuery ftq = null;
+		try{
+			ftq = fts.createFullTextQuery(getLuceneQuery(searchString), entity);
+		}catch(NullPointerException npe){
+			ftq = fts.createFullTextQuery(getLuceneQuery(searchString));
+		}
+		
+		
+		return ftq;
+	}
+	
+	private Query getLuceneQuery(String searchString){
+		String[] searchFields = SearchFields();
+		
+		BooleanQuery.setMaxClauseCount(20000);
+		QueryParser parser = new MultiFieldQueryParser(Version.LUCENE_36,
+														searchFields,
+														new StandardAnalyzer(Version.LUCENE_36));
+		
+		org.apache.lucene.search.Query luceneQuery = null;
+		
+		try {
+			luceneQuery = parser.parse(searchString);
+		} catch (ParseException e) {
+			System.out.println("parse exception " + e);
+		} catch (Exception e2) {
+			System.out.println("other exception " + e2);
+		}
+		
+		return luceneQuery;
 	}
 }

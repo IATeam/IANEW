@@ -3,17 +3,21 @@ package uow.ia.action;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.hibernate.EntityNameResolver;
 import org.hibernate.search.FullTextSession;
 
+import uow.ia.bean.Contacts;
 import uow.ia.bean.Enquiries;
 import uow.ia.bean.IndividualCases;
 import uow.ia.bean.Users;
 import uow.ia.util.SearchUtil;
 
 import com.opensymphony.xwork2.ActionContext;
+import com.sun.tools.ws.wsdl.framework.Entity;
 
 public class LoginAction extends BaseAction{
 
@@ -49,11 +53,12 @@ public class LoginAction extends BaseAction{
             
             FullTextSession fts = utilService.getFullTextSession();
     		
-    		try {
-    			fts.createIndexer().startAndWait();
-    		} catch (InterruptedException e) {
-    			e.printStackTrace();
-    		}
+    		//try {
+    			//fts.createIndexer().startAndWait();
+    			System.out.println("commented index out");
+    		//} catch (InterruptedException e) {
+    			//e.printStackTrace();
+    		//}
             
 			return SUCCESS;
 		} else {

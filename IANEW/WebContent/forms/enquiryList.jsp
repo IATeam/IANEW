@@ -72,7 +72,7 @@
 <!-- ---------------------------------------------------------------------------------------------- -->	
 			<!-- status="..." use attribute to get status info of iteration (index, count, first, even last, odd info) -->
 			
-			<%@include file="/forms/includes/lists.jsp" %>
+			<%@include file="/forms/includes/iterEnquiryList.jsp" %>
 			<s:div cssClass="clear"/>
 <!-- ----------------------------------------------------------------------------------------------------------------------- -->
 <!-- the footer of the form containing the cancel, open enquiry and new enquiry as well as the pagination functions -------- -->

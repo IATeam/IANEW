@@ -61,7 +61,7 @@
 		<div class="fourteen columns alpha"><p></p></div>
 		
 		<!-- addNewRecord function is located in ianew.form.js -->
-		<input type="button" id="btnAddIssue" value="Add Issue" class="two columns" onclick="addNewRecord('artEmployment', 'employmentSize', 'itEmployment' )"/>
+		<input type="button" id="btnAddIssue" value="Add Employment" class="two columns" onclick="addNewRecord('artEmployment', 'employmentSize', 'itEmployment' )"/>
 	</div>
 	
 </div>

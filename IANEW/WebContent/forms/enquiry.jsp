@@ -98,10 +98,8 @@
 					</section>
 					<section class="four columns"><p></p></section>
 					<section class="six columns omega">
-<!-- 						<input id="createCase" type="button" value="Create Case" class="three columns alpha" onclick="confirmAction('Are you sure you want to create a case?', 'case', 'newCase')"/>
- -->						<input id="createCase" type="button" value="Create Case" class="three columns alpha" onclick="checkForm()"/>
-<%-- 						<sj:submit formIds="enquiryForm" name="submit" cssClass="submit two columns omega" value="Submit" onclick="checkForm()"/>
- --%>						<s:submit name="submit" cssClass="three columns omega" value="Submit" onclick="confirmAction('Are you sure you want to save the enquiry?', 'enquiry', 'saveUpdateEnquiry')"/>
+						<input id="createCase" type="button" value="Create Case" class="three columns alpha" onclick="checkForm()"/>
+						<s:submit name="submit" cssClass="three columns omega" value="Submit" onclick="confirmAction('Are you sure you want to save the enquiry?', 'enquiry', 'saveUpdateEnquiry')"/>
 					</section>
 				</s:div>
 			</footer>
@@ -115,9 +113,15 @@
 	
 	
 	<script>
-
+		$("#btnNewEnquiry").click(function(){
+			var contactId = $("input[name='iamodel.contact.id']").val();
+			//alert(contactId);
+			$("#formDiv").load("enquiry/newEnquiry.action?contactid=" + contactId);
+			
+		});
 	$(function() {
 		initialisePrimaryDisability();
+		initialiseNewSection("artIssue", "itIssue");
 		initialiseNewSection("artAddress", "itAddress");
 		initialiseNewSection("artEmployment", "itEmployment");
 		initialiseNewSection("artDisability", "itDisability");

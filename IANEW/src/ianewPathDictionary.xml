@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- @author: Quang Nhan -->
+
+<!-- if user search and found alias, ignore entity, 
+     else if search that directly linked directly linked to field, 
+     then take class into consideration -->
+     
+<ianew>
+	<tags>
+		<field id="firstname">
+			<entity name="Enquiries">
+				<path>contact.firstname</path>
+			</entity>
+			<entity name="Contacts">
+				<path id="contactfirstname">firstname</path>
+			</entity>
+			<entity name="IndividualCases">
+				<path>contact.firstname</path>
+			</entity>
+		</field>
+		<field id="lastname">
+			<entity name="Enquiries">
+				<path>contact.lastname</path>
+			</entity>
+			<entity name="Contacts">
+				<path id="contactlastname">lastname</path>
+			</entity>
+			<entity name="IndividualCases">
+				<path>contact.lastname</path>
+			</entity>
+		</field>
+		
+		<field id="othername">
+			<entity name="Enquiries">
+				<path>contact.othername</path>
+			</entity>
+			<entity name="Contacts">
+				<path>othername</path>
+			</entity>
+			<entity name="IndividualCases">
+				<path>contact.othername</path>
+			</entity>
+		</field>
+		
+		<field id="createdupdatedtime">
+			<entity name="Enquiries">
+				<path>createdDateTime</path>
+				<path>contact.createdDateTime</path>
+			</entity>
+			<entity name="Contacts">
+				<path>updatedDateTime</path>
+			</entity>
+			<entity name="IndividualCases">
+				<path>createdDateTime</path>
+				<path>contact.createdDateTime</path>
+			</entity>
+			
+		</field>
+		
+		<field id="inquisitor">
+			<entity name="Enquiries">
+				<path>inquisitor</path>
+			</entity>
+		</field>
+		
+		<field id="udpateddatetime">
+			<entity name="Enquiries">
+				<path>updatedDateTime</path>
+				<path>contact.updatedDateTime</path>
+			</entity>
+			<entity name="Contacts">
+				<path>updatedDateTime</path>
+			</entity>
+			<entity name="IndividualCases">
+				<path>updatedDateTime</path>
+				<path>contact.updatedDateTime</path>
+			</entity>
+		</field>
+		
+		<field id="issueName">
+			<entity name="Enquiries">
+				<path></path>
+			</entity>
+			
+			<entity name="Contacts">
+				<path></path>
+			</entity>
+			
+			<entity name="IndividualCases">
+				<path></path>
+			</entity>
+		</field>
+		
+		<field id="id">
+			<entity name="Enquiries">
+				<path id="eid">id</path>
+				<path id="cid">contact.id</path>
+				<path>contact.contactType.id</path>
+				<path id="ctype">contact.contactType.id</path>
+			</entity>
+			<entity name="Contacts">
+				<path id="cid">id</path>
+				<path id="ctype">contactType.id</path>
+			</entity>
+			<entity name="IndividualCases">
+				<path id="icid">id</path>
+				<path id="cid">contact.id</path>
+				<path>contact.contactType.id</path>
+				<path id="ctype">contact.contactType.id</path>
+			</entity>
+		</field>
+		
+		
+	</tags>
+	
+	
+	
+	<aliases>
+		<afield alias="name">
+			<grp operator="OR">
+				<ref>firstname</ref>
+				<ref>lastname</ref>
+				<ref>othername</ref>
+			</grp>
+		</afield>
+		<afield alias="createddate">
+			<grp operator="OR">
+				<ref>createddatetime</ref>
+			</grp>
+		</afield>
+		<afield alias="address">
+			<grp operator="OR">
+				<ref>street</ref>
+				<ref>suburb</ref>
+				<ref>postcode</ref>
+				<ref>country</ref>
+			</grp>
+		</afield>
+		<afield alias="enquiryid">
+			<grp operator="OR">
+				<ref>eid</ref>
+			</grp>
+		</afield>
+		<afield alias="caseid">
+			<grp operator="OR">
+				<ref>cid</ref>
+			</grp>
+		</afield>
+		<afield alias="contactid">
+			<grp operator="OR">
+				<ref>cid</ref>
+				<ref>eid</ref>
+				<ref>icid</ref>
+			</grp>
+		</afield>
+		<afield alias="clientid">
+			<grp operator="OR">
+				<ref>cid</ref>
+			</grp>
+		</afield>
+		<afield alias="clientname">
+			<grp operator="AND">
+				<ref>name</ref>
+				<ref value="2">ctype</ref>
+			</grp>
+		</afield>
+		<afield alias="clientfirstname">
+			<grp operator="AND">
+				<ref>firstname</ref>
+				<ref value="2">ctype</ref>
+			</grp>
+		</afield>
+		<afield alias="clientlastname">
+			<grp operator="AND">
+				<ref>lastname</ref>
+				<ref value="2">ctype</ref>
+			</grp>
+		</afield>
+	</aliases>
+</ianew>

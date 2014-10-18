@@ -32,12 +32,19 @@
  */
 
 function validated(){	
+	
 	expandAll();
+	removeNullAndUpdateIndex($("#artAddress"), $("#itAddress"), $("#addressSize"));
+	removeNullAndUpdateIndex($("#artDisability"), $("#itDisability"), $("#disabilitySize"));
+	removeNullAndUpdateIndex($("#artIssue"), $("#itIssue"), $("#issueSize"));
+	removeNullAndUpdateIndex($("#artEmployment"), $("#itEmployment"), $("#employmentSize"));
+	
 	$('#enquiryForm').validate({ 
 			rules: {
 				//status
 				"theDangerTypeId"						:	{	selectcheck:	true	},
 				"theStatusTypeId"						:	{	selectcheck:	true	},
+				"theEnquiryTypeId"						:   {	selectcheck:	true	},
 				
 				//summary
 				theEnquiry								: 	{ 	selectcheck: 	true 	},
@@ -85,12 +92,11 @@ function validated(){
 			
 			
 			submitHandler: function() {
-				
-				removeNullAndUpdateIndex($("#artAddress"), $("#itAddress"), $("#addressSize"));
-				removeNullAndUpdateIndex($("#artDisability"), $("#itDisability"), $("#disabilitySize"));
-				removeNullAndUpdateIndex($("#artIssue"), $("#itIssue"), $("#issueSize"));
-				removeNullAndUpdateIndex($("#artEmployment"), $("#itEmployment"), $("#employmentSize"));
 				alert("Validation complete, submitting form!");
+//				removeNullAndUpdateIndex($("#artAddress"), $("#itAddress"), $("#addressSize"));
+//				removeNullAndUpdateIndex($("#artDisability"), $("#itDisability"), $("#disabilitySize"));
+//				removeNullAndUpdateIndex($("#artIssue"), $("#itIssue"), $("#issueSize"));
+//				removeNullAndUpdateIndex($("#artEmployment"), $("#itEmployment"), $("#employmentSize"));
 				$.post('/IANEW/enquiry/saveUpdateEnquiry.action', 
 						$('#enquiryForm').serialize(), function(data){
 						$('#formDiv').html(data);}
