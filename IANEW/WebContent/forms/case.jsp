@@ -43,13 +43,14 @@
 		      media="all"/>
 	<script src="<s:url value='/js/ianew.lists.js' encode='false' includeParams='none'/>"></script>
 	<script src="<s:url value='/js/ianew.form.js' encode='false' includeParams='none'/>" ></script> 
+	<script src="<s:url value='/js/validation/caseValidation.js' encode='false' includeParams='none'/>" ></script> 
+	<script src="<s:url value='/js/jquery/jquery.validate.js' encode='false' includeParams='none'/>" ></script> 
 	
 </head>
 <body>
 	<s:set var="formType">case</s:set>
 	<s:form id="caseForm" cssClass="cmxform form container" namespace="/case" method="post" action="saveUpdateCase" novalidate="novalidate">  
 		<s:hidden name="iamodel.contact.id" />
-		<s:hidden name="formTitle" />
 <!-- ---------------------------------------------------------------------------------------------- -->
 <!-- Header of the form --------------------------------------------------------------------------- -->
 <!-- ---------------------------------------------------------------------------------------------- -->	
@@ -71,7 +72,11 @@
 		<%@include file="includes/caseIssues.jsp" %>
 		<%@include file="includes/communications.jsp" %>
 		<%@include file="includes/linkedCases.jsp" %>
-		<%@include file="includes/linkedEnquiries.jsp" %>
+		<s:div id="linkedEnquiriesDiv">
+				<%@include file="includes/linkedEnquiries.jsp" %>
+			</s:div>
+			
+			<s:div id="linkedEnquiriesListDiv" style="box-shadow: 5px 5px 0 grey;"/>
 		
 <!-- ---------------------------------------------------------------------------------------------- -->
 <!-- iterator - footer for case form ----------------------------------------------------------- -->
@@ -87,11 +92,8 @@
 					<input type="button" class="three columns alpha" value="Cancel"/>
 					<input type="button" class="three columns omega" value="New Case" />
 				</section>
-				<section class="four columns"><p></p></section>
-				<section class="six columns omega">
-					<input type="button" value="Create Case" class="three columns alpha"/>
-<%--   					<sj:submit targets="formDiv" type="submit" cssClass="three columns omega" value="Save" onClick="checkForm()"/>					
- --%>  				
+				<section class="seven columns"><p></p></section>
+				<section class="three columns omega">
   					<s:submit name="submit" cssClass="three columns omega" value="Submit" onclick="checkForm()"/>
  				</section>
 			</s:div>
@@ -99,36 +101,28 @@
 	</s:form>	
 	<script>
 	
-	/* if (!$.datepicker.initialized) {
-	    $(document).mousedown($.datepicker._checkExternalClick)
-	        // !!!!!!!!!!
-	        // The next code line has to be added again so that the date picker
-	        // shows up when the popup is opened more than once without reloading
-	        // the "base" page.
-	        // !!!!!!!!!!
-	        .find(document.body).append($.datepicker.dpDiv);
-	    $.datepicker.initialized = true;
-	} */
-	
 	$(function() {
-		$(".DateInputClass").datepicker(); 
+		initialiseNewSection("artAddress", "itAddress");
+		initialiseNewSection("artDisability", "itDisability");
+		initialiseNewSection("artEmployment", "itEmployment");
 		initialiseNewSection("artIssue", "itIssue");
 		initialiseNewSection("artCommunication", "itCommunication");
+		initialiseNewSection("artDeveloper", "itDeveloper");
+		initialiseNewSection("artGoal", "itGoal");
+		initialiseNewSection("artRisk", "itRisk");
+		initialisePrimaryDisability();
+		initialiseCaseCommunications();
 		
-		if (!$.datepicker.initialized) {
-		    $(document).mousedown($.datepicker._checkExternalClick)
-		        // !!!!!!!!!!
-		        // The next code line has to be added again so that the date picker
-		        // shows up when the popup is opened more than once without reloading
-		        // the "base" page.
-		        // !!!!!!!!!!
-		        .find(document.body).append($.datepicker.dpDiv);
-		    $.datepicker.initialized = true;
-		}
+		$("#btnNewIssue").click(function(){ 
+			$("#ulistIssues li").first().clone().appendTo("#ulistIssues");
+		});
+		
+		initialiseDatePicker();
+		
+		
 	});
 	
 	function checkForm(){
-		//alert("removed null");
 		removeNullAndUpdateIndex($("#artAddress"), $("#itAddress"), $("#addressSize"));
 		removeNullAndUpdateIndex($("#artDisability"), $("#itDisability"), $("#disabilitySize"));
 		removeNullAndUpdateIndex($("#artIssue"), $("#itIssue"), $("#issueSize"));
@@ -137,6 +131,7 @@
 		removeNullAndUpdateIndex($("#artRisk"), $("#itRisk"), $("#riskSize")); 
 		removeNullAndUpdateIndex($("#artCommunication"), $("#itCommunication"), $("#communicationSize"));
 		removeNullAndUpdateIndex($("#artDeveloper"), $("#itDeveloper"), $("#planDeveloperSize"));
+		//setSQLDateFormat();
 		validated();
 		//$("#caseForm").submit();
 	}

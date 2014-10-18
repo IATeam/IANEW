@@ -69,17 +69,18 @@
 			//showSlidingPanel();
 		}); */
 
-		$('#btnView').click(function(){
+	 $('#btnView').click(function(){
 			var id = $("#hiddenid").val();
 			$('#rightPopUp').show("slow");
 			$('#rightPopUp').load("enquiry/getEnquiry.action?hiddenid=" + id +"&formTitle=Existing Enquiry" );
 		});
 
 		$('#btnLinkEnquiry').click(function(){
+			//alert("test");
 			$("#linkedEnquiriesListDiv").show();
 			$('#linkedEnquiriesListDiv').load("enquiryList/getLinkedEnquiriesList.action");
 		});
-	});
+	});  
 	</script>
 </div>
 </div>

@@ -44,9 +44,9 @@
 	</s:else>
 		<section class="secIssue sixteen columns curveBorder">
 		
+			<s:hidden name="iamodel.communicationsList[%{#index}].id"/>
 			<input type="image" src="/IANEW/resources/images/undoButtonImage.png" alt="undoButton" id="btnUndo" value="Undo" onclick="undoButton(this);return false;" class="undoButton"/>
 			
-			<s:hidden name="iamodel.communicationsList[%{#index}].id"/>
 			<div class="row">
 				<div class="five columns">
 					<s:select list="communicationSelectList" listValue="communicationTypeName" listKey="id" name="theCommunicationsList[%{#index}]" headerKey="-1" headerValue="Select Communication Type" />
@@ -70,7 +70,7 @@
 					<s:textarea cssClass="oneLineTextArea" name="iamodel.communicationsList[%{#index}].description"/> 
 				</div>
 				<s:hidden name="iamodel.communicationsList[%{#index}].importantFlag"/>
-				<input type="button" id="btnImportant" class="one columns" onclick="importantDiv(this)"/>
+				<input type="button" id="btnImportant" class="one columns" name="importantFlag" onclick="importantDiv(this)"/>
 			</div>
 		</section>
 	</article>
@@ -78,30 +78,6 @@
 		<div class="thirteen columns alpha"><p></p></div>
 		<input type="button" id="btnAddCommunication" value="Add Communication" class="three columns" />
 	</div>
-	
-	<script>
-	$(function(){
-		$("#btnAddCommunication").click(function(){ 
-			//var $clone = $("#artCommunication section").clone(true);
-			//$clone.appendTo("#itCommunication");
-			$("#artCommunication section").clone().appendTo("#itCommunication");
-			$("#itCommunication").find("input.DateInputClass").removeClass('hasDatepicker')
-			  .removeData('datepicker')
-			  .unbind()
-			  .datepicker(); 
-		});
-
-		var it = $("#itCommunication").find("section");
-		$(it).each(function(index, section){
-			var isImportant = $(section).find(":hidden[name*='importantFlag']").val();
-			var button = $(section).find("input[name='importantFlag']");
-			if(isImportant == 'Y') {
-				button.css({'background':'orange'});
-				button.parent("div").parent("section").css({'background-color':'#fddabe'});	
-			}
-		});
-	});
-	</script>
 	</div>
 </div>
 </section>

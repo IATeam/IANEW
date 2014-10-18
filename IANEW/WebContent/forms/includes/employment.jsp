@@ -33,7 +33,7 @@
 	<s:else>
 		<s:hidden id="employmentSize" name="iamodel.contact.employmentsList.size" value="0"/>
 		<s:set name="index" value="0" />
-		<article id="artEmployment">
+		<article id="artEmployment" class="hidden">
 	</s:else>
 	<section class="secIssue sixteen columns curveBorder">
 		<img src="/IANEW/resources/images/undoButtonImage.png" alt="undoButton" onclick="undoButton(this);" class="undoButton"/>

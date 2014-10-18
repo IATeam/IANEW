@@ -116,6 +116,12 @@
 	
 	<script>
 
+	$(function() {
+		initialisePrimaryDisability();
+		initialiseNewSection("artAddress", "itAddress");
+		initialiseNewSection("artEmployment", "itEmployment");
+		initialiseNewSection("artDisability", "itDisability");
+	});
 	/* $.validator.setDefaults({
 		
 	}); */
@@ -156,6 +162,7 @@
 		removeNullAndUpdateIndex($("#artEmployment"), $("#itEmployment"), $("#employmentSize")); */
 		
 	}
+	
 	</script>
 </body>
 </html>

@@ -60,6 +60,8 @@ import uow.ia.util.*;
 
 public class CaseAction extends BaseAction implements SessionAware, ModelDriven<IndividualCases>, Preparable{
 	
+	private final static String kExistingCaseTitle = "Existing Case";
+	//private final static String kNewCaseTitle = "New Case";
 	private String formTitle;;
 	private IndividualCases iamodel;
 	private Contacts contact; //not calling from case to allow 'CASE' to share the same include jsp
@@ -1071,8 +1073,10 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 	 * @return
 	 */
 	public String getExistingCase(){	
+		this.formTitle = kExistingCaseTitle;
 		activateLists();
 		initialiseDBList();
+		System.out.println(iamodel.getCaseIssuesList().size());
 		
 		System.out.println("Set stuffs");
 		System.out.println("no");
@@ -1083,6 +1087,7 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 	public void initialiseDBList() {
 		if (iamodel != null) {
 			if (iamodel.getContact() != null) {
+				clearList();
 				if (iamodel.getContact().getAccommodation() != null) {
 					setTheAccommodationTypeId(iamodel.getContact().getAccommodation().getId());
 				}
@@ -1202,6 +1207,17 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 				} 
 			}
 		}
+	}
+	
+	public void clearList() {
+		theDeveloperList.clear();
+		theGoalList.clear();
+		theGoalStatusList.clear();
+		theIssueListId.clear();
+		theIssueStatusList.clear();
+		theCommunicationsList.clear();
+		theDisabilityListId.clear();
+		theEmploymentListId.clear();
 	}
 	
 
@@ -1483,12 +1499,15 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 		System.out.println("calling case services to save");
 		if (iamodel.getId() == null) {
 			if (caseServices.saveOrUpdateCase(iamodel, iamodel.getContact())) {
+				this.formTitle = kExistingCaseTitle;
 				activateLists();
 				setIamodel(caseServices.getCase(iamodel.getId()));
 				initialiseDBList();
 				return SUCCESS;
 			}
 		} else if (caseServices.saveOrUpdateCase(iamodel)) {
+
+			this.formTitle = kExistingCaseTitle;
 			activateLists();
 			setIamodel(caseServices.getCase(iamodel.getId()));
 			initialiseDBList();

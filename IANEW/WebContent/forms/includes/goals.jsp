@@ -37,7 +37,7 @@
 	<s:else>
 		<s:set name="index" value="0" />
 		<s:hidden id="goalSize" name="iamodel.planGoalsList.size" value="0"/>
-		<article id="artGoal">
+		<article id="artGoal" class="hidden">
 	</s:else>
 		<section class="secIssue sixteen columns curveBorder">
 			<s:hidden name="iamodel.planGoalsList[%{#index}].id"/>

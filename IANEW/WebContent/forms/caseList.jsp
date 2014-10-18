@@ -23,10 +23,12 @@
 <body>
 <!-- 
 	<s:url var="urlCExisting" namespace="/case" action="getCase" includeContext="false"/>
-		
-	<s:url var="urlCNew" namespace="/case" action="newCase">
+		-->
+	
+	<s:url id="urlCNew" namespace="/case" action="newCase">
+		<s:param name="formTitle">New Case</s:param>
 	</s:url>
-	<s:url id="urlUpdate" namespace="/case" action="updateCaseList" includeContext="false"/>
+	<!--<s:url id="urlUpdate" namespace="/case" action="updateCaseList" includeContext="false"/>
 	 -->
 	<s:url var="urlCExisting" namespace="/case" action="getExistingCase" includeContext="false"/>		
 	 
@@ -122,8 +124,10 @@
 						</div>
 					</section >
 					<section class="four columns alpha">
-						<sj:submit targets="formDiv" id="open" value="Open Case" cssClass="two columns alpha"/>
-						<sj:a targets="formDiv" id="newCButton" href="%{urlCNew}" ><input type="button" class="two columns omega" value="New Case"/></sj:a>
+						<sj:a targets="formDiv" id="newCButton" href="%{urlCNew}" >
+						<input type="button" class="two columns alpha" value="New Case"/>
+						</sj:a>
+						<sj:submit targets="formDiv" id="open" value="Open Case" cssClass="two columns omega"/>
 					</section>
 				</div>
 			</footer>

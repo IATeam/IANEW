@@ -50,7 +50,7 @@
 	<s:else>
 		<s:hidden id="disabilitySize" name="iamodel.contact.disabilitiesList.size" value="0"/>
 		<s:set name="index" value="0" />
-		<article id="artDisability">
+		<article id="artDisability" class="hidden">
 	</s:else>
 		<section class="sixteen columns curveBorder row">
 			<img src="/IANEW/resources/images/undoButtonImage.png" alt="undoButton" onclick="undoButton(this);" class="undoButton"/>
@@ -78,59 +78,6 @@
 		<div class="fourteen columns alpha"><p></p></div>
 		<input type="button" id="btnAddDisability" value="Add Disability" class="two columns" onclick="addNewRecord('artDisability', 'disabilitySize', 'itDisability' )"/>
 	</div>
-	
-	<script>
-	
-	function primaryUpdate(radio){ 
-		if($('[name="primary"]').is(':checked')){
-			//add the css class primary to the section tag of the radio input
-			$(radio).parents("section").addClass("primary");
-
-			//find all unchecked input radio and remove the css calss primary
-			var otherRadio = $('input[name="primary"]:unchecked');
-			$(otherRadio).parents("section").removeClass("primary");
-
-			//find all primary flag tags
-			var eachprimary = $(otherRadio).parents("section").find("input[name*='Flag']");
-
-			// and assign empty value
-			$(eachprimary).each(function(){
-				if($(this).val() == 'Y'){
-					$(this).val("");
-				}	
-			});
-			
-			//grab the hidden field with with the name primary flag and assign Y to its value
-			$(radio).parents("section").children("input[name*='Flag']").val("Y");
-
-		}
-	};
-	
-	$(function(){
-		//mark the check box if primary
-		var it = $("#itDisability").find("section");
-		
-		$(it).each(function(index, section){
-			//grab names in this section with primaryFlag substring.
-			var deep = $(section).find("input[name*='Flag']")
-			
-			//mark as check and assign the section with class primary
-			$(deep).each(function(){
-				if($(this).val()=='Y'){
-					var radios = $(section).find("[name='primary']").first();
-					$(radios).prop("checked", true);
-					$(section).addClass("primary");
-				}
-			});
-		});
-		
-		$("#btnNewDisability").click(function(){
-			$("#leftPopUp").load("/IANEW/admin/getDisabilityTypeForm", function(){
-				$("#leftPopUp").show("slow");
-			});
-		});
-	});
-	</script>
 	
 </div>
 </div>

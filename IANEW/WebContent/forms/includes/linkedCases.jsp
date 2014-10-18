@@ -81,28 +81,5 @@
 		</div>
 	</div>
 
-	
-	<script>
-	$(function(){
-		$("#btnNewIssue").click(function(){ 
-			$("#ulistIssues li").first().clone().appendTo("#ulistIssues");
-		});
-		
-		/* $('body').click(function(){
-			
-			hideSlidingPanel();
-		});
-		
-		$('#slidingPanel').click(function(event){
-			event.stopPropagation();
-		});
-		
-		$("#aCLinked").click(function(){
-			//$("#slidingPanel").show("slide", {diretion: "right"}, 10);
-			//$("#slidingPanel").hide();
-			//hideSlidingPanel();
-			//showSlidingPanel();
-		}); */
-	});
-	</script></div>
+</div>
 </s:div></section>
