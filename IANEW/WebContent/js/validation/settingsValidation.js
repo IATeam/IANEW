@@ -3,28 +3,32 @@
  */
 
 function validated(){	
-	expandAll();
-	
+	//expandAll();
+	alert("HELLO");
+
 	$('#saveAdvocateForm').validate({ 
 		rules:{
-			theTitleTypeId						: 	{ 	selectcheck	: 	true 	},
+			/*theTitleTypeId						: 	{ 	selectcheck	: 	true 	},
 			theGenderTypeId						: 	{ 	selectcheck	: 	true 	},
 			theCulturalBackgroundTypeId			: 	{	selectcheck	: 	true 	},
-			theAccommodationTypeId				:	{ 	selectcheck	: 	true 	},
+			theAccommodationTypeId				:	{ 	selectcheck	: 	true 	},*/
 			"contact.firstname"			: 	{	required 	: 	true, 
 				maxlength	:	80 	},
-			"contact.othername"			: 	{	maxlength	:	80 	},
+			/*"contact.othername"			: 	{	maxlength	:	80 	},
 			"contact.lastname"			: 	{	required 	: 	true, 
 				maxlength	:	80 	},
-			"contact.email"				: 	{	email		: 	true	},
+			"contact.email"				: 	{	email		: 	true	},*/
 		},
-		messages: {
-			"contact.email"				: 	{	email: "Require a valid email"}
-		
-		},
+		//messages: {
+			//"contact.firstname"				: 	"Requires first name.",
+			/*"contact.lastname"				: 	"Requires last name",
+			"conact.identification"			: 	"Requires identification number",
+			"contact.email"					: 	{	email: "Require a valid email",
+															required: "Require an email address"	},	*/	
+		//},
 		submitHandler: function(form) {
 			alert("Validation completed");
-			removeNullAndUpdateIndex($("#artAddress"), $("#itAddress"), $("#addressSize"));
+			//removeNullAndUpdateIndex($("#artAddress"), $("#itAddress"), $("#addressSize"));
 		    $.post("/IANEW/admin/saveOrUpdateContact.action", 
 					$("#saveAdvocateForm").serialize(), function(data){
 					$("#formDiv").html(data);}
@@ -32,7 +36,7 @@ function validated(){
 		}
 	});
 	
-	$("[name*='workphone']").each(function(){
+	/*$("[name*='workphone']").each(function(){
  		$(this).rules("add", {
  			phone: 		/[0-9\-\(\)\s\+]+/,
  			maxlength: 30
@@ -98,5 +102,5 @@ function validated(){
 
 	 	var re= new RegExp(regexp);
 	 	return this.optional(element) || re.test(value);
-	 	}, "Phone number is invalid" ); 
+	 	}, "Phone number is invalid" ); */
 }

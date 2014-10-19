@@ -31,7 +31,7 @@
 		<div id="ContactInfo">
 			<%@include file="/admin/contactSettings/shared/ajaxContact.jsp" %>
 		</div>
-		<sj:submit id="saveNewAdvocateType" targets="formDiv" cssClass="two columns alpha" value="Save" />
+		<sj:submit name="submit" id="saveNewAdvocateType" targets="formDiv" cssClass="two columns alpha" value="Save" onclick="confirmAction('Are you sure you want to save the advocate?', 'advocate', 'saveOrUpdateContact')"/>
 	</s:form>
 	</s:div>
 </body>

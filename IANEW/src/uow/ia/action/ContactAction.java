@@ -11,7 +11,6 @@ import com.opensymphony.xwork2.Preparable;
 
 import uow.ia.bean.AccommodationTypes;
 import uow.ia.bean.Addresses;
-import uow.ia.bean.ContactTypes;
 import uow.ia.bean.Contacts;
 import uow.ia.bean.CulturalBackgroundTypes;
 import uow.ia.bean.GenderTypes;
