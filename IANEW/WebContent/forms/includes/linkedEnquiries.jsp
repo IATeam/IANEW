@@ -29,15 +29,57 @@
 
 </head>
 <section>
-<input type="image" src="/IANEW/resources/images/plusButton.png" alt="Hide/Show" id="btnShowHide" value="ShowHide" onclick="divHide(this);return false;" class="divHideButton"/>
-<h3 class="sixteen columns" style="float:none;">Linked Enquiries</h3>
-<div class="greybackground">
-<div id="linkedEnquiriesDiv" class="toggled hideable">	
-	<s:url id="urlELinked" namespace="/enquiry" action="getLinkedEnquiry" />
+	<input type="image" src="/IANEW/resources/images/plusButton.png" alt="Hide/Show" id="btnShowHide" value="ShowHide" onclick="divHide(this);return false;" class="divHideButton"/>
+	<h3 class="sixteen columns" style="float:none;">Linked Enquiries</h3>
+	<div class="greybackground">
+		<div id="linkedEnquiriesDiv" class="toggled hideable">	
+			<s:if test="%{#formType=='case'}">
+				<s:hidden id="formType" value="case"/>
+				<s:if test="%{iamodel.relatedEnquiry.id != null}">
+					<section class="secLinkedEnquiries sixteen columns curveBorder"  onclick="selectEnquiry(this);">
+						<s:hidden id="relatedEnquiryId" name="relatedEnquiryId" value="%{iamodel.relatedEnquiry.id}"/>
+						<s:div cssClass="textarea one columns">
+							<s:label value="E#:" />
+							<s:div cssClass="id">
+								<s:property value="%{iamodel.relatedEnquiry.id}"/>
+							</s:div>
+						</s:div>
+						<s:div cssClass="textarea three columns">
+							<s:label for="date" value="Date:" />
+							<s:date name="iamodel.relatedEnquiry.createdDateTime" format="dd MMM yyyy"/>
+						</s:div>
+						<div class="textarea eleven columns omega">
+							<s:label for="description" value="Description:" />
+							<div><s:textarea id="description" cssClass="multiLineTextArea" name="iamodel.relatedEnquiry.description" readonly="true"/></div>
+						</div>
+					</section>
+				</s:if>
+			</s:if>
+			<s:else>
+				<s:url id="urlELinked" namespace="/enquiry" action="getLinkedEnquiry" />
+				<article id="itLikedEnquiries">
+				<s:iterator value="linkedEnquiriesList" status="stat">
+					<s:hidden id="relatedEnquiryId" name="relatedEnquiryId" value="%{id}"/>
+					<section class="secLinkedEnquiries sixteen columns curveBorder"  onclick="selectEnquiry(this)">
+						<s:div cssClass="textarea one columns">
+							<s:label value="E#:" />
+							<s:div cssClass="id"><s:property  value="id"/></s:div>
+						</s:div>
+						<s:div cssClass="textarea three columns">
+							<s:label for="date" value="Date:" />
+							<!-- <s:property value="updatedDateTime"/> -->
+							<s:date name="updatedDateTime" format="dd MMM yyyy"/>
+						</s:div>
+						<div class="textarea eleven columns omega">
+							<s:label for="description" value="Description:" />
+							<div><s:textarea id="description" cssClass="multiLineTextArea" name="description" readonly="true"/></div>
+						</div>
+					</section>
+				</s:iterator>
+				</article>
+			</s:else>
 	
-	<article id="itLikedEnquiries">
-		<%@include file="iterLinkedEnquiries.jsp"%>
-	</article>
+	
 	
 	<s:hidden id="hiddenid" name="hiddenid" />
 	<s:hidden name="iamodel.parentEnquiry" />
@@ -53,34 +95,38 @@
 	<script>
 	$(function(){
 		
-		
-		/* $('body').click(function(){
-			hideSlidingPanel();
-		}); */
-		
-		/* $('#slidingPanel').click(function(event){
-			event.stopPropagation();
-		}); */
-		
-		/* $("#aELinked").click(function(){
-			//$("#slidingPanel").show("slide", {diretion: "right"}, 10);
-			//$("#slidingPanel").hide();
-			//hideSlidingPanel();
-			//showSlidingPanel();
-		}); */
-
-	 $('#btnView').click(function(){
-			var id = $("#hiddenid").val();
-			$('#rightPopUp').show("slow");
-			$('#rightPopUp').load("enquiry/getEnquiry.action?hiddenid=" + id +"&formTitle=Existing Enquiry" );
+		$("#btnView").click(function() {
+			var hiddenid;
+			$(".secLinkedEnquiries").each(function() {
+				if ($(this).hasClass("listSelected")) {
+					hiddenid= $("#relatedEnquiryId").val();
+				}
+			});
+			alert(hiddenid);
+			
+			if (hiddenid != null) {
+				$("#formDiv").load("/IANEW/enquiry/getEnquiry.action?hiddenid=" + hiddenid);
+			} else {
+				alert("No Enquiry is selected");
+			}
 		});
-
+		
 		$('#btnLinkEnquiry').click(function(){
-			//alert("test");
-			$("#linkedEnquiriesListDiv").show();
-			$('#linkedEnquiriesListDiv').load("enquiryList/getLinkedEnquiriesList.action");
+			alert($("#formType").val());
+ 			$("#linkedEnquiriesListDiv").show();
+			$('#linkedEnquiriesListDiv').load("/IANEW/enquiryList/getLinkedEnquiriesList.action?formType=" + $("#formType").val());
 		});
-	});  
+	}); 
+	
+
+	function selectEnquiry(section){
+		$(".secLinkedEnquiries").each(function() {
+			$(this).removeClass("listSelected");
+		});
+		$(section).addClass("listSelected");
+	}
+	
+	
 	</script>
 </div>
 </div>

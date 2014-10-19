@@ -23,7 +23,9 @@ import com.opensymphony.xwork2.ModelDriven;
 public class EnquiryListAction extends BaseAction implements ModelDriven<List<Enquiries>> {
 	private List<Enquiries> iamodelList;
 	private String formTitle;
-	
+	private String formType;
+
+
 	/* For pagination */
 	private int page;
 	private int numberOfRecords;
@@ -91,6 +93,20 @@ public class EnquiryListAction extends BaseAction implements ModelDriven<List<En
 
 	public void setFormTitle(String formTitle) {
 		this.formTitle = formTitle;
+	}
+	
+	/**
+	 * @return the formType
+	 */
+	public String getFormType() {
+		return formType;
+	}
+
+	/**
+	 * @param formType the formType to set
+	 */
+	public void setFormType(String formType) {
+		this.formType = formType;
 	}
 
 	public List<Enquiries> getIamodelList() {

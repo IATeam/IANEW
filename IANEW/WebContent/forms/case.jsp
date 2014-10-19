@@ -50,7 +50,7 @@
 <body>
 	<s:set var="formType">case</s:set>
 	<s:form id="caseForm" cssClass="cmxform form container" namespace="/case" method="post" action="saveUpdateCase" novalidate="novalidate">  
-		<s:hidden name="iamodel.contact.id" />
+		<s:hidden  name="enquiryId" value="%{iamodel.relatedEnquiry.id}"/>
 <!-- ---------------------------------------------------------------------------------------------- -->
 <!-- Header of the form --------------------------------------------------------------------------- -->
 <!-- ---------------------------------------------------------------------------------------------- -->	
@@ -94,7 +94,7 @@
 				</section>
 				<section class="seven columns"><p></p></section>
 				<section class="three columns omega">
-  					<s:submit name="submit" cssClass="three columns omega" value="Submit" onclick="checkForm()"/>
+  					<s:submit name="submit" cssClass="three columns omega" value="Submit" onclick="checkForm();"/>
  				</section>
 			</s:div>
 		</footer>
@@ -123,17 +123,7 @@
 	});
 	
 	function checkForm(){
-		removeNullAndUpdateIndex($("#artAddress"), $("#itAddress"), $("#addressSize"));
-		removeNullAndUpdateIndex($("#artDisability"), $("#itDisability"), $("#disabilitySize"));
-		removeNullAndUpdateIndex($("#artIssue"), $("#itIssue"), $("#issueSize"));
-		removeNullAndUpdateIndex($("#artEmployment"), $("#itEmployment"), $("#employmentSize"));
-		removeNullAndUpdateIndex($("#artGoal"), $("#itGoal"), $("#goalSize"));
-		removeNullAndUpdateIndex($("#artRisk"), $("#itRisk"), $("#riskSize")); 
-		removeNullAndUpdateIndex($("#artCommunication"), $("#itCommunication"), $("#communicationSize"));
-		removeNullAndUpdateIndex($("#artDeveloper"), $("#itDeveloper"), $("#planDeveloperSize"));
-		//setSQLDateFormat();
 		validated();
-		//$("#caseForm").submit();
 	}
 	</script>
 </body>

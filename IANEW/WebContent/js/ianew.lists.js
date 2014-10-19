@@ -92,7 +92,11 @@ function bandSelected(selectedDiv){
 	
 	$(selectedDiv).children("div").last().slideToggle();
 	
-	$("#hiddenid").val($(selectedDiv).find('.id').text());
+	//if ($("#linkedEnquiryId").val() == null){
+		$("#hiddenid").val($(selectedDiv).find('.id').text());
+//	} else {
+//		$("#linkedEnquiryId").val($(selectedDiv).find('.id').text());
+//	}
 }
 
 function deselectAll(){

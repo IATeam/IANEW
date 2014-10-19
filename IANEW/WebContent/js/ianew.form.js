@@ -98,7 +98,6 @@ function updateIndex(articleEle, sizeEle ){
 	$(sizeEle).val(sizeInt + 1);
 	
 	newIndex = "[" + $(sizeEle).val() + "]";
-	alert("new index: " + newIndex)
 	//replaces the old index with the new one and clear the content
 	$(ele).each(function(){ 
 		var oldIndex = $(this).attr('name').match(/\[.\]/);
@@ -194,6 +193,21 @@ function removeSecNull(ele, section, index){
 	}
 }
 
+function updateIndexInSection(articleEle, iterator, sizeEle) {
+	var section = $(iterator).children("section");
+	var counter = 0;
+	
+	//removes any null in the iterator
+	for(var i = 0; i < section.length; i++){
+		var itEle = $(section[i]).find("[name]");
+		counter = removeSecNull(itEle, section[i], counter);
+	}
+	
+	//removes the artcleEle if null
+	//counter = removeSecNull(ele, articleEle, counter);
+	
+	$(sizeEle).val(counter);
+}
 /**
  * This function will update the index of named attribute values
  * when clearing null sections
@@ -262,7 +276,7 @@ function setEmpty(elements){
 		if(!$(this).is("input:radio") && !$(this).is("input:hidden")){
 			if(this.nodeName == "SELECT"){
 				if ($(this).val() != -1){
-					$(this).val('-1')
+					$(this).val('-1');
 				}
 			}else if( $(this).val().length != ""){
 				
@@ -297,7 +311,6 @@ function importantDiv(selectedDiv){
  */
 function undoButton(selectedDiv){
 	//$(selectedDiv).parent("section").hide();
-	alert("HI")
 	var section = $(selectedDiv).parent("section");
 	var id = $(selectedDiv).parent("section").children("input[name*='.id']");
 	//if contains value for id, then assign -1 otherwise completely remove it

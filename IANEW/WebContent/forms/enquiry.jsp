@@ -59,6 +59,10 @@
 </head>
 <body>
 	
+	<%-- <s:url id="urlCNew" namespace="/case" action="newCase">
+		<s:param name="formTitle">New Case</s:param>
+		<s:param name="enquiryId"></s:param>
+	</s:url> --%>
 
 	<s:div cssClass="form container">
 	<s:set var="formType">enquiry</s:set>
@@ -96,11 +100,25 @@
 						<input id="btnCancel" type="button" class="three columns alpha" value="Cancel" onclick="confirmAction('Are you sure you want to Cancel?', 'home', 'home')"/>
 						<input id="btnNewEnquiry" type="button" class="three columns omega" value="New Enquiry" onclick="confirmAction('Are you sure you want to create a new enquiry?', 'enquiry', 'newEnquiry')"/>
 					</section>
-					<section class="four columns"><p></p></section>
-					<section class="six columns omega">
-						<input id="createCase" type="button" value="Create Case" class="three columns alpha" onclick="checkForm()"/>
-						<s:submit name="submit" cssClass="three columns omega" value="Submit" onclick="confirmAction('Are you sure you want to save the enquiry?', 'enquiry', 'saveUpdateEnquiry')"/>
-					</section>
+						<s:if test="%{formTitle == 'Existing Enquiry'}">
+							<section class="four columns"><p></p></section>
+							<section class="six columns omega">
+							<s:if test="%{iamodel.individualCasesList.size == 0}">
+								<input type="button" id="createCase" class="three columns alpha" value="Create Case" />
+							</s:if>
+							<s:else>
+								<s:hidden id="caseId" name="iamodel.individualCasesList[0].id" value="%{iamodel.individualCasesList[0].id}"></s:hidden>
+								<input type="button" id="viewCase" class="three columns alpha" value="View Case" />
+							</s:else>
+							<s:submit name="submit" cssClass="three columns omega" value="Submit" onclick="confirmAction('Are you sure you want to save the enquiry?', 'enquiry', 'saveUpdateEnquiry')"/>
+							</section>
+						</s:if>
+						<s:else>
+							<section class="seven columns"><p></p></section>
+							<section class="three columns omega">
+								<s:submit name="submit" cssClass="three columns omega" value="Submit" onclick="confirmAction('Are you sure you want to save the enquiry?', 'enquiry', 'saveUpdateEnquiry')"/>
+							</section>
+						</s:else>
 				</s:div>
 			</footer>
 		</s:form>	
@@ -130,7 +148,9 @@
 		
 	}); */
 
-	
+	function openNewCase(){
+		$("#contactId").val();
+	}
 	
 
 
@@ -166,7 +186,15 @@
 		removeNullAndUpdateIndex($("#artEmployment"), $("#itEmployment"), $("#employmentSize")); */
 		
 	}
+	$('#createCase').click(function(){
+		var enquiryid = $('#hiddenid').val();
+		$("#formDiv").load("/IANEW/case/newCase.action?hiddenId=0&enquiryId=" + enquiryid);
+	});
 	
+	$('#viewCase').click(function(){
+		var caseid = $('#caseId').val();
+		$("#formDiv").load("/IANEW/case/getExistingCase.action?hiddenid=" + caseid);
+	});
 	</script>
 </body>
 </html>

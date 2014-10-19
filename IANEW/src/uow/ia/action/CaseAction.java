@@ -8,6 +8,8 @@ import java.util.Set;
 
 import org.apache.struts2.interceptor.SessionAware;
 
+import bsh.This;
+
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
 import com.sun.org.apache.xml.internal.security.keys.content.PGPData;
@@ -23,6 +25,8 @@ import uow.ia.bean.CulturalBackgroundTypes;
 import uow.ia.bean.DangerTypes;
 import uow.ia.bean.DisabilityTypes;
 import uow.ia.bean.EmploymentTypes;
+import uow.ia.bean.Enquiries;
+import uow.ia.bean.EnquiryIssues;
 import uow.ia.bean.GoalTypes;
 import uow.ia.bean.IndividualCaseCommunications;
 import uow.ia.bean.IndividualCases;
@@ -61,9 +65,25 @@ import uow.ia.util.*;
 public class CaseAction extends BaseAction implements SessionAware, ModelDriven<IndividualCases>, Preparable{
 	
 	private final static String kExistingCaseTitle = "Existing Case";
-	//private final static String kNewCaseTitle = "New Case";
-	private String formTitle;;
-	private IndividualCases iamodel;
+	private String formTitle;
+	private Integer enquiryId;
+	private Integer contactId;
+
+	/**
+	 * @return the contactId
+	 */
+	public Integer getContactId() {
+		return contactId;
+	}
+
+	/**
+	 * @param contactId the contactId to set
+	 */
+	public void setContactId(Integer contactId) {
+		this.contactId = contactId;
+	}
+
+	private IndividualCases iamodel = new IndividualCases();
 	private Contacts contact; //not calling from case to allow 'CASE' to share the same include jsp
 	
 	/**
@@ -924,7 +944,7 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 	 * @param clientDisabilitiesSet the clientDisabilitiesSet to set
 	 */
 	public void setClientDisabilitiesSet(
-			List<ClientDisabilities> clientDisabilitiesSet) {
+		List<ClientDisabilities> clientDisabilitiesSet) {
 		this.clientDisabilitiesSet = clientDisabilitiesSet;
 	}
 
@@ -1160,9 +1180,13 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 				for (PlanGoals pg : planGoalsDB){
 					try {
 						theGoalList.add(pg.getGoalType().getId());
-						theGoalStatusList.add(pg.getStatusType().getId());
 					} catch (NullPointerException e) {
 						theGoalList.add(new Integer(-1));
+					}
+					
+					try {
+						theGoalStatusList.add(pg.getStatusType().getId());
+					}catch(NullPointerException e) {
 						theGoalStatusList.add(new Integer(-1));
 					}
 				}
@@ -1171,9 +1195,13 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 				for (CaseIssues ci : caseIssuesDB) {
 					try {
 						theIssueListId.add(ci.getIssue().getId());
-						theIssueStatusList.add(ci.getStatusType().getId());
 					} catch(NullPointerException e) {
 						theIssueListId.add(new Integer(-1));
+					}
+					
+					try {
+						theIssueStatusList.add(ci.getStatusType().getId());
+					}catch (NullPointerException e) {
 						theIssueStatusList.add(new Integer(-1));
 					}
 				}
@@ -1182,7 +1210,6 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 				for(IndividualCaseCommunications icc : communicationListDBCaseCommunications) {
 					try {
 						theCommunicationsList.add(icc.getCommunicationType().getId());
-						System.out.println("communications " + icc.getTimeSpent() + " " + icc.getCommunicationType().getId());
 					} catch(NullPointerException e) {
 						theCommunicationsList.add(new Integer(-1));
 					}
@@ -1269,6 +1296,7 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 	
 	public String saveUpdateCase(){ //TO DO
 		System.out.println("Start Saving Case");
+		System.out.println("contact id " + iamodel.getContact().getId());
 		
 		Users user = (Users) userSession.get(USER);
 		java.util.Calendar cal = java.util.Calendar.getInstance();
@@ -1496,15 +1524,35 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 			}
 		}
 		
+		if (isContactEmpty(iamodel.getPlan().getAuthorisedBy())) {
+			iamodel.getPlan().setAuthorisedBy(null);;
+		}
+		
+		if (isContactEmpty(iamodel.getPlan().getSupportPerson())) {
+			iamodel.getPlan().setSupportPerson(null);
+		} else {
+			if (iamodel.getPlan().getSupportPerson().getId() == null) {
+				iamodel.getPlan().getSupportPerson().setContactType(typesService.getContactTypeById(3));
+			}
+		}
+		
+		
 		System.out.println("calling case services to save");
 		if (iamodel.getId() == null) {
+			// check authorise person
+			System.out.println(iamodel.getContact().getId() + "|" + iamodel.getContact().getFirstname());
+			if (iamodel.getContact().getId() == null) {
+				iamodel.getContact().setContactType(typesService.getContactTypeById(2));
+			}
 			if (caseServices.saveOrUpdateCase(iamodel, iamodel.getContact())) {
 				this.formTitle = kExistingCaseTitle;
 				activateLists();
 				setIamodel(caseServices.getCase(iamodel.getId()));
 				initialiseDBList();
+				hiddenid = iamodel.getId();
+				System.out.println("test " + iamodel.getId());
 				return SUCCESS;
-			}
+			} 
 		} else if (caseServices.saveOrUpdateCase(iamodel)) {
 
 			this.formTitle = kExistingCaseTitle;
@@ -1516,6 +1564,19 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 		
 		System.out.println("End Saving Case");
 		return SUCCESS;
+	}
+	
+	public boolean isContactEmpty(Contacts c) {
+		if (c != null) {
+			if (c.getFirstname().trim().isEmpty() && 
+				c.getLastname().trim().isEmpty() && 
+				c.getOthername().trim().isEmpty() && 
+				c.getMobilephone().trim().isEmpty()) {
+				
+				return true;
+			}
+		} 
+		return false;
 	}
 	
 	/* 
@@ -1587,11 +1648,53 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 	public void prepare() throws Exception {
 		// TODO Auto-generated method stub
 		System.out.println("Prepare start");
-		System.out.println("hiddenid2 = " + getHiddenid());
+		System.out.println("case hiddenid = " + getHiddenid());
 		if (!((Integer) getHiddenid() == null || (Integer)getHiddenid() == 0)) {
 			iamodel = caseServices.getCase(getHiddenid());
 			activateLists();
+			
+		} else {
+			
+			//if (this.contactId != null) {
+			//	iamodel.setContact(contactService.getContacts(this.contactId));
+			//	iamodel.setRelatedEnquiry(enquiryService.getEnquiry(this.enquiryId));
+			//} else 
+				if (this.enquiryId != null) {
+				this.formTitle = "New Case";
+				Enquiries enquiry = enquiryService.getEnquiry(this.enquiryId);
+				iamodel.setRelatedEnquiry(enquiry);
+				System.out.println(enquiry.getContact().getId());
+				iamodel.setContact(enquiry.getContact());
+				
+				List<EnquiryIssues> eiList = enquiry.getEnquiryIssuesList();
+				iamodel.getCaseIssuesList().clear();
+				for (EnquiryIssues e : eiList) {
+					CaseIssues ci = new CaseIssues();
+					ci.setIssue(e.getIssue());
+					ci.setComments(e.getComment());
+					iamodel.getCaseIssuesList().add(ci);
+					System.out.println(ci.getIssue().getIssueName());
+				}
+				System.out.println("issue list size " + iamodel.getCaseIssuesList().size());
+				initialiseDBList();
+			} 
 		}
+		
+		
+	}
+
+	/**
+	 * @return the enquiryId
+	 */
+	public Integer getEnquiryId() {
+		return enquiryId;
+	}
+
+	/**
+	 * @param enquiryId the enquiryId to set
+	 */
+	public void setEnquiryId(Integer enquiryId) {
+		this.enquiryId = enquiryId;
 	}
 
 	@Override

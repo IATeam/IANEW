@@ -34,10 +34,14 @@
 function validated(){	
 	
 	expandAll();
-	removeNullAndUpdateIndex($("#artAddress"), $("#itAddress"), $("#addressSize"));
-	removeNullAndUpdateIndex($("#artDisability"), $("#itDisability"), $("#disabilitySize"));
-	removeNullAndUpdateIndex($("#artIssue"), $("#itIssue"), $("#issueSize"));
-	removeNullAndUpdateIndex($("#artEmployment"), $("#itEmployment"), $("#employmentSize"));
+	updateIndexInSection($("#artAddress"), $("#itAddress"), $("#addressSize"));
+	updateIndexInSection($("#artDisability"), $("#itDisability"), $("#disabilitySize"));
+	updateIndexInSection($("#artIssue"), $("#itIssue"), $("#issueSize"));
+	updateIndexInSection($("#artEmployment"), $("#itEmployment"), $("#employmentSize"));
+	initialiseNewSection("artAddress", "itAddress");
+	initialiseNewSection("artDisability", "itDisability");
+	initialiseNewSection("artEmployment", "itEmployment");
+	initialiseNewSection("artIssue", "itIssue");
 	
 	$('#enquiryForm').validate({ 
 			rules: {
@@ -93,6 +97,10 @@ function validated(){
 			
 			submitHandler: function() {
 				alert("Validation complete, submitting form!");
+				removeNullAndUpdateIndex($("#artAddress"), $("#itAddress"), $("#addressSize"));
+				removeNullAndUpdateIndex($("#artDisability"), $("#itDisability"), $("#disabilitySize"));
+				removeNullAndUpdateIndex($("#artIssue"), $("#itIssue"), $("#issueSize"));
+				removeNullAndUpdateIndex($("#artEmployment"), $("#itEmployment"), $("#employmentSize"));
 //				removeNullAndUpdateIndex($("#artAddress"), $("#itAddress"), $("#addressSize"));
 //				removeNullAndUpdateIndex($("#artDisability"), $("#itDisability"), $("#disabilitySize"));
 //				removeNullAndUpdateIndex($("#artIssue"), $("#itIssue"), $("#issueSize"));

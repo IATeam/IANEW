@@ -63,6 +63,10 @@
         	<key column="enquiry_id"/>
         	<one-to-many class="uow.ia.bean.EnquiryIssues"/>
         </bag>
+        <bag name="individualCasesList" table="Individual_Cases" inverse="true" fetch="select" cascade="save-update,delete,delete-orphan">
+        	<key column="related_enquiry_id"/>
+        	<one-to-many class="uow.ia.bean.IndividualCases"/>
+        </bag>
         
         <!-- Filters -->
         <filter name="enquiryStatusFilter" condition="status_id = :enquiryStatusFilterParam"/>

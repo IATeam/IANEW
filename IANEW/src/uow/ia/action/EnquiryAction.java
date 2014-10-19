@@ -75,6 +75,7 @@ ModelDriven<Enquiries>, Preparable{
 	/* 
 	 * form title (can either be new enquiry/exisiting enquiry)
 	 */
+	private final static String kExistingTitle = "Existing Enquiry"; 
 	private String formTitle;
 	private Enquiries iamodel;
 
@@ -232,21 +233,21 @@ ModelDriven<Enquiries>, Preparable{
 		try{ setDob(iamodel.getContact().getDob().toString()); }catch (NullPointerException n) {}
 		
 		
-		if(iamodel.getContact().getEmploymentsList().size() > 0){
+		if(iamodel.getContact().getEmploymentsList() != null){
 			for(ContactEmployments ce: iamodel.getContact().getEmploymentsList()){
 				theEmploymentListId.add(ce.getEmploymentType().getId());
 				
 			}
 		}
 		
-		if(iamodel.getContact().getDisabilitiesList().size() > 0){
+		if(iamodel.getContact().getDisabilitiesList() != null){
 			for(ClientDisabilities cd: iamodel.getContact().getDisabilitiesList()){
 				theDisabilityListId.add(cd.getDisabilityType().getId());
 				
 			}
 		}
 		
-		if(iamodel.getEnquiryIssuesList().size() > 0){
+		if(iamodel.getEnquiryIssuesList() != null){
 			for(EnquiryIssues is: iamodel.getEnquiryIssuesList()){
 				theIssueListId.add(is.getIssue().getId());
 			}
@@ -378,6 +379,8 @@ ModelDriven<Enquiries>, Preparable{
 		
 		if(iamodel.getId() == null){
 			if(enquiryService.saveOrUpdateEnquiry(iamodel, iamodel.getContact())){
+				this.hiddenid = iamodel.getId();
+				this.formTitle = kExistingTitle;
 				activateLists();
 				setIamodel(iamodel);
 				initialiseDBList();
@@ -389,6 +392,8 @@ ModelDriven<Enquiries>, Preparable{
 		
 		
 		else if(enquiryService.saveOrUpdateEnquiry(iamodel)){
+			this.hiddenid = iamodel.getId();
+			this.formTitle = kExistingTitle;
 			activateLists();
 			setIamodel(iamodel);
 			initialiseDBList();
@@ -685,10 +690,12 @@ ModelDriven<Enquiries>, Preparable{
 	public void prepare() throws Exception {
 		System.out.println("Struts: Prepare start");
 		
-		if ((Integer) getHiddenid() == null || (Integer)getHiddenid() == 0) {
-			
-				
-		} else {
+//		if ((Integer) getHiddenid() == null || (Integer)getHiddenid() == 0) {
+//			
+//				
+//		} else {
+		if (!((Integer) getHiddenid() == null || (Integer)getHiddenid() == 0)) {
+			this.formTitle = "Existing Enquiry";
 			iamodel = enquiryService.getEnquiry(getHiddenid());
 			activateLists();
 		}
