@@ -179,7 +179,7 @@
     		<result name="success">/admin//contactSettings/clientSettings/clientSettings.jsp</result>
     	</action>
     	<action name="saveOrUpdateContact" class="uow.ia.action.ContactAction" method="saveOrUpdateContact">
-    		<result name="advocatesettings">/admin/advocateSettings.jsp</result>
+    		<result name="advocatesettings">/admin/contactSettings/advocateSettings/advocateSettings.jsp</result>
     		<result name="clientsettings">/admin/contactSettings/clientSettings/clientSettings.jsp</result>
     	</action>
     	<action name="getExistingContact" class="uow.ia.action.ContactAction" method="getExistingContact">

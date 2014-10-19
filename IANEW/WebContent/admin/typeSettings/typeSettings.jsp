@@ -15,12 +15,14 @@
 	      media="all"/>
 <script src="<s:url value='/js/ianew.form.js' encode='false' includeParams='none'/>" ></script>
 <script src="<s:url value='/js/ianew.admin.js' encode='false' includeParams='none'/>" ></script>     
-<script src="<s:url value='/js/ianew.lists.js' encode='false' includeParams='none'/>" ></script>     
+<script src="<s:url value='/js/ianew.lists.js' encode='false' includeParams='none'/>" ></script>   
+<script src="<s:url value='/js/jquery/jquery.validate.js' encode='false' includeParams='none'/>" ></script>   
 
 </head>
 <body>
 	<s:div cssClass="form container">
 	<s:set var="formType">enquiry</s:set>
+	<s:form id="caseForm" cssClass="cmxform form container" namespace='/case' method="post" action="saveUpdateCase" novalidate="novalidate">
 <!-- ---------------------------------------------------------------------------------------------- -->
 <!-- Header of the form --------------------------------------------------------------------------- -->
 <!-- ---------------------------------------------------------------------------------------------- -->	
@@ -41,6 +43,7 @@
 		<%@include file="/admin/typeSettings/includes/newPriorityType.jsp" %>
 		<%@include file="/admin/typeSettings/includes/newStatusType.jsp" %>
 		<%@include file="/admin/typeSettings/includes/newTitleType.jsp" %>
+	</s:form>
 	</s:div>
 </body>
 </html>
