@@ -22,13 +22,15 @@
 	Description: This js is for the common functions in the forms
 ------------------------------------------------------------------------------------------------*/
 
-//$(document).ready(function(){
-//	$("#enquiryForm").find("option[value='-1']").each(function(){
-//		alert($(this).val());	
-//	});
-//});
-$("#enquiryForm").find("option[value='-1']").css("background-color", "pink");
-
+$("#enquiryForm").find("select").css("background-color", "red");
+$("#enquiryForm").find("select").change(function(){
+	
+	if($(this).val() == "-1"){
+		$(this).css("background-color", "red");
+	} else {
+		$(this).css("background-color", "gray");
+	}
+});
 /**
  * Add a new Component/record to the list
  * 
