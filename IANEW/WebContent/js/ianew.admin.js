@@ -30,10 +30,3 @@
 	function hideBtn(btn){
 		$(btn).addClass("hidden");
 	}
-	/**
-	 * need to get this working
-	 */
-	function clearInput(){
-		$('#accommodationName').val('');
-		$('#accommodationDescription').val('');
-	}

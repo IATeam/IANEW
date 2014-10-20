@@ -5,11 +5,6 @@ import java.util.List;
 
 import uow.ia.bean.EmploymentTypes;
 import uow.ia.bean.Enquiries;
-import uow.ia.bean.EnquiryIssues;
-import uow.ia.bean.IssueTypes;
-import uow.ia.service.EnquiryService;
-
-import com.google.common.util.concurrent.Service;
 
 public class TestAction extends BaseAction{
 	

@@ -1,21 +1,21 @@
 package uow.ia.action;
 
-import uow.ia.bean.CommunicationTypes;
-import uow.ia.bean.DisabilityTypes;
-import uow.ia.bean.EmploymentTypes;
-import uow.ia.bean.GoalTypes;
-import uow.ia.bean.IssueTypes;
+import java.util.List;
+
 import uow.ia.bean.AccommodationTypes;
+import uow.ia.bean.CommunicationTypes;
+import uow.ia.bean.Contacts;
 import uow.ia.bean.CulturalBackgroundTypes;
 import uow.ia.bean.DangerTypes;
+import uow.ia.bean.DisabilityTypes;
+import uow.ia.bean.EmploymentTypes;
 import uow.ia.bean.EnquiryTypes;
 import uow.ia.bean.GenderTypes;
+import uow.ia.bean.GoalTypes;
+import uow.ia.bean.IssueTypes;
 import uow.ia.bean.PriorityTypes;
 import uow.ia.bean.StatusTypes;
 import uow.ia.bean.TitleTypes;
-import uow.ia.bean.Contacts;
-
-import java.util.List;
 
 import com.opensymphony.xwork2.Preparable;
 
@@ -23,11 +23,7 @@ import com.opensymphony.xwork2.Preparable;
  * @author David
  * 				
  */
-public class AdminAction extends BaseAction implements Preparable{
-	
-	
-	
-	//getContact().setAccommodation(typesService.getAccommodationTypeId(getTheAccommodationTypeId()));
+public class AdminAction extends BaseAction implements Preparable{	
 	
 	/* 
 	 * 
@@ -60,6 +56,8 @@ public class AdminAction extends BaseAction implements Preparable{
 		
 		return SUCCESS;
 	}
+	
+
 	
 	/**
 	 * @author davidforbes
@@ -1371,6 +1369,7 @@ public class AdminAction extends BaseAction implements Preparable{
 	public void setPrioritySelectList(List<PriorityTypes> prioritySelectList) {
 		this.prioritySelectList = prioritySelectList;
 	}
+
 	
 	/**
 	 * 
@@ -1391,5 +1390,7 @@ public class AdminAction extends BaseAction implements Preparable{
 		setGoalSelectList(adminService.findGoalTypes());
 		setPrioritySelectList(adminService.findPriorityTypes());
 	}
+
+
 
 }

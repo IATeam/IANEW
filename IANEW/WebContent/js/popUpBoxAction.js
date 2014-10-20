@@ -15,7 +15,7 @@ function confirmAction(message, namespace, actionName) {
 		if (confirm(message) == true) 
 			window.location.href = "http://localhost:8080/IANEW/home/home.jsp";
 	}
-	else if(actionName == "saveUpdateEnquiry"){
+	else if((actionName == "saveUpdateEnquiry") || (actionName == "saveOrUpdateContact")){
 		if (confirm(message) == true) {
 			
 			validated();

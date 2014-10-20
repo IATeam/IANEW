@@ -7,26 +7,36 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-
-import javassist.bytecode.stackmap.TypeData.ClassName;
 
 import javax.annotation.Resource;
 
-import org.apache.log4j.Logger;
-import org.apache.log4j.lf5.Log4JLogRecord;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sun.tools.xjc.reader.xmlschema.bindinfo.BIConversion.Static;
-import com.sun.xml.rpc.processor.modeler.j2ee.xml.parameterModeType;
-
-import uow.ia.bean.*;
-import uow.ia.dao.*;
+import uow.ia.bean.AccommodationTypes;
+import uow.ia.bean.Contacts;
+import uow.ia.bean.CulturalBackgroundTypes;
+import uow.ia.bean.DangerTypes;
+import uow.ia.bean.DisabilityTypes;
+import uow.ia.bean.EmploymentTypes;
+import uow.ia.bean.Enquiries;
+import uow.ia.bean.EnquiryTypes;
+import uow.ia.bean.GenderTypes;
+import uow.ia.bean.IssueTypes;
+import uow.ia.bean.StatusTypes;
+import uow.ia.bean.TitleTypes;
+import uow.ia.dao.AccommodationTypesDao;
+import uow.ia.dao.ContactsDao;
+import uow.ia.dao.CulturalBackgroundTypesDao;
+import uow.ia.dao.DangerTypesDao;
+import uow.ia.dao.DisabilityTypesDao;
+import uow.ia.dao.EmploymentTypesDao;
+import uow.ia.dao.EnquiriesDao;
+import uow.ia.dao.EnquiryTypesDao;
+import uow.ia.dao.GenderTypesDao;
+import uow.ia.dao.IssueTypesDao;
+import uow.ia.dao.StatusTypesDao;
+import uow.ia.dao.TitleTypesDao;
 import uow.ia.service.EnquiryService;
 import uow.ia.util.FilterSortHqlGen;
 

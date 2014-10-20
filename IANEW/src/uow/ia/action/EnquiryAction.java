@@ -26,11 +26,10 @@ import uow.ia.bean.IssueTypes;
 import uow.ia.bean.StatusTypes;
 import uow.ia.bean.TitleTypes;
 import uow.ia.bean.Users;
+import uow.ia.util.DateUtil;
 
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
-
-import uow.ia.util.DateUtil;
 
 
 /** ---------------------------------------------------------------------------------------------

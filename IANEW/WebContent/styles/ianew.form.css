@@ -320,3 +320,8 @@ h4 {
 	margin-bottom: 10px;
 	background-color: orange !important;
 }
+
+select > :first-child option {
+	color: white;
+	background-color: red;
+}

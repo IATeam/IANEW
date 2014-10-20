@@ -14,27 +14,25 @@
 <link href="<s:url value='/styles/adminTables.css' encode='false' includeParams='none'/>" rel="stylesheet" type="text/css"
 	      media="all"/>
 <script src="<s:url value='/js/jquery/jquery.validate.js' encode='false' includeParams='none'/>" ></script>
-<script src="<s:url value='/js/validation/enquiryValidation.js' encode='false' includeParams='none'/>" ></script>
+<script src="<s:url value='/js/validation/settingsValidation.js' encode='false' includeParams='none'/>" ></script>
 <script src="<s:url value='/js/ianew.form.js' encode='false' includeParams='none'/>" ></script>
 <script src="<s:url value='/js/ianew.lists.js' encode='false' includeParams='none'/>" ></script>
 <script src="<s:url value='/js/popUpBoxAction.js' encode='false' includeParams='none'/>" ></script>
 </head>
 <body>
 	<s:div cssClass="form container">
-	<s:set var="formType">enquiry</s:set>
-	<s:form id="advocateForm" action="saveOrUpdateContact" cssClass="cmxform" namespace='/admin' method="post">
-<!-- ---------------------------------------------------------------------------------------------- -->
-<!-- Header of the form --------------------------------------------------------------------------- -->
-<!-- ---------------------------------------------------------------------------------------------- -->	
+	<s:set var="formType">case</s:set>
+	<s:form id="clientForm" action="saveOrUpdateContact" cssClass="cmxform" namespace='/admin' method="post">
 		<%@include file="/forms/includes/formHeader.jsp" %>
-<!-- ---------------------------------------------------------------------------------------------- -->
-<!-- Content of the form -------------------------------------------------------------------------- -->
-<!-- ---------------------------------------------------------------------------------------------- -->	
-		<%@include file="/admin/advocateList.jsp" %>
-		<%@include file="/admin/details.jsp" %> 
-		<%@include file="/admin/address.jsp" %> 
-		<sj:submit id="saveNewAdvocateType" targets="tbodyAdvocateType" cssClass="two columns alpha" value="Save" />
-		</s:form>
-		</s:div>
+		<%@include file="/admin/contactSettings/clientSettings/clientList.jsp" %>
+	</s:form>
+	<s:form id="saveClientForm" action="saveOrUpdateContact" cssClass="cmxform" namespace='/admin' method="post">
+		<s:hidden name="contactType"></s:hidden>
+		<div id="ContactInfo1">
+			<%@include file="/admin/contactSettings/shared/ajaxContact.jsp" %>
+		</div>
+		<sj:submit id="saveNewClientType" targets="formDiv" cssClass="two columns alpha" value="Save" />
+	</s:form>
+	</s:div>
 </body>
 </html>

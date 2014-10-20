@@ -4,17 +4,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.apache.struts2.interceptor.SessionAware;
 
-import com.opensymphony.xwork2.ModelDriven;
-import com.opensymphony.xwork2.Preparable;
-import com.sun.org.apache.xml.internal.security.keys.content.PGPData;
-import com.sun.xml.rpc.processor.modeler.j2ee.xml.javaIdentifierType;
-
 import uow.ia.bean.AccommodationTypes;
 import uow.ia.bean.Addresses;
+import uow.ia.bean.CaseIssues;
 import uow.ia.bean.ClientDisabilities;
 import uow.ia.bean.CommunicationTypes;
 import uow.ia.bean.ContactEmployments;
@@ -23,20 +18,22 @@ import uow.ia.bean.CulturalBackgroundTypes;
 import uow.ia.bean.DangerTypes;
 import uow.ia.bean.DisabilityTypes;
 import uow.ia.bean.EmploymentTypes;
+import uow.ia.bean.GenderTypes;
 import uow.ia.bean.GoalTypes;
 import uow.ia.bean.IndividualCaseCommunications;
 import uow.ia.bean.IndividualCases;
-import uow.ia.bean.CaseIssues;
-import uow.ia.bean.GenderTypes;
 import uow.ia.bean.IssueTypes;
 import uow.ia.bean.PlanDevelopers;
 import uow.ia.bean.PlanGoals;
+import uow.ia.bean.PriorityTypes;
 import uow.ia.bean.ReviewFrequencies;
 import uow.ia.bean.StatusTypes;
 import uow.ia.bean.TitleTypes;
-import uow.ia.bean.PriorityTypes;
 import uow.ia.bean.Users;
-import uow.ia.util.*;
+import uow.ia.util.DateUtil;
+
+import com.opensymphony.xwork2.ModelDriven;
+import com.opensymphony.xwork2.Preparable;
 
 /** ---------------------------------------------------------------------------------------------
  * @author: Quang Nhan

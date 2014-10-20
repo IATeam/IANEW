@@ -3,7 +3,6 @@ package uow.ia.service;
 import java.util.List;
 
 import uow.ia.bean.Contacts;
-import uow.ia.bean.Enquiries;
 import uow.ia.bean.IndividualCases;
 import uow.ia.bean.ReviewFrequencies;
 

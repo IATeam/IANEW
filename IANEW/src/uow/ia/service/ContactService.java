@@ -5,9 +5,7 @@ package uow.ia.service;
 
 import java.util.List;
 
-import uow.ia.bean.AccommodationTypes;
 import uow.ia.bean.Contacts;
-import uow.ia.bean.GenderTypes;
 
 /**
  * @author ZhiYu Yang

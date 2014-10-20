@@ -5,21 +5,21 @@ package uow.ia.service;
 
 import java.util.List;
 
-import uow.ia.bean.CommunicationTypes;
-import uow.ia.bean.DisabilityTypes;
-import uow.ia.bean.GoalTypes;
-import uow.ia.bean.Users;
-import uow.ia.bean.IssueTypes;
 import uow.ia.bean.AccommodationTypes;
+import uow.ia.bean.CommunicationTypes;
+import uow.ia.bean.Contacts;
 import uow.ia.bean.CulturalBackgroundTypes;
 import uow.ia.bean.DangerTypes;
+import uow.ia.bean.DisabilityTypes;
 import uow.ia.bean.EmploymentTypes;
 import uow.ia.bean.EnquiryTypes;
 import uow.ia.bean.GenderTypes;
+import uow.ia.bean.GoalTypes;
+import uow.ia.bean.IssueTypes;
+import uow.ia.bean.PriorityTypes;
 import uow.ia.bean.StatusTypes;
 import uow.ia.bean.TitleTypes;
-import uow.ia.bean.Contacts;
-import uow.ia.bean.PriorityTypes;;
+import uow.ia.bean.Users;
 
 /**
  * @author ZhiYu Yang
@@ -29,6 +29,7 @@ import uow.ia.bean.PriorityTypes;;
 public interface AdminService {
 
 	public static final String SERVICENAME = "AdminService";
+
 	
 	 /* ----------------------------------------------------------------------------------------------------------
 	 * Accommodation Type ServiceMethods
@@ -475,6 +476,4 @@ public interface AdminService {
 		     * @return List<Object>
 		     */
 			public boolean updatePriorityType(PriorityTypes p);
-		
-
 }

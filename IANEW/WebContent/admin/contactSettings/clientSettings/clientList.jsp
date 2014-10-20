@@ -7,10 +7,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Client List</title>
+
 </head>
 <body>
-	<h3>Client List</h3>
+	<h3 class="sixteen columns" style="float:none;">Client List</h3>
+		<s:url var="urlUpdateClientType" namespace="/admin" action="saveOrUpdateContact" includeContext="false"/>
 		<div class="greybackground">
+		<s:form id="editClientTypeForm" method="post" action="%{urlUpdateClientType}">
 			<table>
 				<thead>
 					<th>First Name</th>
@@ -20,6 +23,7 @@
 					<%@include file="iterClientList.jsp" %>
 				</tbody>
 			</table>
+		</s:form>
 		</div>
 </body>
 </html>

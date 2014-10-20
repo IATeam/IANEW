@@ -16,7 +16,6 @@ import uow.ia.bean.EmploymentTypes;
 import uow.ia.bean.EnquiryTypes;
 import uow.ia.bean.GenderTypes;
 import uow.ia.bean.GoalTypes;
-import uow.ia.bean.IndividualCases;
 import uow.ia.bean.IssueTypes;
 import uow.ia.bean.PriorityTypes;
 import uow.ia.bean.ReviewFrequencies;
