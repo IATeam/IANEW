@@ -28,6 +28,9 @@
     
     <!-- Enquiry Forms -->
     <package name="enquiry" namespace="/enquiry" extends="struts-default">
+    	<action name="clearContact" class="uow.ia.action.EnquiryAction" method="clearContact">
+    		<result name="success">/forms/includes/contactInfo.jsp</result>
+    	</action>
     	<action name="getEnquiry" class="uow.ia.action.EnquiryAction" method="getExistingEnquiry">
 		    	<interceptor-ref name="params"/>
 		     <interceptor-ref name="prepare"/>
@@ -62,9 +65,6 @@
     		<result name="addressUpdate">/forms/includes/iterAddresses.jsp</result>
     		<result name="employmentUpdate">/forms/includes/iterEmployments.jsp</result>
     	</action>
-    	<action name="clearContact" class="uow.ia.action.EnquiryAction" method="clearContact">
-    		<result name="success">/forms/includes/contactInfo.jsp</result>
-    	</action>
     	<action name="assignContact" class="uow.ia.action.EnquiryAction" method="assignContact">
     		<result name="success">/forms/includes/contactInfo.jsp</result>
     	</action>
@@ -93,7 +93,7 @@
     		<result name="success">/forms/includes/iterEnquiryList.jsp</result>
     	</action>
     </package>
-    
+
     <!-- Contact List Forms -->
     <package name="contactList" namespace="/contactList" extends="struts-default">
     	

@@ -1,3 +1,4 @@
+<<<<<<< Upstream, based on origin/Kim
 <%@taglib prefix="s" uri="/struts-tags" %>
 <s:div cssClass="list">
 	<s:iterator value="model">

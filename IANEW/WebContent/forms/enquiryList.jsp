@@ -68,9 +68,9 @@
 <!-- ---------------------------------------------------------------------------------------------- -->	
 			<!-- status="..." use attribute to get status info of iteration (index, count, first, even last, odd info) -->
 			
-			<s:div id="iterEnquiryList">
+			<div id="iterEnquiryList">
 				<%@include file="/forms/includes/iterEnquiryList.jsp" %>
-			</s:div>
+			</div>
 			
 		</s:form>
 		

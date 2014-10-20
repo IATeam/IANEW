@@ -113,4 +113,5 @@ function clearContact(){
 		$("#contactInfo").load("case/clearContact.action?contactid=" + parseInt($("#selectedContact").val()));
 	}
 }
+
 </script>

@@ -113,7 +113,6 @@
 
 	</s:div>
 	
-	
 	<script>
 		$("#btnNewEnquiry").click(function(){
 			var contactId = $("input[name='iamodel.contact.id']").val();
@@ -171,5 +170,6 @@
 	}
 	
 	</script>
+	
 </body>
 </html>

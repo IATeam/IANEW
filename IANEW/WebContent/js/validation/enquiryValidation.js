@@ -36,14 +36,7 @@
 function validated(){	
 	
 	expandAll();
-	removeNullAndUpdateIndex($("#artAddress"), $("#itAddress"), $("#addressSize"));
-	removeNullAndUpdateIndex($("#artDisability"), $("#itDisability"), $("#disabilitySize"));
-	removeNullAndUpdateIndex($("#artIssue"), $("#itIssue"), $("#issueSize"));
-	removeNullAndUpdateIndex($("#artEmployment"), $("#itEmployment"), $("#employmentSize"));
-	
 
-	
-	
 	$('#enquiryForm').validate({ 
 			rules: {
 				//status
@@ -82,25 +75,17 @@ function validated(){
 				"theIssueListId[0]"						:	{	selectcheck	:	true	}
 			},
 			
-			messages: {
-				//summary
-				"iamodel.description"					: 	"Required description",
-				
-				//personal information
-				"iamodel.contact.firstname"				: 	"Requires first name.",
-				"iamodel.contact.lastname"				: 	"Requires last name",
-				"iamodel.conact.identification"			: 	"Requires identification number",
-				"iamodel.contact.email"					: 	{	email: "Require a valid email",
-																required: "Require an email address"	}
-			
-			},
-			
-			
 			submitHandler: function() {
 				
-				
 				alert("Validation complete, submitting form!");
+				
+				removeNullAndUpdateIndex($("#artAddress"), $("#itAddress"), $("#addressSize"));
+				removeNullAndUpdateIndex($("#artDisability"), $("#itDisability"), $("#disabilitySize"));
+				removeNullAndUpdateIndex($("#artIssue"), $("#itIssue"), $("#issueSize"));
+				removeNullAndUpdateIndex($("#artEmployment"), $("#itEmployment"), $("#employmentSize"));
+				
 				$.post('/IANEW/enquiry/saveUpdateEnquiry.action', 
+
 					$('#enquiryForm').serialize(), function(data){
 					$('#formDiv').html(data);}
 				);
