@@ -20,7 +20,9 @@
     	</action> -->
     	<action name="login">
     		<result name="success">/login.jsp</result>
-            <result name="error">/login.jsp?error=true</result>
+        </action>
+        <action name="logged" class="uow.ia.action.LoginAction">
+    		<result name="success">/home/home.jsp</result>
         </action>
         <action name="403">
         	<result name="success">/403.jsp</result>

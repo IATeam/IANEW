@@ -401,6 +401,11 @@ public class AdminServiceImpl implements AdminService {
 			return users.get(0);
 		}
 	}
+	
+	@Override
+	public Users getUsers(String username) {
+		return usersDao.get(" from Users u where u.username=?", new Object[] {username});
+	}
 
 	@Resource
 	private IssueTypesDao<IssueTypes> issueTypesDao;

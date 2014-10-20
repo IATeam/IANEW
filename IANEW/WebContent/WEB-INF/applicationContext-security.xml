@@ -20,7 +20,7 @@
 		<intercept-url pattern="/case/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />
 		<intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
 		
-		<form-login login-page="/login" authentication-failure-url="/login?error"
+		<form-login login-page="/login" default-target-url="/logged" authentication-failure-url="/login?error"
 			username-parameter="username" password-parameter="password" />
 		<session-management invalid-session-url="/login?timeout">
 			<!-- <concurrency-control  max-sessions="1" error-if-maximum-exceeded="true" expired-url="/login.jsp"></concurrency-control> -->
