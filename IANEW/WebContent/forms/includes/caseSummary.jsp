@@ -8,9 +8,10 @@
 			<s:div cssClass="row">
 				<s:div cssClass="textarea sixteen columns">
 					<s:label for="notes" value="Notes:" />
-					<s:div><s:textarea id="notes" name="iamodel.description" cssClass="multiLineTextArea" /></s:div>
+					<s:div><s:textarea name="iamodel.description" cssClass="multiLineTextArea" /></s:div>
 				</s:div>
 			</s:div>
 		</fieldset>
 	</div>
 </div>
+</section>
