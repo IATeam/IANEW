@@ -24,16 +24,14 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <section>
 <img src="/IANEW/resources/images/plusButton.png" alt="Hide/Show" onclick="divHide(this);return false;" class="divHideButton"/>
-<s:if test="%{#formType=='case'}">
-	<h3 class="sixteen columns"  style="float:none;">Client Details</h3>
-</s:if>
-<s:elseif test="%{#formType=='enquiry'}">
-	<h3 class="sixteen columns"  style="float:none;">Personal Details</h3>
-</s:elseif>
-<img src="/IANEW/resources/images/srchicon.png" onclick="loadContactSearchForm()" class="searchButton" >
+
+<h3 class="sixteen columns"  style="float:none;">Client Details</h3>
+
+<img src="/IANEW/resources/images/srchicon.png" onclick="loadContactSearchForm()" title="Search for Client Detials" class="button" >
+<img src="/IANEW/resources/images/eraseButton.png" onclick="clearContact()" title="Clear Client Details" class="button" >
 
 <s:div id="contactSearchDiv" cssClass="hidden"> 
-	<s:include value="search/searchContact.jsp" />
+	<%@include file="/forms/search/searchContact.jsp" %>
 </s:div>
 
 <div class="greybackground">
@@ -98,20 +96,21 @@
 </div>
 </section>
 <script>
+
 function loadContactSearchForm(){
 	
-	
-	//$("#contactsSearchDiv").load("contactList/loadClientSearchForm.action");
-	//$('body').addClass('sepia');
-	//$('#contactSearchDiv').css({'filter':'none', '-webkit-filter':'none'});
-	//$("#divRadio").hide();
-	//$("#secSearch").hide();
-	//$("#secSearch").prependTo("#secContactSearchBar");
-	//$("#divSearchContactOptions").appendTo("#secSearch");
 	$("#contactSearchDiv").removeClass("hidden");
-	//$("#secSearch").show("slow");
-	//$("#searchbox").val("firtname:    lastname: ");
-	
+	$("#enquiryForm").children().children().addClass('saturate');
+	$("#caseForm").children().children().children().addClass('saturate');
+	$("#contactSearchDiv").parents(".saturate").removeClass("saturate");
 }
+
+function clearContact(){
+	if($("#formTitle").text() == "New Enquiry" || $("#formTitle").text() == "Existing Enquiry"){
+		$("#contactInfo").load("enquiry/clearContact.action?contactid=" + parseInt($("#selectedContact").val()));
 	
+	}else if($("#formTitle").text() == "New Case" || $("#formTitle").text() == "Existing Case"){
+		$("#contactInfo").load("case/clearContact.action?contactid=" + parseInt($("#selectedContact").val()));
+	}
+}
 </script>

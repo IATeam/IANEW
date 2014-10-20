@@ -36,8 +36,7 @@
 
 
 
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="US-ASCII"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="US-ASCII"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -62,7 +61,7 @@
 
 	<s:div cssClass="form container">
 	<s:set var="formType">enquiry</s:set>
-		<s:form id="enquiryForm" action="saveUpdateEnquiry" cssClass="cmxform" namespace='/enquiry' method="post"> 
+		<s:form id="enquiryForm" action="saveUpdateEnquiry" cssClass="cmxform" namespace='/enquiry' method="post" validate="novalidate"> 
 			<s:hidden name="iamodel.contact.id" />
 			
 <!-- ---------------------------------------------------------------------------------------------- -->
@@ -76,14 +75,17 @@
 			<%@include file="includes/formStatus.jsp" %>
 			<%@include file="includes/referral.jsp" %>
 			<%@include file="includes/summary.jsp" %>
-			<%@include file="includes/personalDetails.jsp" %>
-			<%@include file="includes/address.jsp" %>
-			<%@include file="includes/employment.jsp" %>
-			<%@include file="includes/disability.jsp" %>
+			
+			<s:div id="contactInfo">
+				<%@include file="includes/contactInfo.jsp" %>
+			</s:div>
+			
 			<%@include file="includes/issues.jsp" %>
+			
 			<s:div id="linkedEnquiriesDiv">
 				<%@include file="includes/linkedEnquiries.jsp" %>
 			</s:div>
+			
 			<s:div id="linkedEnquiriesListDiv" style="box-shadow: 5px 5px 0 grey;"/>
 			<s:div cssClass="clear"></s:div>
 			
@@ -119,6 +121,7 @@
 			$("#formDiv").load("enquiry/newEnquiry.action?contactid=" + contactId);
 			
 		});
+
 	$(function() {
 		initialisePrimaryDisability();
 		initialiseNewSection("artIssue", "itIssue");

@@ -3,6 +3,7 @@ package uow.ia.action;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -27,6 +28,11 @@ public class ContactListAction extends BaseAction{
 	private String searchString = null;
 	private String contactType;
 	private String sortField;
+	private int startIndex;
+	private int recordsPerPage;
+	private int currentPage;
+	private int totalNumberOfPages;
+	private int totalNumberOfRecords;
 	private boolean descending;
 	private List<Contacts> contactList = null;
 	
@@ -92,41 +98,153 @@ public class ContactListAction extends BaseAction{
 		this.descending = descending;
 	}
 
+	
+	
+	public int getStartIndex() {
+		return startIndex;
+	}
+
+	public void setStartIndex(int startIndex) {
+		this.startIndex = startIndex;
+	}
+
+	public int getRecordsPerPage() {
+		return recordsPerPage;
+	}
+
+	public void setRecordsPerPage(int recordsPerPage) {
+		this.recordsPerPage = recordsPerPage;
+	}
+
+	public int getTotalNumberOfPages() {
+		return totalNumberOfPages;
+	}
+
+	public void setTotalNumberOfPages(int totalNumberOfPages) {
+		this.totalNumberOfPages = totalNumberOfPages;
+	}
+	
+	
+
+	public int getCurrentPage() {
+		return currentPage;
+	}
+
+	public void setCurrentPage(int currentPage) {
+		this.currentPage = currentPage;
+	}
+
 	/**
 	 * load an empty contact list search form
 	 * @return String
 	 */
 	public String loadClientSearchResult(){
 		System.out.println("in load client search form");
-		//searchString = "contactType.id: 2 ";// + getContactType();
-		//System.out.println(searchString);
-		System.out.println(sortField);
-		System.out.println(descending);
 		
-		//searchString = "firstname: Mo*";
-		
-		if(!getFirstName().equals("undefined")){
-			searchString += "firstname:" + getFirstName();
-			if(!getFirstName().contains("*"))
-				searchString += "*";
-		}
+		SearchUtil service = new SearchUtil();
+		setStartIndex(0);
+		setRecordsPerPage(10);
+		setCurrentPage(1);
 			
-		if(!getLastName().equals("undefined")){
-			searchString += " lastname:" + getLastName();
-			if(!getLastName().contains("*"))
-				searchString += "*";
-		}
+		//need to check the size of contactlist
 		
+		initializeSearchString();
+		contactList = getContactListResult(service);
+		activatePageDetails(service);
 		
-		if(!getSearchString().isEmpty()){
-			System.out.println(searchString);
-			SearchUtil service = new SearchUtil()	;
-			
-			contactList = service.getPage(0, 10, sortField, searchString, utilService, descending, Contacts.class);
-			//System.out.println("List: " + list);
-		}
+		if(totalNumberOfPages == 0)
+			setCurrentPage(0);
+		
 		System.out.println("End of searchContact");
 		return SUCCESS;
+	}
+	
+	public String getNextPage(){
+		SearchUtil service = new SearchUtil();
+		startIndex = getStartIndex() + getRecordsPerPage();
+		
+		initializeSearchString();
+		activatePageDetails(service);
+		
+		if(startIndex <= totalNumberOfRecords){
+			contactList = getContactListResult(service);
+			currentPage = getCurrentPage() + 1;
+		}
+		
+		return SUCCESS;
+	}
+	
+	public String getPrevPage(){
+		SearchUtil service = new SearchUtil();
+		startIndex = getStartIndex() - getRecordsPerPage();
+		
+		initializeSearchString();
+		activatePageDetails(service);
+		
+		if(startIndex >= 0){
+			contactList = getContactListResult(service);
+			currentPage = getCurrentPage() - 1;
+		}
+		
+		return SUCCESS;
+	}
+	
+	public String getPage(){
+		SearchUtil service = new SearchUtil();
+		
+		initializeSearchString();
+		activatePageDetails(service);
+		
+		if(getCurrentPage() > 0 && getCurrentPage() <= totalNumberOfPages){
+			startIndex = getRecordsPerPage() * getCurrentPage();
+			contactList = getContactListResult(service);
+		}
+		
+		return SUCCESS;
+	}
+	
+	private void initializeSearchString(){
+		searchString = "(";
+		
+		try{
+			if(!getFirstName().isEmpty() || !getFirstName().equals(null)){
+				searchString += "firstname:" + getFirstName();
+				if(!getFirstName().contains("*"))
+					searchString += "*";
+			}
+		}catch(NullPointerException npe){}
+			
+		try{
+			if(!getLastName().isEmpty() || !getLastName().equals(null)){
+				searchString += " AND lastname:" + getLastName();
+				if(!getLastName().contains("*"))
+					searchString += "*";
+			}
+		}catch(NullPointerException npe){}
+		
+		searchString += ") AND contactType.id:2";
+	}
+	
+	private List<Contacts> getContactListResult(SearchUtil service){
+		
+		List<Contacts> resultList = new ArrayList<Contacts>();
+		
+		if(!getSearchString().isEmpty()){
+			
+			resultList = service.getPage(startIndex, recordsPerPage, sortField, searchString, utilService, descending, Contacts.class);
+		}
+		return resultList;
+	}
+	
+	private void activatePageDetails(SearchUtil service){
+		
+		totalNumberOfRecords = service.getTotalNumberOfRecords(sortField, searchString, utilService, descending, Contacts.class);
+		
+		
+		int mod = totalNumberOfRecords % recordsPerPage;
+		if (mod != 0)
+			mod = 1;
+		totalNumberOfPages = totalNumberOfRecords / recordsPerPage + mod;
 	}
 	
 	public void something() throws Exception{

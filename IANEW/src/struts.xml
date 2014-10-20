@@ -62,6 +62,13 @@
     		<result name="addressUpdate">/forms/includes/iterAddresses.jsp</result>
     		<result name="employmentUpdate">/forms/includes/iterEmployments.jsp</result>
     	</action>
+    	<action name="clearContact" class="uow.ia.action.EnquiryAction" method="clearContact">
+    		<result name="success">/forms/includes/contactInfo.jsp</result>
+    	</action>
+    	<action name="assignContact" class="uow.ia.action.EnquiryAction" method="assignContact">
+    		<result name="success">/forms/includes/contactInfo.jsp</result>
+    	</action>
+    	
     </package>
     
     <!-- Enquiry List Forms-->
@@ -82,10 +89,24 @@
     	<action name="linkEnquiry" class="uow.ia.action.EnquiryListAction" method="updateEnquiryList">
     		<result name="success">/forms/enquiryList.jsp</result>
     	</action>
+    	<action name="loadFilterSortResult" class="uow.ia.action.EnquiryListAction" method="loadFilterSortResult">
+    		<result name="success">/forms/includes/iterEnquiryList.jsp</result>
+    	</action>
     </package>
     
+    <!-- Contact List Forms -->
     <package name="contactList" namespace="/contactList" extends="struts-default">
+    	
+    	<action name="getPage" class="uow.ia.action.ContactListAction" method="getPage">
+    		<result name="success">/forms/search/contactList.jsp</result>
+    	</action>
     	<action name="loadClientSearchResult" class="uow.ia.action.ContactListAction" method="loadClientSearchResult">
+    		<result name="success">/forms/search/contactList.jsp</result>
+    	</action>
+    	<action name="getNextPage" class="uow.ia.action.ContactListAction" method="getNextPage">
+    		<result name="success">/forms/search/contactList.jsp</result>
+    	</action>
+    	<action name="getPrevPage" class="uow.ia.action.ContactListAction" method="getPrevPage">
     		<result name="success">/forms/search/contactList.jsp</result>
     	</action>
    	</package>
@@ -116,6 +137,12 @@
 		    <interceptor-ref name="prepare"/>
 		    <interceptor-ref name="basicStack"/>
     		<result name="success">/forms/case.jsp</result>
+    	</action>
+    	<action name="assignContact" class="uow.ia.action.CaseAction" method="assignContact">
+    		<result name="success">/forms/includes/contactInfo.jsp</result>
+    	</action>
+    	<action name="clearContact" class="uow.ia.action.CaseAction" method="clearContact">
+    		<result name="success">/forms/includes/contactInfo.jsp</result>
     	</action>
     </package>
     

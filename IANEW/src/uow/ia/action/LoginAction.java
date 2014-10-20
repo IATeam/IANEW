@@ -115,14 +115,19 @@ public class LoginAction extends BaseAction{
 		
 		if (!(searchString == null || searchString.equals(""))) {
 			list = new SearchUtil().getResultObjectList(searchString, utilService);
-			
+			System.out.println("Got list" + list.toString());
 			for (Object o : list) {
 				int type = 0;
 				Field[] fields = o.getClass().getDeclaredFields();
+				
+				System.out.println("class name is: " + o.getClass().getSimpleName());
+				
 				if (o instanceof Enquiries) {
 					resultList.add(o);
 				} else if (o instanceof IndividualCases) {
 					resultList.add(o);
+				} else if(o instanceof Contacts){
+					System.out.print("is a contact object");
 				}
 				else {
 					Object object = null;
@@ -136,9 +141,7 @@ public class LoginAction extends BaseAction{
 						}
 					}
 				}
-				
 			}
-			
 		}
 		
 		return SUCCESS;

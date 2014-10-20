@@ -37,8 +37,8 @@ $("#enquiryForm").find("option[value='-1']").css("background-color", "pink");
  * @param {} iterator
  */
 function addNewRecord(article, size, iterator){ 
-	//$("#" + article + " section").clone().appendTo("#" + iterator);
-	$("#" + iterator).append($("#" + article + " section").clone());
+	$("#" + article + " section").clone().appendTo("#" + iterator);
+	//$("#" + iterator).append($("#" + article + " section").clone());
 //	var articleEle = document.getElementById(article);
 //	var sizeEle = document.getElementById(size);
 //	var iteratorEle = document.getElementById(iterator);

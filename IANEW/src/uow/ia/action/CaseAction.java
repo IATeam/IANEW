@@ -23,6 +23,7 @@ import uow.ia.bean.CulturalBackgroundTypes;
 import uow.ia.bean.DangerTypes;
 import uow.ia.bean.DisabilityTypes;
 import uow.ia.bean.EmploymentTypes;
+import uow.ia.bean.Enquiries;
 import uow.ia.bean.GoalTypes;
 import uow.ia.bean.IndividualCaseCommunications;
 import uow.ia.bean.IndividualCases;
@@ -1081,6 +1082,38 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 		System.out.println("Set stuffs");
 		System.out.println("no");
 		System.out.println("end get existing list");
+		return SUCCESS;
+	}
+	
+	
+	private int contactid;
+	
+	
+	public int getContactid() {
+		return contactid;
+	}
+
+	public void setContactid(int contactid) {
+		this.contactid = contactid;
+	}
+
+	public String assignContact(){ //TODO:
+		System.out.println("Struts: start assignContact");
+		
+		System.out.println("contactid: " + getContactid());
+		
+		try{
+			if (getContactid() > 0)
+				iamodel.setContact(contactService.getContacts(getContactid()));
+		}catch(NullPointerException npe){
+			iamodel = new IndividualCases();
+			if (getContactid() > 0)
+				iamodel.setContact(contactService.getContacts(getContactid()));
+		}
+		activateLists();
+		initialiseDBList();
+		
+		System.out.println("Struts: end assignContact");
 		return SUCCESS;
 	}
 	

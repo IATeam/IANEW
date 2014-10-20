@@ -1,63 +1,107 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ taglib prefix="sj" uri="/struts-jquery-tags" %>
 
-<section id="secContactSearchBar">
+<section id="secContactSearch" class="sixteen columns">
+	<input type="hidden" id="selectedContact"/>
 	<s:div id="divSearchContactOptions">
-		<s:label for="firstname" value="firstname: " /><s:textfield id="contactfirstname"/>
-		<s:label for="lastname" value="lastname: " /><s:textfield id="contactlastname"/><br/>
-		<s:label value="Sort By"/> 
-		<input type="radio" id="radiofirstname" name="sort"/>firstname <input type="radio" id="radiolastname" name="sort"/>lastname
-		<s:select id="descending" list="#{'1':'ascending', '2':'descending'}" />
-		<input id="btnContactSearch" type="button" value="Update" />
+		<s:div cssClass="row">
+			<s:div cssClass="four columns"><p></p></s:div>
+			<div class="inputfield four columns">
+				<s:label for="firstname" value="firstname:" />
+				<div><s:textfield id="contactfirstname"/></div>
+			</div>
+			<div class="inputfield four columns">
+				<s:label for="lastname" value="lastname:" />
+				<div><s:textfield id="contactlastname" /></div>
+			</div>
+			<s:div cssClass="four columns"><p></p></s:div>
+		</s:div>
+		<s:div cssClass="row">
+			<s:div cssClass="four columns"><p></p></s:div>
+			<s:div cssClass="four columns">
+				<s:label value="Sort By"/> 
+				<input type="radio" id="radiofirstname" name="sort" checked="true"/>firstname <input type="radio" id="radiolastname" name="sort"/>lastname
+			</s:div>
+			<s:div cssClass="four columns">
+				<s:select cssClass="two columns alpha" id="descending" list="#{'1':'ascending', '2':'descending'}" />
+				<input class="two columns omega" id="btnContactSearch" type="button" value="Update" onclick="loadContactList(this)"/>
+			</s:div>
+			<s:div cssClass="four columns"><p></p></s:div>
+		</s:div>
 	</s:div>
 </section>
 
-<s:div>
-	<s:div id="contactList">
+<section>
+	<s:div id="contactList" cssClass="list">
 		<%@include file="contactList.jsp" %>
 	</s:div>
-	<input id="selectContact" type="button" value="select contact"/>
-</s:div>
+</section>
 
 <script>
-	$("#btnContactSearch").click(function(){
-		var firstName;
-		var lastName;
-		var asending;
-		var sortField;
-		var searchString = $("#searchbox").val();
-		
+	function loadContactList(btn){
+		var firstName, lastName, asending, sortField, recordsPerPage, startIndex;
+
 		if($("#contactfirstname").val().trim().length > 0)
 			firstName = $("#contactfirstname").val().trim();
 		
 		if($("#contactlastname").val().trim().length > 0)
 			lastName = $("#contactlastname").val().trim();
 
-		alert(searchString);
+		
 		if($("#radiofirstname").is(":checked"))	sortField = "firstname";
 		else									sortField = "lastname";
 		
 		if($("#descending").val() == 1)			descending = false;
 		else									descending = true;
+
+		if($("#recordsPerPage").val() == "")	recordsPerPage = 0;
+		else									recordsPerPage = $("#recordsPerPage").val();
+
+		if($("#startIndex").val() == "")		startIndex = 0;
+		else									startIndex = $("#startIndex").val();
+
+		if($("#currentPage").val() == "")		currentPage = 0;
+		else									currentPage = parseInt($("#currentPage").val());
+
 		
-		if(searchString != ""){
-			/* $("#contactList").load("contactList/loadClientSearchResult.action?firstName=" 
-					+ firstName + "&lastName=" + lastName + "&descending=" + descending + "&sortField=" + sortField);
-			$("#contactList").load("contactList/loadClientSearchResult.action?searchString=" 
-						 + searchString + "&descending=" + descending + "&sortField=" + sortField); */
-			var data = {
-							'searchString' 	: searchString ,
-							'descending'	: descending,
-							'sortField'		: sortField
-						};
-		
-		 $.post('contactList/loadClientSearchResult.action', 
-				data, 
-				function(data){
-					$('#contactList').html(data);
-				}
-			);
-		}
+		if(firstName.length > 0 || lastName.length > 0){
+			var submitData = {
+				'firstName' 	: firstName,
+				'lastName'		: lastName,
+				'descending'	: descending,
+				'sortField'		: sortField,
+				'startIndex'	: startIndex,
+				'recordsPerPage': recordsPerPage,
+				'currentPage'	: currentPage
+			}; 
 			
-	});
+			var url = '';
+			if($(btn).attr('id') == "btnContactSearch")
+				url = 'contactList/loadClientSearchResult.action';
+			else if($(btn).attr('id') == "btnNextContacts")
+				url = "contactList/getNextPage.action";
+			else if($(btn).attr('id') == "btnPrevContacts")
+				url = "contactList/getPrevPage.action";
+			else{ //for when the user input a number for page change
+				url = "contactList/getPage.action"
+			}
+			
+			var totalPage;
+			if($("#totalNumberOfPagesDiv").text() != "")
+				totalPage = parseInt($("#totalNumberOfPagesDiv").text());
+			if(isNaN(parseInt($("#totalNumberOfPagesDiv").text())) || (currentPage >= 0 && currentPage <= totalPage))
+			
+			{
+				$.post(url, 
+					submitData, 
+					function(data){
+						$('#contactList').html(data);
+					}
+				);
+			}
+		}
+	}
+	
+
+	
 </script>

@@ -58,10 +58,10 @@ public class SearchUtil {
 						type.isInstance(new Integer(0)) ) {
 						if (objectFieldName == null) { 
 							this.fieldList.add(f.getName());
-						} else {
+						} else { 
 							this.fieldList.add(objectFieldName + "." + f.getName());
 						}
-					} else {
+					} else { 
 						fieldCollection(type, f.getName());
 					}
 				}
@@ -135,8 +135,15 @@ public class SearchUtil {
 		return list;
 	}
 	
-	public int getTotalNumberOfRecords(String searchString, UtilService s, Class<?> entity){
-		FullTextQuery ftq = getQueryResult(searchString, s, entity);
+	public int getTotalNumberOfRecords(String sortField, String searchString, UtilService s, boolean asc, Class<?> entity){
+FullTextQuery ftq = null;
+		
+		if(sortField == null){
+			ftq = getQueryResult(searchString, s, entity);
+		}else{
+			ftq = getSortedQueryResult(sortField, searchString, s, asc, entity);
+		}
+		
 		return ftq.getResultSize();
 	}
 	

@@ -309,7 +309,7 @@ h4 {
 	 height: 20px;
 }
 
-.searchButton{
+.button{
 	height: 20px;
 	width: 20px;
 }
@@ -324,4 +324,13 @@ h4 {
 	color: white;
 	margin-bottom: 10px;
 	background-color: orange !important;
+}
+
+.saturate{
+	-webkit-filter : opacity(0.4);
+	filter : opacity(0.4);
+}
+
+.dropShadow{
+	box-shadow: 10px 10px 5px grey;
 }

@@ -41,15 +41,18 @@
 		      media="all"/>
 	<link href="<s:url value='/styles/import/skeleton.css' encode='false' includeParams='none'/>" rel="stylesheet" type="text/css"
 		      media="all"/>
+		
+	<script src="<s:url value='/js/jquery/jquery.validate.js' encode='false' includeParams='none'/>" ></script> 
+		      
 	<script src="<s:url value='/js/ianew.lists.js' encode='false' includeParams='none'/>"></script>
 	<script src="<s:url value='/js/ianew.form.js' encode='false' includeParams='none'/>" ></script> 
 	<script src="<s:url value='/js/validation/caseValidation.js' encode='false' includeParams='none'/>" ></script> 
-	<script src="<s:url value='/js/jquery/jquery.validate.js' encode='false' includeParams='none'/>" ></script> 
 	
 </head>
 <body>
+<s:div cssClass="form container">
 	<s:set var="formType">case</s:set>
-	<s:form id="caseForm" cssClass="cmxform form container" namespace="/case" method="post" action="saveUpdateCase" novalidate="novalidate">  
+	<s:form id="caseForm" cssClass="cmxform" namespace="/case" method="post" action="saveUpdateCase">  
 		<s:hidden name="iamodel.contact.id" />
 <!-- ---------------------------------------------------------------------------------------------- -->
 <!-- Header of the form --------------------------------------------------------------------------- -->
@@ -64,10 +67,9 @@
 		<%@include file="includes/formStatus.jsp" %>
 		<%@include file="includes/caseSummary.jsp" %>
 		<%@include file="includes/advocateDetails.jsp" %>
-		<%@include file="includes/personalDetails.jsp" %>
-		<%@include file="includes/address.jsp" %>	
-		<%@include file="includes/disability.jsp" %>
- 		<%@include file="includes/employment.jsp" %>	
+		<s:div id="contactInfo">
+			<%@include file="includes/contactInfo.jsp" %>
+		</s:div>
 		<%@include file="includes/plan.jsp" %>
 		<%@include file="includes/caseIssues.jsp" %>
 		<%@include file="includes/communications.jsp" %>
@@ -99,6 +101,7 @@
 			</s:div>
 		</footer>
 	</s:form>	
+	</s:div>
 	<script>
 	
 	$(function() {
@@ -123,14 +126,14 @@
 	});
 	
 	function checkForm(){
-		removeNullAndUpdateIndex($("#artAddress"), $("#itAddress"), $("#addressSize"));
-		removeNullAndUpdateIndex($("#artDisability"), $("#itDisability"), $("#disabilitySize"));
-		removeNullAndUpdateIndex($("#artIssue"), $("#itIssue"), $("#issueSize"));
-		removeNullAndUpdateIndex($("#artEmployment"), $("#itEmployment"), $("#employmentSize"));
-		removeNullAndUpdateIndex($("#artGoal"), $("#itGoal"), $("#goalSize"));
-		removeNullAndUpdateIndex($("#artRisk"), $("#itRisk"), $("#riskSize")); 
-		removeNullAndUpdateIndex($("#artCommunication"), $("#itCommunication"), $("#communicationSize"));
-		removeNullAndUpdateIndex($("#artDeveloper"), $("#itDeveloper"), $("#planDeveloperSize"));
+		//removeNullAndUpdateIndex($("#artAddress"), $("#itAddress"), $("#addressSize"));
+		//removeNullAndUpdateIndex($("#artDisability"), $("#itDisability"), $("#disabilitySize"));
+		//removeNullAndUpdateIndex($("#artIssue"), $("#itIssue"), $("#issueSize"));
+		//removeNullAndUpdateIndex($("#artEmployment"), $("#itEmployment"), $("#employmentSize"));
+		//removeNullAndUpdateIndex($("#artGoal"), $("#itGoal"), $("#goalSize"));
+		//removeNullAndUpdateIndex($("#artRisk"), $("#itRisk"), $("#riskSize")); 
+		//removeNullAndUpdateIndex($("#artCommunication"), $("#itCommunication"), $("#communicationSize"));
+		//removeNullAndUpdateIndex($("#artDeveloper"), $("#itDeveloper"), $("#planDeveloperSize"));
 		//setSQLDateFormat();
 		validated();
 		//$("#caseForm").submit();
