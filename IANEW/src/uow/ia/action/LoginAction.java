@@ -44,25 +44,6 @@ public class LoginAction extends BaseAction{
 
 		
 	public String execute(){
-		//if(getUsername().equals("username") && getPassword().equals("password")){
-//		Users user = adminService.login(username, password);
-//		if(user!=null) {
-//			Map<String, Object> session = ActionContext.getContext().getSession();
-//			session.put(USER,user);
-//            session.put("context", new Date());
-//            
-//            FullTextSession fts = utilService.getFullTextSession();
-//    		
-//    		try {
-//    			fts.createIndexer().startAndWait();
-//    		} catch (InterruptedException e) {
-//    			e.printStackTrace();
-//    		}
-//            
-//			return SUCCESS;
-//		} else {
-//			return ERROR;
-//		}
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Users user = adminService.getUsers(userDetails.getUsername());
 		ActionContext.getContext().getSession().put(USER, user);
@@ -73,6 +54,14 @@ public class LoginAction extends BaseAction{
             SimpleGrantedAuthority authority = (SimpleGrantedAuthority) it.next();
             System.out.println("Role: " + authority.getAuthority());
         }
+//      FullTextSession fts = utilService.getFullTextSession();
+//		
+//		try {
+//			fts.createIndexer().startAndWait();
+//		} catch (InterruptedException e) {
+//			e.printStackTrace();
+//		}
+        
         return SUCCESS;
 	}
 
