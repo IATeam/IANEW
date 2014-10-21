@@ -168,7 +168,8 @@ public class ContactListAction extends BaseAction{
 		
 		if(startIndex <= totalNumberOfRecords){
 			contactList = getContactListResult(service);
-			currentPage = getCurrentPage() + 1;
+			if(contactList.size() > 0)
+				currentPage = getCurrentPage() + 1;
 		}
 		
 		return SUCCESS;
@@ -183,7 +184,8 @@ public class ContactListAction extends BaseAction{
 		
 		if(startIndex >= 0){
 			contactList = getContactListResult(service);
-			currentPage = getCurrentPage() - 1;
+			if(contactList.size() > 0)
+				currentPage = getCurrentPage() - 1;
 		}
 		
 		return SUCCESS;
@@ -204,25 +206,39 @@ public class ContactListAction extends BaseAction{
 	}
 	
 	private void initializeSearchString(){
-		searchString = "(";
-		
-		try{
-			if(!getFirstName().isEmpty() || !getFirstName().equals(null)){
-				searchString += "firstname:" + getFirstName();
-				if(!getFirstName().contains("*"))
-					searchString += "*";
-			}
-		}catch(NullPointerException npe){}
+		searchString = "";
+		if(getFirstName().length() > 0 || getLastName().length() > 0){
+			searchString += "(";
+			try{
+				if(!getFirstName().isEmpty() || !getFirstName().equals(null)){
+					searchString += "firstname:" + getFirstName();
+					if(!getFirstName().contains("*"))
+						searchString += "*";
+				}
+			}catch(NullPointerException npe){}
+			try{
+				
+			if(getFirstName().length() > 0 && getLastName().length() > 0)
+				searchString += " AND ";
+			}catch(NullPointerException npe){}
 			
-		try{
-			if(!getLastName().isEmpty() || !getLastName().equals(null)){
-				searchString += " AND lastname:" + getLastName();
-				if(!getLastName().contains("*"))
-					searchString += "*";
-			}
-		}catch(NullPointerException npe){}
+			try{
+				if(!getLastName().isEmpty() || !getLastName().equals(null)){
+					searchString += "lastname:" + getLastName();
+					if(!getLastName().contains("*"))
+						searchString += "*";
+				}
+			}catch(NullPointerException npe){}
+			searchString += ")";
+		}
 		
-		searchString += ") AND contactType.id:2";
+		if(searchString.length() > 0)
+			searchString += " AND contactType.id:2";
+		else {
+			searchString = " contactType.id:2";
+		}
+		
+		System.out.println(searchString);
 	}
 	
 	private List<Contacts> getContactListResult(SearchUtil service){
@@ -230,8 +246,8 @@ public class ContactListAction extends BaseAction{
 		List<Contacts> resultList = new ArrayList<Contacts>();
 		
 		if(!getSearchString().isEmpty()){
-			
 			resultList = service.getPage(startIndex, recordsPerPage, sortField, searchString, utilService, descending, Contacts.class);
+			System.out.println(service.getPage(startIndex, recordsPerPage, sortField, searchString, utilService, descending, Contacts.class));
 		}
 		return resultList;
 	}
@@ -239,7 +255,6 @@ public class ContactListAction extends BaseAction{
 	private void activatePageDetails(SearchUtil service){
 		
 		totalNumberOfRecords = service.getTotalNumberOfRecords(sortField, searchString, utilService, descending, Contacts.class);
-		
 		
 		int mod = totalNumberOfRecords % recordsPerPage;
 		if (mod != 0)

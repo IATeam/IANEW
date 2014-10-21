@@ -22,12 +22,6 @@
 	Description: This js is for the common functions in the forms
 ------------------------------------------------------------------------------------------------*/
 
-//$(document).ready(function(){
-//	$("#enquiryForm").find("option[value='-1']").each(function(){
-//		alert($(this).val());	
-//	});
-//});
-$("#enquiryForm").find("option[value='-1']").css("background-color", "pink");
 
 /**
  * Add a new Component/record to the list

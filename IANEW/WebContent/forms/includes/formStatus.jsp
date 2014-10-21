@@ -64,7 +64,7 @@ function changePriorityColour(selectList) {
 	</div>
 	
 	<div id="divDanger" class="three columns">
-		<s:select list="dangerSelectList" listKey="id" listValue="dangerName" name="theDangerTypeId" headerKey="-1" headerValue="Flag" cssClass="coloured" cssStyle="background: %{iamodel.contact.dangerType.symbol}" onChange="changeDangerColour(this)"/>
+		<%@include file="dangerType.jsp" %>
 	</div>
 	
 	<s:if test="%{#formType=='case'}">

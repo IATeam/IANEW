@@ -57,14 +57,27 @@
 
 <script>
 $(".toggled").hide();
-$("#btnSelectContact").click(function(){ alert("btnselect")
+$("#btnSelectContact").click(function(){
+	var sent = false;
+	var contactid = parseInt($("#selectedContact").val());
 	if($("#formTitle").text() == "New Enquiry" || $("#formTitle").text() == "Existing Enquiry"){
-		$("#contactInfo").load("enquiry/assignContact.action?contactid=" + parseInt($("#selectedContact").val()));
-	
+		if($("#selectedContact").val() !== ""){
+			$("#contactInfo").load("enquiry/assignContact.action?contactid=" + contactid + "&call=1");
+			
+			$("#divDanger").load("enquiry/assignContact.action?contactid=" + contactid + "&call=2");
+			
+			sent = true;
+		}
 	}else if($("#formTitle").text() == "New Case" || $("#formTitle").text() == "Existing Case"){
-		$("#contactInfo").load("case/assignContact.action?contactid=" + parseInt($("#selectedContact").val()));
+		if($("#selectedContact").val() !== ""){
+			$("#contactInfo").load("case/assignContact.action?contactid=" + contactid + "&call=1");
+			$("#divDanger").load("case/assignContact.action?contactid=" + contactid + "&call=2");
+			
+			sent = true;
+		}
 	}
-	$('#caseForm, #enquiryForm').find(".saturate").removeClass('saturate');
+	if(sent === true)
+		$('#caseForm, #enquiryForm').find(".saturate").removeClass('saturate');
 }); 
 
 $("#btnCancelSelectContact").click(function(){

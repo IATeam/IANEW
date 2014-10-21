@@ -187,13 +187,18 @@ public class EnquiryListAction extends BaseAction implements ModelDriven<List<En
 	public String getEnquiryList() {
 		SearchUtil service = new SearchUtil();
 		
+		System.out.println(getSortField());
+		
 		setStartIndex(0);
 		setRecordsPerPage(10);
 		setCurrentPage(1);
 		
-		searchString = "m*";
+		searchString = "";
 		iamodelList = getEnquiryListResult(service);
 		activatePageDetails(service);
+		
+		System.out.println(iamodelList);
+		
 		/*
 		issueTypeList = typesService.findIssueTypes();
 		setPage(1);
@@ -229,6 +234,52 @@ public class EnquiryListAction extends BaseAction implements ModelDriven<List<En
 	}
 	
 
+	public String getNextPage(){
+		SearchUtil service = new SearchUtil();
+		startIndex = getStartIndex() + getRecordsPerPage();
+		
+		initializeSearchString();
+		activatePageDetails(service);
+		
+		if(startIndex <= totalNumberOfRecords){
+			iamodelList = getEnquiryListResult(service);
+			if(iamodelList.size() > 0)
+				currentPage = getCurrentPage() + 1;
+		}
+		
+		return SUCCESS;
+	}
+	
+	public String getPrevPage(){
+		SearchUtil service = new SearchUtil();
+		startIndex = getStartIndex() - getRecordsPerPage();
+		
+		initializeSearchString();
+		activatePageDetails(service);
+		
+		if(startIndex >= 0){
+			iamodelList = getEnquiryListResult(service);
+			if(iamodelList.size() > 0)
+				currentPage = getCurrentPage() - 1;
+		}
+		
+		return SUCCESS;
+	}
+	
+	public String getPage(){
+		SearchUtil service = new SearchUtil();
+		
+		initializeSearchString();
+		activatePageDetails(service);
+		
+		if(getCurrentPage() > 0 && getCurrentPage() <= totalNumberOfPages){
+			startIndex = getRecordsPerPage() * getCurrentPage();
+			iamodelList = getEnquiryListResult(service);
+		}
+		
+		return SUCCESS;
+	}
+	
 	public String updateEnquiryList() {
 //		System.out.println(getPage());
 //		setIamodelList(enquiryService.findEnquiriesByPage(getPage(),
@@ -264,60 +315,77 @@ public class EnquiryListAction extends BaseAction implements ModelDriven<List<En
 	private void initializeSearchString(){
 		
 		searchString = "";
-		try{
-			
-			if(!getFirstName().isEmpty() || !getFirstName().equals(null)){
-				searchString = "(";
-				searchString += "contact.firstname:" + getFirstName();
-				if(!getFirstName().contains("*"))
-					searchString += "*";
-			}
-		}catch(NullPointerException npe){}
-			
-		try{
-			if(!getLastName().isEmpty() || !getLastName().equals(null)){
-				searchString += " AND contact.lastname:" + getLastName();
-				if(!getLastName().contains("*"))
-					searchString += "*";
-			}
-			if(searchString.contains("("))
-				searchString += ")";
-			
-		}catch(NullPointerException npe){}
 		
-		
+		if(getFirstName().length() > 0 || getLastName().length() > 0){
+			searchString += "(";
+			try{
+				if(!getFirstName().isEmpty() || !getFirstName().equals(null)){
+					searchString += "contact.firstname:" + getFirstName();
+					if(!getFirstName().contains("*"))
+						searchString += "*";
+				}
+			}catch(NullPointerException npe){}
+			try{
+				
+			if(getFirstName().length() > 0 && getLastName().length() > 0)
+				searchString += " AND ";
+			}catch(NullPointerException npe){}
+			
+			try{
+				if(!getLastName().isEmpty() || !getLastName().equals(null)){
+					searchString += "contact.lastname:" + getLastName();
+					if(!getLastName().contains("*"))
+						searchString += "*";
+				}
+			}catch(NullPointerException npe){}
+			searchString += ")";
+		}
 		
 		//created date start and end - assuming javascript has updated the date fields
 		//such that the string either is either empty or has ( * or numbers+*)
 		try{
-			if(!getCreatedDateStart().isEmpty() || !getCreatedDateStart().equals(null)){
-				searchString += " AND createddatetime:[" + getCreatedDateStart() + " TO ";
-			}
-			if(!getCreatedDateEnd().isEmpty() || !getCreatedDateEnd().equals(null)){
-				searchString += getCreatedDateEnd() + "]";
+			if((getCreatedDateStart().length() > 0 || getCreatedDateEnd().length() > 0)){
+				if(searchString.contains(")") || searchString.contains("]"))
+					searchString += " AND ";
+			
+				
+				if(!getCreatedDateStart().isEmpty() || !getCreatedDateStart().equals(null)){
+					searchString += "createdDateTime:[" + getCreatedDateStart() + " TO ";
+				}
+				if(!getCreatedDateEnd().isEmpty() || !getCreatedDateEnd().equals(null)){
+					searchString += getCreatedDateEnd() + "]";
+				}
+				
+				
 			}
 		}catch(NullPointerException npe){}
 		
-		//created date start and end - assuming javascript has updated the date fields
-		//such that the string either is either empty or has ( * or numbers+*)
 		try{
-			if(!getUpdatedDateStart().isEmpty() || !getUpdatedDateStart().equals(null)){
-				searchString += " AND updateddatetime:[" + getUpdatedDateStart() + " TO ";
-			}
-			if(!getUpdatedDateEnd().isEmpty() || !getUpdatedDateEnd().equals(null)){
-				searchString += getUpdatedDateEnd() + "]";
+			if((getUpdatedDateStart().length() > 0 || getUpdatedDateEnd().length() > 0)){
+				if(searchString.contains(")") || searchString.contains("]"))
+					searchString += " AND ";
+				//created date start and end - assuming javascript has updated the date fields
+				//such that the string either is either empty or has ( * or numbers+*)
+				
+				if(!getUpdatedDateStart().isEmpty() || !getUpdatedDateStart().equals(null)){
+					searchString += "updatedDateTime:[" + getUpdatedDateStart() + " TO ";
+				}
+				if(!getUpdatedDateEnd().isEmpty() || !getUpdatedDateEnd().equals(null)){
+					searchString += getUpdatedDateEnd() + "]";
+				}
 			}
 		}catch(NullPointerException npe){}
+		
 		System.out.println("searchString: " + searchString);
 	}
+		
+	
 	
 	private List<Enquiries> getEnquiryListResult(SearchUtil service){
 		List<Enquiries> resultList = new ArrayList<Enquiries>();
 		
-		if(!searchString.isEmpty()){
-			
-			resultList = service.getPage(startIndex, recordsPerPage, sortField, searchString, utilService, descending, Enquiries.class);
-		}
+		resultList = service.getPage(startIndex, recordsPerPage, sortField, searchString, utilService, descending, Enquiries.class);
+		
 		return resultList;
 	}
 	
@@ -337,9 +405,9 @@ public class EnquiryListAction extends BaseAction implements ModelDriven<List<En
 	 * 
 	 * @return
 	 */
-	public int getPage() {
-		return page;
-	}
+//	public int getPage() {
+//		return page;
+//	}
 
 	/**
 	 * Setter for Page

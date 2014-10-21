@@ -30,6 +30,7 @@
     <package name="enquiry" namespace="/enquiry" extends="struts-default">
     	<action name="clearContact" class="uow.ia.action.EnquiryAction" method="clearContact">
     		<result name="success">/forms/includes/contactInfo.jsp</result>
+    		<result name="input">/forms/includes/contactInfo.jsp</result>
     	</action>
     	<action name="getEnquiry" class="uow.ia.action.EnquiryAction" method="getExistingEnquiry">
 		    	<interceptor-ref name="params"/>
@@ -66,13 +67,26 @@
     		<result name="employmentUpdate">/forms/includes/iterEmployments.jsp</result>
     	</action>
     	<action name="assignContact" class="uow.ia.action.EnquiryAction" method="assignContact">
-    		<result name="success">/forms/includes/contactInfo.jsp</result>
+    		<result name="contactinfo">/forms/includes/contactInfo.jsp</result>
+    		<result name="dangertype">/forms/includes/dangerType.jsp</result>
     	</action>
     	
     </package>
     
     <!-- Enquiry List Forms-->
     <package name="enquiryList" namespace="/enquiryList" extends="struts-default">
+    	<action name="loadFilterSortResult" class="uow.ia.action.EnquiryListAction" method="loadFilterSortResult">
+    		<result name="success">/forms/includes/iterEnquiryList.jsp</result>
+    	</action>
+    	<action name="getPage" class="uow.ia.action.EnquiryListAction" method="getPage">
+    		<result name="success">/forms/search/iterEnquiryList.jsp</result>
+    	</action>
+    	<action name="getNextPage" class="uow.ia.action.EnquiryListAction" method="getNextPage">
+    		<result name="success">/forms/search/iterEnquiryList.jsp</result>
+    	</action>
+    	<action name="getPrevPage" class="uow.ia.action.EnquiryListAction" method="getPrevPage">
+    		<result name="success">/forms/search/iterEnquiryList.jsp</result>
+    	</action>
     	<action name="getEnquiryList" class="uow.ia.action.EnquiryListAction" method="getEnquiryList">
     		<result name="success">/forms/enquiryList.jsp</result>
     	</action>
@@ -89,9 +103,7 @@
     	<action name="linkEnquiry" class="uow.ia.action.EnquiryListAction" method="updateEnquiryList">
     		<result name="success">/forms/enquiryList.jsp</result>
     	</action>
-    	<action name="loadFilterSortResult" class="uow.ia.action.EnquiryListAction" method="loadFilterSortResult">
-    		<result name="success">/forms/includes/iterEnquiryList.jsp</result>
-    	</action>
+    	
     </package>
 
     <!-- Contact List Forms -->
@@ -142,7 +154,28 @@
     		<result name="success">/forms/includes/contactInfo.jsp</result>
     	</action>
     	<action name="clearContact" class="uow.ia.action.CaseAction" method="clearContact">
-    		<result name="success">/forms/includes/contactInfo.jsp</result>
+    		<result name="contactinfo">/forms/includes/contactInfo.jsp</result>
+    		<result name="dangertype">/forms/includes/dangerType.jsp</result>
+    	</action>
+    </package>
+   
+   <!-- Case List Form -->
+   <package name="caseList" namespace="/caseList" extends="struts-default">
+    	<action name="getCaseList" class="uow.ia.action.CaseListAction" method="getCaseList">
+    		<result name="success">/forms/caseList.jsp</result>
+    	</action>
+    	
+    	<action name="loadFilterSortResult" class="uow.ia.action.CaseListAction" method="loadFilterSortResult">
+    		<result name="success">/forms/includes/iterCaseList.jsp</result>
+    	</action>
+    	<action name="getPage" class="uow.ia.action.CaseListAction" method="getPage">
+    		<result name="success">/forms/search/iterCaseList.jsp</result>
+    	</action>
+    	<action name="getNextPage" class="uow.ia.action.CaseListAction" method="getNextPage">
+    		<result name="success">/forms/search/iterCaseList.jsp</result>
+    	</action>
+    	<action name="getPrevPage" class="uow.ia.action.CaseListAction" method="getPrevPage">
+    		<result name="success">/forms/search/iterCaseList.jsp</result>
     	</action>
     </package>
     

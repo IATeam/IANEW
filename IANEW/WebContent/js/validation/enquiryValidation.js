@@ -158,7 +158,6 @@ function validated(){
  		//find type and add selectcheck to SELECT option
  		if($(this).val().trim().length > 0){ 
  			$(this).parent().closest("section").find("[name*='ListId']").each(function(){
- 				alert("adding rule for " + $(this).attr("name"))
  				$(this).rules('add', { selectcheck: true } );
  			});
  		}

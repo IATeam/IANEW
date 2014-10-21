@@ -115,6 +115,7 @@ ModelDriven<Enquiries>, Preparable{
 	private int hiddenid;
 	//variable used to pass contact id between forms
 	private int contactid;
+	private int call;
 	
 	public int getContactid() {
 		return contactid;
@@ -123,6 +124,16 @@ ModelDriven<Enquiries>, Preparable{
 	public void setContactid(int contactid) {
 		this.contactid = contactid;
 	}
+	
+	public int getCall() {
+		return call;
+	}
+
+	public void setCall(int call) {
+		this.call = call;
+	}
+
+
 
 	private Date today;
 	
@@ -149,7 +160,7 @@ ModelDriven<Enquiries>, Preparable{
 	public String newEnquiry(){ //TODO:
 		System.out.println("Struts: start newEnquiry");
 		//activateAutocomplete();
-
+		setFormTitle("New Enquiry");
 		activateLists();
 		
 
@@ -223,7 +234,12 @@ ModelDriven<Enquiries>, Preparable{
 		initialiseDBList();
 		
 		System.out.println("Struts: end assignContact");
-		return SUCCESS;
+		if(getCall() == 1)
+			return "contactinfo";
+		else{
+			return "dangertype";
+		}
+			
 	}
 	
 	public String clearContact(){
@@ -335,6 +351,7 @@ ModelDriven<Enquiries>, Preparable{
 				if (eil.get(i).getId() != null)
 					if (eil.get(i).getId() != -1) {
 						eil.get(i).setIssue(typesService.getIssueTypeById(getTheIssueListId().get(i)));
+						
 						//eil.get(i).setUpdatedUser(user.getContact());
 					}else {
 						eil.remove(i);
@@ -357,6 +374,7 @@ ModelDriven<Enquiries>, Preparable{
 				if (cdl.get(i).getId() != null) {
 					if (cdl.get(i).getId() != -1) {
 						cdl.get(i).setDisabilityType(typesService.getDisabilityTypeById(getTheDisabilityListId().get(i)));
+						cdl.get(i).setContact(iamodel.getContact());
 						//cdl.get(i).setUpdatedUser(user.getContact());
 					} else {
 						cdl.remove(i);
@@ -381,6 +399,7 @@ ModelDriven<Enquiries>, Preparable{
 				if (cel.get(i).getId() != null) {
 					if (cel.get(i).getId() != -1) {
 						cel.get(i).setEmploymentType(typesService.getEmploymentTypeById(getTheEmploymentListId().get(i)));
+						cel.get(i).setContact(iamodel.getContact());
 						//cel.get(i).setUpdatedUser(user.getContact());
 					} else {
 						cel.remove(i);

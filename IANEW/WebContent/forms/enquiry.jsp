@@ -61,8 +61,7 @@
 
 	<s:div cssClass="form container">
 	<s:set var="formType">enquiry</s:set>
-		<s:form id="enquiryForm" action="saveUpdateEnquiry" cssClass="cmxform" namespace='/enquiry' method="post" validate="novalidate"> 
-			<s:hidden name="iamodel.contact.id" />
+		<s:form id="enquiryForm" action="saveUpdateEnquiry" cssClass="cmxform" namespace='/enquiry' method="post"> 
 			
 <!-- ---------------------------------------------------------------------------------------------- -->
 <!-- Header of the form --------------------------------------------------------------------------- -->
@@ -116,7 +115,7 @@
 	<script>
 		$("#btnNewEnquiry").click(function(){
 			var contactId = $("input[name='iamodel.contact.id']").val();
-			//alert(contactId);
+
 			$("#formDiv").load("enquiry/newEnquiry.action?contactid=" + contactId);
 			
 		});
@@ -128,48 +127,6 @@
 		initialiseNewSection("artEmployment", "itEmployment");
 		initialiseNewSection("artDisability", "itDisability");
 	});
-	/* $.validator.setDefaults({
-		
-	}); */
-
-	
-	
-
-
-
-	
-	/* $("#test").click(function(){
-		
-		var ele = $("#enquiryForm").find("article")
-		
-		$(ele).each(function(){
-			//removeNull($(ele));
-			alert(ele)
-		});
-			
-	});
-	
-	//if the enquiry is an existing enquiry 
-	if($("#formTitle").text() === "Existing Enquiry"){
-		//alert("existing need to check if status is closed")
-		//$("#enquiryForm").find("input").attr("readonly", "true");
-		//$("#enquiryForm").find('textarea').attr("readonly", "true");
-		
-		//$("#enquiryForm").find('select').attr("disabled", "disable");
-		//$("#enquiryForm").find('input[type="button"]').attr("disabled", "disable");
-		//$("#btnView").attr("disabled", null);
-		//$("#btnAddEnquiry").attr("disabled", null);
-	} */
-	function checkForm(){
-		alert("removed null");
-		//removeNullAndUpdateIndex($("#artAddress"), $("#itAddress"), $("#addressSize"));
-		removeNullAndUpdateIndex($("#artDisability"), $("#itDisability"), $("#disabilitySize"));
-		/* removeNullAndUpdateIndex($("#artIssue"), $("#itIssue"), $("#issueSize"));
-		removeNullAndUpdateIndex($("#artEmployment"), $("#itEmployment"), $("#employmentSize")); */
-		
-	}
-	
 	</script>
-	
 </body>
 </html>

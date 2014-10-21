@@ -38,6 +38,7 @@
 	<div id="personalDetailsDiv" class="toggled hideable">
 		<fieldset>
 			<s:hidden name="iamodel.contact.id" />
+			<s:hidden name="iamodel.contact.createdDateTime"/>
 			<div class="row">
 				<div class="four columns"><s:select list="titleSelectList" listKey="id" listValue="name" name="theTitleTypeId" headerKey="-1" headerValue="Select Title" /></div>
 		
@@ -112,6 +113,7 @@ function clearContact(){
 	}else if($("#formTitle").text() == "New Case" || $("#formTitle").text() == "Existing Case"){
 		$("#contactInfo").load("case/clearContact.action?contactid=" + parseInt($("#selectedContact").val()));
 	}
+	$('#caseForm, #enquiryForm').find(".saturate").removeClass('saturate');
 }
 
 </script>

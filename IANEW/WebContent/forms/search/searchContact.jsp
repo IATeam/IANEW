@@ -20,7 +20,7 @@
 			<s:div cssClass="four columns"><p></p></s:div>
 			<s:div cssClass="four columns">
 				<s:label value="Sort By"/> 
-				<input type="radio" id="radiofirstname" name="sort" checked="true"/>firstname <input type="radio" id="radiolastname" name="sort"/>lastname
+				<input type="radio" id="radiofirstname" name="sort" checked="checked"/>firstname <input type="radio" id="radiolastname" name="sort"/>lastname
 			</s:div>
 			<s:div cssClass="four columns">
 				<s:select cssClass="two columns alpha" id="descending" list="#{'1':'ascending', '2':'descending'}" />
@@ -40,7 +40,9 @@
 <script>
 	function loadContactList(btn){
 		var firstName, lastName, asending, sortField, recordsPerPage, startIndex;
-
+		var goAhead = false;
+		
+		
 		if($("#contactfirstname").val().trim().length > 0)
 			firstName = $("#contactfirstname").val().trim();
 		
@@ -64,7 +66,7 @@
 		else									currentPage = parseInt($("#currentPage").val());
 
 		
-		if(firstName.length > 0 || lastName.length > 0){
+		if($("#contactfirstname").val().trim().length > 0 || $("#contactlastname").val().trim().length > 0){
 			var submitData = {
 				'firstName' 	: firstName,
 				'lastName'		: lastName,
@@ -74,23 +76,37 @@
 				'recordsPerPage': recordsPerPage,
 				'currentPage'	: currentPage
 			}; 
+
+			var totalPage;
+			if($("#totalNumberOfPagesDiv").text() == "")
+				$("#totalNumberOfPagesDiv").text() != 0;
+			
+			totalPage = parseInt($("#totalNumberOfPagesDiv").text());
+
 			
 			var url = '';
-			if($(btn).attr('id') == "btnContactSearch")
+			if($(btn).attr('id') == "btnContactSearch"){
 				url = 'contactList/loadClientSearchResult.action';
-			else if($(btn).attr('id') == "btnNextContacts")
+				goAhead = true;
+			}
+			else if($(btn).attr('id') == "btnNextContacts"){
 				url = "contactList/getNextPage.action";
-			else if($(btn).attr('id') == "btnPrevContacts")
+				if(currentPage < totalPage)
+					goAhead = true;
+			}
+			else if($(btn).attr('id') == "btnPrevContacts"){
 				url = "contactList/getPrevPage.action";
+				if(currentPage > 1)
+					goAhead = true;
+			}
 			else{ //for when the user input a number for page change
 				url = "contactList/getPage.action"
-			}
-			
-			var totalPage;
-			if($("#totalNumberOfPagesDiv").text() != "")
-				totalPage = parseInt($("#totalNumberOfPagesDiv").text());
-			if(isNaN(parseInt($("#totalNumberOfPagesDiv").text())) || (currentPage >= 0 && currentPage <= totalPage))
-			
+				if(currentPage > 0 && currentPage <= totalPage)
+					goAhead = true;
+			} 
+			//if(isNaN(parseInt($("#totalNumberOfPagesDiv").text())) || (currentPage >= 0 && currentPage <= totalPage))
+
+			if(goAhead == true)
 			{
 				$.post(url, 
 					submitData, 

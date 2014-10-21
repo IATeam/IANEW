@@ -21,7 +21,7 @@
 			<s:div cssClass="row fourteen columns">
 				<s:div cssClass ="two columns"><p></p></s:div>
 				<input type="button" id="btnFilterName" value="name" class="three columns"/>
-				<s:div id="filterName" cssClass="hidden">
+				<s:div id="filterName">
 					<div class="inputfield four columns">
 						<s:label for="firstname" value="firstname:" />
 						<div><s:textfield id="firstname"/></div>
@@ -35,7 +35,7 @@
 			<s:div cssClass="row fourteen columns">
 				<s:div cssClass ="two columns"><p></p></s:div>
 				<input type="button" id="btnFilterCreatedDate" value="created date" class="three columns"/>
-				<s:div id="filterCreatedDate" cssClass="hidden">
+				<s:div id="filterCreatedDate">
 					<s:div cssClass="four columns">
 						<s:label value="From" for="createdDateStart"/>  
 						<input type="date" id="createdDateStart" name="createdDateStart"/>
@@ -49,7 +49,7 @@
 			<s:div cssClass="row fourteen columns">
 				<s:div cssClass ="two columns"><p></p></s:div>
 				<input type="button" id="btnFilterUpdatedDate" value="updated date" class="three columns"/>
-				<s:div id="filterUpdatedDate" cssClass="hidden">
+				<s:div id="filterUpdatedDate">
 					<s:div cssClass="four columns">
 						<s:label value="From" for="updatedDateStart"/> 
 						<input type="date" id="updatedDateStart" name="updatedDateStart"/>
@@ -60,44 +60,20 @@
 					</s:div>
 				</s:div>
 			</s:div>
-			<s:div cssClass="row fourteen columns">
+			<%-- <s:div cssClass="row fourteen columns">
 				<input type="button" id="btnFilterIssues" value="issues" class="three columns"/>
 				<s:checkboxlist list="issueTypeList" name="selectedIssues" listKey="id" listValue="issueName"></s:checkboxlist>
-			</s:div>
+			</s:div> --%>
 		</fieldset>
-		<input type="button" id="btnFilterSort" value="submit"/>
+		<input type="button" id="btnFilterSort" value="Search" onclick="loadList(this)"/>
 	</s:div>
 </s:div>
 <script>
-	$("#btnFilterName").click(function(){
-		
-		if($("#filterName").hasClass("hidden"))
-			$("#filterName").removeClass("hidden");
-		else{
-			$("#firstname").val("");
-			$("#lastname").val("");
-			$("#filterName").addClass("hidden");
-		}
-		
-	});
-	$("#btnFilterCreatedDate").click(function(){ 
-		$("#filterCreatedDate").removeClass("hidden");
-		
-	});
-	$("#btnFilterUpdatedDate").click(function(){ 
-		$("#filterUpdatedDate").removeClass("hidden");
-		
-	});
-
-	$(btnFilterSort).click(function(){
+	function loadList(btn){
 		var firstName, lastName, createdDateStart, createdDateEnd, updatedDateStart, updatedDateEnd;
 		var sortField, ascending;
 
-		var hasValue = false;
-		
 		var dash = "-";
-
-
 
 		if($("#descending").val() == 1)			descending = false;
 		else									descending = true;
@@ -105,12 +81,14 @@
 		
 		if($("#firstname").val().trim().length > 0){
 			firstName = $("#firstname").val().trim();
-			hasValue = true;
+		}else{
+			firstName = "";
 		}
 		
 		if($("#lastname").val().trim().length > 0){
 			lastName = $("#lastname").val().trim();
-			hasValue = true;
+		}else{
+			lastName = "";
 		}
 		
 		if($("#createdDateStart").val() != "" || $("#createdDateEnd").val() != ""){
@@ -159,7 +137,7 @@
 		else 											sortField = "contact.lastname";
 
 		
-		/* if($("#descending").val() == 1)			descending = false;
+		if($("#descending").val() == 1)			descending = false;
 		else									descending = true;
 
 		if($("#recordsPerPage").val() == "")	recordsPerPage = 0;
@@ -169,25 +147,54 @@
 		else									startIndex = $("#startIndex").val();
 
 		if($("#currentPage").val() == "")		currentPage = 0;
-		else									currentPage = parseInt($("#currentPage").val()); */
+		else									currentPage = parseInt($("#currentPage").val()); 
 
 
-		if(hasValue){
-			var submitData = {
-				'firstName' 		: firstName,
-				'lastName'			: lastName,
-				'descending'		: descending,
-				'sortField'			: sortField,
-				/* 'startIndex'		: startIndex,
-				'recordsPerPage'	: recordsPerPage,
-				'currentPage'		: currentPage */
-				'createdDateStart' 	: createdDateStart,
-				'createdDateEnd'	: createdDateEnd,
-				'updatedDateStart'	: updatedDateStart,
-				'updatedDateEnd'	: updatedDateEnd
-			};
+
+		var totalPage;
+		if($("#totalNumberOfPagesDiv").text() == "")
+			$("#totalNumberOfPagesDiv").text() != 0;
 		
-			var url = "/IANEW/enquiryList/loadFilterSortResult.action"
+		totalPage = parseInt($("#totalNumberOfPagesDiv").text());
+
+		
+		var url = '';
+		if($(btn).attr('id') == "btnFilterSort"){
+			url = "/IANEW/enquiryList/loadFilterSortResult.action"
+			goAhead = true;
+		}
+		else if($(btn).attr('id') == "btnNextEnquiries"){
+			url = "/IANEW/enquiryList/getNextPage.action";
+			if(currentPage < totalPage)
+				goAhead = true;
+		}
+		else if($(btn).attr('id') == "btnPrevEnquiries"){
+			url = "/IANEW/enquiryList/getPrevPage.action";
+			if(currentPage > 1)
+				goAhead = true;
+		}
+		else{ //for when the user input a number for page change
+			url = "/IANEW/enquiryList/getPage.action"
+			if(currentPage > 0 && currentPage <= totalPage)
+				goAhead = true;
+		} 
+		
+
+		var submitData = {
+			'firstName' 		: firstName,
+			'lastName'			: lastName,
+			'descending'		: descending,
+			'sortField'			: sortField,
+			'startIndex'		: startIndex,
+			'recordsPerPage'	: recordsPerPage,
+			'currentPage'		: currentPage,
+			'createdDateStart' 	: createdDateStart,
+			'createdDateEnd'	: createdDateEnd,
+			'updatedDateStart'	: updatedDateStart,
+			'updatedDateEnd'	: updatedDateEnd
+		};
+	
+		if(goAhead){
 			$.post(url, 
 				submitData, 
 				function(data){
@@ -196,5 +203,6 @@
 				}
 			);
 		}
-	});
+		
+	}
 </script>

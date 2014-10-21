@@ -1087,7 +1087,7 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 	
 	
 	private int contactid;
-	
+	private int call;
 	
 	public int getContactid() {
 		return contactid;
@@ -1095,6 +1095,15 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 
 	public void setContactid(int contactid) {
 		this.contactid = contactid;
+	}
+
+	
+	public int getCall() {
+		return call;
+	}
+
+	public void setCall(int call) {
+		this.call = call;
 	}
 
 	public String assignContact(){ //TODO:
@@ -1114,7 +1123,10 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 		initialiseDBList();
 		
 		System.out.println("Struts: end assignContact");
-		return SUCCESS;
+		if(call == 1)
+			return "contactinfo";
+		else
+			return "dangertype";
 	}
 	
 	public void initialiseDBList() {

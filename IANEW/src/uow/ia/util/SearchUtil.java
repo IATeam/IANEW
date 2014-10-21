@@ -19,7 +19,9 @@ import org.hibernate.mapping.Collection;
 import org.hibernate.metadata.ClassMetadata;
 import org.hibernate.search.FullTextQuery;
 import org.hibernate.search.FullTextSession;
+import org.hibernate.search.query.dsl.QueryBuilder;
 
+import com.google.common.collect.ImmutableBiMap.Builder;
 import com.sun.tools.ws.wsdl.framework.Entity;
 
 import bsh.This;
@@ -148,10 +150,13 @@ FullTextQuery ftq = null;
 	}
 	
 	public List getPage(int startIndex, int pageSize, String sortField, String searchString, UtilService s, boolean asc, Class<?> entity){
-		FullTextQuery ftq = null;
+		System.out.println("inside get page");
 		
+		FullTextQuery ftq = null;
+		System.out.println("inside get page");
 		if(sortField == null){
 			ftq = getQueryResult(searchString, s, entity);
+			System.out.println("full text " + ftq.list());
 		}else{
 			ftq = getSortedQueryResult(sortField, searchString, s, asc, entity);
 		}
@@ -171,11 +176,26 @@ FullTextQuery ftq = null;
 		
 		
 		FullTextQuery ftq = null;
-		try{
-			ftq = fts.createFullTextQuery(getLuceneQuery(searchString), entity);
-			
-		}catch(NullPointerException npe){
-			ftq = fts.createFullTextQuery(getLuceneQuery(searchString));
+		
+		if(searchString.equals("")){
+			QueryBuilder builder = null;
+			Query q = null;
+			try{
+				builder = fts.getSearchFactory().buildQueryBuilder().forEntity(entity).get();
+				q = builder.all().createQuery();
+				ftq = fts.createFullTextQuery(q, entity);
+				
+			}catch(NullPointerException npe){
+//				builder = fts.getSearchFactory().buildQueryBuilder();
+//				q = builder.all().createQuery();
+			}
+		}else{
+			try{
+				ftq = fts.createFullTextQuery(getLuceneQuery(searchString), entity);
+				
+			}catch(NullPointerException npe){
+				ftq = fts.createFullTextQuery(getLuceneQuery(searchString));
+			}
 		}
 		
 		Sort sort = new Sort(new SortField(sortField, SortField.STRING, asc));
@@ -188,14 +208,31 @@ FullTextQuery ftq = null;
 	private FullTextQuery getQueryResult(String searchString, UtilService s, Class<?> entity){
 		service = s;
 		FullTextSession fts = s.getFullTextSession();
-		
-		
 		FullTextQuery ftq = null;
-		try{
-			ftq = fts.createFullTextQuery(getLuceneQuery(searchString), entity);
-		}catch(NullPointerException npe){
-			ftq = fts.createFullTextQuery(getLuceneQuery(searchString));
+		
+		if(searchString.equals("")){
+			QueryBuilder builder = null;
+			Query q = null;
+			try{
+				builder = fts.getSearchFactory().buildQueryBuilder().forEntity(entity).get();
+				q = builder.all().createQuery();
+				ftq = fts.createFullTextQuery(q, entity);
+				
+			}catch(NullPointerException npe){
+//				builder = fts.getSearchFactory().buildQueryBuilder();
+//				q = builder.all().createQuery();
+			}
+		}else{
+			try{
+				ftq = fts.createFullTextQuery(getLuceneQuery(searchString), entity);
+			}catch(NullPointerException npe){
+				ftq = fts.createFullTextQuery(getLuceneQuery(searchString));
+			}
 		}
+		
+		
+		
+		
 		
 		
 		return ftq;
