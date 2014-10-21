@@ -48,8 +48,9 @@
 	
 </head>
 <body>
+<s:div cssClass="form container">
 	<s:set var="formType">case</s:set>
-	<s:form id="caseForm" cssClass="cmxform form container" namespace="/case" method="post" action="saveUpdateCase" novalidate="novalidate">  
+	<s:form id="caseForm" cssClass="cmxform" namespace="/case" method="post" action="saveUpdateCase">  
 		<s:hidden  name="enquiryId" value="%{iamodel.relatedEnquiry.id}"/>
 <!-- ---------------------------------------------------------------------------------------------- -->
 <!-- Header of the form --------------------------------------------------------------------------- -->
@@ -64,10 +65,9 @@
 		<%@include file="includes/formStatus.jsp" %>
 		<%@include file="includes/caseSummary.jsp" %>
 		<%@include file="includes/advocateDetails.jsp" %>
-		<%@include file="includes/personalDetails.jsp" %>
-		<%@include file="includes/address.jsp" %>	
-		<%@include file="includes/disability.jsp" %>
- 		<%@include file="includes/employment.jsp" %>	
+		<s:div id="contactInfo">
+			<%@include file="includes/contactInfo.jsp" %>
+		</s:div>
 		<%@include file="includes/plan.jsp" %>
 		<%@include file="includes/caseIssues.jsp" %>
 		<%@include file="includes/communications.jsp" %>
@@ -99,6 +99,7 @@
 			</s:div>
 		</footer>
 	</s:form>	
+	</s:div>
 	<script>
 	
 	$(function() {

@@ -25,12 +25,8 @@
 	Note: syntax order: <tag id/type(for input) name class value list(for select) ...>
 ------------------------------------------------------------------------------------------------>
 
-
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ taglib prefix="sj" uri="/struts-jquery-tags"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
 
 <html>
 <head>
@@ -65,37 +61,17 @@
 			<s:hidden id="totalNumberOfPages" name="totalNumberOfPages" />
 			
 			
-				<%@include file="includes/formHeader.jsp" %>
-				<%@include file="includes/filterSort.jsp" %>
+			<%@include file="includes/formHeader.jsp" %>
+			<%@include file="includes/filterSort.jsp" %>
 <!-- ---------------------------------------------------------------------------------------------- -->
 <!-- iterator - used to iterate a list or set ----------------------------------------------------- -->
 <!-- ---------------------------------------------------------------------------------------------- -->	
 			<!-- status="..." use attribute to get status info of iteration (index, count, first, even last, odd info) -->
 			
-			<%@include file="/forms/includes/iterEnquiryList.jsp" %>
-			<s:div cssClass="clear"/>
-<!-- ----------------------------------------------------------------------------------------------------------------------- -->
-<!-- the footer of the form containing the cancel, open enquiry and new enquiry as well as the pagination functions -------- -->
-<!-- ----------------------------------------------------------------------------------------------------------------------- -->
+			<div id="iterEnquiryList">
+				<%@include file="/forms/includes/iterEnquiryList.jsp" %>
+			</div>
 			
-			<s:div style="background:#444444; margin-top: 10px; padding: 5px;">
-				<s:div cssClass="row">
-				
-					<section class="four columns">
-						<input type="button" class="three columns" value="Close"  onclick="confirmAction('Are you sure you want to Close?', 'home', 'home')"/>
-					</section >
-					
-					<section class="eight columns">
-						<%@include file="/forms/includes/paginationToolSet.jsp" %>
-					</section>
-					
-					<section class="four columns alpha">
-						<sj:submit id="open" targets="formDiv" cssClass="two columns alpha" value="Open Enquiry" onBeforeTopics="beforeSubmit"/>
-						<sj:a id="btnNewE" targets="formDiv"  href="%{urlENew}" ><input type="button" class="two columns omega" value="New Enquiry" onclick="confirmAction('Are you sure you want to create a new enquiry?', 'enquiry', 'newEnquiry')"/></sj:a>
-					</section>
-					
-				</s:div>
-			</s:div>
 		</s:form>
 		
 		

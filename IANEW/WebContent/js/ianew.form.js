@@ -22,12 +22,6 @@
 	Description: This js is for the common functions in the forms
 ------------------------------------------------------------------------------------------------*/
 
-//$(document).ready(function(){
-//	$("#enquiryForm").find("option[value='-1']").each(function(){
-//		alert($(this).val());	
-//	});
-//});
-$("#enquiryForm").find("option[value='-1']").css("background-color", "pink");
 
 /**
  * Add a new Component/record to the list
@@ -193,21 +187,6 @@ function removeSecNull(ele, section, index){
 	}
 }
 
-function updateIndexInSection(articleEle, iterator, sizeEle) {
-	var section = $(iterator).children("section");
-	var counter = 0;
-	
-	//removes any null in the iterator
-	for(var i = 0; i < section.length; i++){
-		var itEle = $(section[i]).find("[name]");
-		counter = removeSecNull(itEle, section[i], counter);
-	}
-	
-	//removes the artcleEle if null
-	//counter = removeSecNull(ele, articleEle, counter);
-	
-	$(sizeEle).val(counter);
-}
 /**
  * This function will update the index of named attribute values
  * when clearing null sections
@@ -416,7 +395,7 @@ function initialiseDatePicker() {
 	    $.datepicker.initialized = true;
 	}
 	
-	$(".DateInputClass").datepicker({formatDate: "dd/mm/yy"}); 
+	$(".DateInputClass").datepicker(); 
 //	$(".DateInputClass").each(function() {
 //		//$.datepicker.formatDate( "dd MM yy", new Date($(this.val())));
 //		//var dateformat = $.datepicker.formatDate('mm/dd/yy', new Date($(this).val()));

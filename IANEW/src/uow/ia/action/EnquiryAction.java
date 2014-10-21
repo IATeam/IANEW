@@ -13,6 +13,7 @@ import uow.ia.bean.AccommodationTypes;
 import uow.ia.bean.Addresses;
 import uow.ia.bean.ClientDisabilities;
 import uow.ia.bean.ContactEmployments;
+import uow.ia.bean.ContactTypes;
 import uow.ia.bean.Contacts;
 import uow.ia.bean.CulturalBackgroundTypes;
 import uow.ia.bean.DangerTypes;
@@ -75,7 +76,7 @@ ModelDriven<Enquiries>, Preparable{
 	/* 
 	 * form title (can either be new enquiry/exisiting enquiry)
 	 */
-	private final static String kExistingTitle = "Existing Enquiry"; 
+	private final static String kExistingTitle = "Existing Enquiry";
 	private String formTitle;
 	private Enquiries iamodel;
 
@@ -114,6 +115,7 @@ ModelDriven<Enquiries>, Preparable{
 	private int hiddenid;
 	//variable used to pass contact id between forms
 	private int contactid;
+	private int call;
 	
 	public int getContactid() {
 		return contactid;
@@ -122,6 +124,16 @@ ModelDriven<Enquiries>, Preparable{
 	public void setContactid(int contactid) {
 		this.contactid = contactid;
 	}
+	
+	public int getCall() {
+		return call;
+	}
+
+	public void setCall(int call) {
+		this.call = call;
+	}
+
+
 
 	private Date today;
 	
@@ -148,15 +160,16 @@ ModelDriven<Enquiries>, Preparable{
 	public String newEnquiry(){ //TODO:
 		System.out.println("Struts: start newEnquiry");
 		//activateAutocomplete();
-
+		setFormTitle("New Enquiry");
 		activateLists();
-		//linkedEnquiriesList = enquiryService.getLinkedEnquiry(getHiddenid());
+		
 
 		//if clicked new enquiry from an existing enquiry or new enquiry with
 		//an existing contact then assign new id to this contact.
 		if(getContactid() > 0){
 			iamodel = new Enquiries();
 			iamodel.setContact(contactService.getContacts(getContactid()));
+			initialiseDBList();
 		}
 		System.out.println("Struts: end newEnquiry");
 		
@@ -173,7 +186,6 @@ ModelDriven<Enquiries>, Preparable{
 		//activateAutocomplete();
 		activateLists();
 		initialiseDBList();
-		
 		
 
 		System.out.println("Struts: end getExistingEnquiry");
@@ -205,12 +217,47 @@ ModelDriven<Enquiries>, Preparable{
 	}
 	
 	
-	public String searchContact(Class<?> c){
-		//ArrayList<Contacts>
-		//if(c.isAssignableFrom(Enquiries.class))
+	public String assignContact(){ //TODO:
+		System.out.println("Struts: start assignContact");
 		
+		System.out.println("contactid: " + getContactid());
+		
+		try{
+			if (getContactid() > 0)
+				iamodel.setContact(contactService.getContacts(getContactid()));
+		}catch(NullPointerException npe){
+			iamodel = new Enquiries();
+			if (getContactid() > 0)
+				iamodel.setContact(contactService.getContacts(getContactid()));
+		}
+		activateLists();
+		initialiseDBList();
+		
+		System.out.println("Struts: end assignContact");
+		if(getCall() == 1)
+			return "contactinfo";
+		else{
+			return "dangertype";
+		}
+			
+	}
+	
+	public String clearContact(){
+		try{
+			iamodel.setContact(new Contacts());
+		}catch(NullPointerException npe){
+			iamodel = new Enquiries();
+			iamodel.setContact(new Contacts());
+		}
+		activateLists();
 		return SUCCESS;
 	}
+	
+	
+//	public String getDangerType(){
+//		
+//		return SUCCESS;
+//	}
 	
 	public String checkContactExists(){
 		//enquiryService.findContactsByFullName(, lastName);
@@ -305,6 +352,7 @@ ModelDriven<Enquiries>, Preparable{
 				if (eil.get(i).getId() != null)
 					if (eil.get(i).getId() != -1) {
 						eil.get(i).setIssue(typesService.getIssueTypeById(getTheIssueListId().get(i)));
+						
 						//eil.get(i).setUpdatedUser(user.getContact());
 					}else {
 						eil.remove(i);
@@ -327,6 +375,7 @@ ModelDriven<Enquiries>, Preparable{
 				if (cdl.get(i).getId() != null) {
 					if (cdl.get(i).getId() != -1) {
 						cdl.get(i).setDisabilityType(typesService.getDisabilityTypeById(getTheDisabilityListId().get(i)));
+						cdl.get(i).setContact(iamodel.getContact());
 						//cdl.get(i).setUpdatedUser(user.getContact());
 					} else {
 						cdl.remove(i);
@@ -351,6 +400,7 @@ ModelDriven<Enquiries>, Preparable{
 				if (cel.get(i).getId() != null) {
 					if (cel.get(i).getId() != -1) {
 						cel.get(i).setEmploymentType(typesService.getEmploymentTypeById(getTheEmploymentListId().get(i)));
+						cel.get(i).setContact(iamodel.getContact());
 						//cel.get(i).setUpdatedUser(user.getContact());
 					} else {
 						cel.remove(i);
@@ -376,24 +426,21 @@ ModelDriven<Enquiries>, Preparable{
 		iamodel.getContact().setGenderType(typesService.getGenderTypeById(getTheGenderTypeId()));
 		iamodel.getContact().setDangerType(typesService.getDangerTypeById(getTheDangerTypeId()));
 		iamodel.getContact().setAccommodation(typesService.getAccommodationTypeById(getTheAccommodationTypeId()));
+		iamodel.getContact().setContactType(typesService.getContactTypeById(2));
 		
 		if(iamodel.getId() == null){
 			if(enquiryService.saveOrUpdateEnquiry(iamodel, iamodel.getContact())){
-				this.hiddenid = iamodel.getId();
 				this.formTitle = kExistingTitle;
 				activateLists();
 				setIamodel(iamodel);
 				initialiseDBList();
+				setHiddenid(iamodel.getId());
 				System.out.println("save new enquiry successfully");
 				System.out.println("Struts: end saveUpdateEnquiry");
 				return SUCCESS;
 			}
-		}
-		
-		
-		else if(enquiryService.saveOrUpdateEnquiry(iamodel)){
-			this.hiddenid = iamodel.getId();
-			this.formTitle = kExistingTitle;
+		}else if(enquiryService.saveOrUpdateEnquiry(iamodel)){
+			formTitle = kExistingTitle;
 			activateLists();
 			setIamodel(iamodel);
 			initialiseDBList();
@@ -447,15 +494,12 @@ ModelDriven<Enquiries>, Preparable{
 		employmentSelectList = typesService.findEmploymentTypes();
 		statusSelectList = typesService.findStatusTypes(1);
 		enquiryTypeSelectList = typesService.findEnquiryTypes();
-
-		
 	}
 	
 	
 	public void setTitleSelectList(List<TitleTypes> titleSelectList) {
 		this.titleSelectList = titleSelectList;
 	}
-	
 	/**
 	 * Getter for the form title
 	 * @return String
@@ -690,10 +734,6 @@ ModelDriven<Enquiries>, Preparable{
 	public void prepare() throws Exception {
 		System.out.println("Struts: Prepare start");
 		
-//		if ((Integer) getHiddenid() == null || (Integer)getHiddenid() == 0) {
-//			
-//				
-//		} else {
 		if (!((Integer) getHiddenid() == null || (Integer)getHiddenid() == 0)) {
 			this.formTitle = "Existing Enquiry";
 			iamodel = enquiryService.getEnquiry(getHiddenid());
