@@ -26,10 +26,10 @@
 <img src="/IANEW/resources/images/plusButton.png" alt="Hide/Show" onclick="divHide(this);return false;" class="divHideButton"/>
 
 <h3 class="sixteen columns"  style="float:none;">Client Details</h3>
-
+<s:if test="%{formTitle == 'New Case' || formTitle == 'New Enquiry'}">
 <img src="/IANEW/resources/images/srchicon.png" onclick="loadContactSearchForm()" title="Search for Client Detials" class="button" >
 <img src="/IANEW/resources/images/eraseButton.png" onclick="clearContact()" title="Clear Client Details" class="button" >
-
+</s:if>
 <s:div id="contactSearchDiv" cssClass="hidden"> 
 	<%@include file="/forms/search/searchContact.jsp" %>
 </s:div>
@@ -97,9 +97,7 @@
 </div>
 </section>
 <script>
-
 function loadContactSearchForm(){
-	
 	$("#contactSearchDiv").removeClass("hidden");
 	//$("#enquiryForm").children().children().addClass('saturate');
 	//$("#caseForm").children().children().children().addClass('saturate');

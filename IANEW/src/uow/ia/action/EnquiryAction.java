@@ -242,7 +242,7 @@ ModelDriven<Enquiries>, Preparable{
 			
 	}
 	
-	public String clearContact(){
+	public String clearContact(){//TODO:
 		try{
 			iamodel.setContact(new Contacts());
 		}catch(NullPointerException npe){

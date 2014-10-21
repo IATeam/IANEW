@@ -83,7 +83,7 @@
 		
 		<script type="text/javascript">
 			$.subscribe('beforeSubmit', function(event,data) {
-		    	event.originalEvent.options.submit = checkHiddenID();          
+		    	event.originalEvent.options.submit = checkHiddenID("enquiry");          
 			});
 		</script>
 </body>

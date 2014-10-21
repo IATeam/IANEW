@@ -32,13 +32,13 @@ function validated(){
 			"iamodel.contact.email"						: 	{	email		: 	true	},
 														
 			"iamodel.contact.culturalBackgroundComment"	: 	{	maxlength	: 	250		},
-			"iamodel.contact.accommodationComment"		: 	{	maxlength	: 	250		}
+			"iamodel.contact.accommodationComment"		: 	{	maxlength	: 	250		},
 			
 
-//			"theDisabilityListId[0]"			:	{ 	selectcheck	: 	true 	},
-//			"theEmploymentListId[0]"			:	{	selectcheck	:	true	},
-//			"theIssueListId[0]"					:	{	selectcheck	:	true	},
-//			"theIssueStatusList[0]"				:	{	selectcheck	:	true	}
+			"theDisabilityListId[0]"					:	{ 	selectcheck	: 	true 	},
+			"theEmploymentListId[0]"					:	{	selectcheck	:	true	},
+			"theIssueListId[0]"							:	{	selectcheck	:	true	},
+			"theIssueStatusList[0]"						:	{	selectcheck	:	true	}
 		},
 		messages: {
 			"iamodel.contact.email"				: 	{	email: "Require a valid email"}

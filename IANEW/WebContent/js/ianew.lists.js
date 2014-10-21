@@ -16,7 +16,7 @@ function saveNewActivity(item){
  */
 function displayActivities(){
 	//loadListFromLocalStorage();
-	var activityLength = $('#artActivityList ol li').size()
+	var activityLength = $('#artActivityList ol li').size();
 	var storageLength = localStorage.length;
 	if(activityLength > 0){
 		clearActivityList();
@@ -95,7 +95,10 @@ function bandSelected(selectedDiv){
 	//for contact list setting the clicked band id value
 	if($(selectedDiv).parent().attr("id") == "contactList"){
 		$("#selectedContact").val($(selectedDiv).find('.id').text());
-	}else{
+	}else if($(selectedDiv).parent().attr("id") == "planContactList") {
+		// for contact list setting to search for support or authorised person
+		$("#selectedPlanContact").val($(selectedDiv).find('.id').text());
+	}else {
 		$("#hiddenid").val($(selectedDiv).find('.id').text());
 	}
 		
@@ -108,12 +111,19 @@ function deselectAll(){
 	}
 }
 
-function checkHiddenID(){
-	if($("#hiddenid").val() == ''){
-		alert("No enquiry has been selected! Please select an enquiry.");
+function checkHiddenID(form){
+	alert($("hiddenid").val());
+	if(($("#hiddenid").val() == '') || (typeof ($("#hiddenid").val()) === 'undefined') ){
+		if (form == "enquiry") {
+			alert("No enquiry has been selected! Please select an enquiry.");
+		}else {
+			alert("No case has been selected! Please select a case.");
+		}
 		return false;
-	}else
-		var check = confirmAction('Are you sure you want to open the selected enquiry?', 'enquiry', 'getEnquiry');
-		if(check)return true;
-		else return false;
+	}else {
+//		var check = confirmAction('Are you sure you want to open the selected enquiry?', 'enquiry', 'getEnquiry');
+//		if(check)return true;
+//		else return false;
+		return true;
 	}
+}

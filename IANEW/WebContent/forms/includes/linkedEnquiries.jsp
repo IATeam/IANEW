@@ -102,10 +102,12 @@
 					hiddenid= $("#relatedEnquiryId").val();
 				}
 			});
-			alert(hiddenid);
 			
 			if (hiddenid != null) {
-				$("#formDiv").load("/IANEW/enquiry/getEnquiry.action?hiddenid=" + hiddenid);
+
+				if (confirm("Any unsaved work will lost. Are you sure you want to open this Enquiry to view?")) {
+					$("#formDiv").load("/IANEW/enquiry/getEnquiry.action?hiddenid=" + hiddenid);
+				}
 			} else {
 				alert("No Enquiry is selected");
 			}

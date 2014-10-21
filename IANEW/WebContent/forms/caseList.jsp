@@ -6,11 +6,10 @@
   -->
 
 
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="US-ASCII"%>
+<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="US-ASCII"%> --%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ taglib prefix="sj" uri="/struts-jquery-tags"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
 <head>
@@ -21,25 +20,21 @@
 <sj:head/>
 </head>
 <body>
-<!-- 
-	<s:url var="urlCExisting" namespace="/case" action="getCase" includeContext="false"/>
-		-->
+	<s:url id="urlUpdate" namespace="/case" action="updateCaseList" includeContext="false"/>
 	
 	<s:url id="urlCNew" namespace="/case" action="newCase">
 		<s:param name="formTitle">New Case</s:param>
 	</s:url>
-	<!--<s:url id="urlUpdate" namespace="/case" action="updateCaseList" includeContext="false"/>
-	 -->
 	<s:url var="urlCExisting" namespace="/case" action="getExistingCase" includeContext="false"/>		
 	 
 	<s:form id="caseForm" cssClass="form container" method="post" action="%{urlCExisting}">
 	
 			
-			<!--Hidden Fields to pass parameters between pages -->
-			<s:hidden id="hiddenid" name="hiddenid" />
-			<s:hidden id="formTitle" name="formTitle" value="Existing Case" />
+		<!--Hidden Fields to pass parameters between pages -->
+		<s:hidden id="hiddenid" name="hiddenid" />
+		<s:hidden id="formTitle" name="formTitle" value="Case List" />
 	
-			<s:hidden id="totalNumberOfPages" name="totalNumberOfPages" />
+		<s:hidden id="totalNumberOfPages" name="totalNumberOfPages" />
 		<div class="form container">  
 			<section class="imageContainer">
 				<div class="row">
@@ -112,7 +107,7 @@
 							<sj:submit formIds="paginationForm" targets="formDiv" cssClass="one column" onclick="prevPage()" value="prev"/>
 							
 							<div class="three columns" style="text-align:center;">
-								page <s:textfield size="1" id="pageTextField" value="%{page}"/> of 
+								page <s:textfield size="1" id="pageTextField" value="%{page}" onkeypress="changePage(event);"/> of 
 								<div id="totalNumberOfPagesDiv" style="display: inline"> <s:text name="totalNumberOfPages"/> </div>
 							</div>
 							
@@ -127,15 +122,15 @@
 						<sj:a targets="formDiv" id="newCButton" href="%{urlCNew}" >
 						<input type="button" class="two columns alpha" value="New Case"/>
 						</sj:a>
-						<sj:submit targets="formDiv" id="open" value="Open Case" cssClass="two columns omega"/>
+						<sj:submit targets="formDiv" id="open" value="Open Case" cssClass="two columns omega" />
 					</section>
 				</div>
 			</footer>
-			
+		</div>
 		</s:form>
 		
 <!----- Hidden form to pass pagination to action class submitted by the prev and next buttons ------------------------------------------------------------------->
-		<div ">
+		<div>
 			<s:form id="paginationForm" method="post" action="%{urlUpdate}" namespace="case">
 				<s:hidden id="page" name="page" />
 				<s:hidden id="numberOfRecords" name="numberOfRecords" />
@@ -143,26 +138,6 @@
 		</div>
 	
 	<script>
-		function nextPage(){
-			var currentPageNumber = parseInt($("#pageTextField").val());
-			var totalNumberOfPages = parseInt( $("#totalNumberOfPagesDiv").text())
-			
-			if(currentPageNumber < totalNumberOfPages){ 
-				var nextPageNumber = currentPageNumber + 1;
-				$("#pageTextField").val(nextPageNumber);
-				$("#page").val(nextPageNumber);
-			}
-		}
-		
-		function prevPage(){
-			var currentPageNumber = parseInt($("#pageTextField").val());
-			
-			if(currentPageNumber > 1 ){
-				var prevPageNumber = currentPageNumber - 1;
-				$("#pageTextField").val(prevPageNumber);
-				$("#page").val(prevPageNumber);
-			}
-		}
 		
 		function caseSelected(selectedDiv){
 			deselectAll();
@@ -178,9 +153,6 @@
 				$('.toggled').hide('slide');
 			}
 		}
-		$('#new').click(function(){
-			alert($('#caseID').val())
-		});
 		
 		$(function(){
 			$(".toggled").hide();
