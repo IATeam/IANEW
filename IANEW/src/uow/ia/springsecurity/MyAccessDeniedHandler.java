@@ -31,14 +31,8 @@ public class MyAccessDeniedHandler implements AccessDeniedHandler {
 		
 		if (isAjax) {
 			System.out.println("called here");
-			//request.getRequestDispatcher("/403");
 			response.sendRedirect(accessDeniedUrl);
-			//response.sendError(403, "Forbidden");
 		}
-
-        //String rp = request.getRequestURI();
-
-        //request.getSession().setAttribute(Constants.ACCESS_DENIED_MSG, deniedMessage);
 	}
 
 	public String getAccessDeniedUrl() {

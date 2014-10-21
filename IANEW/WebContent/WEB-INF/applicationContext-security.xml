@@ -18,12 +18,13 @@
 		<intercept-url pattern="/enquiryList/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />
 		<intercept-url pattern="/enquiry/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />
 		<intercept-url pattern="/case/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />
+		<intercept-url pattern="/home/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />
 		<intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
 		
 		<form-login login-page="/login" default-target-url="/logged" authentication-failure-url="/login?error"
 			username-parameter="username" password-parameter="password" />
-		<session-management invalid-session-url="/login?timeout">
-			<!-- <concurrency-control  max-sessions="1" error-if-maximum-exceeded="true" expired-url="/login.jsp"></concurrency-control> -->
+		<session-management invalid-session-url="/login?timeout" > <!-- this invalid will block original reqeust and redirect to home  -->
+			<concurrency-control  max-sessions="1" error-if-maximum-exceeded="false" expired-url="/login?timeout"></concurrency-control>
 		</session-management>
 		<logout invalidate-session="false" logout-success-url="/login?logout" />
 		<access-denied-handler ref="accessDeniedHandler"/>

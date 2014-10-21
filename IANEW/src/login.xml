@@ -21,6 +21,9 @@
     	<action name="login">
     		<result name="success">/login.jsp</result>
         </action>
+        <action name="loginembbed">
+    		<result name="success">/login-embbed.jsp</result>
+        </action>
         <action name="logged" class="uow.ia.action.LoginAction">
     		<result name="success">/home/home.jsp</result>
         </action>
