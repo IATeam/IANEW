@@ -3,6 +3,7 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <div class="row planPeopleDiv" id="supportPersonDiv">
 	<s:hidden id="supportContactId" name="supportContactId" value="%{iamodel.plan.supportPerson.id}" />
+	<%-- <s:hidden name="iamodel.plan.supportPerson.id" /> --%>
 	<div class='inputfield four columns'>
 		<s:label for="firstNameContact" value="Support First Name:" />
 		<div><s:textfield id="supportFirstName" name="iamodel.plan.supportPerson.firstname" ></s:textfield></div>

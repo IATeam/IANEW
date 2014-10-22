@@ -1381,6 +1381,7 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 					iamodel.setPlan(new Plans());
 				
 				iamodel.getPlan().setSupportPerson(support);
+				support = null;
 			} catch(Exception e) {
 				iamodel.getPlan().setSupportPerson(new Contacts());
 			}
@@ -1437,12 +1438,12 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 				iamodel.setPlan(new Plans());
 			
 			iamodel.getPlan().setSupportPerson(new Contacts());
+			System.out.println("clear support"+iamodel.getPlan().getSupportPerson());
 		} catch(NullPointerException e) {
 			iamodel = new IndividualCases();
 			iamodel.setPlan(new Plans());
 			iamodel.getPlan().setSupportPerson(new Contacts());
 		}
-		setSupportContactId(null);
 		
 		return SUCCESS;
 	}
@@ -1461,7 +1462,6 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 			iamodel.setPlan(new Plans());
 			iamodel.getPlan().setAuthorisedBy(new Contacts());
 		}
-		setAuthorisedContactId(null);
 		
 		return SUCCESS;
 	}
@@ -1469,7 +1469,7 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 	
 	public String saveUpdateCase(){ //TO DO
 		System.out.println("Start Saving Case");
-		
+		System.out.println("support " + getSupportContactId() + " " + " authorised " + getAuthorisedContactId());
 		Users user = (Users) userSession.get(USER);
 		java.util.Calendar cal = java.util.Calendar.getInstance();
 		java.util.Date utilDate = cal.getTime();
@@ -1607,21 +1607,46 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 			iamodel.getPlan().setIndividualCase(iamodel);
 		}
 		
-		if (getSupportContactId() != null) {
-			try {
-				iamodel.getPlan().setSupportPerson(contactService.getContacts(getSupportContactId()));
-			} catch (NullPointerException e) {
-				iamodel.getPlan().setSupportPerson(new Contacts());
-			}
-		}
-		
-		if (getAuthorisedContactId() != null) {
-			try {
-				iamodel.getPlan().setAuthorisedBy(contactService.getContacts(getAuthorisedContactId()));
-			} catch (NullPointerException e) {
-				iamodel.getPlan().setAuthorisedBy(new Contacts());
-			}
-		}
+//		if (iamodel.getPlan().getSupportPerson() != null) {
+//			System.out.println("xxxxxxxxxxxxxxxxxxxxx called in outter get id");
+//			if (iamodel.getPlan().getSupportPerson().getId() != null) {
+//				System.out.println("xxxxxxxxxxxxxxxxxxxxx called in inner get id");
+//				Contacts support = contactService.getContacts(iamodel.getPlan().getSupportPerson().getId());
+//				support.setFirstname(iamodel.getPlan().getSupportPerson().getFirstname());
+//				support.setOthername(iamodel.getPlan().getSupportPerson().getOthername());
+//				support.setLastname(iamodel.getPlan().getSupportPerson().getLastname());
+//				iamodel.getPlan().setSupportPerson(support);
+//			} else {
+//				System.out.println("xxxxxxxxxxxxxxxxxxxxx called in inner get id else");
+//			}
+//		} else {
+//			System.out.println("xxxxxxxxxxxxxxxxxxxxx called in outter get id else");
+//		}
+//		
+//		if (iamodel.getPlan().getAuthorisedBy() != null) {
+//			if (iamodel.getPlan().getAuthorisedBy().getId() != null) {
+//				Contacts authorise = contactService.getContacts(iamodel.getPlan().getAuthorisedBy().getId());
+//				support.setFirstname(iamodel.getPlan().getSupportPerson().getFirstname());
+//				support.setOthername(iamodel.getPlan().getSupportPerson().getOthername());
+//				support.setLastname(iamodel.getPlan().getSupportPerson().getLastname());
+//				iamodel.getPlan().setAuthorisedBy(authorise);
+//			}
+//		}
+//		if (getSupportContactId() != null) {
+//			try {
+//				iamodel.getPlan().setSupportPerson(contactService.getContacts(getSupportContactId()));
+//			} catch (NullPointerException e) {
+//				iamodel.getPlan().setSupportPerson(new Contacts());
+//			}
+//		} 
+//		
+//		if (getAuthorisedContactId() != null) {
+//			try {
+//				iamodel.getPlan().setAuthorisedBy(contactService.getContacts(getAuthorisedContactId()));
+//			} catch (NullPointerException e) {
+//				iamodel.getPlan().setAuthorisedBy(new Contacts());
+//			}
+//		} 
 		
 		if (theReviewFrequency != -1) {
 			iamodel.getPlan().setReviewFrequency(typesService.getReviewFrequencyById(theReviewFrequency));
@@ -1764,12 +1789,20 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 			}
 		}
 		
-		if (isContactEmpty(iamodel.getPlan().getAuthorisedBy())) {
-			iamodel.getPlan().setAuthorisedBy(null);;
-		}
-		
-		if (isContactEmpty(iamodel.getPlan().getSupportPerson())) {
-			iamodel.getPlan().setSupportPerson(null);
+		if (iamodel.getPlan() != null) {
+			if (iamodel.getPlan().getAuthorisedBy() != null) {
+				if (isContactEmpty(iamodel.getPlan().getAuthorisedBy())) {
+					iamodel.getPlan().setAuthorisedBy(null);
+				}
+			}
+			
+			if (iamodel.getPlan().getSupportPerson() != null) {
+				System.out.println("suport id " + iamodel.getPlan().getSupportPerson().getId());
+				if (isContactEmpty(iamodel.getPlan().getSupportPerson())) {
+					System.out.println("support contact is empty");
+					iamodel.getPlan().setSupportPerson(null);
+				}
+			}
 		}
 		
 		iamodel.getContact().setContactType(typesService.getContactTypeById(2));
@@ -1777,8 +1810,6 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 		if (iamodel.getId() == null) {
 			if (caseServices.saveOrUpdateCase(iamodel, iamodel.getContact())) {
 				this.formTitle = kExistingCaseTitle;
-				setSupportContactId(null);
-				setAuthorisedContactId(null);
 				activateLists();
 				setIamodel(caseServices.getCase(iamodel.getId()));
 				initialiseDBList();
@@ -1786,9 +1817,8 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 				System.out.println("test " + iamodel.getId());
 				return SUCCESS;
 			} 
-		} else if (caseServices.saveOrUpdateCase(iamodel)) {
-			setSupportContactId(null);
-			setAuthorisedContactId(null);
+		} else if(caseServices.saveOrUpdateCase(iamodel)) {
+			System.out.println("called after support remove");
 			this.formTitle = kExistingCaseTitle;
 			activateLists();
 			setIamodel(caseServices.getCase(iamodel.getId()));
@@ -1865,7 +1895,7 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 		disabilitySelectList = typesService.findDisabilityTypes();
 		issueSelectList = typesService.findIssueTypes();
 		dangerSelectList = typesService.findDangerTypes();
-		statusSelectList = typesService.findStatusTypes(1);
+		statusSelectList = typesService.findStatusTypes(2);
 		employmentSelectList = typesService.findEmploymentTypes();
 		advocateSelectList = caseServices.findAdvocates();
 		prioritySelectList = typesService.findPriorityTypes();

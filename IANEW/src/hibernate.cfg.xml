@@ -18,7 +18,7 @@
 			indexes 
 		</property> 
         
-        <mapping resource="uow/ia/bean/CaseIssues.hbm.xml" />
+        <!-- <mapping resource="uow/ia/bean/CaseIssues.hbm.xml" />
         <mapping resource="uow/ia/bean/DangerTypes.hbm.xml" />
         <mapping resource="uow/ia/bean/StatusTypes.hbm.xml" />
         <mapping resource="uow/ia/bean/AddressesHistories.hbm.xml" />
@@ -67,8 +67,8 @@
         <mapping resource="uow/ia/bean/CulturalBackgroundTypes.hbm.xml" />
         <mapping resource="uow/ia/bean/IaCommunicationsHistories.hbm.xml" />
         <mapping resource="uow/ia/bean/CaseIssuesHistories.hbm.xml" />
-        <mapping resource="uow/ia/bean/ContactEmployments.hbm.xml" />
-        <mapping resource="uow/ia/bean/ContactEmploymentsHistories.hbm.xml" />
+        <mapping resource="uow/ia/bean/ContactEmployments.hbm.xml" /> -->
+       <!--  <mapping resource="uow/ia/bean/ContactEmploymentsHistories.hbm.xml" /> -->
         
         <!-- Enable listener -->
         <event type="post-update"> 

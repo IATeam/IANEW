@@ -244,28 +244,44 @@ public class ContactListAction extends BaseAction{
 	}
 	
 	private void initializeSearchString(){
-		searchString = "(";
-		
-		try{
-			if(!getFirstName().isEmpty() || !getFirstName().equals(null)){
-				searchString += "firstname:" + getFirstName();
-				if(!getFirstName().contains("*"))
-					searchString += "*";
-			}
-		}catch(NullPointerException npe){}
+		searchString = "";
+		if(getFirstName().length() > 0 || getLastName().length() > 0){
+			searchString += "(";
+			try{
+				if(!getFirstName().isEmpty() || !getFirstName().equals(null)){
+					searchString += "firstname:" + getFirstName();
+					if(!getFirstName().contains("*"))
+						searchString += "*";
+				}
+			}catch(NullPointerException npe){}
+			try{
+				
+			if(getFirstName().length() > 0 && getLastName().length() > 0)
+				searchString += " AND ";
+			}catch(NullPointerException npe){}
 			
-		try{
-			if(!getLastName().isEmpty() || !getLastName().equals(null)){
-				searchString += " AND lastname:" + getLastName();
-				if(!getLastName().contains("*"))
-					searchString += "*";
-			}
-		}catch(NullPointerException npe){}
+			try{
+				if(!getLastName().isEmpty() || !getLastName().equals(null)){
+					searchString += "lastname:" + getLastName();
+					if(!getLastName().contains("*"))
+						searchString += "*";
+				}
+			}catch(NullPointerException npe){}
+			searchString += ")";
+		}
 		
-		if (getSearch() != null) {
-			searchString +=")";
+		if (searchString.length() > 0) {
+			if (getSearch() != null) {
+				searchString +=")";
+			} else {
+				searchString += ") AND contactType.id:2";
+			}
 		} else {
-			searchString += ") AND contactType.id:2";
+			if (getSearch() != null) {
+				searchString ="";
+			} else {
+				searchString += " contactType.id:2";
+			}
 		}
 	}
 	

@@ -137,30 +137,47 @@ public class SearchUtil {
 		return list;
 	}
 	
-	public int getTotalNumberOfRecords(String sortField, String searchString, UtilService s, boolean asc, Class<?> entity){
-FullTextQuery ftq = null;
-		
-		if(sortField == null){
-			ftq = getQueryResult(searchString, s, entity);
-		}else{
-			ftq = getSortedQueryResult(sortField, searchString, s, asc, entity);
-		}
-		
+	/**
+	 * Method used by EnquiryList and CaseList
+	 * @param ftq
+	 * @return
+	 */
+	public int getTotalNumberOfRecords(FullTextQuery ftq){
 		return ftq.getResultSize();
 	}
 	
-	public List getPage(int startIndex, int pageSize, String sortField, String searchString, UtilService s, boolean asc, Class<?> entity){
-		System.out.println("inside get page");
-		
+	
+	/**
+	 * Method used by contactList
+	 * @param sortField
+	 * @param searchString
+	 * @param s
+	 * @param desc
+	 * @param entity
+	 * @return
+	 */
+	public int getTotalNumberOfRecords(String sortField, String searchString, UtilService s, boolean desc, Class<?> entity){
 		FullTextQuery ftq = null;
-		System.out.println("inside get page");
+		
 		if(sortField == null){
 			ftq = getQueryResult(searchString, s, entity);
-			System.out.println("full text " + ftq.list());
 		}else{
-			ftq = getSortedQueryResult(sortField, searchString, s, asc, entity);
+			ftq = getSortedQueryResult(sortField, searchString, s, desc, entity);
 		}
+		return ftq.getResultSize();
+	}
+	
+	public List getPage(int startIndex, int pageSize, String sortField, String searchString, UtilService s, boolean desc, Class<?> entity){
 		
+		FullTextQuery ftq = null;
+		
+		if(sortField == null){
+			ftq = getQueryResult(searchString, s, entity);
+			
+		}else{
+			
+			ftq = getSortedQueryResult(sortField, searchString, s, desc, entity);
+		}
 		try{
 			ftq.setFirstResult(startIndex);
 			ftq.setMaxResults(pageSize);
@@ -170,7 +187,22 @@ FullTextQuery ftq = null;
 		return ftq.list();
 	}
 	
-	private FullTextQuery getSortedQueryResult(String sortField, String searchString, UtilService s, boolean asc, Class<?> entity){
+	public FullTextQuery getFullTextQuery( String sortField, String searchString, UtilService s, boolean desc, Class<?> entity){
+		
+		FullTextQuery ftq = null;
+		System.out.println("sort field is: " + sortField);
+		if(sortField == null){
+			ftq = getQueryResult(searchString, s, entity);
+			
+		}else{
+			
+			ftq = getSortedQueryResult(sortField, searchString, s, desc, entity);
+		}
+		
+		return ftq;
+	}
+	
+	private FullTextQuery getSortedQueryResult(String sortField, String searchString, UtilService s, boolean desc, Class<?> entity){
 		service = s;
 		FullTextSession fts = s.getFullTextSession();
 		
@@ -180,11 +212,10 @@ FullTextQuery ftq = null;
 		if(searchString.equals("")){
 			QueryBuilder builder = null;
 			Query q = null;
-			try{
+			try{ 
 				builder = fts.getSearchFactory().buildQueryBuilder().forEntity(entity).get();
 				q = builder.all().createQuery();
 				ftq = fts.createFullTextQuery(q, entity);
-				
 			}catch(NullPointerException npe){
 //				builder = fts.getSearchFactory().buildQueryBuilder();
 //				q = builder.all().createQuery();
@@ -197,8 +228,12 @@ FullTextQuery ftq = null;
 				ftq = fts.createFullTextQuery(getLuceneQuery(searchString));
 			}
 		}
-		
-		Sort sort = new Sort(new SortField(sortField, SortField.STRING, asc));
+		System.out.println("sortfield: " + sortField);
+		Sort sort = null;
+		if(sortField.trim().equals("id")){
+			sort = new Sort(new SortField(sortField, SortField.INT, desc));
+		}else
+			sort = new Sort(new SortField(sortField, SortField.STRING, desc));
 		
 		ftq.setSort(sort);
 		//ftq.enableFullTextFilter(filteringField);
@@ -213,7 +248,7 @@ FullTextQuery ftq = null;
 		if(searchString.equals("")){
 			QueryBuilder builder = null;
 			Query q = null;
-			try{
+			try{ 
 				builder = fts.getSearchFactory().buildQueryBuilder().forEntity(entity).get();
 				q = builder.all().createQuery();
 				ftq = fts.createFullTextQuery(q, entity);
@@ -229,11 +264,6 @@ FullTextQuery ftq = null;
 				ftq = fts.createFullTextQuery(getLuceneQuery(searchString));
 			}
 		}
-		
-		
-		
-		
-		
 		
 		return ftq;
 	}
@@ -259,3 +289,4 @@ FullTextQuery ftq = null;
 		return luceneQuery;
 	}
 }
+

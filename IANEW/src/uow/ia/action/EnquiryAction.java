@@ -182,7 +182,7 @@ ModelDriven<Enquiries>, Preparable{
 	 */
 	public String getExistingEnquiry(){ //TODO:
 		System.out.println("Struts: start getExistingEnquiry");
-		
+		setFormTitle(kExistingTitle);
 		//activateAutocomplete();
 		activateLists();
 		initialiseDBList();
@@ -279,26 +279,31 @@ ModelDriven<Enquiries>, Preparable{
 		
 		try{ setDob(iamodel.getContact().getDob().toString()); }catch (NullPointerException n) {}
 		
-		
-		if(iamodel.getContact().getEmploymentsList() != null){
-			for(ContactEmployments ce: iamodel.getContact().getEmploymentsList()){
-				theEmploymentListId.add(ce.getEmploymentType().getId());
-				
+		try{
+			if(iamodel.getContact().getEmploymentsList().size() > 0){
+				for(ContactEmployments ce: iamodel.getContact().getEmploymentsList()){
+					theEmploymentListId.add(ce.getEmploymentType().getId());
+					
+				}
 			}
-		}
+		}catch (NullPointerException e) {}
 		
-		if(iamodel.getContact().getDisabilitiesList() != null){
-			for(ClientDisabilities cd: iamodel.getContact().getDisabilitiesList()){
-				theDisabilityListId.add(cd.getDisabilityType().getId());
-				
+		try{
+			if(iamodel.getContact().getDisabilitiesList().size() > 0){
+				for(ClientDisabilities cd: iamodel.getContact().getDisabilitiesList()){
+					theDisabilityListId.add(cd.getDisabilityType().getId());
+					
+				}
 			}
-		}
+		}catch (NullPointerException e) {}
 		
-		if(iamodel.getEnquiryIssuesList() != null){
-			for(EnquiryIssues is: iamodel.getEnquiryIssuesList()){
-				theIssueListId.add(is.getIssue().getId());
+		try{
+			if(iamodel.getEnquiryIssuesList().size() > 0){
+				for(EnquiryIssues is: iamodel.getEnquiryIssuesList()){
+					theIssueListId.add(is.getIssue().getId());
+				}
 			}
-		}
+		}catch (NullPointerException e) {}
 
 		linkedEnquiriesList = enquiryService.getLinkedEnquiry(0,getHiddenid());
 		
@@ -311,6 +316,10 @@ ModelDriven<Enquiries>, Preparable{
 	 */
 	public String saveUpdateEnquiry(){ //TODO
 		System.out.println("Struts: start SaveUpdateEnquiry");
+		
+		java.util.Calendar cal = java.util.Calendar.getInstance();
+		java.util.Date utilDate = cal.getTime();
+		java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
 		
 		Date saveDate = null;
 		try {
@@ -428,9 +437,11 @@ ModelDriven<Enquiries>, Preparable{
 		iamodel.getContact().setAccommodation(typesService.getAccommodationTypeById(getTheAccommodationTypeId()));
 		iamodel.getContact().setContactType(typesService.getContactTypeById(2));
 		
+		iamodel.setUpdatedDateTime(sqlDate);
+		
 		if(iamodel.getId() == null){
 			if(enquiryService.saveOrUpdateEnquiry(iamodel, iamodel.getContact())){
-				this.formTitle = kExistingTitle;
+				formTitle = kExistingTitle;
 				activateLists();
 				setIamodel(iamodel);
 				initialiseDBList();

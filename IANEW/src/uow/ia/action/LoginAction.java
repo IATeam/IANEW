@@ -53,12 +53,12 @@ public class LoginAction extends BaseAction{
             
             FullTextSession fts = utilService.getFullTextSession();
     		
-    		//try {
-    			//fts.createIndexer().startAndWait();
-    			System.out.println("commented index out");
-    		//} catch (InterruptedException e) {
-    			//e.printStackTrace();
-    		//}
+//    		try {
+//    			fts.createIndexer().startAndWait();
+//    			System.out.println("commented index out");
+//    		} catch (InterruptedException e) {
+//    			e.printStackTrace();
+//    		}
             
 			return SUCCESS;
 		} else {
@@ -141,9 +141,7 @@ public class LoginAction extends BaseAction{
 						}
 					}
 				}
-				
 			}
-			
 		}
 		
 		return SUCCESS;

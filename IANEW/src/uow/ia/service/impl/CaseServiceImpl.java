@@ -17,6 +17,8 @@ import uow.ia.bean.Contacts;
 import uow.ia.bean.DangerTypes;
 import uow.ia.bean.Enquiries;
 import uow.ia.bean.IndividualCases;
+import uow.ia.bean.PlanDevelopers;
+import uow.ia.bean.Plans;
 import uow.ia.bean.ReviewFrequencies;
 import uow.ia.bean.StatusTypes;
 import uow.ia.dao.ContactTypesDao;
@@ -88,14 +90,17 @@ CaseService {
 
 	@Override
 	public boolean saveOrUpdateCase(IndividualCases ic, Contacts c) {
+		System.out.println("saev new contact");
 		ic.setContact(c);
 		c.getIndividualCasesList().add(ic);
 		try {
 			if (ic.getPlan().getAuthorisedBy() != null) {
+				System.out.println("save authorised " + ic.getPlan().getAuthorisedBy().getId());
 				contactsDao.saveOrUpdate(ic.getPlan().getAuthorisedBy());
 			}
 			
 			if (ic.getPlan().getSupportPerson() != null) {
+				System.out.println("save support " + ic.getPlan().getSupportPerson().getId());
 				contactsDao.saveOrUpdate(ic.getPlan().getSupportPerson());
 			}
 			contactsDao.saveOrUpdate(c);
@@ -109,8 +114,8 @@ CaseService {
 	@Override
 	public boolean saveCase(IndividualCases ic) {
 		try {
-			individualCasesDao.save(ic);
 			System.out.println("saveCase called");
+			individualCasesDao.save(ic);
 			return true;
 		} catch (Exception e) {
 			System.out.println(e);
@@ -155,8 +160,14 @@ CaseService {
 
 	@Override
 	public boolean saveOrUpdateCase(IndividualCases ic) {
+		System.out.println("does it does in here?");
 		try {
+//			IndividualCases icCases = individualCasesDao.get(IndividualCases.class, 1);
+//			Plans plan = icCases.getPlan();
+//			plan.setSupportPerson(null);
+//			individualCasesDao.saveOrUpdate(icCases);
 			individualCasesDao.saveOrUpdate(ic);
+			System.out.println("short save called");
 			return true;
 		} catch (Exception e) {
 			System.out.println(e);
