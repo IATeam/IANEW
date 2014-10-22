@@ -8,10 +8,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.stereotype.Service;
 
+@Service("accessDeniedHandler")
 public class MyAccessDeniedHandler implements AccessDeniedHandler {
 	
-	private String accessDeniedUrl;
+	private String accessDeniedUrl = "/IANEW/403";
 	
 	public MyAccessDeniedHandler() {
 		// TODO Auto-generated constructor stub
@@ -30,7 +32,8 @@ public class MyAccessDeniedHandler implements AccessDeniedHandler {
 		boolean isAjax = "XMLHttpRequest".equals(request.getHeader("X-Requested-With"));
 		
 		if (isAjax) {
-			System.out.println("called here");
+			
+			//response.sendError(403);
 			response.sendRedirect(accessDeniedUrl);
 		}
 	}

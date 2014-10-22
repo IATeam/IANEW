@@ -6,8 +6,8 @@
         <title>Access Denied</title>
     </head>
     <body>
-    	<h1>You do not have privilege to do this!</h1>
-        <h2>Access Denied for ${pageContext.request.userPrincipal.name}!!!</h2>
+    	<h2>You do not have privilege to do this!</h2>
+        <h2>Access Denied </h2> <%-- for ${pageContext.request.userPrincipal.name} --%>
         <!-- <a href="login.jsp">Back</a> -->
     </body>
 </html>

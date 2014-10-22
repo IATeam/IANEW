@@ -9,7 +9,7 @@
 	</global-method-security>
 
 
-	<http auto-config="true" use-expressions="true">
+	<http auto-config="true" use-expressions="true" > <!-- entry-point-ref="MyAuthenticationEntryPoint" -->
 		<intercept-url pattern="/" access="permitAll" />
 		<intercept-url pattern="/styles/**" access="permitAll" />
 		<intercept-url pattern="/resources/**" access="permitAll" />
@@ -23,18 +23,16 @@
 		
 		<form-login login-page="/login" default-target-url="/logged" authentication-failure-url="/login?error"
 			username-parameter="username" password-parameter="password" />
-		<session-management invalid-session-url="/login?timeout" > <!-- this invalid will block original reqeust and redirect to home  -->
-			<concurrency-control  max-sessions="1" error-if-maximum-exceeded="false" expired-url="/login?timeout"></concurrency-control>
+		<session-management  invalid-session-url="/login?timeout"> <!-- this invalid will block original reqeust and redirect to home   -->
+			<!-- <concurrency-control  max-sessions="1" error-if-maximum-exceeded="false"></concurrency-control> -->
 		</session-management>
 		<logout invalidate-session="false" logout-success-url="/login?logout" />
 		<access-denied-handler ref="accessDeniedHandler"/>
 	</http>
+	<!-- test -->
 	<authentication-manager>
 		<authentication-provider user-service-ref="MyUserDetails">
 			<password-encoder hash="md5" />
 		</authentication-provider>
 	</authentication-manager>
-	<beans:bean id="accessDeniedHandler" class="uow.ia.springsecurity.MyAccessDeniedHandler">
-		<beans:property name="accessDeniedUrl" value="/IANEW/403" />
-	</beans:bean>
 </beans:beans> 
