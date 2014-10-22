@@ -42,11 +42,7 @@
 <!-- ---------------------------------------------------------------------------------------------- -->
 <!-- iterator - used to iterate a list or set ----------------------------------------------------- -->
 <!-- ---------------------------------------------------------------------------------------------- -->	
-	<!-- 
-	there is a strange behavior with this s:url link.
-	-->
-	<s:url var="urlExisting" namespace="/enquiry" action="getEnquiry" includeContext="false"/>		
-	<s:url var="urlENew" namespace="/enquiry" action="newEnquiry" />
+	<s:url var="urlExisting" namespace="/enquiry" action="getEnquiry" includeContext="false"/>
 
 	<!-- Change namespace and action for appropriate urls for pagination purposes-->
 	<s:url var="urlUpdate" namespace="/enquiryList" action="updateEnquiryList" includeContext="false"/>

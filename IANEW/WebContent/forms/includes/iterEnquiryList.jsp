@@ -1,5 +1,7 @@
 <%@taglib prefix="s" uri="/struts-tags" %>
 <s:div cssClass="list">
+			
+	<s:url var="urlENew" namespace="/enquiry" action="newEnquiry" />
 	<s:iterator value="model">
 		<s:div cssClass="curveBorder sixteen columns iteratorlist" onclick="bandSelected(this)">
 			<s:div cssClass="row" cssStyle="margin-bottom:1px">
@@ -7,7 +9,10 @@
 					<s:label for="id" value="Enquiry#:" />
 					<p class="id"><s:property value="id"/></p>
 				</s:div>
-				<div class="two columns"><p>:</p></div>
+				<div class="textarea two columns">
+					<s:label for="id" value="satus:" />
+					<p><s:property value="statusType.statusName"/></p>
+				</div>
 				<s:div cssClass="textarea four columns">
 					<s:label for="firstname" value="firstname:" />
 					<p><s:property value="contact.firstname" /></p>
@@ -79,6 +84,8 @@
 			<sj:submit id="open" targets="formDiv" cssClass="two columns alpha" value="Open Enquiry" onBeforeTopics="beforeSubmit"/>
 			<sj:a id="btnNewE" targets="formDiv"  href="%{urlENew}" ><input type="button" class="two columns omega" value="New Enquiry" onclick="confirmAction('Are you sure you want to create a new enquiry?', 'enquiry', 'newEnquiry')"/></sj:a>
 		</section>
-		
 	</s:div>
 </s:div>
+<script>
+$(".toggled").hide();
+</script>

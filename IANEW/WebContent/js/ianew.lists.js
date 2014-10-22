@@ -96,7 +96,9 @@ function bandSelected(selectedDiv){
 	if($(selectedDiv).parent().attr("id") == "contactList"){
 		$("#selectedContact").val($(selectedDiv).find('.id').text());
 	}else{
+		
 		$("#hiddenid").val($(selectedDiv).find('.id').text());
+		alert($("#hiddenid").val())
 	}
 		
 }

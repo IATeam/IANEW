@@ -79,7 +79,7 @@
 
 			var totalPage;
 			if($("#totalNumberOfPagesDiv").text() == "")
-				$("#totalNumberOfPagesDiv").text() != 0;
+				$("#totalNumberOfPagesDiv").text(0	);
 			
 			totalPage = parseInt($("#totalNumberOfPagesDiv").text());
 

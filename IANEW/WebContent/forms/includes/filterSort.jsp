@@ -7,12 +7,13 @@
 			<legend>Sort By</legend>
 			<s:div cssClass="row fourteen columns">
 				<s:div cssClass="eleven columns alpha">
+					<input type="radio" id="radioid" name="sort" checked="checked"/>filenumber
 					<input type="radio" id="radiofirstname" name="sort"/>firstname 
 					<input type="radio" id="radiolastname" name="sort"/>lastname
-					<input type="radio" id="radiocreateddate" name="sort" checked="checked"/>created Date
+					<input type="radio" id="radiocreateddate" name="sort"/>created Date
 					<input type="radio" id="radioupdateddate" name="sort"/>updated Date
 				</s:div>
-				<s:select cssClass="three columns omega" id="descending" list="#{'1':'ascending', '2':'descending'}" />
+				<s:select cssClass="three columns omega" id="descending" value="2" list="#{'1':'ascending', '2':'descending'}" />
 			</s:div>
 		</fieldset>
 			
@@ -60,6 +61,9 @@
 					</s:div>
 				</s:div>
 			</s:div>
+			<div class="two columns">
+				<s:select id="status" list="statusSelectList" listValue="statusName" listKey="id" name="theStatus" headerKey="-1" headerValue="Case Status" />
+			</div>
 			<%-- <s:div cssClass="row fourteen columns">
 				<input type="button" id="btnFilterIssues" value="issues" class="three columns"/>
 				<s:checkboxlist list="issueTypeList" name="selectedIssues" listKey="id" listValue="issueName"></s:checkboxlist>
@@ -70,9 +74,9 @@
 </s:div>
 <script>
 	function loadList(btn){
-		var firstName, lastName, createdDateStart, createdDateEnd, updatedDateStart, updatedDateEnd;
+		var firstName, lastName, createdDateStart, createdDateEnd, updatedDateStart, updatedDateEnd, theStatus;
 		var sortField, ascending;
-
+		var goAhead = false;
 		var dash = "-";
 
 		if($("#descending").val() == 1)			descending = false;
@@ -82,13 +86,13 @@
 		if($("#firstname").val().trim().length > 0){
 			firstName = $("#firstname").val().trim();
 		}else{
-			firstName = "";
+			//firstName = "";
 		}
 		
 		if($("#lastname").val().trim().length > 0){
 			lastName = $("#lastname").val().trim();
 		}else{
-			lastName = "";
+			//lastName = "";
 		}
 		
 		if($("#createdDateStart").val() != "" || $("#createdDateEnd").val() != ""){
@@ -130,8 +134,10 @@
 				updatedDateEnd = updatedDateEnd.replace("-", "") + "*";
 			}
 		}
-		
-		if($("#radiocreateddate").is(":checked"))		sortField = "createdDateTime";
+
+		//get the sortfield
+		if($("#radioid").is(":checked"))				sortField = "id";
+		else if($("#radiocreateddate").is(":checked"))	sortField = "createdDateTime";
 		else if($("#radioupdateddate").is(":checked"))	sortField = "updatedDateTime";
 		else if($("#radiofirstname").is(":checked"))	sortField = "contact.firstname";
 		else 											sortField = "contact.lastname";
@@ -149,35 +155,35 @@
 		if($("#currentPage").val() == "")		currentPage = 0;
 		else									currentPage = parseInt($("#currentPage").val()); 
 
-
+		theStatus = $("select[name='theStatus']").val();
 
 		var totalPage;
 		if($("#totalNumberOfPagesDiv").text() == "")
-			$("#totalNumberOfPagesDiv").text() != 0;
+			$("#totalNumberOfPagesDiv").text("0");
 		
 		totalPage = parseInt($("#totalNumberOfPagesDiv").text());
 
-		
 		var url = '';
 		if($(btn).attr('id') == "btnFilterSort"){
-			url = "/IANEW/enquiryList/loadFilterSortResult.action"
+			url = "enquiryList/loadFilterSortResult.action"
 			goAhead = true;
 		}
 		else if($(btn).attr('id') == "btnNextEnquiries"){
-			url = "/IANEW/enquiryList/getNextPage.action";
+			url = "enquiryList/getNextPage.action";
 			if(currentPage < totalPage)
 				goAhead = true;
 		}
 		else if($(btn).attr('id') == "btnPrevEnquiries"){
-			url = "/IANEW/enquiryList/getPrevPage.action";
+			url = "enquiryList/getPrevPage.action";
 			if(currentPage > 1)
 				goAhead = true;
 		}
 		else{ //for when the user input a number for page change
-			url = "/IANEW/enquiryList/getPage.action"
+			url = "enquiryList/getPage.action"
 			if(currentPage > 0 && currentPage <= totalPage)
 				goAhead = true;
 		} 
+
 		
 
 		var submitData = {
@@ -191,7 +197,8 @@
 			'createdDateStart' 	: createdDateStart,
 			'createdDateEnd'	: createdDateEnd,
 			'updatedDateStart'	: updatedDateStart,
-			'updatedDateEnd'	: updatedDateEnd
+			'updatedDateEnd'	: updatedDateEnd,
+			'theStatus'			: theStatus
 		};
 	
 		if(goAhead){
@@ -203,6 +210,6 @@
 				}
 			);
 		}
-		
 	}
+
 </script>
