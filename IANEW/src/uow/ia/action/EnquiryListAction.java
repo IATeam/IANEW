@@ -16,7 +16,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import uow.ia.bean.Contacts;
 import uow.ia.bean.Enquiries;
+import uow.ia.bean.EnquiryIssues;
+import uow.ia.bean.IssueTypes;
+import uow.ia.util.SearchUtil;
 
 import com.opensymphony.xwork2.ModelDriven;
 
@@ -27,40 +31,176 @@ public class EnquiryListAction extends BaseAction implements ModelDriven<List<En
 	/* For pagination */
 	private int page;
 	private int numberOfRecords;
-	private long totalNumberOfRecords;
-	private long totalNumberOfPages;
+
+	
+//	version2
+	private String createdDateStart;
+	private String createdDateEnd;
+	private String updatedDateStart;
+	private String updatedDateEnd;
+	private String firstName = null;
+	private String lastName = null;
+	private String searchString = null;
+	private String sortField;
+	private int startIndex;
+	private int recordsPerPage;
+	private int currentPage;
+	private int totalNumberOfPages;
+	private int totalNumberOfRecords;
+	private boolean descending;
+	
+	
+	
+	
+	public String getCreatedDateStart() {
+		return createdDateStart;
+	}
+
+	public void setCreatedDateStart(String createdDateStart) {
+		this.createdDateStart = createdDateStart;
+	}
+
+	public String getCreatedDateEnd() {
+		return createdDateEnd;
+	}
+
+	public void setCreatedDateEnd(String createdDateEnd) {
+		this.createdDateEnd = createdDateEnd;
+	}
+
+	public String getUpdatedDateStart() {
+		return updatedDateStart;
+	}
+
+	public void setUpdatedDateStart(String udpatedDateStart) {
+		this.updatedDateStart = udpatedDateStart;
+	}
+
+	public String getUpdatedDateEnd() {
+		return updatedDateEnd;
+	}
+
+	public void setUpdatedDateEnd(String updatedDateEnd) {
+		this.updatedDateEnd = updatedDateEnd;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getSortField() {
+		return sortField;
+	}
+
+	public void setSortField(String sortField) {
+		this.sortField = sortField;
+	}
+
+	public int getStartIndex() {
+		return startIndex;
+	}
+
+	public void setStartIndex(int startIndex) {
+		this.startIndex = startIndex;
+	}
+
+	public int getRecordsPerPage() {
+		return recordsPerPage;
+	}
+
+	public void setRecordsPerPage(int recordsPerPage) {
+		this.recordsPerPage = recordsPerPage;
+	}
+
+	public int getCurrentPage() {
+		return currentPage;
+	}
+
+	public void setCurrentPage(int currentPage) {
+		this.currentPage = currentPage;
+	}
+
+	public boolean isDescending() {
+		return descending;
+	}
+
+	public void setDescending(boolean descending) {
+		this.descending = descending;
+	}
+
 
 	/* For Filter & Sort */
-	private List<String>sortOptionList  = new ArrayList<String>();
+	private List<IssueTypes>issueTypeList  = new ArrayList<IssueTypes>();
 	private Map<String, String>filterOptionList  = new HashMap<String, String>();
 	
 	
+
+	
+	private String[] selectedList;
+	
+	public String[] getSelectedList() {
+		return selectedList;
+	}
+
+	public void setSelectedList(String[] selectedList) {
+		this.selectedList = selectedList;
+	}
+
+	
 	public String getLinkedEnquiriesList() {
 		
-		setPage(1);
-		setNumberOfRecords(10);
-		setIamodelList(enquiryService.findEnquiriesByPage(page, numberOfRecords));
-		totalNumberOfRecords = enquiryService.countEnquiries();
-		int mod = (int) totalNumberOfRecords % numberOfRecords;
-		if (mod != 0)
-			mod = 1;
-		totalNumberOfPages = totalNumberOfRecords / numberOfRecords + mod;
+//		setPage(1);
+//		setNumberOfRecords(10);
+//		setIamodelList(enquiryService.findEnquiriesByPage(page, numberOfRecords));
+//		totalNumberOfRecords = enquiryService.countEnquiries();
+//		int mod = (int) totalNumberOfRecords % numberOfRecords;
+//		if (mod != 0)
+//			mod = 1;
+//		totalNumberOfPages = totalNumberOfRecords / numberOfRecords + mod;
 		return SUCCESS;
 	}
 
 	public String updateLinkedEnquiriesList() {
 		System.out.println(getPage());
-		setIamodelList(enquiryService.findEnquiriesByPage(getPage(),
-				getNumberOfRecords()));
-		totalNumberOfRecords = enquiryService.countEnquiries();
-		int mod = (int) totalNumberOfRecords % numberOfRecords;
-		if (mod != 0)
-			mod = 1;
-		totalNumberOfPages = totalNumberOfRecords / numberOfRecords + mod;
+//		setIamodelList(enquiryService.findEnquiriesByPage(getPage(),
+//				getNumberOfRecords()));
+//		totalNumberOfRecords = enquiryService.countEnquiries();
+//		int mod = (int) totalNumberOfRecords % numberOfRecords;
+//		if (mod != 0)
+//			mod = 1;
+//		totalNumberOfPages = totalNumberOfRecords / numberOfRecords + mod;
 		return SUCCESS;
 	}
 
 	public String getEnquiryList() {
+		SearchUtil service = new SearchUtil();
+		
+		System.out.println(getSortField());
+		
+		setStartIndex(0);
+		setRecordsPerPage(10);
+		setCurrentPage(1);
+		
+		searchString = "";
+		iamodelList = getEnquiryListResult(service);
+		activatePageDetails(service);
+		
+		System.out.println(iamodelList);
+		
+		/*
+		issueTypeList = typesService.findIssueTypes();
 		setPage(1);
 		setNumberOfRecords(10);
 		setIamodelList(enquiryService
@@ -70,18 +210,85 @@ public class EnquiryListAction extends BaseAction implements ModelDriven<List<En
 		if (mod != 0)
 			mod = 1;
 		totalNumberOfPages = totalNumberOfRecords / numberOfRecords + mod;
+		*/
 		return SUCCESS;
 	}
+	
+	public String loadFilterSortResult(){
+		System.out.println("in load filter sort search form");
+		
+		SearchUtil service = new SearchUtil();
+		setStartIndex(0);
+		setRecordsPerPage(10);
+		setCurrentPage(1);
+			
+		initializeSearchString();
+		iamodelList = getEnquiryListResult(service);
+		activatePageDetails(service);
+		
+		if(totalNumberOfPages == 0)
+			setCurrentPage(0);
+		
+		System.out.println("End of searchContact");
+		return SUCCESS;
+	}
+	
 
+	public String getNextPage(){
+		SearchUtil service = new SearchUtil();
+		startIndex = getStartIndex() + getRecordsPerPage();
+		
+		initializeSearchString();
+		activatePageDetails(service);
+		
+		if(startIndex <= totalNumberOfRecords){
+			iamodelList = getEnquiryListResult(service);
+			if(iamodelList.size() > 0)
+				currentPage = getCurrentPage() + 1;
+		}
+		
+		return SUCCESS;
+	}
+	
+	public String getPrevPage(){
+		SearchUtil service = new SearchUtil();
+		startIndex = getStartIndex() - getRecordsPerPage();
+		
+		initializeSearchString();
+		activatePageDetails(service);
+		
+		if(startIndex >= 0){
+			iamodelList = getEnquiryListResult(service);
+			if(iamodelList.size() > 0)
+				currentPage = getCurrentPage() - 1;
+		}
+		
+		return SUCCESS;
+	}
+	
+	public String getPage(){
+		SearchUtil service = new SearchUtil();
+		
+		initializeSearchString();
+		activatePageDetails(service);
+		
+		if(getCurrentPage() > 0 && getCurrentPage() <= totalNumberOfPages){
+			startIndex = getRecordsPerPage() * getCurrentPage();
+			iamodelList = getEnquiryListResult(service);
+		}
+		
+		return SUCCESS;
+	}
+	
 	public String updateEnquiryList() {
-		System.out.println(getPage());
-		setIamodelList(enquiryService.findEnquiriesByPage(getPage(),
-				getNumberOfRecords()));
-		totalNumberOfRecords = enquiryService.countEnquiries();
-		int mod = (int) totalNumberOfRecords % numberOfRecords;
-		if (mod != 0)
-			mod = 1;
-		totalNumberOfPages = totalNumberOfRecords / numberOfRecords + mod;
+//		System.out.println(getPage());
+//		setIamodelList(enquiryService.findEnquiriesByPage(getPage(),
+//				getNumberOfRecords()));
+//		totalNumberOfRecords = enquiryService.countEnquiries();
+//		int mod = (int) totalNumberOfRecords % numberOfRecords;
+//		if (mod != 0)
+//			mod = 1;
+//		totalNumberOfPages = totalNumberOfRecords / numberOfRecords + mod;
 		return SUCCESS;
 	}
 
@@ -104,14 +311,103 @@ public class EnquiryListAction extends BaseAction implements ModelDriven<List<En
 	/*------------------------------------------------Pagination methods, setters & getters
 	 *
 	 */
+	
+	private void initializeSearchString(){
+		
+		searchString = "";
+		
+		if(getFirstName().length() > 0 || getLastName().length() > 0){
+			searchString += "(";
+			try{
+				if(!getFirstName().isEmpty() || !getFirstName().equals(null)){
+					searchString += "contact.firstname:" + getFirstName();
+					if(!getFirstName().contains("*"))
+						searchString += "*";
+				}
+			}catch(NullPointerException npe){}
+			try{
+				
+			if(getFirstName().length() > 0 && getLastName().length() > 0)
+				searchString += " AND ";
+			}catch(NullPointerException npe){}
+			
+			try{
+				if(!getLastName().isEmpty() || !getLastName().equals(null)){
+					searchString += "contact.lastname:" + getLastName();
+					if(!getLastName().contains("*"))
+						searchString += "*";
+				}
+			}catch(NullPointerException npe){}
+			searchString += ")";
+		}
+		
+		//created date start and end - assuming javascript has updated the date fields
+		//such that the string either is either empty or has ( * or numbers+*)
+		try{
+			if((getCreatedDateStart().length() > 0 || getCreatedDateEnd().length() > 0)){
+				if(searchString.contains(")") || searchString.contains("]"))
+					searchString += " AND ";
+			
+				
+				if(!getCreatedDateStart().isEmpty() || !getCreatedDateStart().equals(null)){
+					searchString += "createdDateTime:[" + getCreatedDateStart() + " TO ";
+				}
+				if(!getCreatedDateEnd().isEmpty() || !getCreatedDateEnd().equals(null)){
+					searchString += getCreatedDateEnd() + "]";
+				}
+				
+				
+			}
+		}catch(NullPointerException npe){}
+		
+		try{
+			if((getUpdatedDateStart().length() > 0 || getUpdatedDateEnd().length() > 0)){
+				if(searchString.contains(")") || searchString.contains("]"))
+					searchString += " AND ";
+				//created date start and end - assuming javascript has updated the date fields
+				//such that the string either is either empty or has ( * or numbers+*)
+				
+				if(!getUpdatedDateStart().isEmpty() || !getUpdatedDateStart().equals(null)){
+					searchString += "updatedDateTime:[" + getUpdatedDateStart() + " TO ";
+				}
+				if(!getUpdatedDateEnd().isEmpty() || !getUpdatedDateEnd().equals(null)){
+					searchString += getUpdatedDateEnd() + "]";
+				}
+			}
+		}catch(NullPointerException npe){}
+		
+		System.out.println("searchString: " + searchString);
+	}
+		
+	
+	
+	private List<Enquiries> getEnquiryListResult(SearchUtil service){
+		List<Enquiries> resultList = new ArrayList<Enquiries>();
+		
+		resultList = service.getPage(startIndex, recordsPerPage, sortField, searchString, utilService, descending, Enquiries.class);
+		
+		return resultList;
+	}
+	
+	private void activatePageDetails(SearchUtil service){
+		
+		totalNumberOfRecords = service.getTotalNumberOfRecords(sortField, searchString, utilService, descending, Contacts.class);
+		
+		
+		int mod = totalNumberOfRecords % recordsPerPage;
+		if (mod != 0)
+			mod = 1;
+		totalNumberOfPages = totalNumberOfRecords / recordsPerPage + mod;
+	}
+	
 	/**
 	 * Getter for page
 	 * 
 	 * @return
 	 */
-	public int getPage() {
-		return page;
-	}
+//	public int getPage() {
+//		return page;
+//	}
 
 	/**
 	 * Setter for Page
@@ -145,7 +441,7 @@ public class EnquiryListAction extends BaseAction implements ModelDriven<List<En
 	 * 
 	 * @return
 	 */
-	public long getTotalNumberOfRecords() {
+	public int getTotalNumberOfRecords() {
 		return totalNumberOfRecords;
 	}
 
@@ -182,39 +478,19 @@ public class EnquiryListAction extends BaseAction implements ModelDriven<List<En
 	/**
 	 * populate the filter list with different options
 	 */
-	private void populateFilterOptions(){
-		//filterOptionList.put("Status", value) 
-		//Map<String, String> 
-	}
-	
-	
-	/**
-	 * populate the sort list with different options
-	 */
-	private void populateSortOptions(){
-		String createdDate = "Created Date";
-		String updatedDate = "Updated Date";
-		String firstName = "First Name";
-		String lastName = "Last Name";
-		String id = "id";
-		
-		sortOptionList.add(createdDate);
-		sortOptionList.add(updatedDate);
-		sortOptionList.add(firstName);
-		sortOptionList.add(lastName);
-		sortOptionList.add(id);
-	}
 
-	public List<String> getSortOptionList() {
-		return sortOptionList;
-	}
-
-	public void setSortOptionList(List<String> sortOptionList) {
-		this.sortOptionList = sortOptionList;
-	}
+	
 
 	public Map<String, String> getFilterOptionList() {
 		return filterOptionList;
+	}
+
+	public List<IssueTypes> getIssueTypeList() {
+		return issueTypeList;
+	}
+
+	public void setIssueTypeList(List<IssueTypes> issueTypeList) {
+		this.issueTypeList = issueTypeList;
 	}
 
 	public void setFilterOptionList(Map<String, String> filterOptionList) {

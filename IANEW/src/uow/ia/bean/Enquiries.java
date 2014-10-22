@@ -69,6 +69,8 @@ public class Enquiries implements java.io.Serializable {
 	private Enquiries parentEnquiry; 
 	
 	private List<EnquiryIssues> enquiryIssuesList = new ArrayList<EnquiryIssues>();
+	
+	private List<IndividualCases> individualCasesList = new ArrayList<IndividualCases>();
 
 
 	/**
@@ -336,6 +338,20 @@ public class Enquiries implements java.io.Serializable {
 		this.enquiryIssuesList = enquiryIssuesList;
 	}
 	
+	/**
+	 * @return the individualCasesList
+	 */
+	public List<IndividualCases> getIndividualCasesList() {
+		return this.individualCasesList;
+	}
+
+	/**
+	 * @param individualCasesList the individualCasesList to set
+	 */
+	public void setIndividualCasesList(List<IndividualCases> individualCasesList) {
+		this.individualCasesList = individualCasesList;
+	}
+
 	/**
 	 * @auther ZhiYu Yang
 	 * @return String - Issues Types for this Enquiry as a String

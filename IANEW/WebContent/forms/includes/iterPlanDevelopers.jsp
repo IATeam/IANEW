@@ -16,7 +16,8 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <s:iterator value="iamodel.planDevelopersList" status="stat">	
 	<section class="secIssue sixteen columns curveBorder">
-	<input type="image" src="/IANEW/resources/images/undoButtonImage.png" alt="undoButton" id="btnUndo" value="Undo" onclick="undoButton(this);return false;" class="undoButton"/>
+		<input type="image" src="/IANEW/resources/images/undoButtonImage.png" alt="undoButton" id="btnUndo" value="Undo" onclick="undoButton(this);return false;" class="undoButton"/>
+		<s:hidden name="iamodel.planDevelopersList[%{#stat.index}].id"/>
 		<div class="row">
 			<div class="fifteen columns">
 				<s:select list="developerSelectList" listKey="id" listValue="fullName" name="theDeveloperList[%{#stat.index}]" headerKey="-1" headerValue="Select a Plan Developer"/>

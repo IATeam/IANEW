@@ -29,49 +29,47 @@
 	<h4 class="sixteen columns"  style="float:none;">Goals</h4>
 		
 	<%@include file="iterGoals.jsp" %>
-	
-	<s:set name="index" value="iamodel.planGoalsList.size" />
-	<s:hidden id="goalSize" name="iamodel.planGoalsList.size" value="%{iamodel.planGoalsList.size}"/>
-	<article id="artGoal" class="row" style="visibility: hidden; display: none;">
+	<s:if test="%{iamodel.planGoalsList.size > 0}">
+		<s:set name="index" value="iamodel.planGoalsList.size" />
+		<s:hidden id="goalSize" name="iamodel.planGoalsList.size" value="%{iamodel.planGoalsList.size}"/>
+		<article id="artGoal" class="hidden">
+	</s:if>
+	<s:else>
+		<s:set name="index" value="0" />
+		<s:hidden id="goalSize" name="iamodel.planGoalsList.size" value="0"/>
+		<article id="artGoal" class="hidden">
+	</s:else>
 		<section class="secIssue sixteen columns curveBorder">
 			<s:hidden name="iamodel.planGoalsList[%{#index}].id"/>
-			<input type="image" src="/IANEW/resources/images/undoButtonImage.png" alt="undoButton" id="btnUndo" value="Undo" class="undoButton"/>
+			<input type="image" src="/IANEW/resources/images/undoButtonImage.png" alt="undoButton" id="btnUndo" value="Undo" onclick="undoButton(this);return false;" class="undoButton"/>
 			<div class="row">
 				<div class="five columns">
-					<s:select list="goalSelectList" listValue="goalTypeName" listKey="id" name="theGoalList[%{iamodel.planGoalsList.size}]" headerKey="-1" headerValue="Select Goal Type" />
+					<s:select list="goalSelectList" listValue="goalTypeName" listKey="id" name="theGoalList[%{#index}]" headerKey="-1" headerValue="Select Goal Type" />
 				</div>
 			   	<div class="six columns">
 					<s:label for="completedDate" value="Goal Completed Date:" />
 				    <s:date name="completedDate" format="dd/MM/yyyy"/>
 			    </div>
 			    <div class="four columns">
-			    	<s:select list="goalStatusSelectList" listValue="statusName" listKey="id" name="theGoalStatusList[%{iamodel.planGoalsList.size}]" headerKey="-1" headerValue="Select Goal Status" />
+			    	<s:select list="goalStatusSelectList" listValue="statusName" listKey="id" name="theGoalStatusList[%{#index}]" headerKey="-1" headerValue="Select Goal Status" />
 		    	</div>
 			</div>
 			<div class="row">
 				<div class="textarea fifteen columns omega">
 					<s:label for="goalDescription" value="Goal Description" />
-					<s:textarea id="" cssClass="oneLineTextArea" name="iamodel.planGoalsList[%{iamodel.planGoals.size}].goalDescription"/> 
+					<s:textarea id="" cssClass="oneLineTextArea" name="iamodel.planGoalsList[%{#index}].goalDescription"/> 
 				</div>
 			</div>			
 			<div class="row">
 				<div class="textarea fifteen columns omega">
 					<s:label for="goalAction" value="Goal Action" />
-					<s:textarea id="" cssClass="oneLineTextArea" name="iamodel.planGoalsList[%{iamodel.planGoals.size}].goalAction"/> 
+					<s:textarea id="" cssClass="oneLineTextArea" name="iamodel.planGoalsList[%{#index}].goalAction"/> 
 				</div>
 			</div>
 		</section>
 	</article>
 	<div class="row">
 		<div class="thirteen columns alpha"><p></p></div>
-		<input type="button" id="btnAddGoal" value="Add Goal" class="three columns" />
+		<input type="button" id="btnAddGoal" value="Add Goal" class="three columns" onclick="addNewRecord('artGoal','goalSize', 'itGoal'); return false;"/>
 	</div>
-
-	<script>
-	$(function(){
-		$("#btnAddGoal").click(function(){ 
-			$("#artGoal section").clone().appendTo("#itGoal");
-		});
-	});
-	</script>
 	</div>

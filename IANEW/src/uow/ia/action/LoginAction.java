@@ -3,17 +3,21 @@ package uow.ia.action;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.hibernate.EntityNameResolver;
 import org.hibernate.search.FullTextSession;
 
+import uow.ia.bean.Contacts;
 import uow.ia.bean.Enquiries;
 import uow.ia.bean.IndividualCases;
 import uow.ia.bean.Users;
 import uow.ia.util.SearchUtil;
 
 import com.opensymphony.xwork2.ActionContext;
+import com.sun.tools.ws.wsdl.framework.Entity;
 
 public class LoginAction extends BaseAction{
 
@@ -49,11 +53,12 @@ public class LoginAction extends BaseAction{
             
             FullTextSession fts = utilService.getFullTextSession();
     		
-    		try {
-    			fts.createIndexer().startAndWait();
-    		} catch (InterruptedException e) {
-    			e.printStackTrace();
-    		}
+    		//try {
+    			//fts.createIndexer().startAndWait();
+    			System.out.println("commented index out");
+    		//} catch (InterruptedException e) {
+    			//e.printStackTrace();
+    		//}
             
 			return SUCCESS;
 		} else {
@@ -110,14 +115,19 @@ public class LoginAction extends BaseAction{
 		
 		if (!(searchString == null || searchString.equals(""))) {
 			list = new SearchUtil().getResultObjectList(searchString, utilService);
-			
+			System.out.println("Got list" + list.toString());
 			for (Object o : list) {
 				int type = 0;
 				Field[] fields = o.getClass().getDeclaredFields();
+				
+				System.out.println("class name is: " + o.getClass().getSimpleName());
+				
 				if (o instanceof Enquiries) {
 					resultList.add(o);
 				} else if (o instanceof IndividualCases) {
 					resultList.add(o);
+				} else if(o instanceof Contacts){
+					System.out.print("is a contact object");
 				}
 				else {
 					Object object = null;

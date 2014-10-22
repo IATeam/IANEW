@@ -13,6 +13,8 @@
  *						Reworked the address such that if one field has input then the others
  *						must be filled in
  *						Add max number of characters to relevant fields to database specification
+ *		19/10/2014 -	Modified address validation to make sure that suburb and street are 
+ *						the only required fields
  * Description: Client side validation for the enquiry form using
  * jquery's validation.js http://jqueryvalidation.org/
  */
@@ -32,12 +34,15 @@
  */
 
 function validated(){	
+	
 	expandAll();
+
 	$('#enquiryForm').validate({ 
 			rules: {
 				//status
 				"theDangerTypeId"						:	{	selectcheck:	true	},
 				"theStatusTypeId"						:	{	selectcheck:	true	},
+				"theEnquiryTypeId"						:   {	selectcheck:	true	},
 				
 				//summary
 				theEnquiry								: 	{ 	selectcheck: 	true 	},
@@ -50,7 +55,7 @@ function validated(){
 				"iamodel.contact.othername"				: 	{	maxlength	:	100 	},
 				"iamodel.contact.lastname"				: 	{	required 	: 	true, 
 																maxlength	:	100 	},
-				"iamodel.contact.mobilephone"			: 	{	phone		: 	/[0-9\-\(\)\s]+/,
+				"iamodel.contact.mobilephone"			: 	{	phone		: 	/[0-9\-\(\)\s\+]+/,
 																maxlength	:	40		},
 				theTitleTypeId							: 	{ 	selectcheck	: 	true 	},
 				theGenderTypeId							: 	{ 	selectcheck	: 	true 	},
@@ -70,43 +75,34 @@ function validated(){
 				"theIssueListId[0]"						:	{	selectcheck	:	true	}
 			},
 			
-			messages: {
-				//summary
-				"iamodel.description"					: 	"Required description",
-				
-				//personal information
-				"iamodel.contact.firstname"				: 	"Requires first name.",
-				"iamodel.contact.lastname"				: 	"Requires last name",
-				"iamodel.conact.identification"			: 	"Requires identification number",
-				"iamodel.contact.email"					: 	{	email: "Require a valid email",
-																required: "Require an email address"	}
-			
-			},
-			
-			
 			submitHandler: function() {
+				
+				alert("Validation complete, submitting form!");
 				
 				removeNullAndUpdateIndex($("#artAddress"), $("#itAddress"), $("#addressSize"));
 				removeNullAndUpdateIndex($("#artDisability"), $("#itDisability"), $("#disabilitySize"));
 				removeNullAndUpdateIndex($("#artIssue"), $("#itIssue"), $("#issueSize"));
 				removeNullAndUpdateIndex($("#artEmployment"), $("#itEmployment"), $("#employmentSize"));
-				alert("Validation complete, submitting form!");
+				
 				$.post('/IANEW/enquiry/saveUpdateEnquiry.action', 
-				$('#enquiryForm').serialize()
+
+					$('#enquiryForm').serialize(), function(data){
+					$('#formDiv').html(data);}
 				);
+
 			}
 		});
 	 	
 	$('[name*="workphone"]').each(function(){
  		$(this).rules('add', {
- 			phone: 		/[0-9\-\(\)\s]+/,
+ 			phone: 		/[0-9\-\(\)\s\+]+/,
  			maxlength: 40
  		});
  	});	
  	
  	$('[name*="homephone"]').each(function(){
  		$(this).rules('add', {
- 			phone: 		/[0-9\-\(\)\s]+/,
+ 			phone: 		/[0-9\-\(\)\s\+]+/,
  			maxlength:	40
  		});
  	});	
@@ -132,19 +128,21 @@ function validated(){
  		$("input[name*='addressesList["+i+"]'][type='text']").each(function(){
  			
  			if($(this).val().trim().length > 0){
- 				$("input[name*='addressesList["+i+"]'][type='text']").each(function(){
+ 				$("input[name*='addressesList["+i+"].street'][type='text'], input[name*='addressesList["+i+"].suburb'][type='text']").each(function(){
  					$(this).rules('add', { required: true } );
  				});
  			}
  			
  			//set rules for max length
- 			if($(this).attr("[name*='suburb'"))
+ 			if($(this).attr("[name*='suburb']")){
  				$(this).rules('add', { maxlength: 100 } );
- 			else if($(this).attr("[name*='postcode'"))
+ 			}else if($(this).attr("[name*='street']")){
+ 				$(this).rules('add', { maxlength: 250 } );
+ 			}else if($(this).attr("[name*='postcode']"))
  				$(this).rules('add', { maxlength: 16 } );
- 			else if($(this).attr("[name*='state'"))
+ 			else if($(this).attr("[name*='state']"))
  				$(this).rules('add', { maxlength: 30 } );
- 			else if($(this).attr("[name*='country'"))
+ 			else if($(this).attr("[name*='country']"))
  				$(this).rules('add', { maxlength: 50 } );
  		});
  	}
@@ -179,6 +177,10 @@ function validated(){
  			return this.optional(element) || re.test(value);
  	}, "Phone number is invalid" );	
 
+ 	jQuery.validator.setDefaults({
+		  debug: true,
+		  success: "valid"
+	});
 }
  	
  	

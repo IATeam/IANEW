@@ -52,7 +52,7 @@
 		<s:else>
 			<s:hidden id="addressSize" name="iamodel.contact.addressesList.size" value="0"/>
 			<s:set name="index" value="0" />
-			<article id="artAddress">
+			<article id="artAddress" class="hidden">
 		</s:else>
 			<section class="sixteen columns curveBorder">
 				<img src="/IANEW/resources/images/undoButtonImage.png" alt="undoButton" onclick="undoButton(this);" class="undoButton"/>

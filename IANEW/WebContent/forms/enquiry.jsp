@@ -36,8 +36,7 @@
 
 
 
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="US-ASCII"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="US-ASCII"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -62,8 +61,7 @@
 
 	<s:div cssClass="form container">
 	<s:set var="formType">enquiry</s:set>
-		<s:form id="enquiryForm" action="saveUpdateEnquiry" cssClass="cmxform" namespace='/enquiry' method="post"> 
-			<s:hidden name="iamodel.contact.id" />
+		<s:form id="enquiryForm" action="saveUpdateEnquiry" cssClass="cmxform" namespace='/enquiry' method="post" validate="novalidate"> 
 			
 <!-- ---------------------------------------------------------------------------------------------- -->
 <!-- Header of the form --------------------------------------------------------------------------- -->
@@ -76,14 +74,17 @@
 			<%@include file="includes/formStatus.jsp" %>
 			<%@include file="includes/referral.jsp" %>
 			<%@include file="includes/summary.jsp" %>
-			<%@include file="includes/personalDetails.jsp" %>
-			<%@include file="includes/address.jsp" %>
-			<%@include file="includes/employment.jsp" %>
-			<%@include file="includes/disability.jsp" %>
+			
+			<s:div id="contactInfo">
+				<%@include file="includes/contactInfo.jsp" %>
+			</s:div>
+			
 			<%@include file="includes/issues.jsp" %>
+			
 			<s:div id="linkedEnquiriesDiv">
 				<%@include file="includes/linkedEnquiries.jsp" %>
 			</s:div>
+			
 			<s:div id="linkedEnquiriesListDiv" style="box-shadow: 5px 5px 0 grey;"/>
 			<s:div cssClass="clear"></s:div>
 			
@@ -96,13 +97,25 @@
 						<input id="btnCancel" type="button" class="three columns alpha" value="Cancel" onclick="confirmAction('Are you sure you want to Cancel?', 'home', 'home')"/>
 						<input id="btnNewEnquiry" type="button" class="three columns omega" value="New Enquiry" onclick="confirmAction('Are you sure you want to create a new enquiry?', 'enquiry', 'newEnquiry')"/>
 					</section>
-					<section class="four columns"><p></p></section>
-					<section class="six columns omega">
-<!-- 						<input id="createCase" type="button" value="Create Case" class="three columns alpha" onclick="confirmAction('Are you sure you want to create a case?', 'case', 'newCase')"/>
- -->						<input id="createCase" type="button" value="Create Case" class="three columns alpha" onclick="checkForm()"/>
-<%-- 						<sj:submit formIds="enquiryForm" name="submit" cssClass="submit two columns omega" value="Submit" onclick="checkForm()"/>
- --%>						<s:submit name="submit" cssClass="three columns omega" value="Submit" onclick="confirmAction('Are you sure you want to save the enquiry?', 'enquiry', 'saveUpdateEnquiry')"/>
-					</section>
+						<s:if test="%{formTitle == 'Existing Enquiry'}">
+							<section class="four columns"><p></p></section>
+							<section class="six columns omega">
+							<s:if test="%{iamodel.individualCasesList.size == 0}">
+								<input type="button" id="createCase" class="three columns alpha" value="Create Case" />
+							</s:if>
+							<s:else>
+								<s:hidden id="caseId" name="iamodel.individualCasesList[0].id" value="%{iamodel.individualCasesList[0].id}"></s:hidden>
+								<input type="button" id="viewCase" class="three columns alpha" value="View Case" />
+							</s:else>
+							<s:submit name="submit" cssClass="three columns omega" value="Submit" onclick="confirmAction('Are you sure you want to save the enquiry?', 'enquiry', 'saveUpdateEnquiry')"/>
+							</section>
+						</s:if>
+						<s:else>
+							<section class="seven columns"><p></p></section>
+							<section class="three columns omega">
+								<s:submit name="submit" cssClass="three columns omega" value="Submit" onclick="confirmAction('Are you sure you want to save the enquiry?', 'enquiry', 'saveUpdateEnquiry')"/>
+							</section>
+						</s:else>
 				</s:div>
 			</footer>
 		</s:form>	
@@ -113,49 +126,31 @@
 
 	</s:div>
 	
-	
 	<script>
+		$("#btnNewEnquiry").click(function(){
+			var contactId = $("input[name='iamodel.contact.id']").val();
 
-	/* $.validator.setDefaults({
-		
-	}); */
-
-	
-	
-
-
-
-	
-	/* $("#test").click(function(){
-		
-		var ele = $("#enquiryForm").find("article")
-		
-		$(ele).each(function(){
-			//removeNull($(ele));
-			alert(ele)
-		});
+			$("#formDiv").load("enquiry/newEnquiry.action?contactid=" + contactId);
 			
+		});
+
+	$(function() {
+		initialisePrimaryDisability();
+		initialiseNewSection("artIssue", "itIssue");
+		initialiseNewSection("artAddress", "itAddress");
+		initialiseNewSection("artEmployment", "itEmployment");
+		initialiseNewSection("artDisability", "itDisability");
+	});
+	$('#createCase').click(function(){
+		var enquiryid = $('#hiddenid').val();
+		$("#formDiv").load("/IANEW/case/newCase.action?hiddenId=0&enquiryId=" + enquiryid);
 	});
 	
-	//if the enquiry is an existing enquiry 
-	if($("#formTitle").text() === "Existing Enquiry"){
-		//alert("existing need to check if status is closed")
-		//$("#enquiryForm").find("input").attr("readonly", "true");
-		//$("#enquiryForm").find('textarea').attr("readonly", "true");
-		
-		//$("#enquiryForm").find('select').attr("disabled", "disable");
-		//$("#enquiryForm").find('input[type="button"]').attr("disabled", "disable");
-		//$("#btnView").attr("disabled", null);
-		//$("#btnAddEnquiry").attr("disabled", null);
-	} */
-	function checkForm(){
-		alert("removed null");
-		//removeNullAndUpdateIndex($("#artAddress"), $("#itAddress"), $("#addressSize"));
-		removeNullAndUpdateIndex($("#artDisability"), $("#itDisability"), $("#disabilitySize"));
-		/* removeNullAndUpdateIndex($("#artIssue"), $("#itIssue"), $("#issueSize"));
-		removeNullAndUpdateIndex($("#artEmployment"), $("#itEmployment"), $("#employmentSize")); */
-		
-	}
+	$('#viewCase').click(function(){
+		var caseid = $('#caseId').val();
+		$("#formDiv").load("/IANEW/case/getExistingCase.action?hiddenid=" + caseid);
+	});
 	</script>
+	
 </body>
 </html>

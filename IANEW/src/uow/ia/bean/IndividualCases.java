@@ -489,12 +489,14 @@ public class IndividualCases implements java.io.Serializable {
 		String issuesTypesString="";
 		int i = 0;
 		for(CaseIssues ci: this.caseIssuesList) {
-			if (i != 0) {
-				issuesTypesString += ", " + ci.getIssue().getIssueName();
-			} else {
-				issuesTypesString = ci.getIssue().getIssueName();
+			if (ci.getIssue() != null) {
+				if (i != 0) {
+					issuesTypesString += ", " + ci.getIssue().getIssueName();
+				} else {
+					issuesTypesString = ci.getIssue().getIssueName();
+				}
+				i++;
 			}
-			i++;
 		}
 		issuesTypesString = issuesTypesString.trim();
 		return issuesTypesString;

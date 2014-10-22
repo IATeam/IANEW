@@ -26,7 +26,7 @@
 	
 		<!--Hidden Fields to pass parameters between pages -->
 		<s:hidden id="hiddenid" name="hiddenid" />
-		
+		<s:hidden id="formType" name="formType"/>
 		<s:hidden id="formTitle" name="formTitle" value="Existing Enquiry" />
 		<s:hidden id="totalNumberOfPages" name="totalNumberOfPages" />
 <!-- ---------------------------------------------------------------------------------------------- -->
@@ -36,7 +36,7 @@
 		
 		
 		
-		<%@include file="/forms/includes/lists.jsp" %>
+		<%@include file="/forms/includes/iterEnquiryList.jsp" %>
 			
 			
 		<s:div cssClass="clear"/>
@@ -73,10 +73,18 @@
 			//alert($("#hiddenid").val())
 		});
 
-		$("#btnLink").click(function(){ alert("Cancel Pressed")
-			
-			$("#linkedEnquiriesDiv").load("enquiry/updateLinkedEnquiries.action?hiddenid=" + $("#hiddenid").val() + "&");
-			$("#linkedEnquiriesListDiv").hide();	
+		alert($("#formType").val());
+		alert($("#hiddenid").val());
+		$("#btnLink").click(function(){ 
+			alert("Link Pressed");
+			if ($("#formType").val() == "case") {
+				
+				/* $("#linkedEnquiriesDiv").load("/IANEW/case/updateRelatedEnquiry.action?hiddenid=" + $("#hiddenid").val() + "&"); */
+				$("#linkedEnquiriesListDiv").hide();	
+			} else {
+				$("#linkedEnquiriesDiv").load("enquiry/updateLinkedEnquiries.action?hiddenid=" + $("#hiddenid").val() + "&");
+				$("#linkedEnquiriesListDiv").hide();	
+			}
 		});
 	</script>
 		

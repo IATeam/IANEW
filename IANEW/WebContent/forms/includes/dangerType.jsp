@@ -1,0 +1,2 @@
+<%@taglib prefix="s" uri="/struts-tags" %>
+<s:select list="dangerSelectList" listKey="id" listValue="dangerName" name="theDangerTypeId" headerKey="-1" headerValue="Flag" cssClass="coloured" cssStyle="background: %{iamodel.contact.dangerType.symbol}" onChange="changeDangerColour(this)"/>

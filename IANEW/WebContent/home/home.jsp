@@ -154,7 +154,8 @@
 					<s:textfield id="searchbox" Key="searchString" name="searchString"/><br/>
 					<%-- onkeypress="return addActivity(this.value, event)" --%>
 				</div>
-				<div id="divRadio"><s:radio value="1" onclick="radioChecked(this.id)" name="radio" list="#{'1':'Database','2':'Document','3':'Report' }"/></div>
+				
+				<s:div id="divRadio"><s:radio value="1" onclick="radioChecked(this.id)" name="radio" list="#{'1':'Database','2':'Document','3':'Report' }"/></s:div>
 				<!-- <button onclick="displayActivities()">display</button>
 				<button onclick="deleteLocalStorage()">clear</button> -->
 			</section>
@@ -201,6 +202,47 @@
 	</footer>
 	
 	<script>
+
+		function searchtText(button){
+			var searchString = $("#searchbox").val();
+			var subString = $(button).val() + ":";
+			//var matchString = searchString.match(subString);
+			alert(subString + matchString);
+			var startPosition = searchString.indexOf(matchString);
+			var endPostion = startPosition + subString.length;
+			if(startPosition >= 0){
+				setCursor("searchbox", startPosition, endPostion);
+			}else{
+				
+			}
+			
+		}
+
+		function setCursor(node,spos, epos){
+
+		    var node = (typeof node == "string" || node instanceof String) ? document.getElementById(node) : node;
+			
+		    if(!node){
+		        return false;
+		    }else if(node.createTextRange){
+		        var textRange = node.createTextRange();
+		        textRange.collapse(true);
+		        textRange.moveEnd(pos);
+		        textRange.moveStart(pos);
+		        textRange.select();
+		        return true;
+		    }else if(node.setSelectionRange){
+		        node.setSelectionRange(spos,epos);
+		        return true;
+		    }
+
+		    return false;
+		}
+		
+		$("#help").click(function(){
+			$("#searchHelp").toggle();
+			$("#searchHelp").load("/IANEW/home/searchkey.txt");
+		});
 		$("#searchbox").keypress(function() {
 			if(event.which == 13) {
 				if ($("#searchbox").val() != null || $("#searchbox").val != "") {

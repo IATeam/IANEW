@@ -22,12 +22,6 @@
 	Description: This js is for the common functions in the forms
 ------------------------------------------------------------------------------------------------*/
 
-//$(document).ready(function(){
-//	$("#enquiryForm").find("option[value='-1']").each(function(){
-//		alert($(this).val());	
-//	});
-//});
-$("#enquiryForm").find("option[value='-1']").css("background-color", "pink");
 
 /**
  * Add a new Component/record to the list
@@ -37,49 +31,51 @@ $("#enquiryForm").find("option[value='-1']").css("background-color", "pink");
  * @param {} iterator
  */
 function addNewRecord(article, size, iterator){ 
-	var articleEle = document.getElementById(article);
-	var sizeEle = document.getElementById(size);
-	var iteratorEle = document.getElementById(iterator);
-	
-	//if article is not hidden then add to iterator
-	if(!$(articleEle).hasClass("hidden")){
-		
-		//search for elements with tagname textarea. if it has then 
-		//put it in a list to be copied over 
-		var textarea = $(articleEle).find("textarea");
-		var select = $(articleEle).find("select");
-		var tArray = []; var sArray = [];
-		
-		$(textarea).each(function(){
-			tArray.push(textarea.val());
-		});
-		$(select).each(function(){
-			sArray.push(select.val());
-		});
-		
-		//get section in article, clone and put in iterator
-		$("#" + article + " section").clone().appendTo("#"+iterator);
-		
-		//grab the last section added to the iterator and place the
-		//place the new value back into the textarea
-		var section = $("#"+iterator + " section").last();
-		textarea = $(section).find("textarea");
-		select = $(section).find("select");
-		
-		$(textarea).each(function(index, element){
-			$(element).val(tArray[index]);
-		});
-		
-		$(select).each(function(index, element){
-			$(element).val(sArray[index]);
-		});
-		
-		updateIndex(articleEle, sizeEle);
-		
-						
-	}else{
-		$(articleEle).removeClass("hidden");
-	}
+	//$("#" + article + " section").clone().appendTo("#" + iterator);
+	$("#" + iterator).append($("#" + article + " section").clone());
+//	var articleEle = document.getElementById(article);
+//	var sizeEle = document.getElementById(size);
+//	var iteratorEle = document.getElementById(iterator);
+//	
+//	//if article is not hidden then add to iterator
+//	if(!$(articleEle).hasClass("hidden")){
+//		
+//		//search for elements with tagname textarea. if it has then 
+//		//put it in a list to be copied over 
+//		var textarea = $(articleEle).find("textarea");
+//		var select = $(articleEle).find("select");
+//		var tArray = []; var sArray = [];
+//		
+//		$(textarea).each(function(){
+//			tArray.push(textarea.val());
+//		});
+//		$(select).each(function(){
+//			sArray.push(select.val());
+//		});
+//		
+//		//get section in article, clone and put in iterator
+//		$("#" + article + " section").clone().appendTo("#"+iterator);
+//		
+//		//grab the last section added to the iterator and place the
+//		//place the new value back into the textarea
+//		var section = $("#"+iterator + " section").last();
+//		textarea = $(section).find("textarea");
+//		select = $(section).find("select");
+//		
+//		$(textarea).each(function(index, element){
+//			$(element).val(tArray[index]);
+//		});
+//		
+//		$(select).each(function(index, element){
+//			$(element).val(sArray[index]);
+//		});
+//		
+//		updateIndex(articleEle, sizeEle);
+//		
+//						
+//	}else{
+//		$(articleEle).removeClass("hidden");
+//	}
 }
 
 /**
@@ -96,7 +92,6 @@ function updateIndex(articleEle, sizeEle ){
 	$(sizeEle).val(sizeInt + 1);
 	
 	newIndex = "[" + $(sizeEle).val() + "]";
-	alert("new index: " + newIndex)
 	//replaces the old index with the new one and clear the content
 	$(ele).each(function(){ 
 		var oldIndex = $(this).attr('name').match(/\[.\]/);
@@ -260,7 +255,7 @@ function setEmpty(elements){
 		if(!$(this).is("input:radio") && !$(this).is("input:hidden")){
 			if(this.nodeName == "SELECT"){
 				if ($(this).val() != -1){
-					$(this).val('-1')
+					$(this).val('-1');
 				}
 			}else if( $(this).val().length != ""){
 				
@@ -276,16 +271,18 @@ function setEmpty(elements){
 //});
 
 function importantDiv(selectedDiv){
-	var isImportant = $(selectedDiv).parent("div").parent("section").css('backgroundColor');
-	if (isImportant == "rgb(255, 250, 250)")
-	{
-		$(selectedDiv).parent("div").parent("section").css({'background-color':'#fddabe'});
-		$(selectedDiv).css({'background':'orange'});
-	}
-	else
-	{
-		$(selectedDiv).parent("div").parent("section").css({'background-color':'snow'});
-		$(selectedDiv).css({'background':'#d6d6d6'});
+	
+	var section = $(selectedDiv).closest("section");
+	var isImportant = $(section).find(":hidden[name*='importantFlag']").val();
+	var button = $(section).find("input[name='importantFlag']");
+	if (isImportant == "Y") {
+		$(section).find(":hidden[name*='importantFlag']").val(null);
+		$(button).closest("section").css({'background-color':'snow'});
+		$(button).css({'background':'#d6d6d6'});
+	} else {
+		$(section).find(":hidden[name*='importantFlag']").val("Y");
+		$(button).closest("section").css({'background-color':'#fddabe'});
+		$(button).css({'background':'orange'});
 	}
 }
 /*
@@ -293,7 +290,6 @@ function importantDiv(selectedDiv){
  */
 function undoButton(selectedDiv){
 	//$(selectedDiv).parent("section").hide();
-	alert("HI")
 	var section = $(selectedDiv).parent("section");
 	var id = $(selectedDiv).parent("section").children("input[name*='.id']");
 	//if contains value for id, then assign -1 otherwise completely remove it
@@ -301,8 +297,12 @@ function undoButton(selectedDiv){
 		$(selectedDiv).parent("section").children("input[name*='.id']").val("-1");
 		$(section).css("display", "none");
 	}
-	else
-		$(section).hide();
+	else{
+		
+		//$(section).hide();
+		$(section).remove();
+	}
+		
 }
 
 function divHide(clickedButton){
@@ -320,3 +320,93 @@ function divHide(clickedButton){
 	$(clickedButton).siblings("div").children("div").slideToggle();
 }
 
+function primaryUpdate(radio){ 
+	var section = $(radio).closest("section");
+	$(section).find(":hidden[name*='primaryFlag']").val("Y");
+	$(section).addClass("primary");
+	$("#itDisability").find("input:radio[name='primary']:unchecked").each(function(index, value){
+		var valueSection = $(value).closest("section");
+		$(valueSection).find(":hidden[name*='primaryFlag']").val(null);
+		$(valueSection).removeClass("primary");
+	});
+}
+
+function initialisePrimaryDisability() {
+	var it = $("#itDisability").find("section");
+	
+	$(it).each(function(index, section){
+		//grab names in this section with primaryFlag substring.
+		var deep = $(section).find(":hidden[name*='Flag']");
+		
+		//mark as check and assign the section with class primary
+		$(deep).each(function(){
+			if($(this).val()=="Y"){
+				var radios = $(section).find("[name='primary']").first();
+				$(radios).prop("checked", true);
+				$(section).addClass("primary");
+			}
+		});
+	});
+	
+//	$("#btnNewDisability").click(function(){
+//		$("#leftPopUp").load("/IANEW/admin/getDisabilityTypeForm", function(){
+//			$("#leftPopUp").show("slow");
+//		});
+//	});
+}
+
+function initialiseNewSection(article, iteratorArticle) {
+	if ($("#" + iteratorArticle + " > section").length == 0) {
+		addNewRecord(article, null, iteratorArticle);
+	}
+}
+
+function initialiseCaseCommunications() {
+	$("#btnAddCommunication").click(function(){ 
+		//var $clone = $("#artCommunication section").clone(true);
+		//$clone.appendTo("#itCommunication");
+		$("#artCommunication section").clone().appendTo("#itCommunication");
+		$("#itCommunication").find("input.DateInputClass").removeClass('hasDatepicker')
+		  .removeData('datepicker')
+		  .unbind()
+		  .datepicker(); 
+	});
+
+	var it = $("#itCommunication").find("section");
+	$(it).each(function(index, section){
+		var isImportant = $(section).find(":hidden[name*='importantFlag']").val();
+		var button = $(section).find("input[name='importantFlag']");
+		if(isImportant == 'Y') {
+			button.css({'background':'orange'});
+			button.parent("div").parent("section").css({'background-color':'#fddabe'});	
+		}
+	});
+}
+
+function initialiseDatePicker() {
+	if (!$.datepicker.initialized) {
+	    $(document).mousedown($.datepicker._checkExternalClick)
+	        // !!!!!!!!!!
+	        // The next code line has to be added again so that the date picker
+	        // shows up when the popup is opened more than once without reloading
+	        // the "base" page.
+	        // !!!!!!!!!!
+	        .find(document.body).append($.datepicker.dpDiv);
+	    $.datepicker.initialized = true;
+	}
+	
+	$(".DateInputClass").datepicker(); 
+//	$(".DateInputClass").each(function() {
+//		//$.datepicker.formatDate( "dd MM yy", new Date($(this.val())));
+//		//var dateformat = $.datepicker.formatDate('mm/dd/yy', new Date($(this).val()));
+//		var dateformat2 = $.datepicker.formatDate('dd/mm/yy', new Date($(this).val()));
+//		 $(this).val(dateformat2);
+//	});
+}
+
+function setSQLDateFormat() {
+	$(".DateInputClass").each(function() {
+		var dateformat = $.datepicker.formatDate('dd/mm/yy', new java.sql.Date($(this).val()));
+		 $(this).val(dateformat);
+	});
+}

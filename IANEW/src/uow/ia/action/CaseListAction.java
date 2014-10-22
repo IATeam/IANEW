@@ -1,19 +1,38 @@
 package uow.ia.action;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import uow.ia.bean.Contacts;
 import uow.ia.bean.IndividualCases;
 
 import com.opensymphony.xwork2.ModelDriven;
 
 public class CaseListAction extends BaseAction implements ModelDriven<List<IndividualCases>>{
 
-	private List<IndividualCases> model;
+	private List<IndividualCases> caseList;
 	private String formTitle;
 	int page;
 	int numberOfRecords;
 	long totalNumberOfRecords;
 	long totalNumberOfPages;
+	private Contacts contact;
+
+	/**
+	 * @return the contact
+	 */
+	public Contacts getContact() {
+		return contact;
+	}
+
+
+	/**
+	 * @param contact the contact to set
+	 */
+	public void setContact(Contacts contact) {
+		this.contact = contact;
+	}
+
 
 	/**
 	 * @author Matt
@@ -23,29 +42,24 @@ public class CaseListAction extends BaseAction implements ModelDriven<List<Indiv
 		setPage(1);
 		setNumberOfRecords(10);
 		
-		setModel(caseServices.findCasesByPage(page,numberOfRecords));
+		setCaseList(caseServices.findCasesByPage(page,numberOfRecords));
 		totalNumberOfRecords = caseServices.countCases();
-		
 		int mod = (int) totalNumberOfRecords % numberOfRecords;
-		
-		if (mod != 0)
+		if (mod!= 0)
 			mod = 1;
-		
 		totalNumberOfPages = totalNumberOfRecords/numberOfRecords + mod;
-		
+		System.out.println(totalNumberOfPages);
 		return SUCCESS;
 	}
+	
 	
 	/**
 	 * Action Method for updating the case list after requesting a different page
 	 * @return
 	 */
-	
 	public String updateCaseList(){
-		model = caseServices.findCasesByPage(getPage(),getNumberOfRecords());
+		caseList = caseServices.findCasesByPage(getPage(),getNumberOfRecords());
 		totalNumberOfRecords = caseServices.countCases();
-		int mod = (int) totalNumberOfRecords % numberOfRecords;
-		if(mod != 0) mod = 1;
 		totalNumberOfPages = totalNumberOfRecords/numberOfRecords;
 		return SUCCESS;
 	}
@@ -120,17 +134,19 @@ public class CaseListAction extends BaseAction implements ModelDriven<List<Indiv
 		this.totalNumberOfPages = totalNumberOfPages;
 	}
 
+
 	/**
-	 * @param model the model to set
+	 * @param caseList the caseList to set
 	 */
-	public void setModel(List<IndividualCases> model) {
-		this.model = model;
+	public void setCaseList(List<IndividualCases> caseList) {
+		this.caseList = caseList;
 	}
 
-	
+
 	@Override
 	public List<IndividualCases> getModel() {
 		// TODO Auto-generated method stub
-		return model;
+		return null;
 	}
+
 }

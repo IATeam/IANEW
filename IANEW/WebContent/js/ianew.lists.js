@@ -92,7 +92,13 @@ function bandSelected(selectedDiv){
 	
 	$(selectedDiv).children("div").last().slideToggle();
 	
-	$("#hiddenid").val($(selectedDiv).find('.id').text());
+	//for contact list setting the clicked band id value
+	if($(selectedDiv).parent().attr("id") == "contactList"){
+		$("#selectedContact").val($(selectedDiv).find('.id').text());
+	}else{
+		$("#hiddenid").val($(selectedDiv).find('.id').text());
+	}
+		
 }
 
 function deselectAll(){

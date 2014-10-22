@@ -33,7 +33,7 @@
 	<s:else>
 		<s:hidden id="employmentSize" name="iamodel.contact.employmentsList.size" value="0"/>
 		<s:set name="index" value="0" />
-		<article id="artEmployment">
+		<article id="artEmployment" class="hidden">
 	</s:else>
 	<section class="secIssue sixteen columns curveBorder">
 		<img src="/IANEW/resources/images/undoButtonImage.png" alt="undoButton" onclick="undoButton(this);" class="undoButton"/>
@@ -61,7 +61,7 @@
 		<div class="fourteen columns alpha"><p></p></div>
 		
 		<!-- addNewRecord function is located in ianew.form.js -->
-		<input type="button" id="btnAddIssue" value="Add Issue" class="two columns" onclick="addNewRecord('artEmployment', 'employmentSize', 'itEmployment' )"/>
+		<input type="button" id="btnAddIssue" value="Add Employment" class="two columns" onclick="addNewRecord('artEmployment', 'employmentSize', 'itEmployment' )"/>
 	</div>
 	
 </div>
