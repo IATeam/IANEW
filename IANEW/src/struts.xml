@@ -171,18 +171,17 @@
     	<action name="getCaseList" class="uow.ia.action.CaseListAction" method="getCaseList">
     		<result name="success">/forms/caseList.jsp</result>
     	</action>
-    	
     	<action name="loadFilterSortResult" class="uow.ia.action.CaseListAction" method="loadFilterSortResult">
     		<result name="success">/forms/includes/iterCaseList.jsp</result>
     	</action>
     	<action name="getPage" class="uow.ia.action.CaseListAction" method="getPage">
-    		<result name="success">/forms/search/iterCaseList.jsp</result>
+    		<result name="success">/forms/includes/iterCaseList.jsp</result>
     	</action>
     	<action name="getNextPage" class="uow.ia.action.CaseListAction" method="getNextPage">
-    		<result name="success">/forms/search/iterCaseList.jsp</result>
+    		<result name="success">/forms/includes/iterCaseList.jsp</result>
     	</action>
     	<action name="getPrevPage" class="uow.ia.action.CaseListAction" method="getPrevPage">
-    		<result name="success">/forms/search/iterCaseList.jsp</result>
+    		<result name="success">/forms/includes/iterCaseList.jsp</result>
     	</action>
     </package>
     

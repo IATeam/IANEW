@@ -182,7 +182,7 @@ ModelDriven<Enquiries>, Preparable{
 	 */
 	public String getExistingEnquiry(){ //TODO:
 		System.out.println("Struts: start getExistingEnquiry");
-		
+		setFormTitle(kExistingTitle);
 		//activateAutocomplete();
 		activateLists();
 		initialiseDBList();

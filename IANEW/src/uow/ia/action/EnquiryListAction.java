@@ -32,6 +32,7 @@ import com.opensymphony.xwork2.ModelDriven;
 public class EnquiryListAction extends BaseAction implements ModelDriven<List<Enquiries>> {
 	private List<Enquiries> iamodelList;
 	private String formTitle;
+	private final String kEnquiryList = "Enquiry List";
 	
 	/* For pagination */
 	private int page;
@@ -204,6 +205,7 @@ public class EnquiryListAction extends BaseAction implements ModelDriven<List<En
 		setCurrentPage(1);
 		setDescending(true);
 		setSortField("id");
+		setFormTitle(kEnquiryList);
 		
 		searchString = "";
 		
@@ -403,6 +405,13 @@ public class EnquiryListAction extends BaseAction implements ModelDriven<List<En
 			}
 		}
 		
+		//issues searchstring construction, only support 1 type atm
+//		if(getTheIssue() != -1 && getTheIssue() != 0){
+//			if(searchString.length() > 0){
+//				searchString += " AND enquiryIssuesList"
+//			}
+//		}
+		
 //		String createdDateStart = getCreatedDateStart();
 //		String milliCreatedDateStart = "0";
 //		try{
@@ -528,7 +537,6 @@ public class EnquiryListAction extends BaseAction implements ModelDriven<List<En
 	
 	@Override
 	public List<Enquiries> getModel() {
-		// TODO Auto-generated method stub
 		return iamodelList;
 	}
 }

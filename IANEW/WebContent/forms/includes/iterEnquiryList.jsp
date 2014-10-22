@@ -65,7 +65,7 @@
 				
 		<s:div cssClass="eight columns">
 			<s:div cssClass="one column alpha"><p></p></s:div>
-			<input type="button" id="btnPrevEnquiries" class="one column" onclick="loadList(this)" value="prev"/>
+			<input type="button" id="btnPrev" class="one column" onclick="loadList(this)" value="prev"/>
 			
 			<s:hidden id="startIndex" name="startIndex" />
 			<s:hidden id="recordsPerPage" name="recordsPerPage" />
@@ -75,7 +75,7 @@
 				<s:div id="totalNumberOfPagesDiv" style="display: inline"> <s:property value="totalNumberOfPages"/> </s:div>
 			</s:div>
 
-			<input type="button" id="btnNextEnquiries" class="one column" onclick="loadList(this)" value="next"/>
+			<input type="button" id="btnNext" class="one column" onclick="loadList(this)" value="next"/>
 
 			<s:div cssClass="two column omega"><p></p></s:div>
 		</s:div>

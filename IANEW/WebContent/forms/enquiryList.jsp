@@ -53,7 +53,6 @@
 			
 			<!--Hidden Fields to pass parameters between pages -->
 			<s:hidden id="hiddenid" name="hiddenid" />
-			<s:hidden id="formTitle" name="formTitle" value="Existing Enquiry" />
 			<s:hidden id="totalNumberOfPages" name="totalNumberOfPages" />
 			
 			
@@ -69,14 +68,6 @@
 			</div>
 			
 		</s:form>
-		
-		
-<!-- ---------------------------------------------------------------------------------------------- -->
-<!-- Hidden form to pass pagination to action class submitted by the prev and next buttons -------- -->
-<!-- ---------------------------------------------------------------------------------------------- -->
-		<%@include file="/forms/includes/paginationForm.jsp" %>
-		
-		
 		<script type="text/javascript">
 			$.subscribe('beforeSubmit', function(event,data) {
 		    	event.originalEvent.options.submit = checkHiddenID();          

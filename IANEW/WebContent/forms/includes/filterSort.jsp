@@ -62,7 +62,7 @@
 				</s:div>
 			</s:div>
 			<div class="two columns">
-				<s:select id="status" list="statusSelectList" listValue="statusName" listKey="id" name="theStatus" headerKey="-1" headerValue="Case Status" />
+				<s:select id="status" list="statusSelectList" listValue="statusName" listKey="id" name="theStatus" headerKey="-1" headerValue="Status" />
 			</div>
 			<%-- <s:div cssClass="row fourteen columns">
 				<input type="button" id="btnFilterIssues" value="issues" class="three columns"/>
@@ -74,11 +74,19 @@
 </s:div>
 <script>
 	function loadList(btn){
+		var formTitle = ($("#formTitle").text()); //used to check if it is either an enquirylist or case list
 		var firstName, lastName, createdDateStart, createdDateEnd, updatedDateStart, updatedDateEnd, theStatus;
 		var sortField, ascending;
 		var goAhead = false;
 		var dash = "-";
 
+		var namespace, loadingDiv;
+		switch(formTitle){
+		case "Enquiry List": namespace = "enquiryList"; loadingDiv = "#iterEnquiryList"; break;
+		case "Case List":	namespace = "caseList"; loadingDiv = "#iterCaseList" ;break;
+		default:;
+		}
+		
 		if($("#descending").val() == 1)			descending = false;
 		else									descending = true;
 
@@ -96,27 +104,18 @@
 		}
 		
 		if($("#createdDateStart").val() != "" || $("#createdDateEnd").val() != ""){
-			hasValue = true;
-			if($("#createdDateStart").val() === "")
-				createdDateStart = "*";
-			else{
-				
-				/* need to look into a single function to replace all - */
-				createdDateStart = $("#createdDateStart").val().replace("-", "")
-				createdDateStart = createdDateStart.replace("-", "") + "*";
-			}
+			createdDateStart = getDateSearchFormat("#createdDateStart");
+			alert(createdDateStart);
 				
 			if($("#createdDateEnd").val() === "")
 				createdDateEnd = "*";
 			else{
-				/* need to look into a single function to replace all - */
-				createdDateEnd = $("#createdDateEnd").val().replace(dash, "")
-				createdDateEnd = createdDateEnd.replace("-", "") + "*";
+				var cde = new Date($("#createdDateEnd").val());
+				createdDateEnd = formatDate(cde.setDate(cde.getDate() - 2)) + "*";
 			}
 		}
 
 		if($("#updatedDateStart").val() != "" || $("#updatedDateEnd").val() != ""){
-			hasValue = true;
 			if($("#updatedDateStart").val() === "")
 				updatedDateStart = "*";
 			else{
@@ -165,21 +164,22 @@
 
 		var url = '';
 		if($(btn).attr('id') == "btnFilterSort"){
-			url = "enquiryList/loadFilterSortResult.action"
+			url = namespace + "/loadFilterSortResult.action"
 			goAhead = true;
 		}
-		else if($(btn).attr('id') == "btnNextEnquiries"){
-			url = "enquiryList/getNextPage.action";
+		else if($(btn).attr('id') == "btnNext"){
+			url = namespace + "/getNextPage.action";
 			if(currentPage < totalPage)
 				goAhead = true;
 		}
-		else if($(btn).attr('id') == "btnPrevEnquiries"){
-			url = "enquiryList/getPrevPage.action";
+		else if($(btn).attr('id') == "btnPrev"){
+			
+			url = namespace + "/getPrevPage.action";
 			if(currentPage > 1)
 				goAhead = true;
 		}
 		else{ //for when the user input a number for page change
-			url = "enquiryList/getPage.action"
+			url = namespace + "/getPage.action";
 			if(currentPage > 0 && currentPage <= totalPage)
 				goAhead = true;
 		} 
@@ -205,11 +205,27 @@
 			$.post(url, 
 				submitData, 
 				function(data){
-				alert("success")
-					$('#iterEnquiryList').html(data);
+					$(loadingDiv).html(data);
 				}
 			);
 		}
+	}
+
+	function getDateSearchFormat(date){
+		if($(date).val() === "")
+			return "*";
+		else{
+			var d = new Date($(date).val());
+			date = d.setDate(d.getDate() - 2);
+			return formatDate(date) + "*";
+		}
+	}
+
+	function formatDate(obj) {
+	  
+	  var months = ['01','02','03','04','05','06',
+	               '07','08','09','10','11','12'];    
+	  return obj.getFullYear() + months[obj.getMonth()] + obj.getDate();
 	}
 
 </script>
