@@ -79,7 +79,7 @@
 		</bag>
         
         <!-- One to one relationship -->
-        <one-to-one name="plan" class="uow.ia.bean.Plans" cascade="all"></one-to-one>
+        <one-to-one name="plan" class="uow.ia.bean.Plans" cascade="save-update, delete, delete-orphan"></one-to-one>
         
         
         <!-- Self-join many-to-one -->

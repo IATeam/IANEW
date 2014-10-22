@@ -42,22 +42,17 @@
 <!-- ---------------------------------------------------------------------------------------------- -->
 <!-- iterator - used to iterate a list or set ----------------------------------------------------- -->
 <!-- ---------------------------------------------------------------------------------------------- -->	
-	<!-- 
-	there is a strange behavior with this s:url link.
-	-->
-	<s:url var="urlExisting" namespace="/enquiry" action="getEnquiry" includeContext="false"/>		
-	<s:url var="urlENew" namespace="/enquiry" action="newEnquiry" />
+
 
 	<!-- Change namespace and action for appropriate urls for pagination purposes-->
 	<s:url var="urlUpdate" namespace="/enquiryList" action="updateEnquiryList" includeContext="false"/>
 
 	
 		
-	<s:form id="listForm" cssClass="form container" method="post" action="%{urlExisting}"  >
+	<s:form id="enquiryListForm" cssClass="form container" >
 			
 			<!--Hidden Fields to pass parameters between pages -->
 			<s:hidden id="hiddenid" name="hiddenid" />
-			<s:hidden id="formTitle" name="formTitle" value="Existing Enquiry" />
 			<s:hidden id="totalNumberOfPages" name="totalNumberOfPages" />
 			
 			
@@ -73,18 +68,12 @@
 			</div>
 			
 		</s:form>
-		
-		
-<!-- ---------------------------------------------------------------------------------------------- -->
-<!-- Hidden form to pass pagination to action class submitted by the prev and next buttons -------- -->
-<!-- ---------------------------------------------------------------------------------------------- -->
-		<%@include file="/forms/includes/paginationForm.jsp" %>
-		
-		
 		<script type="text/javascript">
 			$.subscribe('beforeSubmit', function(event,data) {
 		    	event.originalEvent.options.submit = checkHiddenID();          
 			});
+		</script>
+		<script>
 		</script>
 </body>
 </html>

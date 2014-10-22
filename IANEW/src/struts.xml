@@ -30,8 +30,8 @@
     <package name="enquiry" namespace="/enquiry" extends="struts-default">
     	<action name="clearContact" class="uow.ia.action.EnquiryAction" method="clearContact">
     		<interceptor-ref name="params"/>
-    		<interceptor-ref name="prepare"/>
-    		<interceptor-ref name="basicStack" />
+		     <interceptor-ref name="prepare"/>
+		     <interceptor-ref name="basicStack"/>
     		<result name="success">/forms/includes/contactInfo.jsp</result>
     		<result name="input">/forms/includes/contactInfo.jsp</result>
     	</action>
@@ -80,15 +80,16 @@
     <package name="enquiryList" namespace="/enquiryList" extends="struts-default">
     	<action name="loadFilterSortResult" class="uow.ia.action.EnquiryListAction" method="loadFilterSortResult">
     		<result name="success">/forms/includes/iterEnquiryList.jsp</result>
+    		<result name="input">/forms/includes/iterEnquiryList.jsp</result>
     	</action>
     	<action name="getPage" class="uow.ia.action.EnquiryListAction" method="getPage">
-    		<result name="success">/forms/search/iterEnquiryList.jsp</result>
+    		<result name="success">/forms/includes/iterEnquiryList.jsp</result>
     	</action>
     	<action name="getNextPage" class="uow.ia.action.EnquiryListAction" method="getNextPage">
-    		<result name="success">/forms/search/iterEnquiryList.jsp</result>
+    		<result name="success">/forms/includes/iterEnquiryList.jsp</result>
     	</action>
     	<action name="getPrevPage" class="uow.ia.action.EnquiryListAction" method="getPrevPage">
-    		<result name="success">/forms/search/iterEnquiryList.jsp</result>
+    		<result name="success">/forms/includes/iterEnquiryList.jsp</result>
     	</action>
     	<action name="getEnquiryList" class="uow.ia.action.EnquiryListAction" method="getEnquiryList">
     		<result name="success">/forms/enquiryList.jsp</result>
@@ -114,15 +115,19 @@
     	
     	<action name="getPage" class="uow.ia.action.ContactListAction" method="getPage">
     		<result name="success">/forms/search/contactList.jsp</result>
+    		<result name="plan">/forms/search/planContactList.jsp</result>
     	</action>
     	<action name="loadClientSearchResult" class="uow.ia.action.ContactListAction" method="loadClientSearchResult">
     		<result name="success">/forms/search/contactList.jsp</result>
+    		<result name="plan">/forms/search/planContactList.jsp</result>
     	</action>
     	<action name="getNextPage" class="uow.ia.action.ContactListAction" method="getNextPage">
     		<result name="success">/forms/search/contactList.jsp</result>
+    		<result name="plan">/forms/search/planContactList.jsp</result>
     	</action>
     	<action name="getPrevPage" class="uow.ia.action.ContactListAction" method="getPrevPage">
     		<result name="success">/forms/search/contactList.jsp</result>
+    		<result name="plan">/forms/search/planContactList.jsp</result>
     	</action>
    	</package>
     
@@ -141,9 +146,9 @@
 		     <interceptor-ref name="basicStack"/>
     		<result name="success">/forms/case.jsp</result>
     	</action>
-    	<action name="caseList" class="uow.ia.action.CaseAction" method="caseList">
+    	<!-- <action name="caseList" class="uow.ia.action.CaseAction" method="caseList">
     		<result name="success">/forms/caseList.jsp</result>
-    	</action>
+    	</action> -->
     	<action name="updateCaseList" class="uow.ia.action.CaseAction" method="updateCaseList">
     		<result name="success">/forms/caseList.jsp</result>
     	</action>
@@ -163,6 +168,27 @@
     		<interceptor-ref name="basicStack" />
     		<result name="success">/forms/includes/contactInfo.jsp</result>
     	</action>
+    	<action name="assignSupportContact" class="uow.ia.action.CaseAction" method="assignSupportContact">
+    		<result name="success">/forms/includes/support.jsp</result>
+    	</action>
+    	<action name="assignAuthorisedContact" class="uow.ia.action.CaseAction" method="assignAuthorisedContact">
+    		<result name="success">/forms/includes/authorisedPerson.jsp</result>
+    	</action>
+    	<action name="clearSupportContact" class="uow.ia.action.CaseAction" method="clearSupportContact">
+    		<interceptor-ref name="params"/>
+    		<interceptor-ref name="prepare"/>
+    		<interceptor-ref name="basicStack" />
+    		<result name="success">/forms/includes/support.jsp</result>
+    	</action>
+    	<action name="clearAuthorisedContact" class="uow.ia.action.CaseAction" method="clearAuthorisedContact">
+    		<interceptor-ref name="params"/>
+    		<interceptor-ref name="prepare"/>
+    		<interceptor-ref name="basicStack" />
+    		<result name="success">/forms/includes/authorisedPerson.jsp</result>
+    	</action>
+    	<action name="clearContactList" class="uow.ia.action.CaseAction" method="clearContactList">
+    		<result name="success">/forms/search/searchSupportAuthorised.jsp</result>
+    	</action>
     </package>
    
    <!-- Case List Form -->
@@ -170,18 +196,17 @@
     	<action name="getCaseList" class="uow.ia.action.CaseListAction" method="getCaseList">
     		<result name="success">/forms/caseList.jsp</result>
     	</action>
-    	
     	<action name="loadFilterSortResult" class="uow.ia.action.CaseListAction" method="loadFilterSortResult">
     		<result name="success">/forms/includes/iterCaseList.jsp</result>
     	</action>
     	<action name="getPage" class="uow.ia.action.CaseListAction" method="getPage">
-    		<result name="success">/forms/search/iterCaseList.jsp</result>
+    		<result name="success">/forms/includes/iterCaseList.jsp</result>
     	</action>
     	<action name="getNextPage" class="uow.ia.action.CaseListAction" method="getNextPage">
-    		<result name="success">/forms/search/iterCaseList.jsp</result>
+    		<result name="success">/forms/includes/iterCaseList.jsp</result>
     	</action>
     	<action name="getPrevPage" class="uow.ia.action.CaseListAction" method="getPrevPage">
-    		<result name="success">/forms/search/iterCaseList.jsp</result>
+    		<result name="success">/forms/includes/iterCaseList.jsp</result>
     	</action>
     </package>
     

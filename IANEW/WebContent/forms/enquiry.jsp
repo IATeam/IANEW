@@ -61,7 +61,7 @@
 
 	<s:div cssClass="form container">
 	<s:set var="formType">enquiry</s:set>
-		<s:form id="enquiryForm" action="saveUpdateEnquiry" cssClass="cmxform" namespace='/enquiry' method="post" validate="novalidate"> 
+		<s:form id="enquiryForm" action="saveUpdateEnquiry" cssClass="cmxform" namespace='/enquiry' method="post"> 
 			
 <!-- ---------------------------------------------------------------------------------------------- -->
 <!-- Header of the form --------------------------------------------------------------------------- -->
@@ -151,6 +151,5 @@
 		$("#formDiv").load("/IANEW/case/getExistingCase.action?hiddenid=" + caseid);
 	});
 	</script>
-	
 </body>
 </html>

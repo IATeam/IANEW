@@ -29,13 +29,12 @@ $('#listForm').bind("keyup keypress", function(e) {
  */
 function nextPage(){
 	var currentPageNumber = parseInt($("#pageTextField").val());
-	var totalNumberOfPages = parseInt( $("#totalNumberOfPagesDiv").text())
+	var totalNumberOfPages = parseInt( $("#totalNumberOfPagesDiv").text());
 	
 	if(currentPageNumber < totalNumberOfPages){ 
 		var nextPageNumber = currentPageNumber + 1;
 		$("#pageTextField").val(nextPageNumber);
-		$("#page").val(nextPageNumber);
-		
+		$("#page").val(nextPageNumber);	
 	}
 }
 
@@ -53,17 +52,24 @@ function prevPage(){
 
 function changePage(e){
 	if(e.keyCode===13 ){
+		e.preventDefault();
 		var newPage = parseInt($("#pageTextField").val());
 		var totalNumberOfPages = parseInt($("#totalNumberOfPagesDiv").text());
 		var numberOfRecords = $("#numberOfRecords").val();
 		if(newPage > 0 && newPage <= totalNumberOfPages){
-			$("#page").val(newPage);			
-			$("#formDiv").load("enquiry/updateEnquiryList.action?numberOfRecords=" + numberOfRecords +"&page=" + newPage);
+			if ($("#formTitle").val() == "Case List") {
+				$("#page").val(newPage);
+				$("#formDiv").load("/IANEW/case/updateCaseList.action?numberOfRecords=" + numberOfRecords + "&page=" + newPage);
+			} else {
+				$("#page").val(newPage);			
+				$("#formDiv").load("/IANEW/enquiry/updateEnquiryList.action?numberOfRecords=" + numberOfRecords +"&page=" + newPage);
+			}
 		}
 		else{
 			alert("Please enter a page number between 1 and " + totalNumberOfPages);
 		}
 	}
+	return false;
 }
 
 //TO DO when the user specify the desired page number

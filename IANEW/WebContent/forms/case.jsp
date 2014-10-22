@@ -45,6 +45,7 @@
 	<script src="<s:url value='/js/ianew.form.js' encode='false' includeParams='none'/>" ></script> 
 	<script src="<s:url value='/js/validation/caseValidation.js' encode='false' includeParams='none'/>" ></script> 
 	<script src="<s:url value='/js/jquery/jquery.validate.js' encode='false' includeParams='none'/>" ></script> 
+	<script src="<s:url value='/js/popUpBoxAction.js' encode='false' includeParams='none'/>" ></script>
 	
 </head>
 <body>
@@ -89,7 +90,7 @@
 		<footer>
 			<s:div cssClass="row" cssStyle="padding-top:10px;">
 				<section class="six columns">
-					<input type="button" class="three columns alpha" value="Cancel"/>
+						<input id="btnCancel" type="button" class="three columns alpha" value="Cancel" onclick="confirmAction('Are you sure you want to Cancel?', 'home', 'home');"/>
 					<input type="button" class="three columns omega" value="New Case" />
 				</section>
 				<section class="seven columns"><p></p></section>

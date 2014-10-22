@@ -34,6 +34,35 @@ public class ContactListAction extends BaseAction{
 	private int totalNumberOfPages;
 	private int totalNumberOfRecords;
 	private boolean descending;
+	private String search; // used by plan to search for support or authorised
+	/**
+	 * @return the totalNumberOfRecords
+	 */
+	public int getTotalNumberOfRecords() {
+		return totalNumberOfRecords;
+	}
+
+	/**
+	 * @param totalNumberOfRecords the totalNumberOfRecords to set
+	 */
+	public void setTotalNumberOfRecords(int totalNumberOfRecords) {
+		this.totalNumberOfRecords = totalNumberOfRecords;
+	}
+
+	/**
+	 * @return the search
+	 */
+	public String getSearch() {
+		return search;
+	}
+
+	/**
+	 * @param search the search to set
+	 */
+	public void setSearch(String search) {
+		this.search = search;
+	}
+
 	private List<Contacts> contactList = null;
 	
 	@Resource
@@ -155,8 +184,10 @@ public class ContactListAction extends BaseAction{
 		if(totalNumberOfPages == 0)
 			setCurrentPage(0);
 		
-		System.out.println("End of searchContact");
-		return SUCCESS;
+		if (search != null)
+			return "plan";
+		else
+			return SUCCESS;
 	}
 	
 	public String getNextPage(){
@@ -171,7 +202,10 @@ public class ContactListAction extends BaseAction{
 			currentPage = getCurrentPage() + 1;
 		}
 		
-		return SUCCESS;
+		if (search != null) 
+			return "plan";
+		else 
+			return SUCCESS;
 	}
 	
 	public String getPrevPage(){
@@ -186,7 +220,10 @@ public class ContactListAction extends BaseAction{
 			currentPage = getCurrentPage() - 1;
 		}
 		
-		return SUCCESS;
+		if (search != null)
+			return "plan";
+		else
+			return SUCCESS;
 	}
 	
 	public String getPage(){
@@ -200,29 +237,52 @@ public class ContactListAction extends BaseAction{
 			contactList = getContactListResult(service);
 		}
 		
-		return SUCCESS;
+		if (search != null)
+			return "plan";
+		else
+			return SUCCESS;
 	}
 	
 	private void initializeSearchString(){
-		searchString = "(";
-		
-		try{
-			if(!getFirstName().isEmpty() || !getFirstName().equals(null)){
-				searchString += "firstname:" + getFirstName();
-				if(!getFirstName().contains("*"))
-					searchString += "*";
-			}
-		}catch(NullPointerException npe){}
+		searchString = "";
+		if(getFirstName().length() > 0 || getLastName().length() > 0){
+			searchString += "(";
+			try{
+				if(!getFirstName().isEmpty() || !getFirstName().equals(null)){
+					searchString += "firstname:" + getFirstName();
+					if(!getFirstName().contains("*"))
+						searchString += "*";
+				}
+			}catch(NullPointerException npe){}
+			try{
+				
+			if(getFirstName().length() > 0 && getLastName().length() > 0)
+				searchString += " AND ";
+			}catch(NullPointerException npe){}
 			
-		try{
-			if(!getLastName().isEmpty() || !getLastName().equals(null)){
-				searchString += " AND lastname:" + getLastName();
-				if(!getLastName().contains("*"))
-					searchString += "*";
-			}
-		}catch(NullPointerException npe){}
+			try{
+				if(!getLastName().isEmpty() || !getLastName().equals(null)){
+					searchString += "lastname:" + getLastName();
+					if(!getLastName().contains("*"))
+						searchString += "*";
+				}
+			}catch(NullPointerException npe){}
+			searchString += ")";
+		}
 		
-		searchString += ") AND contactType.id:2";
+		if (searchString.length() > 0) {
+			if (getSearch() != null) {
+				searchString +=")";
+			} else {
+				searchString += ") AND contactType.id:2";
+			}
+		} else {
+			if (getSearch() != null) {
+				searchString ="";
+			} else {
+				searchString += " contactType.id:2";
+			}
+		}
 	}
 	
 	private List<Contacts> getContactListResult(SearchUtil service){

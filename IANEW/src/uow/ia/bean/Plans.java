@@ -114,7 +114,6 @@ public class Plans implements java.io.Serializable {
 		this.individualCase = individualCase;
 	}
 
-
 	/**
 	 * @return the id
 	 */

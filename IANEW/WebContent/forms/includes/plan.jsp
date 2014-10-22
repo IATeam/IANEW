@@ -1,24 +1,8 @@
 <!----------------------------------------------------------------------------------------------
-	Created By: Quang Nhan
-	Created Date: 02/08/2014
+	Created By: Kim To
+	Created Date: 
 	==============================================
 	Updates:
-		10/08/2014 - 	Added iteration by Quang Nhan
-		14/08/2014 	- 	Connect and retrieve data called by the action class and added 
-						pagination functionality by Quang Nhan
-<<<<<<< HEAD
-		16/08/2014 -	Tested s:url workings see comment below. 
-						Moved javascript code to list.js file by Quang Nhan
-=======
-<<<<<<< HEAD
-		21/08/2014 -	Quang Nhan
-						Added "Add Issue" button and functionality
-						
-=======
-		16/08/2014 -	Tested s:url workings see comment below. 
-						Moved javascript code to list.js file by Quang Nhan
->>>>>>> refs/remotes/origin/master
->>>>>>> refs/remotes/origin/Quang
 	==============================================	
 	Description: A jsp page that displays a list of enquiries
 ------------------------------------------------------------------------------------------------>
@@ -26,11 +10,15 @@
     pageEncoding="US-ASCII"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <section>
-<input type="image" src="/IANEW/resources/images/plusButton.png" alt="Hide/Show" id="btnShowHide" value="ShowHide" onclick="divHide(this);return false;" class="divHideButton"/>	<h3 class="sixteen columns"  style="float:none;">Plan</h3>
-<!-- 	<input type="image" src="/IANEW/resources/images/plusButton.png" alt="Hide/Show" id="btnShowHide" value="ShowHide" onclick="divHide(this);return false;" class="divHideButton"/>
- -->	
-<div class="greybackground">
-<div id="linkedEnquiriesDiv" class="toggled hideable">	
+	<input type="image" src="/IANEW/resources/images/plusButton.png" alt="Hide/Show" id="btnShowHide" value="ShowHide" onclick="divHide(this);return false;" class="divHideButton"/>	
+	<h3 class="sixteen columns"  style="float:none;">Plan</h3>
+	<img src="/IANEW/resources/images/srchicon.png" onclick="searchSupportAuthorised();" title="Search for Support or Authorised Person" class="button" >
+	<img src="/IANEW/resources/images/eraseButton.png" onclick="clearSupportAuthorised();" title="Search for Support or Authorised Person" class="button" >
+	<s:div id="planSearchDiv" cssClass="hidden"> 
+		<%@include file="/forms/search/searchSupportAuthorised.jsp" %>
+	</s:div>
+	<div class="greybackground">
+		<div id="planDiv" class="toggled hideable">	
 			<fieldset>
 				<div class="row">
 					<div class="five columns">
@@ -78,45 +66,8 @@
 						</div>
 					</div>
 				</div>
-				<div class="row">
-					<div class='inputfield four columns'>
-						<s:label for="firstNameContact" value="Authorised First Name:" />
-						<div><s:textfield id="authorisedFirstName" name="iamodel.plan.authorisedBy.firstname" ></s:textfield></div>
-					</div>
-					<div class="inputfield four columns">
-						<s:label for="otherNameContact" value="Authorised Other Name:" />
-						<div><s:textfield id="authorisedOtherName" name="iamodel.plan.authorisedBy.othername"></s:textfield></div>
-					</div>
-					
-					<div class="inputfield four columns omega">
-						<s:label for="lastNameContact" value="Authorised Last Name:" />
-						<div><s:textfield id="authorisedLastName" name="iamodel.plan.authorisedBy.lastname"></s:textfield></div>
-					</div>
-					<div class="inputfield four columns omega">
-						<s:label for="mobileContact" value="Authorised Mobile#:" />
-						<div><s:textfield id="authorisedMobile" name="iamodel.plan.authorisedBy.mobilephone" ></s:textfield></div>
-					</div>
-				</div>
-				<div class="row">
-					<div class='inputfield four columns'>
-									<s:label for="firstNameContact" value="Support First Name:" />
-									<div><s:textfield id="supportFirstName" name="iamodel.plan.supportPerson.firstname" ></s:textfield></div>
-								</div>
-								<div class="inputfield four columns">
-									<s:label for="otherNameContact" value="Support Other Name:" />
-									<div><s:textfield id="supportOtherName" name="iamodel.plan.supportPerson.othername"></s:textfield></div>
-								</div>
-								
-								<div class="inputfield four columns omega">
-									<s:label for="lastNameContact" value="Support Last Name:" />
-									<div><s:textfield id="supportLastName" name="iamodel.plan.supportPerson.lastname"></s:textfield></div>
-				</div>
-				
-				<div class="inputfield four columns omega">
-									<s:label for="mobileContact" value="Support Mobile#:" />
-									<div><s:textfield id="supportMobile" name="iamodel.plan.supportPerson.mobilephone" ></s:textfield></div>
-								</div>
-				</div>
+				<%@include file="authorisedPerson.jsp" %>
+				<%@include file="support.jsp" %>
 				<div class="row">
 					<div class="textarea sixteen columns omega">
 						<s:label for="notes" value="Notes:" />
@@ -134,3 +85,27 @@
 		</div>
 	</div>
 </section>
+<script>
+	function searchSupportAuthorised() {
+		$("#planSearchDiv").removeClass("hidden");
+	}
+	
+	function clearSupportAuthorised(){
+		// need confirmation
+		var search;
+		$("#planSearchDiv").removeClass("hidden");
+		
+		if($("#radioSupport").is(":checked")) {
+			if (confirm("Are you sure you want to remove Support person from this case?")) {
+				$("#planSearchDiv").addClass("hidden");
+				$("#supportPersonDiv").load("/IANEW/case/clearSupportContact.action");
+			}
+		} else {
+			if (confirm("Are you sure you want to remove Autorised person from this case?")) {
+				$("#planSearchDiv").addClass("hidden");
+				$("#authorisedPersonDiv").load("/IANEW/case/clearAuthorisedContact.action");
+			}
+		}
+		
+	}
+</script>

@@ -5,6 +5,7 @@ import java.util.Set;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.context.internal.ManagedSessionContext;
@@ -32,11 +33,25 @@ public class PlanTest {
 		Plans p  = list.get(0);
 		System.out.println("id: " + p.getId());
 		System.out.println("notes: " + p.getNotes());
-		System.out.println("authorise by id: " + p.getAuthorisedBy().getId());
+		//System.out.println("authorise by id: " + p.getAuthorisedBy().getId());
 		System.out.println("case id: " + p.getIndividualCase().getId());
 		//System.out.println("frequency: " + p.getReviewFrequency().getFrequencyName());
 		System.out.println("status: " + p.getStatusType().getId() + " " + p.getStatusType().getStatusName());
-		//System.out.println("support person id: " + p.getSupportPerson().getId());
+		System.out.println("support person id: " + p.getSupportPerson().getId());
+		
+		p.setSupportPerson(null);
+		
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			session.saveOrUpdate(p.getIndividualCase());
+			//session.saveOrUpdate(contact);
+			tx.commit();
+		} catch (Exception e) {
+			tx.rollback();
+			System.out.println(e);
+		} finally {
+		}
 	}
 	
 	@AfterMethod
