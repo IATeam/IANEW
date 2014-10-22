@@ -18,17 +18,11 @@
 <sj:head/>
 </head>
 <body>
-<!-- 
-	<s:url var="urlCExisting" namespace="/case" action="getCase" includeContext="false"/>
-		-->
-	
 	<s:url id="urlCNew" namespace="/case" action="newCase">
 		<s:param name="formTitle">New Case</s:param>
 	</s:url>
-	
-	<s:url var="urlCExisting" namespace="/case" action="getExistingCase" includeContext="false"/>		
-	 
-	<s:form id="caseForm" cssClass="form container" method="post" action="%{urlCExisting}">
+			
+	<s:form id="caseListForm" cssClass="form container">
 	
 			<!--Hidden Fields to pass parameters between pages -->
 			<s:hidden id="hiddenid" name="hiddenid" />
@@ -37,7 +31,6 @@
 			
 			<%@include file="includes/formHeader.jsp" %>
 			<%@include file="includes/filterSort.jsp" %>
-			
 			
 			<div id="iterCaseList">
 				<%@include file="/forms/includes/iterCaseList.jsp" %>

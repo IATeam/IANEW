@@ -42,14 +42,14 @@
 <!-- ---------------------------------------------------------------------------------------------- -->
 <!-- iterator - used to iterate a list or set ----------------------------------------------------- -->
 <!-- ---------------------------------------------------------------------------------------------- -->	
-	<s:url var="urlExisting" namespace="/enquiry" action="getEnquiry" includeContext="false"/>
+
 
 	<!-- Change namespace and action for appropriate urls for pagination purposes-->
 	<s:url var="urlUpdate" namespace="/enquiryList" action="updateEnquiryList" includeContext="false"/>
 
 	
 		
-	<s:form id="listForm" cssClass="form container" method="post" action="%{urlExisting}"  >
+	<s:form id="enquiryListForm" cssClass="form container" >
 			
 			<!--Hidden Fields to pass parameters between pages -->
 			<s:hidden id="hiddenid" name="hiddenid" />

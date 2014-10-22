@@ -93,6 +93,21 @@ function validated(){
 			}
 		});
 	 	
+	$("#open").click(function(){ alert($("#formTitle").text())
+	if($("#hiddenid").val() != ""){
+		if($("#formTitle").text() == "Case List")
+			$.post('/IANEW/case/getExistingCase.action', 
+				$('#caseListForm').serialize(), function(data){
+				$('#formDiv').html(data);}
+			);
+		else
+			$.post('/IANEW/enquiry/getExistingEnquiry.action', 
+				$('#enquiryListForm').serialize(), function(data){
+				$('#formDiv').html(data);}
+			);
+		}
+	});
+		
 	$('[name*="workphone"]').each(function(){
  		$(this).rules('add', {
  			phone: 		/[0-9\-\(\)\s\+]+/,
