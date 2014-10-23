@@ -2,13 +2,17 @@ package uow.ia.action;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
-import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import org.hibernate.EntityNameResolver;
 import org.hibernate.search.FullTextSession;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import uow.ia.bean.Contacts;
 import uow.ia.bean.Enquiries;
@@ -43,27 +47,25 @@ public class LoginAction extends BaseAction{
 
 		
 	public String execute(){
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Users user = adminService.getUsers(userDetails.getUsername());
+		ActionContext.getContext().getSession().put(USER, user);
+        System.out.println("username: " + userDetails.getUsername());
+        System.out.println("password: " + userDetails.getPassword());
+        Collection<SimpleGrantedAuthority> authorities = (Collection<SimpleGrantedAuthority>) userDetails.getAuthorities();
+        for (Iterator it = authorities.iterator(); it.hasNext();) {
+            SimpleGrantedAuthority authority = (SimpleGrantedAuthority) it.next();
+            System.out.println("Role: " + authority.getAuthority());
+        }
+        FullTextSession fts = utilService.getFullTextSession();
 		
-		//if(getUsername().equals("username") && getPassword().equals("password")){
-		Users user = adminService.login(username, password);
-		if(user!=null) {
-			Map<String, Object> session = ActionContext.getContext().getSession();
-			session.put(USER,user);
-            session.put("context", new Date());
-            
-            FullTextSession fts = utilService.getFullTextSession();
-    		
-//    		try {
-//    			fts.createIndexer().startAndWait();
-//    			System.out.println("commented index out");
-//    		} catch (InterruptedException e) {
-//    			e.printStackTrace();
-//    		}
-            
-			return SUCCESS;
-		} else {
-			return ERROR;
+		try {
+			fts.createIndexer().startAndWait();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
+        
+        return SUCCESS;
 	}
 
 	public String getUsername() {

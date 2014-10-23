@@ -311,6 +311,8 @@ public interface AdminService {
 	public boolean updateDisabilityType(DisabilityTypes d);
 	
 	public Users login(String username, String password);
+	
+	public Users getUsers(String username);
 	 /* ----------------------------------------------------------------------------------------------------------
 	 * Issue Type ServiceMethods
 	 * ----------------------------------------------------------------------------------------------------------
