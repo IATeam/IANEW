@@ -23,6 +23,14 @@ import uow.ia.util.SearchUtil;
 import com.opensymphony.xwork2.ActionContext;
 import com.sun.tools.ws.wsdl.framework.Entity;
 
+/**
+ * This class is used for Login action as well as for Search Box
+ * 
+ * @author KimTo
+ * @author Quang
+ * @author Yang
+ *
+ */
 public class LoginAction extends BaseAction{
 
 	private String username;
@@ -31,21 +39,7 @@ public class LoginAction extends BaseAction{
 	private List list = new ArrayList();
 	private String searchString = null;
 	private List resultList = new ArrayList();
-	/**
-	 * @return the resultList
-	 */
-	public List getResultList() {
-		return resultList;
-	}
-
-	/**
-	 * @param resultList the resultList to set
-	 */
-	public void setResultList(List resultList) {
-		this.resultList = resultList;
-	}
-
-		
+	
 	public String execute(){
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Users user = adminService.getUsers(userDetails.getUsername());
@@ -68,51 +62,21 @@ public class LoginAction extends BaseAction{
         return SUCCESS;
 	}
 
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	
-	
 	/**
-	 * @return the searchString
+	 * This method is used for the Search Box, which is used to search for Enquiry and Individual Case
+	 * that contains the search string
+	 * 
+	 * It will call the getResultList utility to get all the objects that contains the search string.
+	 * However, the method will check whether the object or its declared fields are an instance of 
+	 * Enquiries or IndividualCases. If it is, it will add to the resultList. This resultList is a list 
+	 * contains all the results that matched the user search string, and will be displayed to the user.
+	 * 
+	 * All other object that is not an instance of Enquiries or IndividualCases and has no declared fields
+	 * that are an instance of either of those entity, will be disregard. 
+	 * 
+	 * @return String SUCCESS
+	 * @see uow.ia.util.SearchUtil#getResultList(String, uow.ia.service.UtilService)
 	 */
-	public String getSearchString() {
-		return searchString;
-	}
-
-	/**
-	 * @param searchString the searchString to set
-	 */
-	public void setSearchString(String searchString) {
-		this.searchString = searchString;
-	}
-
-	/**
-	 * @return the list
-	 */
-	public List getList() {
-		return list;
-	}
-
-	/**
-	 * @param list the list to set
-	 */
-	public void setList(List list) {
-		this.list = list;
-	}
-	
 	public String search() {
 		
 		if (!(searchString == null || searchString.equals(""))) {
@@ -147,5 +111,64 @@ public class LoginAction extends BaseAction{
 		}
 		
 		return SUCCESS;
+	}
+
+	/**
+	 * @return the resultList
+	 */
+	public List getResultList() {
+		return resultList;
+	}
+
+
+	/**
+	 * @param resultList the resultList to set
+	 */
+	public void setResultList(List resultList) {
+		this.resultList = resultList;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	/**
+	 * @return the searchString
+	 */
+	public String getSearchString() {
+		return searchString;
+	}
+
+	/**
+	 * @param searchString the searchString to set
+	 */
+	public void setSearchString(String searchString) {
+		this.searchString = searchString;
+	}
+
+	/**
+	 * @return the list
+	 */
+	public List getList() {
+		return list;
+	}
+
+	/**
+	 * @param list the list to set
+	 */
+	public void setList(List list) {
+		this.list = list;
 	}
 }

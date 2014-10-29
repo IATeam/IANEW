@@ -30,24 +30,38 @@ import uow.ia.bean.TitleTypes;
 import uow.ia.dao.BaseDao;
 import uow.ia.service.UtilService;
 
+/**
+ * This is a utility which provides the search mechanism used within this application
+ * 
+ * @author KimTo
+ * @author Quang
+ *
+ */
 public class SearchUtil {
+	
 	UtilService service = null;
-	/**
-	 * @return the fieldList
-	 */
-	public List<String> getFieldList() {
-		return fieldList;
-	}
-
-	/**
-	 * @param fieldList the fieldList to set
-	 */
-	public void setFieldList(List<String> fieldList) {
-		this.fieldList = fieldList;
-	}
-
 	private List<String> fieldList = new ArrayList<String>();
 	
+	/**
+	 * This method will add all the searchable fields of an entity class as well as searchable fields 
+	 * of its associated entity to the List fieldList.
+	 * 
+	 * This method will first check whether the class passed in as the first parameter 
+	 * contains any annotations (it is assumed that the entity class will only contains annotations
+	 * which are used for Hibernate Search).
+	 * 
+	 * If the class contains at least one annotation, that means the entity is searchable, otherwise ignore.
+	 * If the entity class is searchable, it will get all the declared fields and checked whether the field
+	 * has any annotation. If it has annotations, it means that the fields is searchable.
+	 * 
+	 * Then if the field is searchable, if it is of type String, or java.sql.Date, or java.util.Date, or Integer,
+	 * then add the field to the List fieldList (contains all the fields that can be searched). 
+	 * If the field is an object type i.e. associated object, then this method is called within itself to get 
+	 * all of its associated object searchable fields.
+	 * 
+	 * @param mappedClass
+	 * @param objectFieldName
+	 */
 	public void fieldCollection (Class mappedClass, String objectFieldName) {
 		Field[] fields = mappedClass.getDeclaredFields();
 		for (Field f : fields) {
@@ -71,6 +85,12 @@ public class SearchUtil {
 		}
 	}
 	
+	/**
+	 * This methods will returns all the searchable fields
+	 * 
+	 * @return Array of String
+	 * @see #fieldCollection(Class, String)
+	 */
 	public String[] SearchFields() {
 		
 		Map<String, ClassMetadata> map = service.getAllClassMetadata();
@@ -82,6 +102,15 @@ public class SearchUtil {
 	
 	}
 	
+	/**
+	 * This methods will returns all the objects that match the search text string.
+	 * 
+	 * @param searchString
+	 * @param service		UtilService provides FullTextSession
+	 * @return List of matched objects 
+	 * @see #SearchFields()
+	 * @see uow.ia.service.UtilService#getFullTextSession()
+	 */
 	public List getResultObjectList(String searchString, UtilService service) {
 		this.service = service;
 		String[] searchFields = SearchFields();
@@ -287,6 +316,20 @@ public class SearchUtil {
 		}
 		
 		return luceneQuery;
+	}
+
+	/**
+	 * @return the fieldList
+	 */
+	public List<String> getFieldList() {
+		return fieldList;
+	}
+
+	/**
+	 * @param fieldList the fieldList to set
+	 */
+	public void setFieldList(List<String> fieldList) {
+		this.fieldList = fieldList;
 	}
 }
 
