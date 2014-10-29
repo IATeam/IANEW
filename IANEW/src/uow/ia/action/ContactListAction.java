@@ -272,9 +272,9 @@ public class ContactListAction extends BaseAction{
 		
 		if (searchString.length() > 0) {
 			if (getSearch() != null) {
-				searchString +=")";
+				searchString +="";
 			} else {
-				searchString += ") AND contactType.id:2";
+				searchString += " AND contactType.id:2";
 			}
 		} else {
 			if (getSearch() != null) {
