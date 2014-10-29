@@ -24,6 +24,8 @@ import uow.ia.bean.Users;
 /**
  * @author ZhiYu Yang
  * @date 23/08/2014
+ *   @author davidforbes
+     *  @date 09/09/2014
  *
  */
 public interface AdminService {
@@ -37,8 +39,6 @@ public interface AdminService {
 	 */
 	/** 
      * retrieve with List<object> of Accommodation Types from Accommodation_Types table
-     *  @author davidforbes
-     *  @date 09/09/2014
      * @return List<Object>
      */
 	public List<AccommodationTypes> findAccommodationTypes();
@@ -47,18 +47,14 @@ public interface AdminService {
      * save Accommodation Types object to Accommodation_Types table
      * 
      * @param AccommodationTypes a
-     * @return List<Object>
-     *  @author davidforbes
-     *  @date 09/09/2014
+     * @return boolean
      */
 	public boolean saveAccommodationType(AccommodationTypes a);
 	
 	/** 
      * update Accommodation Types object to Accommodation_Types table
-     *  @author davidforbes
-     *  @date 09/09/2014
      * @param AccommodationTypes a
-     * @return List<Object>
+     * @return boolean
      */
 	public boolean updateAccommodationType(AccommodationTypes a);
 	
@@ -69,8 +65,6 @@ public interface AdminService {
 	
 	/** 
      * retrieve with List<object> of Cultural Background Types from CulturalBackground_Types table
-     *  @author davidforbes
-     *  @date 13/09/2014
      * @return List<Object>
      */
 	public List<CulturalBackgroundTypes> findCulturalBackgroundTypes();
@@ -79,18 +73,14 @@ public interface AdminService {
      * save Cultural Background  Types object to CulturalBackground_Types table
      * 
      * @param CulturalBackgroundTypes cbt
-     * @return List<Object>
-     *  @author davidforbes
-     *  @date 13/09/2014
+     * @return boolean
      */
 	public boolean saveCulturalBackgroundType(CulturalBackgroundTypes cbt);
 	
 	/** 
      * update Cultural Background  Types object to CulturalBackground_Types table
-     *  @author davidforbes
-     *  @date 13/09/2014
      * @param CulturalBackgroundTypes cbt
-     * @return List<Object>
+     * @return boolean
      */
 	public boolean updateCulturalBackgroundType(CulturalBackgroundTypes cbt);
 	
@@ -100,8 +90,6 @@ public interface AdminService {
 	 */
 	/** 
      * retrieve with List<object> of Danger Type from Danger_Types table
-     *  @author davidforbes
-     *  @date 14/09/2014
      * @return List<Object>
      */
 	public List<DangerTypes> findDangerTypes();
@@ -110,18 +98,14 @@ public interface AdminService {
      * save Danger Types object to Danger_Types table
      * 
      * @param DangerTypes dt
-     * @return List<Object>
-     *  @author davidforbes
-     *  @date 14/09/2014
+     * @return boolean
      */
 	public boolean saveDangerType(DangerTypes dt);
 	
 	/** 
      * update DangerTypes object to Danger_Types table
-     *  @author davidforbes
-     *  @date 14/09/2014
      * @param DangerTypes dt
-     * @return List<Object>
+     * @return boolean
      */
 	public boolean updateDangerType(DangerTypes dt);
 	
@@ -131,8 +115,6 @@ public interface AdminService {
 		 */
 		/** 
 	     * retrieve with List<object> of Employment Type from Employment_Types table
-	     *  @author davidforbes
-	     *  @date 14/09/2014
 	     * @return List<Object>
 	     */
 		public List<EmploymentTypes> findEmploymentTypes();
@@ -141,18 +123,14 @@ public interface AdminService {
 	     * save Employment Types object to Employment_Types table
 	     * 
 	     * @param EmploymentType et
-	     * @return List<Object>
-	     *  @author davidforbes
-	     *  @date 14/09/2014
+	     * @return boolean
 	     */
 		public boolean saveEmploymentType(EmploymentTypes et);
 		
 		/** 
 	     * update EmploymentType object to Employment_Types table
-	     *  @author davidforbes
-	     *  @date 14/09/2014
 	     * @param EmploymentTypes et
-	     * @return List<Object>
+	     * @return boolean
 	     */
 		public boolean updateEmploymentType(EmploymentTypes et);
 		
@@ -162,8 +140,6 @@ public interface AdminService {
 		 */
 		/** 
 	     * retrieve with List<object> of Enquiry Type from Enquiry_Type table
-	     *  @author davidforbes
-	     *  @date 14/09/2014
 	     * @return List<Object>
 	     */
 		public List<EnquiryTypes> findEnquiryTypes();
@@ -172,19 +148,15 @@ public interface AdminService {
 	     * save Enquiry Types object to Enquiry_Types table
 	     * 
 	     * @param EnquiryType enqt
-	     * @return List<Object>
-	     *  @author davidforbes
-	     *  @date 14/09/2014
+	     * @return boolean
 	     */
 		public boolean saveEnquiryType(EnquiryTypes enqt);
 		
 		
 		/** 
 	     * update EnquiryType object to Enquiry_Types table
-	     *  @author davidforbes
-	     *  @date 14/09/2014
 	     * @param EnquiryTypes enqt
-	     * @return List<Object>
+	     * @return boolean
 	     */
 		public boolean updateEnquiryType(EnquiryTypes enqt);
 		
@@ -194,8 +166,6 @@ public interface AdminService {
 		 */
 		/** 
 	     * retrieve with List<object> of Gender Type from Gender_Type table
-	     *  @author davidforbes
-	     *  @date 14/09/2014
 	     * @return List<Object>
 	     */
 		public List<GenderTypes> findGenderTypes();
@@ -204,18 +174,14 @@ public interface AdminService {
 	     * save Gender Types object to Gender_Types table
 	     * 
 	     * @param GenderType gt
-	     * @return List<Object>
-	     *  @author davidforbes
-	     *  @date 14/09/2014
+	     * @return boolean
 	     */
 		public boolean saveGenderType(GenderTypes gt);
 		
 		/** 
 	     * update GenderType object to Gender_Types table
-	     *  @author davidforbes
-	     *  @date 14/09/2014
 	     * @param GenderTypes gt
-	     * @return List<Object>
+	     * @return boolean
 	     */
 		public boolean updateGenderType(GenderTypes gt);
 		
@@ -225,8 +191,6 @@ public interface AdminService {
 		 */
 		/** 
 	     * retrieve with List<object> of Status Type from Status_Type table
-	     *  @author davidforbes
-	     *  @date 14/09/2014
 	     * @return List<Object>
 	     */
 		public List<StatusTypes> findStatusTypes();
@@ -235,18 +199,14 @@ public interface AdminService {
 	     * save Status Types object to Status_Types table
 	     * 
 	     * @param StatusType st
-	     * @return List<Object>
-	     *  @author davidforbes
-	     *  @date 14/09/2014
+	     * @return boolean
 	     */
 		public boolean saveStatusType(StatusTypes st);
 		
 		/** 
 	     * update StatusType object to Status_Types table
 	     *  @author davidforbes
-	     *  @date 14/09/2014
-	     * @param StatusTypes st
-	     * @return List<Object>
+	     * @return boolean
 	     */
 		public boolean updateStatusType(StatusTypes st);
 		
@@ -256,8 +216,6 @@ public interface AdminService {
 		 */
 		/** 
 	     * retrieve with List<object> of Title Type from Title_Type table
-	     *  @author davidforbes
-	     *  @date 14/09/2014
 	     * @return List<Object>
 	     */
 		public List<TitleTypes> findTitleTypes();
@@ -266,18 +224,14 @@ public interface AdminService {
 	     * save Title Types object to Title_Types table
 	     * 
 	     * @param TitleType tt
-	     * @return List<Object>
-	     *  @author davidforbes
-	     *  @date 14/09/2014
+	     * @return boolean
 	     */
 		public boolean saveTitleType(TitleTypes tt);
 		
 		/** 
 	     * update TitleType object to Title_Types table
-	     *  @author davidforbes
-	     *  @date 14/09/2014
 	     * @param TitleTypes tt
-	     * @return List<Object>
+	     * @return boolean
 	     */
 		public boolean updateTitleType(TitleTypes tt);
 	
@@ -298,20 +252,29 @@ public interface AdminService {
      * save Disability Types object to Disability_Types table
      * 
      * @param DisabilityTypes d
-     * @return List<Object>
+     * @return boolean
      */
 	public boolean saveDisabilityType(DisabilityTypes d);
 	
 	/** 
      * update Disability Types object to Disability_Types table
-     * 
      * @param DisabilityTypes d
-     * @return List<Object>
+     * @return boolean
      */
 	public boolean updateDisabilityType(DisabilityTypes d);
 	
+	/** 
+     * Login
+     * @param String username, String password
+     * @return Users
+     */
 	public Users login(String username, String password);
 	
+	/** 
+     * getUsers
+     * @param String username
+     * @return Users
+     */
 	public Users getUsers(String username);
 	 /* ----------------------------------------------------------------------------------------------------------
 	 * Issue Type ServiceMethods
@@ -321,8 +284,6 @@ public interface AdminService {
      * retrieve with List<object> of Issue Types from Issue_Types table
      *  
      * @return List<Object>
-     *  @author davidforbes
-     *  @date 09/09/2014
      */
 	public List<IssueTypes> findIssueTypes();
 	
@@ -330,9 +291,7 @@ public interface AdminService {
      * save Issue Types object to Issue_Types table
      * 
      * @param IssueTypes i
-     * @return List<Object>
-     *  @author davidforbes
-     *  @date 09/09/2014
+     * @return boolean
      */
 	public boolean saveIssueType(IssueTypes i);
 	
@@ -340,9 +299,7 @@ public interface AdminService {
      * update Issue Types object to Issue_Types table
      * 
      * @param IssueTypes i
-     * @return List<Object>
-     *  @author davidforbes
-     *  @date 09/09/2014
+     * @return boolean
      */
 	public boolean updateIssueType(IssueTypes i);
 	
@@ -352,11 +309,9 @@ public interface AdminService {
 		 * ----------------------------------------------------------------------------------------------------------
 	*/
 		/** 
-	     * retrieve with List<object> of Contacts from Contacts table
+	     * retrieve with List<Contacts> of Contacts from Contacts table
 	     *  
-	     * @return List<Object>
-	     *  @author davidforbes
-	     *  @date 16/09/2014
+	     * @return List<Contacts>
 	     */
 		public List<Contacts> findContacts();
 		
@@ -364,9 +319,7 @@ public interface AdminService {
 	     * save Contacts object to Contacts table
 	     * 
 	     * @param Contacts c
-	     * @return List<Object>
-	     *  @author davidforbes
-	     *  @date 09/09/2014
+	     * @return boolean
 	     */
 		public boolean saveContact(Contacts c);
 		
@@ -375,9 +328,7 @@ public interface AdminService {
 	     * update Contacts object to Contacts table
 	     * 
 	     * @param Contact c
-	     * @return List<Object>
-	     *  @author davidforbes
-	     *  @date 16/09/2014
+	     * @return boolean
 	     */
 		public boolean updateContact(Contacts c);
 		
@@ -391,8 +342,6 @@ public interface AdminService {
 		 */
 		/** 
 	     * retrieve with List<object> of Communication Types from Communication_Types table
-	     *  @author davidforbes
-	     *  @date 04/10/2014
 	     * @return List<Object>
 	     */
 		public List<CommunicationTypes> findCommunicationTypes();
@@ -401,18 +350,14 @@ public interface AdminService {
 	     * save Communication Types object to Communication_Types table
 	     * 
 	     * @param CommunicationTypes c
-	     * @return List<Object>
-	     *  @author davidforbes
-	     *  @date 04/10/2014
+	     * @return boolean
 	     */
 		public boolean saveCommunicationType(CommunicationTypes c);
 		
 		/** 
 	     * update Communication Types object to Communication_Types table
-	     *  @author davidforbes
-	     *  @date 09/09/2014
 	     * @param CommunicationTypes a
-	     * @return List<Object>
+	     * @return boolean
 	     */
 		public boolean updateCommunicationType(CommunicationTypes c);
 		
@@ -422,8 +367,6 @@ public interface AdminService {
 		 */
 		/** 
 	     * retrieve with List<object> of Goal Types from Goal_Types table
-	     *  @author davidforbes
-	     *  @date 06/10/2014
 	     * @return List<Object>
 	     */
 		public List<GoalTypes> findGoalTypes();
@@ -432,18 +375,14 @@ public interface AdminService {
 	     * save Goal Types object to Goal_Types table
 	     * 
 	     * @param GoalTypes g
-	     * @return List<Object>
-	     *  @author davidforbes
-	     *  @date 06/10/2014
+	     * @return boolean
 	     */
 		public boolean saveGoalType(GoalTypes g);
 		
 		/** 
 	     * update Goal Types object to Goal_Types table
-	     *  @author davidforbes
-	     *  @date 06/10/2014
 	     * @param GoalTypes g
-	     * @return List<Object>
+	     * @return boolean
 	     */
 		public boolean updateGoalType(GoalTypes g);
 		
@@ -454,8 +393,6 @@ public interface AdminService {
 			 */
 			/** 
 		     * retrieve with List<object> of Priority Types from Priority_Types table
-		     *  @author davidforbes
-		     *  @date 06/10/2014
 		     * @return List<Object>
 		     */
 			public List<PriorityTypes> findPriorityTypes();
@@ -464,18 +401,14 @@ public interface AdminService {
 		     * save Priority Types object to Priority_Types table
 		     * 
 		     * @param PriorityTypes p
-		     * @return List<Object>
-		     *  @author davidforbes
-		     *  @date 06/10/2014
+		     * @return boolean
 		     */
 			public boolean savePriorityType(PriorityTypes p);
 			
 			/** 
 		     * update Priority Types object to Priority_Types table
-		     *  @author davidforbes
-		     *  @date 06/10/2014
 		     * @param PriorityTypes p
-		     * @return List<Object>
+		     * @return boolean
 		     */
 			public boolean updatePriorityType(PriorityTypes p);
 }

@@ -44,6 +44,8 @@ import uow.ia.service.AdminService;
 /**
  * @author ZhiYu Yang
  * @date 23/08/2014
+ * @author davidforbes
+ *  @date 09/09/2014
  *
  */
 @Service(AdminService.SERVICENAME)
@@ -52,19 +54,27 @@ public class AdminServiceImpl implements AdminService {
 	
 	/** 
      * Accomodation Service methods
-     *  @author davidforbes
-     *  @date 09/09/2014
      * 
      */
 	
 	@Resource
 	private AccommodationTypesDao<AccommodationTypes> AccommodationTypesDao;
 	
+	/** 
+     * retrieve with List<object> of Accommodation Types from Accommodation_Types table
+     * @return List<Object>
+     */
 	@Override
 	public List<AccommodationTypes> findAccommodationTypes() {
 		return AccommodationTypesDao.find(" from AccommodationTypes");
 	}
 	
+	/** 
+     * save Accommodation Types object to Accommodation_Types table
+     * 
+     * @param AccommodationTypes a
+     * @return boolean
+     */
 	@Override
 	public boolean saveAccommodationType(AccommodationTypes a) {
 		try {
@@ -76,6 +86,11 @@ public class AdminServiceImpl implements AdminService {
 		}
 	}
 	
+	/** 
+     * update Accommodation Types object to Accommodation_Types table
+     * @param AccommodationTypes a
+     * @return boolean
+     */
 	@Override
 	public boolean updateAccommodationType(AccommodationTypes a) {
 		try {
@@ -89,19 +104,27 @@ public class AdminServiceImpl implements AdminService {
 	
 	/** 
      * Cultural Background Service methods
-     *  @author davidforbes
-     *  @date 13/09/2014
      * 
      */
 	
 	@Resource
 	private CulturalBackgroundTypesDao<CulturalBackgroundTypes> CulturalBackgroundTypesDao;
 	
+	/** 
+     * retrieve with List<object> of Cultural Background Types from CulturalBackground_Types table
+     * @return List<Object>
+     */
 	@Override
 	public List<CulturalBackgroundTypes> findCulturalBackgroundTypes() {
 		return CulturalBackgroundTypesDao.find(" from CulturalBackgroundTypes");
 	}
 	
+	/** 
+     * save Cultural Background  Types object to CulturalBackground_Types table
+     * 
+     * @param CulturalBackgroundTypes cbt
+     * @return boolean
+     */
 	@Override
 	public boolean saveCulturalBackgroundType(CulturalBackgroundTypes cbt) {
 		try {
@@ -113,6 +136,11 @@ public class AdminServiceImpl implements AdminService {
 		}
 	}
 	
+	/** 
+     * update Cultural Background  Types object to CulturalBackground_Types table
+     * @param CulturalBackgroundTypes cbt
+     * @return boolean
+     */
 	@Override
 	public boolean updateCulturalBackgroundType(CulturalBackgroundTypes cbt) {
 		try {
@@ -126,19 +154,27 @@ public class AdminServiceImpl implements AdminService {
 	
 	/** 
      * DangerTypes Service methods
-     *  @author davidforbes
-     *  @date 14/09/2014
      * 
      */
 	
 	@Resource
 	private DangerTypesDao<DangerTypes> DangerTypesDao;
 	
+	/** 
+     * retrieve with List<object> of Danger Type from Danger_Types table
+     * @return List<Object>
+     */
 	@Override
 	public List<DangerTypes> findDangerTypes() {
 		return DangerTypesDao.find(" from DangerTypes");
 	}
 	
+	/** 
+     * save Danger Types object to Danger_Types table
+     * 
+     * @param DangerTypes dt
+     * @return boolean
+     */
 	@Override
 	public boolean saveDangerType(DangerTypes dt) {
 		try {
@@ -150,6 +186,11 @@ public class AdminServiceImpl implements AdminService {
 		}
 	}
 	
+	/** 
+     * update DangerTypes object to Danger_Types table
+     * @param DangerTypes dt
+     * @return boolean
+     */
 	@Override
 	public boolean updateDangerType(DangerTypes dt) {
 		try {
@@ -163,19 +204,27 @@ public class AdminServiceImpl implements AdminService {
 	
 	/** 
      * EmploymentTypes Service methods
-     *  @author davidforbes
-     *  @date 14/09/2014
      * 
      */
 	
 	@Resource
 	private EmploymentTypesDao<EmploymentTypes> EmploymentTypesDao;
 	
+	/** 
+     * retrieve with List<object> of Employment Type from Employment_Types table
+     * @return List<Object>
+     */
 	@Override
 	public List<EmploymentTypes> findEmploymentTypes() {
 		return EmploymentTypesDao.find(" from EmploymentTypes");
 	}
 	
+	/** 
+     * save Employment Types object to Employment_Types table
+     * 
+     * @param EmploymentType et
+     * @return boolean
+     */
 	@Override
 	public boolean saveEmploymentType(EmploymentTypes et) {
 		try {
@@ -187,6 +236,11 @@ public class AdminServiceImpl implements AdminService {
 		}
 	}
 	
+	/** 
+     * update EmploymentType object to Employment_Types table
+     * @param EmploymentTypes et
+     * @return boolean
+     */
 	@Override
 	public boolean updateEmploymentType(EmploymentTypes et) {
 		try {
@@ -200,19 +254,27 @@ public class AdminServiceImpl implements AdminService {
 	
 	/** 
      * EnquiryTypes Service methods
-     *  @author davidforbes
-     *  @date 14/09/2014
      * 
      */
 	
 	@Resource
 	private EnquiryTypesDao<EnquiryTypes> EnquiryTypesDao;
 	
+	/** 
+     * retrieve with List<object> of Enquiry Type from Enquiry_Type table
+     * @return List<Object>
+     */
 	@Override
 	public List<EnquiryTypes> findEnquiryTypes() {
 		return EnquiryTypesDao.find(" from EnquiryTypes");
 	}
 	
+	/** 
+     * save Enquiry Types object to Enquiry_Types table
+     * 
+     * @param EnquiryType enqt
+     * @return boolean
+     */
 	@Override
 	public boolean saveEnquiryType(EnquiryTypes enqt) {
 		try {
@@ -224,6 +286,11 @@ public class AdminServiceImpl implements AdminService {
 		}
 	}
 	
+	/** 
+     * update EnquiryType object to Enquiry_Types table
+     * @param EnquiryTypes enqt
+     * @return boolean
+     */
 	@Override
 	public boolean updateEnquiryType(EnquiryTypes enqt) {
 		try {
@@ -237,19 +304,27 @@ public class AdminServiceImpl implements AdminService {
 	
 	/** 
      * GenderTypes Service methods
-     *  @author davidforbes
-     *  @date 14/09/2014
      * 
      */
 	
 	@Resource
 	private GenderTypesDao<GenderTypes> GenderTypesDao;
 	
+	/** 
+     * retrieve with List<object> of Gender Type from Gender_Type table
+     * @return List<Object>
+     */
 	@Override
 	public List<GenderTypes> findGenderTypes() {
 		return GenderTypesDao.find(" from GenderTypes");
 	}
 	
+	/** 
+     * save Gender Types object to Gender_Types table
+     * 
+     * @param GenderType gt
+     * @return boolean
+     */
 	@Override
 	public boolean saveGenderType(GenderTypes gt) {
 		try {
@@ -261,6 +336,11 @@ public class AdminServiceImpl implements AdminService {
 		}
 	}
 	
+	/** 
+     * update GenderType object to Gender_Types table
+     * @param GenderTypes gt
+     * @return boolean
+     */
 	@Override
 	public boolean updateGenderType(GenderTypes gt) {
 		try {
@@ -274,19 +354,27 @@ public class AdminServiceImpl implements AdminService {
 	
 	/** 
      * StatusTypes Service methods
-     *  @author davidforbes
-     *  @date 14/09/2014
      * 
      */
 	
 	@Resource
 	private StatusTypesDao<StatusTypes> StatusTypesDao;
 	
+	/** 
+     * retrieve with List<object> of Status Type from Status_Type table
+     * @return List<Object>
+     */
 	@Override
 	public List<StatusTypes> findStatusTypes() {
 		return StatusTypesDao.find(" from StatusTypes");
 	}
 	
+	/** 
+     * save Status Types object to Status_Types table
+     * 
+     * @param StatusType st
+     * @return boolean
+     */
 	@Override
 	public boolean saveStatusType(StatusTypes st) {
 		try {
@@ -298,6 +386,10 @@ public class AdminServiceImpl implements AdminService {
 		}
 	}
 	
+	/** 
+     * update StatusType object to Status_Types table
+     * @return boolean
+     */
 	@Override
 	public boolean updateStatusType(StatusTypes st) {
 		try {
@@ -311,19 +403,27 @@ public class AdminServiceImpl implements AdminService {
 	
 	/** 
      * TitleTypes Service methods
-     *  @author davidforbes
-     *  @date 14/09/2014
      * 
      */
 	
 	@Resource
 	private TitleTypesDao<TitleTypes> TitleTypesDao;
 	
+	/** 
+     * retrieve with List<object> of Title Type from Title_Type table
+     * @return List<Object>
+     */
 	@Override
 	public List<TitleTypes> findTitleTypes() {
 		return TitleTypesDao.find(" from TitleTypes");
 	}
 	
+	/** 
+     * save Title Types object to Title_Types table
+     * 
+     * @param TitleType tt
+     * @return boolean
+     */
 	@Override
 	public boolean saveTitleType(TitleTypes tt) {
 		try {
@@ -335,6 +435,11 @@ public class AdminServiceImpl implements AdminService {
 		}
 	}
 	
+	/** 
+     * update TitleType object to Title_Types table
+     * @param TitleTypes tt
+     * @return boolean
+     */
 	@Override
 	public boolean updateTitleType(TitleTypes tt) {
 		try {
@@ -347,9 +452,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	/** 
-     * Disability Service methods
-     *  @author Quang
-     *  
+     * Disability Service methods     *  
      * 
      */
 	
@@ -359,11 +462,22 @@ public class AdminServiceImpl implements AdminService {
 	@Resource
 	private UsersDao<Users> usersDao;
 
+	/** 
+     * retrieve with List<object> of Disability Types from Disability_Types table
+     *  
+     * @return List<Object>
+     */
 	@Override
 	public List<DisabilityTypes> findDisabilityTypes() {
 		return disabilityTypesDao.find(" from DisabilityTypes");
 	}
 	
+	/** 
+     * save Disability Types object to Disability_Types table
+     * 
+     * @param DisabilityTypes d
+     * @return boolean
+     */
 	@Override
 	public boolean saveDisabilityType(DisabilityTypes d) {
 		try {
@@ -375,6 +489,11 @@ public class AdminServiceImpl implements AdminService {
 		}
 	}
 	
+	/** 
+     * update Disability Types object to Disability_Types table
+     * @param DisabilityTypes d
+     * @return boolean
+     */
 	@Override
 	public boolean updateDisabilityType(DisabilityTypes d) {
 		try {
@@ -386,12 +505,12 @@ public class AdminServiceImpl implements AdminService {
 		}
 	}
 	
+	
 	/** 
-     * IssueTypes Service methods
-     *  @author davidforbes
-     *  @date 09/09/2014
+     * Login
+     * @param String username, String password
+     * @return Users
      */
-
 	@Override
 	public Users login(String username, String password) {
 		List<Users> users = usersDao.find(" from Users u where u.username=? and u.password=?", new Object[] {username, password});
@@ -402,19 +521,38 @@ public class AdminServiceImpl implements AdminService {
 		}
 	}
 	
+	/** 
+     * getUsers
+     * @param String username
+     * @return Users
+     */
 	@Override
 	public Users getUsers(String username) {
 		return usersDao.get(" from Users u where u.username=?", new Object[] {username});
 	}
+	
+	/** 
+     * IssueTypes Service methods
+     */
 
 	@Resource
 	private IssueTypesDao<IssueTypes> issueTypesDao;
 	
+	/** 
+     * retrieve with List<object> of Issue Types from Issue_Types table 
+     * @return List<Object>
+     */
 	@Override
 	public List<IssueTypes> findIssueTypes() {
 		return issueTypesDao.find(" from IssueTypes");
 	}
 	
+	/** 
+     * save Issue Types object to Issue_Types table
+     * 
+     * @param IssueTypes i
+     * @return boolean
+     */
 	@Override
 	public boolean saveIssueType(IssueTypes i) {
 		try {
@@ -426,6 +564,12 @@ public class AdminServiceImpl implements AdminService {
 		}
 	}
 	
+	/** 
+     * update Issue Types object to Issue_Types table
+     * 
+     * @param IssueTypes i
+     * @return boolean
+     */
 	@Override
 	public boolean updateIssueType(IssueTypes i) {
 		try {
@@ -439,18 +583,27 @@ public class AdminServiceImpl implements AdminService {
 
 	/** 
      * Contacts Service methods
-     *  @author davidforbes
-     *  @date 16/09/2014
      */
 
 	@Resource
 	private ContactsDao<Contacts> ContactsDao;
 	
+	/** 
+     * retrieve with List<Contacts> of Contacts from Contacts table
+     *  
+     * @return List<Contacts>
+     */
 	@Override
 	public List<Contacts> findContacts() {
 		return ContactsDao.find(" from Contacts");
 	}
 	
+	/** 
+     * save Contacts object to Contacts table
+     * 
+     * @param Contacts c
+     * @return boolean
+     */
 	@Override
 	public boolean saveContact(Contacts c) {
 		try {
@@ -462,6 +615,12 @@ public class AdminServiceImpl implements AdminService {
 		}
 	}
 	
+	/** 
+     * update Contacts object to Contacts table
+     * 
+     * @param Contact c
+     * @return boolean
+     */
 	@Override
 	public boolean updateContact(Contacts c) {
 		try {
@@ -474,20 +633,28 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	/** 
-     * Accomodation Service methods
-     *  @author davidforbes
-     *  @date 09/09/2014
+     * Communication Service methods
      * 
      */
 	
 	@Resource
 	private CommunicationTypesDao<CommunicationTypes> CommunicationTypesDao;
 	
+	/** 
+     * retrieve with List<object> of Communication Types from Communication_Types table
+     * @return List<Object>
+     */
 	@Override
 	public List<CommunicationTypes> findCommunicationTypes() {
 		return CommunicationTypesDao.find(" from CommunicationTypes");
 	}
 	
+	/** 
+     * save Communication Types object to Communication_Types table
+     * 
+     * @param CommunicationTypes c
+     * @return boolean
+     */
 	@Override
 	public boolean saveCommunicationType(CommunicationTypes c) {
 		try {
@@ -499,6 +666,11 @@ public class AdminServiceImpl implements AdminService {
 		}
 	}
 	
+	/** 
+     * update Communication Types object to Communication_Types table
+     * @param CommunicationTypes a
+     * @return boolean
+     */
 	@Override
 	public boolean updateCommunicationType(CommunicationTypes c) {
 		try {
@@ -512,19 +684,27 @@ public class AdminServiceImpl implements AdminService {
 	
 	/** 
      * Goal Service methods
-     *  @author davidforbes
-     *  @date 06/10/2014
      * 
      */
 	
 	@Resource
 	private GoalTypesDao<GoalTypes> GoalTypesDao;
 	
+	/** 
+     * retrieve with List<object> of Goal Types from Goal_Types table
+     * @return List<Object>
+     */
 	@Override
 	public List<GoalTypes> findGoalTypes() {
 		return GoalTypesDao.find(" from GoalTypes");
 	}
 	
+	/** 
+     * save Goal Types object to Goal_Types table
+     * 
+     * @param GoalTypes g
+     * @return boolean
+     */
 	@Override
 	public boolean saveGoalType(GoalTypes g) {
 		try {
@@ -536,6 +716,11 @@ public class AdminServiceImpl implements AdminService {
 		}
 	}
 	
+	/** 
+     * update Goal Types object to Goal_Types table
+     * @param GoalTypes g
+     * @return boolean
+     */
 	@Override
 	public boolean updateGoalType(GoalTypes g) {
 		try {
@@ -549,19 +734,27 @@ public class AdminServiceImpl implements AdminService {
 	
 	/** 
      * Priority Service methods
-     *  @author davidforbes
-     *  @date 06/10/2014
      * 
      */
 	
 	@Resource
 	private PriorityTypesDao<PriorityTypes> PriorityTypesDao;
 	
+	/** 
+     * retrieve with List<object> of Priority Types from Priority_Types table
+     * @return List<Object>
+     */
 	@Override
 	public List<PriorityTypes> findPriorityTypes() {
 		return PriorityTypesDao.find(" from PriorityTypes");
 	}
 	
+	/** 
+     * save Priority Types object to Priority_Types table
+     * 
+     * @param PriorityTypes p
+     * @return boolean
+     */
 	@Override
 	public boolean savePriorityType(PriorityTypes p) {
 		try {
@@ -573,6 +766,11 @@ public class AdminServiceImpl implements AdminService {
 		}
 	}
 	
+	/** 
+     * update Priority Types object to Priority_Types table
+     * @param PriorityTypes p
+     * @return boolean
+     */
 	@Override
 	public boolean updatePriorityType(PriorityTypes p) {
 		try {

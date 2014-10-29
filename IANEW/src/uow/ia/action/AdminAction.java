@@ -20,7 +20,8 @@ import uow.ia.bean.TitleTypes;
 import com.opensymphony.xwork2.Preparable;
 
 /**
- * @author David
+ * @author David Forbes
+ * @date 09/09/2014 
  * 				
  */
 public class AdminAction extends BaseAction implements Preparable{	
@@ -32,9 +33,7 @@ public class AdminAction extends BaseAction implements Preparable{
 	 * Admin page start up Method
 	 * ----------------------------------------------------------------------------------------------------------
 	 * ----------------------------------------------------------------------------------------------------------*/
-	/**
-	 * @author davidforbes
-	 * @date 09/09/2014 -	
+	/**	 * 	
 	 * 		Start Method for Admin page		
 	 * 				
 	 */
@@ -60,8 +59,6 @@ public class AdminAction extends BaseAction implements Preparable{
 
 	
 	/**
-	 * @author davidforbes
-	 * @date 09/09/2014 -	
 	 * 		Accommodation Type Fields & Methods		
 	 * 				
 	 */
@@ -71,17 +68,26 @@ public class AdminAction extends BaseAction implements Preparable{
 	private List<AccommodationTypes> accommodationSelectList;	
 
 	
-	/**
-	 * @author davidforbes
-	 * @date 09/09/2014 -	
+	/**	
 	 * 		Accommodation Type ActionMethods		
 	 * 				
 	 */
 	
+	
+	/**	
+	 * 	getAccommodationTypeForm
+	 * 	@return String		
+	 * 				
+	 */
 	public String getAccommodationTypeForm(){
 		return SUCCESS;
 	}
 	
+	/**	
+	 * 	saveNewAccommodationType - saves a new Accommodation type
+	 * 	@return String		
+	 * 				
+	 */
 	public String saveNewAccommodationType(){
 		List<AccommodationTypes> accommodationTypeList = adminService.findAccommodationTypes();
 		boolean exists = false;
@@ -112,6 +118,11 @@ public class AdminAction extends BaseAction implements Preparable{
 		}
 	}
 	
+	/**	
+	 * updateAccommodationTypes - updates the list of Accommodation types
+	 * 	@return String
+	 * 					
+	 */
 	public String updateAccommodationTypes(){
 		for(AccommodationTypes at: getAccommodationSelectList())
 			adminService.updateAccommodationType(at);
@@ -119,60 +130,92 @@ public class AdminAction extends BaseAction implements Preparable{
 	}
 	
 	/**
-	 * @author davidforbes
-	 * @date 09/09/2014 -	
 	 * 		Accommodation Getters & Setters		
 	 * 				  
 	 */
 	
+	/**	
+	 * 	getAccommodationName
+	 * 	@return String		
+	 * 				
+	 */
 	public String getAccommodationName() {
 		return accommodationName;
 	}
 
+	/**	
+	 * 	setAccommodationName
+	 * 	@param accommodationName String		
+	 * 				
+	 */
 	public void setAccommodationName(String accommodationName) {
 		this.accommodationName = accommodationName;
 	}
 
+	/**	
+	 * 	getAccommodationDescription
+	 * 	@return String		
+	 * 				
+	 */
 	public String getAccommodationDescription() {
 		return accommodationDescription;
 	}
 
+	/**	
+	 * 	setAccommodationDescription
+	 * 	@param accommodationDescription String		
+	 * 				
+	 */
 	public void setAccommodationDescription(String accommodationDescription) {
 		this.accommodationDescription = accommodationDescription;
 	}
 
+	/**	
+	 * 	getAccommodationSelectList
+	 * 	@return List<AccommodationTypes>		
+	 * 				
+	 */
 	public List<AccommodationTypes> getAccommodationSelectList() {
 		return accommodationSelectList;
 	}
 
+	/**	
+	 * 	setAccommodationSelectList
+	 * 	@param accommodationSelectList List<AccommodationTypes> 		
+	 * 				
+	 */
 	public void setAccommodationSelectList(List<AccommodationTypes> accommodationSelectList) {
 		this.accommodationSelectList = accommodationSelectList;
 	}
 	
 	/**
-	 * @author davidforbes
-	 * @date 13/09/2014 -	
 	 * 		Cultural Background Type Fields & Methods		
 	 * 				
 	 */
 	private CulturalBackgroundTypes culturalBackgroundType;
-	
-
 	private String culturalBackgroundName;
 	private String culturalBackgroundDescription;
 	private List<CulturalBackgroundTypes> culturalBackgroundSelectList;	
 
 	/**
-	 * @author davidforbes
-	 * @date 13/09/2014 -	
 	 * 		culturalBackground Type ActionMethods		
 	 * 				
 	 */
 	
+	/**	
+	 * 	getCulturalBackgroundTypeForm
+	 * 	@return String		
+	 * 				
+	 */
 	public String getCulturalBackgroundTypeForm(){
 		return SUCCESS;
 	}
 	
+	/**	
+	 * 	saveNewculturalBackgroundType - saves a new Cultural Background type
+	 * 	@return String		
+	 * 				
+	 */
 	public String saveNewculturalBackgroundType(){
 		List<CulturalBackgroundTypes> culturalBackgroundTypeList = adminService.findCulturalBackgroundTypes();
 		boolean exists = false;
@@ -203,6 +246,11 @@ public class AdminAction extends BaseAction implements Preparable{
 		}
 	}
 	
+	/**	
+	 * updateCultualBackgroundType - updates the list of Cultural Background types
+	 * 	@return String
+	 * 					
+	 */
 	public String updateCultualBackgroundType(){
 		System.out.println("Struts: start updateCulturalType");
 		for(CulturalBackgroundTypes ct: getCulturalBackgroundSelectList())
@@ -218,44 +266,79 @@ public class AdminAction extends BaseAction implements Preparable{
 	 * 				  
 	 */
 	
+	/**	
+	 * 	getCulturalBackgroundType
+	 * 	@return CulturalBackgroundTypes		
+	 * 				
+	 */
 	public CulturalBackgroundTypes getCulturalBackgroundType() {
 		return culturalBackgroundType;
 	}
 
-	public void setCulturalBackgroundType(
-			CulturalBackgroundTypes culturalBackgroundType) {
+	/**	
+	 * 	setCulturalBackgroundType
+	 * 	@param culturalBackgroundType CulturalBackgroundTypes 		
+	 * 				
+	 */
+	public void setCulturalBackgroundType(CulturalBackgroundTypes culturalBackgroundType) {
 		this.culturalBackgroundType = culturalBackgroundType;
 	}
 
+	/**	
+	 * 	getCulturalBackgroundName
+	 * 	@return String		
+	 * 				
+	 */
 	public String getCulturalBackgroundName() {
 		return culturalBackgroundName;
 	}
 
+	/**	
+	 * 	setCulturalBackgroundName
+	 * 	@param culturalBackgroundName String 		
+	 * 				
+	 */
 	public void setCulturalBackgroundName(String culturalBackgroundName) {
 		this.culturalBackgroundName = culturalBackgroundName;
 	}
 
+	/**	
+	 * 	getCulturalBackgroundDescription
+	 * 	@return String		
+	 * 				
+	 */
 	public String getCulturalBackgroundDescription() {
 		return culturalBackgroundDescription;
 	}
 
-	public void setCulturalBackgroundDescription(
-			String culturalBackgroundDescription) {
+	/**	
+	 * 	setCulturalBackgroundDescription
+	 * 	@param culturalBackgroundDescription String 		
+	 * 				
+	 */
+	public void setCulturalBackgroundDescription(String culturalBackgroundDescription) {
 		this.culturalBackgroundDescription = culturalBackgroundDescription;
 	}
 
+	/**	
+	 * 	getCulturalBackgroundSelectList
+	 * 	@return List<CulturalBackgroundTypes>		
+	 * 				
+	 */
 	public List<CulturalBackgroundTypes> getCulturalBackgroundSelectList() {
 		return culturalBackgroundSelectList;
 	}
 
-	public void setCulturalBackgroundSelectList(
-			List<CulturalBackgroundTypes> culturalBackgroundSelectList) {
+	/**	
+	 * 	setCulturalBackgroundSelectList
+	 * 	@param culturalBackgroundSelectList List<CulturalBackgroundTypes> 		
+	 * 				
+	 */
+	public void setCulturalBackgroundSelectList(List<CulturalBackgroundTypes> culturalBackgroundSelectList) {
 		this.culturalBackgroundSelectList = culturalBackgroundSelectList;
 	}
 	
 	/**
-	 * @author davidforbes
-	 * @date 14/09/2014 -	
 	 * 		Danger Types Fields & Methods		
 	 * 				
 	 */
@@ -266,16 +349,24 @@ public class AdminAction extends BaseAction implements Preparable{
 
 	
 	/**
-	 * @author davidforbes
-	 * @date 14/09/2014 -	
 	 * 		Danger Types ActionMethods		
 	 * 				
 	 */
 	
+	/**	
+	 * 	getDangerTypeForm
+	 * 	@return String		
+	 * 				
+	 */
 	public String getDangerTypeForm(){
 		return SUCCESS;
 	}
 	
+	/**	
+	 * 	saveNewDangerType - saves a new Danger type
+	 * 	@return String		
+	 * 				
+	 */
 	public String saveNewDangerType(){
 		List<DangerTypes> dangerTypeList = adminService.findDangerTypes();
 		boolean exists = false;
@@ -306,6 +397,11 @@ public class AdminAction extends BaseAction implements Preparable{
 		}
 	}
 	
+	/**	
+	 * updateDangerType - updates the list of Danger types
+	 * 	@return String
+	 * 					
+	 */
 	public String updateDangerType(){
 		System.out.println("Struts: start updateDangerType");
 		for(DangerTypes dt: getDangerSelectList())
@@ -315,43 +411,74 @@ public class AdminAction extends BaseAction implements Preparable{
 	}
 	
 	/**
-	 * @author davidforbes
-	 * @date 14/09/2014 -	
 	 * 		Danger Types Getters & Setters		
 	 * 				  
 	 */
 	
+	/**	
+	 * 	setDangerType
+	 * 	@param dangerType DangerTypes		
+	 * 				
+	 */
 	public void setDangerType(DangerTypes dangerType) {
 		this.dangerType = dangerType;
 	}
 
+	/**	
+	 * 	getDangerName
+	 * 	@return String		
+	 * 				
+	 */
 	public String getDangerName() {
 		return dangerName;
 	}
 
+	/**	
+	 * 	setDangerName
+	 * 	@param dangerName String		
+	 * 				
+	 */
 	public void setDangerName(String dangerName) {
 		this.dangerName = dangerName;
 	}
 
+	/**	
+	 * 	getDangerDescription
+	 * 	@return String		
+	 * 				
+	 */
 	public String getDangerDescription() {
 		return dangerDescription;
 	}
 
+	/**	
+	 * 	setDangerDescription
+	 * 	@param dangerDescription String		
+	 * 				
+	 */
 	public void setDangerDescription(String dangerDescription) {
 		this.dangerDescription = dangerDescription;
 	}
 
+	/**	
+	 * 	getDangerSelectList
+	 * 	@return List<DangerTypes>		
+	 * 				
+	 */
 	public List<DangerTypes> getDangerSelectList() {
 		return dangerSelectList;
 	}
 
+	/**	
+	 * 	setDangerSelectList
+	 * 	@param dangerSelectList List<DangerTypes>		
+	 * 				
+	 */
 	public void setDangerSelectList(List<DangerTypes> dangerSelectList) {
 		this.dangerSelectList = dangerSelectList;
 	}
 	
 	/**
-	 * @author davidforbes
-	 * @date 14/09/2014 -	
 	 * 		Employment Types Fields & Methods		
 	 * 				
 	 */
@@ -363,16 +490,24 @@ public class AdminAction extends BaseAction implements Preparable{
 
 	
 	/**
-	 * @author davidforbes
-	 * @date 14/09/2014 -	
 	 * 		Employment Types ActionMethods		
 	 * 				
 	 */
 	
+	/**	
+	 * 	getEmploymentTypeForm
+	 * 	@return String		
+	 * 				
+	 */
 	public String getEmploymentTypeForm(){
 		return SUCCESS;
 	}
 	
+	/**	
+	 * 	saveNewEmploymentType - saves a new Employment type
+	 * 	@return String		
+	 * 				
+	 */
 	public String saveNewEmploymentType(){
 		List<EmploymentTypes> employmentTypeList = adminService.findEmploymentTypes();
 		boolean exists = false;
@@ -403,6 +538,11 @@ public class AdminAction extends BaseAction implements Preparable{
 		}
 	}
 	
+	/**	
+	 * updateEmploymentType - updates the list of Employment types
+	 * 	@return String
+	 * 					
+	 */
 	public String updateEmploymentType(){
 		for(EmploymentTypes et: getEmploymentSelectList())
 			adminService.updateEmploymentType(et);
@@ -410,47 +550,84 @@ public class AdminAction extends BaseAction implements Preparable{
 	}
 	
 	/**
-	 * @author davidforbes
-	 * @date 14/09/2014 -	
 	 * 		Employment Types Getters & Setters		
 	 * 				  
+	 */
+	
+	/**	
+	 * 	getEmploymentName
+	 * 	@return String		
+	 * 				
 	 */
 	public String getEmploymentName() {
 		return employmentName;
 	}
 
+	/**	
+	 * 	setEmploymentName
+	 * 	@param employmentName String		
+	 * 				
+	 */
 	public void setEmploymentName(String employmentName) {
 		this.employmentName = employmentName;
 	}
 
+	/**	
+	 * 	getEmploymentDescription
+	 * 	@return String		
+	 * 				
+	 */
 	public String getEmploymentDescription() {
 		return employmentDescription;
 	}
 
+	/**	
+	 * 	setEmploymentDescription
+	 * 	@param employmentDescription String		
+	 * 				
+	 */
 	public void setEmploymentDescription(String employmentDescription) {
 		this.employmentDescription = employmentDescription;
 	}
 
+	/**	
+	 * 	getEmploymentType
+	 * 	@return EmploymentTypes		
+	 * 				
+	 */
 	public EmploymentTypes getEmploymentType() {
 		return employmentType;
 	}
 
+	/**	
+	 * 	setEmploymentType
+	 * 	@param employmentType EmploymentTypes		
+	 * 				
+	 */
 	public void setEmploymentType(EmploymentTypes employmentType) {
 		this.employmentType = employmentType;
 	}
 
+	/**	
+	 * 	getEmploymentSelectList
+	 * 	@return List<EmploymentTypes>		
+	 * 				
+	 */
 	public List<EmploymentTypes> getEmploymentSelectList() {
 		return employmentSelectList;
 	}
 
+	/**	
+	 * 	setEmploymentSelectList
+	 * 	@param employmentSelectList List<EmploymentTypes>		
+	 * 				
+	 */
 	public void setEmploymentSelectList(List<EmploymentTypes> employmentSelectList) {
 		this.employmentSelectList = employmentSelectList;
 	}
 	
 	
 	/**
-	 * @author davidforbes
-	 * @date 14/09/2014 -	
 	 * 		Enquiry Types Fields & Methods		
 	 * 				
 	 */
@@ -462,16 +639,24 @@ public class AdminAction extends BaseAction implements Preparable{
 
 	
 	/**
-	 * @author davidforbes
-	 * @date 14/09/2014 -	
 	 * 		Enquiry Types ActionMethods		
 	 * 				
 	 */
 	
+	/**	
+	 * 	getEnquiryTypeForm
+	 * 	@return String
+	 * 				
+	 */
 	public String getEnquiryTypeForm(){
 		return SUCCESS;
 	}
 	
+	/**	
+	 * 	saveNewEnquiryType - saves a new Enquiry type
+	 * 	@return String		
+	 * 				
+	 */
 	public String saveNewEnquiryType(){
 		List<EnquiryTypes> enquiryTypeList = adminService.findEnquiryTypes();
 		boolean exists = false;
@@ -502,6 +687,11 @@ public class AdminAction extends BaseAction implements Preparable{
 		}
 	}
 	
+	/**	
+	 * updateEnquiryType - updates the list of Enquiry types
+	 * 	@return String
+	 * 					
+	 */
 	public String updateEnquiryType(){
 		for(EnquiryTypes et: getEnquiryTypeSelectList())
 			adminService.updateEnquiryType(et);
@@ -509,39 +699,65 @@ public class AdminAction extends BaseAction implements Preparable{
 	}
 	
 	/**
-	 * @author davidforbes
-	 * @date 14/09/2014 -	
 	 * 		Enquiry Types Getters & Setters		
 	 * 				  
 	 */
 	
+	/**	
+	 * 	getEnquiryTypeName
+	 * 	@return String
+	 * 				
+	 */
 	public String getEnquiryTypeName() {
 		return enquiryTypeName;
 	}
 
+	/**	
+	 * 	setEnquiryTypeName
+	 * 	@param enquiryTypeName String		
+	 * 				
+	 */
 	public void setEnquiryTypeName(String enquiryTypeName) {
 		this.enquiryTypeName = enquiryTypeName;
 	}
 
+	/**	
+	 * 	getEnquiryTypeDescription
+	 * 	@return String
+	 * 				
+	 */
 	public String getEnquiryTypeDescription() {
 		return enquiryTypeDescription;
 	}
 
+	/**	
+	 * 	setEnquiryTypeDescription
+	 * 	@param enquiryTypeDescription String		
+	 * 				
+	 */
 	public void setEnquiryTypeDescription(String enquiryTypeDescription) {
 		this.enquiryTypeDescription = enquiryTypeDescription;
 	}
 
+	/**	
+	 * 	getEnquiryTypeSelectList
+	 * 	@return List<EnquiryTypes>
+	 * 				
+	 */
 	public List<EnquiryTypes> getEnquiryTypeSelectList() {
 		return enquiryTypeSelectList;
 	}
 
+	/**	
+	 * 	setEnquiryTypeSelectList
+	 * 	@param enquiryTypeSelectList List<EnquiryTypes>		
+	 * 				
+	 */
 	public void setEnquiryTypeSelectList(List<EnquiryTypes> enquiryTypeSelectList) {
 		this.enquiryTypeSelectList = enquiryTypeSelectList;
 	}
 	
 	/**
-	 * @author davidforbes
-	 * @date 14/09/2014 -	
 	 * 		Gender Types Fields & Methods		
 	 * 				
 	 */
@@ -553,16 +769,24 @@ public class AdminAction extends BaseAction implements Preparable{
 
 	
 	/**
-	 * @author davidforbes
-	 * @date 14/09/2014 -	
 	 * 		Gender Types ActionMethods		
 	 * 				
 	 */
 	
+	/**	
+	 * 	getGenderTypesForm
+	 * 	@return String
+	 * 				
+	 */
 	public String getGenderTypesForm(){
 		return SUCCESS;
 	}
 	
+	/**	
+	 * 	saveNewGenderType - saves a new Gender type
+	 * 	@return String		
+	 * 				
+	 */
 	public String saveNewGenderType(){
 		List<GenderTypes> genderTypesList = adminService.findGenderTypes();
 		boolean exists = false;
@@ -593,6 +817,11 @@ public class AdminAction extends BaseAction implements Preparable{
 		}
 	}
 	
+	/**	
+	 * updateGenderType - updates the list of Gender types
+	 * 	@return String
+	 * 					
+	 */
 	public String updateGenderType(){
 		for(GenderTypes gt: getGenderSelectList())
 			adminService.updateGenderType(gt);
@@ -606,41 +835,79 @@ public class AdminAction extends BaseAction implements Preparable{
 	 * 				  
 	 */
 	
+	/**	
+	 * 	getGenderType
+	 * 	@return GenderTypes
+	 * 				
+	 */
 	public GenderTypes getGenderType() {
 		return genderType;
 	}
 
+	/**	
+	 * 	setGenderType
+	 * 	@param genderType GenderTypes		
+	 * 				
+	 */
 	public void setGenderType(GenderTypes genderType) {
 		this.genderType = genderType;
 	}
 
+	/**	
+	 * 	getGenderName
+	 * 	@return String
+	 * 				
+	 */
 	public String getGenderName() {
 		return genderName;
 	}
 
+	/**	
+	 * 	setGenderName
+	 * 	@param genderName String		
+	 * 				
+	 */
 	public void setGenderName(String genderName) {
 		this.genderName = genderName;
 	}
 
+	/**	
+	 * 	getGenderCode
+	 * 	@return String
+	 * 				
+	 */
 	public String getGenderCode() {
 		return genderCode;
 	}
 
+	/**	
+	 * 	setGenderCode
+	 * 	@param GenderCode String		
+	 * 				
+	 */
 	public void setGenderCode(String GenderCode) {
 		this.genderCode = GenderCode;
 	}
 
+	/**	
+	 * 	getGenderSelectList
+	 * 	@return List<GenderTypes>
+	 * 				
+	 */
 	public List<GenderTypes> getGenderSelectList() {
 		return genderSelectList;
 	}
 
+	/**	
+	 * 	setGenderSelectList
+	 * 	@param genderSelectList List<GenderTypes>		
+	 * 				
+	 */
 	public void setGenderSelectList(List<GenderTypes> genderSelectList) {
 		this.genderSelectList = genderSelectList;
 	}
 	
 	/**
-	 * @author davidforbes
-	 * @date 14/09/2014 -	
 	 * 		Status Types Fields & Methods		
 	 * 				
 	 */
@@ -651,16 +918,24 @@ public class AdminAction extends BaseAction implements Preparable{
 
 	
 	/**
-	 * @author davidforbes
-	 * @date 14/09/2014 -	
 	 * 		Status Types ActionMethods		
 	 * 				
 	 */
 	
+	/**	
+	 * 	getStatusTypesForm
+	 * 	@return String
+	 * 				
+	 */
 	public String getStatusTypesForm(){
 		return SUCCESS;
 	}
 	
+	/**	
+	 * 	saveNewStatusType - saves a new Status type
+	 * 	@return String		
+	 * 				
+	 */
 	public String saveNewStatusType(){
 		List<StatusTypes> statusTypesList = adminService.findStatusTypes();
 		boolean exists = false;
@@ -689,6 +964,11 @@ public class AdminAction extends BaseAction implements Preparable{
 		}
 	}
 	
+	/**	
+	 * updateStatusType - updates the list of Status types
+	 * 	@return String
+	 * 					
+	 */
 	public String updateStatusType(){
 		for(StatusTypes st: getStatusSelectList())
 			adminService.updateStatusType(st);
@@ -696,38 +976,65 @@ public class AdminAction extends BaseAction implements Preparable{
 	}
 	
 	/**
-	 * @author davidforbes
-	 * @date 14/09/2014 -	
 	 * 		Status Types Getters & Setters		
 	 * 				  
+	 */
+	
+	/**	
+	 * 	getStatusType
+	 * 	@return StatusTypes
+	 * 				
 	 */
 	public StatusTypes getStatusType() {
 		return statusType;
 	}
 
+	/**	
+	 * 	setStatusType
+	 * 	@param statusType StatusTypes		
+	 * 				
+	 */
 	public void setStatusType(StatusTypes statusType) {
 		this.statusType = statusType;
 	}
 
+	/**	
+	 * 	getStatusName
+	 * 	@return String
+	 * 				
+	 */
 	public String getStatusName() {
 		return statusName;
 	}
 
+	/**	
+	 * 	setStatusName
+	 * 	@param statusName String		
+	 * 				
+	 */
 	public void setStatusName(String statusName) {
 		this.statusName = statusName;
 	}
 
+	/**	
+	 * 	getStatusSelectList
+	 * 	@return List<StatusTypes> 
+	 * 				
+	 */
 	public List<StatusTypes> getStatusSelectList() {
 		return statusSelectList;
 	}
 
+	/**	
+	 * 	setStatusSelectList
+	 * 	@param statusSelectList List<StatusTypes>		
+	 * 				
+	 */
 	public void setStatusSelectList(List<StatusTypes> statusSelectList) {
 		this.statusSelectList = statusSelectList;
 	}
 	
 	/**
-	 * @author davidforbes
-	 * @date 14/09/2014 -	
 	 * 		Title Types Fields & Methods		
 	 * 				
 	 */
@@ -738,16 +1045,24 @@ public class AdminAction extends BaseAction implements Preparable{
 
 	
 	/**
-	 * @author davidforbes
-	 * @date 14/09/2014 -	
 	 * 		Title Types ActionMethods		
 	 * 				
 	 */
 	
+	/**	
+	 * 	getTitleTypesForm
+	 * 	@return String
+	 * 				
+	 */
 	public String getTitleTypesForm(){
 		return SUCCESS;
 	}
 	
+	/**	
+	 * 	saveNewTitleType - saves a new Title type
+	 * 	@return String		
+	 * 				
+	 */
 	public String saveNewTitleType(){
 		List<TitleTypes> titleTypesList = adminService.findTitleTypes();
 		boolean exists = false;
@@ -776,6 +1091,11 @@ public class AdminAction extends BaseAction implements Preparable{
 		}
 	}
 	
+	/**	
+	 * updateTitleType - updates the list of title types
+	 * 	@return String
+	 * 					
+	 */
 	public String updateTitleType(){
 		for(TitleTypes tt: getTitleSelectList())
 			adminService.updateTitleType(tt);
@@ -783,41 +1103,65 @@ public class AdminAction extends BaseAction implements Preparable{
 	}
 	
 	/**
-	 * @author davidforbes
-	 * @date 14/09/2014 -	
 	 * 		Title Types Getters & Setters		
 	 * 				  
+	 */
+	
+	/**	
+	 * 	getTitleName
+	 * 	@return String
+	 * 				
 	 */
 	public String getTitleName() {
 		return titleName;
 	}
 
+	/**	
+	 * 	setTitleName
+	 * 	@param titleName String		
+	 * 				
+	 */
 	public void setTitleName(String titleName) {
 		this.titleName = titleName;
 	}
 
+	/**	
+	 * 	getTitleType
+	 * 	@return TitleTypes
+	 * 				
+	 */
 	public TitleTypes getTitleType() {
 		return titleType;
 	}
 
+	/**	
+	 * 	setTitleType
+	 * 	@param titleType TitleTypes		
+	 * 				
+	 */
 	public void setTitleType(TitleTypes titleType) {
 		this.titleType = titleType;
 	}
 	
+	/**	
+	 * 	getTitleSelectList
+	 * 	@return List<TitleTypes>
+	 * 				
+	 */
 	public List<TitleTypes> getTitleSelectList() {
 		return titleSelectList;
 	}
 
+	/**	
+	 * 	setTitleSelectList
+	 * 	@param titleSelectList List<TitleTypes>		
+	 * 				
+	 */
 	public void setTitleSelectList(List<TitleTypes> titleSelectList) {
 		this.titleSelectList = titleSelectList;
 	}
 	
 	/* 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
 	 * 
 	 * ----------------------------------------------------------------------------------------------------------
 	 * ----------------------------------------------------------------------------------------------------------
@@ -835,12 +1179,21 @@ public class AdminAction extends BaseAction implements Preparable{
 	 * ----------------------------------------------------------------------------------------------------------
 	 */
 	
-	
+	/**	
+	 * 	getDisabilityTypeForm
+	 * 	@return String
+	 * 				
+	 */
 	public String getDisabilityTypeForm(){
 		DisabilitySelectList = adminService.findDisabilityTypes();
 		return SUCCESS;
 	}
 	
+	/**	
+	 * 	saveNewDisabilityType - saves a new disability type
+	 * 	@return String		
+	 * 				
+	 */
 	public String saveNewDisabilityType(){
 		List<DisabilityTypes> disabilityTypeList = adminService.findDisabilityTypes();
 		boolean exists = false;
@@ -871,6 +1224,11 @@ public class AdminAction extends BaseAction implements Preparable{
 		}
 	}
 	
+	/**	
+	 * updateDisabilityType - updates the list of disability types
+	 * 	@return String
+	 * 					
+	 */
 	public String updateDisabilityType(){
 		System.out.println("Struts: start updateDisabilityType");
 		for(DisabilityTypes dt: getDisabilitySelectList())
@@ -882,39 +1240,69 @@ public class AdminAction extends BaseAction implements Preparable{
 	 * Disability Getters & Setters
 	 * ----------------------------------------------------------------------------------------------------------
 	 */
+	/**	
+	 * 	getDangerType
+	 * 	@return DangerTypes
+	 * 				
+	 */
 	public DangerTypes getDangerType() {
 		return dangerType;
 	}
 	
+	/**	
+	 * 	getDisabilityName
+	 * 	@return String
+	 * 				
+	 */
 	public String getDisabilityName() {
 		return disabilityName;
 	}
 
+	/**	
+	 * 	setDisabilityName
+	 * 	@param disabilityName String		
+	 * 				
+	 */
 	public void setDisabilityName(String disabilityName) {
 		this.disabilityName = disabilityName;
 	}
 
+	/**	
+	 * 	getDisabilityDescription
+	 * 	@return String
+	 * 				
+	 */
 	public String getDisabilityDescription() {
 		return disabilityDescription;
 	}
 
+	/**	
+	 * 	setDisabilityDescription
+	 * 	@param disabilityDescription String		
+	 * 				
+	 */
 	public void setDisabilityDescription(String disabilityDescription) {
 		this.disabilityDescription = disabilityDescription;
 	}
 
+	/**	
+	 * 	getDisabilitySelectList
+	 * 	@return List<DisabilityTypes>
+	 * 				
+	 */
 	public List<DisabilityTypes> getDisabilitySelectList() {
 		return DisabilitySelectList;
 	}
 
+	/**	
+	 * 	setDisabilitySelectList
+	 * 	@param disabilitySelectList List<DisabilityTypes>		
+	 * 				
+	 */
 	public void setDisabilitySelectList(List<DisabilityTypes> disabilitySelectList) {
 		this.DisabilitySelectList = disabilitySelectList;
 	}
 	/* 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
 	 * 
 	 * ----------------------------------------------------------------------------------------------------------
 	 * ----------------------------------------------------------------------------------------------------------
@@ -933,11 +1321,20 @@ public class AdminAction extends BaseAction implements Preparable{
 	 * ----------------------------------------------------------------------------------------------------------
 	 */
 
-	
+	/**	
+	 * 	getIssueTypeForm
+	 * 	@return String
+	 * 				
+	 */
 	public String getIssueTypeForm(){
 		return SUCCESS;
 	}
 	
+	/**	
+	 * 	saveNewIssueType - saves a new issues type
+	 * 	@return String		
+	 * 				
+	 */
 	public String saveNewIssueType(){
 		List<IssueTypes> issueTypeList = adminService.findIssueTypes();
 		boolean exists = false;
@@ -967,6 +1364,11 @@ public class AdminAction extends BaseAction implements Preparable{
 		}
 	}
 	
+	/**	
+	 * updateIssueType - updates the list of issue types
+	 * 	@return String
+	 * 					
+	 */
 	public String updateIssueType(){
 		for(IssueTypes it: getIssueTypeList())
 			adminService.updateIssueType(it);
@@ -977,66 +1379,110 @@ public class AdminAction extends BaseAction implements Preparable{
 	 * Issue Getters & Setters
 	 * ----------------------------------------------------------------------------------------------------------
 	 */
+	
+	/**	
+	 * 	getIssueName
+	 * 	@return String
+	 * 				
+	 */
 	public String getIssueName() {
 		return issueName;
 	}
 
+	/**	
+	 * 	setIssueName
+	 * 	@param issueName String		
+	 * 				
+	 */
 	public void setIssueName(String issueName) {
 		this.issueName = issueName;
 	}
 
+	/**	
+	 * 	getIssueDescription
+	 * 	@return String
+	 * 				
+	 */
 	public String getIssueDescription() {
 		return issueDescription;
 	}
 
+	/**	
+	 * 	setIssueDescription
+	 * 	@param issueDescription String		
+	 * 				
+	 */
 	public void setIssueDescription(String issueDescription) {
 		this.issueDescription = issueDescription;
 	}
 
 	
-
+	/**	
+	 * 	getFormTitle
+	 * 	@return String
+	 * 				
+	 */
 	public String getFormTitle() {
 		return formTitle;
 	}
 
+	/**	
+	 * 	setFormTitle
+	 * 	@param formTitle String		
+	 * 				
+	 */
 	public void setFormTitle(String formTitle) {
 		this.formTitle = formTitle;
 	}
 
+	/**	
+	 * 	getIssueTypeList
+	 * 	@return List<IssueTypes>
+	 * 				
+	 */
 	public List<IssueTypes> getIssueTypeList() {
 		return IssueTypeList;
 	}
 
+	/**	
+	 * 	setIssueTypeList
+	 * 	@param issueTypeList List<IssueTypes>		
+	 * 				
+	 */
 	public void setIssueTypeList(List<IssueTypes> issueTypeList) {
 		IssueTypeList = issueTypeList;
 	}
 
 	
 	/**
-	 * @author davidforbes
-	 * @date 16/09/2014 -	
 	 * 		Contacts Fields & Methods		
 	 * 				
 	 */
 	private Contacts contact;
-	
-
 	private String firstname;
 	private String lastname;
 	private List<Contacts> contactsSelectList;	
 
 	
 	/**
-	 * @author davidforbes
-	 * @date 16/09/2014 -	
 	 * 		Contacts ActionMethods		
 	 * 				
 	 */
 	
+	/**	
+	 * 	getContactsForm
+	 * 	@return String
+	 * 				
+	 */
 	public String getContactsForm(){
 		return SUCCESS;
 	}
 	
+	/**	
+	 * 	saveNewContact - saves a new contact type
+	 * 	@return String		
+	 * 				
+	 */
 	public String saveNewContact(){
 		List<Contacts> contactsList = adminService.findContacts();
 		boolean exists = false;
@@ -1065,53 +1511,95 @@ public class AdminAction extends BaseAction implements Preparable{
 		}
 	}
 	
+	/**	
+	 * updateContact - updates the list of contact types
+	 * 	@return String
+	 * 					
+	 */
 	public String updateContact(){
 		//adminService.updateDisabilityType(disabilityType);
 		return SUCCESS;
 	}
 	
 	/**
-	 * @author davidforbes
-	 * @date 16/09/2014 -	
 	 * 		Contacts Getters & Setters		
 	 * 				  
 	 */
 
+
+	/**	
+	 * 	getContact
+	 * 	@return Contacts
+	 * 				
+	 */
 	public Contacts getContact() {
 		return contact;
 	}
 
+	/**	
+	 * 	setContact
+	 * 	@param contact Contacts		
+	 * 				
+	 */
 	public void setContact(Contacts contact) {
 		this.contact = contact;
 	}
 
+	/**	
+	 * 	getFirstname
+	 * 	@return String
+	 * 				
+	 */
 	public String getFirstname() {
 		return firstname;
 	}
 
+	/**	
+	 * 	setFirstname
+	 * 	@param firstname String		
+	 * 				
+	 */
 	public void setFirstname(String firstname) {
 		this.firstname = firstname;
 	}
 
+	/**	
+	 * 	getLastname
+	 * 	@return String
+	 * 				
+	 */
 	public String getLastname() {
 		return lastname;
 	}
 
+	/**	
+	 * 	setLastname
+	 * 	@param lastname String		
+	 * 				
+	 */
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
 	}
 
+	/**	
+	 * 	getContactsSelectList
+	 * 	@return List<Contacts>
+	 * 				
+	 */
 	public List<Contacts> getContactsSelectList() {
 		return contactsSelectList;
 	}
 
+	/**	
+	 * 	setContactsSelectList
+	 * 	@param contactsSelectList List<Contacts>		
+	 * 				
+	 */
 	public void setContactsSelectList(List<Contacts> contactsSelectList) {
 		this.contactsSelectList = contactsSelectList;
 	}
 	
 	/**
-	 * @author davidforbes
-	 * @date 04/10/2014 -	
 	 * 		Communication Type Fields & Methods		
 	 * 				
 	 */
@@ -1121,16 +1609,24 @@ public class AdminAction extends BaseAction implements Preparable{
 
 	
 	/**
-	 * @author davidforbes
-	 * @date 04/10/2014 -	
 	 * 		Communication Type ActionMethods		
 	 * 				
 	 */
 	
+	/**	
+	 * 	getCommunicationTypeForm
+	 * 	@return String
+	 * 				
+	 */
 	public String getCommunicationTypeForm(){
 		return SUCCESS;
 	}
 	
+	/**	
+	 * 	saveNewCommunicationType - saves a new communication type
+	 * 	@return String		
+	 * 				
+	 */
 	public String saveNewCommunicationType(){
 		List<CommunicationTypes> communicationTypeList = adminService.findCommunicationTypes();
 		boolean exists = false;
@@ -1159,6 +1655,11 @@ public class AdminAction extends BaseAction implements Preparable{
 		}
 	}
 	
+	/**	
+	 * updateCommunicationTypes - updates the list of communication types
+	 * 	@return String
+	 * 					
+	 */
 	public String updateCommunicationTypes(){
 		for(CommunicationTypes ct: getCommunicationSelectList())
 			adminService.updateCommunicationType(ct);
@@ -1166,40 +1667,65 @@ public class AdminAction extends BaseAction implements Preparable{
 	}
 	
 	/**
-	 * @author davidforbes
-	 * @date 04/10/2014 -	
 	 * 		Communication Getters & Setters		
 	 * 				  
 	 */
 	
+	/**	
+	 * 	getCommunicationType
+	 * 	@return CommunicationTypes
+	 * 				
+	 */
 	public CommunicationTypes getCommunicationType() {
 		return communicationType;
 	}
 
+	/**	
+	 * 	setCommunicationType
+	 * 	@param communicationType CommunicationTypes		
+	 * 				
+	 */
 	public void setCommunicationType(CommunicationTypes communicationType) {
 		this.communicationType = communicationType;
 	}
 
+	/**	
+	 * 	getCommunicationTypeName
+	 * 	@return String
+	 * 				
+	 */
 	public String getCommunicationTypeName() {
 		return communicationTypeName;
 	}
 
+	/**	
+	 * 	setCommunicationTypeName
+	 * 	@param communicationTypeName String		
+	 * 				
+	 */
 	public void setCommunicationTypeName(String communicationTypeName) {
 		this.communicationTypeName = communicationTypeName;
 	}
 
+	/**	
+	 * 	getCommunicationSelectList
+	 * 	@return List<CommunicationTypes>
+	 * 				
+	 */
 	public List<CommunicationTypes> getCommunicationSelectList() {
 		return communicationSelectList;
 	}
 
-	public void setCommunicationSelectList(
-			List<CommunicationTypes> communicationSelectList) {
+	/**	
+	 * 	setCommunicationSelectList
+	 * 	@param communicationSelectList List<CommunicationTypes>		
+	 * 				
+	 */
+	public void setCommunicationSelectList(List<CommunicationTypes> communicationSelectList) {
 		this.communicationSelectList = communicationSelectList;
 	}
 	
-	/**
-	 * @author davidforbes
-	 * @date 06/10/2014 -	
+	/**	
 	 * 		Goal Type Fields & Methods		
 	 * 				
 	 */
@@ -1208,17 +1734,25 @@ public class AdminAction extends BaseAction implements Preparable{
 	private List<GoalTypes> goalSelectList;	
 
 	
-	/**
-	 * @author davidforbes
-	 * @date 06/10/2014 -	
+	/**	
 	 * 		Accommodation Type ActionMethods		
 	 * 				
 	 */
 	
+	/**	
+	 * 	getGoalTypeForm
+	 * 	@return String
+	 * 				
+	 */
 	public String getGoalTypeForm(){
 		return SUCCESS;
 	}
 	
+	/**	
+	 * 	saveNewGoalType - saves a new goal type
+	 * 	@return String		
+	 * 				
+	 */
 	public String saveNewGoalType(){
 		List<GoalTypes> goalTypeList = adminService.findGoalTypes();
 		boolean exists = false;
@@ -1247,45 +1781,77 @@ public class AdminAction extends BaseAction implements Preparable{
 		}
 	}
 	
+	/**	
+	 * updateGoalTypes - updates the list of goal types
+	 * 	@return String
+	 * 					
+	 */
 	public String updateGoalTypes(){
 		for(GoalTypes gt: getGoalSelectList())
 			adminService.updateGoalType(gt);
 		return SUCCESS;
 	}
 	
-	/**
-	 * @author davidforbes
-	 * @date 06/10/2014 -	
+	/**	
 	 * 		Goal Getters & Setters		
 	 * 				  
+	 */
+	
+	/**	
+	 * 	getGoalType
+	 * 	@return GoalTypes
+	 * 				
 	 */
 	public GoalTypes getGoalType() {
 		return goalType;
 	}
 
+	/**	
+	 * 	setGoalType
+	 * 	@param goalType GoalTypes		
+	 * 				
+	 */
 	public void setGoalType(GoalTypes goalType) {
 		this.goalType = goalType;
 	}
 
+	/**	
+	 * 	getGoalTypeName
+	 * 	@return String
+	 * 				
+	 */
 	public String getGoalTypeName() {
 		return goalTypeName;
 	}
 
+	/**	
+	 * 	setGoalTypeName
+	 * 	@param goalTypeName String		
+	 * 				
+	 */
 	public void setGoalTypeName(String goalTypeName) {
 		this.goalTypeName = goalTypeName;
 	}
 
+	/**	
+	 * 	getGoalSelectList
+	 * 	@return List<GoalTypes>
+	 * 				
+	 */
 	public List<GoalTypes> getGoalSelectList() {
 		return goalSelectList;
 	}
 
+	/**	
+	 * 	setGoalSelectList
+	 * 	@param goalSelectList List<GoalTypes> 		
+	 * 				
+	 */
 	public void setGoalSelectList(List<GoalTypes> goalSelectList) {
 		this.goalSelectList = goalSelectList;
 	}
 	
-	/**
-	 * @author davidforbes
-	 * @date 06/10/2014 -	
+	/**	
 	 * 		Priority Type Fields & Methods		
 	 * 				
 	 */
@@ -1294,17 +1860,25 @@ public class AdminAction extends BaseAction implements Preparable{
 	private List<PriorityTypes> prioritySelectList;	
 
 	
-	/**
-	 * @author davidforbes
-	 * @date 06/10/2014 -	
+	/**	
 	 * 		Priority Type ActionMethods		
 	 * 				
 	 */
 	
+	/**	
+	 * 	getPriorityTypeForm
+	 * 	@return String
+	 * 				
+	 */
 	public String getPriorityTypeForm(){
 		return SUCCESS;
 	}
 	
+	/**	
+	 * 	saveNewPriorityType - saves a new priority type
+	 * 	@return String		
+	 * 				
+	 */
 	public String saveNewPriorityType(){
 		List<PriorityTypes> priorityTypeList = adminService.findPriorityTypes();
 		boolean exists = false;
@@ -1333,39 +1907,72 @@ public class AdminAction extends BaseAction implements Preparable{
 		}
 	}
 	
+	/**	
+	 * updatePriorityTypes - updates the list of priority types
+	 * 	@return String
+	 * 					
+	 */
 	public String updatePriorityTypes(){
 		for(PriorityTypes pt: getPrioritySelectList())
 			adminService.updatePriorityType(pt);
 		return SUCCESS;
 	}
 	
-	/**
-	 * @author davidforbes
-	 * @date 09/09/2014 -	
+	/**	
 	 * 		Priority Getters & Setters		
 	 * 				  
 	 */
 
+	/**	
+	 * 	getPriorityType
+	 * 	@return PriorityTypes
+	 * 				
+	 */
 	public PriorityTypes getPriorityType() {
 		return priorityType;
 	}
 
+	/**	
+	 * 	setPriorityType
+	 * 	@param priorityType PriorityTypes 		
+	 * 				
+	 */
 	public void setPriorityType(PriorityTypes priorityType) {
 		this.priorityType = priorityType;
 	}
 
+	/**	
+	 * 	getPriorityName
+	 * 	@return String
+	 * 				
+	 */
 	public String getPriorityName() {
 		return priorityName;
 	}
 
+	/**	
+	 * 	setPriorityName
+	 * 	@param priorityName String 		
+	 * 				
+	 */
 	public void setPriorityName(String priorityName) {
 		this.priorityName = priorityName;
 	}
 
+	/**	
+	 * 	getPrioritySelectList
+	 * 	@return List<PriorityTypes>
+	 * 				
+	 */
 	public List<PriorityTypes> getPrioritySelectList() {
 		return prioritySelectList;
 	}
 
+	/**	
+	 * 	setPrioritySelectList
+	 * 	@param prioritySelectList List<PriorityTypes> 		
+	 * 				
+	 */
 	public void setPrioritySelectList(List<PriorityTypes> prioritySelectList) {
 		this.prioritySelectList = prioritySelectList;
 	}
