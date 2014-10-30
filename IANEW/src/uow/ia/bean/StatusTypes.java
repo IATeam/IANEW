@@ -13,7 +13,6 @@ import org.hibernate.search.annotations.Indexed;
 
 /**
  * @author Kim To
- * @version 1.0.4, 31/08/2014
  */
 
 @Indexed

@@ -13,12 +13,6 @@ import org.hibernate.search.annotations.Resolution;
 
 /**
  * @author Kim To
- * @version 1.0.3, 27/09/2014
- * 
- * Modification History:
- * 		27/09/2014
- * 			Change Integer createdUserId and Integer updatedUserId to Contacts object
- * 			Change constructor, setters and getters
  */
 
 @Indexed

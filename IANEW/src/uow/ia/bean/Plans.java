@@ -17,10 +17,6 @@ import org.hibernate.search.annotations.Resolution;
  * Bean class of Plans
  * 
  * @author Kim To
- * @version 1.0.4, 28/09/2014
- * 
- * Modification History:
- * 		28/09/2014	Change from Integer to Contacts for createdUser and updatedUser
  */
 
 @Indexed

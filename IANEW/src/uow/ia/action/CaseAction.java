@@ -9,6 +9,21 @@ import org.apache.struts2.interceptor.SessionAware;
 //import bsh.This;
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
 import com.sun.org.apache.xml.internal.security.keys.content.PGPData;
@@ -47,25 +62,12 @@ import uow.ia.util.DateUtil;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
 
-/** ---------------------------------------------------------------------------------------------
- * @author: Quang Nhan
- * Created Date: 27/07/2014
- * ==============================================
- * Updates:
- * 12/08/2014 - 	Quang Nhan
- * 					Migrate code into new project setup
- * 14/08/2014 	- 	Quang Nhan
- * 					Connect and retrieve data from service class to case, caselist jsps and a
- * 					dded pagination functionality
- * 16/08/2014 -	Quang Nhan
- * 					Refactor the code
- * ==============================================
- * 	Description: An action class to linking the service from spring to the case jsp pages
+/**
+ * An action class to linking the service from spring to the case jsp pages
+ * 
+ * @author: Kim To
  *
- *----------------------------------------------------------------------------------------------*/
-
-
-
+ */
 public class CaseAction extends BaseAction implements SessionAware, ModelDriven<IndividualCases>, Preparable{
 	
 	private final static String kExistingCaseTitle = "Existing Case";
@@ -77,6 +79,955 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 	private Integer authorisedContactId;
 
 	
+	private IndividualCases iamodel = new IndividualCases();
+
+
+	private Contacts contact; //not calling from case to allow 'CASE' to share the same include jsp
+
+
+	/**
+	 * List of types for drop down selection box
+	 */
+	private List<TitleTypes> titleSelectList = new ArrayList<TitleTypes>();
+
+
+	private List<GenderTypes> genderSelectList = new ArrayList<GenderTypes>();
+
+
+	private List<CulturalBackgroundTypes> culturalBackgroundSelectList = new ArrayList<CulturalBackgroundTypes>();
+
+
+	private List<AccommodationTypes> accommodationSelectList = new ArrayList<AccommodationTypes>();
+
+
+	private List<DisabilityTypes> disabilitySelectList = new ArrayList<DisabilityTypes>();
+
+
+	private List<IssueTypes> issueSelectList = new ArrayList<IssueTypes>();
+
+
+	private List<EmploymentTypes> employmentSelectList = new ArrayList<EmploymentTypes>();
+
+
+	private List<DangerTypes> dangerSelectList = new ArrayList<DangerTypes>();
+
+
+	private List<StatusTypes> statusSelectList = new ArrayList<StatusTypes>();
+
+
+	private List<Contacts> advocateSelectList = new ArrayList<Contacts>();
+
+
+	private List<PriorityTypes> prioritySelectList = new ArrayList<PriorityTypes>();
+
+
+	private List<CommunicationTypes> communicationSelectList = new ArrayList<CommunicationTypes>();
+
+
+	private List<GoalTypes> goalSelectList = new ArrayList<GoalTypes>();
+
+
+	private List<ReviewFrequencies> reviewFrequencyList = new ArrayList<ReviewFrequencies>();
+
+
+	private List<Contacts> developerSelectList = new ArrayList<Contacts>();
+
+
+	private List<StatusTypes> planStatusSelectList = new ArrayList<StatusTypes>();
+
+
+	private List<StatusTypes> goalStatusSelectList = new ArrayList<StatusTypes>();
+
+
+	/**
+	 * Lists of selected type ids
+	 */
+	private List<Integer> theDisabilityListId = new ArrayList<Integer>();
+	private List<StatusTypes> caseIssueStatusSelectList = new ArrayList<StatusTypes>();
+
+
+	private List<Integer> theIssueListId = new ArrayList<Integer>();
+
+
+	private List<Integer> theEmploymentListId = new ArrayList<Integer>();
+
+
+	private List<Integer> theCommunicationsList = new ArrayList<Integer>();
+
+
+	private List<Integer> theGoalList = new ArrayList<Integer>();
+
+
+	private List<Integer> theDeveloperList = new ArrayList<Integer>();
+
+
+	private List<Integer> theGoalStatusList = new ArrayList<Integer>();
+
+
+	private List<Integer> theIssueStatusList = new ArrayList<Integer>();
+
+
+	private List<String> communicationDateList = new ArrayList<String>();
+
+
+	private String theReviewFrequencyString;
+	private String dob;
+	private int theTitleTypeId;
+	private int theGenderTypeId;
+	private int theCulturalBackgroundTypeId;
+	private int theAccommodationTypeId;
+	private int theDangerTypeId;
+	private int theStatus;
+	private int theAdvocate;
+	private int thePriority;
+	private int thePlanStatus;
+	private int theReviewFrequency;
+	private String lastReviewedDate;
+	private String planProvidedDate;
+	private String consentSignedDate;
+	private String authorisedByDate;
+
+
+	/*
+	 * Sets variables for 1 to many relationship tables
+	 */
+	private List<CaseIssues> issueSet;
+	private List<IndividualCases> linkedCasesSet;
+	private List<Addresses> addressSet;
+	private List<ClientDisabilities> clientDisabilitiesSet;
+	private Date createdDate;
+	private Date updatedDate;
+	private String createdBy;
+	private String updatedBy;
+	private Integer id;
+	private String inquisitor;
+	private String referredBy;
+	private String referredTo;
+	/*
+	 * Employment
+	 */
+	
+	//private String profession, workPhone, employmentDescription, employmentComment;
+	
+	/*
+	 * Sumamry
+	 */
+	private String description;
+	//vairiable used to get case id;
+	int hiddenid;
+
+
+	/* For pagination */
+	private List<IndividualCases> caseList;
+	int page;
+	int numberOfRecords;
+	long totalNumberOfRecords;
+	long totalNumberOfPages;
+
+
+	private Map <String, Object> userSession;
+
+	@Override
+	public void prepare() throws Exception {//TODO:
+		if (!((Integer) getHiddenid() == null || (Integer)getHiddenid() == 0)) {
+			iamodel = caseServices.getCase(getHiddenid());
+			activateLists();
+			
+		} else {
+			
+			//if (this.contactId != null) {
+			//	iamodel.setContact(contactService.getContacts(this.contactId));
+			//	iamodel.setRelatedEnquiry(enquiryService.getEnquiry(this.enquiryId));
+			//} else 
+				if (this.enquiryId != null) {
+					this.formTitle = "New Case";
+					Enquiries enquiry = enquiryService.getEnquiry(this.enquiryId);
+					iamodel.setRelatedEnquiry(enquiry);
+					System.out.println(enquiry.getContact().getId());
+					iamodel.setContact(enquiry.getContact());
+					
+					List<EnquiryIssues> eiList = enquiry.getEnquiryIssuesList();
+					iamodel.getCaseIssuesList().clear();
+					for (EnquiryIssues e : eiList) {
+						CaseIssues ci = new CaseIssues();
+						ci.setIssue(e.getIssue());
+						ci.setComments(e.getComment());
+						iamodel.getCaseIssuesList().add(ci);
+						System.out.println(ci.getIssue().getIssueName());
+					}
+					System.out.println("issue list size " + iamodel.getCaseIssuesList().size());
+					initialiseDBList();
+			} 
+		}
+	
+		if (iamodel == null)
+			iamodel = new IndividualCases();
+		
+		if (iamodel.getPlan() == null)
+			iamodel.setPlan(new Plans());
+		
+		if (getSupportContactId() != null) {
+			try {
+				iamodel.getPlan().setSupportPerson(contactService.getContacts(getSupportContactId()));
+			} catch(Exception e) {
+				iamodel.getPlan().setSupportPerson(new Contacts());
+			}
+		} 
+		
+		if (getAuthorisedContactId() != null) {
+			try {
+				iamodel.getPlan().setAuthorisedBy(contactService.getContacts(getAuthorisedContactId()));
+			} catch(Exception e) {
+				iamodel.getPlan().setAuthorisedBy(new Contacts());
+			}
+		} 
+	}
+
+	/**
+	 * populate the Select List vairables
+	 */
+	private void activateLists(){
+		titleSelectList=typesService.findTitleTypes();
+		genderSelectList=typesService.findGenderTypes();
+		culturalBackgroundSelectList=typesService.findCulturalBackgroundTypes();
+		accommodationSelectList = typesService.findAccommodationTypes();
+		disabilitySelectList = typesService.findDisabilityTypes();
+		issueSelectList = typesService.findIssueTypes();
+		dangerSelectList = typesService.findDangerTypes();
+		statusSelectList = typesService.findStatusTypes(2);
+		employmentSelectList = typesService.findEmploymentTypes();
+		advocateSelectList = caseServices.findAdvocates();
+		prioritySelectList = typesService.findPriorityTypes();
+		communicationSelectList = typesService.findCommunicationTypes();
+		goalSelectList = typesService.findGoalTypes();
+		reviewFrequencyList = caseServices.findReviewFrequencies();
+		developerSelectList = caseServices.findAdvocates();
+		planStatusSelectList = typesService.findStatusTypes(3);
+		goalStatusSelectList = typesService.findStatusTypes(4);
+		caseIssueStatusSelectList = typesService.findStatusTypes(5);
+	}
+
+	/**
+	 * This method will validate whether the Contact object is empty
+	 * 
+	 * @param c 
+	 * @return true or false whether the contact object is empty
+	 */
+	public boolean isContactEmpty(Contacts c) {
+		if (c != null) {
+			if (c.getFirstname().trim().isEmpty() && 
+				c.getLastname().trim().isEmpty() && 
+				c.getOthername().trim().isEmpty() && 
+				c.getMobilephone().trim().isEmpty()) {
+				
+				return true;
+			}
+		} 
+		return false;
+	}
+
+	/**
+	 * Action method which retrieves case List and used for Case List menu item.
+	 * Redundant method (This method has been replaced in CaseListAction.java
+	 * 
+	 * @return String
+	 * @see uow.ia.action.CaseListAction#getCaseList()
+	 */
+	public String caseList(){//TODO:
+		this.formTitle = "Case List";
+		setPage(1);
+		setNumberOfRecords(10);
+		
+		setCaseList(caseServices.findCasesByPage(page,numberOfRecords));
+		totalNumberOfRecords = caseServices.countCases();
+		int mod = (int) totalNumberOfRecords % numberOfRecords;
+		if (mod!= 0)
+			mod = 1;
+		totalNumberOfPages = totalNumberOfRecords/numberOfRecords + mod;
+		return SUCCESS;
+	}
+
+	/**
+	 * Action Method for updating the case list after requesting a different page
+	 * Redundant method (This method has been replaced in CaseListAction.java)
+	 * 
+	 * @return String
+	 * @see uow.ia.action.CaseListAction
+	 */
+	public String updateCaseList(){ //TODO:
+		caseList = caseServices.findCasesByPage(getPage(),getNumberOfRecords());
+		totalNumberOfRecords = caseServices.countCases();
+		int mod = (int) totalNumberOfRecords % numberOfRecords;
+		if (mod!= 0)
+			mod = 1;
+		totalNumberOfPages = totalNumberOfRecords/numberOfRecords + mod;
+		this.formTitle = "Case List";
+		return SUCCESS;
+	}
+
+	/**
+	 * Action method for assigning the contact to Client Details section in Existing and New Case menu item 
+	 * Used for Contact Sugggestion utility
+	 * 
+	 * @return String
+	 */
+	public String assignContact(){ //TODO:
+		setFormTitle("New Case");
+		try{
+			if (getContactid() > 0)
+				iamodel.setContact(contactService.getContacts(getContactid()));
+			
+		}catch(NullPointerException npe){
+			iamodel = new IndividualCases();
+			if (getContactid() > 0)
+				iamodel.setContact(contactService.getContacts(getContactid()));
+		}
+		activateLists();
+		//initialiseDBList();
+		if(getCall() == 1)
+			return "contactinfo";
+		else{
+			return "dangertype";
+		}
+	}
+
+	/**
+	 * Action method for assigning contact to Support section in Exisitng and New Case Menu item
+	 * Used for Contact Suggestion utility
+	 * 
+	 * @return String
+	 */
+	public String assignSupportContact() {//TODO:
+		if (getSupportContactId() > 0) {
+			if (iamodel == null) {
+				iamodel = new IndividualCases();
+			}
+				
+			Contacts support = new Contacts();
+			try {
+				support = contactService.getContacts(getSupportContactId());
+				
+				if (iamodel.getPlan() == null)
+					iamodel.setPlan(new Plans());
+				
+				iamodel.getPlan().setSupportPerson(support);
+				support = null;
+			} catch(Exception e) {
+				iamodel.getPlan().setSupportPerson(new Contacts());
+			}
+		}
+		return SUCCESS;
+	}
+
+	/**
+	 * Action method for assigning authorised contact in Existing and New Case.
+	 * Used for contact suggestion utility
+	 * 
+	 * @return
+	 */
+	public String assignAuthorisedContact() {//TODO:
+		if (getAuthorisedContactId() > 0) {
+			if (iamodel == null) {
+				iamodel = new IndividualCases();
+			}
+				
+			Contacts authorised = new Contacts();
+			try {
+				authorised = contactService.getContacts(getAuthorisedContactId());
+				
+				if (iamodel.getPlan() == null)
+					iamodel.setPlan(new Plans());
+				
+				iamodel.getPlan().setAuthorisedBy(authorised);
+			} catch(Exception e) {
+				iamodel.getPlan().setAuthorisedBy(new Contacts());
+			}
+		}
+		return SUCCESS;
+	}
+
+	/**
+	 * Action method for clearing the client contact in New Case
+	 * Used for contact suggestion utility
+	 * 
+	 * @return
+	 */
+	public String clearContact(){ //TODO:
+		setFormTitle("New Case");
+		try{
+			iamodel.setContact(new Contacts());
+		}catch(NullPointerException npe){
+			iamodel = new IndividualCases();
+			iamodel.setContact(new Contacts());
+		}
+		activateLists();
+		return SUCCESS;
+	}
+
+	/**
+	 * Redudant method
+	 * @return
+	 */
+	public String clearContactList() {//TODO:
+		System.out.println("clear the contact List");
+		return SUCCESS;
+	}
+
+	/**
+	 * Redundant method.
+	 * This method is used to clear the support contact person from the form
+	 * 
+	 * @return
+	 */
+	public String clearSupportContact() {//TODO:
+		try {
+			if (iamodel == null)
+				iamodel = new IndividualCases();
+			
+			if (iamodel.getPlan() == null)
+				iamodel.setPlan(new Plans());
+			
+			iamodel.getPlan().setSupportPerson(new Contacts());
+			System.out.println("clear support"+iamodel.getPlan().getSupportPerson());
+		} catch(NullPointerException e) {
+			iamodel = new IndividualCases();
+			iamodel.setPlan(new Plans());
+			iamodel.getPlan().setSupportPerson(new Contacts());
+		}
+		
+		return SUCCESS;
+	}
+
+	/**
+	 * Redundant method.
+	 * Used to clear authorised person from Existing Case and New Case form.
+	 * 
+	 * @return
+	 */
+	public String clearAuthorisedContact() {//TODO:
+		try {
+			if (iamodel == null)
+				iamodel = new IndividualCases();
+			
+			if (iamodel.getPlan() == null)
+				iamodel.setPlan(new Plans());
+			
+			iamodel.getPlan().setAuthorisedBy(new Contacts());
+		} catch(NullPointerException e) {
+			iamodel = new IndividualCases();
+			iamodel.setPlan(new Plans());
+			iamodel.getPlan().setAuthorisedBy(new Contacts());
+		}
+		
+		return SUCCESS;
+	}
+
+	/**
+	 * Action method to save and update Existing/New Case
+	 * @return
+	 */
+	public String saveUpdateCase(){ //TO DO
+			System.out.println("Start Saving Case");
+			System.out.println("support " + getSupportContactId() + " " + " authorised " + getAuthorisedContactId());
+			Users user = (Users) userSession.get(USER);
+			java.util.Calendar cal = java.util.Calendar.getInstance();
+			java.util.Date utilDate = cal.getTime();
+			java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+			
+			iamodel.getContact().setUpdatedDateTime(sqlDate);
+			
+			// set status
+			iamodel.setStatusType(typesService.getStatusTypeById(theStatus));
+			iamodel.setPriorityType(typesService.getPriorityTypeById(thePriority));
+			iamodel.getContact().setDangerType(typesService.getDangerTypeById(theDangerTypeId));
+			
+			// save advocate
+			iamodel.setAdvocate(contactService.getContacts(theAdvocate));
+			
+			// save contact details
+			if (theCulturalBackgroundTypeId != -1) { 
+				iamodel.getContact().setCulturalBackground(typesService.getCulturalBackgroundTypeById(theCulturalBackgroundTypeId));
+			} else {
+				iamodel.getContact().setCulturalBackground(null);
+			}
+			
+			if(theTitleTypeId != -1) {
+				iamodel.getContact().setTitleType(typesService.getTitleTypeById(theTitleTypeId));
+			} else {
+				iamodel.getContact().setTitleType(null);
+			}
+			
+			iamodel.getContact().setGenderType(typesService.getGenderTypeById(theGenderTypeId));
+			iamodel.getContact().setDangerType(typesService.getDangerTypeById(theDangerTypeId));
+			
+			java.sql.Date sqlDobDate = null;
+			try {
+				sqlDobDate = DateUtil.yyyymmddSqlDate(dob);
+			} catch (Exception e) {
+				sqlDobDate = null;
+			}
+			iamodel.getContact().setDob(sqlDobDate);
+			
+			// save addresses
+			if (theAccommodationTypeId != -1) {
+				iamodel.getContact().setAccommodation(typesService.getAccommodationTypeById(theAccommodationTypeId));
+			} else {
+				iamodel.getContact().setAccommodation(null);
+			}
+			
+			List<Addresses> al = iamodel.getContact().getAddressesList();
+			for (int i = 0; i < al.size(); i++) {
+				if (al.get(i).getId() == null){
+					al.get(i).setContact(iamodel.getContact());
+				} else if (al.get(i).getId() == -1) {
+					iamodel.getContact().getAddressesList().remove(i);
+					i--;
+				}
+			}
+			
+			// save disability
+			List<ClientDisabilities> cdl = iamodel.getContact().getDisabilitiesList();
+			if (getTheDisabilityListId().size() > 0) {
+				for(int i = 0; i < theDisabilityListId.size(); i++){
+					if (cdl.get(i).getId() != null) {
+						if (cdl.get(i).getId() != -1 && theDisabilityListId.get(i) != -1) {
+							cdl.get(i).setDisabilityType(typesService.getDisabilityTypeById(getTheDisabilityListId().get(i)));
+							cdl.get(i).setContact(iamodel.getContact());
+							//cdl.get(i).setUpdatedUser(user.getContact());
+						} else {
+							cdl.remove(i);
+							theDisabilityListId.remove(i);
+							i--;
+						}
+					} else {
+						if (theDisabilityListId.get(i) != -1) {
+							cdl.get(i).setDisabilityType(typesService.getDisabilityTypeById(getTheDisabilityListId().get(i)));
+							cdl.get(i).setContact(iamodel.getContact());
+							//cdl.get(i).setCreatedUser(user.getContact());
+							//cdl.get(i).setUpdatedUser(user.getContact());
+						} else {
+							cdl.remove(i);
+							theDisabilityListId.remove(i);
+							i--;
+						}
+					}
+				}
+			}
+			
+			// save employments
+			List<ContactEmployments> cel = iamodel.getContact().getEmploymentsList();
+			System.out.println();
+			if (getTheEmploymentListId().size() > 0) {
+				for(int i = 0; i < theEmploymentListId.size(); i++){
+					if (cel.get(i).getId() != null) {
+						if (cel.get(i).getId() != -1 && theEmploymentListId.get(i) != -1) {
+							cel.get(i).setEmploymentType(typesService.getEmploymentTypeById(getTheEmploymentListId().get(i)));
+							cel.get(i).setContact(iamodel.getContact());
+							//cel.get(i).setUpdatedUser(user.getContact());
+						} else {
+							cel.remove(i);
+							theEmploymentListId.remove(i);
+							i--;
+						}
+					} else {
+						if (theEmploymentListId.get(i) != -1) {
+							cel.get(i).setEmploymentType(typesService.getEmploymentTypeById(getTheEmploymentListId().get(i)));
+							cel.get(i).setContact(iamodel.getContact());
+							//cel.get(i).setCreatedUser(user.getContact());
+							//cel.get(i).setUpdatedUser(user.getContact());
+						} else {
+							cel.remove(i);
+							theEmploymentListId.remove(i);
+							i--;
+						}
+					}
+				}
+			}
+			
+			//save risk
+			List<Risks> riskList = iamodel.getRisksList();
+			for (int i = 0; i < riskList.size(); i++) {
+				if (riskList.get(i).getId() != null) {
+					if(riskList.get(i).getId() == -1) {
+						riskList.remove(i);
+						i--;
+					} 
+				} else {
+					riskList.get(i).setIndividualCase(iamodel);
+				}
+			}
+			
+			// save plan
+	
+			if (iamodel.getPlan() == null)
+				iamodel.setPlan(new Plans());
+			
+			if (iamodel.getId() == null) {
+				iamodel.getPlan().setIndividualCase(iamodel);
+			}
+			
+			
+			if (theReviewFrequency != -1) {
+				iamodel.getPlan().setReviewFrequency(typesService.getReviewFrequencyById(theReviewFrequency));
+			} else {
+				iamodel.getPlan().setReviewFrequency(null);
+			}
+			
+			if (thePlanStatus != -1) {
+				iamodel.getPlan().setStatusType(typesService.getStatusTypeById(thePlanStatus));
+			} else {
+				iamodel.getPlan().setStatusType(null);
+			}
+			
+			// save plan developers
+			List<PlanDevelopers> pdl = iamodel.getPlanDevelopersList();
+			System.out.println(pdl.size());
+			for (int i = 0; i < theDeveloperList.size(); i++) {
+				if (pdl.get(i).getId() != null) {
+					if (pdl.get(i).getId() != -1) {
+						pdl.get(i).setContact(contactService.getContacts(theDeveloperList.get(i)));
+						pdl.get(i).setIndividualCase(iamodel);
+					} else {
+						pdl.remove(i);
+						theDeveloperList.remove(i);
+						i--;
+					}
+				} else {
+					pdl.get(i).setContact(contactService.getContacts(theDeveloperList.get(i)));
+					pdl.get(i).setIndividualCase(iamodel);
+				}
+			}
+			
+			// save goals
+			System.out.println("Save goals");
+			List<PlanGoals> pgl = iamodel.getPlanGoalsList();
+			System.out.println(theGoalList.size() + " " + theGoalStatusList.size());
+			if (theGoalList.size() == theGoalStatusList.size()) {
+				for (int i = 0; i < theGoalList.size(); i++) {
+					if(pgl.get(i).getId() != null) {
+						if (pgl.get(i).getId() != -1 && theGoalList.get(i) != -1) {
+							pgl.get(i).setGoalType(typesService.getGoalTypeById(theGoalList.get(i)));
+							
+							if (theGoalStatusList.get(i) != -1) {
+								pgl.get(i).setStatusType(typesService.getStatusTypeById(theGoalStatusList.get(i)));
+							}
+							
+							pgl.get(i).setIndividualCase(iamodel);
+						} else {
+							pgl.remove(i);
+							theGoalList.remove(i);
+							theGoalStatusList.remove(i);
+							i--;
+						}
+					} else {
+						if (theGoalList.get(i) != -1) {
+							pgl.get(i).setGoalType(typesService.getGoalTypeById(theGoalList.get(i)));
+							
+							if (theGoalStatusList.get(i) != -1) {
+								pgl.get(i).setStatusType(typesService.getStatusTypeById(theGoalStatusList.get(i)));
+							}
+							
+							pgl.get(i).setIndividualCase(iamodel);
+						} else {
+							pgl.remove(i);
+							theGoalList.remove(i);
+							theGoalStatusList.remove(i);
+							i--;
+						}
+					}
+				}
+			}
+			
+			// save case issues
+			System.out.println("Save case issues");
+			List<CaseIssues> cil = iamodel.getCaseIssuesList();
+			System.out.println(cil.size() + " " + theIssueListId.size());
+			if (theIssueListId.size() == theIssueStatusList.size() && theIssueListId.size() == cil.size()) {
+				for (int i = 0; i < theIssueListId.size(); i++) {
+					if (cil.get(i).getId() != null) {
+						if (cil.get(i).getId() != -1 && theIssueListId.get(i) != -1) {
+							cil.get(i).setIssue(typesService.getIssueTypeById(theIssueListId.get(i)));
+							
+							if (theIssueStatusList.get(i) != -1) {
+								cil.get(i).setStatusType(typesService.getStatusTypeById(theIssueStatusList.get(i)));
+							}
+							
+							cil.get(i).setIndividualCase(iamodel);
+						} else {
+							cil.remove(i);
+							theIssueListId.remove(i);
+							theIssueStatusList.remove(i);
+							i--;
+						}
+					} else {
+						if (theIssueListId.get(i) != -1) {
+							cil.get(i).setIssue(typesService.getIssueTypeById(theIssueListId.get(i)));
+							
+							if (theIssueStatusList.get(i) != -1) {
+								cil.get(i).setStatusType(typesService.getStatusTypeById(theIssueStatusList.get(i)));
+							}
+							
+							cil.get(i).setIndividualCase(iamodel);
+						} else {
+							cil.remove(i);
+							theIssueListId.remove(i);
+							theIssueStatusList.remove(i);
+							i--;
+						}
+					}
+				}
+			}
+			
+			//save communications - need to find a better way
+			System.out.println("Save communications");
+			List<IndividualCaseCommunications> icl = iamodel.getCommunicationsList();
+			System.out.println(theCommunicationsList.size());
+			if (theCommunicationsList.size() == icl.size()) {
+				for (int i = 0; i < theCommunicationsList.size(); i++) {
+					System.out.println(theCommunicationsList.get(i));
+					if (icl.get(i).getId() != null) {
+						if (icl.get(i).getId() != -1 && theCommunicationsList.get(i) != -1) {
+							icl.get(i).setCommunicationType(typesService.getCommunicationTypeById(theCommunicationsList.get(i)));
+							icl.get(i).setIndividualCase(iamodel);
+						} else {
+							icl.remove(i);
+							theCommunicationsList.remove(i);
+							i--;
+						}
+					} else {
+						
+						if (theCommunicationsList.get(i) != -1) {
+							icl.get(i).setCommunicationType(typesService.getCommunicationTypeById(theCommunicationsList.get(i)));
+							icl.get(i).setIndividualCase(iamodel);
+						} else {
+							icl.remove(i);
+							theCommunicationsList.remove(i);
+							i--;
+						}
+					}
+				}
+			}
+			
+			if (iamodel.getPlan() != null) {
+				if (iamodel.getPlan().getAuthorisedBy() != null) {
+					if (isContactEmpty(iamodel.getPlan().getAuthorisedBy())) {
+						iamodel.getPlan().setAuthorisedBy(null);
+					}
+				}
+				
+				if (iamodel.getPlan().getSupportPerson() != null) {
+					System.out.println("suport id " + iamodel.getPlan().getSupportPerson().getId());
+					if (isContactEmpty(iamodel.getPlan().getSupportPerson())) {
+						System.out.println("support contact is empty");
+						iamodel.getPlan().setSupportPerson(null);
+					}
+				}
+			}
+			
+			iamodel.getContact().setContactType(typesService.getContactTypeById(2));
+			System.out.println("calling case services to save");
+			if (iamodel.getId() == null) {
+				if (caseServices.saveOrUpdateCase(iamodel, iamodel.getContact())) {
+					this.formTitle = kExistingCaseTitle;
+					activateLists();
+					setIamodel(caseServices.getCase(iamodel.getId()));
+					initialiseDBList();
+					hiddenid = iamodel.getId();
+					System.out.println("test " + iamodel.getId());
+					return SUCCESS;
+				} 
+			} else if(caseServices.saveOrUpdateCase(iamodel)) {
+				System.out.println("called after support remove");
+				this.formTitle = kExistingCaseTitle;
+				activateLists();
+				setIamodel(caseServices.getCase(iamodel.getId()));
+				initialiseDBList();
+				return SUCCESS;
+			}
+			
+			System.out.println("End Saving Case");
+			return SUCCESS;
+		}
+	
+	
+	/**
+	 * Action Method for New Case
+	 * @return
+	 */
+	public String newCase(){//TODO:
+		setFormTitle("New Case");
+		activateLists();
+		setCreatedDate(new Date());
+		setUpdatedDate(new Date());
+		return SUCCESS;
+	}
+
+	/**
+	 * Action Method for Existing Case
+	 * @return
+	 */
+	public String getExistingCase(){//TODO:
+		this.formTitle = kExistingCaseTitle;
+		activateLists();
+		initialiseDBList();
+		System.out.println(iamodel.getCaseIssuesList().size());
+		
+		System.out.println("Set stuffs");
+		System.out.println("no");
+		System.out.println("end get existing list");
+		return SUCCESS;
+	}
+
+	/**
+	 * This method is used to initialise the list using existing data from databas related to current existing case openned form.
+	 * 
+	 */
+	public void initialiseDBList() {//TODO:
+		if (iamodel != null) {
+			if (iamodel.getContact() != null) {
+				clearList();
+				if (iamodel.getContact().getAccommodation() != null) {
+					setTheAccommodationTypeId(iamodel.getContact().getAccommodation().getId());
+				}
+				
+				if (iamodel.getContact().getCulturalBackground() != null) {
+					setTheCulturalBackgroundTypeId(iamodel.getContact().getCulturalBackground().getId());
+				}
+				
+				if (iamodel.getContact().getDangerType() != null) {
+					setTheDangerTypeId(iamodel.getContact().getDangerType().getId());
+				}
+				
+				if (iamodel.getContact().getGenderType() != null) {
+					setTheGenderTypeId(iamodel.getContact().getGenderType().getId());
+				}
+				
+				if (iamodel.getStatusType() != null) {
+					setTheStatus(iamodel.getStatusType().getId());
+				}
+				
+				if (iamodel.getContact().getTitleType() != null) {
+					setTheTitleTypeId(iamodel.getContact().getTitleType().getId());
+				}
+				
+				if (iamodel.getAdvocate() != null) {
+					theAdvocate = iamodel.getAdvocate().getId();
+				}
+				
+				if (iamodel.getPlan() != null) {
+					if (iamodel.getPlan().getStatusType() != null) {
+						setThePlanStatus(iamodel.getPlan().getStatusType().getId());
+					}
+					
+					if (iamodel.getPlan().getLastReviewedDate() != null) {
+						lastReviewedDate = iamodel.getPlan().getLastReviewedDate().toString();
+					}
+					
+					if (iamodel.getPlan().getAuthorisedByDate() != null) {
+						authorisedByDate = iamodel.getPlan().getAuthorisedByDate().toString();
+					}
+					
+					if (iamodel.getPlan().getConsentSignedDate() != null) {
+						consentSignedDate = iamodel.getPlan().getConsentSignedDate().toString();
+					}
+					
+					if (iamodel.getPlan().getProvidedPlanDate() != null) {
+						planProvidedDate = iamodel.getPlan().getProvidedPlanDate().toString();
+					}
+					
+					if (iamodel.getPlan().getReviewFrequency() != null) {
+						theReviewFrequency = iamodel.getPlan().getReviewFrequency().getId();
+					}
+					
+				}
+				
+				if (iamodel.getPriorityType() != null) {
+					setThePriority(iamodel.getPriorityType().getId());
+				}
+				
+				List<PlanDevelopers> planDevelopersDB = iamodel.getPlanDevelopersList();
+				for (PlanDevelopers pd : planDevelopersDB) {
+					try {
+						theDeveloperList.add(pd.getContact().getId());
+					} catch(NullPointerException e) {
+						theDeveloperList.add(new Integer(-1));
+					}
+				}
+				
+				List<PlanGoals> planGoalsDB = getIamodel().getPlanGoalsList();
+				for (PlanGoals pg : planGoalsDB){
+					try {
+						theGoalList.add(pg.getGoalType().getId());
+					} catch (NullPointerException e) {
+						theGoalList.add(new Integer(-1));
+					}
+					
+					try {
+						theGoalStatusList.add(pg.getStatusType().getId());
+					}catch(NullPointerException e) {
+						theGoalStatusList.add(new Integer(-1));
+					}
+				}
+				
+				List<CaseIssues> caseIssuesDB = getIamodel().getCaseIssuesList();
+				for (CaseIssues ci : caseIssuesDB) {
+					try {
+						theIssueListId.add(ci.getIssue().getId());
+					} catch(NullPointerException e) {
+						theIssueListId.add(new Integer(-1));
+					}
+					
+					try {
+						theIssueStatusList.add(ci.getStatusType().getId());
+					}catch (NullPointerException e) {
+						theIssueStatusList.add(new Integer(-1));
+					}
+				}
+				
+				List<IndividualCaseCommunications> communicationListDBCaseCommunications = getIamodel().getCommunicationsList();
+				for(IndividualCaseCommunications icc : communicationListDBCaseCommunications) {
+					try {
+						theCommunicationsList.add(icc.getCommunicationType().getId());
+					} catch(NullPointerException e) {
+						theCommunicationsList.add(new Integer(-1));
+					}
+				}
+				
+				List<ClientDisabilities> disabilityDB = getIamodel().getContact().getDisabilitiesList();
+				for (ClientDisabilities cd : disabilityDB) {
+					try {
+						theDisabilityListId.add(cd.getDisabilityType().getId());
+					} catch(NullPointerException e) {
+						theDisabilityListId.add(new Integer(-1));
+					}
+				}
+				
+				List<ContactEmployments> employmentsDB = getIamodel().getContact().getEmploymentsList();
+				for (ContactEmployments ce : employmentsDB) {
+					try {
+						theEmploymentListId.add(ce.getEmploymentType().getId());
+					} catch(NullPointerException e) {
+						theEmploymentListId.add(new Integer(-1));
+					}
+				} 
+			}
+		}
+	}
+
+	/**
+	 * This method is used to clear the list retrieved from database related to current opened case
+	 */
+	public void clearList() {//TODO:
+		theDeveloperList.clear();
+		theGoalList.clear();
+		theGoalStatusList.clear();
+		theIssueListId.clear();
+		theIssueStatusList.clear();
+		theCommunicationsList.clear();
+		theDisabilityListId.clear();
+		theEmploymentListId.clear();
+	}
+
 	/**
 	 * @return the supportContactId
 	 */
@@ -133,30 +1084,6 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 		this.contactid = contactid;
 	}
 
-	private IndividualCases iamodel = new IndividualCases();
-	private Contacts contact; //not calling from case to allow 'CASE' to share the same include jsp
-	
-	/**
-	 * List of typs for drop down selection box
-	 */
-	private List<TitleTypes> titleSelectList = new ArrayList<TitleTypes>(); 							
-	private List<GenderTypes> genderSelectList = new ArrayList<GenderTypes>(); 						
-	private List<CulturalBackgroundTypes> culturalBackgroundSelectList = new ArrayList<CulturalBackgroundTypes>();	
-	private List<AccommodationTypes> accommodationSelectList = new ArrayList<AccommodationTypes>();			
-	private List<DisabilityTypes> disabilitySelectList = new ArrayList<DisabilityTypes>();	
-	private List<IssueTypes> issueSelectList = new ArrayList<IssueTypes>();					
-	private List<EmploymentTypes> employmentSelectList = new ArrayList<EmploymentTypes>();
-	private List<DangerTypes> dangerSelectList = new ArrayList<DangerTypes>();					
-	private List<StatusTypes> statusSelectList = new ArrayList<StatusTypes>();								
-	private List<Contacts> advocateSelectList = new ArrayList<Contacts>();
-	private List<PriorityTypes> prioritySelectList = new ArrayList<PriorityTypes>();
-	private List<CommunicationTypes> communicationSelectList = new ArrayList<CommunicationTypes>();	
-	private List<GoalTypes> goalSelectList = new ArrayList<GoalTypes>();	
-	private List<ReviewFrequencies> reviewFrequencyList = new ArrayList<ReviewFrequencies>();
-	private List<Contacts> developerSelectList = new ArrayList<Contacts>();
-	private List<StatusTypes> planStatusSelectList = new ArrayList<StatusTypes>();
-	private List<StatusTypes> goalStatusSelectList = new ArrayList<StatusTypes>();
-	private List<StatusTypes> caseIssueStatusSelectList = new ArrayList<StatusTypes>();
 	/**
 	 * @return the caseIssueStatusSelectList
 	 */
@@ -172,10 +1099,6 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 		this.caseIssueStatusSelectList = caseIssueStatusSelectList;
 	}
 
-	/**
-	 * Lists of selected type ids
-	 */
-	private List<Integer> theDisabilityListId = new ArrayList<Integer>();						
 	/**
 	 * @return the planStatusSelectList
 	 */
@@ -204,16 +1127,6 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 		this.goalStatusSelectList = goalStatusSelectList;
 	}
 
-	private List<Integer> theIssueListId = new ArrayList<Integer>();				
-	private List<Integer> theEmploymentListId = new ArrayList<Integer>();			
-	private List<Integer> theCommunicationsList = new ArrayList<Integer>();	
-	private List<Integer> theGoalList = new ArrayList<Integer>();
-	private List<Integer> theDeveloperList = new ArrayList<Integer>();
-	private List<Integer> theGoalStatusList = new ArrayList<Integer>();
-	private List<Integer> theIssueStatusList = new ArrayList<Integer>();
-	private List<String> communicationDateList = new ArrayList<String>(); 
-	
-	
 	/**
 	 * @return the theIssueStatusList
 	 */
@@ -298,24 +1211,6 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 		this.theGoalStatusList = theGoalStatusList;
 	}
 
-	private String theReviewFrequencyString;
-	private String dob;
-	private int theTitleTypeId; 							
-	private int theGenderTypeId;
-	private int theCulturalBackgroundTypeId;
-	private int theAccommodationTypeId;
-	private int theDangerTypeId;
-	private int theStatus;							
-	private int theAdvocate;						
-	private int thePriority;
-	private int thePlanStatus;
-	private int theReviewFrequency;
-	private String lastReviewedDate;
-	private String planProvidedDate;
-	private String consentSignedDate;
-	private String authorisedByDate;
-	
-	
 	/**
 	 * @return the theReviewFrequency
 	 */
@@ -1062,40 +1957,13 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 		this.totalNumberOfPages = totalNumberOfPages;
 	}
 
-	/*
-	 * Sets variables for 1 to many relationship tables
-	 */
-	private List<CaseIssues> issueSet;
-	private List<IndividualCases> linkedCasesSet;
-	private List<Addresses> addressSet;
-	private List<ClientDisabilities> clientDisabilitiesSet;
-
-	/*
-	 * status variables
-	 */
-	private Date createdDate, updatedDate;
-	private String createdBy, updatedBy;
-	private Integer id;
 	
-	/*
-	 * Referral
-	 */
-	private String inquisitor, referredBy, referredTo;
 	
 	/*
 	 * Employment
 	 */
 	
 	//private String profession, workPhone, employmentDescription, employmentComment;
-	
-	/*
-	 * Sumamry
-	 */
-	private String description;
-	
-	
-	//vairiable used to get case id;
-	int hiddenid;
 	
 	public int getHiddenid() {
 		return hiddenid;
@@ -1105,12 +1973,7 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 		this.hiddenid = hiddenid;
 	}
 
-	/* For pagination */
-	private List<IndividualCases> caseList;
-	int page;
-	int numberOfRecords;
-	long totalNumberOfRecords;
-	long totalNumberOfPages;
+	
 
 
 	/* 
@@ -1128,178 +1991,6 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 	
 	
 	/**
-	 * Action Method
-	 * @return
-	 */
-	public String newCase(){//TODO:
-		setFormTitle("New Case");
-		activateLists();
-		setCreatedDate(new Date());
-		setUpdatedDate(new Date());
-		return SUCCESS;
-	}
-
-	/**
-	 * Action Method
-	 * @return
-	 */
-	public String getExistingCase(){//TODO:
-		this.formTitle = kExistingCaseTitle;
-		activateLists();
-		initialiseDBList();
-		System.out.println(iamodel.getCaseIssuesList().size());
-		
-		System.out.println("Set stuffs");
-		System.out.println("no");
-		System.out.println("end get existing list");
-		return SUCCESS;
-	}
-	
-	public void initialiseDBList() {//TODO:
-		if (iamodel != null) {
-			if (iamodel.getContact() != null) {
-				clearList();
-				if (iamodel.getContact().getAccommodation() != null) {
-					setTheAccommodationTypeId(iamodel.getContact().getAccommodation().getId());
-				}
-				
-				if (iamodel.getContact().getCulturalBackground() != null) {
-					setTheCulturalBackgroundTypeId(iamodel.getContact().getCulturalBackground().getId());
-				}
-				
-				if (iamodel.getContact().getDangerType() != null) {
-					setTheDangerTypeId(iamodel.getContact().getDangerType().getId());
-				}
-				
-				if (iamodel.getContact().getGenderType() != null) {
-					setTheGenderTypeId(iamodel.getContact().getGenderType().getId());
-				}
-				
-				if (iamodel.getStatusType() != null) {
-					setTheStatus(iamodel.getStatusType().getId());
-				}
-				
-				if (iamodel.getContact().getTitleType() != null) {
-					setTheTitleTypeId(iamodel.getContact().getTitleType().getId());
-				}
-				
-				if (iamodel.getAdvocate() != null) {
-					theAdvocate = iamodel.getAdvocate().getId();
-				}
-				
-				if (iamodel.getPlan() != null) {
-					if (iamodel.getPlan().getStatusType() != null) {
-						setThePlanStatus(iamodel.getPlan().getStatusType().getId());
-					}
-					
-					if (iamodel.getPlan().getLastReviewedDate() != null) {
-						lastReviewedDate = iamodel.getPlan().getLastReviewedDate().toString();
-					}
-					
-					if (iamodel.getPlan().getAuthorisedByDate() != null) {
-						authorisedByDate = iamodel.getPlan().getAuthorisedByDate().toString();
-					}
-					
-					if (iamodel.getPlan().getConsentSignedDate() != null) {
-						consentSignedDate = iamodel.getPlan().getConsentSignedDate().toString();
-					}
-					
-					if (iamodel.getPlan().getProvidedPlanDate() != null) {
-						planProvidedDate = iamodel.getPlan().getProvidedPlanDate().toString();
-					}
-					
-					if (iamodel.getPlan().getReviewFrequency() != null) {
-						theReviewFrequency = iamodel.getPlan().getReviewFrequency().getId();
-					}
-					
-				}
-				
-				if (iamodel.getPriorityType() != null) {
-					setThePriority(iamodel.getPriorityType().getId());
-				}
-				
-				List<PlanDevelopers> planDevelopersDB = iamodel.getPlanDevelopersList();
-				for (PlanDevelopers pd : planDevelopersDB) {
-					try {
-						theDeveloperList.add(pd.getContact().getId());
-					} catch(NullPointerException e) {
-						theDeveloperList.add(new Integer(-1));
-					}
-				}
-				
-				List<PlanGoals> planGoalsDB = getIamodel().getPlanGoalsList();
-				for (PlanGoals pg : planGoalsDB){
-					try {
-						theGoalList.add(pg.getGoalType().getId());
-					} catch (NullPointerException e) {
-						theGoalList.add(new Integer(-1));
-					}
-					
-					try {
-						theGoalStatusList.add(pg.getStatusType().getId());
-					}catch(NullPointerException e) {
-						theGoalStatusList.add(new Integer(-1));
-					}
-				}
-				
-				List<CaseIssues> caseIssuesDB = getIamodel().getCaseIssuesList();
-				for (CaseIssues ci : caseIssuesDB) {
-					try {
-						theIssueListId.add(ci.getIssue().getId());
-					} catch(NullPointerException e) {
-						theIssueListId.add(new Integer(-1));
-					}
-					
-					try {
-						theIssueStatusList.add(ci.getStatusType().getId());
-					}catch (NullPointerException e) {
-						theIssueStatusList.add(new Integer(-1));
-					}
-				}
-				
-				List<IndividualCaseCommunications> communicationListDBCaseCommunications = getIamodel().getCommunicationsList();
-				for(IndividualCaseCommunications icc : communicationListDBCaseCommunications) {
-					try {
-						theCommunicationsList.add(icc.getCommunicationType().getId());
-					} catch(NullPointerException e) {
-						theCommunicationsList.add(new Integer(-1));
-					}
-				}
-				
-				List<ClientDisabilities> disabilityDB = getIamodel().getContact().getDisabilitiesList();
-				for (ClientDisabilities cd : disabilityDB) {
-					try {
-						theDisabilityListId.add(cd.getDisabilityType().getId());
-					} catch(NullPointerException e) {
-						theDisabilityListId.add(new Integer(-1));
-					}
-				}
-				
-				List<ContactEmployments> employmentsDB = getIamodel().getContact().getEmploymentsList();
-				for (ContactEmployments ce : employmentsDB) {
-					try {
-						theEmploymentListId.add(ce.getEmploymentType().getId());
-					} catch(NullPointerException e) {
-						theEmploymentListId.add(new Integer(-1));
-					}
-				} 
-			}
-		}
-	}
-	
-	public void clearList() {//TODO:
-		theDeveloperList.clear();
-		theGoalList.clear();
-		theGoalStatusList.clear();
-		theIssueListId.clear();
-		theIssueStatusList.clear();
-		theCommunicationsList.clear();
-		theDisabilityListId.clear();
-		theEmploymentListId.clear();
-	}
-	
-
-	/**
 	 * @return the dob
 	 */
 	public String getDob() {
@@ -1313,537 +2004,9 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 		this.dob = dob;
 	}
 
-	/**
-	 * Action method
-	 * @return
-	 */
-	public String caseList(){//TODO:
-		this.formTitle = "Case List";
-		setPage(1);
-		setNumberOfRecords(10);
-		
-		setCaseList(caseServices.findCasesByPage(page,numberOfRecords));
-		totalNumberOfRecords = caseServices.countCases();
-		int mod = (int) totalNumberOfRecords % numberOfRecords;
-		if (mod!= 0)
-			mod = 1;
-		totalNumberOfPages = totalNumberOfRecords/numberOfRecords + mod;
-		return SUCCESS;
-	}
 	
 	
-	/**
-	 * Action Method for updating the case list after requesting a different page
-	 * @return
-	 */
-	public String updateCaseList(){ //TODO:
-		caseList = caseServices.findCasesByPage(getPage(),getNumberOfRecords());
-		totalNumberOfRecords = caseServices.countCases();
-		int mod = (int) totalNumberOfRecords % numberOfRecords;
-		if (mod!= 0)
-			mod = 1;
-		totalNumberOfPages = totalNumberOfRecords/numberOfRecords + mod;
-		this.formTitle = "Case List";
-		return SUCCESS;
-	}
 	
-	private Map <String, Object> userSession;
-	
-	public String assignContact(){ //TODO:
-		setFormTitle("New Case");
-		try{
-			if (getContactid() > 0)
-				iamodel.setContact(contactService.getContacts(getContactid()));
-			
-		}catch(NullPointerException npe){
-			iamodel = new IndividualCases();
-			if (getContactid() > 0)
-				iamodel.setContact(contactService.getContacts(getContactid()));
-		}
-		activateLists();
-		//initialiseDBList();
-		if(getCall() == 1)
-			return "contactinfo";
-		else{
-			return "dangertype";
-		}
-	}
-	
-	public String assignSupportContact() {//TODO:
-		if (getSupportContactId() > 0) {
-			if (iamodel == null) {
-				iamodel = new IndividualCases();
-			}
-				
-			Contacts support = new Contacts();
-			try {
-				support = contactService.getContacts(getSupportContactId());
-				
-				if (iamodel.getPlan() == null)
-					iamodel.setPlan(new Plans());
-				
-				iamodel.getPlan().setSupportPerson(support);
-				support = null;
-			} catch(Exception e) {
-				iamodel.getPlan().setSupportPerson(new Contacts());
-			}
-		}
-		return SUCCESS;
-	}
-	
-	public String assignAuthorisedContact() {//TODO:
-		if (getAuthorisedContactId() > 0) {
-			if (iamodel == null) {
-				iamodel = new IndividualCases();
-			}
-				
-			Contacts authorised = new Contacts();
-			try {
-				authorised = contactService.getContacts(getAuthorisedContactId());
-				
-				if (iamodel.getPlan() == null)
-					iamodel.setPlan(new Plans());
-				
-				iamodel.getPlan().setAuthorisedBy(authorised);
-			} catch(Exception e) {
-				iamodel.getPlan().setAuthorisedBy(new Contacts());
-			}
-		}
-		return SUCCESS;
-	}
-	
-	public String clearContact(){ //TODO:
-		setFormTitle("New Case");
-		try{
-			iamodel.setContact(new Contacts());
-		}catch(NullPointerException npe){
-			iamodel = new IndividualCases();
-			iamodel.setContact(new Contacts());
-		}
-		activateLists();
-		return SUCCESS;
-	}
-	
-	// to clear contact list after user select
-	public String clearContactList() {//TODO:
-		System.out.println("clear the contact List");
-		return SUCCESS;
-	}
-	
-	//clear support person
-	public String clearSupportContact() {//TODO:
-		try {
-			if (iamodel == null)
-				iamodel = new IndividualCases();
-			
-			if (iamodel.getPlan() == null)
-				iamodel.setPlan(new Plans());
-			
-			iamodel.getPlan().setSupportPerson(new Contacts());
-			System.out.println("clear support"+iamodel.getPlan().getSupportPerson());
-		} catch(NullPointerException e) {
-			iamodel = new IndividualCases();
-			iamodel.setPlan(new Plans());
-			iamodel.getPlan().setSupportPerson(new Contacts());
-		}
-		
-		return SUCCESS;
-	}
-	
-	public String clearAuthorisedContact() {//TODO:
-		try {
-			if (iamodel == null)
-				iamodel = new IndividualCases();
-			
-			if (iamodel.getPlan() == null)
-				iamodel.setPlan(new Plans());
-			
-			iamodel.getPlan().setAuthorisedBy(new Contacts());
-		} catch(NullPointerException e) {
-			iamodel = new IndividualCases();
-			iamodel.setPlan(new Plans());
-			iamodel.getPlan().setAuthorisedBy(new Contacts());
-		}
-		
-		return SUCCESS;
-	}
-	
-	
-	public String saveUpdateCase(){ //TO DO
-		System.out.println("Start Saving Case");
-		System.out.println("support " + getSupportContactId() + " " + " authorised " + getAuthorisedContactId());
-		Users user = (Users) userSession.get(USER);
-		java.util.Calendar cal = java.util.Calendar.getInstance();
-		java.util.Date utilDate = cal.getTime();
-		java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-		
-		iamodel.getContact().setUpdatedDateTime(sqlDate);
-		
-		// set status
-		iamodel.setStatusType(typesService.getStatusTypeById(theStatus));
-		iamodel.setPriorityType(typesService.getPriorityTypeById(thePriority));
-		iamodel.getContact().setDangerType(typesService.getDangerTypeById(theDangerTypeId));
-		
-		// save advocate
-		iamodel.setAdvocate(contactService.getContacts(theAdvocate));
-		
-		// save contact details
-		if (theCulturalBackgroundTypeId != -1) { 
-			iamodel.getContact().setCulturalBackground(typesService.getCulturalBackgroundTypeById(theCulturalBackgroundTypeId));
-		} else {
-			iamodel.getContact().setCulturalBackground(null);
-		}
-		
-		if(theTitleTypeId != -1) {
-			iamodel.getContact().setTitleType(typesService.getTitleTypeById(theTitleTypeId));
-		} else {
-			iamodel.getContact().setTitleType(null);
-		}
-		
-		iamodel.getContact().setGenderType(typesService.getGenderTypeById(theGenderTypeId));
-		iamodel.getContact().setDangerType(typesService.getDangerTypeById(theDangerTypeId));
-		
-		java.sql.Date sqlDobDate = null;
-		try {
-			sqlDobDate = DateUtil.yyyymmddSqlDate(dob);
-		} catch (Exception e) {
-			sqlDobDate = null;
-		}
-		iamodel.getContact().setDob(sqlDobDate);
-		
-		// save addresses
-		if (theAccommodationTypeId != -1) {
-			iamodel.getContact().setAccommodation(typesService.getAccommodationTypeById(theAccommodationTypeId));
-		} else {
-			iamodel.getContact().setAccommodation(null);
-		}
-		
-		List<Addresses> al = iamodel.getContact().getAddressesList();
-		for (int i = 0; i < al.size(); i++) {
-			if (al.get(i).getId() == null){
-				al.get(i).setContact(iamodel.getContact());
-			} else if (al.get(i).getId() == -1) {
-				iamodel.getContact().getAddressesList().remove(i);
-				i--;
-			}
-		}
-		
-		// save disability
-		List<ClientDisabilities> cdl = iamodel.getContact().getDisabilitiesList();
-		if (getTheDisabilityListId().size() > 0) {
-			for(int i = 0; i < theDisabilityListId.size(); i++){
-				if (cdl.get(i).getId() != null) {
-					if (cdl.get(i).getId() != -1 && theDisabilityListId.get(i) != -1) {
-						cdl.get(i).setDisabilityType(typesService.getDisabilityTypeById(getTheDisabilityListId().get(i)));
-						cdl.get(i).setContact(iamodel.getContact());
-						//cdl.get(i).setUpdatedUser(user.getContact());
-					} else {
-						cdl.remove(i);
-						theDisabilityListId.remove(i);
-						i--;
-					}
-				} else {
-					if (theDisabilityListId.get(i) != -1) {
-						cdl.get(i).setDisabilityType(typesService.getDisabilityTypeById(getTheDisabilityListId().get(i)));
-						cdl.get(i).setContact(iamodel.getContact());
-						//cdl.get(i).setCreatedUser(user.getContact());
-						//cdl.get(i).setUpdatedUser(user.getContact());
-					} else {
-						cdl.remove(i);
-						theDisabilityListId.remove(i);
-						i--;
-					}
-				}
-			}
-		}
-		
-		// save employments
-		List<ContactEmployments> cel = iamodel.getContact().getEmploymentsList();
-		System.out.println();
-		if (getTheEmploymentListId().size() > 0) {
-			for(int i = 0; i < theEmploymentListId.size(); i++){
-				if (cel.get(i).getId() != null) {
-					if (cel.get(i).getId() != -1 && theEmploymentListId.get(i) != -1) {
-						cel.get(i).setEmploymentType(typesService.getEmploymentTypeById(getTheEmploymentListId().get(i)));
-						cel.get(i).setContact(iamodel.getContact());
-						//cel.get(i).setUpdatedUser(user.getContact());
-					} else {
-						cel.remove(i);
-						theEmploymentListId.remove(i);
-						i--;
-					}
-				} else {
-					if (theEmploymentListId.get(i) != -1) {
-						cel.get(i).setEmploymentType(typesService.getEmploymentTypeById(getTheEmploymentListId().get(i)));
-						cel.get(i).setContact(iamodel.getContact());
-						//cel.get(i).setCreatedUser(user.getContact());
-						//cel.get(i).setUpdatedUser(user.getContact());
-					} else {
-						cel.remove(i);
-						theEmploymentListId.remove(i);
-						i--;
-					}
-				}
-			}
-		}
-		
-		//save risk
-		List<Risks> riskList = iamodel.getRisksList();
-		for (int i = 0; i < riskList.size(); i++) {
-			if (riskList.get(i).getId() != null) {
-				if(riskList.get(i).getId() == -1) {
-					riskList.remove(i);
-					i--;
-				} 
-			} else {
-				riskList.get(i).setIndividualCase(iamodel);
-			}
-		}
-		
-		// save plan
-
-		if (iamodel.getPlan() == null)
-			iamodel.setPlan(new Plans());
-		
-		if (iamodel.getId() == null) {
-			iamodel.getPlan().setIndividualCase(iamodel);
-		}
-		
-//		if (iamodel.getPlan().getSupportPerson() != null) {
-//			System.out.println("xxxxxxxxxxxxxxxxxxxxx called in outter get id");
-//			if (iamodel.getPlan().getSupportPerson().getId() != null) {
-//				System.out.println("xxxxxxxxxxxxxxxxxxxxx called in inner get id");
-//				Contacts support = contactService.getContacts(iamodel.getPlan().getSupportPerson().getId());
-//				support.setFirstname(iamodel.getPlan().getSupportPerson().getFirstname());
-//				support.setOthername(iamodel.getPlan().getSupportPerson().getOthername());
-//				support.setLastname(iamodel.getPlan().getSupportPerson().getLastname());
-//				iamodel.getPlan().setSupportPerson(support);
-//			} else {
-//				System.out.println("xxxxxxxxxxxxxxxxxxxxx called in inner get id else");
-//			}
-//		} else {
-//			System.out.println("xxxxxxxxxxxxxxxxxxxxx called in outter get id else");
-//		}
-//		
-//		if (iamodel.getPlan().getAuthorisedBy() != null) {
-//			if (iamodel.getPlan().getAuthorisedBy().getId() != null) {
-//				Contacts authorise = contactService.getContacts(iamodel.getPlan().getAuthorisedBy().getId());
-//				support.setFirstname(iamodel.getPlan().getSupportPerson().getFirstname());
-//				support.setOthername(iamodel.getPlan().getSupportPerson().getOthername());
-//				support.setLastname(iamodel.getPlan().getSupportPerson().getLastname());
-//				iamodel.getPlan().setAuthorisedBy(authorise);
-//			}
-//		}
-//		if (getSupportContactId() != null) {
-//			try {
-//				iamodel.getPlan().setSupportPerson(contactService.getContacts(getSupportContactId()));
-//			} catch (NullPointerException e) {
-//				iamodel.getPlan().setSupportPerson(new Contacts());
-//			}
-//		} 
-//		
-//		if (getAuthorisedContactId() != null) {
-//			try {
-//				iamodel.getPlan().setAuthorisedBy(contactService.getContacts(getAuthorisedContactId()));
-//			} catch (NullPointerException e) {
-//				iamodel.getPlan().setAuthorisedBy(new Contacts());
-//			}
-//		} 
-		
-		if (theReviewFrequency != -1) {
-			iamodel.getPlan().setReviewFrequency(typesService.getReviewFrequencyById(theReviewFrequency));
-		} else {
-			iamodel.getPlan().setReviewFrequency(null);
-		}
-		
-		if (thePlanStatus != -1) {
-			iamodel.getPlan().setStatusType(typesService.getStatusTypeById(thePlanStatus));
-		} else {
-			iamodel.getPlan().setStatusType(null);
-		}
-		
-		// save plan developers
-		List<PlanDevelopers> pdl = iamodel.getPlanDevelopersList();
-		System.out.println(pdl.size());
-		for (int i = 0; i < theDeveloperList.size(); i++) {
-			if (pdl.get(i).getId() != null) {
-				if (pdl.get(i).getId() != -1) {
-					pdl.get(i).setContact(contactService.getContacts(theDeveloperList.get(i)));
-					pdl.get(i).setIndividualCase(iamodel);
-				} else {
-					pdl.remove(i);
-					theDeveloperList.remove(i);
-					i--;
-				}
-			} else {
-				pdl.get(i).setContact(contactService.getContacts(theDeveloperList.get(i)));
-				pdl.get(i).setIndividualCase(iamodel);
-			}
-		}
-		
-		// save goals
-		System.out.println("Save goals");
-		List<PlanGoals> pgl = iamodel.getPlanGoalsList();
-		System.out.println(theGoalList.size() + " " + theGoalStatusList.size());
-		if (theGoalList.size() == theGoalStatusList.size()) {
-			for (int i = 0; i < theGoalList.size(); i++) {
-				if(pgl.get(i).getId() != null) {
-					if (pgl.get(i).getId() != -1 && theGoalList.get(i) != -1) {
-						pgl.get(i).setGoalType(typesService.getGoalTypeById(theGoalList.get(i)));
-						
-						if (theGoalStatusList.get(i) != -1) {
-							pgl.get(i).setStatusType(typesService.getStatusTypeById(theGoalStatusList.get(i)));
-						}
-						
-						pgl.get(i).setIndividualCase(iamodel);
-					} else {
-						pgl.remove(i);
-						theGoalList.remove(i);
-						theGoalStatusList.remove(i);
-						i--;
-					}
-				} else {
-					if (theGoalList.get(i) != -1) {
-						pgl.get(i).setGoalType(typesService.getGoalTypeById(theGoalList.get(i)));
-						
-						if (theGoalStatusList.get(i) != -1) {
-							pgl.get(i).setStatusType(typesService.getStatusTypeById(theGoalStatusList.get(i)));
-						}
-						
-						pgl.get(i).setIndividualCase(iamodel);
-					} else {
-						pgl.remove(i);
-						theGoalList.remove(i);
-						theGoalStatusList.remove(i);
-						i--;
-					}
-				}
-			}
-		}
-		
-		// save case issues
-		System.out.println("Save case issues");
-		List<CaseIssues> cil = iamodel.getCaseIssuesList();
-		System.out.println(cil.size() + " " + theIssueListId.size());
-		if (theIssueListId.size() == theIssueStatusList.size() && theIssueListId.size() == cil.size()) {
-			for (int i = 0; i < theIssueListId.size(); i++) {
-				if (cil.get(i).getId() != null) {
-					if (cil.get(i).getId() != -1 && theIssueListId.get(i) != -1) {
-						cil.get(i).setIssue(typesService.getIssueTypeById(theIssueListId.get(i)));
-						
-						if (theIssueStatusList.get(i) != -1) {
-							cil.get(i).setStatusType(typesService.getStatusTypeById(theIssueStatusList.get(i)));
-						}
-						
-						cil.get(i).setIndividualCase(iamodel);
-					} else {
-						cil.remove(i);
-						theIssueListId.remove(i);
-						theIssueStatusList.remove(i);
-						i--;
-					}
-				} else {
-					if (theIssueListId.get(i) != -1) {
-						cil.get(i).setIssue(typesService.getIssueTypeById(theIssueListId.get(i)));
-						
-						if (theIssueStatusList.get(i) != -1) {
-							cil.get(i).setStatusType(typesService.getStatusTypeById(theIssueStatusList.get(i)));
-						}
-						
-						cil.get(i).setIndividualCase(iamodel);
-					} else {
-						cil.remove(i);
-						theIssueListId.remove(i);
-						theIssueStatusList.remove(i);
-						i--;
-					}
-				}
-			}
-		}
-		
-		//save communications - need to find a better way
-		System.out.println("Save communications");
-		List<IndividualCaseCommunications> icl = iamodel.getCommunicationsList();
-		System.out.println(theCommunicationsList.size());
-		if (theCommunicationsList.size() == icl.size()) {
-			for (int i = 0; i < theCommunicationsList.size(); i++) {
-				System.out.println(theCommunicationsList.get(i));
-				if (icl.get(i).getId() != null) {
-					if (icl.get(i).getId() != -1 && theCommunicationsList.get(i) != -1) {
-						icl.get(i).setCommunicationType(typesService.getCommunicationTypeById(theCommunicationsList.get(i)));
-						icl.get(i).setIndividualCase(iamodel);
-					} else {
-						icl.remove(i);
-						theCommunicationsList.remove(i);
-						i--;
-					}
-				} else {
-					
-					if (theCommunicationsList.get(i) != -1) {
-						icl.get(i).setCommunicationType(typesService.getCommunicationTypeById(theCommunicationsList.get(i)));
-						icl.get(i).setIndividualCase(iamodel);
-					} else {
-						icl.remove(i);
-						theCommunicationsList.remove(i);
-						i--;
-					}
-				}
-			}
-		}
-		
-		if (iamodel.getPlan() != null) {
-			if (iamodel.getPlan().getAuthorisedBy() != null) {
-				if (isContactEmpty(iamodel.getPlan().getAuthorisedBy())) {
-					iamodel.getPlan().setAuthorisedBy(null);
-				}
-			}
-			
-			if (iamodel.getPlan().getSupportPerson() != null) {
-				System.out.println("suport id " + iamodel.getPlan().getSupportPerson().getId());
-				if (isContactEmpty(iamodel.getPlan().getSupportPerson())) {
-					System.out.println("support contact is empty");
-					iamodel.getPlan().setSupportPerson(null);
-				}
-			}
-		}
-		
-		iamodel.getContact().setContactType(typesService.getContactTypeById(2));
-		System.out.println("calling case services to save");
-		if (iamodel.getId() == null) {
-			if (caseServices.saveOrUpdateCase(iamodel, iamodel.getContact())) {
-				this.formTitle = kExistingCaseTitle;
-				activateLists();
-				setIamodel(caseServices.getCase(iamodel.getId()));
-				initialiseDBList();
-				hiddenid = iamodel.getId();
-				System.out.println("test " + iamodel.getId());
-				return SUCCESS;
-			} 
-		} else if(caseServices.saveOrUpdateCase(iamodel)) {
-			System.out.println("called after support remove");
-			this.formTitle = kExistingCaseTitle;
-			activateLists();
-			setIamodel(caseServices.getCase(iamodel.getId()));
-			initialiseDBList();
-			return SUCCESS;
-		}
-		
-		System.out.println("End Saving Case");
-		return SUCCESS;
-	}
-	
-	public boolean isContactEmpty(Contacts c) {
-		if (c != null) {
-			if (c.getFirstname().trim().isEmpty() && 
-				c.getLastname().trim().isEmpty() && 
-				c.getOthername().trim().isEmpty() && 
-				c.getMobilephone().trim().isEmpty()) {
-				
-				return true;
-			}
-		} 
-		return false;
-	}
 	
 	/* 
 	 * 
@@ -1884,86 +2047,6 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 	 */
 	public void setTheEmploymentListId(List<Integer> theEmploymentListId) {
 		this.theEmploymentListId = theEmploymentListId;
-	}
-
-	/**
-	 * populate the Select List vairables
-	 */
-	private void activateLists(){
-		titleSelectList=typesService.findTitleTypes();
-		genderSelectList=typesService.findGenderTypes();
-		culturalBackgroundSelectList=typesService.findCulturalBackgroundTypes();
-		accommodationSelectList = typesService.findAccommodationTypes();
-		disabilitySelectList = typesService.findDisabilityTypes();
-		issueSelectList = typesService.findIssueTypes();
-		dangerSelectList = typesService.findDangerTypes();
-		statusSelectList = typesService.findStatusTypes(2);
-		employmentSelectList = typesService.findEmploymentTypes();
-		advocateSelectList = caseServices.findAdvocates();
-		prioritySelectList = typesService.findPriorityTypes();
-		communicationSelectList = typesService.findCommunicationTypes();
-		goalSelectList = typesService.findGoalTypes();
-		reviewFrequencyList = caseServices.findReviewFrequencies();
-		developerSelectList = caseServices.findAdvocates();
-		planStatusSelectList = typesService.findStatusTypes(3);
-		goalStatusSelectList = typesService.findStatusTypes(4);
-		caseIssueStatusSelectList = typesService.findStatusTypes(5);
-	}
-
-	@Override
-	public void prepare() throws Exception {//TODO:
-		if (!((Integer) getHiddenid() == null || (Integer)getHiddenid() == 0)) {
-			iamodel = caseServices.getCase(getHiddenid());
-			activateLists();
-			
-		} else {
-			
-			//if (this.contactId != null) {
-			//	iamodel.setContact(contactService.getContacts(this.contactId));
-			//	iamodel.setRelatedEnquiry(enquiryService.getEnquiry(this.enquiryId));
-			//} else 
-				if (this.enquiryId != null) {
-					this.formTitle = "New Case";
-					Enquiries enquiry = enquiryService.getEnquiry(this.enquiryId);
-					iamodel.setRelatedEnquiry(enquiry);
-					System.out.println(enquiry.getContact().getId());
-					iamodel.setContact(enquiry.getContact());
-					
-					List<EnquiryIssues> eiList = enquiry.getEnquiryIssuesList();
-					iamodel.getCaseIssuesList().clear();
-					for (EnquiryIssues e : eiList) {
-						CaseIssues ci = new CaseIssues();
-						ci.setIssue(e.getIssue());
-						ci.setComments(e.getComment());
-						iamodel.getCaseIssuesList().add(ci);
-						System.out.println(ci.getIssue().getIssueName());
-					}
-					System.out.println("issue list size " + iamodel.getCaseIssuesList().size());
-					initialiseDBList();
-			} 
-		}
-
-		if (iamodel == null)
-			iamodel = new IndividualCases();
-		
-		if (iamodel.getPlan() == null)
-			iamodel.setPlan(new Plans());
-		
-		if (getSupportContactId() != null) {
-			try {
-				iamodel.getPlan().setSupportPerson(contactService.getContacts(getSupportContactId()));
-			} catch(Exception e) {
-				iamodel.getPlan().setSupportPerson(new Contacts());
-			}
-		} 
-		
-		if (getAuthorisedContactId() != null) {
-			try {
-				iamodel.getPlan().setAuthorisedBy(contactService.getContacts(getAuthorisedContactId()));
-			} catch(Exception e) {
-				iamodel.getPlan().setAuthorisedBy(new Contacts());
-			}
-		} 
 	}
 
 	/**

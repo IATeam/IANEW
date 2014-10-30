@@ -6,7 +6,6 @@ package uow.ia.bean;
  * Bean class for criteria_control_values
  * 
  * @author Kim To
- * @version 1.0.1, 28/08/2014
  */
 public class CriteriaControlValues implements java.io.Serializable {
 

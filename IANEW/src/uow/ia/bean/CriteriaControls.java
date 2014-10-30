@@ -11,7 +11,6 @@ import java.util.Set;
  * Bean class of criteria_controls
  * 
  * @author Kim To
- * @version 1.0.2, 30/08/2014
  */
 public class CriteriaControls implements java.io.Serializable {
 

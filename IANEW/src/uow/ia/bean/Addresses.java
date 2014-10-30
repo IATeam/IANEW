@@ -15,12 +15,6 @@ import org.hibernate.search.annotations.Resolution;
  * Bean class for Addresses
  * 
  * @author Kim To
- * @version 1.0.3, 27/09/2014
- * 
- * Modification History:
- * 		27/09/2014
- * 			Change from Integer createdUserId and Integer updatedUserId to Contacts object
- * 			Mods to constructor, setters and getters
  */
 
 @Indexed

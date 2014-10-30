@@ -4,13 +4,6 @@ package uow.ia.bean;
 
 /**
  * @author Kim To
- * @version 1.0.1, 27/09/2014
- * 
- * Modification History:
- * 		27/09/2014 
- * 			Change Integer contactId to Contacts contact
- * 			Change constructor
- * 			Mods to setters and getters for contact 
  */
 public class Users implements java.io.Serializable {
 

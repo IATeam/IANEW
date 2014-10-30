@@ -6,10 +6,6 @@ import java.sql.Date;
 
 /**
  * @author Kim To
- * @version 1.0.1, 28/09/2014
- * 
- * Modification History:
- * 		28/09/2014: Add displayOrder attribute, change constructor, setters and getters
  */
 public class AddressesHistories implements java.io.Serializable {
 

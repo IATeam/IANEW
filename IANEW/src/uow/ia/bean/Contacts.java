@@ -21,11 +21,6 @@ import uow.ia.util.DateUtil;
 
 /**
  * @author Kim To
- * @version 1.0.7, 28/09/2014
- * 
- * Modification History:
- * 		28/09/2014:  Change Integer createdUserId and Integer updatedUserId to Contacts createdUser and Contacts updatedUser
- * 					 Mods to constructor and setters and getters
  */
 
 @Indexed
