@@ -13,8 +13,8 @@
 	<input type="image" src="/IANEW/resources/images/plusButton.png" alt="Hide/Show" id="btnShowHide" value="ShowHide" onclick="divHide(this);return false;" class="divHideButton"/>	
 	<h3 class="sixteen columns"  style="float:none;">Plan</h3>
 	<img src="/IANEW/resources/images/srchicon.png" onclick="searchSupportAuthorised();" title="Search for Support or Authorised Person" class="button" >
-	<img src="/IANEW/resources/images/eraseButton.png" onclick="clearSupportAuthorised();" title="Search for Support or Authorised Person" class="button" >
-	<s:div id="planSearchDiv" cssClass="hidden"> 
+<!-- 	<img src="/IANEW/resources/images/eraseButton.png" onclick="clearSupportAuthorised();" title="Search for Support or Authorised Person" class="button" >
+ -->	<s:div id="planSearchDiv" cssClass="hidden"> 
 		<%@include file="/forms/search/searchSupportAuthorised.jsp" %>
 	</s:div>
 	<div class="greybackground">

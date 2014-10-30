@@ -62,7 +62,7 @@
 	<s:div cssClass="form container">
 	<s:set var="formType">enquiry</s:set>
 		<s:form id="enquiryForm" action="saveUpdateEnquiry" cssClass="cmxform" namespace='/enquiry' method="post"> 
-			
+			<s:hidden id="hiddenid" name="hiddenid" />
 <!-- ---------------------------------------------------------------------------------------------- -->
 <!-- Header of the form --------------------------------------------------------------------------- -->
 <!-- ---------------------------------------------------------------------------------------------- -->	
@@ -81,9 +81,9 @@
 			
 			<%@include file="includes/issues.jsp" %>
 			
-			<s:div id="linkedEnquiriesDiv">
+			<%-- <s:div id="linkedEnquiriesDiv">
 				<%@include file="includes/linkedEnquiries.jsp" %>
-			</s:div>
+			</s:div> --%>
 			
 			<s:div id="linkedEnquiriesListDiv" style="box-shadow: 5px 5px 0 grey;"/>
 			<s:div cssClass="clear"></s:div>
@@ -107,13 +107,13 @@
 								<s:hidden id="caseId" name="iamodel.individualCasesList[0].id" value="%{iamodel.individualCasesList[0].id}"></s:hidden>
 								<input type="button" id="viewCase" class="three columns alpha" value="View Case" />
 							</s:else>
-							<s:submit name="submit" cssClass="three columns omega" value="Submit" onclick="confirmAction('Are you sure you want to save the enquiry?', 'enquiry', 'saveUpdateEnquiry')"/>
+							<s:submit name="submit" cssClass="three columns omega" value="Submit" onclick="validated()"/>
 							</section>
 						</s:if>
 						<s:else>
 							<section class="seven columns"><p></p></section>
 							<section class="three columns omega">
-								<s:submit name="submit" cssClass="three columns omega" value="Submit" onclick="confirmAction('Are you sure you want to save the enquiry?', 'enquiry', 'saveUpdateEnquiry')"/>
+								<s:submit name="submit" cssClass="three columns omega" value="Submit" onclick="validated()"/>
 							</section>
 						</s:else>
 				</s:div>

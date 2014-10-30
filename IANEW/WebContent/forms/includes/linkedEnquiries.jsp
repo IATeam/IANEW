@@ -79,16 +79,13 @@
 				</article>
 			</s:else>
 	
-	
-	
-	<s:hidden id="hiddenid" name="hiddenid" />
 	<s:hidden name="iamodel.parentEnquiry" />
 	
 	<div>
 		<div class="row">
-			<div class="ten columns alpha"><p></p></div>
-			<input type="button" id="btnView" value="View" class="three columns"/>
-			<input type="button" id="btnLinkEnquiry" value="Link" class="three columns omega"/>
+			<div class="thirteen columns alpha"><p></p></div>
+			<input type="button" id="btnView" value="View" class="three columns omega"/>
+			<!-- <input type="button" id="btnLinkEnquiry" value="Link" class="three columns omega"/> -->
 		</div>
 	</div>
 

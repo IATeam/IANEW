@@ -383,7 +383,7 @@ public class CaseAction extends BaseAction implements SessionAware, ModelDriven<
 				iamodel.setContact(contactService.getContacts(getContactid()));
 		}
 		activateLists();
-		//initialiseDBList();
+		initialiseDBList();
 		if(getCall() == 1)
 			return "contactinfo";
 		else{

@@ -92,9 +92,7 @@ public class LoginAction extends BaseAction{
 					resultList.add(o);
 				} else if (o instanceof IndividualCases) {
 					resultList.add(o);
-				} else if(o instanceof Contacts){
-					System.out.print("is a contact object");
-				}
+				} 
 				else {
 					Object object = null;
 					for (Field f : fields) {

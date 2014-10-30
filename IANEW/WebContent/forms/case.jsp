@@ -53,6 +53,7 @@
 	<s:set var="formType">case</s:set>
 	<s:form id="caseForm" cssClass="cmxform" namespace="/case" method="post" action="saveUpdateCase">  
 		<s:hidden  name="enquiryId" value="%{iamodel.relatedEnquiry.id}"/>
+		<s:hidden id="hiddenid" name="hiddenid" />
 <!-- ---------------------------------------------------------------------------------------------- -->
 <!-- Header of the form --------------------------------------------------------------------------- -->
 <!-- ---------------------------------------------------------------------------------------------- -->	
@@ -72,7 +73,7 @@
 		<%@include file="includes/plan.jsp" %>
 		<%@include file="includes/caseIssues.jsp" %>
 		<%@include file="includes/communications.jsp" %>
-		<%@include file="includes/linkedCases.jsp" %>
+		<%-- <%@include file="includes/linkedCases.jsp" %> --%>
 		<s:div id="linkedEnquiriesDiv">
 				<%@include file="includes/linkedEnquiries.jsp" %>
 			</s:div>
@@ -91,7 +92,7 @@
 			<s:div cssClass="row" cssStyle="padding-top:10px;">
 				<section class="six columns">
 						<input id="btnCancel" type="button" class="three columns alpha" value="Cancel" onclick="confirmAction('Are you sure you want to Cancel?', 'home', 'home');"/>
-					<input type="button" class="three columns omega" value="New Case" />
+					<!-- <input type="button" class="three columns omega" value="New Case" /> -->
 				</section>
 				<section class="seven columns"><p></p></section>
 				<section class="three columns omega">
