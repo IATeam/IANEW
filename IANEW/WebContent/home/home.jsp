@@ -117,23 +117,23 @@
 				</ul>
 			</li>
 			
-			<li >
+			<%-- <li >
 				<li><sj:a id="report" href="%{urlReport}" targets="formDiv"  onclick="menuclicked()">Report</sj:a></li>
-			</li>
-			<li>
+			</li> --%>
+			<!-- <li> -->
 				<li><sj:a id="timeManagement" href="%{urlTimeManagement}" targets="formDiv"  onclick="menuclicked()">Time Management</sj:a></li>
 			
-			<li>
+			<%-- <li>
 				<sj:a id="syncho" href="%{urlTest}" targets="formDiv">Synchronize</sj:a>
 				
-			</li>
+			</li> --%>
 
 			<li><s:a id="s"href="#">Settings</s:a>
 				<ul>
 					<li><sj:a id="sAddNewType" href="%{urlAddType}" targets="formDiv" onclick="menuclicked()">Type Settings</sj:a></li>
 					<li><sj:a id="sAddAdvocate" href="%{urlAddAdvocate}" targets="formDiv" onclick="menuclicked()">Advocate Settings</sj:a></li>
 					<li><sj:a id="sAddUser" href="%{urlAddUser}" targets="formDiv" onclick="menuclicked()">Client Settings</sj:a></li>
-					<li><sj:a id="sUserSettings" href="%{urlUserSettings}" targets="formDiv" onclick="menuclicked()">User Settings</sj:a></li>
+					<%-- <li><sj:a id="sUserSettings" href="%{urlUserSettings}" targets="formDiv" onclick="menuclicked()">User Settings</sj:a></li> --%>
 				</ul>
 			</li>
 			<li><sj:a id="links" href="%{urlLinks}" targets="formDiv">Links</sj:a></li>

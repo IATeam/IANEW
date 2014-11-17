@@ -21,7 +21,8 @@
 			<legend>Filter</legend>
 			<s:div cssClass="row fourteen columns">
 				<s:div cssClass ="two columns"><p></p></s:div>
-				<input type="button" id="btnFilterName" value="name" class="three columns"/>
+				<!-- <input type="button" id="btnFilterName" value="name" class="three columns"/> -->
+				<s:label for="name" value="Name:" cssClass="three columns"/>
 				<s:div id="filterName">
 					<div class="inputfield four columns">
 						<s:label for="firstname" value="firstname:" />
@@ -35,7 +36,8 @@
 			</s:div>
 			<s:div cssClass="row fourteen columns">
 				<s:div cssClass ="two columns"><p></p></s:div>
-				<input type="button" id="btnFilterCreatedDate" value="created date" class="three columns"/>
+				<!-- <input type="button" id="btnFilterCreatedDate" value="created date" class="three columns"/> -->
+				<s:label for="createdDate" value="Created Date:" cssClass="three columns"/>
 				<s:div id="filterCreatedDate">
 					<s:div cssClass="four columns">
 						<s:label value="From" for="createdDateStart"/>  
@@ -49,7 +51,8 @@
 			</s:div>
 			<s:div cssClass="row fourteen columns">
 				<s:div cssClass ="two columns"><p></p></s:div>
-				<input type="button" id="btnFilterUpdatedDate" value="updated date" class="three columns"/>
+				<!-- <input type="button" id="btnFilterUpdatedDate" value="updated date" class="three columns"/> -->
+				<s:label for="updatedDate" value="Updated Date:" cssClass="three columns"/>
 				<s:div id="filterUpdatedDate">
 					<s:div cssClass="four columns">
 						<s:label value="From" for="updatedDateStart"/> 
@@ -61,8 +64,11 @@
 					</s:div>
 				</s:div>
 			</s:div>
-			<div class="two columns">
-				<s:select id="status" list="statusSelectList" listValue="statusName" listKey="id" name="theStatus" headerKey="-1" headerValue="Status" />
+			<div class="row sixteen columns">
+				<s:div cssClass ="five columns"><p></p></s:div>
+				<s:div cssClass ="four columns">
+					<s:select id="status" list="statusSelectList" listValue="statusName" listKey="id" name="theStatus" headerKey="-1" headerValue="Status" />
+				</s:div>
 			</div>
 		</fieldset>
 		<input type="button" id="btnFilterSort" value="Search" onclick="loadList(this)"/>

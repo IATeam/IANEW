@@ -22,7 +22,7 @@
 <body>
 	<s:div cssClass="form container">
 	<s:set var="formType">enquiry</s:set>
-	<s:form id="caseForm" cssClass="cmxform form container" namespace='/case' method="post" action="saveUpdateCase" novalidate="novalidate">
+	<%-- <s:form id="caseForm" cssClass="cmxform form container" namespace='/case' method="post" action="saveUpdateCase" novalidate="novalidate"> --%>
 <!-- ---------------------------------------------------------------------------------------------- -->
 <!-- Header of the form --------------------------------------------------------------------------- -->
 <!-- ---------------------------------------------------------------------------------------------- -->	
@@ -43,7 +43,7 @@
 		<%@include file="/admin/typeSettings/includes/newPriorityType.jsp" %>
 		<%@include file="/admin/typeSettings/includes/newStatusType.jsp" %>
 		<%@include file="/admin/typeSettings/includes/newTitleType.jsp" %>
-	</s:form>
+	<%-- </s:form> --%>
 	</s:div>
 </body>
 </html>
